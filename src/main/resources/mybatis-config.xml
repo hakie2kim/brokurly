@@ -3,9 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 
 <configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <typeAliases>
-<!--        예시    -->
-<!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
-<!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
+        <!--        예시    -->
+        <!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
+        <!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
     </typeAliases>
 </configuration>
