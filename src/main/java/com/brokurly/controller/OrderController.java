@@ -12,4 +12,9 @@ public class OrderController {
     public String showCheckout() {
         return "order/checkout";
     }
+
+    @GetMapping("/receiver-details")
+    public String showReceiverDetails() {
+        return "order/receiver-details";
+    }
 }
