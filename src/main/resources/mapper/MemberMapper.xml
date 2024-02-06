@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brokurly.repository.MemberDao">
+    <!-- CREATE -->
+<!--     useGeneratedKeys="true" keyProperty="bno"-->
+    <insert id="insert">
+        INSERT INTO customer
+            (custId, pwd, name, email, telNo, sex,
+             birthDt, regDt, adultVerifDt, cartCnt, point, consent,
+             initRegDt, initRegId, lastModiDt, lastModiId)
+        VALUES
+            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
+             #{birthDt}, now(), #{adultVerifDt}, #{cartCnt}, #{point}, #{consent},
+             now(), #{custId}, now(), #{custId})
+    </insert>
+
+    <!-- READ -->
+    <sql id="selectMember">
+        SELECT custId,
+               pwd,
+               name,
+               email,
+               telNo,
+               sex,
+               birthDt,
+               regDt,
+               adultVerifDt,
+               cartCnt,
+               point,
+               consent,
+               act_stat,
+               grade
+        FROM customer
+        WHERE custId = #{custId}
+    </sql>
+
+    <sql id="count">
+        SELECT COUNT(*) FROM customer
+        WHERE custId = #{custId}
+    </sql>
+
+
+    <!-- DELETE -->
+    <delete id="deleteMember">
+        DELETE FROM customer
+        WHERE custId = #{custId}
+    </delete>
+</mapper>

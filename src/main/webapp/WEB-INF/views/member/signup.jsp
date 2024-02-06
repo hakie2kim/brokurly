@@ -1,0 +1,485 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Sora
+  Date: 2024-02-05
+  Time: 오후 2:22
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<style>
+    :root {
+        --main-color: #11967f;
+        --main-font: "Noto Sans KR", sans-serif;
+        --main-border-radius: 3px;
+        --main-border: 1px solid #11967f;
+    }
+    body {
+        margin: 0;
+        padding: auto;
+    }
+    section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    input[type="text"],
+    .register-div__btn {
+        width: 333px;
+        height: 46px;
+    }
+
+    input[type="text"] {
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: var(--main-border-radius);
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    input:focus {
+        outline: 1px solid black;
+    }
+
+    button {
+        width: 120px;
+        height: 44px;
+        border: var(--main-border);
+        border-radius: var(--main-border-radius);
+        background-color: white;
+        color: var(--main-color);
+        font-size: 14px;
+        margin-left: 10px;
+    }
+    .birth-div {
+        display: flex;
+    }
+
+    .birth-div__column {
+        width: 333px;
+        height: 46px;
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: var(--main-border-radius);
+    }
+
+    .birth-div__column > input,
+    .birth-div__column > span {
+        width: 95px;
+        height: 40px;
+        border: transparent;
+        color: rgb(102, 102, 102);
+        text-align: center;
+    }
+
+    .register-div__label {
+        display: inline-block;
+        width: 139px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .Required-entr-div {
+        width: 610px;
+        text-align: end;
+        color: rgb(102, 102, 102);
+        font-size: 12px;
+        border-bottom: 2px solid rgb(51, 51, 51);
+        padding-top: 40px;
+        padding-bottom: 10px;
+    }
+    .register-btn {
+        width: 240px;
+        height: 56px;
+        background-color: var(--main-color);
+        color: white;
+        font-size: 16px;
+    }
+    .agreement-div {
+        display: flex;
+        flex-direction: column;
+        /* background-color: aqua; */
+    }
+
+    .register-header {
+        font-size: 28px;
+        font-weight: 500;
+    }
+
+    .Required-entr__label {
+        color: red;
+    }
+
+    .line-div {
+        height: 100px;
+        width: 100px;
+        border: 2px solid black;
+    }
+
+    .column-div {
+        margin-top: 10px;
+    }
+
+    ::placeholder {
+        font-size: 14px;
+        padding: 0 11px 1px 15px;
+    }
+    .order-info__label {
+        font-size: 12px;
+        margin: 10px 145px 0;
+        color: #666666;
+    }
+
+    .register-div__btn {
+        margin-left: 0;
+    }
+
+    .birth-div {
+        border-bottom: 1px solid rgb(51, 51, 51);
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+
+    label {
+        font-size: 14px;
+        color: #333333;
+    }
+
+    #agreement1 ~ label {
+        font-size: 18px;
+    }
+
+    .agreement-div__column {
+        padding: 8px 0;
+    }
+
+    .agreement-label {
+        font-size: 4px;
+    }
+
+    .birth-div__column > *:focus {
+        outline: none;
+    }
+
+    .id-info-div {
+        display: flex;
+        justify-content: center;
+        padding-top: 4px;
+        font-size: 13px;
+        color: #ff0000;
+        display: none;
+    }
+
+    /* modal css start */
+    .modal {
+        position: absolute;
+        display: none;
+
+        justify-content: center;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(0, 0, 0, 0.4);
+
+        padding: 0;
+    }
+
+    .modal_content_body {
+        position: absolute;
+
+        padding: 40px;
+
+        width: 320px;
+        height: 66px;
+
+        text-align: center;
+
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+
+        top: 50%;
+
+        background-color: white;
+        transform: translateY(-50%);
+    }
+
+    .modal_alert_body {
+        position: absolute;
+
+        background-color: white;
+        padding: 0 40px;
+
+        width: 320px;
+        height: 56px;
+
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+
+        top: 60%;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .close-modal-btn {
+        width: auto;
+        font-size: 16px;
+        border: none;
+        padding: 5px 0 0 0;
+        font-weight: 600;
+        color: var(--main-color);
+        background: transparent;
+        cursor: pointer;
+    }
+
+    /* modal css end */
+</style>
+<body>
+<section>
+    <!-- modal start -->
+    <div class="modal">
+        <div class="modal_content_body">
+            <span id="modal_content"></span>
+            <!-- modalContent -->
+        </div>
+        <div class="modal_alert_body">
+            <button class="close-modal-btn">확인</button>
+        </div>
+    </div>
+    <!-- modal end -->
+    <span class="register-header">회원가입</span>
+    <div class="Required-entr-div">
+        <span class="Required-entr__label">*&nbsp;</span>필수입력사항
+    </div>
+    <div class="register-div">
+        <div class="column-div">
+          <span class="register-div__label"
+          >아이디<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="아이디를 입력해주세요"
+                    title="이 입력란을 작성하세요"
+                    id="custId"
+                    name="custId"
+            />
+            <button class="open-modal-btn" value="1">중복확인</button>
+        </div>
+        <div class="id-info-div">
+          <span
+          >6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합</span
+          >
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >비밀번호<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="비밀번호를 입력해주세요"
+                    title="이 입력란을 작성하세요"
+            />
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >비밀번호확인<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="비밀번호를 한번 더 입력해주세요"
+                    title="이 입력란을 작성하세요"
+            />
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >이름<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="이름을 입력해주세요"
+                    title="이 입력란을 작성하세요"
+            />
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >이메일<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="예: brokurly@kurly.com"
+                    title="이 입력란을 작성하세요"
+            />
+            <button class="open-modal-btn" value="2">중복확인</button>
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >휴대폰<span class="Required-entr__label">*</span></span
+          >
+            <input
+                    type="text"
+                    placeholder="숫자만 입력해주세요"
+                    title="이 입력란을 작성하세요"
+            />
+            <button>인증번호 받기</button>
+        </div>
+        <div class="column-div">
+          <span class="register-div__label"
+          >주소<span class="Required-entr__label">*</span></span
+          >
+            <button class="register-div__btn">주소검색</button>
+        </div>
+        <div class="order-info__label">
+            배송지에 따라 상품정보가 달라질 수 있습니다.
+        </div>
+        <div class="column-div">
+            <span class="register-div__label">성별</span>
+            <input type="radio" id="sex-m" name="sex" />
+            <label for="sex-m">남자</label>
+            <input type="radio" id="sex-f" name="sex" />
+            <label for="sex-f">여자</label>
+            <input type="radio" id="sex-none" name="sex" />
+            <label for="sex-none">선택안함</label>
+        </div>
+        <div class="birth-div column-div">
+            <span class="register-div__label">생년월일</span>
+            <div class="birth-div__column">
+                <input type="text" placeholder="YYYY" /><span>/</span>
+                <input type="text" placeholder="MM" /><span>/</span>
+                <input type="text" placeholder="DD" />
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="agreement-div">
+        <span class="register-div__label"
+        >이용약관동의<span class="Required-entr__label">*</span></span
+        >
+        <div class="agreement-div__column">
+            <div>
+                <input type="radio" id="agreement1" /><label for="agreement1"
+            >전체 동의합니다.</label
+            >
+                <div class="agreement-label">
+                    <label>
+                        선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를
+                        이용할 수 있습니다.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="agreement-div__column">
+            <input type="radio" id="agreement2" /><label for="agreement2"
+        >이용약관 동의<span>(필수)</span></label
+        >
+            <a href="#"
+            ><span><label>약관보기></label></span></a
+            >
+        </div>
+        <div class="agreement-div__column">
+            <input type="radio" id="agreement3" /><label for="agreement3"
+        >개인정보 수집 이용 동의<span>(필수)</span></label
+        >
+            <a href="#"
+            ><span><label>약관보기></label></span></a
+            >
+        </div>
+        <div class="agreement-div__column">
+            <input type="radio" id="agreement4" /><label for="agreement4"
+        >개인정보 수집 이용 동의<span>(선택)</span></label
+        >
+            <a href="#"
+            ><span><label>약관보기></label></span></a
+            >
+        </div>
+        <div class="agreement-div__column">
+            <input type="radio" id="agreement5" /><label for="agreement5"
+        >무료배송,할인쿠폰 등 혜택/정보 수신 동의<span>(선택)</span></label
+        >
+        </div>
+        <div class="agreement-div__column">
+            <input type="radio" id="agreement6" /><label for="agreement6"
+        >본인은 만 14세 이상입니다.<span>(필수)</span></label
+        >
+        </div>
+    </div>
+    <hr />
+    <button class="register-btn">가입하기</button>
+</section>
+<script>
+        let modal = document.querySelector(".modal");
+        let openModalBtns = document.querySelectorAll(".open-modal-btn");
+        let modalContent = document.querySelector("#modal_content");
+        let closeModalBtn = document.querySelector(".close-modal-btn");
+
+        let custId = document.querySelector("#custId");
+
+        [].forEach.call(openModalBtns, function (openModalBtn) {
+            // 하나의 클래스명으로 다른 값을 얻어 alert의 내용을 바꾸는 fun.
+            openModalBtn.addEventListener("click", clickModal, false);
+        });
+
+        // btn에 따른 조건식 변경 fun.
+        function clickModal() {
+            let str = "";
+            if (this.value == 1) {
+                // 아이디 중복 확인
+                str = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
+            } else if (this.value == 2) {
+                // 이메일 중복 확인
+                str = "이메일을 입력해주세요";
+            }
+
+            openModal(str);
+        }
+
+        // modal open
+        function openModal(str) {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden"; // 모달 작동 시 스크롤바 비활성화
+            modalContent.innerHTML = `<p>${'${str}'}</p>`; //
+        }
+
+        // modal close
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "unset"; // 모달 작동 시 스크롤바 활성화
+        });
+
+        $(document).ready(function () {
+        // id check - length
+        custId.addEventListener("input", () => {
+            let custIdVal = $("#custId").val(); // id의 길이
+            let idInfoDiv =  $(".id-info-div");
+
+            $.ajax({
+                success: function () {
+                    if (custIdVal.length < 6 || 17 < custIdVal.length) {
+                        idInfoDiv.css("display","block");
+                    }else{
+                        idInfoDiv.css("display","none");
+                    }
+                },
+            });
+        });
+        });
+
+
+</script>
+</body>
+</html>
