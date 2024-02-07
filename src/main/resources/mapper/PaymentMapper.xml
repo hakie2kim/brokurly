@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brokurly.repository.PaymentDao">
+    <!-- CREATE -->
+    <insert id="insert">
+        INSERT INTO payment
+            (pay_no, pay_mthd, pay_stat, pay_req_dt, pay_conf_dt, order_amt,
+             ship_fee, cpn_dc_amt, card_dc_amt, point_dc_amt, pay_amt, order_id)
+        VALUES
+            (#{payNo}, #{payMthd}, #{payStat}, #{payReqDt}, #{payConfDt}, #{order_amt},
+             #{shipFee}, #{cpnDcAmt}, #{cardDcAmt}, #{pointDcAmt}, #{payAmt}, #{orderId})
+    </insert>
+
+    <!-- READ -->
+    <sql id="select">
+        SELECT * FROM payment
+    </sql>
+
+    <select id="selectAll" resultType="Payment">
+        <include refid="select"/>
+    </select>
+
+    <!-- UPDATE -->
+
+    <!-- DELETE -->
+
+</mapper>
