@@ -10,5 +10,6 @@
         <!--        예시    -->
         <!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
         <!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
+        <typeAlias type="com.brokurly.entity.PointLogUsageDto" alias="PointLogUsageDto"/>
     </typeAliases>
 </configuration>
