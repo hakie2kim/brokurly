@@ -294,6 +294,8 @@
                     type="text"
                     placeholder="비밀번호를 입력해주세요"
                     title="이 입력란을 작성하세요"
+                    name="pwd"
+
             />
         </div>
         <div class="column-div">
@@ -304,6 +306,7 @@
                     type="text"
                     placeholder="비밀번호를 한번 더 입력해주세요"
                     title="이 입력란을 작성하세요"
+
             />
         </div>
         <div class="column-div">
@@ -314,6 +317,8 @@
                     type="text"
                     placeholder="이름을 입력해주세요"
                     title="이 입력란을 작성하세요"
+                    id="name"
+                    name="name"
             />
         </div>
         <div class="column-div">
@@ -324,6 +329,8 @@
                     type="text"
                     placeholder="예: brokurly@kurly.com"
                     title="이 입력란을 작성하세요"
+                    id="email"
+                    name="email"
             />
             <button class="open-modal-btn" value="2">중복확인</button>
         </div>
@@ -335,6 +342,8 @@
                     type="text"
                     placeholder="숫자만 입력해주세요"
                     title="이 입력란을 작성하세요"
+                    id="telNo"
+                    name="telNo"
             />
             <button>인증번호 받기</button>
         </div>
@@ -362,6 +371,7 @@
                 <input type="text" placeholder="YYYY" /><span>/</span>
                 <input type="text" placeholder="MM" /><span>/</span>
                 <input type="text" placeholder="DD" />
+                <input type="hidden" name="yyyymmdd">
             </div>
         </div>
     </div>

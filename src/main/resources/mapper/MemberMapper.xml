@@ -7,27 +7,25 @@
 <!--     useGeneratedKeys="true" keyProperty="bno"-->
     <insert id="insert">
         INSERT INTO customer
-            (custId, pwd, name, email, telNo, sex,
-             birthDt, regDt, adultVerifDt, cartCnt, point, consent,
-             initRegDt, initRegId, lastModiDt, lastModiId)
+            (cust_id, pwd, name, email, tel_no, sex,
+             birth_dt, reg_dt, adult_verif_dt, cart_cnt, point, consent)
         VALUES
             (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
-             #{birthDt}, now(), #{adultVerifDt}, #{cartCnt}, #{point}, #{consent},
-             now(), #{custId}, now(), #{custId})
+             #{birthDt}, now(), #{adultVerifDt}, #{cartCnt}, #{point}, #{consent})
     </insert>
 
     <!-- READ -->
     <sql id="selectMember">
-        SELECT custId,
+        SELECT cust_id,
                pwd,
                name,
                email,
-               telNo,
+               tel_no,
                sex,
-               birthDt,
-               regDt,
-               adultVerifDt,
-               cartCnt,
+               birth_dt,
+               reg_dt,
+               adult_verif_dt,
+               cart_cnt,
                point,
                consent,
                act_stat,
@@ -38,13 +36,13 @@
 
     <sql id="count">
         SELECT COUNT(*) FROM customer
-        WHERE custId = #{custId}
+        WHERE cust_id = #{custId}
     </sql>
 
 
     <!-- DELETE -->
     <delete id="deleteMember">
         DELETE FROM customer
-        WHERE custId = #{custId}
+        WHERE cust_id = #{custId}
     </delete>
 </mapper>

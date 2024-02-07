@@ -28,11 +28,6 @@ public class Member {
     private String actStat;
     private String grade;
 
-    private Date initRegDt;   // 최초 등록 일시
-    private String initRegId; // 최초 등록자 식별번호
-    private Date lastModiDt;  // 최종 수정 일시
-    private String lastModiId;    // 최종 수정자 식별번호
-
     public Member(){}
     public Member(String custId, String pwd, String name, String email, String telNo, String sex, String birthDt, int consent) {
         this.custId = custId;
@@ -43,8 +38,6 @@ public class Member {
         this.sex = sex;
         this.birthDt = birthDt;
         this.consent = consent;
-        this.initRegId = custId;
-        this.lastModiId = custId;
     }
 
 }
