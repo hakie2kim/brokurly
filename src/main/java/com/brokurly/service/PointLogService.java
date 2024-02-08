@@ -12,5 +12,11 @@ import java.util.List;
 public class PointLogService {
     private final PointLogDao pointLogDao;
 
-    public List<PointLogUsageDto> findPointLogByCustId(String custId) { return pointLogDao.selectByCustomer(custId); }
+    public List<PointLogUsageDto> findPointLogUsageByCustomer(String custId, Integer period) {
+        return pointLogDao.selectUsageByCustomerAndPeriod(custId, period);
+    }
+
+    public int getPointLogUsageByCustomerCount(String custId, Integer period) {
+        return pointLogDao.countUsageByCustomerAndPeriod(custId, period);
+    }
 }
