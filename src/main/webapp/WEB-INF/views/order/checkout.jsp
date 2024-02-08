@@ -142,14 +142,6 @@
                             <div>사용가능 잔액</div>
                             <div>0 원</div>
                         </div>
-                        <div>
-                            <div>ㄴ 적립금</div>
-                            <div>0 원</div>
-                        </div>
-                        <div>
-                            <div>컬리캐시</div>
-                            <div>0 원</div>
-                        </div>
                         <div id="point-input">
                             <input type="text" placeholder="0"/>
                             <button>모두사용</button>
@@ -220,7 +212,11 @@
             </div>
             <div>
                 <div>카드즉시할인</div>
+                <div>0원</div>
+            </div>
+            <div>
                 <div>적립금</div>
+                <div>0원</div>
             </div>
             <hr/>
             <div>

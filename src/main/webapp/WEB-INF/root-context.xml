@@ -12,7 +12,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation"  value="classpath:mybatis-config.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
     </bean>
 
@@ -25,11 +25,27 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.brokurly.repository" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.brokurly.repository"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-<!--    <bean id="boardDao" class="com.jungsuk.repository.BoardDaoImpl">-->
-<!--        <constructor-arg ref="sqlSession"/>-->
-<!--    </bean>-->
+    <!--  Validation 관련 Bean 추가  -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">
+        <property name="validator" ref="validator"/>
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="basenames">
+            <list>
+                <value>errors/error_message.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--    <bean id="boardDao" class="com.jungsuk.repository.BoardDaoImpl">-->
+    <!--        <constructor-arg ref="sqlSession"/>-->
+    <!--    </bean>-->
 </beans>

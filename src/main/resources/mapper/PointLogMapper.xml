@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jungsuk.repository.ExampleRepository">
+<mapper namespace="com.brokurly.repository.PointLogDao">
+    <!-- READ -->
+    <select id="selectUsageByCustomerAndPeriod" resultType="PointLogUsageDto">
+        SELECT order_id, point_amt, proc_dt, point_spec, point_stat
+        FROM point_log
+        WHERE cust_id = #{custId}
+        AND point_stat = '사용'
+        AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
+    </select>
+
+    <select id="countUsageByCustomerAndPeriod" resultType="int">
+        SELECT count(*)
+        FROM point_log
+        WHERE cust_id = #{custId}
+        AND point_stat = '사용'
+        AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
+    </select>
 <!--    &lt;!&ndash; CREATE &ndash;&gt;-->
 <!--    <insert id="insert" useGeneratedKeys="true" keyProperty="bno">-->
 <!--        INSERT INTO board-->
@@ -53,7 +69,7 @@
 
 <!--    <update id="resetAutoIncrement">-->
 <!--        ALTER TABLE board-->
-<!--        AUTO_INCREMENT = 1-->
+<!--            AUTO_INCREMENT = 1-->
 <!--    </update>-->
 
 <!--    &lt;!&ndash; DELETE &ndash;&gt;-->
