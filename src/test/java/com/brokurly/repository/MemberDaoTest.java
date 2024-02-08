@@ -1,6 +1,7 @@
 package com.brokurly.repository;
 
 import com.brokurly.entity.Member;
+import com.brokurly.entity.MemberAndSignup;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ class MemberDaoTest {
 
     @Test
     public void insertTest() throws Exception{
-        Member memberDto = new Member("aaaa","1234","김학준1","abc@cod.com","01012341111","M","2024-02-0",0);
-        System.out.println("memberDto = " + memberDto);
-        int rowCnt = dao.insert(memberDto);
+        MemberAndSignup memberAndSignup = new MemberAndSignup("aaaa","1234","김학준1","abc@cod.com","01012341111","M","2024-02-0",0);
+        System.out.println("memberAndSignup = " + memberAndSignup);
+        int rowCnt = dao.insert(memberAndSignup);
         System.out.println("rowCnt = " + rowCnt);
 
         assertTrue(rowCnt == 1);

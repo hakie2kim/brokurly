@@ -8,10 +8,10 @@
     <insert id="insert">
         INSERT INTO customer
             (cust_id, pwd, name, email, tel_no, sex,
-             birth_dt, reg_dt, adult_verif_dt, cart_cnt, point, consent)
+             birth_dt, reg_dt, adult_verif_dt,consent)
         VALUES
             (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
-             #{birthDt}, now(), #{adultVerifDt}, #{cartCnt}, #{point}, #{consent})
+             #{birthDt}, now(), #{adultVerifDt},#{consent})
     </insert>
 
     <!-- READ -->
@@ -36,11 +36,22 @@
 
     <sql id="count">
         SELECT COUNT(*) FROM customer
-        WHERE cust_id = #{custId}
     </sql>
 
+    <select id="countMemberAll" resultType="int">
+        <include refid="count"/>
+    </select>
+
+    <select id="countMember" resultType="int">
+        <include refid="count" />
+            WHERE cust_id = #{custId}
+    </select>
 
     <!-- DELETE -->
+    <delete id="deleteMemberAll">
+        DELETE FROM customer
+    </delete>
+
     <delete id="deleteMember">
         DELETE FROM customer
         WHERE cust_id = #{custId}

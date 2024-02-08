@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@
         margin: 0;
         padding: auto;
     }
-    section {
+    section, form {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -105,6 +107,7 @@
         background-color: var(--main-color);
         color: white;
         font-size: 16px;
+
     }
     .agreement-div {
         display: flex;
@@ -251,7 +254,10 @@
     /* modal css end */
 </style>
 <body>
+<form id="frm" action="<c:url value="/member/signup"/>" method="POST">
+    <input type="hidden" name="_method" value="POST">
 <section>
+
     <!-- modal start -->
     <div class="modal">
         <div class="modal_content_body">
@@ -259,10 +265,11 @@
             <!-- modalContent -->
         </div>
         <div class="modal_alert_body">
-            <button class="close-modal-btn">확인</button>
+            <button type="button" class="close-modal-btn">확인</button>
         </div>
     </div>
     <!-- modal end -->
+
     <span class="register-header">회원가입</span>
     <div class="Required-entr-div">
         <span class="Required-entr__label">*&nbsp;</span>필수입력사항
@@ -279,7 +286,7 @@
                     id="custId"
                     name="custId"
             />
-            <button class="open-modal-btn" value="1">중복확인</button>
+            <button type="button" class="open-modal-btn" value="1">중복확인</button>
         </div>
         <div class="id-info-div">
           <span
@@ -332,7 +339,7 @@
                     id="email"
                     name="email"
             />
-            <button class="open-modal-btn" value="2">중복확인</button>
+            <button type="button" class="open-modal-btn" value="2">중복확인</button>
         </div>
         <div class="column-div">
           <span class="register-div__label"
@@ -345,7 +352,7 @@
                     id="telNo"
                     name="telNo"
             />
-            <button>인증번호 받기</button>
+            <button type="button" class="open-modal-btn" value="3" id="telNo_btn">인증번호 받기</button>
         </div>
         <div class="column-div">
           <span class="register-div__label"
@@ -358,11 +365,11 @@
         </div>
         <div class="column-div">
             <span class="register-div__label">성별</span>
-            <input type="radio" id="sex-m" name="sex" />
+            <input type="radio" id="sex-m" name="sex" value="M"/>
             <label for="sex-m">남자</label>
-            <input type="radio" id="sex-f" name="sex" />
+            <input type="radio" id="sex-f" name="sex" value="F"/>
             <label for="sex-f">여자</label>
-            <input type="radio" id="sex-none" name="sex" />
+            <input type="radio" id="sex-none" name="sex" value="N"/>
             <label for="sex-none">선택안함</label>
         </div>
         <div class="birth-div column-div">
@@ -371,7 +378,7 @@
                 <input type="text" placeholder="YYYY" /><span>/</span>
                 <input type="text" placeholder="MM" /><span>/</span>
                 <input type="text" placeholder="DD" />
-                <input type="hidden" name="yyyymmdd">
+                <input type="text" id="yyyymmdd" name="birthDt">
             </div>
         </div>
     </div>
@@ -431,6 +438,7 @@
     <hr />
     <button class="register-btn">가입하기</button>
 </section>
+</form>
 <script>
         let modal = document.querySelector(".modal");
         let openModalBtns = document.querySelectorAll(".open-modal-btn");
@@ -438,37 +446,47 @@
         let closeModalBtn = document.querySelector(".close-modal-btn");
 
         let custId = document.querySelector("#custId");
+       let telNoBtn = document.querySelector("#telNo_btn");
+
 
         [].forEach.call(openModalBtns, function (openModalBtn) {
             // 하나의 클래스명으로 다른 값을 얻어 alert의 내용을 바꾸는 fun.
-            openModalBtn.addEventListener("click", clickModal, false);
+            openModalBtn.addEventListener("click", setMessage, false);
         });
 
         // btn에 따른 조건식 변경 fun.
-        function clickModal() {
-            let str = "";
+        function setMessage() {
+            let msg = "";
             if (this.value == 1) {
                 // 아이디 중복 확인
-                str = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
+                msg = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
+                openModal(msg);
             } else if (this.value == 2) {
                 // 이메일 중복 확인
-                str = "이메일을 입력해주세요";
+                msg = "이메일을 입력해주세요";
+                openModal(msg);
+            } else if (this.value == 3){
+                // 휴대폰 인증번호 발송
+                msg = "인증번호가 발송되었습니다";
+                openModal(msg)
             }
 
-            openModal(str);
+
         }
 
         // modal open
-        function openModal(str) {
+        function openModal(msg) {
             modal.style.display = "flex";
             document.body.style.overflow = "hidden"; // 모달 작동 시 스크롤바 비활성화
-            modalContent.innerHTML = `<p>${'${str}'}</p>`; //
+            modalContent.innerHTML = `<p>${'${msg}'}</p>`; //
+
         }
 
         // modal close
         closeModalBtn.addEventListener("click", () => {
             modal.style.display = "none";
             document.body.style.overflow = "unset"; // 모달 작동 시 스크롤바 활성화
+
         });
 
         $(document).ready(function () {
@@ -487,7 +505,46 @@
                 },
             });
         });
-        });
+
+            telNoBtn.addEventListener("click", () => {
+                let telNoVal = $("#telNo").val(); // 휴대폰 번호
+                alert(telNoVal);
+                $.ajax({
+                    type : "POST",
+                    url : "/sms/telNoCheck",
+                    data : {telNo : telNoVal},
+                    cache : false,
+                    success : function(data) {
+                        if (data == "err") { // 실패시
+                            alert("SEND ERR");
+                        } else {
+                            alert("SEND OK");
+                            // 성공시 데이터 저장
+                        }
+                    }
+                });
+            });
+        // let sendMessage = function(){
+        //     let telNoVal = $("#telNo").val(); // 휴대폰 번호
+        //     alert(telNoVal);
+        //     $.ajax({
+        //         type : "POST",
+        //         url : "/sms/telNoCheck",
+        //         data : {telNo : telNoVal},
+        //         cache : false,
+        //         success : function(data) {
+        //             if (data == "err") { // 실패시
+        //                 alert("SEND ERR");
+        //             } else {
+        //                 alert("SEND OK");
+        //                 // 성공시 데이터 저장
+        //             }
+        //         }
+        //     });
+        // }
+
+
+       });
 
 
 </script>
