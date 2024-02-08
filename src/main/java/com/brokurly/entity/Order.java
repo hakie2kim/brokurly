@@ -3,7 +3,7 @@ package com.brokurly.entity;
 import lombok.*;
 
 @Getter
-@Setter
+//@Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
