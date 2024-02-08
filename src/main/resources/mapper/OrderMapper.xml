@@ -30,6 +30,11 @@
         WHERE cust_id = #{custId}
     </select>
 
+    <select id="selectByOrderId" resultType="Order">
+        <include refid="select"/>
+        WHERE order_id = #{orderId}
+    </select>
+
     <!-- UPDATE -->
 
     <!-- DELETE -->
