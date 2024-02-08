@@ -53,7 +53,7 @@
 
 <!--    <update id="resetAutoIncrement">-->
 <!--        ALTER TABLE board-->
-<!--            AUTO_INCREMENT = 1-->
+<!--        AUTO_INCREMENT = 1-->
 <!--    </update>-->
 
 <!--    &lt;!&ndash; DELETE &ndash;&gt;-->

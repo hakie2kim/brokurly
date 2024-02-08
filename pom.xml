@@ -98,6 +98,32 @@
       <version>1.18.30</version>
       <scope>provided</scope>
     </dependency>
+    <!-- spring-security-core -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>6.2.0</version>
+    </dependency>
+    <!-- spring-security-web -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>6.2.0</version>
+    </dependency>
+    <!-- spring-security-config -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>6.2.0</version>
+    </dependency>
+    <!-- coolsms api -->
+    <dependency>
+      <groupId>net.nurigo</groupId>
+      <artifactId>sdk</artifactId>
+      <version>4.3.0</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <finalName>test</finalName>

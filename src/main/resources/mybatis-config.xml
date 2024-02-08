@@ -10,6 +10,8 @@
         <!--        resultType에 넣을 객체를 바인딩하는 예시    -->
         <!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
         <!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
+        <typeAlias type="com.brokurly.entity.Member" alias="Member"/>
+        <typeAlias type="com.brokurly.entity.Member" alias="MemberAndSignup"/>
         <typeAlias type="com.brokurly.entity.Order" alias="Order"/>
         <typeAlias type="com.brokurly.entity.Payment" alias="Payment"/>
         <typeAlias type="com.brokurly.entity.OrderAndPayment" alias="OrderAndPayment"/>
