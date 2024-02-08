@@ -3,30 +3,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.brokurly.repository.CategoryDao">
-<insert id="insert" >
-    INSERT INTO category_code
-        (code_id, exp)
-    VALUES
-        (#{codeId}, #{exp})
-</insert>
+    <insert id="insert">
+        INSERT INTO category_code
+            (code_id, exp)
+        VALUES (#{codeId}, #{exp})
+    </insert>
 
-<!--<select id="selectmainexp" resultType="CategoryDto">-->
-<!--    SELECT exp-->
-<!--    FROM category_code-->
-<!--    WHERE code_id<1000-->
-<!--</select>-->
+<!--  카테고리 대분류 가져오기  -->
+    <select id="selectMainExp" resultType="CategoryDto">
+        <![CDATA[
+        SELECT exp
+        FROM category_code
+        WHERE code_id < 1000
+        ]]>
+    </select>
 
-<select id="select907" resultType="String">
-    SELECT exp
-    FROM category_code
-    WHERE code_id LIKE '9070%'
-</select>
-
-<!--<select id="selectone907" resultType="String">-->
-<!--    SELECT exp-->
-<!--    FROM category_code-->
-<!--    WHERE code_id LIKE '907%'-->
-
-<!--</select>-->
-
+<!--  카테고리 907 중분류  -->
+    <select id="select907" resultType="String">
+        SELECT exp
+        FROM category_code
+        WHERE code_id LIKE '9070%'
+    </select>
 </mapper>
