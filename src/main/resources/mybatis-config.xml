@@ -3,9 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 
 <configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <typeAliases>
-<!--        예시    -->
-<!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
-<!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
+        <!--        resultType에 넣을 객체를 바인딩하는 예시    -->
+        <!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
+        <!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
+        <typeAlias type="com.brokurly.entity.Order" alias="Order"/>
+        <typeAlias type="com.brokurly.entity.Payment" alias="Payment"/>
+        <typeAlias type="com.brokurly.entity.OrderAndPayment" alias="OrderAndPayment"/>
     </typeAliases>
 </configuration>
