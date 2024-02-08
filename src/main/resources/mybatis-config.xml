@@ -13,5 +13,7 @@
         <typeAlias type="com.brokurly.entity.Order" alias="Order"/>
         <typeAlias type="com.brokurly.entity.Payment" alias="Payment"/>
         <typeAlias type="com.brokurly.entity.OrderAndPayment" alias="OrderAndPayment"/>
+        <typeAlias type="com.brokurly.entity.CategoryDto" alias="CategoryDto"/>
+        <typeAlias type="com.brokurly.entity.CategoryMainDto" alias="CategoryMainDto"/>
     </typeAliases>
 </configuration>
