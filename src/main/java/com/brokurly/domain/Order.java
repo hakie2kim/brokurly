@@ -1,5 +1,6 @@
 package com.brokurly.domain;
 
+
 import lombok.*;
 
 @Getter
@@ -19,4 +20,5 @@ public class Order {
     private int shipFee;
     private String orderAddr;
     private String shipNo;
+
 }
