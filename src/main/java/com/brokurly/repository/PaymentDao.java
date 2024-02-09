@@ -1,6 +1,6 @@
 package com.brokurly.repository;
 
-import com.brokurly.domain.Payment;
+import com.brokurly.entity.Payment;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

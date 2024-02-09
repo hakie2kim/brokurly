@@ -1,6 +1,6 @@
 package com.brokurly.repository;
 
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.entity.PointLogUsageDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
