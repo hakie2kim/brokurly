@@ -11,5 +11,5 @@ import lombok.*;
 @AllArgsConstructor
 public class SearchKeyword {
     private String keyword;
-    private String item_id_list;
+    private String itemIdList;
 }

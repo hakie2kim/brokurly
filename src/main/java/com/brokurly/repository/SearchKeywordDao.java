@@ -1,6 +1,7 @@
 package com.brokurly.repository;
 
-import com.brokurly.entity.SearchKeyword;
+
+import com.brokurly.domain.SearchKeyword;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
