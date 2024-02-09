@@ -1,14 +1,12 @@
 package com.brokurly.controller;
 
-import com.brokurly.entity.MemberAndSignup;
+import com.brokurly.dto.MemberAndSignup;
 import com.brokurly.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/member")

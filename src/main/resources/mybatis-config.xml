@@ -10,11 +10,13 @@
         <!--        resultType에 넣을 객체를 바인딩하는 예시    -->
         <!--        <typeAlias type="com.jungsuk.entity.Board" alias="Board"/>-->
         <!--        <typeAlias type="com.jungsuk.dto.BoardDto" alias="BoardDto"/>-->
-        <typeAlias type="com.brokurly.entity.Member" alias="Member"/>
-        <typeAlias type="com.brokurly.entity.Member" alias="MemberAndSignup"/>
-        <typeAlias type="com.brokurly.entity.Order" alias="Order"/>
-        <typeAlias type="com.brokurly.entity.Payment" alias="Payment"/>
-        <typeAlias type="com.brokurly.entity.OrderAndPayment" alias="OrderAndPayment"/>
-        <typeAlias type="com.brokurly.entity.PointLogUsageDto" alias="PointLogUsageDto"/>
+        <typeAlias type="com.brokurly.dto.Member" alias="Member"/>
+        <typeAlias type="com.brokurly.dto.Member" alias="MemberAndSignup"/>
+        <typeAlias type="com.brokurly.domain.Order" alias="Order"/>
+        <typeAlias type="com.brokurly.domain.Payment" alias="Payment"/>
+        <typeAlias type="com.brokurly.domain.OrderAndPayment" alias="OrderAndPayment"/>
+        <typeAlias type="com.brokurly.dto.PointLogUsageDto" alias="PointLogUsageDto"/>
+<!--        <typeAlias type="com.brokurly.entity.CategoryDto" alias="CategoryDto"/>-->
+        <typeAlias type="com.brokurly.domain.ReceiverDetails" alias="ReceiverDetails"/>
     </typeAliases>
 </configuration>
