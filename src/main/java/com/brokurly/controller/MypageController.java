@@ -1,12 +1,14 @@
 package com.brokurly.controller;
 
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.entity.PointLogUsageDto;
 import com.brokurly.service.PointLogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

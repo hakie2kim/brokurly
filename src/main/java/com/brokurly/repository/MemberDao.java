@@ -1,7 +1,7 @@
 package com.brokurly.repository;
 
-import com.brokurly.dto.Member;
-import com.brokurly.dto.MemberAndSignup;
+import com.brokurly.entity.Member;
+import com.brokurly.entity.MemberAndSignup;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -1,10 +1,12 @@
-package com.brokurly.domain;
+package com.brokurly.entity;
 
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderList {
     private int orderNo;
