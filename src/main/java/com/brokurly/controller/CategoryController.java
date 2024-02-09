@@ -1,6 +1,7 @@
 package com.brokurly.controller;
 
 import com.brokurly.entity.CategoryDto;
+import com.brokurly.repository.CategoryDao;
 import com.brokurly.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/seller")
 public class CategoryController {
+
+   CategoryService categoryService;
+
+    //생성자 추가해서 주입받기
     @Autowired
-    CategoryService categoryService;
+    public CategoryController(CategoryService categoryService){
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/productscreate")
     public String readCategory(Model m) throws Exception {
 
         CategoryDto categoryDto = new CategoryDto();
-
 
         List<CategoryDto> selectMain = categoryService.readMain();
         m.addAttribute("selectMain", selectMain);

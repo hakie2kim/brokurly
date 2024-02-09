@@ -9,10 +9,17 @@ import java.util.List;
 
 @Service
 public class CategoryService {
-@Autowired
-CategoryDao categoryDao;
 
-//카테고리 대분류 가져오기
+ CategoryDao categoryDao;
+
+ //생성자 추가해서 주입받기
+ @Autowired
+public CategoryService(CategoryDao categoryDao){
+ this.categoryDao = categoryDao;
+}
+
+
+ //카테고리 대분류 가져오기
 public List<CategoryDto> readMain() throws Exception{
  return categoryDao.selectMainExp();
 }
