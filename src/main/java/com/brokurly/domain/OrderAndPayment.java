@@ -1,14 +1,12 @@
-package com.brokurly.entity;
+package com.brokurly.domain;
 
 import lombok.*;
 
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderAndPayment {
     private String orderId;
@@ -28,7 +26,6 @@ public class OrderAndPayment {
     private String payStat;
     private Timestamp payReqDt;
     private Timestamp payConfDt;
-    private int order_amt;
     private Integer cpnDcAmt;
     private Integer cardDcAmt;
     private Integer pointDcAmt;

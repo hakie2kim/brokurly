@@ -1,6 +1,6 @@
 package com.brokurly.repository;
 
-import com.brokurly.entity.CategoryDto;
+import com.brokurly.dto.CategoryDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.brokurly.controller;
 
-import com.brokurly.entity.Validation;
+import com.brokurly.domain.Validation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

@@ -1,6 +1,6 @@
 package com.brokurly.service;
 
-import com.brokurly.entity.CategoryDto;
+import com.brokurly.dto.CategoryDto;
 import com.brokurly.repository.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
