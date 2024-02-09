@@ -1,6 +1,6 @@
 package com.brokurly.service;
 
-import com.brokurly.dto.MemberAndSignup;
+import com.brokurly.domain.MemberAndSignup;
 
 public interface MemberService {
     int signUp(MemberAndSignup memberAndSignup);

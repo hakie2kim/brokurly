@@ -1,6 +1,6 @@
 package com.brokurly.controller;
 
-import com.brokurly.dto.MemberAndSignup;
+import com.brokurly.domain.MemberAndSignup;
 import com.brokurly.service.MemberService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

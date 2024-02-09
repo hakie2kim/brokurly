@@ -1,6 +1,6 @@
 package com.brokurly.service;
 
-import com.brokurly.dto.MemberAndSignup;
+import com.brokurly.domain.MemberAndSignup;
 import com.brokurly.repository.MemberDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

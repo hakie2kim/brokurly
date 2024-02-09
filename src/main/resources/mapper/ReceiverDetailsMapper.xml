@@ -18,8 +18,9 @@
         SELECT * FROM receiver_details
     </sql>
 
-    <select id="selectAll" resultType="Payment">
+    <select id="selectByShipLocaId" resultType="ReceiverDetails">
         <include refid="select"/>
+        WHERE ship_loca_id = #{shipLocaId}
     </select>
 
     <!-- UPDATE -->

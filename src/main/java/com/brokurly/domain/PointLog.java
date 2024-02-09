@@ -1,4 +1,4 @@
-package com.brokurly.dto;
+package com.brokurly.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
