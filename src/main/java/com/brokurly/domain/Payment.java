@@ -1,14 +1,12 @@
-package com.brokurly.entity;
+package com.brokurly.domain;
 
 import lombok.*;
 
 import java.sql.Timestamp;
 
 @Getter
-@Setter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
 public class Payment {
     private String payNo;

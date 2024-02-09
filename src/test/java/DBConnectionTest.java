@@ -1,5 +1,3 @@
-import com.brokurly.entity.Order;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +20,5 @@ public class DBConnectionTest {
     void connection() throws SQLException {
         Connection con = dataSource.getConnection();
         assertNotNull(con);
-    }
-
-    @Test
-    void method(){
-//        Order od = new Order();
-//        od.setName("sfsd");
-//        od.setNumber(1);
-//        od.getName();
-//        System.out.println("od = " + od);
-
     }
 }

@@ -16,7 +16,7 @@
         <typeAlias type="com.brokurly.entity.Payment" alias="Payment"/>
         <typeAlias type="com.brokurly.entity.OrderAndPayment" alias="OrderAndPayment"/>
         <typeAlias type="com.brokurly.entity.PointLogUsageDto" alias="PointLogUsageDto"/>
-
         <typeAlias type="com.brokurly.entity.CategoryDto" alias="CategoryDto"/>
+        <typeAlias type="com.brokurly.domain.ReceiverDetails" alias="ReceiverDetails"/>
     </typeAliases>
 </configuration>
