@@ -12,16 +12,9 @@
 <!--  카테고리 대분류 가져오기  -->
     <select id="selectMainExp" resultType="CategoryDto">
         <![CDATA[
-        SELECT exp
+        SELECT code_id, exp
         FROM category_code
         WHERE code_id < 1000
         ]]>
-    </select>
-
-<!--  카테고리 907 중분류  -->
-    <select id="select907" resultType="String">
-        SELECT exp
-        FROM category_code
-        WHERE code_id LIKE '9070%'
     </select>
 </mapper>

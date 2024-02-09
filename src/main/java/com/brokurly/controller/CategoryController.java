@@ -18,19 +18,18 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping("/readCategory")
+    @GetMapping("/productscreate")
     public String readCategory(Model m) throws Exception {
 
         CategoryDto categoryDto = new CategoryDto();
 
-        List<CategoryDto> selectaa = categoryService.read907();
-//        m.addAttribute(selectaa.get(0));
-        m.addAttribute("selectaa",selectaa);
+
+        List<CategoryDto> selectMain = categoryService.readMain();
+        m.addAttribute("selectMain", selectMain);
         log.info("model={}",m);
-        log.info("selectaa={}",selectaa.get(0));
+        log.info("selectMain={}", selectMain);
 
-        return "/seller/productcreate";
-
+        return "/seller/productscreate";
     }
 
 }

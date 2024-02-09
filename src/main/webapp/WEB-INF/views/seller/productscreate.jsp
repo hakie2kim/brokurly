@@ -16,6 +16,7 @@
 </head>
 <body>
 
+
 <!-- 카테고리 -->
 
 <ui-view name="category">
@@ -36,9 +37,10 @@
                         <div class="seller-data-list category-list" ng-if="vm.showPcDepthSearch()" style="">
                             <div><!---->
                                 <ul class="data-group"><!---->
-                                    <c:forEach var="item" items="${selectMain}">
+                                    <c:forEach var="selectMainC" items="${selectMain}">
                                         <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}">
-                                            <a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">${item}</a>
+                                            <a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">${selectMainC.exp}</a>
+
                                         </li><!---->
                                     </c:forEach>
                                     <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}" class="on"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">가구/인테리어</a></li><!---->
@@ -80,6 +82,26 @@
                         <p class="sub-text text-primary" ng-if="!vm.hasModel">상품과 맞지 않는 카테고리에 등록할 경우 강제 이동되거나 판매중지, 판매금지 될 수 있습니다.</p><br><!----><!----><!----><!----><!----><!----></div></div><!----></div></div><!----></div>
 </ui-view>
 
+
+<%--Ajax--%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            type: //데이터 전송 타입,
+            url : //데이터를 주고받을 파일 주소 입력,
+        data: //보내는 데이터,
+            dataType://문자형식으로 받기 ,
+                success: function(result){
+                    //작업이 성공적으로 발생했을 경우
+                },
+        error:function(){
+            //에러가 났을 경우 실행시킬 코드
+        }
+    })
+    });
+
+</script>
 
 </body>
 </html>
