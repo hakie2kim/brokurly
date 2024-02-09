@@ -1,4 +1,4 @@
-package com.brokurly.entity;
+package com.brokurly.domain;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.brokurly.controller;
 
-import com.brokurly.entity.CategoryDto;
+import com.brokurly.dto.CategoryDto;
 import com.brokurly.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

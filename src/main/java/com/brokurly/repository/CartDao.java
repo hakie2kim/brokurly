@@ -1,6 +1,6 @@
 package com.brokurly.repository;
 
-import com.brokurly.entity.Cart;
+import com.brokurly.domain.Cart;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
