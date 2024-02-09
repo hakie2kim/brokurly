@@ -36,6 +36,11 @@
                         <div class="seller-data-list category-list" ng-if="vm.showPcDepthSearch()" style="">
                             <div><!---->
                                 <ul class="data-group"><!---->
+                                    <c:forEach var="item" items="${selectMain}">
+                                        <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}">
+                                            <a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">${item}</a>
+                                        </li><!---->
+                                    </c:forEach>
                                     <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}" class="on"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">가구/인테리어</a></li><!---->
                                     <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">도서</a></li><!---->
                                     <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">디지털/가전</a></li><!---->
@@ -51,12 +56,11 @@
                             </div>
                             <div ng-show="vm.showLevel >= 2" class=""><!---->
                                 <ul class="data-group"><!---->
-                                    <c:forEach var="item" items="${selectaa}">
-
-                                        <li ng-repeat="category2 in vm.categories2 track by $index" ng-class="{on: category2.id == vm.category2.id}" class="on">
-                                            <a role="button" href="">${item}</a>
-                                        </li><!---->
-                                    </c:forEach>
+<%--                                    <c:forEach var="item" items="${selectaa}">--%>
+<%--                                        <li ng-repeat="category2 in vm.categories2 track by $index" ng-class="{on: category2.id == vm.category2.id}" class="on">--%>
+<%--                                            <a role="button" href="">${item}</a>--%>
+<%--                                        </li><!---->--%>
+<%--                                    </c:forEach>--%>
                                 </ul>
 <%--                                <li ng-repeat="category2 in vm.categories2 track by $index" ng-class="{'on': category2.id == vm.category2.id, 'no-depth': category2.lastLevel}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category2)">홈데코</a></li><!---->&ndash;%&gt;--%>
 
