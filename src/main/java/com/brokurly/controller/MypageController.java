@@ -30,6 +30,7 @@ public class MypageController {
         List<PointLogUsageDto> pointLogUsageList = pointLogService.findPointLogUsageByCustomer(custId, period);
         int pointLogUsageCount = pointLogService.getPointLogUsageByCustomerCount(custId, period);
 
+        model.addAttribute("type", "사용");
         model.addAttribute("period", period);
         model.addAttribute("pointLogUsageList", pointLogUsageList);
         model.addAttribute("pointLogUsageCount", pointLogUsageCount);
