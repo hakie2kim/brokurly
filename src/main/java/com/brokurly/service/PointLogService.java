@@ -1,8 +1,6 @@
 package com.brokurly.service;
 
-import com.brokurly.entity.PointLogEarningDto;
-import com.brokurly.entity.PointLogExpDto;
-import com.brokurly.entity.PointLogUsageDto;
+import com.brokurly.dto.PointLogUsageDto;
 import com.brokurly.repository.PointLogDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
