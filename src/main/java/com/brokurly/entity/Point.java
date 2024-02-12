@@ -8,12 +8,9 @@ import lombok.ToString;
 import java.util.Date;
 
 @Getter @Setter @ToString @EqualsAndHashCode
-public class PointLog {
+public class Point {
     private int pointNo;
-    private String orderId;
     private String custId;
     private int pointAmt;
-    private Date procDt;
-    private String pointSpec;
-    private String pointStat;
+    private Date expirDt;
 }

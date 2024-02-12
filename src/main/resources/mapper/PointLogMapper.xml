@@ -35,6 +35,24 @@
           AND point_stat = '소멸'
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
     </select>
+
+    <select id="selectEarningByCustomerAndPeriod" resultType="PointLogEarningDto">
+        SELECT p.point_no, order_id, pl.point_amt, proc_dt, point_spec, point_stat, p.expir_dt
+        FROM point_log pl
+        INNER JOIN point p
+        ON pl.point_no = p.point_no
+        WHERE pl.cust_id = #{custId}
+          AND point_stat LIKE '%적립%'
+          AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
+    </select>
+
+    <select id="countEarningByCustomerAndPeriod" resultType="int">
+        SELECT count(*)
+        FROM point_log
+        WHERE cust_id = #{custId}
+          AND point_stat LIKE '%적립%'
+          AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
+    </select>
 <!--    &lt;!&ndash; CREATE &ndash;&gt;-->
 <!--    <insert id="insert" useGeneratedKeys="true" keyProperty="bno">-->
 <!--        INSERT INTO board-->

@@ -427,6 +427,13 @@ body .app main .content .bottom .row3 .wrapper .details .right {
     color: #666;
 }
 
+body .app main .content .bottom .row3 .wrapper .details .right .exp {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #666;
+}
+
 body .app main .content .bottom .row3 .no-log {
     justify-content: center;
     flex-grow: 1;

@@ -1,5 +1,6 @@
 package com.brokurly.service;
 
+import com.brokurly.entity.PointLogEarningDto;
 import com.brokurly.entity.PointLogExpDto;
 import com.brokurly.entity.PointLogUsageDto;
 import com.brokurly.repository.PointLogDao;
@@ -27,5 +28,13 @@ public class PointLogService {
 
     public int getPointLogExpCountByCustomerAndPeriod(String custId, Integer period) {
         return pointLogDao.countExpByCustomerAndPeriod(custId, period);
+    }
+
+    public List<PointLogEarningDto> findPointLogEarningByCustomerAndPeriod(String custId, Integer period) {
+        return pointLogDao.selectEarningByCustomerAndPeriod(custId, period);
+    }
+
+    public int getPointLogEarningCountByCustomerAndPeriod(String custId, Integer period) {
+        return pointLogDao.countEarningByCustomerAndPeriod(custId, period);
     }
 }

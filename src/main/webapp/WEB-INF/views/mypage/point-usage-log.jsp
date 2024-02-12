@@ -16,7 +16,7 @@
 </head>
 <script>
     window.onload = function () {
-        var buttonWrappers = document.querySelectorAll('.row1 .button-wrapper');
+        const buttonWrappers = document.querySelectorAll('.row1 .button-wrapper');
 
         buttonWrappers.forEach((wrapper) => {
             if (wrapper.textContent.includes("${type}")) {
@@ -90,7 +90,7 @@
             <div class="bottom">
                 <div class="row1">
                     <div class="button-wrapper"><span>전체</span></div>
-                    <div class="button-wrapper"><span>적립</span></div>
+                    <div class="button-wrapper"><a href="/mypage/point/earning"><span>적립</span></a></div>
                     <div class="button-wrapper"><a href="/mypage/point/usage"><span>사용</span></a></div>
                     <div class="button-wrapper"><a href="/mypage/point/exp"><span>소멸</span></a></div>
                 </div>

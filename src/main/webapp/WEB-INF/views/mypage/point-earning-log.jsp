@@ -16,7 +16,7 @@
 </head>
 <script>
     window.onload = function () {
-        var buttonWrappers = document.querySelectorAll('.row1 .button-wrapper');
+        const buttonWrappers = document.querySelectorAll('.row1 .button-wrapper');
 
         buttonWrappers.forEach((wrapper) => {
             if (wrapper.textContent.includes("${type}")) {
@@ -24,6 +24,24 @@
                 wrapper.querySelector('span').style.setProperty('color', '#5f0080');
             }
         });
+
+
+        if ('${type}' === '적립') {
+            const backgrounds = document.querySelectorAll('.icon .background');
+            backgrounds.forEach((iconBackground) => {
+                iconBackground.style.setProperty('background-color', '#efe5f2');
+            })
+
+            const iconStatus = document.querySelectorAll('.icon .icon-status');
+            iconStatus.forEach((iconStatus) => {
+                iconStatus.querySelector('span').style.setProperty('color', '#5f0080')
+            })
+
+            const rights = document.querySelectorAll('.right');
+            rights.forEach((right) => {
+                right.style.setProperty('color', '#5f0080')
+            })
+        }
     }
 </script>
 <body>
@@ -90,13 +108,13 @@
             <div class="bottom">
                 <div class="row1">
                     <div class="button-wrapper"><span>전체</span></div>
-                    <div class="button-wrapper"><span>적립</span></div>
+                    <div class="button-wrapper"><a href="/mypage/point/earning"><span>적립</span></a></div>
                     <div class="button-wrapper"><a href="/mypage/point/usage"><span>사용</span></a></div>
                     <div class="button-wrapper"><a href="/mypage/point/exp"><span>소멸</span></a></div>
                 </div>
                 <div class="row2">
-                    <span>총 ${pointLogExpCount}건</span>
-                    <form action="/mypage/point/exp" method="get">
+                    <span>총 ${pointLogEarningCount}건</span>
+                    <form action="/mypage/point/earning" method="get">
                         <select name="period" onchange="this.form.submit()">
                             <option value="3" <c:if test="${period == 3}">selected</c:if>>3개월</option>
                             <option value="6" <c:if test="${period == 6}">selected</c:if>>6개월</option>
@@ -105,7 +123,7 @@
                     </form>
                 </div>
                 <div class="row3">
-                    <c:if test="${pointLogExpCount eq 0}">
+                    <c:if test="${pointLogEarningCount eq 0}">
                         <div class="no-log">
                             <div class="wrapper">
                                 <div class="row">
@@ -136,28 +154,38 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${pointLogExpCount ne 0}">
-                        <c:forEach var="pointUsageLog" items="${pointLogExpList}" varStatus="status">
+                    <c:if test="${pointLogEarningCount ne 0}">
+                        <c:forEach var="pointEarningLog" items="${pointLogEarningList}" varStatus="status">
                             <div class="wrapper">
                                 <div class="date"><fmt:formatDate pattern="yyyy.MM.dd"
-                                                                  value="${pointUsageLog.procDt}"/></div>
+                                                                  value="${pointEarningLog.procDt}"/></div>
                                 <div class="details">
                                     <div class="left">
                                         <div class="icon">
                                             <div class="background"></div>
                                             <div class="icon-wrapper">
                                                 <div class="icon-status">
-                                                    <span>${pointUsageLog.pointStat}</span>
+                                                    <span>${pointEarningLog.pointStat}</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="titles">
-                                            <span class="main">${pointUsageLog.pointSpec}</span>
-                                            <span class="sub"></span>
+                                            <span class="main">${pointEarningLog.pointSpec}</span>
+                                            <c:if test="${empty pointEarningLog.orderId}">
+                                                <span class="sub"><fmt:formatDate pattern="MM.dd까지 사용가능"
+                                                                                  value="${pointEarningLog.procDt}"/></span>
+                                            </c:if>
+                                            <c:if test="${not empty pointEarningLog.orderId}">
+                                                <span class="sub">주문번호 (${pointEarningLog.orderId})</span>
+                                            </c:if>
                                         </div>
                                     </div>
-                                    <div class="right"><fmt:formatNumber pattern="#,###원"
-                                                                         value="${pointUsageLog.pointAmt}"/></div>
+                                    <div class="right">
+                                        <fmt:formatNumber pattern="+#,###원"
+                                                          value="${pointEarningLog.pointAmt}"/>
+                                        <span class="exp"><fmt:formatDate pattern="yy.MM.dd 만료"
+                                                                          value="${pointEarningLog.procDt}"/></span>
+                                    </div>
                                 </div>
                             </div>
                         </c:forEach>
