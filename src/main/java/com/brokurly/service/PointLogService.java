@@ -1,5 +1,7 @@
 package com.brokurly.service;
 
+import com.brokurly.dto.PointLogEarningDto;
+import com.brokurly.dto.PointLogExpDto;
 import com.brokurly.dto.PointLogUsageDto;
 import com.brokurly.repository.PointLogDao;
 import lombok.RequiredArgsConstructor;
