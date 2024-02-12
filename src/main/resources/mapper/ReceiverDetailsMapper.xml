@@ -23,7 +23,21 @@
         WHERE ship_loca_id = #{shipLocaId}
     </select>
 
+    <select id="selectByRcvDtlId" resultType="ReceiverDetails">
+        <include refid="select"/>
+        WHERE rcv_dtl_id = #{rcvDtlId}
+    </select>
     <!-- UPDATE -->
+    <update id="update">
+        UPDATE receiver_details
+        SET rcv_name = #{rcvName},
+            tel_no = #{telNo},
+            rcv_place = #{rcvPlace},
+            enter_mthd = #{enterMthd},
+            place_exp = #{placeExp},
+            msg_time = #{msgTime}
+        WHERE rcv_dtl_id = #{rcvDtlId}
+    </update>
 
     <!-- DELETE -->
 
