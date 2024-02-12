@@ -1,11 +1,9 @@
 package com.brokurly.service;
 
-import com.brokurly.entity.Point;
+import com.brokurly.domain.Point;
 import com.brokurly.repository.PointDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

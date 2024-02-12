@@ -1,4 +1,4 @@
-package com.brokurly.entity;
+package com.brokurly.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -8,9 +8,9 @@ import lombok.ToString;
 import java.util.Date;
 
 @Getter @Setter @ToString @EqualsAndHashCode
-public class PointLogExpDto {
+public class Point {
+    private int pointNo;
+    private String custId;
     private int pointAmt;
-    private Date procDt;
-    private String pointSpec;
-    private String pointStat;
+    private Date expirDt;
 }
