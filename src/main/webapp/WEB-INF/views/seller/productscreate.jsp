@@ -1,3 +1,4 @@
+<%--@elvariable id="selectMainC" type="com.brokurly.dto.CategoryDto"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -37,9 +38,9 @@
                         <div class="seller-data-list category-list" ng-if="vm.showPcDepthSearch()" style="">
                             <div><!---->
                                 <ul class="data-group"><!---->
-                                    <c:forEach var="selectMainC" items="${selectMain}">
+                                    <c:forEach var="selectMainC" items="${selectMain}" varStatus="status">
                                         <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}">
-                                            <a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">${selectMainC.exp}</a>
+                                            <button type="button" id="maincate${status.count}" href="" onclick="s_ajax(${status.count});" value="${selectMainC.codeId}">${selectMainC.exp}</>
 
                                         </li><!---->
                                     </c:forEach>
@@ -82,24 +83,111 @@
                         <p class="sub-text text-primary" ng-if="!vm.hasModel">상품과 맞지 않는 카테고리에 등록할 경우 강제 이동되거나 판매중지, 판매금지 될 수 있습니다.</p><br><!----><!----><!----><!----><!----><!----></div></div><!----></div></div><!----></div>
 </ui-view>
 
+<!-- 상품명 -->
+<ui-view name="item_name">
+    <div class="form-section">
+        <div class="title-line">
+            <label class="col-lg-2 col-sm-3 col-xs-6 control-label">상품명
+            </label>
+        </div>
+        <!---->
+        <div
+                class="inner-content input-content">
+            <div class="form-section-sub">
+                <div class="form-sub-wrap">
+                    <div class="input-content">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="seller-input-wrap">
+<%--                                    <form action="itemname.do" method="post">--%>
+                                    <form id="forma">
+                                    <input  name="name"
+                                            type="text"
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                            maxlength="100"
+                                            value=""
+                                            title="상품명 입력"
+                                    /></form>
+                                    <%--    </form>--%>
+                                </div>
+                            </div>
+                        </div>
+                        <!----><!----><!---->
+                        <p class="sub-text text-primary">
+                            판매 상품과 직접 관련이 없는 다른 상품명, 스팸성키워드 입력 시 관리자에 의해 판매 금지될 수있습니다.
+                            <br>유명 상품 유사문구를 무단으로 도용하여 ~스타일, ~st 등과 같이 기재하는 경우 별도 고지 없이 제재될수 있습니다.
+                            <br>전용 상품명을 사용 중인 경우 대표 상품명 수정시에도 전용 상품명으로 노출됩니다.<br><br>
+                        </p>
+                        <!---->
+                    </div>
+                </div>
+                <!---->
+            </div>
+            <!---->
+        </div>
+        <!---->
+    </div>
+</ui-view>
+
+
+<button type="button"
+        id="writeBtn">
+              <span class="content" ng-transclude="">저장하기</span
+              ><span class="progress"
+><span
+        class="progress-inner notransition"
+></span
+></span>
+</button>
+
 
 <%--Ajax--%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $.ajax({
-            type: //데이터 전송 타입,
-            url : //데이터를 주고받을 파일 주소 입력,
-        data: //보내는 데이터,
-            dataType://문자형식으로 받기 ,
-                success: function(result){
-                    //작업이 성공적으로 발생했을 경우
+
+    for(var i=0; i<2; i++) {
+
+        function s_ajax(i) {
+            let testcodeId = $("#maincate"+i).val();
+            alert(testcodeId)
+            $.ajax({
+                url: "/seller/ajax",
+                type: "post",
+
+                data: {
+                    testcodeId: testcodeId
                 },
-        error:function(){
-            //에러가 났을 경우 실행시킬 코드
+                success: function (data) {
+                    alert("success");
+
+                },
+                error: function (request, error) {
+                    alert("error");
+                    alert(this.data)
+                    // console.log(i);
+
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                },
+
+            })
         }
+    }
+
+
+//     '등록버튼' 값 보내기
+    $(document).ready(function () { //main()
+        $('#writeBtn').on("click", function () {
+            let form = $('#forma');
+            form.attr("action", "<c:url value='/seller/productscreate/write'/>");
+            form.attr("method", "post");
+            form.submit();
+            alert("저장되었습니다.");
+            alert(form);
+        });
+
     })
-    });
+
+
 
 </script>
 

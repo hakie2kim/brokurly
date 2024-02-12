@@ -20,8 +20,8 @@ public CategoryService(CategoryDao categoryDao){
 
 
  //카테고리 대분류 가져오기
-public List<CategoryDto> readMain() throws Exception{
- return categoryDao.selectMainExp();
+public List<CategoryDto> readMain() {
+ return categoryDao.selectMain();
 }
 
 }

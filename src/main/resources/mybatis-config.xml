@@ -18,5 +18,7 @@
         <typeAlias type="com.brokurly.domain.ReceiverDetails" alias="ReceiverDetails"/>
         <typeAlias type="com.brokurly.dto.PointLogUsageDto" alias="PointLogUsageDto"/>
         <typeAlias type="com.brokurly.dto.CategoryDto" alias="CategoryDto"/>
+        <typeAlias type="com.brokurly.dto.ProductscreateDto" alias="ProductscreateDto"/>
+
     </typeAliases>
 </configuration>
