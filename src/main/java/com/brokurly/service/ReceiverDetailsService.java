@@ -21,7 +21,7 @@ public class ReceiverDetailsService {
     @Transactional
     public ReceiverDetailsDto changeReceiverDetails(ReceiverDetailsChangeDto changeDto) {
         ReceiverDetails receiverDetails = receiverDetailsDao.selectByRcvDtlId(changeDto.getRcvDtlId());
-        receiverDetails.update(changeDto);
+        receiverDetails.changeStatus(changeDto);
         receiverDetailsDao.update(receiverDetails);
         return receiverDetails.makeFullDto();
     }
