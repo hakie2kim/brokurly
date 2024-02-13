@@ -38,6 +38,7 @@
             msg_time = #{msgTime}
         WHERE rcv_dtl_id = #{rcvDtlId}
     </update>
+    <!-- UPDATE -->
 
     <!-- DELETE -->
 

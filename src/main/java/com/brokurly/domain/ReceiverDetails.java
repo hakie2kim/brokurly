@@ -2,8 +2,12 @@ package com.brokurly.domain;
 
 import com.brokurly.dto.ReceiverDetailsChangeDto;
 import com.brokurly.dto.ReceiverDetailsDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor

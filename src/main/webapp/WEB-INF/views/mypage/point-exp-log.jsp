@@ -95,8 +95,8 @@
                     <div class="button-wrapper"><a href="/mypage/point/exp"><span>소멸</span></a></div>
                 </div>
                 <div class="row2">
-                    <span>총 ${pointLogUsageCount}건</span>
-                    <form action="/mypage/point/usage" method="get">
+                    <span>총 ${pointLogExpCount}건</span>
+                    <form action="/mypage/point/exp" method="get">
                         <select name="period" onchange="this.form.submit()">
                             <option value="3" <c:if test="${period == 3}">selected</c:if>>3개월</option>
                             <option value="6" <c:if test="${period == 6}">selected</c:if>>6개월</option>
@@ -105,7 +105,7 @@
                     </form>
                 </div>
                 <div class="row3">
-                    <c:if test="${pointLogUsageCount eq 0}">
+                    <c:if test="${pointLogExpCount eq 0}">
                         <div class="no-log">
                             <div class="wrapper">
                                 <div class="row">
@@ -136,8 +136,8 @@
                             </div>
                         </div>
                     </c:if>
-                    <c:if test="${pointLogUsageCount ne 0}">
-                        <c:forEach var="pointUsageLog" items="${pointLogUsageList}" varStatus="status">
+                    <c:if test="${pointLogExpCount ne 0}">
+                        <c:forEach var="pointUsageLog" items="${pointLogExpList}" varStatus="status">
                             <div class="wrapper">
                                 <div class="date"><fmt:formatDate pattern="yyyy.MM.dd"
                                                                   value="${pointUsageLog.procDt}"/></div>
@@ -153,7 +153,7 @@
                                         </div>
                                         <div class="titles">
                                             <span class="main">${pointUsageLog.pointSpec}</span>
-                                            <span class="sub">주문번호 (${pointUsageLog.orderId})</span>
+                                            <span class="sub"></span>
                                         </div>
                                     </div>
                                     <div class="right"><fmt:formatNumber pattern="#,###원"
