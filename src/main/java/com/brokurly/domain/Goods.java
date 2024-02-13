@@ -32,5 +32,4 @@ public class Goods {
   private int sellCnt;
   private int revCnt;
   private String stdySellerFl;
-
 }

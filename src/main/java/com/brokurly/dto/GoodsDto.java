@@ -34,5 +34,4 @@ public class GoodsDto {
   private int sellCnt;
   private int revCnt;
   private String stdySellerFl;
-
 }

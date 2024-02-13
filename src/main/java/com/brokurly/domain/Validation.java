@@ -1,5 +1,6 @@
 package com.brokurly.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
+@Builder
 public class Validation {
     @Min(10)
     @NotNull

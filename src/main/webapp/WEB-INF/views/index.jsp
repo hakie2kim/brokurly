@@ -16,7 +16,7 @@
     <a href="order/checkout">승범 - 주문서 조회</a>
 </div>
 <div>
-    <a href="mypage/point">학준 - 적립금 내역</a>
+    <a href="mypage/point/usage">학준 - 적립금 내역</a>
 </div>
 <div>
     <a href="member/signup">소라 - 회원가입</a>
