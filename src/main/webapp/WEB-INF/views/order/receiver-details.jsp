@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -21,8 +22,8 @@
             align-items: center;
             margin: 10px 30px 0 30px;
             position: sticky;
-            top: 0px;
-            left: 0px;
+            top: 0;
+            left: 0;
             z-index: 321;
             height: 90px;
             background: rgb(255, 255, 255);
@@ -37,7 +38,7 @@
             color: rgb(51, 51, 51);
             margin-top: 9px;
             font-size: 14px;
-            padding: 12px 0px;
+            padding: 12px 0;
             letter-spacing: -0.5px;
         }
 
@@ -46,12 +47,12 @@
         }
 
         .receiver-info {
-            width: 600px;
+            width: 90%;
             padding: 0 30px;
         }
 
         .receiver-info input[type="text"] {
-            width: 93%;
+            width: 100%;
             height: 44px;
             margin-top: 5px;
             margin-bottom: 25px;
@@ -76,17 +77,22 @@
 <div class="header">
     <h2>배송 요청사항</h2>
     <label class="sameCheck">
-        <input type="checkbox" class="css-agvwxo e1dcessg2" checked=""/>
-        <div class="css-79hxr7 e1dcessg1"></div>
+        <input type="checkbox" checked=""/>
         <span>주문자 정보와 동일</span>
     </label>
 </div>
 <div class="receiver-info">
     <div>
-        <label for="receiver-name" class="name">받으실 분<span class="star">*</span></label>
-        <input id="receiver-name" name="name" placeholder="이름을 입력해 주세요" type="text" value=""/>
-        <label for="receiver-phone" class="name">휴대폰<span class="star">*</span></label>
-        <input id="receiver-phone" name="name" placeholder="숫자만 입력해 주세요" type="text" value=""/>
+        <div>
+            <label for="receiver-name" class="name">받으실 분<span class="star">*</span></label>
+            <input id="receiver-name" name="name" placeholder="이름을 입력해 주세요" type="text"
+                   value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
+        </div>
+        <div>
+            <label for="receiver-phone" class="name">휴대폰<span class="star">*</span></label>
+            <input id="receiver-phone" name="name" placeholder="숫자만 입력해 주세요" type="text"
+                   value="<c:if test='${receiverDetails != null}'>${receiverDetails.telNo}</c:if>"/>
+        </div>
     </div>
     <div>
         <div>받으실 장소<span class="star">*</span></div>
@@ -102,8 +108,8 @@
                         </label>
                     </div>
                     <div style="width: 50%">
-                        <label for="etc" class="receive-place-label">
-                            <input type="radio" name="receivePlace" id="etc" class="receive-place"/>
+                        <label for="etc-place" class="receive-place-label">
+                            <input type="radio" name="receivePlace" id="etc-place" class="receive-place"/>
                             <div style="margin-left: 10px">
                                 <span>기타 장소</span>
                             </div>
@@ -113,14 +119,14 @@
             </div>
             <div class="notice">경비실과 무인택배함 배송이 종료되었어요.</div>
             <div class="etc-detail">기타장소 세부사항<span class="star">*</span></div>
-            <label for="spec" class="receive-place-label">
-                <input type="radio" name="receivePlace" id="spec" class="receive-place"/>
+            <label for="etc" class="receive-place-label">
+                <input type="radio" name="receivePlace" id="etc" class="receive-place"/>
                 <div style="margin-left: 10px">
                     <span>기타</span>
                 </div>
             </label>
-            <div>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+            <div >
+                <input type="text" id="etc-detail" name="etc-detail" class="detail" />
             </div>
         </div>
     </div>

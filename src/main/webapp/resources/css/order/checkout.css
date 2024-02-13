@@ -38,6 +38,10 @@ h2 {
     text-align: center;
 }
 
+.caution {
+    color: rgb(240, 63, 64);
+}
+
 .info-type1 {
     margin-bottom: 100px;
 }
@@ -156,7 +160,7 @@ h2 {
     cursor: pointer;
 }
 
-.modal {
+.big-modal, .small-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -167,26 +171,36 @@ h2 {
     z-index: 9999;
 }
 
-.modal-content {
+.small-modal-content {
+    width: 360px;
+    height: 180px;
+    padding: 40px 30px;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
+.big-modal-content {
     width: 30%;
     height: 80%;
     margin: 5% auto auto;
     background-color: #fff;
-    border-radius: 20px;
+    border-radius: 12px;
 }
 
-.modal-content > h1 {
+.big-modal-content > h1 {
     display: block;
     margin: 0;
     padding: 30px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
 }
 
-.modal-content > div {
+.big-modal-content > div {
     height: 77%;
 }
 
-.modal-content > button {
+.big-modal-content > button {
     display: block;
     width: 100%;
     height: 10%;
@@ -196,12 +210,13 @@ h2 {
     font-size: 18px;
 }
 
-.modal-content > button:hover {
+.big-modal-content > button:hover {
     cursor: pointer;
 }
 
-#caution {
+.personal-info-caution {
     font-size: 12px;
+    letter-spacing: -0.5px;
 }
 
 #pay-btn {
