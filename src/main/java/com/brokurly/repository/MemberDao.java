@@ -10,6 +10,7 @@ public interface MemberDao {
     Member selectMember(String custId);
     int countMemberAll();
     int countMember(String custId);
+    int countEmail(String email);
     int deleteMemberAll();
     int deleteMember(String custId);
 

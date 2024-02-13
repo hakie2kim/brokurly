@@ -286,7 +286,7 @@
                     id="custId"
                     name="custId"
             />
-            <button type="button" class="open-modal-btn" value="1">중복확인</button>
+            <button type="button" id="custId_btn" class="open-modal-btn" value="1">중복확인</button>
         </div>
         <div class="id-info-div">
           <span
@@ -339,7 +339,7 @@
                     id="email"
                     name="email"
             />
-            <button type="button" class="open-modal-btn" value="2">중복확인</button>
+            <button type="button" id="email_btn" class="open-modal-btn" value="2">중복확인</button>
         </div>
         <div class="column-div">
           <span class="register-div__label"
@@ -375,10 +375,10 @@
         <div class="birth-div column-div">
             <span class="register-div__label">생년월일</span>
             <div class="birth-div__column">
-                <input type="text" placeholder="YYYY" /><span>/</span>
-                <input type="text" placeholder="MM" /><span>/</span>
-                <input type="text" placeholder="DD" />
-                <input type="text" id="yyyymmdd" name="birthDt">
+                <input type="text" id="yyyy" placeholder="YYYY" /><span>/</span>
+                <input type="text" id="mm" placeholder="MM" /><span>/</span>
+                <input type="text" id="dd" placeholder="DD" />
+                <input type="hidden" id="yyyymmdd" value="" name="birthDt">
             </div>
         </div>
     </div>
@@ -436,42 +436,61 @@
         </div>
     </div>
     <hr />
-    <button class="register-btn">가입하기</button>
+    <button type="button" class="register-btn">가입하기</button>
 </section>
 </form>
 <script>
+    $(document).ready(function () {
         let modal = document.querySelector(".modal");
         let openModalBtns = document.querySelectorAll(".open-modal-btn");
         let modalContent = document.querySelector("#modal_content");
         let closeModalBtn = document.querySelector(".close-modal-btn");
 
         let custId = document.querySelector("#custId");
-       let telNoBtn = document.querySelector("#telNo_btn");
+        let telNoBtn = document.querySelector("#telNo_btn");
 
+        // id 중복확인 버튼
+        let custIdBtn = document.querySelector("#custId_btn");
+        let email = document.querySelector("#email");
 
-        [].forEach.call(openModalBtns, function (openModalBtn) {
-            // 하나의 클래스명으로 다른 값을 얻어 alert의 내용을 바꾸는 fun.
-            openModalBtn.addEventListener("click", setMessage, false);
-        });
+        // 가입하기 btn
+        let regBtn = document.querySelector(".register-btn");
+
+        // [].forEach.call(openModalBtns, function (openModalBtn) {
+        //     // 하나의 클래스명으로 다른 값을 얻어 alert의 내용을 바꾸는 fun.
+        //     openModalBtn.addEventListener("click", setMessage, false);
+        // });
 
         // btn에 따른 조건식 변경 fun.
-        function setMessage() {
+        function setMessage(val) {
             let msg = "";
-            if (this.value == 1) {
-                // 아이디 중복 확인
-                msg = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
-                openModal(msg);
-            } else if (this.value == 2) {
-                // 이메일 중복 확인
-                msg = "이메일을 입력해주세요";
-                openModal(msg);
+            if (val == 1) {  // 아이디 중복 확인
+                if(checkId()) {  // 1. NULL , 2. LENGTH
+                    msg = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
+                    openModal(msg);
+                }
+            } else if (val == 2) {
+                if(checkEmail()){
+                    // 이메일 중복 확인
+                    msg = "이메일을 입력해주세요";
+                    openModal(msg);
+                }
             } else if (this.value == 3){
                 // 휴대폰 인증번호 발송
+                // telNoRegExp();
                 msg = "인증번호가 발송되었습니다";
-                openModal(msg)
+                openModal(msg);
             }
 
 
+        }
+
+        function checkId(){
+            return custId.value.trim() == "" || custId.value.length < 6 || 17 < custId.value.length;
+        }
+
+        function checkEmail(){
+            return email.value.trim() == "";
         }
 
         // modal open
@@ -482,6 +501,16 @@
 
         }
 
+        // function telNoRegExp(){
+        //
+        //     let regEx = /0[]{9,11}/;
+        //     let inputed = document.getElementById("telNo").value;
+        //
+        //
+        //     console.log(inputed);
+        //     console.log(regEx.test(inputed));
+        // }
+
         // modal close
         closeModalBtn.addEventListener("click", () => {
             modal.style.display = "none";
@@ -489,16 +518,17 @@
 
         });
 
-        $(document).ready(function () {
+
+        // $(document).ready(function () {
         // id check - length
         custId.addEventListener("input", () => {
-            let custIdVal = $("#custId").val(); // id의 길이
+            let custIdVal = $("#custId").val().trim(); // id의 길이
             let idInfoDiv =  $(".id-info-div");
 
             $.ajax({
                 success: function () {
-                    if (custIdVal.length < 6 || 17 < custIdVal.length) {
-                        idInfoDiv.css("display","block");
+                        if (custIdVal.length < 6 || 17 < custIdVal.length) {
+                            idInfoDiv.css("display", "block");
                     }else{
                         idInfoDiv.css("display","none");
                     }
@@ -506,9 +536,55 @@
             });
         });
 
+    //    id 중복체크 btn
+        custIdBtn.addEventListener("click", () => {
+            if(checkId()){
+                setMessage(1);
+                return false;
+            }else{
+                let custIdVal = $("#custId").val();
+                $.ajax({
+                    type : 'GET',
+                    url : '/member/signup/'+custIdVal,
+                    success : function(result){
+                            alert("사용 할 수 있는 아이디입니다");
+                        $("#custId_btn").attr("disabled",true);
+                        $("#custId_btn").css("color","#dddddd");
+                        $("#custId_btn").css("border-color","#dddddd");
+                    },
+                    error : function(){
+                        alert("사용 불가능한 아이디입니다");
+                    }
+                }); // end of ajax
+            }
+        });
+
+        // email 중복체크 btn
+        $("#email_btn").click(function(){
+            if(checkEmail()){
+                setMessage(2);
+                return false;
+            }else{
+                let emailVal = $("#email").val();
+                $.ajax({
+                    type : 'GET',
+                    url : '/member/signup/email/'+emailVal,
+                    success : function(result){
+                        alert("사용 할 수 있는 이메일입니다");
+                        $("#email_btn").attr("disabled",true);
+                        $("#email_btn").css("color","#dddddd");
+                        $("#email_btn").css("border-color","#dddddd");
+                    },
+                    error : function(){
+                        alert("사용 불가능한 이메일입니다");
+                    }
+                }); // end of ajax
+            }
+        });
+
+        // 휴대폰번호 인증 api
             telNoBtn.addEventListener("click", () => {
                 let telNoVal = $("#telNo").val(); // 휴대폰 번호
-                alert(telNoVal);
                 $.ajax({
                     type : "POST",
                     url : "/sms/telNoCheck",
@@ -524,6 +600,31 @@
                     }
                 });
             });
+
+            // function sendSignup(){
+            //     // 생년월일 합치기
+            //     let yyyy = document.querySelector("#yyyy").value;
+            //     let mm = document.querySelector("#mm").value;
+            //     let dd = document.querySelector("#dd").value;
+            //     let yyyymmdd = document.querySelector("#yyyymmdd").value;
+            //     yyyymmdd = yyyy+mm+dd;
+            //     alert("test");
+            //     return true;
+            // }
+
+        regBtn.addEventListener("click", () =>{
+           // 생년월일 합치기
+           let yyyy = document.querySelector("#yyyy").value;
+           let mm = document.querySelector("#mm").value;
+           let dd = document.querySelector("#dd").value;
+           let yyyymmdd = document.querySelector("#yyyymmdd");
+           yyyymmdd.value = yyyy+mm+dd;
+
+
+            let signupFrm = document.querySelector("#frm");
+            signupFrm.submit();
+
+        });
         // let sendMessage = function(){
         //     let telNoVal = $("#telNo").val(); // 휴대폰 번호
         //     alert(telNoVal);
