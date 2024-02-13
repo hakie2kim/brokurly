@@ -1,10 +1,33 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <script>
         window.onload = () => {
+            // 주문 상품창 요약 & 리스트 변환 기능
+            const orderGoodsButton = document.querySelector('.info-type1-title').children[1];
+            orderGoodsButton.addEventListener("click", () => {
+                let buttonText = orderGoodsButton.innerHTML;
+                if (buttonText === '⋁') {
+                    orderGoodsButton.innerHTML = "&xwedge;";
+                    document.getElementById("order-goods").style.display = "none";
+                    document.getElementById("order-goods-list").style.display = "block";
+                } else {
+                    orderGoodsButton.innerHTML = "&xvee;";
+                    document.getElementById("order-goods").style.display = "block";
+                    document.getElementById("order-goods-list").style.display = "none";
+                }
+            });
+
+            // 배송지 변경 모달 띄우기
+            const smallModal = document.querySelector(".small-modal");
+            const locationChangeButton = document.getElementById("location-change");
+            locationChangeButton.addEventListener("click", () => {
+                smallModal.style.display = "block";
+                document.body.style.overflow = 'hidden';
+            });
+            
             // 결제 정보 헤더에 붙이기
             window.addEventListener("scroll", () => {
                 const headerBottom = document.querySelector("header").offsetHeight;
@@ -20,38 +43,42 @@
             });
 
             // 배송 요청사항 입력창 띄우기
-            const receiverDetails = document.getElementById("receiver-details");
+            const receiverDetails = document.querySelector(".receiver-details-btn");
             receiverDetails.addEventListener("click", () => {
                 const left = screen.width / 2 - 300;
                 const top = screen.height / 2 - 350;
                 window.open(
-                    "receiver-details",
+                    "/order/receiver-details",
                     "_blank",
                     "width=600px, height=700px, left=" + left + ", top=" + top
                 );
             });
 
             // 개인정보 수집 동의 정보 조회
-            const modal = document.querySelector(".modal");
+            const bigModal = document.querySelectorAll(".big-modal");
             const showModalButton = document.querySelectorAll(".personal-info-consent");
-            showModalButton.forEach((button) =>
-                button.addEventListener("click", () => {
-                    modal.style.display = "block";
-                })
-            );
+            for (let i = 0; i < bigModal.length; i++) {
+                showModalButton[i].addEventListener("click", () => {
+                    bigModal[i].style.display = "block";
+                    document.body.style.overflow = 'hidden';
+                });
+            }
 
             // 개인정보 수집 동의 정보 모달창 닫기
-            const closeModalButton = document.querySelector(".modal-content").children[2];
-            closeModalButton.addEventListener("click", (e) => {
-                modal.style.display = "none";
-            });
+            const closeModalButton = document.querySelectorAll(".big-modal-content");
+            for (let i = 0; i < bigModal.length; i++) {
+                closeModalButton[i].addEventListener("click", () => {
+                    bigModal[i].style.display = "none";
+                    document.body.style.removeProperty('overflow');
+                })
+            }
         };
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/order/checkout.css'/>"/>
-    <title>Document</title>
+    <title>브로컬리</title>
 </head>
 <body>
 <header></header>
@@ -60,13 +87,15 @@
     <div class="info-type1">
         <div class="info-type1-title">
             <h3>주문 상품</h3>
-            <button>V</button>
+            <button id="order-goods-change">&xvee;</button>
         </div>
         <hr/>
         <div id="order-goods">실속 바나나 1kg 외 2개 상품을 주문합니다.</div>
+        <div id="order-goods-list" style="display: none">상품 리스트 반복문</div>
     </div>
+
     <div class="info-type1">
-        <h3>주문 상품</h3>
+        <h3>주문자 정보</h3>
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
@@ -85,6 +114,7 @@
             </div>
         </div>
     </div>
+
     <div class="info-type1">
         <div class="info-type1-title">
             <h3>배송 정보</h3>
@@ -96,18 +126,34 @@
             <div>
                 <span id="default-delivery">기본 배송지</span>
                 <p>서울 강남구 강남로 111</p>
-                <p>상세 주소를 입력해주세요</p>
-                <button>변경</button>
+                <p class="caution">상세 주소를 입력해주세요</p>
+                <button id="location-change">변경</button>
             </div>
         </div>
+        <div class="small-modal">
+            <div class="small-modal-content">
+                <div>장바구니로 이동하여
+                다른 배송지로 변경하시겠습니까?</div>
+            </div>
+        </div>
+
         <div class="info-type2">
             <div>배송 요청사항</div>
-            <div>
-                <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
-                <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
-                <p>배송 요청사항을 입력해주세요</p>
-                <button id="receiver-details">입력</button>
-            </div>
+            <c:if test="${receiverDetails == null}">
+                <div>
+                    <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
+                    <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
+                    <p class="caution">배송 요청사항을 입력해주세요</p>
+                    <button class="receiver-details-btn">입력</button>
+                </div>
+            </c:if>
+            <c:if test="${receiverDetails != null}">
+                <div>
+                    <div>${receiverDetails.rcvPlace} | ${receiverDetails.enterMthd}</div>
+                    <div>${receiverDetails.rcvName},${receiverDetails.telNo}</div>
+                    <button class="receiver-details-btn">수정</button>
+                </div>
+            </c:if>
         </div>
     </div>
 </section>
@@ -175,7 +221,7 @@
                 <div>위 내용을 확인하였으며 결제에 동의합니다.</div>
                 <hr style="border: 0; height: 1px; background-color: #e8e8e8"/>
             </div>
-            <div id="caution">
+            <div class="personal-info-caution">
                 <p>
                     주문완료 상태일 경우에만 주문 취소가 가능하며, 상품 미배송 시 결제하신 수단으로 환불됩니다.
                 </p>
@@ -229,14 +275,28 @@
             </div>
             <div>
                 <div></div>
-                <div>컬리카드 결제 시 최대 4,905원 추가 적립</div>
+<%--                <div>컬리카드 결제 시 최대 4,905원 추가 적립</div>--%>
             </div>
         </div>
     </div>
 </section>
-<div class="modal">
-    <div class="modal-content">
+<div class="big-modal">
+    <div class="big-modal-content">
         <h1>개인정보 수집·이용 및 처리 동의 (필수)</h1>
+        <div></div>
+        <button>확인</button>
+    </div>
+</div>
+<div class="big-modal">
+    <div class="big-modal-content">
+        <h1>NHN한국사이버결제 전자결제 서비스 이용약관</h1>
+        <div></div>
+        <button>확인</button>
+    </div>
+</div>
+<div class="big-modal">
+    <div class="big-modal-content">
+        <h1>컬리페이 전자지급 결제대행 서비스 이용약관</h1>
         <div></div>
         <button>확인</button>
     </div>

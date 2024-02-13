@@ -1,14 +1,19 @@
 package com.brokurly.controller;
 
-import com.brokurly.entity.MemberAndSignup;
+import com.brokurly.domain.MemberAndSignup;
 import com.brokurly.service.MemberService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 @Slf4j
 @Controller
 @RequestMapping("/member")

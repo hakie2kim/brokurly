@@ -1,0 +1,197 @@
+html, button, input, select, textarea {
+    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;
+}
+
+/* 전체 */
+.css-luwwab {
+    display: flex;
+    width: 1050px;
+    padding: 50px 0px 80px;
+    margin: 0px auto;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+/* 왼쪽 탭 div */
+.css-833hqy {
+    width: 200px;
+}
+
+/* 왼쪽 탭 고객센터 */
+.css-1v4whg {
+    height: 75px;
+    padding: 5px 0px 35px 1px;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 35px;
+    color: rgb(51, 51, 51);
+    letter-spacing: -1px;
+}
+/* 왼쪽 탭 테이블 */
+.css-1x9bshx {
+    border: 1px solid rgb(242, 242, 242);
+}
+
+/* 왼쪽 탭 각 항목 */
+.css-g4g0eu {
+    cursor: pointer;
+    border-bottom: 1px solid rgb(242, 242, 242);
+    padding: 15px 13px 15px 20px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    line-height: 19px;
+    letter-spacing: -0.3px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.css-g4g0eu.active, .css-g4g0eu:hover {
+    background-color: rgb(250, 250, 250);
+    color: rgb(17,150,127);
+    font-weight: 500;
+}
+
+/* 왼쪽 탭 도움이 필요하신가요 */
+.css-196gwz9 {
+    width: 100%;
+    height: 60px;
+    padding: 0px 14px 0px 20px;
+    margin-top: 36px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+    line-height: 20px;
+}
+
+.css-rmee6s {
+    display: flex;
+    flex-direction: column;
+    color: rgb(51, 51, 51);
+}
+
+.css-1sdidca {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.css-rnnx2x {
+    font-size: 12px;
+}
+
+
+/* 오른쪽 게시판 공간 */
+.css-171zbec {
+    width: 820px;
+}
+
+/* 게시판 제목 */
+.css-j0lifa {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 27px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+/* 게시판 제목 */
+.css-fhxb3m {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+/* 게시판 제목 */
+.css-1268zpe {
+    font-weight: 500;
+    font-size: 24px;
+    color: rgb(51, 51, 51);
+    letter-spacing: -0.5px;
+    line-height: 48px;
+}
+
+/* 테이블 컬럼 로우 */
+.css-e23nfx {
+    display: flex;
+    width: 100%;
+    padding: 20px 0px;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+}
+
+/* 제목 컬럼 */
+.css-1ym8aqm {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+
+/* 작성일,답변상태 컬럼 */
+.css-16tcewl {
+    flex-basis: 100px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+
+/* 게시글 목록 */
+.css-l0r8ps {
+    width: 100%;
+    height: 200px;
+    line-height: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(51, 51, 51);
+    text-align: center;
+}
+
+/* 문의하기 버튼 공간 */
+.css-15jhycr {
+    position: relative;
+    min-height: 44px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* 문의하기 버튼 */
+.css-15jhycr > button {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+/* 문의하기 */
+.css-1ibxj4m {
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 120px;
+    height: 44px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    background-color: #11967f;
+    border: 0px none;
+}
+
+/* 문의하기 글자 */
+.css-1ibxj4m span {
+    font-size: 13px;
+}
+/* 1:1문의 게시판 공간 */
+.css-185m8ch {
+    width: 820px;
+    padding: 4px 20px;
+    border-top: 2px solid rgb(51, 51, 51);
+}
