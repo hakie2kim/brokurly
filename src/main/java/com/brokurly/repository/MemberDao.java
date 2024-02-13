@@ -1,7 +1,7 @@
 package com.brokurly.repository;
 
-import com.brokurly.entity.Member;
-import com.brokurly.entity.MemberAndSignup;
+import com.brokurly.domain.Member;
+import com.brokurly.domain.MemberAndSignup;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -10,6 +10,7 @@ public interface MemberDao {
     Member selectMember(String custId);
     int countMemberAll();
     int countMember(String custId);
+    int countEmail(String email);
     int deleteMemberAll();
     int deleteMember(String custId);
 

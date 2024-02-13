@@ -34,6 +34,7 @@
         WHERE custId = #{custId}
     </sql>
 
+    <!-- COUNT -->
     <sql id="count">
         SELECT COUNT(*) FROM customer
     </sql>
@@ -45,6 +46,11 @@
     <select id="countMember" resultType="int">
         <include refid="count" />
             WHERE cust_id = #{custId}
+    </select>
+
+    <select id="countEmail" resultType="int">
+        <include refid="count"/>
+            WHERE email = #{email}
     </select>
 
     <!-- DELETE -->

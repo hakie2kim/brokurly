@@ -1,15 +1,15 @@
 package com.brokurly.controller;
 
-import com.brokurly.entity.MemberAndSignup;
+import com.brokurly.domain.MemberAndSignup;
 import com.brokurly.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -27,6 +27,37 @@ public class MemberController {
     public String signUp(){
         return "/member/signupForm";
     }
+
+    @GetMapping("/signup/{custId}")
+    @ResponseBody
+    public ResponseEntity<String> checkId(@PathVariable String custId){
+        try{
+            if(memberService.getCount(custId) == 1){
+                throw new Exception("Member IdChk failed.");
+            }
+            return new ResponseEntity<String>("IDCHK_OK", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<String>("IDCHK_ERR", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/signup/email/{email}")
+    @ResponseBody
+    public ResponseEntity<String> checkEmail(@PathVariable String email){
+        try{
+            if(memberService.getCountEmail(email) == 1){
+                log.debug("memberService.getCountEmail(email) = {}", memberService.getCountEmail(email));
+                throw new Exception("Member EmailChk failed.");
+            }
+            return new ResponseEntity<String>("EMAILCHK_OK", HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<String>("EMAILCHK_ERR", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
     @PostMapping("/signup")
     public String signUp(MemberAndSignup memberAndSignup) {
