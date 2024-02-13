@@ -4,14 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.sql.Timestamp;
+
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Cart {   //1. insert(넣을 값)할  값을 담을 Dto를 만듦
+public class GoodsReivewBoard {
+  private String revNo;
   private String itemId;
   private String custId;
-  private int itemCnt;
-
-
+  private String content;
+  private Timestamp regDt;
+  private int likeCnt;
 
 }

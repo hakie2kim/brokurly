@@ -18,6 +18,7 @@
         <typeAlias type="com.brokurly.dto.PointLogUsageDto" alias="PointLogUsageDto"/>
         <typeAlias type="com.brokurly.domain.Point" alias="Point"/>
         <typeAlias type="com.brokurly.dto.CategoryDto" alias="CategoryDto"/>
-
+        <typeAlias type="com.brokurly.domain.Cart" alias="Cart"/>
+        <typeAlias type="com.brokurly.domain.Goods" alias="Goods"/>
     </typeAliases>
 </configuration>
