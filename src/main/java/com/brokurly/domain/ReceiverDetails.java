@@ -2,12 +2,10 @@ package com.brokurly.domain;
 
 import com.brokurly.dto.ReceiverDetailsChangeDto;
 import com.brokurly.dto.ReceiverDetailsDto;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -36,8 +34,7 @@ public class ReceiverDetails {
                 .build();
     }
 
-    public void update(ReceiverDetailsChangeDto changeDto) {
-        this.rcvDtlId = changeDto.getRcvDtlId();
+    public void changeStatus(ReceiverDetailsChangeDto changeDto) {
         this.rcvName = changeDto.getRcvName();
         this.telNo = changeDto.getTelNo();
         this.rcvPlace = changeDto.getRcvPlace();

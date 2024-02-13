@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/goods")
 public class GoodsController {
 
-  @GetMapping("/goods")
+  @GetMapping
   public String goods(Model model){
 
     return "goods/goods";

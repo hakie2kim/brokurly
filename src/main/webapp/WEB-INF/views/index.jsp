@@ -27,5 +27,14 @@
 <div>
     <a href="seller/productscreate">수경 - 상품 등록</a>
 </div>
+<div>
+    <a href="cart">준한 - 상품 장바구니</a>
+</div>
+<div>
+    <a href="goods">준한 - 상품 상세</a>
+</div>
+<div>
+    <a href="categories/best-page">나혜 - 카테고리</a>
+</div>
 </body>
 </html>
