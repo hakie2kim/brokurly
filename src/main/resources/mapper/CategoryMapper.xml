@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brokurly.repository.CategoryDao">
+    <insert id="insert">
+        INSERT INTO category_code
+            (code_id, exp)
+        VALUES (#{codeId}, #{exp})
+    </insert>
+
+<!--  카테고리 대분류 가져오기  -->
+    <select id="selectMain" resultType="CategoryDto">
+        <![CDATA[
+        SELECT code_id, exp
+        FROM category_code
+        WHERE code_id < 1000
+        ]]>
+    </select>
+
+<!--    카테고리 중분류 가져오기    -->
+    <select id="selectMiddleExp" resultType="CategoryDto">
+        SELECT code_id, exp
+        FROM category_code
+        WHERE code_id LIKE '9070__'
+    </select>
+
+</mapper>

@@ -6,7 +6,7 @@
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>brokurly Maven Webapp</name>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
 
     <properties>
         <junit.version>5.0.3</junit.version>
@@ -89,6 +89,16 @@
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
       <version>6.1.7.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>2.2.6</version>
     </dependency>
     <!-- Logging -->
     <dependency>
