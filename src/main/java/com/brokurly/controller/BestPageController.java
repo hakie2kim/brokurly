@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+
 @RequiredArgsConstructor
 @RequestMapping("/categories")
 public class BestPageController {
@@ -50,10 +51,12 @@ public class BestPageController {
         List<CategoryDto> selectMain = categoryService.readMain();
 
 
+
+
         m.addAttribute("codeId",codeId);
 
 
-        return "categories";
+        return "/categories";
 
     }
 
