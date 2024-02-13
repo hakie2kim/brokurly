@@ -32,11 +32,11 @@
     </bean>
 
     <!--  Validation 관련 Bean 추가  -->
-<!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+    <!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 
-<!--    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
-<!--        <property name="validator" ref="validator"/>-->
-<!--    </bean>-->
+    <!--    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
+    <!--        <property name="validator" ref="validator"/>-->
+    <!--    </bean>-->
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8"/>
