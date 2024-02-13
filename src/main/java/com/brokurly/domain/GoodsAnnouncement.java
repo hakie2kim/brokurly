@@ -7,11 +7,10 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Cart {   //1. insert(넣을 값)할  값을 담을 Dto를 만듦
+public class GoodsAnnouncement {
   private String itemId;
-  private String custId;
-  private int itemCnt;
-
+  private String itemAnnCate;
+  private String itemAnn;
 
 
 }
