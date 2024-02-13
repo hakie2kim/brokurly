@@ -14,9 +14,10 @@ public class Goods {
     private String exp;
     private int price;
     private double dcRt;
-    private String itemDcAmt;
+    private int itemDcAmt;
     private String origin;
     private String pointFl;
+    private String cpnElgFl;
     private String shipType;
     private String sellerName;
     private String pkgType;
@@ -44,6 +45,7 @@ public class Goods {
                 .itemDcAmt(itemDcAmt)
                 .origin(origin)
                 .pointFl(pointFl)
+                .cpnElgFl(cpnElgFl)
                 .shipType(shipType)
                 .sellerName(sellerName)
                 .pkgType(pkgType)
@@ -70,6 +72,7 @@ public class Goods {
         this.itemDcAmt = goodsDto.getItemDcAmt();
         this.origin = goodsDto.getOrigin();
         this.pointFl = goodsDto.getPointFl();
+        this.cpnElgFl = goodsDto.getCpnElgFl();
         this.shipType = goodsDto.getShipType();
         this.sellerName = goodsDto.getSellerName();
         this.pkgType = goodsDto.getPkgType();

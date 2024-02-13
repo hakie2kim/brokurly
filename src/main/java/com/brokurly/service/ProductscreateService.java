@@ -1,6 +1,5 @@
 package com.brokurly.service;
 
-import com.brokurly.domain.Goods;
 import com.brokurly.dto.GoodsDto;
 import com.brokurly.repository.ProductscreateDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,10 @@ public class ProductscreateService {
 
 
     //상품명 insert test
-    public void write(GoodsDto goodsDto){
+    public GoodsDto write(GoodsDto goodsDto){
         productscreateDao.insert(goodsDto);
+
+        return goodsDto;
     }
 
 

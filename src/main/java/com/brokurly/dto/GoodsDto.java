@@ -16,9 +16,10 @@ public class GoodsDto {
     private String exp;
     private int price;
     private double dcRt;
-    private String itemDcAmt;
+    private int itemDcAmt;
     private String origin;
     private String pointFl;
+    private String cpnElgFl;
     private String shipType;
     private String sellerName;
     private String pkgType;
@@ -33,6 +34,6 @@ public class GoodsDto {
     private String itemSpec;
     private int sellCnt;
     private int revCnt;
-    private String stdySellerFl;
+    private String stdySellerFl ;
 
 }
