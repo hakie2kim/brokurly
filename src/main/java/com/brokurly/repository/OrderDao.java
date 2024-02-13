@@ -4,6 +4,7 @@ import com.brokurly.domain.Order;
 import com.brokurly.domain.OrderAndPayment;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Mapper

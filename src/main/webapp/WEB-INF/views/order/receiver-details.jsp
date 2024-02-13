@@ -72,12 +72,30 @@
             padding: 10px 12px;
         }
     </style>
+    <script>
+        window.onload = () => {
+            // 배송 요청사항 주문자 정보 불러오기 기능
+            const checkbox = document.querySelector(".sameCheck input");
+            const nameInput = document.getElementById("receiver-name");
+            const phoneInput = document.getElementById("receiver-phone");
+            checkbox.addEventListener("click", (e) => {
+                if (e.target.checked) {
+                    nameInput.value = "<c:out value='${member.name}'/>";
+                    phoneInput.value = "<c:out value='${member.telNo}'/>";
+                } else {
+                    nameInput.value = "";
+                    phoneInput.value = "";
+                }
+            });
+
+        };
+    </script>
 </head>
 <body>
 <div class="header">
     <h2>배송 요청사항</h2>
     <label class="sameCheck">
-        <input type="checkbox" checked=""/>
+        <input type="checkbox" checked="checked"/>
         <span>주문자 정보와 동일</span>
     </label>
 </div>
@@ -101,7 +119,7 @@
                 <div class="receive-place">
                     <div style="width: 50%">
                         <label for="door" class="receive-place-label">
-                            <input type="radio" name="receivePlace" id="door" class="receive-place"/>
+                            <input type="radio" name="receivePlace" id="door" class="receive-place" checked="checked"/>
                             <div style="margin-left: 10px">
                                 <span>문 앞</span>
                             </div>
@@ -109,7 +127,7 @@
                     </div>
                     <div style="width: 50%">
                         <label for="etc-place" class="receive-place-label">
-                            <input type="radio" name="receivePlace" id="etc-place" class="receive-place"/>
+                            <input type="radio" name="receivePlace" id="etc-place" class="receive-place" checked=""/>
                             <div style="margin-left: 10px">
                                 <span>기타 장소</span>
                             </div>

@@ -5,7 +5,6 @@ import com.brokurly.dto.ReceiverDetailsDto;
 import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -34,7 +33,7 @@ public class ReceiverDetails {
                 .build();
     }
 
-    public void changeStatus(ReceiverDetailsChangeDto changeDto) {
+    public void changeReceiverDetails(ReceiverDetailsChangeDto changeDto) {
         this.rcvName = changeDto.getRcvName();
         this.telNo = changeDto.getTelNo();
         this.rcvPlace = changeDto.getRcvPlace();
