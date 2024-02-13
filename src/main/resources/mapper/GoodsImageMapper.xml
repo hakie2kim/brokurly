@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brokurly.repository.GoodsImageDao">
+    <!-- CREATE -->
+    <insert id="insert">
+        INSERT INTO item_image
+            (img, rep_img_fl, item_id)
+        VALUES
+            (#{img}, #{repImgFl}, #{itemId})
+    </insert>
+
+    <!-- READ -->
+    <sql id="select">
+        SELECT * FROM item_image
+    </sql>
+
+    <select id="selectByItemId" resultType="GoodsImage">
+        <include refid="select"/>
+        WHERE item_id = #{itemId}
+    </select>
+
+    <!-- UPDATE -->
+
+    <!-- DELETE -->
+    <delete id="deleteByImg">
+        DELETE FROM item_image
+        WHERE img = #{img}
+    </delete>
+</mapper>
