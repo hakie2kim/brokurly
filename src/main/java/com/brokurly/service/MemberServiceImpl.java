@@ -24,6 +24,10 @@ public class MemberServiceImpl implements MemberService {
     public int getCount(String custId){
         return memberDao.countMember(custId);
     }
+
+    @Override
+    public int getCountEmail(String email) { return memberDao.countEmail(email); }
+
     @Override
     public int removeAll(){
         return memberDao.deleteMemberAll();
