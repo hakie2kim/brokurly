@@ -19,6 +19,7 @@ public class GoodsDto {
   private String itemDcAmt;
   private String origin;
   private String pointFl;
+  private String cpnElgFl;
   private String shipType;
   private String sellerName;
   private String pkgType;

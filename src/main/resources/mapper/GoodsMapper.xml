@@ -28,7 +28,23 @@
     </select>
 
     <!-- UPDATE -->
+<!--    <update id="update">-->
+<!--        UPDATE item-->
+<!--        SET name = #{rcvName},-->
+<!--            exp = #{telNo},-->
+<!--            price = #{rcvPlace},-->
+<!--            dc_rt = #{enterMthd},-->
+<!--            item_dc_amt = #{placeExp},-->
+<!--            origin = #{msgTime}-->
+<!--            origin = #{msgTime}-->
+<!--            origin = #{msgTime}-->
+<!--            origin = #{msgTime}-->
 
+
+
+
+<!--        WHERE rcv_dtl_id = #{rcvDtlId}-->
+<!--    </update>-->
     <!-- DELETE -->
 
 </mapper>
