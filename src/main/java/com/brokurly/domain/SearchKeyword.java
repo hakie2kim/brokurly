@@ -12,4 +12,5 @@ import lombok.*;
 public class SearchKeyword {
     private String keyword;
     private String itemIdList;
+
 }
