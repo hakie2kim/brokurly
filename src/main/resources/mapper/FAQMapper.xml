@@ -5,7 +5,7 @@
 <mapper namespace="com.brokurly.repository.FAQDao">
     <!-- CREATE -->
     <select id="selectFAQList" resultType="FAQListDto">
-        SELECT b.bno, c.name category, title
+        SELECT bno, name, title
         FROM FAQ_BOARD b, FAQ_CATEGORY_CODE c
         WHERE b.cate_code = c.code
         ORDER BY bno DESC
