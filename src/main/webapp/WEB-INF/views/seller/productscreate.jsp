@@ -39,23 +39,14 @@
                         <div class="seller-data-list category-list" ng-if="vm.showPcDepthSearch()" style="">
                             <div><!---->
                                 <ul class="data-group"><!---->
+                        <%--          DB에 있는 대분류 값 for문 돌리기       --%>
                                     <c:forEach var="selectMainC" items="${selectMain}" varStatus="status">
                                         <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}">
                                             <button type="button" id="maincate${status.count}" href="" onclick="s_ajax(${status.count});" value="${selectMainC.codeId}">${selectMainC.exp}</>
 
                                         </li><!---->
                                     </c:forEach>
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}" class="on"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">가구/인테리어</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">도서</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">디지털/가전</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">생활/건강</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">스포츠/레저</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">식품</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">여가/생활편의</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">출산/육아</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">패션의류</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">패션잡화</a></li><!---->
-                                    <li ng-repeat="category1 in vm.categories1 track by $index" ng-class="{on: category1.id == vm.category1.id}"><a role="button" href="" ng-click="vm.clickCategoryDepth(category1)">화장품/미용</a></li><!---->
+
                                 </ul>
                             </div>
                             <div ng-show="vm.showLevel >= 2" class=""><!---->
@@ -218,23 +209,6 @@
 
                             <div class="seller-input-toggle form-group">
 
-                                <input
-                                        type="radio"
-                                        id="r3_1_total"
-                                        name="discount_or_not"
-                                        class="ng-valid ng-not-empty ng-dirty ng-touched ng-valid-parse"
-                                        value="true"
-
-                                />
-                                <label for="r3_1_total">설정함</label>
-                                <input
-                                        type="radio"
-                                        id="r3_2_total"
-                                        name="discount_or_not"
-                                        class="r-no-set ng-valid ng-not-empty ng-dirty ng-touched"
-                                        value="false"
-                                />
-                                <label for="r3_2_total">설정안함</label>
                             </div>
                             <!---->
                         </div>
@@ -243,13 +217,11 @@
 
                     <div
                             class="form-sub-detail"
-                            ng-show="vm.viewData.isEnableImmediateDiscountPolicy"
                             style=""
                     >
                         <!----><!----><!---->
                         <div
                                 class="form-sub-detail-wrap"
-                                ng-if="vm.viewData.isEnableImmediateDiscountPolicy"
                         >
                             <div class="input-content">
                                 <div
@@ -261,7 +233,6 @@
                                             <!---->
                                             <div
                                                     class="seller-input-wrap"
-                                                    ng-if="vm.viewData.reservedDiscount.discountMethod.discountUnitType === 'WON'"
                                                     style=""
                                             >
                                                 <input  name="dcRt"
@@ -311,34 +282,12 @@
                         class="form-sub-wrap"
                 >
                     <label class="control-label">판매기간</label>
-                    <div class="input-content">
-                        <div class="seller-input-toggle">
-                            <input
-                                    type="radio"
-                                    name="period"
-                                    id="period1"
-                                    class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
-                                    value="true"
-                            />
-                            <label for="period1">설정함</label>
-                            <input
-                                    type="radio"
-                                    name="period"
-                                    id="period2"
-                                    class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
-                                    value="false"
-                            />
-                            <label for="period2">설정안함</label>
-                        </div>
-                    </div>
                 </div>
                 <!----><!---->
                 <div
                         class="form-sub-detail"
-                        style=""
                 >
                     <div class="form-sub-detail-wrap">
-                        <label class="control-label">기간설정</label>
                         <div class="input-content">
                             <div class="form-inline has-error-msg">
                                 <!---->
@@ -501,48 +450,6 @@
     </div>
 </ui-view>
 <!----><!----><!---->
-<!-- 재고수량 -->
-<ui-view name="stock" id="anchor-stock"
-><!---->
-    <div class="form-section">
-        <div class="title-line" role="button">
-            <label
-                    class="col-lg-1 col-sm-2 col-xs-4 control-label"
-                    for="stock"
-            >재고수량</label>
-        </div>
-        <!---->
-        <div class="inner-content input-content" >
-            <div class="form-section-sub">
-                <div class="form-sub-wrap">
-                    <div class="input-content">
-                        <div class="form-inline" id="error_stockQuantity">
-                            <div class="form-group has-error">
-                                <div class="input-group">
-                                    <div class="seller-input-wrap">
-                                        <input
-                                                type="text"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                                class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
-                                                id="stock"
-                                                placeholder="숫자만 입력"
-                                        />
-                                    </div>
-                                    <span class="input-group-addon">개</span>
-                                </div>
-                                <br>
-                            </div>
-                            <!---->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</ui-view>
-<!----><!----><!---->
-
-
 <!-- 상품 이미지 -->
 <ui-view name="images">
     <div class="form-section">
@@ -735,12 +642,11 @@
                         <div
                                 class="content">
                             <div class="form-group sr-only">
-                                  <textarea
-                                          name="itemSpec"
-                                          style="visibility: hidden; opacity: 0"
-                                          class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"
-                                          required="required"
-                                  ></textarea>
+<%--                                  <textarea--%>
+<%--                                          name="itemSpec"--%>
+<%--                                          class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"--%>
+<%--                                          required="required"--%>
+<%--                                  ></textarea>--%>
                             </div>
                             <p class="ico-status">
                                 <i
@@ -757,7 +663,15 @@
                         <div
                                 class="sub-text detail-content-info"
                         >
-                                <textarea class="item_info"></textarea>
+                            <div class="seller-input-wrap">
+                                <textarea
+                                        name="itemSpec"
+                                        type="text"
+                                        class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern ng-valid-maxlength"
+                                        id="search3"
+                                        style="height: 250px">
+                                </textarea>
+                            </div>
                                 <br>
                                 <span class="sub-text text-danger"
                                 >외부 링크(네이버 폼 등)를 통한
@@ -780,7 +694,6 @@
                                     상세설명 권장 크기 : 가로 860px
                                     <br />
                                 </p>
-                            </ng-bind-html>
                         </div>
                         <!---->
 
@@ -916,8 +829,7 @@
                         <!----><!----><!----><!----><!----><!---->
 
                         <!-- 원산지 -->
-                            <div  class=""
-                                    style="">
+                            <div  class="" style="">
                                 <div>
                                     <!---->
                                     <div
@@ -937,10 +849,8 @@
                                                                 <div
                                                                         class="selectize-input items has-options ng-valid ng-pristine full has-items"
                                                                 >
-                                                                    <div
-                                                                            data-value="LOCAL"
-                                                                            class="item"
-                                                                    >
+                                                                    <div    data-value="LOCAL"
+                                                                            class="item">
                                                                         국산<br><br>
 
                                                                         시/도/군
@@ -950,7 +860,7 @@
                                                                         <br>
                                                                         수입산<br><br>
                                                                         국가명
-                                                                        <input type="text" class="form-control"
+                                                                        <input name="origin" type="text" class="form-control"
                                                                                placeholder="ex. 미국"
                                                                         >
                                                                     </div>
@@ -966,6 +876,7 @@
                                                                         type="text"
                                                                         class="form-control ng-pristine ng-untouched ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required"
                                                                         placeholder="수입사입력"
+                                                                        name="origin"
                                                                 />
                                                             </div>
                                                         </div>
@@ -1020,7 +931,6 @@
                             <!----><!---->
                             <div
                                     class="form-sub-wrap"
-                                    ng-if="vm.productFormViewVO.productCreateType === 'BASIC' &amp;&amp; vm.viewData.isMenuOpen"
                             >
                                 <label class="control-label">유효일자</label>
                                 <div class="input-content">
@@ -1169,6 +1079,8 @@
         </div></ui-view><!---->
 
     <!-- 상품정보제공고시 -->
+
+    <%--    --%>
     <ui-view name="provided-notice"
     ><!----><!---->
         <div
@@ -1198,7 +1110,11 @@
                         <!----><!----><!---->
                         <div class="form-sub-wrap">
                             <label class="control-label"
-                            >상품군<!----><!----></label
+                            >상품군<!----><!---->
+                                <input  name="itemAnnCate"
+                                        type="hidden"
+                                        value="상품군" />
+                            </label
                             >
                             <div class="input-content">
                                 <div class="form-inline">
@@ -1214,10 +1130,11 @@
                                             >
                                                 <div data-value="FOOD" class="item">
                                                     식품(농.축.수산물)
+                                                    <input  name="itemAnn"
+                                                            type="hidden"
+                                                            value="식품(농.축.수산물)" />
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -1232,36 +1149,32 @@
                         >
                             <!----><div class="form-sub-wrap">
                             <label class="control-label" for="prd_foodItem"
-                            >품목 또는 명칭<!----><i
-                                    ng-if="vm.formType !== 'BULK'"
-                                    class="icon-must"
-                                    aria-label="필수항목"
-                            ></i
-                            ><!----></label
-                            >
+                            >품목 또는 명칭<!---->
+                                <input  name="itemAnnCate"
+                                        type="hidden"
+                                        value="품목 또는 명칭"
+                                />
+                            </label>
                             <div class="input-content form-group">
                                 <div class="seller-input-wrap">
-                                    <input
+                                    <input  name="itemAnn"
                                             type="text"
                                             class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                             id="prd_foodItem"
                                             maxlength="200"
-                                    /><a
-                                        role="button"
-                                        class="btn-clear"
-                                        tabindex="-1"
-                                        style="display: none"
-                                ><span aria-label="삭제">×</span></a
-                                >
+                                    />
                                 </div>
                             </div>
                         </div>
                             <div class="form-sub-wrap">
                                 <label class="control-label" for="prd_weight"
-                                >포장단위별 용량(중량), 수량, 크기<!----><i
-                                        class="icon-must"
+                                >중량/용량<!----><i class="icon-must"
                                 ></i
-                                ><!----></label
+                                >
+                                    <input  name="itemAnnCate"
+                                            type="hidden"
+                                            value="중량/용량"
+                                    /><!----></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input-wrap">
@@ -1270,15 +1183,25 @@
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                 id="prd_weight"
                                         />
+                                        <input  name="itemAnn"
+                                                type="hidden"
+                                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                                id="prd_weight2"
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-sub-wrap">
                                 <label class="control-label" for="prd_amount"
-                                >포장단위별 수량<!----><i
+                                >판매단위<!----><i
                                         class="icon-must"
                                 ></i
-                                ><!----></label
+                                >
+                                    <input  name="itemAnnCate"
+                                            type="hidden"
+                                            value="판매단위"
+                                    />
+                                    <!----></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input-wrap">
@@ -1288,34 +1211,21 @@
                                                 id="prd_amount"
                                                 maxlength="200"
                                         />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-sub-wrap">
-                                <label class="control-label" for="prd_size"
-                                >포장단위별 크기<!----><i
-                                        class="icon-must"
-                                ></i
-                                ><!----></label
-                                >
-                                <div class="input-content form-group">
-                                    <div class="seller-input-wrap">
-                                        <input
-                                                type="text"
+                                        <input  name="itemAnn"
+                                                type="hidden"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                                id="prd_size"
+                                                id="prd_amount2"
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-sub-wrap">
                                 <label class="control-label"
-                                >제조연월일<!----><i
-                                        aria-label="필수항목"
-                                        class="icon-must"
-                                        ng-if="vm.formType !== 'BULK'"
-                                ></i
-                                ><!----></label
+                                >제조연월일<!---->
+                                    <input  name="itemAnnCate"
+                                            type="hidden"
+                                            value="제조연월일"
+                                    /><!----></label
                                 >
                                 <div class="input-content">
                                     <div class="input-content provided-notice">
@@ -1335,7 +1245,7 @@
                                                                     class="input-group dropdown-toggle dropdown_7791242947"
                                                             >
                                                                 <label for="date">
-                                                                    <input
+                                                                    <input  name="itemAnn"
                                                                             type="date"
                                                                             id="date"
                                                                             max="2060-12-31"
@@ -1358,16 +1268,16 @@
                                 </div>
                             </div>
 
-
-
-
                             <div class="form-sub-wrap">
                                 <label class="control-label"
                                 >소비기한 또는 품질유지기한<!----><i
-                                        aria-label="필수항목"
                                         class="icon-must"
                                 ></i
-                                ><!----></label
+                                ><!---->
+                                    <input  name="itemAnnCate"
+                                            type="hidden"
+                                            value="소비기한 또는 품질유지기한"
+                                    /></label
                                 >
                                 <div class="input-content">
                                         <div class="input-content provided-notice">
@@ -1390,7 +1300,7 @@
                                                                         data-toggle="dropdown"
                                                                 >
                                                                     <label for="date">
-                                                                        <input
+                                                                        <input  name="itemAnn"
                                                                                 type="date"
                                                                                 id="date"
                                                                                 max="2060-12-31"
@@ -1417,11 +1327,15 @@
                                         class="icon-must"
                                         aria-label="필수항목"
                                 ></i
-                                ><!----></label
+                                ><input  name="itemAnnCate"
+                                         type="hidden"
+                                         value="생산자"
+                                />
+                                    <!----></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input-wrap">
-                                        <input
+                                        <input  name="itemAnn"
                                                 type="text"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                 id="prd_producer"
@@ -1437,30 +1351,22 @@
                                 >세부 품목군별 표시사항<!----><i
                                         aria-label="필수항목"
                                         class="icon-must"
-                                ></i
+                                >
+                                    <input  name="itemAnnCate"
+                                            type="hidden"
+                                            value="세부 품목군별 표시사항"
+                                    />
+                                </i
                                 ><!----></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input">
-                                        <label
-                                        ><input
-                                                type="radio"
-                                                name="radio_relevantLawContent"
-                                                class="ng-pristine ng-untouched ng-valid ng-not-empty"
-                                                value="false" />직접입력<span></span
-                                        ></label>
-                                        <label
-                                        ><input
-                                                type="radio"
-                                                name="radio_relevantLawContent"
-                                                class="ng-pristine ng-untouched ng-valid ng-not-empty"
-                                                value="true" />해당사항 없음<span></span
-                                        ></label>
+
                                     </div>
                                     <div
                                             class="seller-input-wrap2"
                                     >
-                                        <input
+                                        <input  name="itemAnn"
                                                 type="text"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                 id="prd_relevantLawContent"
@@ -1493,22 +1399,19 @@
                                         class="icon-must"
                                         aria-label="필수항목"
                                 ></i
-                                ><!----></label
+                                ><!----><input  name="itemAnnCate"
+                                                type="hidden"
+                                                value="상품구성"
+                                /></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input-wrap">
-                                        <input
+                                        <input  name="itemAnn"
                                                 type="text"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                 id="prd_productComposition"
                                                 maxlength="200"
-                                        /><a
-                                            role="button"
-                                            class="btn-clear"
-                                            tabindex="-1"
-                                            style="display: none"
-                                    ><span aria-label="삭제">×</span></a
-                                    >
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -1517,11 +1420,14 @@
                                 >보관방법 또는 취급방법<!----><i
                                         class="icon-must"
                                         aria-label="필수항목"
-                                ></i
+                                ><input  name="itemAnnCate"
+                                         type="hidden"
+                                         value="보관방법 또는 취급방법"
+                                /></i
                                 ><!----></label
                                 >
                                 <div class="input-content form-group">
-                                  <textarea
+                                  <textarea name="itemAnn"
                                           class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                           rows="3"
                                           id="prd_keep"
@@ -1533,11 +1439,14 @@
                                 <label class="control-label" for="prd_adCaution"
                                 >소비자 안전을 위한 주의사항<!----><i
                                         class="icon-must"
-                                ></i
+                                ><input  name="itemAnnCate"
+                                         type="hidden"
+                                         value="소비자 안전을 위한 주의사항"
+                                /></i
                                 ><!----></label
                                 >
                                 <div class="input-content form-group">
-                                  <textarea
+                                  <textarea name="itemAnn"
                                           class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                           rows="3"
                                           id="prd_adCaution"
@@ -1555,13 +1464,15 @@
                                 >소비자 상담 관련 전화번호<!----><i
                                         aria-label="필수항목"
                                         class="icon-must"
-                                        ng-if="vm.formType !== 'BULK'"
-                                ></i
+                                ><input  name="itemAnnCate"
+                                         type="hidden"
+                                         value="소비자 상담 관련 전화번호"
+                                /></i
                                 ><!----></label
                                 >
                                 <div class="input-content form-group">
                                     <div class="seller-input-wrap">
-                                        <input
+                                        <input  name="itemAnn"
                                                 type="text"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
                                                 id="prd_customerServicePhoneNumber"
@@ -1576,6 +1487,7 @@
         </div>
         <!----><!----></ui-view
     ><!---->
+<%--    상품정보제공고시 끝    --%>
 
     <!-- 배송, 반품, 교환 -->
     <ui-view name="delivery"
@@ -1621,7 +1533,7 @@
 
                     <!----><!---->
                     <div>
-                        <div ng-show="vm.viewData.setting" class="">
+                        <div class="">
                             <div
                                     class="form-sub-wrap ng-valid ng-dirty ng-valid-parse"
                             >
@@ -1651,7 +1563,7 @@
                                                     class="ng-valid ng-not-empty ng-dirty ng-touched ng-valid-parse"
                                                     value="샛별배송"
                                             />
-                                                <label ng-repeat-end="" for="TODAY"
+                                                <label  for="TODAY"
                                                 >샛별배송</label
                                                 ><!---->
                                             </div>
@@ -1734,19 +1646,13 @@
             >
                 <div class="form-section-sub">
                     <!----><div
-                        ng-form="_DELIVERY_CLAIM"
-                        novalidate=""
-                        disable-dynamic-validation="false"
-                        validate-non-visible-controls="true"
                         class="ng-pristine ng-valid-min ng-valid-max ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
                 >
                     <div
                             class="form-sub-wrap"
-                            server-field-errors="product.deliveryInfo.claimDeliveryInfo.*"
                     >
                         <label class="control-label"
                         >반품/교환 택배사<!----><i
-                                ng-if="vm.formType !== 'BULK'"
                                 class="icon-must"
                                 aria-label="필수항목"
                         ></i
@@ -1796,7 +1702,6 @@
                                         </div>
                                     </div>
                                     <input
-                                            selectize=""
                                             name="_returnDeliveryCompany"
                                             class="ng-pristine ng-untouched ng-valid selectized ng-valid-required ng-not-empty"
                                             style="
@@ -1813,8 +1718,7 @@
                                     class="sub-text text-primary"
                             >
                                 기본 반품택배사는 브로컬리
-                                지정택배(한진택배)로 최초 자동설정 됩니다.</span
-                                    ><br />
+                                지정택배(한진택배)로 최초 자동설정 됩니다.</span><br />
                             </p>
                             <!---->
                         </div>
@@ -1943,31 +1847,26 @@
                                                 />
                                                 <input  name="wishCnt"
                                                         type="hidden"
-                                                        class="form-control"
                                                         placeholder="찜한개수"
                                                         value="0"
                                                 />
                                                 <input  name="sellCnt"
                                                         type="hidden"
-                                                        class="form-control"
                                                         placeholder="판매량"
                                                         value="0"
                                                 />
                                                 <input  name="revCnt"
                                                         type="hidden"
-                                                        class="form-control"
                                                         placeholder="후기개수"
                                                         value="0"
                                                 />
 
                                                 <input  name="itemId"
-                                                        type=""
                                                         class="form-control"
                                                         placeholder="아이템아이디"
                                                 />
                                                 <input  name="stdySellerFl"
                                                         type="hidden"
-                                                        class="form-control"
                                                         placeholder="스테디 여부"
                                                         value="N"
                                                 />
@@ -1978,7 +1877,6 @@
                                                 />
                                                 <input  name="regDt"
                                                         type="hidden"
-                                                        class="form-control"
                                                         placeholder="regDt"
                                                         value="2024-01-31 11:11:11"
                                                 />
@@ -2096,7 +1994,13 @@
         });
     }
 
-
+    // 동시입력????
+    $("#prd_weight").change(function(){
+        $('#prd_weight2').val($(this).val());
+    });
+    $("#prd_amount").change(function(){
+        $('#prd_amount2').val($(this).val());
+    });
 
 
     //
@@ -2170,6 +2074,8 @@
         });
 
     })
+
+//
 
 
 

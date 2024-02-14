@@ -24,5 +24,6 @@
         <typeAlias type="com.brokurly.entity.NoticeListDto" alias="NoticeListDto"/>
         <typeAlias type="com.brokurly.entity.NoticeBoardDto" alias="NoticeBoardDto"/>
         <typeAlias type="com.brokurly.entity.FAQListDto" alias="FAQListDto"/>
+        <typeAlias type="com.brokurly.domain.ItemAnnouncement" alias="ItemAnnouncement"/>
     </typeAliases>
 </configuration>

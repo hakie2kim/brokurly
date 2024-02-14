@@ -1,6 +1,7 @@
 package com.brokurly.service;
 
 import com.brokurly.dto.GoodsDto;
+import com.brokurly.dto.ItemAnnouncementDto;
 import com.brokurly.repository.ProductscreateDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,11 @@ public class ProductscreateService {
         productscreateDao.insert(goodsDto);
 
         return goodsDto;
+    }
+
+    public ItemAnnouncementDto writeAnno(ItemAnnouncementDto itemAnnouncementDto){
+        productscreateDao.insertAnno(itemAnnouncementDto);
+        return itemAnnouncementDto;
     }
 
 

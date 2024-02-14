@@ -1,5 +1,6 @@
 package com.brokurly.domain;
 
+import com.brokurly.dto.GoodsDto;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -32,4 +33,63 @@ public class Goods {
   private int sellCnt;
   private int revCnt;
   private String stdySellerFl;
+
+  public GoodsDto makeDto(){
+    return GoodsDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .regDt(regDt)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .wishCnt(wishCnt)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .sellCnt(sellCnt)
+            .revCnt(revCnt)
+            .stdySellerFl(stdySellerFl).build();
+  }
+
+  public void change (GoodsDto goodsDto) {
+    this.itemId = goodsDto.getItemId();
+    this.name = goodsDto.getName();
+    this.exp = goodsDto.getExp();
+    this.price = goodsDto.getPrice();
+    this.dcRt = goodsDto.getDcRt();
+    this.itemDcAmt = goodsDto.getItemDcAmt();
+    this.origin = goodsDto.getOrigin();
+    this.pointFl = goodsDto.getPointFl();
+    this.cpnElgFl = goodsDto.getCpnElgFl();
+    this.shipType = goodsDto.getShipType();
+    this.sellerName = goodsDto.getSellerName();
+    this.pkgType = goodsDto.getPkgType();
+    this.capa = goodsDto.getCapa();
+    this.sellUnit = goodsDto.getSellUnit();
+    this.regDt = goodsDto.getRegDt();
+    this.adultVerifFl = goodsDto.getAdultVerifFl();
+    this.cateCode = goodsDto.getCateCode();
+    this.itemQty = goodsDto.getItemQty();
+    this.wishCnt = goodsDto.getWishCnt();
+    this.bsnsNo = goodsDto.getBsnsNo();
+    this.itemSpec = goodsDto.getItemSpec();
+    this.sellCnt = goodsDto.getSellCnt();
+    this.revCnt = goodsDto.getRevCnt();
+    this.stdySellerFl = goodsDto.getStdySellerFl();
+
+
+  }
+
+
 }

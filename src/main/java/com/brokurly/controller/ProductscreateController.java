@@ -2,6 +2,7 @@ package com.brokurly.controller;
 
 
 import com.brokurly.dto.GoodsDto;
+import com.brokurly.dto.ItemAnnouncementDto;
 import com.brokurly.service.ProductscreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,17 @@ public class ProductscreateController {
     }
 
     @PostMapping("/productscreate/write")
-    public String writeproducts(GoodsDto goodsDto){
+    public String writeproducts(GoodsDto goodsDto, ItemAnnouncementDto itemAnnouncementDto){
         String a = goodsDto.getName();
         log.info("a={}",a);
         System.out.println(goodsDto);
 
+        String b = itemAnnouncementDto.getItemAnn();
+        System.out.println("itemAnnouncementDto = "+itemAnnouncementDto);
+
+
         productscreateService.write(goodsDto);
+        productscreateService.writeAnno(itemAnnouncementDto);
 
         return "redirect:/seller/productscreate";
         //나중에 상품 등록 확인 페이지 만들고 연결하기
