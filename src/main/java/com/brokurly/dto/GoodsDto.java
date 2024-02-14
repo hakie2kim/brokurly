@@ -3,6 +3,7 @@ package com.brokurly.dto;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,7 +26,6 @@ public class GoodsDto {
   private String pkgType;
   private String capa;
   private int sellUnit;
-  private Timestamp regDt;
   private String adultVerifFl;
   private String cateCode;
   private int itemQty;

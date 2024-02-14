@@ -7,10 +7,10 @@
     <insert id="insert">
         INSERT INTO item
             (item_id, name, exp, price, dc_rt, item_dc_amt, origin, point_fl, cpn_elg_fl, ship_type,
-             seller_name, pkg_type, capa, sell_unit, reg_dt, adult_verif_fl, cate_code, item_qty,
+             seller_name, pkg_type, capa, sell_unit, adult_verif_fl, cate_code, item_qty,
              wish_cnt, bsns_no, item_spec, sell_cnt, rev_cnt, stdy_seller_fl)
         VALUES (#{itemId}, #{name}, #{exp}, #{price}, #{dcRt}, #{itemDcAmt}, #{origin}, #{pointFl},
-                #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType}, #{capa}, #{sellUnit}, #{regDt},
+                #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType}, #{capa}, #{sellUnit},
                 #{adultVerifFl}, #{cateCode}, #{itemQty}, #{wishCnt}, #{bsnsNo}, #{itemSpec},
                 #{sellCnt}, #{revCnt}, #{stdySellerFl})
     </insert>

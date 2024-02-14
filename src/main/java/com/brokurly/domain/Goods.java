@@ -4,6 +4,7 @@ import com.brokurly.dto.GoodsDto;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @ToString
 @EqualsAndHashCode
@@ -24,7 +25,7 @@ public class Goods {
   private String pkgType;
   private String capa;
   private int sellUnit;
-  private Timestamp regDt;
+  private Date regDt;
   private String adultVerifFl;
   private String cateCode;
   private int itemQty;
@@ -51,7 +52,6 @@ public class Goods {
             .pkgType(pkgType)
             .capa(capa)
             .sellUnit(sellUnit)
-            .regDt(regDt)
             .adultVerifFl(adultVerifFl)
             .cateCode(cateCode)
             .itemQty(itemQty)
@@ -78,7 +78,6 @@ public class Goods {
     this.pkgType = goodsDto.getPkgType();
     this.capa = goodsDto.getCapa();
     this.sellUnit = goodsDto.getSellUnit();
-    this.regDt = goodsDto.getRegDt();
     this.adultVerifFl = goodsDto.getAdultVerifFl();
     this.cateCode = goodsDto.getCateCode();
     this.itemQty = goodsDto.getItemQty();

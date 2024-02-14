@@ -171,10 +171,11 @@
                                     <div class="seller-input-wrap">
                                         <input name="price"
                                                 class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-max ng-invalid ng-invalid-required ng-valid-pattern ng-valid-minlength ng-valid-maxlength"
-                                                id="prd_price2"
+                                                id="prd_price"
                                                 placeholder="숫자만 입력"
                                                 type="text"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+
                                         />
                                     </div>
                                     <span class="input-group-addon">원</span>
@@ -237,12 +238,13 @@
                                             >
                                                 <input  name="dcRt"
                                                         class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-valid ng-valid-required"
-                                                        id="prd_sale5"
+                                                        id="prd_sale"
                                                         placeholder="판매가에서"
                                                         title="할인가 입력"
                                                         type="text"
                                                         min="0"
                                                         max="100"
+                                                        onkeyup="ShowPrice()"
                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                 />
                                             </div>
@@ -263,9 +265,8 @@
                                             class="total-price"
                                     >
                                         <div class="input-content">
-                                            <p class="text-info text-price">
-                                                <span>0 </span><em>원</em> (0원 할인)
-                                            </p>
+                                            <div id="showResult"></div>
+
                                         </div>
                                     </div>
                                     <!---->
@@ -548,16 +549,11 @@
                                     <div class="wrap-img">
                                         <!----><!---->
                                         <div>
-                                            <ul
-                                                    class="img-list"
-                                            >
+                                            <ul  class="img-list">
                                                 <!----><!---->
-                                                <li
-                                                >
+                                                <li>
                                                     <!----><!---->
-
-                                                    <div
-                                                            class="register-img"
+                                                    <div   class="register-img"
                                                             style=""
                                                     >
 
@@ -1840,6 +1836,7 @@
 
 <%--                                                일단 값 넣어보자 --%>
                                                 <input  name="itemDcAmt"
+                                                        id="dc_price"
                                                         type="text"
                                                         class="form-control"
                                                         placeholder="할인가격"
@@ -1861,6 +1858,8 @@
                                                 />
 
                                                 <input  name="itemId"
+                                                        id="itemid"
+                                                        type="hidden"
                                                         class="form-control"
                                                         placeholder="아이템아이디"
                                                 />
@@ -1875,11 +1874,11 @@
                                                         placeholder="카테고리코드"
                                                 />
                                                 <input  name="regDt"
+                                                        id="reg_dt"
                                                         type="hidden"
                                                         placeholder="regDt"
-                                                        value="2024-01-31 11:11:11"
+<%--                                                        value="2024-01-31 11:11:11"--%>
                                                 />
-
 
 <%--                                                --%>
                                             </div>
@@ -1979,13 +1978,39 @@
         });
     }
 
-    // 동시입력????
+    // 할인율 계산
+    function ShowPrice(){
+        var originPrice = document.querySelector("#prd_price").value;
+        var rate = document.querySelector("#prd_sale").value;
+        var savePrice = originPrice *(rate / 100);
+        var resultPrice = originPrice - savePrice;
+        document.querySelector("#showResult").innerHTML = resultPrice+"원 ("+savePrice+" 원 할인)"
+        document.querySelector("#dc_price").value = savePrice
+    }
+
+
+
+    // 동시입력 가능
     $("#prd_weight").change(function(){
         $('#prd_weight2').val($(this).val());
     });
     $("#prd_amount").change(function(){
         $('#prd_amount2').val($(this).val());
     });
+
+    //난수 만들기
+     var newId = function(){
+        return Math.floor(Math.random()*1000000000000000)
+    }
+    document.getElementById("itemid").value = newId();
+
+     //겹치는 숫자 나오면 다시 돌리기  - 나중에 생각한다
+
+
+     //현재 날짜??
+    // document.getElementById('reg_dt').value = new Timestamp(System.currentTimeMillis());
+    // $('#reg_dt').val(new Timestamp(System.currentTimeMillis()));
+    //
 
 
 
