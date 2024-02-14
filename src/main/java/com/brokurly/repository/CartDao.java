@@ -1,6 +1,7 @@
 package com.brokurly.repository;
 
 import com.brokurly.domain.Cart;
+import com.brokurly.dto.CartDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface CartDao {  //2. 반환값/mapper에서 사용할 쿼리 아이�
   void delete(Cart cart);
   void update(Cart cart);
   void insert(Cart cart);
+
+
 }

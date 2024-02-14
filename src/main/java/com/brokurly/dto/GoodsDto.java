@@ -16,7 +16,7 @@ public class GoodsDto {
   private String exp;
   private int price;
   private double dcRt;
-  private String itemDcAmt;
+  private int itemDcAmt;
   private String origin;
   private String pointFl;
   private String cpnElgFl;
