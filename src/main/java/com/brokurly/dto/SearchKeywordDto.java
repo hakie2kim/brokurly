@@ -1,14 +1,15 @@
-package com.brokurly.domain;
+package com.brokurly.dto;
 
 
 import lombok.*;
 
-
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode
+@Builder
 @AllArgsConstructor
-public class SearchKeyword {
+public class SearchKeywordDto {
     private String keyword;
     private String itemIdList;
-
 }

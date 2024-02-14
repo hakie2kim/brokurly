@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class Goods {
   private String itemId;
   private String name;
@@ -34,7 +35,7 @@ public class Goods {
   private int revCnt;
   private String stdySellerFl;
 
-  public GoodsDto makeDto(){
+  public GoodsDto makeFullDto(){
     return GoodsDto.builder()
             .itemId(itemId)
             .name(name)
@@ -62,7 +63,7 @@ public class Goods {
             .stdySellerFl(stdySellerFl).build();
   }
 
-  public void change (GoodsDto goodsDto) {
+  public void changeStatus (GoodsDto goodsDto) {
     this.itemId = goodsDto.getItemId();
     this.name = goodsDto.getName();
     this.exp = goodsDto.getExp();

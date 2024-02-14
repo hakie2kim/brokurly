@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.brokurly.repository.ProductscreateDao">
+    <!-- CREATE -->
     <insert id="insert">
         INSERT INTO item
             (item_id, name, exp, price, dc_rt, item_dc_amt, origin, point_fl, cpn_elg_fl, ship_type,
@@ -14,10 +15,18 @@
                 #{sellCnt}, #{revCnt}, #{stdySellerFl})
     </insert>
 
-    <insert id="insertAnno">
+    <insert id="insertAnnouncement">
         INSERT INTO item_announcement
             (item_id, item_ann, item_ann_cate)
         VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
-
     </insert>
+
+    <insert id="insertSearchkeyword">
+        INSERT INTO search_keyword
+            (keyword, item_id_list)
+    </insert>
+
+
+
+
 </mapper>

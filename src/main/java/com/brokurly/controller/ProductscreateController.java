@@ -33,7 +33,7 @@ public class ProductscreateController {
 
 
         productscreateService.write(goodsDto);
-        productscreateService.writeAnno(itemAnnouncementDto);
+        productscreateService.writeAnnouncement(itemAnnouncementDto);
 
         return "redirect:/seller/productscreate";
         //나중에 상품 등록 확인 페이지 만들고 연결하기

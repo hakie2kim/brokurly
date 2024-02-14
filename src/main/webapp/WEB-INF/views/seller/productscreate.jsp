@@ -92,7 +92,7 @@
                                     <input  name="name"
                                             type="text"
                                             class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                            maxlength="100"
+                                            maxlength="160"
                                             value=""
                                             title="상품명 입력"
                                     />
@@ -487,7 +487,7 @@
                                                 <ul class="img-list"
                                                 >
                                                     <!----><!---->
-                                                    <li>
+                                                    <li id>
                                                         <!----><!---->
                                                         <div
                                                                 class="register-img"
@@ -1578,7 +1578,6 @@
                         <!----><!---->
                     </div><!----><!----><!----><!---->
                     <div
-                            ng-form="_DELIVERY_FEE"
                             class="ng-pristine ng-valid-max ng-valid-pattern ng-valid-maxlength ng-valid-required ng-invalid ng-invalid-min ng-invalid-minlength"
                     >
                         <div
@@ -1901,17 +1900,7 @@
                 </div>
             </div>
         </div>
-
-        <!---->
-        </div>
-
     </ui-view><!----><!----><!---->
-
-
-    </div>
-
-</ui-view><!---->
-
 </form>
 <%--form 태그 끝--%>
 
@@ -1936,11 +1925,7 @@
     </button>
 
 </div>
-</div>
-</div>
-</div>
-</div>
-</ui-view>
+
 
 
 
@@ -2003,60 +1988,60 @@
     });
 
 
-    //
-    // // 이미지------------------------------------------------
-    //
-    // // 이미지 넣기
-    // var acc = document.getElementsByClassName("menuitem");
-    // var i;
-    //
-    // for (i = 0; i < acc.length; i++) {
-    //     acc[i].addEventListener("click", function () {
-    //         this.classList.toggle("active");
-    //         var panel = this.nextElementSibling;
-    //         if (panel.style.maxHeight) {
-    //             panel.style.maxHeight = null;
-    //         } else {
-    //             panel.style.maxHeight = panel.scrollHeight + "px";
-    //         }
-    //     });
-    // }
-    //
-    // // 대표 이미지 파일 가져오기
-    // function loadFile(input) {
-    //     let file = input.files[0]; // 선택된 파일 가져오기
-    //
-    //     let newImage = document.createElement("img"); //새 이미지 추가
-    //
-    //     //이미지 source 가져오기
-    //     newImage.src = URL.createObjectURL(file);
-    //     newImage.id = "img-id";
-    //     newImage.style.width = "100%";
-    //     newImage.style.height = "100%";
-    //     newImage.style.objectFit = "cover";
-    //
-    //     //이미지를 image-show div에 추가
-    //     let container = document.getElementById("image-show");
-    //     container.appendChild(newImage);
-    // }
-    //
-    // // 추가 이미지 파일 가져오기
-    // function loadFile(input) {
-    //     let file2 = input.files[0]; // 선택된 파일 가져오기
-    //
-    //     let newImage = document.createElement("img"); //새 이미지 추가
-    //
-    //     //이미지 source 가져오기
-    //     newImage.src = URL.createObjectURL(file2);
-    //     newImage.id = "img-id";
-    //     newImage.style.width = "100%";
-    //     newImage.style.height = "100%";
-    //     newImage.style.objectFit = "cover";
-    //
-    //     //이미지를 image-show div에 추가
-    //     let container = document.getElementById("image-show2");
-    //     container.appendChild(newImage);
-    // }
+
+    // 이미지------------------------------------------------
+
+    // 이미지 넣기
+    var acc = document.getElementsByClassName("menuitem");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+
+    // 대표 이미지 파일 가져오기
+    function loadFile(input) {
+        let file = input.files[0]; // 선택된 파일 가져오기
+
+        let newImage = document.createElement("img"); //새 이미지 추가
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);
+        newImage.id = "img-id";
+        newImage.style.width = "100%";
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover";
+
+        //이미지를 image-show div에 추가
+        let container = document.getElementById("image-show");
+        container.appendChild(newImage);
+    }
+
+    // 추가 이미지 파일 가져오기
+    function loadFile(input) {
+        let file2 = input.files[0]; // 선택된 파일 가져오기
+
+        let newImage = document.createElement("img"); //새 이미지 추가
+
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file2);
+        newImage.id = "img-id";
+        newImage.style.width = "100%";
+        newImage.style.height = "100%";
+        newImage.style.objectFit = "cover";
+
+        //이미지를 image-show div에 추가
+        let container = document.getElementById("image-show");
+        container.appendChild(newImage);
+    }
 
 
 
