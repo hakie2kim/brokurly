@@ -12,5 +12,7 @@ public interface CategoryDao {
 //    카테고리 대분류 가져오기
     List<CategoryDto> selectMainExp();
 
+    CategoryDto getCategoryExpById(int codeId);
+
 
 }

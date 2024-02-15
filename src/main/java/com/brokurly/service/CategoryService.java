@@ -17,4 +17,6 @@ public List<CategoryDto> readMain() throws Exception{
  return categoryDao.selectMainExp();
 }
 
+
+
 }

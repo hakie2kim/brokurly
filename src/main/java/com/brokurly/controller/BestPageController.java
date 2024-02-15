@@ -56,7 +56,7 @@ public class BestPageController {
         m.addAttribute("codeId",codeId);
 
 
-        return "/categories";
+        return "/codeId";
 
     }
 

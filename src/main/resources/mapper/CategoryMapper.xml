@@ -9,6 +9,10 @@
         VALUES (#{codeId}, #{exp})
     </insert>
 
+    <sql id="select">
+        SELECT * FROM category_code
+    </sql>
+
 <!--  카테고리 대분류 가져오기  -->
     <select id="selectMainExp" resultType="CategoryDto">
         <![CDATA[
@@ -17,4 +21,13 @@
         WHERE code_id < 1000
         ]]>
     </select>
+    
+    <select id="getCategoryExpById" resultType="CategoryDto">
+        <include refid="select"/>
+        WHERE code_id = #{codeId}
+    </select>
+
+
+
+
 </mapper>
