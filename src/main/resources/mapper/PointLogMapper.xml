@@ -3,10 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.brokurly.repository.PointLogDao">
+    <!-- CREATE -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pointNo">
+        INSERT INTO point_log (point_no, order_id, cust_id, point_amt, proc_dt, point_spec, point_stat)
+        VALUES (#{pointNo}, #{orderId}, #{custId}, #{pointAmt}, #{procDt}, #{pointSpec}, #{pointStat})
+    </insert>
+
     <!-- READ -->
-    <select id="selectUsageByCustomerAndPeriod" resultType="PointLogUsageDto">
+    <sql id="select">
         SELECT order_id, point_amt, proc_dt, point_spec, point_stat
         FROM point_log
+    </sql>
+
+    <select id="selectUsageByCustomerAndPeriod" resultType="PointLog">
+        <include refid="select"/>
         WHERE cust_id = #{custId}
           AND point_stat = '사용'
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
@@ -20,9 +30,8 @@
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
     </select>
 
-    <select id="selectExpByCustomerAndPeriod" resultType="PointLogExpDto">
-        SELECT point_amt, proc_dt, point_spec, point_stat
-        FROM point_log
+    <select id="selectExpByCustomerAndPeriod" resultType="PointLog">
+        <include refid="select"/>
         WHERE cust_id = #{custId}
           AND point_stat = '소멸'
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
@@ -36,8 +45,8 @@
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
     </select>
 
-    <select id="selectEarningByCustomerAndPeriod" resultType="PointLogEarningDto">
-        SELECT p.point_no, order_id, pl.point_amt, proc_dt, point_spec, point_stat, p.expir_dt
+    <select id="selectEarningByCustomerAndPeriod" resultType="PointAndPointLog">
+        SELECT p.point_no, pl.point_amt, p.expir_dt, order_id, proc_dt, point_spec, point_stat
         FROM point_log pl
         INNER JOIN point p
         ON pl.point_no = p.point_no
@@ -53,6 +62,26 @@
           AND point_stat LIKE '%적립%'
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
     </select>
+
+    <select id="countAll" resultType="int">
+        SELECT count(*)
+        FROM point_log
+    </select>
+
+    <!--UPDATE 없음-->
+
+    <!--DELETE-->
+    <delete id="deleteAll">
+        DELETE
+        FROM point_log
+    </delete>
+
+    <delete id="deleteByPointNo">
+        DELETE
+        FROM point_log
+        WHERE point_no = #{pointNo}
+    </delete>
+
 <!--    &lt;!&ndash; CREATE &ndash;&gt;-->
 <!--    <insert id="insert" useGeneratedKeys="true" keyProperty="bno">-->
 <!--        INSERT INTO board-->

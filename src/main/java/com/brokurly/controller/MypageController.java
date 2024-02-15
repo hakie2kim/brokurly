@@ -1,6 +1,6 @@
 package com.brokurly.controller;
 
-import com.brokurly.dto.PointLogEarningDto;
+import com.brokurly.dto.PointAndPointLogEarningDto;
 import com.brokurly.dto.PointLogExpDto;
 import com.brokurly.dto.PointLogUsageDto;
 import com.brokurly.service.PointLogService;
@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -63,8 +60,8 @@ public class MypageController {
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
-        List<PointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
-//        for (PointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
+        List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
+//        for (PointAndPointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
 //            String orderId = pointLogUsageDto.getOrderId();
 //            int pointAmt = pointLogUsageDto.getPointAmt();
 //            Date procDt = pointLogUsageDto.getProcDt();
@@ -80,7 +77,7 @@ public class MypageController {
 //            String pointStat = pointLogUsageDto.getPointStat();
 //            Date expDt = pointService.findPointByPointId(pointLogUsageDto.get)
 //
-//            pointLogEarningList.add(new PointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
+//            pointLogEarningList.add(new PointAndPointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
 //        }
 
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);

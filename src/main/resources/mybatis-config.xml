@@ -14,9 +14,9 @@
         <typeAlias type="com.brokurly.domain.OrderAndPayment" alias="OrderAndPayment"/>
         <typeAlias type="com.brokurly.domain.ReceiverDetails" alias="ReceiverDetails"/>
         <typeAlias type="com.brokurly.domain.GoodsImage" alias="GoodsImage"/>
-        <typeAlias type="com.brokurly.dto.PointLogExpDto" alias="PointLogExpDto"/>
-        <typeAlias type="com.brokurly.dto.PointLogUsageDto" alias="PointLogUsageDto"/>
-        <typeAlias type="com.brokurly.dto.PointLogEarningDto" alias="PointLogEarningDto"/>
+        <typeAlias type="com.brokurly.domain.Point" alias="Point"/>
+        <typeAlias type="com.brokurly.domain.PointLog" alias="PointLog"/>
+        <typeAlias type="com.brokurly.domain.PointAndPointLog" alias="PointAndPointLog"/>
         <typeAlias type="com.brokurly.domain.Point" alias="Point"/>
         <typeAlias type="com.brokurly.dto.CategoryDto" alias="CategoryDto"/>
         <typeAlias type="com.brokurly.domain.Cart" alias="Cart"/>

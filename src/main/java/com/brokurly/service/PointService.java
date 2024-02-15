@@ -1,7 +1,9 @@
 package com.brokurly.service;
 
 import com.brokurly.domain.Point;
+import com.brokurly.dto.PointDto;
 import com.brokurly.repository.PointDao;
+import com.brokurly.repository.PointLogDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,30 @@ import org.springframework.stereotype.Service;
 public class PointService {
     private final PointDao pointDao;
 
-    public Point findPointByPointId(Integer pointId) {
-        return pointDao.selectByPointNo(pointId);
+    // CREATE
+
+    // READ
+    public PointDto findPointByPointId(Integer pointId) {
+        return pointDao.selectByPointNo(pointId).getPointDto();
     }
+
+    // UPDATE
+    
+    // DELETE 없음
+
+    /*(일반) 적립
+    PointDao insert
+    PointLogDao insert
+
+    구매 적립
+    PointDao insert
+    PointLogDao insert
+
+    주문 결제 시 사용
+    PointDao update
+    PointLogDao insert
+
+    기간 소멸
+    PointDao update
+    PointLogDao insert*/
 }
