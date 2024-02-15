@@ -22,11 +22,8 @@ public class SmsRestController {
             int r = (int) (Math.random() * 8) + 1; // 보낼 인증번호 랜덤생성
             smsNum += Integer.toString(r);
         }
-        System.out.println("smsNum = " + smsNum);
 
         smsRestService.certifiedPhoneNumber(telNo, smsNum);
-
-
 
         return smsNum;
     }

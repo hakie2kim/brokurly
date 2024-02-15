@@ -3,14 +3,12 @@ package com.brokurly.domain;
 
 import lombok.*;
 
-@Getter
-@Setter
+
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class SearchKeyword {
     private String keyword;
     private String itemIdList;
-
 }

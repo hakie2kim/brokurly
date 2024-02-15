@@ -7,6 +7,10 @@ body {
     overflow-x: hidden;
 }
 
+a {
+    text-decoration: none;
+}
+
 @media (min-width: 1280px) {
     body .app {
         max-width: 375px;
@@ -325,6 +329,7 @@ main
     border-radius: 9999px;
     background-color: #f2f2f2;
 }
+
 body
 .app
 main
@@ -420,4 +425,36 @@ body .app main .content .bottom .row3 .wrapper .details .right {
     font-size: 14px;
     line-height: 20px;
     color: #666;
+}
+
+body .app main .content .bottom .row3 .wrapper .details .right .exp {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #666;
+}
+
+body .app main .content .bottom .row3 .no-log {
+    justify-content: center;
+    flex-grow: 1;
+    align-items: center;
+}
+
+body .app main .content .bottom .row3 .no-log .wrapper {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-direction: column;
+}
+
+body .app main .content .bottom .row3 .no-log .wrapper .row {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+body .app main .content .bottom .row3 .no-log .wrapper .row span {
+    font-size: 16px;
+    line-height: 20px;
+    color: #b5b5b5;
 }

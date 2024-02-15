@@ -14,13 +14,14 @@
     </sql>
 
 <!--  카테고리 대분류 가져오기  -->
-    <select id="selectMainExp" resultType="CategoryDto">
+    <select id="selectMain" resultType="CategoryDto">
         <![CDATA[
         SELECT code_id, exp
         FROM category_code
         WHERE code_id < 1000
         ]]>
     </select>
+
     
     <select id="getCategoryExpById" resultType="CategoryDto">
         <include refid="select"/>
@@ -28,6 +29,16 @@
     </select>
 
 
+
+
+
+
+<!--    카테고리 중분류 가져오기    -->
+    <select id="selectMiddleExp" resultType="CategoryDto">
+        SELECT code_id, exp
+        FROM category_code
+        WHERE code_id LIKE '9070__'
+    </select>
 
 
 </mapper>

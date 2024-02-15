@@ -20,5 +20,4 @@ public class Order {
     private int shipFee;
     private String orderAddr;
     private String shipNo;
-
 }

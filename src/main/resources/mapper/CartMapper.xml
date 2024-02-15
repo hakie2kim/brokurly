@@ -5,65 +5,39 @@
 <mapper namespace="com.brokurly.repository.CartDao">
 
     <!-- CREATE -->
-    <insert id="insertCart">    <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
+    <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
         INSERT INTO cart
             (item_id, cust_id, item_cnt)
         VALUES
             (#{itemId}, #{custId}, #{itemCnt})
     </insert>
 
-<!--    &lt;!&ndash; READ &ndash;&gt;-->
-<!--    <sql id="select">-->
-<!--        SELECT * FROM board-->
-<!--    </sql>-->
+    <!-- READ -->
+    <sql id="select">
+        SELECT * FROM cart
+    </sql>
 
-<!--    <sql id="count">-->
-<!--        SELECT COUNT(*) FROM board-->
-<!--    </sql>-->
+    <select id="selectByCustId" resultType="Cart">
+        <include refid="select"/>
+        WHERE cust_id = #{custId}
+    </select>
 
-<!--    <select id="selectAll" resultType="Board">-->
-<!--        <include refid="select"/>-->
-<!--        ORDERS LIMIT #{limit} OFFSET #{start}-->
-<!--    </select>-->
+    <!-- UPDATE -->
+    <update id="update">
+        UPDATE cart
+        SET item_cnt = #{itemCnt}
+        WHERE cust_id = #{custId}
+        AND item_id = #{itemId}
+    </update>
 
-<!--    <select id="selectByNumber" resultType="Board">-->
-<!--        <include refid="select"/>-->
-<!--        WHERE bno = #{bno}-->
-<!--    </select>-->
+    <!-- DELETE -->
+    <!--고객 아이디랑 아이탬아이디 같을때만 삭제되게 -->
+    <delete id="delete">
+        DELETE FROM cart
+        WHERE item_id = #{itemId}
+        AND cust_id = #{custId}
+    </delete>
 
-<!--    <select id="selectByTitle" resultType="Board">-->
-<!--        <include refid="select"/>-->
-<!--        WHERE title LIKE CONCAT('%', #{title}, '%')-->
-<!--    </select>-->
 
-<!--    <select id="selectByWriter" resultType="Board">-->
-<!--        <include refid="select"/>-->
-<!--        WHERE writer = #{writer}-->
-<!--    </select>-->
 
-<!--    <select id="countAll" resultType="int">-->
-<!--        <include refid="count"/>-->
-<!--    </select>-->
-
-<!--    &lt;!&ndash; UPDATE &ndash;&gt;-->
-<!--    <update id="update">-->
-<!--        UPDATE board-->
-<!--        SET title = #{title}, content=#{content}, writer=#{writer}-->
-<!--        WHERE bno = #{bno}-->
-<!--    </update>-->
-
-<!--    <update id="resetAutoIncrement">-->
-<!--        ALTER TABLE board-->
-<!--            AUTO_INCREMENT = 1-->
-<!--    </update>-->
-
-<!--    &lt;!&ndash; DELETE &ndash;&gt;-->
-<!--    <delete id="deleteAll">-->
-<!--        DELETE FROM board-->
-<!--    </delete>-->
-
-<!--    <delete id="deleteByNumber" parameterType="int">-->
-<!--        DELETE FROM board-->
-<!--        WHERE bno = #{bno}-->
-<!--    </delete>-->
 </mapper>

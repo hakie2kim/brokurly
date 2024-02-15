@@ -10,7 +10,7 @@ public interface CategoryDao {
     void insert(CategoryDto categoryDto);
 
 //    카테고리 대분류 가져오기
-    List<CategoryDto> selectMainExp();
+    List<CategoryDto> selectMain();
 
     CategoryDto getCategoryExpById(int codeId);
 
