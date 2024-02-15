@@ -17,7 +17,7 @@ import java.util.Map;
 @RequestMapping("/seller")
 public class CategoryController {
 
-   CategoryService categoryService;
+   private final CategoryService categoryService;
 
     //생성자 추가해서 주입받기
     @Autowired
@@ -27,8 +27,6 @@ public class CategoryController {
 
     @GetMapping("/productscreate")
     public String readCategory(Model m) throws Exception {
-
-        CategoryDto categoryDto = new CategoryDto();
 
         List<CategoryDto> selectMain = categoryService.readMain();
         m.addAttribute("selectMain", selectMain);
@@ -41,9 +39,8 @@ public class CategoryController {
     @PostMapping ("/ajax")
     public void test(@RequestParam String testcodeId){
 
-        log.info("testcodeId={}",testcodeId);
+        log.info("testcodeId컨트롤러임={}",testcodeId);
 
-//        m.addAttribute("code_id", categoryDto.getCodeId());
 
     }
 

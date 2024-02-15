@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/seller")
 public class ProductscreateController {
 
-   ProductscreateService productscreateService;
+   private final ProductscreateService productscreateService;
 
     @Autowired
     public ProductscreateController(ProductscreateService productscreateService){
@@ -26,7 +26,8 @@ public class ProductscreateController {
     public String writeproducts(GoodsDto goodsDto, ItemAnnouncementDto itemAnnouncementDto){
         String a = goodsDto.getName();
         log.info("a={}",a);
-        System.out.println(goodsDto);
+
+        log.info("goodsDto={}",goodsDto);
 
         String b = itemAnnouncementDto.getItemAnn();
         System.out.println("itemAnnouncementDto = "+itemAnnouncementDto);
@@ -38,5 +39,7 @@ public class ProductscreateController {
         return "redirect:/seller/productscreate";
         //나중에 상품 등록 확인 페이지 만들고 연결하기
     }
+
+
 
 }

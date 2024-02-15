@@ -1158,6 +1158,7 @@
                                             class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                             id="prd_foodItem"
                                             maxlength="200"
+                                            required
                                     />
                                 </div>
                             </div>
@@ -1837,7 +1838,7 @@
 <%--                                                일단 값 넣어보자 --%>
                                                 <input  name="itemDcAmt"
                                                         id="dc_price"
-                                                        type="text"
+                                                        type="hidden"
                                                         class="form-control"
                                                         placeholder="할인가격"
                                                 />
@@ -1872,12 +1873,6 @@
                                                         type="text"
                                                         class="form-control"
                                                         placeholder="카테고리코드"
-                                                />
-                                                <input  name="regDt"
-                                                        id="reg_dt"
-                                                        type="hidden"
-                                                        placeholder="regDt"
-<%--                                                        value="2024-01-31 11:11:11"--%>
                                                 />
 
 <%--                                                --%>
@@ -2004,13 +1999,7 @@
     }
     document.getElementById("itemid").value = newId();
 
-     //겹치는 숫자 나오면 다시 돌리기  - 나중에 생각한다
-
-
-     //현재 날짜??
-    // document.getElementById('reg_dt').value = new Timestamp(System.currentTimeMillis());
-    // $('#reg_dt').val(new Timestamp(System.currentTimeMillis()));
-    //
+     //겹치는 숫자 나오면 다시 돌리기  - 나중에 생각할거임..
 
 
 
@@ -2069,7 +2058,6 @@
     }
 
 
-
     // 등록버튼------------------------------------------------
 
     //     '등록버튼' 값 보내기
@@ -2082,9 +2070,7 @@
             alert("저장되었습니다.");
             alert(form);
         });
-
     })
-
 //
 
 

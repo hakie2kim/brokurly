@@ -3,14 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.brokurly.repository.CategoryDao">
-    <insert id="insert">
-        INSERT INTO category_code
-            (code_id, exp)
-        VALUES (#{codeId}, #{exp})
-    </insert>
 
-<!--  카테고리 대분류 가져오기  -->
-    <select id="selectMain" resultType="CategoryDto">
+    <!--  READ  -->
+    <sql id="select">
+        SELECT *
+        FROM category_code
+    </sql>
+
+    <!--  카테고리 대분류 가져오기  -->
+    <select id="selectMain" resultType="Category">
         <![CDATA[
         SELECT code_id, exp
         FROM category_code
@@ -18,11 +19,10 @@
         ]]>
     </select>
 
-<!--    카테고리 중분류 가져오기    -->
-    <select id="selectMiddleExp" resultType="CategoryDto">
-        SELECT code_id, exp
-        FROM category_code
-        WHERE code_id LIKE '9070__'
+    <!--    카테고리 중분류 가져오기-->
+    <select id="selectMiddle" resultType="Category">
+        <include refid="select"/>
+        WHERE code_id LIKE '${testcodeId}0__'
     </select>
 
 </mapper>
