@@ -1,4 +1,4 @@
-package com.brokurly.entity;
+package com.brokurly.dto;
 
 import java.util.Date;
 import java.util.Objects;

@@ -7,7 +7,10 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@Getter @Setter @ToString @EqualsAndHashCode
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class PointLogUsageDto {
     private String orderId;
     private int pointAmt;
