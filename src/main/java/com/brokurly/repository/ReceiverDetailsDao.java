@@ -3,11 +3,15 @@ package com.brokurly.repository;
 import com.brokurly.domain.ReceiverDetails;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ReceiverDetailsDao {
-    ReceiverDetails selectByShipLocaId(String shipLocaId);
+    void insert(ReceiverDetails receiverDetails);
 
-    ReceiverDetails selectByRcvDtlId(String rcvDtlId);
+    List<ReceiverDetails> selectAll();
+
+    ReceiverDetails selectByShipLocaId(String shipLocaId);
 
     void update(ReceiverDetails receiverDetails);
 }
