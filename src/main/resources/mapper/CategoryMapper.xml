@@ -5,10 +5,6 @@
 <mapper namespace="com.brokurly.repository.CategoryDao">
 
     <!--  READ  -->
-    <sql id="select">
-        SELECT *
-        FROM category_code
-    </sql>
 
     <!--  카테고리 대분류 가져오기  -->
     <select id="selectMain" resultType="Category">
@@ -21,8 +17,9 @@
 
     <!--    카테고리 중분류 가져오기-->
     <select id="selectMiddle" resultType="Category">
-        <include refid="select"/>
-        WHERE code_id LIKE '${testcodeId}0__'
+    SELECT code_id, exp
+    FROM category_code
+    WHERE code_id LIKE '${codeId}0%'
     </select>
 
 </mapper>

@@ -33,15 +33,21 @@ public class CategoryController {
         log.info("model={}",m);
         log.info("selectMain={}", selectMain);
 
-        return "/seller/productscreate";
+        return "seller/productscreate";
     }
 
-    @PostMapping ("/ajax")
-    public void test(@RequestParam String testcodeId){
+    @GetMapping ("/ajax")
+    @ResponseBody
+    public List<CategoryDto> test(@RequestParam String codeId){
 
-        log.info("testcodeId컨트롤러임={}",testcodeId);
+        log.info("codeId컨트롤러임={}",codeId);
 
+        List<CategoryDto> selectMiddle = categoryService.readMiddle(codeId);
+        log.info("selectMiddle컨트롤러={}",selectMiddle);
 
+//        log.info("middlemodel={}",model);
+
+        return selectMiddle;
     }
 
 

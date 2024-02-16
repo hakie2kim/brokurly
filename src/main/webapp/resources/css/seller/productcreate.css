@@ -468,5 +468,14 @@ textarea {
     background-color: #003103;
     color: white;
 }
-
-
+/*검색태그*/
+.form-control1 .form-control2 .form-control3 {
+     width: 100px;
+     height: 34px;
+     padding: 4px 10px;
+     font-size: 12px;
+     line-height: 24px;
+     background-color: #f8f9fd;
+     background-image: none;
+     border: 1px solid #dbdde2;
+ }
