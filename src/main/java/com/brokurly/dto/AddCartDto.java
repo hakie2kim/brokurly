@@ -1,2 +1,17 @@
-package com.brokurly.dto;public class AddCartDto {
+package com.brokurly.dto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@ToString
+@Builder
+@EqualsAndHashCode
+@AllArgsConstructor
+public class AddCartDto {
+
+
+
+
+
 }
