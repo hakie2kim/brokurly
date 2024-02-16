@@ -16,17 +16,31 @@
         WHERE point_no = #{pointNo}
     </select>
 
+    <select id="selectExpired" resultType="Point">
+        SELECT
+    </select>
+
     <select id="countAll" resultType="int">
         SELECT count(*)
         FROM point
     </select>
 
     <!-- UPDATE -->
+    <update id="updatePointAmt">
+        UPDATE point
+        SET point_amt = point_amt + #{amt}
+    </update>
 
     <!-- DELETE -->
     <delete id="deleteAll">
         DELETE
         FROM point
+    </delete>
+
+    <delete id="deleteByPointNo">
+        DELETE
+        FROM point
+        WHERE point_no = #{pointNo}
     </delete>
 
 <!--    <select id="countUsageByCustomerAndPeriod" resultType="int">

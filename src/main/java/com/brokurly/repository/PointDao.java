@@ -13,7 +13,9 @@ public interface PointDao {
     int countAll();
 
     // UPDATE
+    int updatePointAmt(Integer amt);
 
     // DELETE
     void deleteAll();
+    int deleteByPointNo(Integer pointNo);
 }
