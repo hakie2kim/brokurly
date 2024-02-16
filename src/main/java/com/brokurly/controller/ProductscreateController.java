@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/seller")
 public class ProductscreateController {
-
    ProductscreateService productscreateService;
 
     @Autowired

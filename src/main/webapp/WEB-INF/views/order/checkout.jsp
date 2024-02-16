@@ -166,10 +166,10 @@
                     <button class="receiver-details-btn">입력</button>
                 </div>
             </c:if>
-            <c:if test="${receiverDetails != null}">
+            <c:if test="${receiverDetails != null && member != null}">
                 <div>
                     <div>${receiverDetails.rcvPlace} | ${receiverDetails.enterMthd}</div>
-                    <div>${receiverDetails.rcvName},${receiverDetails.telNo}</div>
+                    <div>${member.name},${member.telNo}</div>
                     <button class="receiver-details-btn">수정</button>
                 </div>
             </c:if>
