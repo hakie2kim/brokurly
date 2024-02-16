@@ -3,9 +3,6 @@ package com.brokurly.domain;
 import com.brokurly.dto.ReceiverDetailsChangeDto;
 import com.brokurly.dto.ReceiverDetailsDto;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-import org.intellij.lang.annotations.Pattern;
-import org.jetbrains.annotations.NotNull;
 
 @ToString
 @EqualsAndHashCode
