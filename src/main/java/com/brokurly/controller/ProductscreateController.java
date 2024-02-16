@@ -3,10 +3,12 @@ package com.brokurly.controller;
 
 import com.brokurly.dto.GoodsDto;
 import com.brokurly.dto.ItemAnnouncementDto;
+import com.brokurly.dto.SearchKeywordDto;
 import com.brokurly.service.ProductscreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/seller")
 public class ProductscreateController {
-   ProductscreateService productscreateService;
+
+   private final ProductscreateService productscreateService;
+
 
     @Autowired
     public ProductscreateController(ProductscreateService productscreateService){
@@ -22,14 +26,18 @@ public class ProductscreateController {
     }
 
     @PostMapping("/productscreate/write")
-    public String writeproducts(GoodsDto goodsDto, ItemAnnouncementDto itemAnnouncementDto){
+    public String writeproducts(GoodsDto goodsDto, ItemAnnouncementDto itemAnnouncementDto, SearchKeywordDto searchKeywordDto){
         String a = goodsDto.getName();
         log.info("a={}",a);
-        System.out.println(goodsDto);
+
+        log.info("goodsDto={}",goodsDto);
+
+        log.info("itemId={}",goodsDto.getItemId());
 
         String b = itemAnnouncementDto.getItemAnn();
         System.out.println("itemAnnouncementDto = "+itemAnnouncementDto);
 
+        log.info("searchkeyword={}",searchKeywordDto);
 
         productscreateService.write(goodsDto);
         productscreateService.writeAnnouncement(itemAnnouncementDto);
@@ -37,5 +45,7 @@ public class ProductscreateController {
         return "redirect:/seller/productscreate";
         //나중에 상품 등록 확인 페이지 만들고 연결하기
     }
+
+
 
 }

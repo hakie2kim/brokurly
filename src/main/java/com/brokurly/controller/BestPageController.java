@@ -21,7 +21,7 @@ public class BestPageController {
     @GetMapping("/header")
     public String readCategory(Model m) throws Exception {
 
-        CategoryDto categoryDto = new CategoryDto();
+//        CategoryDto categoryDto = new CategoryDto();
 
         List<CategoryDto> selectMain = categoryService.readMain();
         m.addAttribute("selectMain", selectMain);
@@ -32,7 +32,7 @@ public class BestPageController {
 
     @GetMapping("/best-page")
     public String bestpage(Model m) throws Exception {
-        CategoryDto categoryDto = new CategoryDto();
+//        CategoryDto categoryDto = new CategoryDto();
 
         List<CategoryDto> selectMain = categoryService.readMain();
         m.addAttribute("selectMain", selectMain);

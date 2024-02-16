@@ -1,9 +1,6 @@
 package com.brokurly.domain;
-
 import com.brokurly.dto.GoodsDto;
 import lombok.*;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 @ToString
@@ -15,7 +12,7 @@ public class Goods {
   private String name;
   private String exp;
   private int price;
-  private double dcRt;
+  private int dcRt;
   private int itemDcAmt;
   private String origin;
   private String pointFl;
