@@ -9,7 +9,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 public class ReceiverDetailsChangeDto {
-    private String rcvDtlId;
     private String rcvName;
     private String telNo;
     private String rcvPlace;

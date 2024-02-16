@@ -15,8 +15,244 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="<c:url value='/resources/css/member/signup.css'/>"/>
 </head>
+<style>
+    :root {
+        --main-color: #11967f;
+        --main-font: "Noto Sans KR", sans-serif;
+        --main-border-radius: 3px;
+        --main-border: 1px solid #11967f;
+    }
+    body {
+        margin: 0;
+        padding: auto;
+    }
+    section, form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    input[type="text"],
+    .register-div__btn {
+        width: 333px;
+        height: 46px;
+    }
+
+    input[type="text"] {
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: var(--main-border-radius);
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    input:focus {
+        outline: 1px solid black;
+    }
+
+    button {
+        width: 120px;
+        height: 44px;
+        border: var(--main-border);
+        border-radius: var(--main-border-radius);
+        background-color: white;
+        color: var(--main-color);
+        font-size: 14px;
+        margin-left: 10px;
+    }
+    .birth-div {
+        display: flex;
+    }
+
+    .birth-div__column {
+        width: 333px;
+        height: 46px;
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: var(--main-border-radius);
+    }
+
+    .birth-div__column > input,
+    .birth-div__column > span {
+        width: 95px;
+        height: 40px;
+        border: transparent;
+        color: rgb(102, 102, 102);
+        text-align: center;
+    }
+
+    .register-div__label {
+        display: inline-block;
+        width: 139px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .Required-entr-div {
+        width: 610px;
+        text-align: end;
+        color: rgb(102, 102, 102);
+        font-size: 12px;
+        border-bottom: 2px solid rgb(51, 51, 51);
+        padding-top: 40px;
+        padding-bottom: 10px;
+    }
+    .register-btn {
+        width: 240px;
+        height: 56px;
+        background-color: var(--main-color);
+        color: white;
+        font-size: 16px;
+
+    }
+    .agreement-div {
+        display: flex;
+        flex-direction: column;
+        /* background-color: aqua; */
+    }
+
+    .register-header {
+        font-size: 28px;
+        font-weight: 500;
+    }
+
+    .Required-entr__label {
+        color: red;
+    }
+
+    .line-div {
+        height: 100px;
+        width: 100px;
+        border: 2px solid black;
+    }
+
+    .column-div {
+        margin-top: 10px;
+    }
+
+    ::placeholder {
+        font-size: 14px;
+        padding: 0 11px 1px 15px;
+    }
+    .order-info__label {
+        font-size: 12px;
+        margin: 10px 145px 0;
+        color: #666666;
+    }
+
+    .register-div__btn {
+        margin-left: 0;
+    }
+
+    .birth-div {
+        border-bottom: 1px solid rgb(51, 51, 51);
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+
+    label {
+        font-size: 14px;
+        color: #333333;
+    }
+
+    #agreement1 ~ label {
+        font-size: 18px;
+    }
+
+    .agreement-div__column {
+        padding: 8px 0;
+    }
+
+    .agreement-label {
+        font-size: 4px;
+    }
+
+    .birth-div__column > *:focus {
+        outline: none;
+    }
+
+    .id-info-div {
+        display: flex;
+        justify-content: center;
+        padding-top: 4px;
+        font-size: 13px;
+        color: #ff0000;
+        display: none;
+    }
+
+    /* modal css start */
+    .modal {
+        position: absolute;
+        display: none;
+
+        justify-content: center;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: rgba(0, 0, 0, 0.4);
+
+        padding: 0;
+    }
+
+    .modal_content_body {
+        position: absolute;
+
+        padding: 40px;
+
+        width: 320px;
+        height: 66px;
+
+        text-align: center;
+
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+
+        top: 50%;
+
+        background-color: white;
+        transform: translateY(-50%);
+    }
+
+    .modal_alert_body {
+        position: absolute;
+
+        background-color: white;
+        padding: 0 40px;
+
+        width: 320px;
+        height: 56px;
+
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+
+        top: 60%;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .close-modal-btn {
+        width: auto;
+        font-size: 16px;
+        border: none;
+        padding: 5px 0 0 0;
+        font-weight: 600;
+        color: var(--main-color);
+        background: transparent;
+        cursor: pointer;
+    }
+
+    /* modal css end */
+</style>
 <body>
 <form id="frm" action="<c:url value="/member/signup"/>" method="POST">
     <input type="hidden" name="_method" value="POST">
@@ -98,7 +334,7 @@
           >
                 <input
                         type="text"
-                        placeholder="예: brokurly@gmail.com"
+                        placeholder="예: brokurly@kurly.com"
                         title="이 입력란을 작성하세요"
                         id="email"
                         name="email"
@@ -206,14 +442,56 @@
 <script>
     $(document).ready(function () {
         let modal = document.querySelector(".modal");
+        let openModalBtns = document.querySelectorAll(".open-modal-btn");
         let modalContent = document.querySelector("#modal_content");
         let closeModalBtn = document.querySelector(".close-modal-btn");
 
         let custId = document.querySelector("#custId");
+        let telNoBtn = document.querySelector("#telNo_btn");
+
+        // id 중복확인 버튼
+        let custIdBtn = document.querySelector("#custId_btn");
         let email = document.querySelector("#email");
 
+        // 가입하기 btn
         let regBtn = document.querySelector(".register-btn");
 
+        // [].forEach.call(openModalBtns, function (openModalBtn) {
+        //     // 하나의 클래스명으로 다른 값을 얻어 alert의 내용을 바꾸는 fun.
+        //     openModalBtn.addEventListener("click", setMessage, false);
+        // });
+
+        // btn에 따른 조건식 변경 fun.
+        function setMessage(val) {
+            let msg = "";
+            if (val == 1) {  // 아이디 중복 확인
+                if(checkId()) {  // 1. NULL , 2. LENGTH
+                    msg = "6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합";
+                    openModal(msg);
+                }
+            } else if (val == 2) {
+                if(checkEmail()){
+                    // 이메일 중복 확인
+                    msg = "이메일을 입력해주세요";
+                    openModal(msg);
+                }
+            } else if (this.value == 3){
+                // 휴대폰 인증번호 발송
+                // telNoRegExp();
+                msg = "인증번호가 발송되었습니다";
+                openModal(msg);
+            }
+
+
+        }
+
+        function checkId(){
+            return custId.value.trim() == "" || custId.value.length < 6 || 17 < custId.value.length;
+        }
+
+        function checkEmail(){
+            return email.value.trim() == "";
+        }
 
         // modal open
         function openModal(msg) {
@@ -223,6 +501,16 @@
 
         }
 
+        // function telNoRegExp(){
+        //
+        //     let regEx = /0[]{9,11}/;
+        //     let inputed = document.getElementById("telNo").value;
+        //
+        //
+        //     console.log(inputed);
+        //     console.log(regEx.test(inputed));
+        // }
+
         // modal close
         closeModalBtn.addEventListener("click", () => {
             modal.style.display = "none";
@@ -230,61 +518,16 @@
 
         });
 
-        // // 아이디 정규식
-        // function custIdRegExp(){
-        //     let regEx = /^[a-z]+[a-z0-9]{5,17}$/g;    // 영어로 시작하고 영문자숫자 조합 6자이상 16자이하
-        //     let inputed = custId.value.trim();
-        //
-        //     return !regEx.test(inputed) || !inputed;
-        // }
-        //
-        // // 이메일 정규식
-        // function emailRegExp(){
-        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
-        //     let inputed = document.querySelector("#email").value.trim();
-        //
-        //     return !regEx.test(inputed) || !inputed;
-        // }
-        //
-        //
-        // // 핸드폰 번호 정규식
-        // function telNoRegExp(){
-        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
-        //     let inputed = document.querySelector("#telNo").value.trim();
-        //
-        //     let telNo = inputed.slice(0,3)+'-'+inputed.slice(3,7)+"-"+inputed.slice(7,inputed.length);
-        //
-        //     return !regEx.test(telNo) || !telNo;
-        // }
 
-        function regExp(value){
-            let regEx = "";
-            let inputed = "";
-
-            if(value === 1){  // 아이디 정규식
-                regEx = /^[a-z]+[a-z0-9]{5,17}$/g;
-                inputed = custId.value.trim();
-            }else if(value === 2){
-                regEx = /[a-z0-9]+@gmail.com/;    // 이메일 정규식 > 추후에 메일인증을 gmail로 구현할 예정
-                inputed = document.querySelector("#email").value.trim();
-            }else if(value === 3){  // 휴대폰 번호 정규식
-                regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
-                let telNo = document.querySelector("#telNo").value.trim();
-
-                inputed = telNo.slice(0,3)+'-'+telNo.slice(3,7)+"-"+telNo.slice(7,telNo.length);
-            }
-
-            return !regEx.test(inputed) || !inputed;
-        }
-
-
-        // 아이디 ajax로 유효성 검사
-        $("#custId").keydown(function(){
+        // $(document).ready(function () {
+        // id check - length
+        custId.addEventListener("input", () => {
+            let custIdVal = $("#custId").val().trim(); // id의 길이
             let idInfoDiv =  $(".id-info-div");
 
             $.ajax({
                 success: function () {
-                    if (regExp(1)) {
+                    if (custIdVal.length < 6 || 17 < custIdVal.length) {
                         idInfoDiv.css("display", "block");
                     }else{
                         idInfoDiv.css("display","none");
@@ -293,11 +536,10 @@
             });
         });
 
-
         //    id 중복체크 btn
-        $("#custId_btn").click(function(){
-            if(regExp(1)){
-                openModal("6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합");
+        custIdBtn.addEventListener("click", () => {
+            if(checkId()){
+                setMessage(1);
                 return false;
             }else{
                 let custIdVal = $("#custId").val();
@@ -317,11 +559,10 @@
             }
         });
 
-
         // email 중복체크 btn
         $("#email_btn").click(function(){
-            if(regExp(2)){
-                openModal("이메일 형식으로 입력해 주세요");
+            if(checkEmail()){
+                setMessage(2);
                 return false;
             }else{
                 let emailVal = $("#email").val();
@@ -342,11 +583,7 @@
         });
 
         // 휴대폰번호 인증 api
-        $("#telNo_btn").click(function(){
-            if(regExp(3)){
-                // 1. 숫자아니면 버튼 활성화 안함
-                return false;
-            }else{
+        telNoBtn.addEventListener("click", () => {
             let telNoVal = $("#telNo").val(); // 휴대폰 번호
             $.ajax({
                 type : "POST",
@@ -361,10 +598,19 @@
                         // 성공시 데이터 저장
                     }
                 }
-            });     // end of ajax
-            }
+            });
         });
 
+        // function sendSignup(){
+        //     // 생년월일 합치기
+        //     let yyyy = document.querySelector("#yyyy").value;
+        //     let mm = document.querySelector("#mm").value;
+        //     let dd = document.querySelector("#dd").value;
+        //     let yyyymmdd = document.querySelector("#yyyymmdd").value;
+        //     yyyymmdd = yyyy+mm+dd;
+        //     alert("test");
+        //     return true;
+        // }
 
         regBtn.addEventListener("click", () =>{
             // 생년월일 합치기
@@ -379,6 +625,24 @@
             signupFrm.submit();
 
         });
+        // let sendMessage = function(){
+        //     let telNoVal = $("#telNo").val(); // 휴대폰 번호
+        //     alert(telNoVal);
+        //     $.ajax({
+        //         type : "POST",
+        //         url : "/sms/telNoCheck",
+        //         data : {telNo : telNoVal},
+        //         cache : false,
+        //         success : function(data) {
+        //             if (data == "err") { // 실패시
+        //                 alert("SEND ERR");
+        //             } else {
+        //                 alert("SEND OK");
+        //                 // 성공시 데이터 저장
+        //             }
+        //         }
+        //     });
+        // }
 
 
     });

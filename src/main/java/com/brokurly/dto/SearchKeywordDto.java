@@ -1,14 +1,13 @@
 package com.brokurly.dto;
-
 import lombok.*;
 
-@Setter
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class CategoryDto {
-    String codeId;
-    String exp;
+public class SearchKeywordDto {
+    private String keyword;
+    private String itemIdList;
 }
