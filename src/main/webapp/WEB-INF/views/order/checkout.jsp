@@ -6,10 +6,10 @@
     <script>
         window.onload = () => {
             // 주문 상품창 요약 & 리스트 변환 기능
-            const orderGoodsButton = document.querySelector('.info-type1-title').children[1];
+            const orderGoodsButton = document.querySelector(".info-type1-title").children[1];
             orderGoodsButton.addEventListener("click", () => {
                 let buttonText = orderGoodsButton.innerHTML;
-                if (buttonText === '⋁') {
+                if (buttonText === "⋁") {
                     orderGoodsButton.innerHTML = "&xwedge;";
                     document.getElementById("order-goods").style.display = "none";
                     document.getElementById("order-goods-list").style.display = "block";
@@ -25,9 +25,22 @@
             const locationChangeButton = document.getElementById("location-change");
             locationChangeButton.addEventListener("click", () => {
                 smallModal.style.display = "block";
-                document.body.style.overflow = 'hidden';
+                document.body.style.overflow = "hidden";
             });
-            
+
+            // 배송지 변경 모달 끄기
+            const cancelButton = document.getElementById("small-modal-cancel");
+            cancelButton.addEventListener("click", () => {
+                smallModal.style.display = "none";
+                document.body.style.removeProperty("overflow");
+            });
+
+            // 배송지 변경 리다이렉트
+            const okButton = document.getElementById("small-modal-ok");
+            okButton.addEventListener("click", () => {
+                window.location.href = '/cart';
+            });
+
             // 결제 정보 헤더에 붙이기
             window.addEventListener("scroll", () => {
                 const headerBottom = document.querySelector("header").offsetHeight;
@@ -60,7 +73,7 @@
             for (let i = 0; i < bigModal.length; i++) {
                 showModalButton[i].addEventListener("click", () => {
                     bigModal[i].style.display = "block";
-                    document.body.style.overflow = 'hidden';
+                    document.body.style.overflow = "hidden";
                 });
             }
 
@@ -69,8 +82,8 @@
             for (let i = 0; i < bigModal.length; i++) {
                 closeModalButton[i].addEventListener("click", () => {
                     bigModal[i].style.display = "none";
-                    document.body.style.removeProperty('overflow');
-                })
+                    document.body.style.removeProperty("overflow");
+                });
             }
         };
     </script>
@@ -99,16 +112,16 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div>홍길동</div>
+            <div>${member.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div>010-1234-1234</div>
+            <div>${member.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-                abc123@google.com
+                ${member.email}
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
@@ -131,9 +144,15 @@
             </div>
         </div>
         <div class="small-modal">
-            <div class="small-modal-content">
-                <div>장바구니로 이동하여
-                다른 배송지로 변경하시겠습니까?</div>
+            <div class="small-modal-border">
+                <div class="small-modal-content">
+                    <p>장바구니로 이동하여</p>
+                    <p>다른 배송지로 변경하시겠습니까?</p>
+                </div>
+                <div class="small-modal-buttons">
+                    <button id="small-modal-cancel">취소</button>
+                    <button id="small-modal-ok">확인</button>
+                </div>
             </div>
         </div>
 
@@ -147,10 +166,10 @@
                     <button class="receiver-details-btn">입력</button>
                 </div>
             </c:if>
-            <c:if test="${receiverDetails != null}">
+            <c:if test="${receiverDetails != null && member != null}">
                 <div>
                     <div>${receiverDetails.rcvPlace} | ${receiverDetails.enterMthd}</div>
-                    <div>${receiverDetails.rcvName},${receiverDetails.telNo}</div>
+                    <div>${member.name},${member.telNo}</div>
                     <button class="receiver-details-btn">수정</button>
                 </div>
             </c:if>
@@ -275,7 +294,7 @@
             </div>
             <div>
                 <div></div>
-<%--                <div>컬리카드 결제 시 최대 4,905원 추가 적립</div>--%>
+                <%--  <div>컬리카드 결제 시 최대 4,905원 추가 적립</div>  --%>
             </div>
         </div>
     </div>
