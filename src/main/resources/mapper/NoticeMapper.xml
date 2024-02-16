@@ -11,8 +11,8 @@
             (#{bno}, #{title}, #{hit}, #{content}, #{adminId}, #{notiFl}, #{pubFl}, #{regDt})
     </insert>
 
-    <select id="selectAllPages" resultType="NoticeListDto">
-        SELECT bno, title, admin_id, reg_dt
+    <select id="selectAllPages" resultType="Notice">
+        SELECT *
         FROM notice_board
         ORDER BY bno DESC, reg_dt DESC
     </select>
@@ -22,8 +22,8 @@
         FROM notice_board
     </sql>
 
-    <select id="selectBoardDetail" resultType="NoticeBoardDto">
-        SELECT title, admin_id, content, reg_dt
+    <select id="selectBoardDetail" resultType="Notice">
+        SELECT *
         FROM notice_board
         WHERE bno = #{bno}
     </select>
