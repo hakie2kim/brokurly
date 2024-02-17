@@ -3,13 +3,13 @@ package com.brokurly.service;
 import com.brokurly.domain.PointAndPointLog;
 import com.brokurly.domain.PointLog;
 import com.brokurly.dto.PointAndPointLogEarningDto;
+import com.brokurly.dto.PointLogEarningDto;
 import com.brokurly.dto.PointLogExpDto;
 import com.brokurly.dto.PointLogUsageDto;
 import com.brokurly.repository.PointLogDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +47,15 @@ public class PointLogService {
 
     public int getPointLogUsageCountByCustomerAndPeriod(String custId, Integer period) {
         return pointLogDao.countUsageByCustomerAndPeriod(custId, period);
+    }
+
+    // 총 누적 적립금액 찾기
+    public int getTotalAccumulPoints(String custId) {
+        return pointLogDao.selectEarningByCustomer(custId)
+                .stream()
+                .map(PointLog::getPointLogEarningDto)
+                .mapToInt(PointLogEarningDto::getPointAmt)
+                .sum();
     }
 
     public List<PointLogExpDto> findPointLogExpByCustomerAndPeriod(String custId, Integer period) {

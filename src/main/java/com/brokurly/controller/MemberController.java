@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
+/*@Slf4j
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -71,4 +71,4 @@ public class MemberController {
         return "index";
     }
 
-}
+}*/

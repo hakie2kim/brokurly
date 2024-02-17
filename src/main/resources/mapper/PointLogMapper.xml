@@ -45,6 +45,12 @@
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
     </select>
 
+    <select id="selectEarningByCustomer" resultType="PointLog">
+        <include refid="select"/>
+        WHERE cust_id = #{custId}
+          AND point_stat LIKE '%적립%'
+    </select>
+
     <select id="selectEarningByCustomerAndPeriod" resultType="PointAndPointLog">
         SELECT p.point_no, pl.point_amt, p.expir_dt, order_id, proc_dt, point_spec, point_stat
         FROM point_log pl

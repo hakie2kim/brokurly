@@ -29,13 +29,15 @@ public class MypageController {
 
         List<PointLogUsageDto> pointLogUsageList = pointLogService.findPointLogUsageByCustomerAndPeriod(custId, period);
         int pointLogUsageCount = pointLogService.getPointLogUsageCountByCustomerAndPeriod(custId, period);
-        int totalAvailPoints = pointService.findTotalAvailPoints(custId);
+        int totalAvailPoints = pointService.getTotalAvailPoints(custId);
+        int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
 
         model.addAttribute("type", "사용");
         model.addAttribute("period", period);
         model.addAttribute("pointLogUsageList", pointLogUsageList);
         model.addAttribute("pointLogUsageCount", pointLogUsageCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
+        model.addAttribute("totalAccumulPoints", totalAccumulPoints);
 
         log.info("{}", pointLogUsageList);
 
@@ -48,13 +50,15 @@ public class MypageController {
 
         List<PointLogExpDto> pointLogExpList = pointLogService.findPointLogExpByCustomerAndPeriod(custId, period);
         int pointLogExpCount = pointLogService.getPointLogExpCountByCustomerAndPeriod(custId, period);
-        int totalAvailPoints = pointService.findTotalAvailPoints(custId);
+        int totalAvailPoints = pointService.getTotalAvailPoints(custId);
+        int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
 
         model.addAttribute("type", "소멸");
         model.addAttribute("period", period);
         model.addAttribute("pointLogExpList", pointLogExpList);
         model.addAttribute("pointLogExpCount", pointLogExpCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
+        model.addAttribute("totalAccumulPoints", totalAccumulPoints);
 
         log.info("{}", pointLogExpCount);
 
@@ -86,13 +90,15 @@ public class MypageController {
 //        }
 
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
-        int totalAvailPoints = pointService.findTotalAvailPoints(custId);
+        int totalAvailPoints = pointService.getTotalAvailPoints(custId);
+        int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
 
         model.addAttribute("type", "적립");
         model.addAttribute("period", period);
         model.addAttribute("pointLogEarningList", pointLogEarningList);
         model.addAttribute("pointLogEarningCount", pointLogEarningCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
+        model.addAttribute("totalAccumulPoints", totalAccumulPoints);
 
         return "/mypage/point-earning-log";
     }

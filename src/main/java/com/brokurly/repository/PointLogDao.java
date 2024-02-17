@@ -20,6 +20,7 @@ public interface PointLogDao {
     int countUsageByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     List<PointLog> selectExpByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countExpByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
+    List<PointLog> selectEarningByCustomer(String custId);
     List<PointAndPointLog> selectEarningByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countEarningByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countAll();

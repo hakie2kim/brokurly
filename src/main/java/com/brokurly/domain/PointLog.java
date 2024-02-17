@@ -1,5 +1,6 @@
 package com.brokurly.domain;
 
+import com.brokurly.dto.PointLogEarningDto;
 import com.brokurly.dto.PointLogExpDto;
 import com.brokurly.dto.PointLogUsageDto;
 import lombok.*;
@@ -53,6 +54,13 @@ public class PointLog {
         this.pointSpec = pointLogUsageDto.getPointSpec();
         this.pointStat = pointLogUsageDto.getPointStat();
     }*/
+
+    public PointLogEarningDto getPointLogEarningDto() {
+        return PointLogEarningDto.builder()
+                .pointAmt(pointAmt)
+                .pointStat(pointStat)
+                .build();
+    }
 
     public PointLogExpDto getPointLogExpDto() {
         return PointLogExpDto.builder()

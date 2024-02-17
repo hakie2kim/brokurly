@@ -10,7 +10,7 @@
     </insert>
 
     <!-- READ -->
-    <select id="selectByCustId" resultType="Point">
+    <select id="selectByCustomer" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
         WHERE cust_id = #{custId}
@@ -20,6 +20,12 @@
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
         WHERE point_no = #{pointNo}
+    </select>
+
+    <select id="selectToBeExpired" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE expir_dt BETWEEN date_sub(now(), interval 1 month) AND now()
     </select>
 
     <select id="selectExpired" resultType="Point">

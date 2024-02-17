@@ -11,7 +11,7 @@ public interface PointDao {
     int insert(Point point);
 
     // READ
-    List<Point> selectByCustId(String custId);
+    List<Point> selectByCustomer(String custId);
     Point selectByPointNo(Integer pointNo);
     List<Point> selectExpired();
     int countAll();

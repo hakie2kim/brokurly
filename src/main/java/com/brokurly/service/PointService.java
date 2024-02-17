@@ -3,7 +3,6 @@ package com.brokurly.service;
 import com.brokurly.domain.Point;
 import com.brokurly.dto.PointDto;
 import com.brokurly.repository.PointDao;
-import com.brokurly.repository.PointLogDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,8 @@ public class PointService {
     private final PointDao pointDao;
 
     // 총 적립금 구하기
-    public int findTotalAvailPoints(String custId) {
-        return pointDao.selectByCustId(custId)
+    public int getTotalAvailPoints(String custId) {
+        return pointDao.selectByCustomer(custId)
                 .stream()
                 .map(Point::getPointDto)
                 .mapToInt(PointDto::getPointAmt)
