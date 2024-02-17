@@ -72,7 +72,8 @@
                         </div>
                         <div class="price">
                             <div class="wrapper">
-                                <span class="amount">0</span><span class="won">원</span>
+                                <span class="amount"><fmt:formatNumber pattern="#,###"
+                                                                       value="${totalAvailPoints}"/></span><span class="won">원</span>
                             </div>
                         </div>
                         <div class="details">

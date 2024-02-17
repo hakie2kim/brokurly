@@ -10,6 +10,12 @@
     </insert>
 
     <!-- READ -->
+    <select id="selectByCustId" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE cust_id = #{custId}
+    </select>
+
     <select id="selectByPointNo" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
@@ -17,7 +23,9 @@
     </select>
 
     <select id="selectExpired" resultType="Point">
-        SELECT
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE expir_dt &lt; now()
     </select>
 
     <select id="countAll" resultType="int">

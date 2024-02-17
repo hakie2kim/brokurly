@@ -12,6 +12,18 @@ import org.springframework.stereotype.Service;
 public class PointService {
     private final PointDao pointDao;
 
+    // 총 적립금 구하기
+    public int findTotalAvailPoints(String custId) {
+        return pointDao.selectByCustId(custId)
+                .stream()
+                .map(Point::getPointDto)
+                .mapToInt(PointDto::getPointAmt)
+                .sum();
+    }
+
+    // (일반) 적립
+
+
     // CREATE
 
     // READ
