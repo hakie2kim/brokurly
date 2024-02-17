@@ -1,4 +1,5 @@
 package com.brokurly.dto;
+
 import lombok.*;
 
 @Getter
@@ -7,7 +8,9 @@ import lombok.*;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class SearchKeywordDto {
-    private String keyword;
-    private String itemIdList;
+public class GoodsImageDto {
+    private String img;
+    private String repImgFl;
+    private String itemId;
+
 }

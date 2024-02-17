@@ -1,9 +1,6 @@
 package com.brokurly.domain;
-
 import com.brokurly.dto.GoodsDto;
 import lombok.*;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 @ToString
