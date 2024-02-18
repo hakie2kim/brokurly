@@ -1,22 +1,35 @@
 package com.brokurly.service;
 
-import com.brokurly.entity.NoticeBoardDto;
-import com.brokurly.entity.NoticeListDto;
+import com.brokurly.domain.Notice;
+import com.brokurly.dto.NoticeBoardDto;
+import com.brokurly.dto.NoticeListDto;
+import com.brokurly.repository.NoticeBoardDao;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Map;
-
+@Slf4j
 @Service
-public interface NoticeService {
+@RequiredArgsConstructor
+public class NoticeService {
+    private final NoticeBoardDao noticeBoardDao;
 
-//    noticelist 띄우기
-//    noticeboard 띄우기
-    List<NoticeListDto> getList() throws Exception;
+    //  스트림 사용하면 간편하게 할 수 있다.
+    public List<NoticeListDto> getList() {
+        List<Notice> noticeList = noticeBoardDao.selectAllPages();
+        List<NoticeListDto> noticeListDtoList = new ArrayList<>();
+        for (Notice notice : noticeList) {
+            noticeListDtoList.add(notice.getNoticeListDto());
+        }
+        return noticeListDtoList;
+    }
 
-    NoticeListDto read(Integer bno) throws Exception;
+    public NoticeBoardDto getBoard(int bno) {
+        Notice notice = noticeBoardDao.selectBoardDetail(bno);
+        return notice.getNoticeBoardDto();
+    }
 
-    List<NoticeListDto> getPage(Map map) throws Exception;
-    NoticeBoardDto getBoard(int bno) throws Exception;
 }

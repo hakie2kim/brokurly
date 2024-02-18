@@ -1,10 +1,12 @@
-package com.brokurly.entity;
+package com.brokurly.dto;
 
 import lombok.*;
 
-import java.util.Date;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NoticeListDto {
     private int bno;
     private String title;

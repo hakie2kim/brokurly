@@ -18,12 +18,15 @@
         <typeAlias type="com.brokurly.dto.PointLogUsageDto" alias="PointLogUsageDto"/>
         <typeAlias type="com.brokurly.dto.PointLogEarningDto" alias="PointLogEarningDto"/>
         <typeAlias type="com.brokurly.domain.Point" alias="Point"/>
-        <typeAlias type="com.brokurly.dto.CategoryDto" alias="CategoryDto"/>
+        <typeAlias type="com.brokurly.domain.Category" alias="Category"/>
         <typeAlias type="com.brokurly.domain.Cart" alias="Cart"/>
         <typeAlias type="com.brokurly.domain.Goods" alias="Goods"/>
-        <typeAlias type="com.brokurly.entity.NoticeListDto" alias="NoticeListDto"/>
-        <typeAlias type="com.brokurly.entity.NoticeBoardDto" alias="NoticeBoardDto"/>
-        <typeAlias type="com.brokurly.entity.FAQListDto" alias="FAQListDto"/>
+        <typeAlias type="com.brokurly.dto.NoticeListDto" alias="NoticeListDto"/>
+        <typeAlias type="com.brokurly.dto.NoticeBoardDto" alias="NoticeBoardDto"/>
+        <typeAlias type="com.brokurly.dto.FAQListDto" alias="FAQListDto"/>
+        <typeAlias type="com.brokurly.domain.Notice" alias="Notice"/>
+        <typeAlias type="com.brokurly.domain.FAQBoard" alias="FAQBoard"/>
+        <typeAlias type="com.brokurly.domain.FAQCate" alias="FAQCate"/>
         <typeAlias type="com.brokurly.domain.ItemAnnouncement" alias="ItemAnnouncement"/>
     </typeAliases>
 </configuration>

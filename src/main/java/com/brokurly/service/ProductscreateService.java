@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductscreateService {
 
-    private ProductscreateDao productscreateDao;
+    private final ProductscreateDao productscreateDao;
 
     //생성자 추가해서 주입받기
     @Autowired

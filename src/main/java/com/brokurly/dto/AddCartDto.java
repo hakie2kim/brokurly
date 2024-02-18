@@ -2,13 +2,16 @@ package com.brokurly.dto;
 
 import lombok.*;
 
-@Setter
 @Getter
+@Setter
 @ToString
-@EqualsAndHashCode
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
-public class CategoryDto {
-    String codeId;
-    String exp;
+public class AddCartDto {
+
+
+
+
+
 }

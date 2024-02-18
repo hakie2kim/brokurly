@@ -289,7 +289,7 @@
                         </g></svg                ></a>
                 </li>
                 <li>
-                    <a class="css-g4g0eu ecbxmj0" href="/board/faq"
+                    <a class="css-g4g0eu ecbxmj0" href="/board/faqboard"
                     >자주하는 질문<svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="19"

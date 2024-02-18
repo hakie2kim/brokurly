@@ -16,7 +16,7 @@ public class GoodsDto {
   private String name;
   private String exp;
   private int price;
-  private double dcRt;
+  private int dcRt;
   private int itemDcAmt;
   private String origin;
   private String pointFl;
@@ -35,4 +35,6 @@ public class GoodsDto {
   private int sellCnt;
   private int revCnt;
   private String stdySellerFl;
+
+
 }
