@@ -25,7 +25,7 @@ public class OrderController {
     public String showCheckout(Model model, HttpSession session) {
 //        String shipLocaId = (String) session.getAttribute("shipLocaId");
         // 임시 데이터 삽입
-        ReceiverDetailsDto receiverDetails = receiverDetailsService.findReceiverDetails("112");
+        ReceiverDetailsDto receiverDetails = receiverDetailsService.findReceiverDetails("124");
         if (receiverDetails != null)
             session.setAttribute("receiverDetails", receiverDetails);
 

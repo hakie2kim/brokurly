@@ -19,7 +19,7 @@ public class ReceiverDetails {
     private String placeExp;
     private String msgTime;
 
-    public ReceiverDetailsDto makeFullDto() {
+    public ReceiverDetailsDto toResponseDto() {
         return ReceiverDetailsDto.builder()
                 .rcvDtlId(rcvDtlId)
                 .shipLocaId(shipLocaId)

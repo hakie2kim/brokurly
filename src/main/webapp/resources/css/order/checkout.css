@@ -205,8 +205,9 @@ h2 {
     border-radius: 12px;
     background-color: #fff;
     border: 0;
-    font-weight: bold;
-    color: rgb(95, 0, 128);
+    font-size: 16px;
+    font-weight: 600;
+    color: #11967f;
 }
 
 .small-modal-buttons button:hover {

@@ -7,11 +7,15 @@ import java.util.List;
 
 @Mapper
 public interface ReceiverDetailsDao {
-    void insert(ReceiverDetails receiverDetails);
+    int insert(ReceiverDetails receiverDetails);
 
     List<ReceiverDetails> selectAll();
 
     ReceiverDetails selectByShipLocaId(String shipLocaId);
 
-    void update(ReceiverDetails receiverDetails);
+    ReceiverDetails selectByRcvDtlId(String rcvDtlId);
+
+    int update(ReceiverDetails receiverDetails);
+
+    int deleteByRcvDtlId(String rcvDtlId);
 }

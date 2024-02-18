@@ -46,5 +46,9 @@
     </update>
 
     <!-- DELETE -->
+    <delete id="deleteByRcvDtlId">
+        DELETE FROM brokurly.receiver_details
+        WHERE rcv_dtl_id = #{rcvDtlId}
+    </delete>
 
 </mapper>
