@@ -156,7 +156,11 @@ label {
     outline: none;
 }
 
-.id-info-div {
+.id-info-div,
+.name-info-div,
+.email-info-div,
+.email-infoSec-div,
+.telNo-info-div{
     display: flex;
     justify-content: center;
     padding-top: 4px;
