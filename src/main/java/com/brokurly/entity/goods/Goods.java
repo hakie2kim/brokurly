@@ -5,6 +5,7 @@ import lombok.*;
 import java.util.Date;
 
 @ToString
+@Builder
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,29 +37,26 @@ public class Goods {
 
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
-        .itemId(itemId)
-        .name(name)
-        .exp(exp)
-        .price(price)
-        .dcRt(dcRt)
-        .itemDcAmt(itemDcAmt)
-        .origin(origin)
-        .pointFl(pointFl)
-        .cpnElgFl(cpnElgFl)
-        .shipType(shipType)
-        .sellerName(sellerName)
-        .pkgType(pkgType)
-        .capa(capa)
-        .sellUnit(sellUnit)
-        .adultVerifFl(adultVerifFl)
-        .cateCode(cateCode)
-        .itemQty(itemQty)
-        .wishCnt(wishCnt)
-        .bsnsNo(bsnsNo)
-        .itemSpec(itemSpec)
-        .sellCnt(sellCnt)
-        .revCnt(revCnt)
-        .stdySellerFl(stdySellerFl).build();
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .stdySellerFl(stdySellerFl).build();
   }
 
   public GoodsForCartDto toGoodsForCartDto() {
@@ -88,11 +86,8 @@ public class Goods {
     this.adultVerifFl = goodsDto.getAdultVerifFl();
     this.cateCode = goodsDto.getCateCode();
     this.itemQty = goodsDto.getItemQty();
-    this.wishCnt = goodsDto.getWishCnt();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.sellCnt = goodsDto.getSellCnt();
-    this.revCnt = goodsDto.getRevCnt();
     this.stdySellerFl = goodsDto.getStdySellerFl();
   }
 }

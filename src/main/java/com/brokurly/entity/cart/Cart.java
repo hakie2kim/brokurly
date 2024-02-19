@@ -5,6 +5,7 @@ import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
 
 @Getter
+@Builder
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor

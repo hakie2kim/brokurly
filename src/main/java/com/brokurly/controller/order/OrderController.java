@@ -29,9 +29,6 @@ public class OrderController {
         if (receiverDetails != null)
             session.setAttribute("receiverDetails", receiverDetails);
 
-        member.setName(receiverDetails.getRcvName());
-        member.setTelNo(StringFormatUtils.formatPhoneNumber(receiverDetails.getTelNo()));
-        member.setEmail("abc@naver.com");
 
 //        model.addAttribute("member", session.getAttribute("member"));
 

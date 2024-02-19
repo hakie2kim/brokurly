@@ -8,7 +8,6 @@
     </settings>
     <typeAliases>
         <typeAlias type="com.brokurly.entity.member.Member" alias="Member"/>
-        <typeAlias type="com.brokurly.entity.member.MemberAndSignup" alias="MemberAndSignup"/>
         <typeAlias type="com.brokurly.entity.order.Order" alias="Order"/>
         <typeAlias type="com.brokurly.entity.order.Payment" alias="Payment"/>
         <typeAlias type="com.brokurly.entity.order.OrderAndPayment" alias="OrderAndPayment"/>
@@ -28,5 +27,6 @@
         <typeAlias type="com.brokurly.entity.board.FAQBoard" alias="FAQBoard"/>
         <typeAlias type="com.brokurly.entity.board.FAQCate" alias="FAQCate"/>
         <typeAlias type="com.brokurly.entity.goods.ItemAnnouncement" alias="ItemAnnouncement"/>
+        <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
     </typeAliases>
 </configuration>

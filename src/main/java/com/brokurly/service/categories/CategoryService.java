@@ -27,7 +27,7 @@ public class CategoryService {
     @Transactional
     public List<CategoryDto> readMain() {
         //domain list 전체 가져오기
-        List<Category> categoryList = categoryDao.selectMain();
+        List<Category> categoryList = categoryDao.selectPrimary();
 
         //비어있는 dtoList 만들기
         List<CategoryDto> categoryDtoList = new ArrayList<>();
