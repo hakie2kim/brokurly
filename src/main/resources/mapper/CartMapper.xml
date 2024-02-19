@@ -22,6 +22,11 @@
         WHERE cust_id = #{custId}
     </select>
 
+    <select id="selectByItemId" resultType="Cart">
+        <include refid="select"/>
+        WHERE item_id = #{itemId}
+    </select>
+
     <!-- UPDATE -->
     <update id="update">
         UPDATE cart
@@ -30,13 +35,21 @@
         AND item_id = #{itemId}
     </update>
 
+
     <!-- DELETE -->
     <!--고객 아이디랑 아이탬아이디 같을때만 삭제되게 -->
-    <delete id="delete">
+    <delete id="deleteOneItem">
         DELETE FROM cart
         WHERE item_id = #{itemId}
         AND cust_id = #{custId}
     </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM cart
+        WHERE cust_id = #{custId}
+    </delete>
+
+
 
 
 

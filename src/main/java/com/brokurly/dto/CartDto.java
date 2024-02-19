@@ -11,7 +11,6 @@ import lombok.*;
 @AllArgsConstructor
 public class CartDto {
   private String itemId;
-  private String custId;
   private int itemCnt;  //카트에 담긴 상품 개수
 
   //상품테이블
@@ -20,7 +19,4 @@ public class CartDto {
   private String shipType;  //샛별배송여부
   private String pkgType;   //포장타입
   private int disPrice; //상품 할인된 가격
-
-
 }
-

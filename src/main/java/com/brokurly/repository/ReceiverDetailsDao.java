@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface ReceiverDetailsDao {
-    void insert(ReceiverDetails receiverDetails);
+    int insert(ReceiverDetails receiverDetails);
 
     List<ReceiverDetails> selectAll();
 
