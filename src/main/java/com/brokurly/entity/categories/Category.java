@@ -4,8 +4,10 @@ import com.brokurly.dto.categories.CategoryDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
+@ToString
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

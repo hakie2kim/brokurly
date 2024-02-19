@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/seller/productcreate.css'/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/seller/productsCreate.css'/>"/>
 
     <title>Title</title>
 
@@ -236,7 +236,7 @@
                                                         class="seller-input-wrap"
                                                         style=""
                                                 >
-                                                    <input name="dcRt1"
+                                                    <input name="dcRt"
                                                            class="form-control ng-pristine ng-untouched ng-empty ng-valid-min ng-valid-max ng-valid-pattern ng-valid-minlength ng-valid-maxlength ng-valid ng-valid-required"
                                                            id="prd_sale"
                                                            placeholder="판매가에서"
@@ -247,7 +247,7 @@
                                                            onkeyup="ShowPrice()"
                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                     />
-                                                    <input name="dcRt"
+                                                    <input name="dcRt1"
                                                            type="hidden">
                                                 </div>
                                                 <!----><!---->
@@ -1826,23 +1826,27 @@
                                                 <div
                                                         class="selectize-input items not-full ng-valid ng-pristine"
                                                 >
-                                                    <input
+                                                    <input  name="keyword"
                                                             type="text"
                                                             class="form-control1"
                                                             placeholder="태그1"
                                                     />
-                                                    <input
+                                                    <input name="itemIdList"
+                                                           class="itemid"
+                                                            type="hidden"
+                                                    >
+                                                    <input  name="keyword"
                                                             type="text"
                                                             class="form-control2"
                                                             placeholder="태그2"
                                                     />
-                                                    <input
+                                                    <input  name="keyword"
                                                             type="text"
                                                             class="form-control3"
                                                             placeholder="태그3"
                                                     />
 
-                                                    <%--                                                일단 값 넣어보자 --%>
+                                                    <%--  일단 값 넣어보자  --%>
                                                     <input name="itemDcAmt"
                                                            id="dc_price"
                                                            type="hidden"
@@ -1942,7 +1946,6 @@
                     "codeId": codeId
                 },
                 success: function (list) {
-                    // person2 = JSON.parse(result);
                     const $middledata = $("#middledata");
                     $.each(list, function (i, data) {
                         let li = document.createElement('li');
@@ -1956,7 +1959,6 @@
                 error: function (request, error) {
                     alert("error");
                     alert(this.data)
-                    // console.log(i);
 
                     alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
                 },
@@ -1986,7 +1988,7 @@
         var originPrice = document.querySelector("#prd_price").value;
         var rate = document.querySelector("#prd_sale").value;
 
-        var savePrice = originPrice * (rate / 100);
+        var savePrice = Math.floor(originPrice * (rate / 100));
         var resultPrice = originPrice - savePrice;
         document.querySelector("#showResult").innerHTML = resultPrice + "원 (" + savePrice + " 원 할인)"
         document.querySelector("#dc_price").value = savePrice
@@ -2007,6 +2009,7 @@
         // 1초=1000밀리초
     }
     document.getElementById("itemid").value = newId();
+    document.getElementsByClassName("itemid").value = newId();
     // console.log(document.getElementById("itemid").value);
 
     // 이미지------------------------------------------------
@@ -2070,7 +2073,7 @@
     $(document).ready(function () { //main()
         $('#writeBtn').on("click", function () {
             let form = $('#forma');
-            form.attr("action", "<c:url value='/seller/productscreate/write'/>");
+            form.attr("action", "<c:url value='/seller/productsCreate/write'/>");
             form.attr("method", "post");
             form.submit();
             alert("저장되었습니다.");
