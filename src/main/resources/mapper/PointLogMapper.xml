@@ -4,16 +4,20 @@
 
 <mapper namespace="com.brokurly.repository.PointLogDao">
     <!-- CREATE -->
-    <insert id="insert" useGeneratedKeys="true" keyProperty="pointNo">
+    <insert id="insert" parameterType="PointLog" useGeneratedKeys="true" keyProperty="pointNo">
         INSERT INTO point_log (point_no, order_id, cust_id, point_amt, proc_dt, point_spec, point_stat)
-        VALUES (#{pointNo}, #{orderId}, #{custId}, #{pointAmt}, #{procDt}, #{pointSpec}, #{pointStat})
+        VALUES (#{pointNo}, #{orderId}, #{custId}, #{pointAmt}, DEFAULT, #{pointSpec}, #{pointStat})
     </insert>
 
     <!-- READ -->
     <sql id="select">
-        SELECT order_id, point_amt, proc_dt, point_spec, point_stat
+        SELECT point_no, order_id, cust_id, point_amt, proc_dt, point_spec, point_stat
         FROM point_log
     </sql>
+
+    <select id="selectAll" resultType="PointLog">
+        <include refid="select"/>
+    </select>
 
     <select id="selectUsageByCustomerAndPeriod" resultType="PointLog">
         <include refid="select"/>

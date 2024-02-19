@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.Date;
 
+@Getter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -24,10 +25,10 @@ public class Point {
                 .build();
     }
 
-    /*public void setPointDto(PointDto pointDto) {
+    public void setPointDto(PointDto pointDto) {
         this.pointNo = pointDto.getPointNo();
         this.custId = pointDto.getCustId();
         this.pointAmt = pointDto.getPointAmt();
         this.expirDt = pointDto.getExpirDt();
-    }*/
+    }
 }

@@ -16,6 +16,7 @@ public interface PointLogDao {
     int insert(PointLog pointLog);
 
     // READ
+    List<PointLog> selectAll();
     List<PointLog> selectUsageByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countUsageByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     List<PointLog> selectExpByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);

@@ -10,6 +10,13 @@
     </insert>
 
     <!-- READ -->
+    <select id="selectByExpirDt" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE cust_id = #{custId}
+        ORDER BY expir_dt
+    </select>
+
     <select id="selectByCustomer" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
@@ -40,9 +47,12 @@
     </select>
 
     <!-- UPDATE -->
-    <update id="updatePointAmt">
+    <update id="updatePointAmtByPointNo">
         UPDATE point
         SET point_amt = point_amt + #{amt}
+        WHERE point_no = #{pointNo}
+        ORDER BY expir_dt
+        LIMIT 1
     </update>
 
     <!-- DELETE -->

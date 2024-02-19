@@ -1,12 +1,10 @@
 package com.brokurly.domain;
 
-import com.brokurly.dto.PointLogEarningDto;
-import com.brokurly.dto.PointLogExpDto;
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.dto.*;
 import lombok.*;
 
 import java.util.Date;
-
+@Getter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -35,6 +33,44 @@ public class PointLog {
         this.procDt = procDt;
         this.pointSpec = pointSpec;
         this.pointStat = pointStat;
+    }
+
+    public PointLogRecordWithPointNoDto getPointLogRecordWithPointNoDto() {
+        return PointLogRecordWithPointNoDto.builder()
+                .pointNo(pointNo)
+                .orderId(orderId)
+                .custId(custId)
+                .pointAmt(pointAmt)
+                .pointSpec(pointSpec)
+                .pointStat(pointStat)
+                .build();
+    }
+
+    public void setPointLogRecordWithPointNoDto(PointLogRecordWithPointNoDto pointLogRecordWithPointNoDto) {
+        this.pointNo = pointLogRecordWithPointNoDto.getPointNo();
+        this.orderId = pointLogRecordWithPointNoDto.getOrderId();
+        this.custId = pointLogRecordWithPointNoDto.getCustId();
+        this.pointAmt = pointLogRecordWithPointNoDto.getPointAmt();
+        this.pointSpec = pointLogRecordWithPointNoDto.getPointSpec();
+        this.pointStat = pointLogRecordWithPointNoDto.getPointStat();
+    }
+
+    public PointLogRecordWithoutPointNoDto getPointLogRecordWithoutPointNoDto() {
+        return PointLogRecordWithoutPointNoDto.builder()
+                .orderId(orderId)
+                .custId(custId)
+                .pointAmt(pointAmt)
+                .pointSpec(pointSpec)
+                .pointStat(pointStat)
+                .build();
+    }
+
+    public void setPointLogRecordWithoutPointNoDto(PointLogRecordWithoutPointNoDto pointLogRecordWithoutPointNoDto) {
+        this.orderId = pointLogRecordWithoutPointNoDto.getOrderId();
+        this.custId = pointLogRecordWithoutPointNoDto.getCustId();
+        this.pointAmt = pointLogRecordWithoutPointNoDto.getPointAmt();
+        this.pointSpec = pointLogRecordWithoutPointNoDto.getPointSpec();
+        this.pointStat = pointLogRecordWithoutPointNoDto.getPointStat();
     }
 
     public PointLogUsageDto getPointLogUsageDto() {
