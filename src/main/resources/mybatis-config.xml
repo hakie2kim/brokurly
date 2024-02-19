@@ -27,6 +27,7 @@
         <typeAlias type="com.brokurly.domain.Notice" alias="Notice"/>
         <typeAlias type="com.brokurly.domain.FAQBoard" alias="FAQBoard"/>
         <typeAlias type="com.brokurly.domain.FAQCate" alias="FAQCate"/>
-        <typeAlias type="com.brokurly.domain.ItemAnnouncement" alias="ItemAnnouncement"/>
+        <typeAlias type="com.brokurly.domain.GoodsAnnouncement" alias="GoodsAnnouncement"/>
+        <typeAlias type="com.brokurly.domain.SearchKeyword" alias="SearchKeyword"/>
     </typeAliases>
 </configuration>

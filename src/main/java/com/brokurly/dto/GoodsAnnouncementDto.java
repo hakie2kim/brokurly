@@ -1,5 +1,6 @@
 package com.brokurly.dto;
 
+
 import lombok.*;
 
 @Getter
@@ -9,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class GoodsAnnouncementDto {
-  private String itemId;
-  private String itemAnnCate;
-  private String itemAnn;
+    private String itemId;
+    private String itemAnnCate;
+    private String itemAnn;
 }

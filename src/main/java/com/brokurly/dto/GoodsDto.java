@@ -29,10 +29,7 @@ public class GoodsDto {
   private String adultVerifFl;
   private String cateCode;
   private int itemQty;
-  private int wishCnt;
   private String bsnsNo;
   private String itemSpec;
-  private int sellCnt;
-  private int revCnt;
   private String stdySellerFl;
 }

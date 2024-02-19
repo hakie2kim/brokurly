@@ -4,10 +4,18 @@
 
 <mapper namespace="com.brokurly.repository.CategoryDao">
 
+    <!--  CREATE  -->
+    <insert id="insertCategory">
+        INSERT INTO category_code
+               (code_id, exp)
+        VALUES (#{codeId},#{exp})
+    </insert>
+
+
     <!--  READ  -->
 
     <!--  카테고리 대분류 가져오기  -->
-    <select id="selectMain" resultType="Category">
+    <select id="selectPrimary" resultType="Category">
         <![CDATA[
         SELECT code_id, exp
         FROM category_code
@@ -21,5 +29,25 @@
     FROM category_code
     WHERE code_id LIKE '${codeId}0%'
     </select>
+
+
+    <!--  UPDATE  -->
+    <update id="update">
+        UPDATE category_code
+        SET code_id = #{codeId}
+            , exp = #{exp}
+        WHERE code_id = #{codeId}
+    </update>
+
+
+    <!--  DELETE  -->
+    <delete id="delete">
+        DELETE FROM category_code
+        WHERE code_id = #{codeId}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM category_code
+    </delete>
 
 </mapper>

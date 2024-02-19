@@ -52,11 +52,8 @@ public class Goods {
             .adultVerifFl(adultVerifFl)
             .cateCode(cateCode)
             .itemQty(itemQty)
-            .wishCnt(wishCnt)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .sellCnt(sellCnt)
-            .revCnt(revCnt)
             .stdySellerFl(stdySellerFl).build();
   }
 
@@ -78,13 +75,9 @@ public class Goods {
     this.adultVerifFl = goodsDto.getAdultVerifFl();
     this.cateCode = goodsDto.getCateCode();
     this.itemQty = goodsDto.getItemQty();
-    this.wishCnt = goodsDto.getWishCnt();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.sellCnt = goodsDto.getSellCnt();
-    this.revCnt = goodsDto.getRevCnt();
     this.stdySellerFl = goodsDto.getStdySellerFl();
-
 
   }
 

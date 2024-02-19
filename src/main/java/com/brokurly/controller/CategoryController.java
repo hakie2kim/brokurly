@@ -25,7 +25,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/productscreate")
+    @GetMapping("/productsCreate")
     public String readCategory(Model m) throws Exception {
 
         List<CategoryDto> selectMain = categoryService.readMain();
@@ -33,7 +33,7 @@ public class CategoryController {
         log.info("model={}",m);
         log.info("selectMain={}", selectMain);
 
-        return "seller/productscreate";
+        return "seller/productsCreate";
     }
 
     @GetMapping ("/ajax")
