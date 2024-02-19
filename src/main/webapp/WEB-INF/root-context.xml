@@ -5,10 +5,10 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.129.125:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>
-<!--        <property name="url" value="jdbc:mysql://localhost:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>-->
-        <property name="username" value="brokurly"/>
-<!--        <property name="username" value="aaetom"/>-->
+<!--        <property name="url" value="jdbc:mysql://192.168.129.107:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>-->
+        <property name="url" value="jdbc:mysql://localhost:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>
+<!--        <property name="username" value="brokurly"/>-->
+        <property name="username" value="root"/>
         <property name="password" value="1234"/>
     </bean>
 
@@ -32,11 +32,11 @@
     </bean>
 
     <!--  Validation 관련 Bean 추가  -->
-    <!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+        <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
-    <!--    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
-    <!--        <property name="validator" ref="validator"/>-->
-    <!--    </bean>-->
+        <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">
+            <property name="validator" ref="validator"/>
+        </bean>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8"/>

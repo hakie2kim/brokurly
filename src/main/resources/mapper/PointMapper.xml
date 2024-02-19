@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.PointDao">
+<mapper namespace="com.brokurly.repository.mypage.PointDao">
     <!-- READ -->
     <select id="selectByPointNo" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt

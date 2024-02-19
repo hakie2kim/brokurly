@@ -11,98 +11,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/order/receiver-details.css'/>"/>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-        window.onload = () => {
-            // 배송 요청사항 주문자 정보 불러오기 기능
-            $(".sameCheck input").on("change", function (e) {
-                if (e.target.checked) {
-                    $("#receiver-name").val("<c:out value='${member.name}'/>");
-                    $("#receiver-phone").val("<c:out value='${member.telNo}'/>");
-                } else {
-                    $("#receiver-name").val("");
-                    $("#receiver-phone").val("");
-                }
-            });
-
-            // 받으실 장소 선택 시 다른 form 숨기기
-            const $doorRadioList = $("#door-radio-list");
-            const $etcRadioList = $("#etc-radio-list");
-
-            if ($("input[name=rcvPlace]:checked").val() === "문 앞")
-                showDoorRadioList();
-            else
-                showEtcRadioList();
-
-
-            $("#front-door").click(showDoorRadioList);
-            $("#etc-place").click(showEtcRadioList);
-
-            function showDoorRadioList() {
-                $doorRadioList.show();
-                $etcRadioList.hide();
-            }
-
-            function showEtcRadioList() {
-                $doorRadioList.hide();
-                $etcRadioList.show();
-            }
-
-            const $passwordText = $("#password-text"); // 공동현관 비밀번호 상세
-            const $doorPasswordGuide = $(".door-password-guide"); // 공동현관 비밀번호 입력 가이드 상단
-            const $doorPwdGuideContent = $(".door-password-guide-content"); // 공동현관 비밀번호 입력 가이드 하단
-            const $showHideButton = $(".show-hide-button"); // 공동현관 비밀번호 입력 가이드 여닫기 버튼
-            const $securityCallTextarea = $(".security-call-textarea"); // 경비실 호출 상세
-            const $doorEtcTextarea = $(".door-etc-textarea"); // 기타 상세
-            // &xwedge; -> 위 화살표
-            // &xvee; -> 아래 화살표
-            $("#password-radio").click(() => {
-                if ($doorPwdGuideContent.css("display") !== "block") {
-                    $showHideButton.click();
-                    $showHideButton.html("&xwedge;");
-                }
-                $doorPasswordGuide.css("display", "flex");
-                $passwordText.show();
-                $doorPwdGuideContent.show();
-                $securityCallTextarea.hide();
-                $doorEtcTextarea.hide();
-            });
-
-            // 공동현관 비밀번호 입력 가이드 창 보이기/숨기기 기능
-            $showHideButton.click(() => {
-                if ($showHideButton.html() === "⋁") {
-                    $showHideButton.html("&xwedge;");
-                    $doorPwdGuideContent.show();
-                } else {
-                    $showHideButton.html("&xvee;");
-                    $doorPwdGuideContent.hide();
-                }
-            });
-
-            $("#free-entry-radio").click(() => {
-                $passwordText.hide();
-                $doorPasswordGuide.hide();
-                $doorPwdGuideContent.hide();
-                $securityCallTextarea.hide();
-                $doorEtcTextarea.hide();
-            })
-
-            $("#security-call-radio").click(() => {
-                $passwordText.hide();
-                $doorPasswordGuide.hide();
-                $doorPwdGuideContent.hide();
-                $securityCallTextarea.show();
-                $doorEtcTextarea.hide();
-            });
-
-            $("#door-etc-radio").click(() => {
-                $passwordText.hide();
-                $doorPasswordGuide.hide();
-                $doorPwdGuideContent.hide();
-                $securityCallTextarea.hide();
-                $doorEtcTextarea.show();
-            });
-        };
-    </script>
+    <script type="text/javascript" src="<c:url value='/resources/js/order/receiver-details.js'/>"></script>
 </head>
 <body>
 <div class="header">
@@ -122,7 +31,7 @@
                     name="name"
                     placeholder="이름을 입력해 주세요"
                     type="text"
-                    value="<c:if test='${member != null}'>${member.name}</c:if>"/>
+                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
         </div>
         <div>
             <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
@@ -131,7 +40,7 @@
                     name="telNo"
                     placeholder="숫자만 입력해 주세요"
                     type="text"
-                    value="<c:if test='${member != null}'>${member.telNo}</c:if>"/>
+                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.telNo}</c:if>"/>
         </div>
     </div>
 
@@ -159,6 +68,7 @@
                                     name="rcvPlace"
                                     id="etc-place"
                                     class="receive-place"
+                                    <c:if test="${receiverDetails.rcvPlace == '기타 장소'}">checked</c:if>
                                     value="기타 장소"/>
                             <span style="margin-left: 10px">기타 장소</span>
                         </label>
@@ -218,8 +128,8 @@
                     <span style="margin-left: 10px">자유 출입 가능</span>
                 </label>
                 <label for="security-call-radio" class="receive-place-label">
-                    <input type="radio" name="enterMthd" id="security-call-radio"
-                           <c:if test="${receiverDetails.enterMthd == '공동현관 비밀번호'}">checked</c:if>/>
+                    <input type="radio" name="enterMthd" id="security-call-radio" value="경비실 호출"
+                           <c:if test="${receiverDetails.enterMthd == '경비실 호출'}">checked</c:if>/>
                     <span style="margin-left: 10px">경비실 호출</span>
                 </label>
                 <div class="textarea-div security-call-textarea">
@@ -229,7 +139,8 @@
                                     placeholder="경비실 호출 방법을 자세히 입력해주세요.&#13;&#10;예 : 공동현관에서 경비실 모양 버튼"></textarea>
                 </div>
                 <label for="door-etc-radio" class="receive-place-label">
-                    <input type="radio" name="enterMthd" id="door-etc-radio"/>
+                    <input type="radio" name="enterMthd" id="door-etc-radio" value="문 앞 기타"
+                           <c:if test="${receiverDetails.enterMthd == '문 앞 기타'}">checked</c:if>/>
                     <span style="margin-left: 10px">기타</span>
                 </label>
                 <div class="textarea-div door-etc-textarea">
@@ -244,29 +155,29 @@
             <div id="etc-radio-list">
                 <div class="etc-detail title">기타장소 세부사항<span class="star">*</span></div>
                 <label for="etc" class="receive-place-label">
-                    <input type="radio" name="enterMthd" id="etc"/>
+                    <input type="radio" name="enterMthd" id="etc" value="기타 장소 기타"
+                           <c:if test="${receiverDetails.enterMthd == '기타 장소 기타'}">checked</c:if>/>
                     <span style="margin-left: 10px">기타</span>
                 </label>
-                <div class="textarea-div">
+                <div class="textarea-div etc-textarea">
                             <textarea
                                     name="placeExp"
-                                    id=""
                                     maxlength="100"
                                     placeholder="원하시는 장소를 자세히 입력해주세요.&#13;&#10;예 : 계단 및, 주택단지 앞 경비초소를 지나 A동 출입구"></textarea>
                 </div>
                 <label for="receiving-room" class="receive-place-label">
-                    <input type="radio" name="enterMthd" id="receiving-room"/>
+                    <input type="radio" name="enterMthd" id="receiving-room" value="택배 수령실"
+                           <c:if test="${receiverDetails.enterMthd == '택배 수령실'}">checked</c:if>/>
                     <span style="margin-left: 10px">택배 수령실</span>
                 </label>
-                <div class="textarea-div">
+                <div class="textarea-div receiving-room-textarea">
                             <textarea
                                     name="placeExp"
-                                    id=""
                                     maxlength="100"
                                     placeholder="원하시는 장소를 자세히 입력해주세요.&#13;&#10;예 : 1층 출입구 오른쪽 택배수령실에 배송해주세요."></textarea>
                 </div>
                 <label for="front-gate" class="receive-place-label">
-                    <input type="radio" name="enterMthd" id="front-gate"/>
+                    <input type="radio" name="enterMthd" id="front-gate" value="공동현관 앞"/>
                     <span style="margin-left: 10px">공동현관(대문) 앞</span>
                 </label>
             </div>
@@ -278,18 +189,17 @@
             <div class="receive-place">
                 <div style="width: 50%">
                     <label for="after-shipping" class="receive-place-label">
-                        <input
-                                type="radio"
-                                name="msgTime"
-                                id="after-shipping"
-                                class="receive-place"
-                                value="배송 직후"/>
+                        <input type="radio" name="msgTime" id="after-shipping" class="receive-place"
+                               <c:if test="${receiverDetails.msgTime == '배송 직후'}">checked</c:if>
+                               value="배송 직후"/>
                         <span style="margin-left: 10px">배송 직후</span>
                     </label>
                 </div>
                 <div style="width: 50%">
                     <label for="7am" class="receive-place-label">
-                        <input type="radio" name="msgTime" id="7am" class="receive-place" value="오전 7시"/>
+                        <input type="radio" name="msgTime" id="7am" class="receive-place"
+                               <c:if test="${receiverDetails.msgTime == '오전 7시'}">checked</c:if>
+                               value="오전 7시"/>
                         <span style="margin-left: 10px">오전 7시</span>
                     </label>
                 </div>
