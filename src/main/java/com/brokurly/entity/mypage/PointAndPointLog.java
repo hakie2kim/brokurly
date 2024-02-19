@@ -1,7 +1,6 @@
 package com.brokurly.domain;
 
-import com.brokurly.dto.PointAndPointLogEarningDto;
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
 import lombok.*;
 
 import java.util.Date;

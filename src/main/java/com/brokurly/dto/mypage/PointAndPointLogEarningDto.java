@@ -1,4 +1,4 @@
-package com.brokurly.dto;
+package com.brokurly.dto.mypage;
 
 import lombok.*;
 
