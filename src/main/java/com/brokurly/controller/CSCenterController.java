@@ -44,6 +44,8 @@ public class CSCenterController {
 
     @RequestMapping("/inquiry")
     public String inquiry() { return "board/inquiryList"; }
+
+
     @RequestMapping("/inquiryPost")
     public String inquiryPost() {
         return "board/inquiryPost";

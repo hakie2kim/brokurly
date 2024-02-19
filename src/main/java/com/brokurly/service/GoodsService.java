@@ -29,7 +29,7 @@ public class GoodsService {
   @Transactional
   public void addCart(CartDto cartDto){
     Cart cart = new Cart();
-    cart.changeStatus(cartDto);
+//    cart.changeStatus(cartDto);
     goodsDao.insert(cart);
   }
 
