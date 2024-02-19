@@ -10,10 +10,9 @@ import java.util.Date;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class PointLogUsageDto {
-    private String orderId;
+public class PointDto {
+    private int pointNo;
+    private String custId;
     private int pointAmt;
-    private Date procDt;
-    private String pointSpec;
-    private String pointStat;
+    private Date expirDt;
 }

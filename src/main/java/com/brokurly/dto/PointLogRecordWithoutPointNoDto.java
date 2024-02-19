@@ -1,8 +1,6 @@
-package com.brokurly.dto.mypage;
+package com.brokurly.dto;
 
 import lombok.*;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -10,9 +8,10 @@ import java.util.Date;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class PointLogExpDto {
+public class PointLogRecordWithoutPointNoDto {
+    private String orderId;
+    private String custId;
     private int pointAmt;
-    private Date procDt;
     private String pointSpec;
     private String pointStat;
 }

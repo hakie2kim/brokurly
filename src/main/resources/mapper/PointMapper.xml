@@ -2,13 +2,71 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.mypage.PointDao">
+<mapper namespace="com.brokurly.repository.PointDao">
+    <!-- CREATE -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="pointNo">
+        INSERT INTO point (point_no, cust_id, point_amt, expir_dt)
+        VALUES (#{pointNo}, #{custId}, #{pointAmt}, #{expirDt})
+    </insert>
+
     <!-- READ -->
+    <select id="selectByExpirDt" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE cust_id = #{custId}
+        ORDER BY expir_dt
+    </select>
+
+    <select id="selectByCustomer" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE cust_id = #{custId}
+    </select>
+
     <select id="selectByPointNo" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
         WHERE point_no = #{pointNo}
     </select>
+
+    <select id="selectToBeExpired" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE expir_dt BETWEEN date_sub(now(), interval 1 month) AND now()
+    </select>
+
+    <select id="selectExpiredByCustomer" resultType="Point">
+        SELECT point_no, cust_id, point_amt, expir_dt
+        FROM point
+        WHERE expir_dt &lt; now()
+        AND cust_id = #{custId}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT count(*)
+        FROM point
+    </select>
+
+    <!-- UPDATE -->
+    <update id="updatePointAmtByPointNo">
+        UPDATE point
+        SET point_amt = point_amt + #{amt}
+        WHERE point_no = #{pointNo}
+        ORDER BY expir_dt
+        LIMIT 1
+    </update>
+
+    <!-- DELETE -->
+    <delete id="deleteAll">
+        DELETE
+        FROM point
+    </delete>
+
+    <delete id="deleteByPointNo">
+        DELETE
+        FROM point
+        WHERE point_no = #{pointNo}
+    </delete>
 
 <!--    <select id="countUsageByCustomerAndPeriod" resultType="int">
         SELECT count(*)
