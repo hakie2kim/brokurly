@@ -1,4 +1,4 @@
-package com.brokurly.service;
+package com.brokurly.service.mypage;
 
 import com.brokurly.entity.mypage.Point;
 import com.brokurly.dto.mypage.PointDto;
