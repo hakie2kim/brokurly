@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.PointLogDao">
+<mapper namespace="com.brokurly.repository.mypage.PointLogDao">
     <!-- READ -->
     <select id="selectUsageByCustomerAndPeriod" resultType="PointLogUsageDto">
         SELECT order_id, point_amt, proc_dt, point_spec, point_stat
