@@ -1,36 +1,42 @@
-package com.brokurly.domain;
+package com.brokurly.dto;
 
 import lombok.*;
 
-import java.util.Date;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-public class MemberAndSignup {
+@Builder
+@AllArgsConstructor
+public class MemberAndSignupDto {
+    @NotBlank(message = "아이디를 입력해 주세요")
+    @Pattern(regexp = "^[a-z]+[a-z0-9]{5,17}$",
+                message = "id regEx is checked. back") //6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합
     private String custId;
+
+    @NotBlank(message = "비밀번호를 입력해 주세요")
     private String pwd;
+
+    @NotBlank(message = "이름을 입력해 주세요")
     private String name;
+
+    @NotBlank(message = "이메일을 입력해 주세요")
+    @Email(message = "email regEx is checked. back") //이메일 형식으로 입력해 주세요
     private String email;
+
+    @NotBlank(message = "휴대폰 번호를 입력해 주세요")
+    @Pattern(regexp="^01(?:0|1|[6-9])\\d{8}$",
+                message = "telNo regEx is checked. back") //휴대폰 번호 형식으로 입력해 주세요
     private String telNo;
-    private String sex = "M";
+    private String sex;
     private String birthDt;
-    private Date regDt;
-    private String adultVerifDt = "0";
-    private int consent;    // 혜택정보 수신동의
+    private String consent;
+    private String snsId;
 
-
-    public MemberAndSignup(){}
-    public MemberAndSignup(String custId, String pwd, String name, String email, String telNo, String sex, String birthDt, int consent) {
-        this.custId = custId;
-        this.pwd = pwd;
-        this.name = name;
-        this.email = email;
-        this.telNo = telNo;
-        this.sex = sex;
-        this.birthDt = birthDt;
-        this.consent = consent;
-    }
 
 }

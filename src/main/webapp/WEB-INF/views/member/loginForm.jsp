@@ -19,87 +19,9 @@
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
             rel="stylesheet"
     />
+    <link rel="stylesheet" href="<c:url value='/resources/css/member/loginForm.css'/>"/>
     <title>로그인</title>
 </head>
-<style>
-    :root {
-        --main-color: #11967f;
-        --main-font: "Noto Sans KR", sans-serif;
-        --main-border-radius: 3px;
-    }
-
-    body {
-        font-family: var(--main-font);
-    }
-    section {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .login-div {
-        width: 340px;
-        height: 295px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
-
-    .login-div__column {
-        height: 54px;
-        margin-bottom: 10px;
-    }
-    .find-div {
-        display: flex;
-        justify-content: flex-end;
-        font-size: 13px;
-        color: #333;
-        cursor: pointer;
-        padding-bottom: 20px;
-    }
-
-    a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    .loginBtn,
-    .regBtn {
-        font-size: 16px;
-        font-weight: 500;
-        border-radius: var(--main-border-radius);
-    }
-
-    .loginBtn {
-        background-color: var(--main-color);
-        border: none;
-        color: white;
-        margin-bottom: 10px;
-    }
-    .regBtn {
-        background-color: white;
-        border: 1px solid var(--main-color);
-        color: var(--main-color);
-    }
-
-    input[type="text"] {
-        border-radius: var(--main-border-radius);
-        border: 1px solid rgb(221, 221, 221);
-    }
-
-    ::placeholder {
-        font-size: 14px;
-        padding: 0 11px 1px 15px;
-    }
-
-    .login-header {
-        font-size: 20px;
-        font-weight: 800;
-        line-height: 20px;
-        margin-bottom: 20px;
-    }
-</style>
 <body>
 <section>
     <span class="login-header">로그인</span>
@@ -122,8 +44,23 @@
             <a href="#"><span>비밀번호 찾기</span></a>
         </div>
         <button class="login-div__column loginBtn">로그인</button>
-        <button class="login-div__column regBtn">회원가입</button>
+        <button onclick="location.href=signup" class="login-div__column regBtn">회원가입</button>
+        <span onclick="loginWithKakao()">카카오</span>
     </div>
 </section>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
+<script>
+    window.onload = function(){
+        Kakao.init('fe1e90401e6f79d66eb56c138430a308'); // sdk 초기화 및 사용할 앱의 키 설정
+        Kakao.isInitialized(); // SDK 초기화 여부를 판단
+    };
+
+
+    function loginWithKakao(){
+        Kakao.Auth.authorize({
+           redirectUri: 'http://localhost:80/kakao_callback'
+        });
+    }
+</script>
 </body>
 </html>

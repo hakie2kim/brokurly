@@ -500,6 +500,32 @@
             modalContent.innerHTML = `<p>${'${msg}'}</p>`; //
 
         }
+        // // 아이디 정규식
+        // function custIdRegExp(){
+        //     let regEx = /^[a-z]+[a-z0-9]{5,17}$/g;    // 영어로 시작하고 영문자숫자 조합 6자이상 16자이하
+        //     let inputed = custId.value.trim();
+        //
+        //     return !regEx.test(inputed) || !inputed;
+        // }
+        //
+        // // 이메일 정규식
+        // function emailRegExp(){
+        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
+        //     let inputed = document.querySelector("#email").value.trim();
+        //
+        //     return !regEx.test(inputed) || !inputed;
+        // }
+        //
+        //
+        // // 핸드폰 번호 정규식
+        // function telNoRegExp(){
+        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
+        //     let inputed = document.querySelector("#telNo").value.trim();
+        //
+        //     let telNo = inputed.slice(0,3)+'-'+inputed.slice(3,7)+"-"+inputed.slice(7,inputed.length);
+        //
+        //     return !regEx.test(telNo) || !telNo;
+        // }
 
         // function telNoRegExp(){
         //

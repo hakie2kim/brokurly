@@ -8,7 +8,6 @@
     </settings>
     <typeAliases>
         <typeAlias type="com.brokurly.domain.Member" alias="Member"/>
-        <typeAlias type="com.brokurly.domain.MemberAndSignup" alias="MemberAndSignup"/>
         <typeAlias type="com.brokurly.domain.Order" alias="Order"/>
         <typeAlias type="com.brokurly.domain.Payment" alias="Payment"/>
         <typeAlias type="com.brokurly.domain.OrderAndPayment" alias="OrderAndPayment"/>
