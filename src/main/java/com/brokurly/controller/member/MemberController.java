@@ -1,12 +1,20 @@
 package com.brokurly.controller.member;
 
-import com.brokurly.entity.member.MemberAndSignup;
+
+import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Map;
+import java.util.stream.Stream;
 
 @Slf4j
 @Controller
@@ -14,19 +22,23 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
 
-//    private BCryptPasswordEncoder passEncoder;
+    private BCryptPasswordEncoder passEncoder;
     private MemberService memberService;
 
-//    MemberController(BCryptPasswordEncoder passEncoder, MemberService memberService){
-//        this.passEncoder = passEncoder;
-//        this.memberService = memberService;
-//    }
+    MemberController(BCryptPasswordEncoder passEncoder, MemberService memberService){
+        this.passEncoder = passEncoder;
+        this.memberService = memberService;
+    }
 
     @GetMapping("/signup")
     public String signUp(){
         return "/member/signupForm";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "/member/loginForm";
+    }
     @GetMapping("/signup/{custId}")
     @ResponseBody
     public ResponseEntity<String> checkId(@PathVariable String custId){
@@ -39,6 +51,7 @@ public class MemberController {
             e.printStackTrace();
             return new ResponseEntity<String>("IDCHK_ERR", HttpStatus.BAD_REQUEST);
         }
+
     }
 
     @GetMapping("/signup/email/{email}")
@@ -59,13 +72,28 @@ public class MemberController {
 
 
     @PostMapping("/signup")
-    public String signUp(MemberAndSignup memberAndSignup) {
+    public String signUp(@Valid MemberAndSignupDto memberAndSignupDto, Errors errors, Model model) {
 
-        String pwd_before = memberAndSignup.getPwd();
-//        String pwd_after = passEncoder.encode(pwd_before);
+        if(errors.hasErrors()) {    // 유효성 검사에 실패한 필드가 있는지 확인
+            // 회원가입 실패시, 입력 데이터를 유지
+            model.addAttribute("memberAndSignupDto", memberAndSignupDto);
 
-//        memberAndSignup.setPwd(pwd_after);
-        memberService.signUp(memberAndSignup);
+            // 유효성 통과 못한 필드와 메시지를 핸들링
+            Map<String, String> validatorRs = memberService.validateHandling(errors);
+            Stream<String> streamValidatorRs = validatorRs.keySet().stream();
+            streamValidatorRs.forEach(i -> model.addAttribute(i));
+//            streamValidatorRs.forEach(i -> log.info("i = {} ", i));
+
+
+            return "/signup";
+        }
+
+
+        String pwd_before = memberAndSignupDto.getPwd();
+        String pwd_after = passEncoder.encode(pwd_before);
+
+        memberAndSignupDto.setPwd(pwd_after);
+        memberService.signUp(memberAndSignupDto);
 
         return "index";
     }

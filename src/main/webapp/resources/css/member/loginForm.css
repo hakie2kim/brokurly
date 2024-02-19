@@ -1,0 +1,81 @@
+:root {
+    --main-color: #11967f;
+    --main-font: "Noto Sans KR", sans-serif;
+    --main-border-radius: 3px;
+}
+
+body {
+    font-family: var(--main-font);
+}
+section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login-div {
+    width: 340px;
+    height: 295px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.login-div__column {
+    height: 54px;
+    margin-bottom: 10px;
+}
+.find-div {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+    padding-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.loginBtn,
+.regBtn {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: var(--main-border-radius);
+}
+
+.loginBtn {
+    background-color: var(--main-color);
+    border: none;
+    color: white;
+    margin-bottom: 10px;
+}
+.regBtn {
+    background-color: white;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+input[type="text"] {
+    border-radius: var(--main-border-radius);
+    border: 1px solid rgb(221, 221, 221);
+}
+
+input:focus {
+    outline: 1px solid black;
+}
+
+::placeholder {
+    font-size: 14px;
+    padding: 0 11px 1px 15px;
+}
+
+.login-header {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
