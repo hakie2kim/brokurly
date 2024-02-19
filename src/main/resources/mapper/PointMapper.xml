@@ -35,10 +35,11 @@
         WHERE expir_dt BETWEEN date_sub(now(), interval 1 month) AND now()
     </select>
 
-    <select id="selectExpired" resultType="Point">
+    <select id="selectExpiredByCustomer" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
         WHERE expir_dt &lt; now()
+        AND cust_id = #{custId}
     </select>
 
     <select id="countAll" resultType="int">

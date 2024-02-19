@@ -1,3 +1,4 @@
+/*
 package com.brokurly.controller;
 
 import com.brokurly.domain.MemberAndSignup;
@@ -73,3 +74,4 @@ public class MemberController {
 
 }
 
+*/

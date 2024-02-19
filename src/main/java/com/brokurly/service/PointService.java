@@ -90,10 +90,26 @@ public class PointService {
         }
     }
 
-    // 기간 만료 소멸
+    // 기간 만료 포인트 소멸
     @Transactional
-    public void deleteExpiredPoints() {
+    public void deleteExpiredPoints(String custId) {
+        log.info("{}", pointDao.selectExpiredByCustomer(custId));
+        List<PointDto> pointDtos = pointDao.selectExpiredByCustomer(custId)
+                .stream()
+                .map(Point::getPointDto)
+                .collect(Collectors.toList());
 
+        for (PointDto pointDto : pointDtos) {
+            int pointNo = pointDto.getPointNo();
+            int pointAmt = pointDto.getPointAmt();
+
+            pointDao.deleteByPointNo(pointNo);
+
+            PointLogRecordWithoutPointNoDto pointLogRecordWithoutPointNoDto = new PointLogRecordWithoutPointNoDto(null, custId, pointAmt * -1, "적립금 유효기간 만료", "소멸");
+            PointLog pointLog = new PointLog();
+            pointLog.setPointLogRecordWithoutPointNoDto(pointLogRecordWithoutPointNoDto);
+            pointLogDao.insert(pointLog);
+        }
     }
 
     // CREATE
