@@ -1,4 +1,4 @@
-package com.brokurly.dto;
+package com.brokurly.dto.mypage;
 
 import lombok.*;
 
@@ -8,8 +8,7 @@ import lombok.*;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class PointLogRecordWithPointNoDto {
-    private int pointNo;
+public class PointLogRecordWithoutPointNoDto {
     private String orderId;
     private String custId;
     private int pointAmt;

@@ -1,6 +1,6 @@
 package com.brokurly.entity.mypage;
 
-import com.brokurly.dto.PointDto;
+import com.brokurly.dto.mypage.PointDto;
 import lombok.*;
 
 import java.util.Date;

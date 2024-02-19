@@ -1,12 +1,12 @@
 package com.brokurly.service;
 
-import com.brokurly.domain.Point;
-import com.brokurly.domain.PointLog;
-import com.brokurly.dto.PointDto;
-import com.brokurly.dto.PointLogRecordWithPointNoDto;
-import com.brokurly.dto.PointLogRecordWithoutPointNoDto;
-import com.brokurly.repository.PointDao;
-import com.brokurly.repository.PointLogDao;
+import com.brokurly.entity.mypage.Point;
+import com.brokurly.dto.mypage.PointDto;
+import com.brokurly.dto.mypage.PointLogRecordWithPointNoDto;
+import com.brokurly.dto.mypage.PointLogRecordWithoutPointNoDto;
+import com.brokurly.entity.mypage.PointLog;
+import com.brokurly.repository.mypage.PointDao;
+import com.brokurly.repository.mypage.PointLogDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
