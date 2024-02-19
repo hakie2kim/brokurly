@@ -1,10 +1,10 @@
-package com.brokurly.controller;
+package com.brokurly.controller.products;
 
 
-import com.brokurly.dto.GoodsDto;
-import com.brokurly.dto.GoodsAnnouncementDto;
-import com.brokurly.dto.SearchKeywordDto;
-import com.brokurly.service.ProductsCreateService;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
+import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.service.products.ProductsCreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

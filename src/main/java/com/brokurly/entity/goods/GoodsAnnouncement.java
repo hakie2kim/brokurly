@@ -1,6 +1,6 @@
 package com.brokurly.entity.goods;
 
-import com.brokurly.dto.GoodsAnnouncementDto;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

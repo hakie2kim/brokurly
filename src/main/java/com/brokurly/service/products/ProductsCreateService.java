@@ -1,12 +1,12 @@
-package com.brokurly.service;
+package com.brokurly.service.products;
 
-import com.brokurly.domain.Goods;
-import com.brokurly.domain.GoodsAnnouncement;
-import com.brokurly.domain.SearchKeyword;
-import com.brokurly.dto.GoodsDto;
-import com.brokurly.dto.GoodsAnnouncementDto;
-import com.brokurly.dto.SearchKeywordDto;
-import com.brokurly.repository.ProductsCreateDao;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
+import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.entity.goods.Goods;
+import com.brokurly.entity.goods.GoodsAnnouncement;
+import com.brokurly.entity.search.SearchKeyword;
+import com.brokurly.repository.products.ProductsCreateDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

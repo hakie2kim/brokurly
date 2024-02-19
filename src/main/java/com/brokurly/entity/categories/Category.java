@@ -6,13 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-<<<<<<< HEAD:src/main/java/com/brokurly/entity/categories/Category.java
-
-=======
-import java.util.List;
 
 @ToString
->>>>>>> sookyung:src/main/java/com/brokurly/domain/Category.java
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

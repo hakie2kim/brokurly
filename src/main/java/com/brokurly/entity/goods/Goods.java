@@ -36,31 +36,6 @@ public class Goods {
 
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
-<<<<<<< HEAD:src/main/java/com/brokurly/entity/goods/Goods.java
-        .itemId(itemId)
-        .name(name)
-        .exp(exp)
-        .price(price)
-        .dcRt(dcRt)
-        .itemDcAmt(itemDcAmt)
-        .origin(origin)
-        .pointFl(pointFl)
-        .cpnElgFl(cpnElgFl)
-        .shipType(shipType)
-        .sellerName(sellerName)
-        .pkgType(pkgType)
-        .capa(capa)
-        .sellUnit(sellUnit)
-        .adultVerifFl(adultVerifFl)
-        .cateCode(cateCode)
-        .itemQty(itemQty)
-        .wishCnt(wishCnt)
-        .bsnsNo(bsnsNo)
-        .itemSpec(itemSpec)
-        .sellCnt(sellCnt)
-        .revCnt(revCnt)
-        .stdySellerFl(stdySellerFl).build();
-=======
             .itemId(itemId)
             .name(name)
             .exp(exp)
@@ -81,7 +56,6 @@ public class Goods {
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
             .stdySellerFl(stdySellerFl).build();
->>>>>>> sookyung:src/main/java/com/brokurly/domain/Goods.java
   }
 
   public GoodsForCartDto toGoodsForCartDto() {
@@ -114,9 +88,5 @@ public class Goods {
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
     this.stdySellerFl = goodsDto.getStdySellerFl();
-<<<<<<< HEAD:src/main/java/com/brokurly/entity/goods/Goods.java
-=======
-
->>>>>>> sookyung:src/main/java/com/brokurly/domain/Goods.java
   }
 }

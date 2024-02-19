@@ -1,11 +1,7 @@
-<<<<<<< HEAD:src/main/java/com/brokurly/repository/categories/CategoryDao.java
 package com.brokurly.repository.categories;
+
+import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.entity.categories.Category;
-=======
-package com.brokurly.repository;
-import com.brokurly.domain.Category;
-import com.brokurly.dto.CategoryDto;
->>>>>>> sookyung:src/main/java/com/brokurly/repository/CategoryDao.java
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.RequestParam;
 

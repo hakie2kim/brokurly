@@ -1,9 +1,8 @@
-package com.brokurly.repository;
+package com.brokurly.repository.products;
 
-import com.brokurly.domain.Goods;
-import com.brokurly.domain.GoodsAnnouncement;
-import com.brokurly.domain.ReceiverDetails;
-import com.brokurly.domain.SearchKeyword;
+import com.brokurly.entity.goods.Goods;
+import com.brokurly.entity.goods.GoodsAnnouncement;
+import com.brokurly.entity.search.SearchKeyword;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
