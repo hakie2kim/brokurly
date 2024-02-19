@@ -53,7 +53,7 @@ public class KakaoController {
         log.warn("카카오로 로그인");
         String userId = memberService.findBySnsId(snsId);
         log.info("userId = {}", userId);
-//        MemberAndSignupDto dto = memberService.findByUserId(userId);
+     //   MemberAndSignupDto dto = memberService.findByUserId(userId);
 
 
 //        Authentication auth = new AbstractAuthenticationToken(user, null, roles);

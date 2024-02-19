@@ -1,11 +1,8 @@
 package com.brokurly.entity.mypage;
 
 import com.brokurly.dto.*;
-import com.brokurly.dto.PointLogUsageDto;
-import com.brokurly.dto.mypage.PointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogExpDto;
-import com.brokurly.dto.mypage.PointLogRecordWithPointNoDto;
-import com.brokurly.dto.mypage.PointLogRecordWithoutPointNoDto;
+import com.brokurly.dto.mypage.PointLogUsageDto;
+import com.brokurly.dto.mypage.*;
 import lombok.*;
 
 import java.util.Date;

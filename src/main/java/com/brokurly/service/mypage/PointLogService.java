@@ -1,7 +1,9 @@
 package com.brokurly.service.mypage;
 
+import com.brokurly.dto.mypage.PointLogUsageDto;
+import com.brokurly.entity.mypage.PointAndPointLog;
 import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.dto.mypage.PointLogUsageDto;
 import com.brokurly.dto.mypage.PointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogExpDto;
 import com.brokurly.entity.mypage.PointLog;

@@ -1,8 +1,9 @@
 package com.brokurly.repository.mypage;
 
-import com.brokurly.dto.PointLogUsageDto;
+import com.brokurly.dto.mypage.PointLogUsageDto;
 import com.brokurly.dto.mypage.PointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogExpDto;
+import com.brokurly.entity.mypage.PointAndPointLog;
 import com.brokurly.entity.mypage.PointLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,7 +22,7 @@ public interface PointLogDao {
     List<PointLog> selectExpByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countExpByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     List<PointLog> selectEarningByCustomer(String custId);
-    List<com.brokurly.domain.PointAndPointLog> selectEarningByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
+    List<PointAndPointLog> selectEarningByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countEarningByCustomerAndPeriod(@Param("custId") String custId, @Param("period") Integer period);
     int countAll();
 

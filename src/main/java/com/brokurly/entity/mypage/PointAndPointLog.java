@@ -1,4 +1,4 @@
-package com.brokurly.domain;
+package com.brokurly.entity.mypage;
 
 import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
 import lombok.*;

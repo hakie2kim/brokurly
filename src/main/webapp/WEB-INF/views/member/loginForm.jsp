@@ -46,7 +46,6 @@
         <button class="login-div__column loginBtn">로그인</button>
         <button onclick="location.href=signup" class="login-div__column regBtn">회원가입</button>
         <div class="col-lg-12 text-center mt-3">
-            <button class="btn btn-block waves-effect waves-light btn-rounded btn-outline-info mb-3">로그인하기</button>
             <img alt="카카오로그인" src="<c:url value='/resources/image/kakao_login_medium_wide.png'/>" onclick="loginWithKakao()">
         </div>
 

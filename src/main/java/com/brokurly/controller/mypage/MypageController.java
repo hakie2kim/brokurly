@@ -1,5 +1,6 @@
 package com.brokurly.controller.mypage;
 
+import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogExpDto;
 import com.brokurly.dto.mypage.PointLogUsageDto;
@@ -60,7 +61,7 @@ public class MypageController {
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
-        List<PointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
+        List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
 //        for (PointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
 //            String orderId = pointLogUsageDto.getOrderId();
 //            int pointAmt = pointLogUsageDto.getPointAmt();
