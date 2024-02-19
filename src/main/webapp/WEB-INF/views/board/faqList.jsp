@@ -473,7 +473,7 @@
                 <li class="css-e0dnmk e1cfowvj3">
                     <div class="css-14yglsw e1cfowvj4">
                         <div class="css-dx3647 e1cfowvj2">${FAQListDto.bno}</div>
-                        <div class="css-1tixomb e1cfowvj2">${FAQListDto.category}</div>
+                        <div class="css-1tixomb e1cfowvj2">${FAQListDto.name}</div>
                         <div class="css-fzefrb e1cfowvj2">
                             <div>${FAQListDto.title}</div>
                         </div>

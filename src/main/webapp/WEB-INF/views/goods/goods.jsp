@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 <head>
@@ -31,24 +32,33 @@
               샛별배송
             </div>
             <div>
-              <h1>[KF365] 양념 소불고기 1kg (냉장)</h1>
+              <h1>${goods.name}</h1>
               <h2 class="goods-117">100g당 : 1,999원</h2>
             </div>
             <h2>
-              <span class="goods-118" id="discount">9<!-- -->%</span>
-              <span class="goods-119">19,990</span>
+              <span class="goods-118">${goods.dcRt}<!-- -->%</span> <!-- 할인율 -->
+              <span class="goods-119" id="resultPrice">18990
+<%--                <fmt:formatNumber pattern="#,###"--%>
+<%--                                  value="${goods.itemDcAmt}"/>--%>
+
+              </span>
               <span>원</span>
             </h2>
             <span class="goods-45">
-                                <span id="originPrice">21,990<!-- -->원</span>
+                                <span>
+<%--                                  <fmt:formatNumber pattern="#,###"--%>
+<%--                                                    value="${goods.price}"/>--%>
+
+                                </span>
+                                  <!-- -->원</span><!-- 상품 가격 -->
                             </span>
-            <p class="goods-120">원산지: <!-- -->상품설명/상세정보 참조</p>
+            <p class="goods-120">원산지: ${goods.origin}</p>
             <div class="goods-121">적립 제외 상품입니다.</div>
             <ul>
               <li class="goods-98">
                 <dt class="goods-99">배송</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">샛별배송</p>
+                  <p class="goods-101">${goods.shipType}배송</p>
                   <p class="goods-100">23시 전 주문 시 내일 아침 7시 전 도착
                     (대구·부산·울산 샛별배송 운영시간 별도 확인)</p>
                 </dd>
@@ -56,26 +66,26 @@
               <li class="goods-98">
                 <dt class="goods-99">판매자</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">컬리</p>
+                  <p class="goods-101">${goods.sellerName}</p>
                 </dd>
               </li>
               <li class="goods-98">
                 <dt class="goods-99">포장타입</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">냉장 (종이포장)</p>
+                  <p class="goods-101">${goods.pkgType}</p>
                   <p class="goods-100">택배배송은 에코 포장이 스티로폼으로 대체됩니다.</p>
                 </dd>
               </li>
               <li class="goods-98">
                 <dt class="goods-99">판매단위</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">1개</p>
+                  <p class="goods-101">${goods.sellUnit}개</p>
                 </dd>
               </li>
               <li class="goods-98">
                 <dt class="goods-99">중량/용량</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">1Kg</p>
+                  <p class="goods-101">${goods.capa}</p>
                 </dd>
               </li>
               <li class="goods-98">
@@ -105,20 +115,26 @@
                   <dd class="goods-102">
                     <div>
                       <div>
-                        <span>[KF365] 양념 소불고기 1kg (냉장)</span>
+                        <span name="name">${goods.name}</span>
                       </div>
-                      <span class="goods-100">적립제외상품</span>
+                      <span class="goods-100" name="point_fl">적립제외상품</span>
                       <div class="goods-103">
                         <div class="goods-104">
                           <button class="goods-105" type="button" onclick='count("minus")' value='+'
                                   aria-label="수량내리기"></button>
-                          <div class="count goods-106" id="count">1</div>
+                          <div class="count goods-106" id="count" name="item_cnt">1</div>
                           <button class="goods-107" type="button" onclick='count("plus")' value='-'
                                   aria-label="수량올리기"></button>
                         </div>
                         <div>
-                          <span class="goods-8">21,990원</span>
-                          <span id="price">19990원</span>
+                          <span class="goods-8" >${goods.price}
+<%--                            <fmt:formatNumber pattern="#,###"--%>
+<%--                                              value="${goods.price}"/>--%>
+                            </span>
+                          <span id="price">18990
+<%--                            <fmt:formatNumber pattern="#,###"--%>
+<%--                               value="${goods.itemDcAmt}"/>원--%>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -129,7 +145,10 @@
                 <div>
                   <div class="goods-42">
                     <span>총 상품금액 :</span>
-                    <span class="goods-108" id="sum">19990</span>
+                    <span class="goods-108" id="sum">18990
+<%--                      <fmt:formatNumber pattern="#,###"--%>
+<%--                           value="${goods.itemDcAmt}"/>--%>
+                    </span>
                     <span class="goods-109">원</span>
                   </div>
                   <div class="goods-43">
@@ -201,9 +220,7 @@
                         <small>합리적으로 즐기는 온 가족 반찬</small>
                         [KF365] 양념 소불고기
                       </h3>
-                      <p>호불호 없는 메인 요리를 꼽자면 양념 소불고기가 빠지지 않을 거예요. 달짝지근한 양념이 고루 밴 야들한 소불고기는 온 가족 밥반찬으로 딱 좋은 식재료인데요. 컬리는 맛
-                        좋은 소불고기를 부담 없이 즐길 수 있도록 넉넉한 1kg 대용량으로 준비했어요. 육가공 전문 브랜드, 견우푸드와 손 잡고 질 좋은 소고기에 너무 짜거나 달지 않은 은근한
-                        감칠맛을 입혀 완성했답니다. 냉장고에 구비해두고 마땅한 반찬이 떠오르지 않는 순간, 언제든지 꺼내 즐겨보세요. 명절 음식으로 활용하기에도 제격일 거에요.</p>
+                      <p>${goods.itemSpec}</p>
                     </div>
                   </div>
                   <div>
@@ -957,23 +974,31 @@
           <div class="goods-36"><!-- 버튼 누르면 사라지게-->
             <div>
               <div class="goods-37">
-                                <span class="goods-38">
-                                    <span>[KF365] 양념 소불고기 1kg (냉장)</span>
-                                    <span>적립제외상품</span>
-                                </span>
+                  <span class="goods-38">
+                      <span>[KF365] 양념 소불고기 1kg (냉장)</span>
+                      <span>적립제외상품</span>
+                  </span>
                 <span class="goods-39">
-                                    <div class="goods-104">
-                                        <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                                                aria-label="수량내리기">+</button>
-                                        <div class="count goods-106" id="count2">1</div>
-                                        <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                                                aria-label="수량올리기">-</button>
-                                    </div>
-                                    <span class="goods-40">
-                                        <span class="goods-41">21,990원</span>
-                                        <span>19,990원</span>
-                                    </span>
-                                </span>
+                  <div class="goods-104">
+                      <button class="goods-105" type="button" onclick='count("minus")' value='+'
+                              aria-label="수량내리기">+</button>
+                      <div class="count goods-106" id="count2">1</div>
+                      <button class="goods-107" type="button" onclick='count("plus")' value='-'
+                              aria-label="수량올리기">-</button>
+                  </div>
+                  <span class="goods-40">
+                      <span class="goods-41">
+<%--                        <fmt:formatNumber pattern="#,###"--%>
+<%--                                          value="${goods.price}"/> --%>
+                        ${goods.price}
+                        원</span>
+                      <span id = "dicPrice">
+<%--                        <fmt:formatNumber pattern="#,###"--%>
+<%--                                          value="${goods.itemDcAmt}"/>--%>
+
+                        원</span>
+                  </span>
+                </span>
               </div>
             </div>
           </div>
@@ -981,7 +1006,10 @@
             <div>
               <div class="goods-42">
                 <span>총 상품금액 :</span>
-                <span class="goods-108" id="price2">19990</span>
+                <span class="goods-108" id="price2">
+<%--                  <fmt:formatNumber pattern="#,###"--%>
+<%--                                    value=""/>--%>
+                </span>
                 <span class="goods-109">원</span>
               </div>
               <div class="goods-43">
@@ -1005,7 +1033,7 @@
               </button>
               <div class="goods-113">
                 <button class="cart-button goods-115" type="button" radius="3">
-                  <span class="goods-114 ">장바구니 담기</span>
+                  <span class="goods-114">장바구니 담기</span>
                 </button>
               </div>
             </div>
@@ -1228,7 +1256,7 @@
   // });
 
 
-  //상품 개수에 따른 가격 변동
+  // //상품 개수에 따른 가격 변동
   function count(type) {
       let cntResult = document.getElementById('count'); //상품 개수
       let priResult = document.getElementById('price'); //상품 가격
@@ -1250,6 +1278,75 @@
       document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동
       document.getElementById('price2').innerHTML = sumNumber;
   }
+
+
+  <%--// 천 단위 구분기호(콤마)를 추가하는 함수--%>
+  <%--function addCommasToNumber(number) {--%>
+  <%--    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
+  <%--}--%>
+
+  <%--// 상품 정보를 가져오고 콤마를 추가하여 결과를 화면에 표시하는 함수--%>
+  <%--function getProductInfo() {--%>
+  <%--    var oPrice = ${goods.price}; // 상품 할인 전 가격--%>
+  <%--    var disAmnt = ${goods.itemDcAmt}; // 뺄 가격--%>
+  <%--    var resultPrice = oPrice - disAmnt; // 할인된 가격--%>
+
+  <%--    // 결과에 콤마 추가--%>
+  <%--    var formattedOPrice = addCommasToNumber(oPrice)+"원";--%>
+  <%--    var formattedResultPrice = addCommasToNumber(resultPrice)+"원";--%>
+
+  <%--    // 결과를 화면에 표시--%>
+  <%--    document.getElementById("price3").innerHTML = formattedOPrice;--%>
+  <%--    document.getElementById("resultPrice2").value = formattedResultPrice;--%>
+  <%--    document.getElementById("originPrice").value = formattedResultPrice;--%>
+  <%--}--%>
+
+  <%--// 페이지 로드시 상품 정보를 가져옴--%>
+  <%--getProductInfo();--%>
+
+
+
+
+
+  // 상품 개수에 따른 가격 변동
+  <%--function count(type) {--%>
+  <%--    let cntResult = document.getElementById('count'); //상품 개수--%>
+  <%--    let priResult = ${goods.price}-${goods.itemDcAmt}; //상품 가격--%>
+  <%--    let sumResult = priResult;   //총 가격--%>
+
+  <%--    let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로--%>
+
+  <%--    if (type === 'plus') {  //증가--%>
+  <%--        cntNumber += 1;--%>
+  <%--        sumResult = sumResult + priResult;--%>
+  <%--    } else if (type === 'minus' && cntNumber > 1) { //감소--%>
+  <%--        cntNumber -= 1;--%>
+  <%--        sumResult = sumResult - priResult;--%>
+  <%--    }--%>
+  <%--    cntResult.innerText = cntNumber;    //숫자 값 문자열--%>
+  <%--    // sumResult.innerText = sumResult;--%>
+
+  <%--    document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동--%>
+
+  <%--    document.getElementById('price2').innerHTML = sumResult;--%>
+  // }
+
+
+  <%--$(document).ready(function () { //main()--%>
+  <%--    $('.cart-button').on("click", function () {--%>
+  <%--        let form = $('#forma');--%>
+  <%--        form.attr("action", "<c:url value='/seller/productscreate/write'/>");--%>
+  <%--        form.attr("method", "post");--%>
+  <%--        form.submit();--%>
+  <%--        alert("저장되었습니다.");--%>
+  <%--        alert(form);--%>
+  <%--    });--%>
+
+  // })
+
+
+
+
   </script>
 
 

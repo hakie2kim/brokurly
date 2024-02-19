@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.GoodsDao">
+<mapper namespace="com.brokurly.repository.goods.GoodsDao">
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO item
             (item_id,  name ,exp, price, dc_rt, item_dc_amt, origin,
              point_fl, cpn_elg_fl, ship_type, seller_name, pkg_type, capa,
-             sell_unit, reg_dt, adult_verif_fl, cate_code, item_qty, wish_cnt,
-             bsns_no, item_spec, sell_cnt, rev_cnt, stdy_seller_fl)
+             sell_unit, adult_verif_fl, cate_code, item_qty, wish_cnt,
+             bsns_no, item_spec, sell_cnt, rev_cnt)
         VALUES
             (#{itemId}, #{name}, #{exp}, #{price}, #{dcRt}, #{itemDcAmt}, #{origin},
              #{pointFl}, #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType} , #{capa},
-             #{sellUnit}, #{regDt}, #{adultVerifFl}, #{cateCode}, #{itemQty} , #{wishCnt},
-             #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt}, #{stdySellerFl}  )
+             #{sellUnit}, #{adultVerifFl}, #{cateCode}, #{itemQty} , #{wishCnt},
+             #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt} )
     </insert>
 
     <!-- READ -->
@@ -28,7 +28,38 @@
     </select>
 
     <!-- UPDATE -->
+    <update id="update">
+        UPDATE item
+        SET name = #{name},
+            exp = #{exp},
+            price = #{price},
+            dc_rt = #{dcRt},
+            item_dc_amt = #{itemDcAmt},
+            origin = #{origin},
+            point_fl = #{pointFl},
+            cpn_elg_fl = #{cpnElgFl},
+            ship_type = #{shipType},
+            seller_name = #{sellerName},
+            pkg_type = #{pkgType},
+            capa = #{capa},
+            sell_unit = #{sellUnit},
+            reg_dt = #{regDt},
+            adult_verif_fl = #{adultVerifFl},
+            cate_code = #{cateCode},
+            item_qty = #{itemQty},
+            wish_cnt = #{wishCnt},
+            bsns_no = #{bsnsNo},
+            item_spec = #{itemSpec},
+            sell_cnt = #{sellCnt},
+            rev_cnt = #{revCnt},
+            stdy_seller_fl = #{stdySellerFl}
+        WHERE item_id = #{itemId}
+    </update>
 
     <!-- DELETE -->
+    <delete id="deleteByItemId">
+        DELETE FROM item
+        WHERE item_id = #{itemId}
+    </delete>
 
 </mapper>
