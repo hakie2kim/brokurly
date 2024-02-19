@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.member.MemberDao">
+<mapper namespace="com.brokurly.repository.MemberDao">
     <!-- CREATE -->
-<!--     useGeneratedKeys="true" keyProperty="bno"-->
+    <!--     useGeneratedKeys="true" keyProperty="bno"-->
     <insert id="insert">
         INSERT INTO customer
-            (cust_id, pwd, name, email, tel_no, sex,
-             birth_dt, reg_dt, adult_verif_dt,consent)
+        (cust_id, pwd, name, email, tel_no, sex,
+         birth_dt, reg_dt,consent)
         VALUES
-            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
-             #{birthDt}, now(), #{adultVerifDt},#{consent})
+            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
+             #{birthDt}, now(),'01')
     </insert>
 
     <!-- READ -->
-    <sql id="selectMember">
+    <sql id="select">
         SELECT cust_id,
                pwd,
                name,
@@ -31,8 +31,20 @@
                act_stat,
                grade
         FROM customer
-        WHERE custId = #{custId}
     </sql>
+    <!-- KAKAO LOGIN-->
+    <select id="selectSnsMember" resultType="Member">
+        SELECT cust_id, name, email, tel_no
+        FROM customer
+        WHERE sns_id = #{snsId}
+    </select>
+
+    <insert id="insertSnsMember">
+        INSERT INTO customer
+            (cust_id, pwd, name, email, sns_id)
+        VALUES
+            (#{custId}, #{pwd}, #{name}, #{email}, #{snsId})
+    </insert>
 
     <!-- COUNT -->
     <sql id="count">
@@ -45,12 +57,12 @@
 
     <select id="countMember" resultType="int">
         <include refid="count" />
-            WHERE cust_id = #{custId}
+        WHERE cust_id = #{custId}
     </select>
 
     <select id="countEmail" resultType="int">
         <include refid="count"/>
-            WHERE email = #{email}
+        WHERE email = #{email}
     </select>
 
     <!-- DELETE -->

@@ -13,9 +13,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+            rel="stylesheet"
+    />
     <title>회원가입</title>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="<c:url value='/resources/css/member/signup.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/css/member/signupForm.css'/>"/>
 </head>
 <body>
 <form id="frm" action="<c:url value="/member/signup"/>" method="POST">
@@ -45,12 +50,13 @@
           >
                 <input
                         type="text"
-                        placeholder="아이디를 입력해주세요"
+                        placeholder="아이디를 입력해 주세요"
                         title="이 입력란을 작성하세요"
                         id="custId"
                         name="custId"
+                        maxlength="17"
                 />
-                <button type="button" id="custId_btn" class="open-modal-btn" value="1">중복확인</button>
+                <button type="button" id="custId_btn" class="open-modal-btn">중복확인</button>
             </div>
             <div class="id-info-div">
           <span
@@ -63,7 +69,7 @@
           >
                 <input
                         type="text"
-                        placeholder="비밀번호를 입력해주세요"
+                        placeholder="비밀번호를 입력해 주세요"
                         title="이 입력란을 작성하세요"
                         name="pwd"
 
@@ -75,7 +81,7 @@
           >
                 <input
                         type="text"
-                        placeholder="비밀번호를 한번 더 입력해주세요"
+                        placeholder="비밀번호를 한번 더 입력해 주세요"
                         title="이 입력란을 작성하세요"
 
                 />
@@ -86,11 +92,16 @@
           >
                 <input
                         type="text"
-                        placeholder="이름을 입력해주세요"
+                        placeholder="이름을 입력해 주세요"
                         title="이 입력란을 작성하세요"
                         id="name"
                         name="name"
                 />
+            </div>
+            <div class="name-info-div">
+          <span
+          >이름을 입력해 주세요</span
+          >
             </div>
             <div class="column-div">
           <span class="register-div__label"
@@ -103,7 +114,17 @@
                         id="email"
                         name="email"
                 />
-                <button type="button" id="email_btn" class="open-modal-btn" value="2">중복확인</button>
+                <button type="button" id="email_btn" class="open-modal-btn">중복확인</button>
+            </div>
+            <div class="email-info-div">
+          <span
+          >이메일 형식으로 입력해 주세요</span
+          >
+            </div>
+            <div class="email-infoSec-div">
+          <span
+          >이메일을 입력해주세요</span
+          >
             </div>
             <div class="column-div">
           <span class="register-div__label"
@@ -111,12 +132,17 @@
           >
                 <input
                         type="text"
-                        placeholder="숫자만 입력해주세요"
+                        placeholder="숫자만 입력해 주세요"
                         title="이 입력란을 작성하세요"
                         id="telNo"
                         name="telNo"
                 />
                 <button type="button" class="open-modal-btn" value="3" id="telNo_btn">인증번호 받기</button>
+            </div>
+            <div class="telNo-info-div">
+          <span
+          >휴대폰 번호를 입력해 주세요</span
+          >
             </div>
             <div class="column-div">
           <span class="register-div__label"
@@ -210,7 +236,9 @@
         let closeModalBtn = document.querySelector(".close-modal-btn");
 
         let custId = document.querySelector("#custId");
+        let name = document.querySelector("#name");
         let email = document.querySelector("#email");
+        let telNo = document.querySelector("#telNo");
 
         let regBtn = document.querySelector(".register-btn");
 
@@ -230,53 +258,53 @@
 
         });
 
-        // // 아이디 정규식
-        // function custIdRegExp(){
-        //     let regEx = /^[a-z]+[a-z0-9]{5,17}$/g;    // 영어로 시작하고 영문자숫자 조합 6자이상 16자이하
-        //     let inputed = custId.value.trim();
-        //
-        //     return !regEx.test(inputed) || !inputed;
-        // }
-        //
-        // // 이메일 정규식
-        // function emailRegExp(){
-        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
-        //     let inputed = document.querySelector("#email").value.trim();
-        //
-        //     return !regEx.test(inputed) || !inputed;
-        // }
-        //
-        //
-        // // 핸드폰 번호 정규식
-        // function telNoRegExp(){
-        //     let regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
-        //     let inputed = document.querySelector("#telNo").value.trim();
-        //
-        //     let telNo = inputed.slice(0,3)+'-'+inputed.slice(3,7)+"-"+inputed.slice(7,inputed.length);
-        //
-        //     return !regEx.test(telNo) || !telNo;
-        // }
 
         function regExp(value){
-            let regEx = "";
+            const idRegEx = /^[a-z]+[a-z0-9]{5,17}$/g; // 아이디 정규식
+            const emailRegEx = /[a-z0-9]+@gmail.com/; // 이메일 정규식 > 추후에 메일인증을 gmail로 구현할 예정
+            const telNoRegEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;  // 휴대폰번호 > 숫자만 가능 01?-4자리-4자리
+
             let inputed = "";
+            let regEx = "";
 
             if(value === 1){  // 아이디 정규식
-                regEx = /^[a-z]+[a-z0-9]{5,17}$/g;
                 inputed = custId.value.trim();
+                regEx = idRegEx;
             }else if(value === 2){
-                regEx = /[a-z0-9]+@gmail.com/;    // 이메일 정규식 > 추후에 메일인증을 gmail로 구현할 예정
                 inputed = document.querySelector("#email").value.trim();
-            }else if(value === 3){  // 휴대폰 번호 정규식
-                regEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;    // 숫자만 가능 01?-4자리-4자리
+                regEx = emailRegEx;
+            }else if(value === 3){
                 let telNo = document.querySelector("#telNo").value.trim();
-
                 inputed = telNo.slice(0,3)+'-'+telNo.slice(3,7)+"-"+telNo.slice(7,telNo.length);
+                regEx = telNoRegEx;
             }
 
             return !regEx.test(inputed) || !inputed;
         }
 
+        telNo.addEventListener("input", () => {
+            const regEx = /[^-0-9]/g;
+            let telNoInfoDiv = document.querySelector(".telNo-info-div");
+
+            if(regEx.test(telNo.value)){
+                telNo.value = telNo.value.replace(/[^-0-9]/g, "");
+                telNoInfoDiv.style.display = "block";
+            }else{
+                telNoInfoDiv.style.display = "none";
+            }
+
+        });
+
+        // // 이름 유효성 검사
+        name.addEventListener("input", () => {
+            let nameInfoDiv = document.querySelector(".name-info-div");
+
+            if(!name.value.trim()){
+                nameInfoDiv.style.display = "block";
+            }else{
+                nameInfoDiv.style.display = "none";
+            }
+        });
 
         // 아이디 ajax로 유효성 검사
         $("#custId").keydown(function(){
@@ -286,8 +314,32 @@
                 success: function () {
                     if (regExp(1)) {
                         idInfoDiv.css("display", "block");
+                        $("#custId_btn").attr("disabled",false);
+                        $("#custId_btn").css("color","#11967f");
+                        $("#custId_btn").css("border-color","#11967f");
                     }else{
                         idInfoDiv.css("display","none");
+                    }
+                },
+            });
+        });
+
+
+
+
+        // 이메일 ajax로 유효성 검사
+        $("#email").keydown(function(){
+            let emailInfoDiv =  $(".email-info-div");
+
+            $.ajax({
+                success: function () {
+                    if (regExp(2)) {
+                        emailInfoDiv.css("display", "block");
+                        $("#email_btn").attr("disabled",false);
+                        $("#email_btn").css("color","#11967f");
+                        $("#email_btn").css("border-color","#11967f");
+                    }else{
+                        emailInfoDiv.css("display","none");
                     }
                 },
             });
@@ -309,6 +361,7 @@
                         $("#custId_btn").attr("disabled",true);
                         $("#custId_btn").css("color","#dddddd");
                         $("#custId_btn").css("border-color","#dddddd");
+
                     },
                     error : function(){
                         alert("사용 불가능한 아이디입니다");
@@ -344,24 +397,24 @@
         // 휴대폰번호 인증 api
         $("#telNo_btn").click(function(){
             if(regExp(3)){
-                // 1. 숫자아니면 버튼 활성화 안함
+                openModal("telNo is failed") // 1. 숫자아니면 버튼 활성화 안함
                 return false;
             }else{
-            let telNoVal = $("#telNo").val(); // 휴대폰 번호
-            $.ajax({
-                type : "POST",
-                url : "/sms/telNoCheck",
-                data : {telNo : telNoVal},
-                cache : false,
-                success : function(data) {
-                    if (data == "err") { // 실패시
-                        alert("SEND ERR");
-                    } else {
-                        alert("SEND OK");
-                        // 성공시 데이터 저장
+                let telNoVal = $("#telNo").val(); // 휴대폰 번호
+                $.ajax({
+                    type : "POST",
+                    url : "/sms/telNoCheck",
+                    data : {telNo : telNoVal},
+                    cache : false,
+                    success : function(data) {
+                        if (data == "err") { // 실패시
+                            alert("SEND ERR");
+                        } else {
+                            alert("SEND OK");
+                            // 성공시 데이터 저장
+                        }
                     }
-                }
-            });     // end of ajax
+                });     // end of ajax
             }
         });
 
