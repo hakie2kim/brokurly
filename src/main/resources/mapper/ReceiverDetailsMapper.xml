@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.ReceiverDetailsDao">
+<mapper namespace="com.brokurly.repository.order.ReceiverDetailsDao">
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO receiver_details
@@ -14,6 +14,10 @@
     </insert>
 
     <!-- READ -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM receiver_details
+    </select>
+
     <sql id="select">
         SELECT * FROM receiver_details
     </sql>
@@ -46,8 +50,16 @@
     </update>
 
     <!-- DELETE -->
+    <sql id="delete">
+        DELETE FROM receiver_details
+    </sql>
+
+    <delete id="deleteAll">
+        <include refid="delete"/>
+    </delete>
+
     <delete id="deleteByRcvDtlId">
-        DELETE FROM brokurly.receiver_details
+        <include refid="delete"/>
         WHERE rcv_dtl_id = #{rcvDtlId}
     </delete>
 
