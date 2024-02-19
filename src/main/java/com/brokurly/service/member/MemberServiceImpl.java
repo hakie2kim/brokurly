@@ -50,14 +50,24 @@ public class MemberServiceImpl implements MemberService {
         memberDao.insertSnsMember(member);
 
         String custId = memberAndSignupDto.getCustId();
-        log.info("custId = {} ", custId);
+        log.debug("custId = {} ", custId);
 
     }
     @Override
     public MemberAndSignupDto kakaoLogin(String snsId){
         log.info("snsId = {}",snsId);
         Member member = memberDao.selectSnsMember(snsId);
+        if(member == null){
+            return null;
+        }
         return member.makeFullDto();
+    }
+    @Override
+    public String findBySnsId(String snsId){
+        log.info("snsId = {} ", snsId);
+        String findSnsId = memberDao.findBySnsId(snsId);
+
+        return findSnsId;
     }
     @Override
     public int getCountAll(){

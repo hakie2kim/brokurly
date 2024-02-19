@@ -42,6 +42,7 @@ public class MemberController {
     @GetMapping("/signup/{custId}")
     @ResponseBody
     public ResponseEntity<String> checkId(@PathVariable String custId){
+        log.info("custId = {}",custId);
         try{
             if(memberService.getCount(custId) == 1){
                 throw new Exception("Member IdChk failed.");

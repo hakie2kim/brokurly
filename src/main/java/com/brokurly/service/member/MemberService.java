@@ -12,6 +12,7 @@ public interface MemberService {
     void kakaoJoin(MemberAndSignupDto memberAndSignupDto);
     int signUp(MemberAndSignupDto memberAndSignupDto);
     MemberAndSignupDto kakaoLogin(String snsId);
+    String findBySnsId(String snsId);
     int getCountAll();
     int getCount(String custId);
     int getCountEmail(String email);
