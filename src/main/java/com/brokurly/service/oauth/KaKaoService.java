@@ -77,7 +77,8 @@ public class KaKaoService {
             conn.setRequestMethod("GET");
             log.info("url = {}",url);
 
-            conn.setRequestProperty("Authorization", "Bearer" + access_token);
+            conn.setRequestProperty("Authorization", "Bearer " + access_token);
+            conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
             int responseCode = conn.getResponseCode();
             log.info("responseCode = {}", responseCode);
@@ -100,11 +101,9 @@ public class KaKaoService {
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            log.warn("id::"+element.getAsJsonObject().get("id").getAsString());
             String id = element.getAsJsonObject().get("id").getAsString();
-            String name = element.getAsJsonObject().get("nickname").getAsString();
+            String name = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
-            log.warn("email::"+email);
 
             resultMap.put("name", name);
             resultMap.put("id",id);

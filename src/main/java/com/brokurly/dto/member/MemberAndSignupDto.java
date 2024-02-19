@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class MemberAndSignupDto {
     @NotBlank(message = "아이디를 입력해 주세요")
     @Pattern(regexp = "^[a-z]+[a-z0-9]{5,17}$",
