@@ -1,15 +1,14 @@
 package com.brokurly.service.goods;
 
-import com.brokurly.entity.cart.Cart;
-import com.brokurly.entity.goods.Goods;
+
 import com.brokurly.dto.cart.CartDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.entity.goods.Goods;
 import com.brokurly.repository.goods.GoodsDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -32,10 +31,9 @@ public class GoodsService {
     //상품 카트에 담기
     @Transactional
     public void addCart(CartDto cartDto) {
-        Cart cart = new Cart();
+        Goods goods = new Goods();
 //    cart.changeStatus(cartDto);
-        goodsDao.insert(cart);
+        goodsDao.insert(goods);
     }
-
 
 }
