@@ -32,8 +32,7 @@
     <select id="selectToBeExpired" resultType="Point">
         SELECT point_no, cust_id, point_amt, expir_dt
         FROM point
-        WHERE cust_id = #{custId}
-        AND expir_dt BETWEEN now() AND date_add(now(), interval 30 day)
+        WHERE expir_dt BETWEEN date_sub(now(), interval 1 month) AND now()
     </select>
 
     <select id="selectExpiredByCustomer" resultType="Point">

@@ -15,7 +15,6 @@ public interface PointDao {
     List<Point> selectByExpirDt(String custId);
     List<Point> selectByCustomer(String custId);
     Point selectByPointNo(Integer pointNo);
-    List<Point> selectToBeExpired(String custId);
     List<Point> selectExpiredByCustomer(String custId);
     int countAll();
 

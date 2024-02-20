@@ -61,8 +61,7 @@
                         <div class="details">
                             <div class="row">
                                 <span>소멸예정 금액 (30일 이내)</span>
-                                <span class="amount"><fmt:formatNumber pattern="#,###원"
-                                                                       value="${totalPointsToBeExpired}"/></span>
+                                <span class="amount">0원</span>
                             </div>
                             <div class="row">
                                 <span>총 누적 적립금 (가입일 기준)</span>
