@@ -21,6 +21,13 @@
         WHERE item_id = #{itemId}
     </select>
 
+    <select id="getThumbnailByItemId" resultType="String">
+        SELECT img
+        from ITEM_IMAGE
+        WHERE item_id=#{itemId}
+        AND rep_img_fl='Y';
+    </select>
+
     <!-- UPDATE -->
 
     <!-- DELETE -->

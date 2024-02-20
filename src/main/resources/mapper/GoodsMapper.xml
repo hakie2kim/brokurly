@@ -27,6 +27,12 @@
         WHERE item_id = #{itemId}
     </select>
 
+    <select id="selectGoodsListbyCateCode" resultType="Goods">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode}, '%');
+    </select>
+
     <!-- UPDATE -->
 <!--    <update id="update">-->
 <!--        UPDATE item-->

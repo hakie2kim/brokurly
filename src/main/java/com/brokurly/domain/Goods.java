@@ -1,6 +1,8 @@
 package com.brokurly.domain;
 
 import com.brokurly.dto.GoodsDto;
+
+import com.brokurly.dto.GoodsListDto;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -15,7 +17,7 @@ public class Goods {
   private String name;
   private String exp;
   private int price;
-  private double dcRt;
+  private int dcRt;
   private int itemDcAmt;
   private String origin;
   private String pointFl;
@@ -68,7 +70,7 @@ public class Goods {
     this.name = goodsDto.getName();
     this.exp = goodsDto.getExp();
     this.price = goodsDto.getPrice();
-    this.dcRt = goodsDto.getDcRt();
+    this.dcRt = (int) goodsDto.getDcRt();
     this.itemDcAmt = goodsDto.getItemDcAmt();
     this.origin = goodsDto.getOrigin();
     this.pointFl = goodsDto.getPointFl();
@@ -90,6 +92,26 @@ public class Goods {
 
 
   }
+
+  public GoodsListDto makeGoodsList(){
+    return GoodsListDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .disPrice(price-itemDcAmt)
+            .itemDcAmt(itemDcAmt)
+            .revCnt(revCnt)
+            .shipType(shipType)
+            .build();
+  }
+
+
+
+
+
+
 
 
 }

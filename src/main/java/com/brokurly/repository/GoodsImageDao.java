@@ -10,4 +10,6 @@ public interface GoodsImageDao {
     GoodsImage selectByItemId(String itemId);
 
     void deleteByImg(String string);
+
+    String getThumbnailByItemId(String itemId);
 }

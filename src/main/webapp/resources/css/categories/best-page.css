@@ -412,7 +412,7 @@ button {
     letter-spacing: -0.5px;
 }
 .css-19lkxd2 {
-    color: rgb(250, 98, 47);
+     color: rgb(250, 98, 47);
 }
 
 .css-1tl7659 .discount-rate, .css-1tl7659 .sales-price {
@@ -475,4 +475,80 @@ button {
     color: rgb(153, 153, 153);
     line-height: 19px;
     letter-spacing: -0.5px;
+}
+
+/* 페이징 스타일 */
+.css-rdz8z7 {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 36px;
+}
+
+.css-1d20dg7:first-of-type {
+    border-left: 1px solid rgb(221, 221, 221);
+}
+.css-1d20dg7 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-image: initial;
+    border-left: none;
+    cursor: pointer;
+}
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: inherit;
+}
+img, legend {
+    border: 0;
+    vertical-align: top;
+}
+canvas, img, video {
+    max-width: 100%;
+}
+.css-19yo1fh {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-image: initial;
+    border-left: none;
+    cursor: pointer;
+    background-color: rgb(247, 247, 247);
+    color: rgb(95, 0, 128);
+}
+.css-1d20dg7 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-top: 1px solid rgb(221, 221, 221);
+    border-right: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-image: initial;
+    border-left: none;
+    cursor: pointer;
+}
+.css-1d3w5wq {
+    width: 100%;
 }

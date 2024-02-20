@@ -28,9 +28,9 @@ public class CategoryController {
     @GetMapping("/productscreate")
     public String readCategory(Model m) throws Exception {
 
-        CategoryDto categoryDto = new CategoryDto();
+//        CategoryDto categoryDto = new CategoryDto();
 
-        List<CategoryDto> selectMain = categoryService.readMain();
+        List<CategoryDto> selectMain = categoryService.readPrimary();
         m.addAttribute("selectMain", selectMain);
         log.info("model={}",m);
         log.info("selectMain={}", selectMain);

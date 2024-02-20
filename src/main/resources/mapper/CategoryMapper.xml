@@ -14,7 +14,7 @@
     </sql>
 
 <!--  카테고리 대분류 가져오기  -->
-    <select id="selectMain" resultType="CategoryDto">
+    <select id="selectPrimary" resultType="Category">
         <![CDATA[
         SELECT code_id, exp
         FROM category_code
@@ -23,10 +23,22 @@
     </select>
 
     
-    <select id="getCategoryExpById" resultType="CategoryDto">
+    <select id="getCategoryExpByPrimary" resultType="Category">
         <include refid="select"/>
-        WHERE code_id = #{codeId}
+        WHERE code_id LIKE CONCAT(#{cateCode}, '%');
     </select>
+
+    <delete id="deletebyId">
+        delete from CATEGORY_CODE
+        where code_id=#{codeId}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from CATEGORY_CODE
+    </delete>
+
+
+
 
 
 
@@ -34,11 +46,11 @@
 
 
 <!--    카테고리 중분류 가져오기    -->
-    <select id="selectMiddleExp" resultType="CategoryDto">
-        SELECT code_id, exp
-        FROM category_code
-        WHERE code_id LIKE '9070__'
-    </select>
+<!--    <select id="selectMiddleExp" resultType="CategoryDto">-->
+<!--        SELECT code_id, exp-->
+<!--        FROM category_code-->
+<!--        WHERE code_id LIKE '9070__'-->
+<!--    </select>-->
 
 
 </mapper>

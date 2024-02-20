@@ -1,7 +1,12 @@
 package com.brokurly.controller;
 
+import com.brokurly.domain.Category;
 import com.brokurly.dto.CategoryDto;
+
+import com.brokurly.dto.GoodsListDto;
 import com.brokurly.service.CategoryService;
+
+import com.brokurly.service.GoodsListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -21,13 +26,15 @@ import java.util.List;
 public class BestPageController {
 
     private final CategoryService categoryService;
+    private final GoodsListService goodsListService;
+
 
     @GetMapping("/header")
     public String readCategory(Model m) throws Exception {
 
-        CategoryDto categoryDto = new CategoryDto();
+        categoryService.readPrimary();
 
-        List<CategoryDto> selectMain = categoryService.readMain();
+        List<CategoryDto> selectMain = categoryService.readPrimary();
         m.addAttribute("selectMain", selectMain);
 
 
@@ -36,27 +43,37 @@ public class BestPageController {
 
     @GetMapping("/best-page")
     public String bestpage(Model m) throws Exception {
-        CategoryDto categoryDto = new CategoryDto();
+//        CategoryDto categoryDto = new CategoryDto();
 
-        List<CategoryDto> selectMain = categoryService.readMain();
+        List<CategoryDto> selectMain = categoryService.readPrimary();
         m.addAttribute("selectMain", selectMain);
 
         return "categories/best-page";
     }
 
     @RequestMapping(value = "/{codeId}", method = RequestMethod.GET)
-    public String categoryPage(Model m, @PathVariable int codeId) throws Exception{
+    public String categoryPage(Model m, @PathVariable String codeId) throws Exception{
+
+        categoryService.readPrimary();
+
+        List<CategoryDto> selectMain = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectMain);
 
 
-        List<CategoryDto> selectMain = categoryService.readMain();
-
+        List<CategoryDto> categorydto = categoryService.findCategoryByPrimary(codeId);
+        List<GoodsListDto> goodsListDto = goodsListService.readGoodsList(codeId);
 
 
 
         m.addAttribute("codeId",codeId);
 
+        m.addAttribute("categorydto",categorydto);
+        m.addAttribute("goodsListDto",goodsListDto);
 
-        return "/codeId";
+
+
+
+        return "categories/categories";
 
     }
 
