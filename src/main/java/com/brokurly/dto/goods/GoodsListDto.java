@@ -1,4 +1,4 @@
-package com.brokurly.dto;
+package com.brokurly.dto.goods;
 
 import lombok.Builder;
 import lombok.Getter;

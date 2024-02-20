@@ -1,6 +1,6 @@
-package com.brokurly.repository;
+package com.brokurly.repository.goods;
 
-import com.brokurly.domain.GoodsList;
+import com.brokurly.entity.goods.GoodsList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

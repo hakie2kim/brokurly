@@ -1,7 +1,7 @@
-package com.brokurly.domain;
+package com.brokurly.entity.goods;
 
 
-import com.brokurly.dto.GoodsListDto;
+import com.brokurly.dto.goods.GoodsListDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

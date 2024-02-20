@@ -1,13 +1,11 @@
-package com.brokurly.service;
+package com.brokurly.service.goods;
 
-import com.brokurly.domain.Goods;
-import com.brokurly.dto.GoodsListDto;
-import com.brokurly.repository.GoodsDao;
-import com.brokurly.repository.GoodsImageDao;
-import com.brokurly.repository.GoodsListDao;
+import com.brokurly.entity.goods.Goods;
+import com.brokurly.repository.goods.GoodsDao;
+import com.brokurly.repository.goods.GoodsImageDao;
+import com.brokurly.dto.goods.GoodsListDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
