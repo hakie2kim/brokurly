@@ -112,6 +112,14 @@ public class PointService {
         }
     }
 
+    // 소멸 예정 금액
+    public int getTotalPointsToBeExpired(String custId) {
+        return pointDao.selectToBeExpired(custId)
+                .stream()
+                .mapToInt(Point::getPointAmt)
+                .sum();
+    }
+
     // CREATE
 
     // READ

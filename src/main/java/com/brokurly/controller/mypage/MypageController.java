@@ -32,6 +32,7 @@ public class MypageController {
         int pointLogUsageCount = pointLogService.getPointLogUsageCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "사용");
         model.addAttribute("period", period);
@@ -39,6 +40,7 @@ public class MypageController {
         model.addAttribute("pointLogUsageCount", pointLogUsageCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogUsageList);
 
@@ -53,6 +55,7 @@ public class MypageController {
         int pointLogExpCount = pointLogService.getPointLogExpCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "소멸");
         model.addAttribute("period", period);
@@ -60,6 +63,7 @@ public class MypageController {
         model.addAttribute("pointLogExpCount", pointLogExpCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogExpCount);
 
@@ -74,6 +78,7 @@ public class MypageController {
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "적립");
         model.addAttribute("period", period);
@@ -81,6 +86,7 @@ public class MypageController {
         model.addAttribute("pointLogEarningCount", pointLogEarningCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         return "/mypage/point-earning-log";
     }
