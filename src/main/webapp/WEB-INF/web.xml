@@ -31,6 +31,11 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <mime-mapping>
+        <extension>png</extension>
+        <mime-type>image/png</mime-type>
+    </mime-mapping>
+
     <!-- 한글 변환 필터 -->
     <filter>
         <filter-name>encodingFilter</filter-name>

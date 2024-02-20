@@ -30,11 +30,11 @@
                 <a class="best-menu-name" href="http://localhost:8080/categories/${categorydto[0].codeId}">전체보기</a>
             </li>
 
-        <c:forEach var="catelist" items="${categorydto}" begin="1" end="${fn:length(categorydto)}" varStatus="loop">
-            <li class="best-list">
-            <a class="best-menu-name" href="http://localhost:8080/categories/${catelist.codeId}">${catelist.exp}</a>
-            </li>
-        </c:forEach>
+            <c:forEach var="catelist" items="${categorydto}" begin="1" end="${fn:length(categorydto)}" varStatus="loop">
+                <li class="best-list">
+                    <a class="best-menu-name" href="http://localhost:8080/categories/${catelist.codeId}">${catelist.exp}</a>
+                </li>
+            </c:forEach>
         </ul>
     </div>
 

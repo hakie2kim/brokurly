@@ -54,7 +54,8 @@
                         </div>
                         <div class="price">
                             <div class="wrapper">
-                                <span class="amount">0</span><span class="won">원</span>
+                                <span class="amount"><fmt:formatNumber pattern="#,###"
+                                                                       value="${totalAvailPoints}"/></span><span class="won">원</span>
                             </div>
                         </div>
                         <div class="details">
@@ -64,7 +65,8 @@
                             </div>
                             <div class="row">
                                 <span>총 누적 적립금 (가입일 기준)</span>
-                                <span class="amount">8,223원</span>
+                                <span class="amount"><span class="amount"><fmt:formatNumber pattern="#,###원"
+                                                                                            value="${totalAccumulPoints}"/></span>
                             </div>
                         </div>
                     </div>
