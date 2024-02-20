@@ -22,7 +22,6 @@ public class BestPageController {
     private final CategoryService categoryService;
     private final GoodsListService goodsListService;
 
-
     @GetMapping("/header")
     public String readCategory(Model m) throws Exception {
 
@@ -70,5 +69,4 @@ public class BestPageController {
         return "categories/categories";
 
     }
-
 }

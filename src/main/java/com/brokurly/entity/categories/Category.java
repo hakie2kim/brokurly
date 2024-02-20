@@ -15,7 +15,7 @@ public class Category {
     String codeId;
     String exp;
 
-    public CategoryDto makeDto(){
+    public CategoryDto makeFullDto(){
         return CategoryDto.builder()
                 .codeId(codeId)
                 .exp(exp)

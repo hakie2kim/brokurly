@@ -5,10 +5,11 @@
 <mapper namespace="com.brokurly.repository.categories.CategoryDao">
 
     <!--  CREATE  -->
+
     <insert id="insert">
         INSERT INTO category_code
-            (code_id, exp)
-        VALUES (#{codeId}, #{exp})
+               (code_id, exp)
+        VALUES (#{codeId},#{exp})
     </insert>
 
     <insert id="insertCategory">
@@ -22,6 +23,9 @@
     <sql id="select">
         SELECT * FROM category_code
     </sql>
+
+
+    <!--  READ  -->
 
     <!--  카테고리 대분류 가져오기  -->
     <select id="selectPrimary" resultType="Category">
@@ -37,13 +41,14 @@
     SELECT code_id, exp
     FROM category_code
     WHERE code_id LIKE '${codeId}0%'
+
     </select>
 
     <select id="getCategoryExpByPrimary" resultType="Category">
         <include refid="select"/>
         WHERE code_id LIKE CONCAT(#{cateCode}, '%');
     </select>
-
+  
     <!--  UPDATE  -->
     <update id="update">
         UPDATE category_code

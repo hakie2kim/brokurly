@@ -2,6 +2,8 @@ package com.brokurly.service.categories;
 
 import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.entity.categories.Category;
+import com.brokurly.entity.categories.Category;
+import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.repository.categories.CategoryDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class CategoryService {
         List<CategoryDto> categoryDtoList = new ArrayList<>();
         //비어있는 dto list에 domain을 하나씩 넣는다.
         for (Category category : categoryList) {
-            categoryDtoList.add(category.makeDto());
+            categoryDtoList.add(category.makeFullDto());
         }
 
         log.info("list={}", categoryDtoList);
@@ -50,13 +52,12 @@ public class CategoryService {
         List<CategoryDto> categoryDtoList = new ArrayList<>();
         //domain 하나씩 넣기
         for(Category category : categoryList){
-            categoryDtoList.add(category.makeDto());
+            categoryDtoList.add(category.makeFullDto());
         }
         log.info("Middlelist서비스={}",categoryDtoList);
 
         return categoryDtoList;
     }
-
 
     public List<CategoryDto> findCategoryByPrimary(String codeId) {
 
@@ -71,5 +72,4 @@ public class CategoryService {
 
 
     }
-
 }
