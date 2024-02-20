@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.MemberDao">
+<mapper namespace="com.brokurly.repository.member.MemberDao">
     <!-- CREATE -->
-<!--     useGeneratedKeys="true" keyProperty="bno"-->
+    <!--     useGeneratedKeys="true" keyProperty="bno"-->
     <insert id="insert">
         INSERT INTO customer
-            (cust_id, pwd, name, email, tel_no, sex,
-             birth_dt, reg_dt, adult_verif_dt,consent)
+        (cust_id, pwd, name, email, tel_no, sex,
+         birth_dt, consent,sns_id)
         VALUES
-            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
-             #{birthDt}, now(), #{adultVerifDt},#{consent})
+            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
+             #{birthDt}, '0' ,'0')
     </insert>
 
     <!-- READ -->
-    <sql id="selectMember">
+    <sql id="select">
         SELECT cust_id,
                pwd,
                name,
@@ -29,10 +29,36 @@
                point,
                consent,
                act_stat,
-               grade
+               grade,
+               sns_id
         FROM customer
-        WHERE custId = #{custId}
     </sql>
+    <!-- KAKAO LOGIN START-->
+    <select id="selectSnsMember" resultType="Member">
+        SELECT cust_id, name, pwd, email, tel_no, sex,
+               birth_dt,consent,sns_id
+        FROM customer
+        WHERE sns_id = #{snsId}
+    </select>
+    <select id="findBySnsId" resultType="String">
+        SELECT cust_id
+        FROM customer
+        WHERE sns_id = #{snsId}
+    </select>
+    <select id="findByAuth">
+        SELECT cust_id
+        FROM customer
+        WHERE sns_id = #{snsId}
+    </select>
+    <insert id="insertSnsMember">
+        INSERT INTO customer
+        (cust_id, pwd, name, email, tel_no, sex,
+            birth_dt, consent,sns_id)
+        VALUES
+            (#{custId}, #{pwd}, #{name}, 'testEmail@kakao.com', '01015121542', 'N',
+        '1695-02-18', '0' ,#{snsId})
+    </insert>
+    <!-- KAKAO LOGIN END-->
 
     <!-- COUNT -->
     <sql id="count">
@@ -45,12 +71,12 @@
 
     <select id="countMember" resultType="int">
         <include refid="count" />
-            WHERE cust_id = #{custId}
+        WHERE cust_id = #{custId}
     </select>
 
     <select id="countEmail" resultType="int">
         <include refid="count"/>
-            WHERE email = #{email}
+        WHERE email = #{email}
     </select>
 
     <!-- DELETE -->

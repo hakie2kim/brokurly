@@ -4,133 +4,212 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Document</title>
+    <title>브로컬리</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Noto Sans KR", sans-serif;
-            overflow-x: hidden;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 30px 0 30px;
-            position: sticky;
-            top: 0;
-            left: 0;
-            z-index: 321;
-            height: 90px;
-            background: rgb(255, 255, 255);
-        }
-
-        .sameCheck {
-            position: relative;
-            display: flex;
-            align-items: center;
-            vertical-align: top;
-            line-height: normal;
-            color: rgb(51, 51, 51);
-            margin-top: 9px;
-            font-size: 14px;
-            padding: 12px 0;
-            letter-spacing: -0.5px;
-        }
-
-        .star {
-            color: rgb(250, 98, 47);
-        }
-
-        .receiver-info {
-            width: 90%;
-            padding: 0 30px;
-        }
-
-        .receiver-info input[type="text"] {
-            width: 100%;
-            height: 44px;
-            margin-top: 5px;
-            margin-bottom: 25px;
-            padding: 0 11px 0 15px;
-        }
-
-        .receive-place {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .receive-place-label {
-            display: flex;
-        }
-
-        .notice {
-            padding: 10px 12px;
-        }
-    </style>
+    <link rel="stylesheet" href="<c:url value='/resources/css/order/receiver-details.css'/>"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="<c:url value='/resources/js/order/receiver-details.js'/>"></script>
 </head>
 <body>
 <div class="header">
     <h2>배송 요청사항</h2>
     <label class="sameCheck">
-        <input type="checkbox" checked=""/>
-        <span>주문자 정보와 동일</span>
+        <input type="checkbox" checked="checked"/>
+        <span style="font-size: 15px; margin-left: 10px">주문자 정보와 동일</span>
     </label>
 </div>
-<div class="receiver-info">
+<form action="" method="post" class="receiver-info">
+    <!-- 배송 대상자 정보 -->
     <div>
         <div>
-            <label for="receiver-name" class="name">받으실 분<span class="star">*</span></label>
-            <input id="receiver-name" name="name" placeholder="이름을 입력해 주세요" type="text"
-                   value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
+            <label for="receiver-name" class="name title">받으실 분<span class="star">*</span></label>
+            <input
+                    id="receiver-name"
+                    name="name"
+                    placeholder="이름을 입력해 주세요"
+                    type="text"
+                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
         </div>
         <div>
-            <label for="receiver-phone" class="name">휴대폰<span class="star">*</span></label>
-            <input id="receiver-phone" name="name" placeholder="숫자만 입력해 주세요" type="text"
-                   value="<c:if test='${receiverDetails != null}'>${receiverDetails.telNo}</c:if>"/>
+            <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
+            <input
+                    id="receiver-phone"
+                    name="telNo"
+                    placeholder="숫자만 입력해 주세요"
+                    type="text"
+                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.telNo}</c:if>"/>
         </div>
     </div>
+
     <div>
-        <div>받으실 장소<span class="star">*</span></div>
-        <div>
+        <div class="title">받으실 장소<span class="star">*</span></div>
+        <div style="margin-top: 10px">
             <div>
                 <div class="receive-place">
                     <div style="width: 50%">
-                        <label for="door" class="receive-place-label">
-                            <input type="radio" name="receivePlace" id="door" class="receive-place"/>
-                            <div style="margin-left: 10px">
-                                <span>문 앞</span>
-                            </div>
+                        <label for="front-door" class="receive-place-label">
+                            <input
+                                    type="radio"
+                                    name="rcvPlace"
+                                    id="front-door"
+                                    class="receive-place"
+                                    <c:if test="${receiverDetails == null || receiverDetails.rcvPlace == '문 앞'}">checked</c:if>
+                                    value="문 앞"/>
+                            <span style="margin-left: 10px">문 앞</span>
                         </label>
                     </div>
                     <div style="width: 50%">
                         <label for="etc-place" class="receive-place-label">
-                            <input type="radio" name="receivePlace" id="etc-place" class="receive-place"/>
-                            <div style="margin-left: 10px">
-                                <span>기타 장소</span>
-                            </div>
+                            <input
+                                    type="radio"
+                                    name="rcvPlace"
+                                    id="etc-place"
+                                    class="receive-place"
+                                    <c:if test="${receiverDetails.rcvPlace == '기타 장소'}">checked</c:if>
+                                    value="기타 장소"/>
+                            <span style="margin-left: 10px">기타 장소</span>
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="notice">경비실과 무인택배함 배송이 종료되었어요.</div>
-            <div class="etc-detail">기타장소 세부사항<span class="star">*</span></div>
-            <label for="etc" class="receive-place-label">
-                <input type="radio" name="receivePlace" id="etc" class="receive-place"/>
-                <div style="margin-left: 10px">
-                    <span>기타</span>
+            <div class="notice">
+                <img src="<c:url value="/resources/image/info.png"/>" alt="information mark">
+                <span style="margin-left: 5px;">경비실과 무인택배함 배송이 종료되었어요.</span>
+            </div>
+
+            <!-- 공동현관 출입방법 라디오 목록  -->
+            <div id="door-radio-list">
+                <div class="door-detail title">공동현관 출입방법<span class="star">*</span></div>
+                <label for="password-radio" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="password-radio" value="공동현관 비밀번호"
+                           <c:if test="${receiverDetails == null || receiverDetails.enterMthd == '공동현관 비밀번호'}">checked</c:if>/>
+                    <span style="margin-left: 10px">공동현관 비밀번호</span>
+                </label>
+                <input
+                        type="text"
+                        name="placeExp"
+                        id="password-text"
+                        placeholder="출입에 필요한 버튼을 모두 입력해주세요."/>
+                <div class="door-password-guide">
+                    <div>공동현관 비밀번호 입력 가이드</div>
+                    <button type="button" class="show-hide-button">⋁</button>
                 </div>
-            </label>
-            <div >
-                <input type="text" id="etc-detail" name="etc-detail" class="detail" />
+                <div class="door-password-guide-content">
+                    <p>입력 시 한글 혹은 특수문자(#,*)를 활용해주세요</p>
+                    <ul>
+                        <li>
+                            <span>호수 🔑 비밀번호 🔔 📢</span>
+                            <span>></span>
+                            <span class="copy-template">101 열쇠 1234 종 호출</span>
+                        </li>
+                        <li>
+                            <span>👮🏻‍♂️ # 호수 # 비밀번호 *</span>
+                            <span>></span>
+                            <span class="copy-template">경비 # 101 # 1234 *</span>
+                        </li>
+                        <li>
+                            <span>🔔 비밀번호</span>
+                            <span>></span>
+                            <span class="copy-template">종 1234</span>
+                        </li>
+                        <li>
+                            <span># 비밀번호 *</span>
+                            <span>></span>
+                            <span class="copy-template"># 1234 *</span>
+                        </li>
+                    </ul>
+                </div>
+                <label for="free-entry-radio" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="free-entry-radio" value="자유 출입 가능"
+                           <c:if test="${receiverDetails.enterMthd == '자유 출입 가능'}">checked</c:if>/>
+                    <span style="margin-left: 10px">자유 출입 가능</span>
+                </label>
+                <label for="security-call-radio" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="security-call-radio" value="경비실 호출"
+                           <c:if test="${receiverDetails.enterMthd == '경비실 호출'}">checked</c:if>/>
+                    <span style="margin-left: 10px">경비실 호출</span>
+                </label>
+                <div class="textarea-div security-call-textarea">
+                            <textarea
+                                    name="placeExp"
+                                    maxlength="100"
+                                    placeholder="경비실 호출 방법을 자세히 입력해주세요.&#13;&#10;예 : 공동현관에서 경비실 모양 버튼"></textarea>
+                </div>
+                <label for="door-etc-radio" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="door-etc-radio" value="문 앞 기타"
+                           <c:if test="${receiverDetails.enterMthd == '문 앞 기타'}">checked</c:if>/>
+                    <span style="margin-left: 10px">기타</span>
+                </label>
+                <div class="textarea-div door-etc-textarea">
+                            <textarea
+                                    name="placeExp"
+                                    maxlength="100"
+                                    placeholder="출입방법을 상세히 기재해주세요."></textarea>
+                </div>
+            </div>
+
+            <!-- 기타장소 세부사항 라디오 목록 -->
+            <div id="etc-radio-list">
+                <div class="etc-detail title">기타장소 세부사항<span class="star">*</span></div>
+                <label for="etc" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="etc" value="기타 장소 기타"
+                           <c:if test="${receiverDetails.enterMthd == '기타 장소 기타'}">checked</c:if>/>
+                    <span style="margin-left: 10px">기타</span>
+                </label>
+                <div class="textarea-div etc-textarea">
+                            <textarea
+                                    name="placeExp"
+                                    maxlength="100"
+                                    placeholder="원하시는 장소를 자세히 입력해주세요.&#13;&#10;예 : 계단 및, 주택단지 앞 경비초소를 지나 A동 출입구"></textarea>
+                </div>
+                <label for="receiving-room" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="receiving-room" value="택배 수령실"
+                           <c:if test="${receiverDetails.enterMthd == '택배 수령실'}">checked</c:if>/>
+                    <span style="margin-left: 10px">택배 수령실</span>
+                </label>
+                <div class="textarea-div receiving-room-textarea">
+                            <textarea
+                                    name="placeExp"
+                                    maxlength="100"
+                                    placeholder="원하시는 장소를 자세히 입력해주세요.&#13;&#10;예 : 1층 출입구 오른쪽 택배수령실에 배송해주세요."></textarea>
+                </div>
+                <label for="front-gate" class="receive-place-label">
+                    <input type="radio" name="enterMthd" id="front-gate" value="공동현관 앞"/>
+                    <span style="margin-left: 10px">공동현관(대문) 앞</span>
+                </label>
             </div>
         </div>
+
+        <!-- 배송 완료 메시지 라디오 목록 -->
+        <div class="title">배송 완료 메시지 전송<span class="star">*</span></div>
+        <div>
+            <div class="receive-place">
+                <div style="width: 50%">
+                    <label for="after-shipping" class="receive-place-label">
+                        <input type="radio" name="msgTime" id="after-shipping" class="receive-place"
+                               <c:if test="${receiverDetails.msgTime == '배송 직후'}">checked</c:if>
+                               value="배송 직후"/>
+                        <span style="margin-left: 10px">배송 직후</span>
+                    </label>
+                </div>
+                <div style="width: 50%">
+                    <label for="7am" class="receive-place-label">
+                        <input type="radio" name="msgTime" id="7am" class="receive-place"
+                               <c:if test="${receiverDetails.msgTime == '오전 7시'}">checked</c:if>
+                               value="오전 7시"/>
+                        <span style="margin-left: 10px">오전 7시</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="result-buttons">
+            <button type="button" class="cancel" onclick="window.close()">취소</button>
+            <button type="submit" class="save">저장</button>
+        </div>
     </div>
-</div>
+</form>
 </body>
 </html>
-

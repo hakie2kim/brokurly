@@ -2,21 +2,30 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.ReceiverDetailsDao">
+<mapper namespace="com.brokurly.repository.order.ReceiverDetailsDao">
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO receiver_details
-            (rcv_dtl_id, ship_loca_id, cust_id, rcv_name, tel_no, rec_addr, enter_mthd,
-             door_pwd, guard_call, etc, msg_time)
+            (rcv_dtl_id, ship_loca_id, cust_id, rcv_name, tel_no,
+             rcv_place, enter_mthd, place_exp, msg_time)
         VALUES
-            (#{rvcDtlId}, #{shipLocaId}, #{custId}, #{rcvName}, #{telNo}, #{rcv_addr}, #{enterMthd},
-             #{doorPwd}, #{guardCall}, #{etc}, #{msgTime})
+            (#{rcvDtlId}, #{shipLocaId}, #{custId}, #{rcvName}, #{telNo},
+             #{rcvPlace}, #{enterMthd}, #{placeExp}, #{msgTime})
     </insert>
 
     <!-- READ -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM receiver_details
+    </select>
+
     <sql id="select">
         SELECT * FROM receiver_details
     </sql>
+
+    <select id="selectAll" resultType="ReceiverDetails">
+        <include refid="select"/>
+        ORDER BY rcv_dtl_id
+    </select>
 
     <select id="selectByShipLocaId" resultType="ReceiverDetails">
         <include refid="select"/>
@@ -27,6 +36,7 @@
         <include refid="select"/>
         WHERE rcv_dtl_id = #{rcvDtlId}
     </select>
+
     <!-- UPDATE -->
     <update id="update">
         UPDATE receiver_details
@@ -38,8 +48,19 @@
             msg_time = #{msgTime}
         WHERE rcv_dtl_id = #{rcvDtlId}
     </update>
-    <!-- UPDATE -->
 
     <!-- DELETE -->
+    <sql id="delete">
+        DELETE FROM receiver_details
+    </sql>
+
+    <delete id="deleteAll">
+        <include refid="delete"/>
+    </delete>
+
+    <delete id="deleteByRcvDtlId">
+        <include refid="delete"/>
+        WHERE rcv_dtl_id = #{rcvDtlId}
+    </delete>
 
 </mapper>
