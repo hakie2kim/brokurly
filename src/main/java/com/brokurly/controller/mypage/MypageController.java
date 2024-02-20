@@ -32,6 +32,7 @@ public class MypageController {
         int pointLogUsageCount = pointLogService.getPointLogUsageCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "사용");
         model.addAttribute("period", period);
@@ -39,6 +40,7 @@ public class MypageController {
         model.addAttribute("pointLogUsageCount", pointLogUsageCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogUsageList);
 
@@ -53,6 +55,7 @@ public class MypageController {
         int pointLogExpCount = pointLogService.getPointLogExpCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "소멸");
         model.addAttribute("period", period);
@@ -60,6 +63,7 @@ public class MypageController {
         model.addAttribute("pointLogExpCount", pointLogExpCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogExpCount);
 
@@ -71,28 +75,10 @@ public class MypageController {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
-//        for (PointAndPointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
-//            String orderId = pointLogUsageDto.getOrderId();
-//            int pointAmt = pointLogUsageDto.getPointAmt();
-//            Date procDt = pointLogUsageDto.getProcDt();
-//            String pointSpec = pointLogUsageDto.getPointSpec();
-//
-//            /*String pointSpecDetails = "";
-//            if (orderId == null) {
-//                pointSpecDetails = new SimpleDateFormat("MM/dd까지 사용가능").format(pointLogUsageDto.getProcDt());
-//            } else {
-//                pointSpecDetails = String.format("주문번호 (%s)", orderId);
-//            }*/
-//
-//            String pointStat = pointLogUsageDto.getPointStat();
-//            Date expDt = pointService.findPointByPointId(pointLogUsageDto.get)
-//
-//            pointLogEarningList.add(new PointAndPointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
-//        }
-
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "적립");
         model.addAttribute("period", period);
@@ -100,6 +86,7 @@ public class MypageController {
         model.addAttribute("pointLogEarningCount", pointLogEarningCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         return "/mypage/point-earning-log";
     }
