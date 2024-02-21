@@ -120,11 +120,11 @@
                       <span class="goods-100" name="point_fl">적립제외상품</span>
                       <div class="goods-103">
                         <div class="goods-104">
-                          <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                                  aria-label="수량내리기"></button>
-                          <div class="count goods-106" id="count" name="item_cnt">1</div>
-                          <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                                  aria-label="수량올리기"></button>
+                          <button class="minus_btn goods-105" type="button" aria-label="수량내리기"></button>
+                          <div class="goods-106">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                          <button class="plus_btn goods-107" type="button" aria-label="수량올리기"></button>
                         </div>
                         <div>
                           <span class="goods-8" >${goods.price}
@@ -171,7 +171,7 @@
                                         </span>
                 </button>
                 <div class="goods-113">
-                  <button class="cart-button goods-115" type="button" radius="3">
+                  <button class="btn_cart goods-115" type="button" radius="3" id="addBtn">
                     <span class="goods-114 ">장바구니 담기</span>
                   </button>
                 </div>
@@ -975,16 +975,18 @@
             <div>
               <div class="goods-37">
                   <span class="goods-38">
-                      <span>[KF365] 양념 소불고기 1kg (냉장)</span>
+                      <span>${goods.name}</span>
                       <span>적립제외상품</span>
                   </span>
                 <span class="goods-39">
                   <div class="goods-104">
-                      <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                              aria-label="수량내리기">+</button>
-                      <div class="count goods-106" id="count2">1</div>
-                      <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                              aria-label="수량올리기">-</button>
+                      <button class="minus_btn goods-105" type="button" onclick='count("minus")' value='+'
+                              aria-label="수량내리기"></button>
+                          <div class="goods-106" name="item_cnt">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                      <button class="plus_btn goods-107" type="button" onclick='count("plus")' value='-'
+                              aria-label="수량올리기"></button>
                   </div>
                   <span class="goods-40">
                       <span class="goods-41">
@@ -1241,43 +1243,72 @@
       });
   });
 
-  //할인가 적용
-  // $(document).ready(function(){
-  // let oriResult = document.getElementById('originPrice');
-  // let disResult = document.getElementById('discount');
-  // let priResult = document.getElementById('price');
-  // let oriNumber = parseInt(originResult.innerText);
-  // let disNumber = parseInt(disResult.innerText);
-  // let priNumber = parseInt(priResult.innerText);
+  // // //상품 개수에 따른 가격 변동
+  // function count(type) {
+  //     let cntResult = document.getElementById('count'); //상품 개수
+  //     let priResult = document.getElementById('price'); //상품 가격
+  //     let sumResult = document.getElementById('sum');   //총 가격
+  //
+  //     let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로
+  //     let priNumber = parseInt(priResult.innerText);  //문자값을 숫자로
+  //     let sumNumber = parseInt(sumResult.innerText);
+  //
+  //     if (type === 'plus') {  //증가
+  //         cntNumber += 1;
+  //         sumNumber = sumNumber + priNumber;
+  //     } else if (type === 'minus' && cntNumber > 1) { //감소
+  //         cntNumber -= 1;
+  //         sumNumber = sumNumber - priNumber;
+  //     }
+  //     cntResult.innerText = cntNumber;    //숫자 값 문자열
+  //     sumResult.innerText = sumNumber;
+  //     document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동
+  //     document.getElementById('price2').innerHTML = sumNumber;
+  // }
+  //
 
-  // priNumber = oriNumbers - (oriNumber + disNumber);
-  // document.getElementById('price').innerHTML = priNumber;
-
-  // });
-
-
-  // //상품 개수에 따른 가격 변동
-  function count(type) {
-      let cntResult = document.getElementById('count'); //상품 개수
-      let priResult = document.getElementById('price'); //상품 가격
-      let sumResult = document.getElementById('sum');   //총 가격
-
-      let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로
-      let priNumber = parseInt(priResult.innerText);  //문자값을 숫자로
-      let sumNumber = parseInt(sumResult.innerText);
-
-      if (type === 'plus') {  //증가
-          cntNumber += 1;
-          sumNumber = sumNumber + priNumber;
-      } else if (type === 'minus' && cntNumber > 1) { //감소
-          cntNumber -= 1;
-          sumNumber = sumNumber - priNumber;
+  // 수량 버튼 조작
+  let quantity = $(".quantity_input").val();
+  $(".plus_btn").on("click", function(){
+      if(quantity <${goods.itemQty})  //재고까지만 구매가능하게
+      $(".quantity_input").val(++quantity);
+  });
+  $(".minus_btn").on("click", function(){
+      if(quantity > 1){
+          $(".quantity_input").val(--quantity);
       }
-      cntResult.innerText = cntNumber;    //숫자 값 문자열
-      sumResult.innerText = sumNumber;
-      document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동
-      document.getElementById('price2').innerHTML = sumNumber;
+  });
+  // 서버로 전송할 데이터
+  const form = {
+      custId : '${customer.custId}',
+      itemId : '${goods.itemId}',
+      itemCnt : ''
   }
+  // 장바구니 추가 버튼
+  $(".btn_cart").on("click", function(e){
+      form.itemCnt = $(".quantity_input").val();
+      $.ajax({
+          url: '/cart/add',
+          type: 'POST',
+          data: form,
+          success: function(result){
+              cartAlert(result);
+          }
+      })
+  });
+
+  function cartAlert(result){
+      if(result == '0'){
+          alert("장바구니에 추가를 하지 못하였습니다.");
+      } else if(result == '1'){
+          alert("장바구니에 추가되었습니다.");
+      } else if(result == '2'){
+          alert("장바구니에 이미 추가되어져 있습니다.");
+      } else if(result == '5'){
+          alert("로그인이 필요합니다.");
+      }
+  }
+
 
 
   <%--// 천 단위 구분기호(콤마)를 추가하는 함수--%>
@@ -1285,67 +1316,18 @@
   <%--    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
   <%--}--%>
 
-  <%--// 상품 정보를 가져오고 콤마를 추가하여 결과를 화면에 표시하는 함수--%>
-  <%--function getProductInfo() {--%>
-  <%--    var oPrice = ${goods.price}; // 상품 할인 전 가격--%>
-  <%--    var disAmnt = ${goods.itemDcAmt}; // 뺄 가격--%>
-  <%--    var resultPrice = oPrice - disAmnt; // 할인된 가격--%>
 
-  <%--    // 결과에 콤마 추가--%>
-  <%--    var formattedOPrice = addCommasToNumber(oPrice)+"원";--%>
-  <%--    var formattedResultPrice = addCommasToNumber(resultPrice)+"원";--%>
-
-  <%--    // 결과를 화면에 표시--%>
-  <%--    document.getElementById("price3").innerHTML = formattedOPrice;--%>
-  <%--    document.getElementById("resultPrice2").value = formattedResultPrice;--%>
-  <%--    document.getElementById("originPrice").value = formattedResultPrice;--%>
-  <%--}--%>
-
-  <%--// 페이지 로드시 상품 정보를 가져옴--%>
-  <%--getProductInfo();--%>
-
-
-
-
-
-  // 상품 개수에 따른 가격 변동
-  <%--function count(type) {--%>
-  <%--    let cntResult = document.getElementById('count'); //상품 개수--%>
-  <%--    let priResult = ${goods.price}-${goods.itemDcAmt}; //상품 가격--%>
-  <%--    let sumResult = priResult;   //총 가격--%>
-
-  <%--    let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로--%>
-
-  <%--    if (type === 'plus') {  //증가--%>
-  <%--        cntNumber += 1;--%>
-  <%--        sumResult = sumResult + priResult;--%>
-  <%--    } else if (type === 'minus' && cntNumber > 1) { //감소--%>
-  <%--        cntNumber -= 1;--%>
-  <%--        sumResult = sumResult - priResult;--%>
-  <%--    }--%>
-  <%--    cntResult.innerText = cntNumber;    //숫자 값 문자열--%>
-  <%--    // sumResult.innerText = sumResult;--%>
-
-  <%--    document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동--%>
-
-  <%--    document.getElementById('price2').innerHTML = sumResult;--%>
-  // }
-
-
-  <%--$(document).ready(function () { //main()--%>
-  <%--    $('.cart-button').on("click", function () {--%>
-  <%--        let form = $('#forma');--%>
-  <%--        form.attr("action", "<c:url value='/seller/productscreate/write'/>");--%>
-  <%--        form.attr("method", "post");--%>
-  <%--        form.submit();--%>
-  <%--        alert("저장되었습니다.");--%>
-  <%--        alert(form);--%>
-  <%--    });--%>
-
-  // })
-
-
-
+  function cartAlert(result){
+      if(result == '0'){
+          alert("장바구니에 추가를 하지 못하였습니다.");
+      } else if(result == '1'){
+          alert("장바구니에 추가되었습니다.");
+      } else if(result == '2'){
+          alert("장바구니에 이미 추가되어져 있습니다.");
+      } else if(result == '5'){
+          alert("로그인이 필요합니다.");
+      }
+  }
 
   </script>
 

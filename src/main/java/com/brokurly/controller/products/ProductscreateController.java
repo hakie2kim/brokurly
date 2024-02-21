@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/seller")
 public class ProductscreateController {
 
-   private final ProductscreateService productscreateService;
+    private final ProductscreateService productscreateService;
 
 
     @Autowired

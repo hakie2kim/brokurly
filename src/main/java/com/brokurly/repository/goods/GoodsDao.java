@@ -1,6 +1,7 @@
 package com.brokurly.repository.goods;
 
 
+import com.brokurly.entity.cart.Cart;
 import com.brokurly.entity.goods.Goods;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -8,7 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface GoodsDao {
 
   // CREATE
-  int insert(Goods goods); //장바구니에 담기
+  int insert(Goods goods); //상품 추가
+  int addCart(Cart cart); //장바구니 상품 추가
   // READ
   Goods selectByItemId(String itemId);  //optional 값이 없는 null을 optional로 감싸서 전달
   // UPDATE
