@@ -5,11 +5,24 @@
 <mapper namespace="com.brokurly.repository.categories.CategoryDao">
 
     <!--  CREATE  -->
+
+    <insert id="insert">
+        INSERT INTO category_code
+               (code_id, exp)
+        VALUES (#{codeId},#{exp})
+    </insert>
+
     <insert id="insertCategory">
         INSERT INTO category_code
                (code_id, exp)
         VALUES (#{codeId},#{exp})
     </insert>
+
+
+    <!--  READ  -->
+    <sql id="select">
+        SELECT * FROM category_code
+    </sql>
 
 
     <!--  READ  -->
@@ -28,9 +41,14 @@
     SELECT code_id, exp
     FROM category_code
     WHERE code_id LIKE '${codeId}0%'
+
     </select>
 
-
+    <select id="getCategoryExpByPrimary" resultType="Category">
+        <include refid="select"/>
+        WHERE code_id LIKE CONCAT(#{cateCode}, '%');
+    </select>
+  
     <!--  UPDATE  -->
     <update id="update">
         UPDATE category_code
@@ -48,6 +66,11 @@
 
     <delete id="deleteAll">
         DELETE FROM category_code
+    </delete>
+
+    <delete id="deletebyId">
+        delete from CATEGORY_CODE
+        where code_id=#{codeId}
     </delete>
 
 </mapper>

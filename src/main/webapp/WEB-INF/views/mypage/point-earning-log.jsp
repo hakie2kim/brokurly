@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/mypage/point-log.css'/>"/>
     <title>적립금 내역</title>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = function () {
         const buttonWrappers = document.querySelectorAll('.row1 .button-wrapper');
@@ -43,6 +44,46 @@
             })
         }
     }
+
+    <%--Ajax--%>
+    /*$(document).ready(function() {
+        $(".period").change(() => {
+            const period = $(".period").val();
+
+            $.ajax({
+                url: "/mypage/point/earning/" + period,
+                type: "get",
+                dataType: "json",
+                data: {
+                    "period": period
+                },
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function (request, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            })
+        })
+
+        $(".row1 .button-wrapper:contains('적립')").on('click', () => {
+            console.log('적립 버튼 클릭')
+
+            const period = $(".period").json();
+            console.log(period);
+
+            $.ajax({
+                url: "earning",
+                type: "get",
+                data: {
+                    "type": "적립"
+                },
+                success: function() {
+
+                }
+            })
+        });
+    });*/
 </script>
 <body>
 <div class="app">
@@ -72,7 +113,9 @@
                         </div>
                         <div class="price">
                             <div class="wrapper">
-                                <span class="amount">0</span><span class="won">원</span>
+                                <span class="amount"><fmt:formatNumber pattern="#,###"
+                                                                       value="${totalAvailPoints}"/></span><span
+                                    class="won">원</span>
                             </div>
                         </div>
                         <div class="details">
@@ -82,7 +125,8 @@
                             </div>
                             <div class="row">
                                 <span>총 누적 적립금 (가입일 기준)</span>
-                                <span class="amount">8,223원</span>
+                                <span class="amount"><span class="amount"><fmt:formatNumber pattern="#,###원"
+                                                                                            value="${totalAccumulPoints}"/></span>
                             </div>
                         </div>
                     </div>
@@ -108,7 +152,7 @@
             <div class="bottom">
                 <div class="row1">
                     <div class="button-wrapper"><span>전체</span></div>
-                    <div class="button-wrapper"><a href="/mypage/point/earning"><span>적립</span></a></div>
+                    <div class="button-wrapper"><%--<a href="/mypage/point/earning">--%><span>적립</span><%--</a>--%></div>
                     <div class="button-wrapper"><a href="/mypage/point/usage"><span>사용</span></a></div>
                     <div class="button-wrapper"><a href="/mypage/point/exp"><span>소멸</span></a></div>
                 </div>
@@ -116,6 +160,7 @@
                     <span>총 ${pointLogEarningCount}건</span>
                     <form action="/mypage/point/earning" method="get">
                         <select name="period" onchange="this.form.submit()">
+                        <%--<select name="period" class="period">--%>
                             <option value="3" <c:if test="${period == 3}">selected</c:if>>3개월</option>
                             <option value="6" <c:if test="${period == 6}">selected</c:if>>6개월</option>
                             <option value="12" <c:if test="${period == 12}">selected</c:if>>12개월</option>

@@ -244,7 +244,8 @@
                                         <div class="css-11n7bn4 e1vs1ym81">
                                             <!-- 이미지 파일명 설정 -->
                                             <img src="/resources/image/icon-<c:out value="${loop.index + 1}" />.png" alt="${item.exp}" class="css-ar6ptu e1vs1ym82" />
-                                            <span class="css-mhaka4 e1vs1ym84">${item.exp}</span>
+                                            <span class="css-mhaka4 e1vs1ym84"><a href="/categories/${item.codeId}">${item.exp}</a></span>
+
                                         </div>
                                     </li>
                                 </c:forEach>

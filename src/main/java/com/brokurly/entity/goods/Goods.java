@@ -1,4 +1,5 @@
 package com.brokurly.entity.goods;
+import com.brokurly.dto.goods.GoodsListDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
@@ -34,6 +35,20 @@ public class Goods {
   private int sellCnt;
   private int revCnt;
   private String stdySellerFl;
+
+  public GoodsListDto makeGoodsList(){
+    return GoodsListDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .disPrice(price-itemDcAmt)
+            .itemDcAmt(itemDcAmt)
+            .revCnt(revCnt)
+            .shipType(shipType)
+            .build();
+  }
 
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
