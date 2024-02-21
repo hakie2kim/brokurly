@@ -5,6 +5,8 @@ import com.brokurly.service.oauth.KaKaoService;
 import com.brokurly.service.member.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,26 +31,33 @@ public class KakaoController {
         log.info("kakaoToken = {}", kakaoToken);
         // 접속자 정보 get
         Map<String, Object> result = kaKaoService.getUserInfo(kakaoToken);
-        log.info("result = {}", result);
         String snsId = (String)result.get("id");
         String userName = (String)result.get("name");
         String email = (String)result.get("email");
         String userpw = snsId;
 
-        MemberAndSignupDto memberAndSignupDto = null;
+        MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
 
         // 일치하는 snsId 없을 시 회원가입
-        log.info(" memberServiece.kakaoLogin(snsId) = {} ", memberService.kakaoLogin(snsId));
+      //  log.info(" memberServiece.kakaoLogin(snsId) = {} ", memberService.kakaoLogin(snsId));
         if(memberService.kakaoLogin(snsId) == null){
-//            log.warn("kakao register");
-//            memberAndSignupDto = new MemberAndSignupDto(email,userpw,userName,snsId);
-////            memberAndSignupDto.setCustId(email);
-////            memberAndSignupDto.setPwd(userpw);
-////            memberAndSignupDto.setName(userName);
-////            memberAndSignupDto.setSnsId(snsId);
-//            memberService.kakaoJoin(memberAndSignupDto);
+            log.info("kakao register");
+            memberAndSignupDto.setCustId(email);
+            memberAndSignupDto.setPwd(userpw);
+            memberAndSignupDto.setName(userName);
+            memberAndSignupDto.setSnsId(snsId);
+            memberService.kakaoJoin(memberAndSignupDto);
         }
 
-        return  "";
+        // 일치하는 snsId가 있으면 멤버객체에 담음
+        log.warn("카카오로 로그인");
+        String userId = memberService.findBySnsId(snsId);
+        log.info("userId = {}", userId);
+     //   MemberAndSignupDto dto = memberService.findByUserId(userId);
+
+
+//        Authentication auth = new AbstractAuthenticationToken(user, null, roles);
+
+        return  "redirect:/";
     }
 }

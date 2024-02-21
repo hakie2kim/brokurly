@@ -1,9 +1,6 @@
 package com.brokurly.dto.mypage;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
@@ -11,6 +8,8 @@ import java.util.Date;
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 public class PointLogUsageDto {
     private String orderId;
     private int pointAmt;

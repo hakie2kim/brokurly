@@ -11,6 +11,7 @@
 <!--        <property name="username" value="aaetom"/>-->
 
         <property name="password" value="1234"/>
+
     </bean>
 
 
@@ -34,6 +35,7 @@
     </bean>
 
     <!--  Validation 관련 Bean 추가  -->
+<<<<<<< HEAD
 <!--    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 <!--    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
 <!--        <property name="validator" ref="validator"/>-->
@@ -43,6 +45,13 @@
     <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">
             <property name="validator" ref="validator"/>
     </bean>
+=======
+<!--        <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+
+<!--        <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
+<!--            <property name="validator" ref="validator"/>-->
+<!--        </bean>-->
+>>>>>>> e0b806cdf81bd266f4715a673dfe7caf3c0816e5
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8"/>

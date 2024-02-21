@@ -1,5 +1,7 @@
 package com.brokurly.service.categories;
 
+import com.brokurly.dto.categories.CategoryDto;
+import com.brokurly.entity.categories.Category;
 import com.brokurly.entity.categories.Category;
 import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.repository.categories.CategoryDao;
@@ -25,7 +27,7 @@ public class CategoryService {
 
     //카테고리 대분류 가져오기
     @Transactional
-    public List<CategoryDto> readMain() {
+    public List<CategoryDto> readPrimary() {
         //domain list 전체 가져오기
         List<Category> categoryList = categoryDao.selectPrimary();
 
@@ -57,5 +59,17 @@ public class CategoryService {
         return categoryDtoList;
     }
 
+    public List<CategoryDto> findCategoryByPrimary(String codeId) {
 
+        List<Category> categoryList = categoryDao.getCategoryExpByPrimary(codeId);
+        List<CategoryDto> categoryDto =new ArrayList<>();
+
+        for (Category category : categoryList) { //categoryList에서 Category(도메인)를 하나씩 꺼내서
+            categoryDto.add(category.makeDto());    //makeDto메서드를 이용해 Dto로 만들어
+        }                                        //categoryDtoList에 다시 담는다
+        log.info("{}",categoryDto);
+        return categoryDto;
+
+
+    }
 }
