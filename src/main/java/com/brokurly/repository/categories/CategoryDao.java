@@ -14,10 +14,6 @@ public interface CategoryDao {
 
     int deletebyId (String codeId);
 
-    void deleteAll();
-
-    //    카테고리 대분류 가져오기
-    List<Category> selectPrimary();
 
     List<Category> getCategoryExpByPrimary(String codeId);
 

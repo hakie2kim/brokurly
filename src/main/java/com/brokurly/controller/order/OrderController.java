@@ -32,7 +32,7 @@ public class OrderController {
 
 //        model.addAttribute("member", session.getAttribute("member"));
 
-        model.addAttribute("member", member);
+//        model.addAttribute("member", member);
         model.addAttribute("receiverDetails", receiverDetails);
         return "order/checkout";
     }
@@ -42,7 +42,7 @@ public class OrderController {
         ReceiverDetailsDto receiverDetails = (ReceiverDetailsDto) session.getAttribute("receiverDetails");
 
 //        model.addAttribute("member", session.getAttribute("member"));
-        model.addAttribute("member", member);
+//        model.addAttribute("member", member);
         model.addAttribute("receiverDetails", receiverDetails);
         return "order/receiver-details";
     }

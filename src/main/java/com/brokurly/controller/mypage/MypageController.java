@@ -19,12 +19,12 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mypage/point")
+@RequestMapping("/mypage")
 public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
 
-    @GetMapping("/usage")
+    @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -47,7 +47,7 @@ public class MypageController {
         return "/mypage/point-usage-log";
     }
 
-    @GetMapping("/exp")
+    @GetMapping("/point/exp")
     String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -70,7 +70,7 @@ public class MypageController {
         return "/mypage/point-exp-log";
     }
 
-    @GetMapping("/earning")
+    @GetMapping("/point/earning")
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -89,5 +89,15 @@ public class MypageController {
         model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         return "/mypage/point-earning-log";
+    }
+
+    @GetMapping("/address")
+    String manageAddress() {
+        return "/mypage/address";
+    }
+
+    @GetMapping("/address/shipping-address")
+    String addAddress() {
+        return "/mypage/shipping-address";
     }
 }
