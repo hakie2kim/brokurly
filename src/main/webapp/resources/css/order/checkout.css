@@ -56,6 +56,10 @@ h2 {
     display: flex;
 }
 
+.item-list {
+    display: flex;
+}
+
 #order-goods {
     text-align: center;
 }
@@ -273,4 +277,19 @@ h2 {
     width: 80%;
     padding-left: 10px;
     text-align: left;
+}
+
+.kakaopay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 60%;
+    height: 48px;
+    border: 1px solid rgb(246, 229, 0);
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    background: rgb(246, 229, 0);
+    font-weight: 500;
+    border-radius: 3px;
 }

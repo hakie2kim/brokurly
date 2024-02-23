@@ -9,7 +9,6 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class CartDto {
-
   private String itemId;
   private int itemCnt;  //카트에 담긴 상품 개수
   private String custId; //-------------------------------
