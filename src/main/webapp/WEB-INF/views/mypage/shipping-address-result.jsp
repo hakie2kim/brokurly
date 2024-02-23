@@ -14,6 +14,32 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/mypage/shipping-address-result.css'/>"/>
     <title>컬리 - 마켓컬리/뷰티컬리</title>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    window.onload = () => {
+        $(".form").submit((e) => {
+            e.preventDefault();
+
+            // console.dir(this);
+            // const formData = $(this).serialize();
+            const formData = $(".form").serialize();
+
+            $.ajax({
+                url: "/mypage/address",
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    alert('Your form has been sent successfully.');
+                    window.close();
+                    window.opener.addShippingAddrs();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Your form was not sent successfully.');
+                }
+            })
+        })
+    }
+</script>
 <body>
 <form class="form" method="post">
     <strong>

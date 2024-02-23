@@ -1,13 +1,12 @@
 package com.brokurly.controller.mypage;
 
-import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogExpDto;
-import com.brokurly.dto.mypage.PointLogUsageDto;
+import com.brokurly.dto.mypage.*;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,8 +93,14 @@ public class MypageController {
         return "/mypage/address";
     }
 
+    @PostMapping("/address")
+    ResponseEntity<ShippingLocationDto> addShippingAddress(String addr, String specAddr) {
+        log.info("addr: {} specAddr: {}", addr, specAddr);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/address/shipping-address")
-    String addAddress() {
+    String shippingAddress() {
         return "/mypage/shipping-address";
     }
 
@@ -106,17 +111,20 @@ public class MypageController {
         return "/mypage/shipping-address-result";
     }*/
 
+
     @PostMapping("/address/shipping-address/result")
-    String addAddressResult(String addr, String specAddr, Model model) {
-        log.info("{}", addr);
+    String shippingAddressResult(String addr, String specAddr, Model model) {
+        log.info("addr: {}", addr);
         model.addAttribute("addr", addr);
 
-        if (specAddr == null) {
+        return "/mypage/shipping-address-result";
+
+        /*if (specAddr == null) {
             return "/mypage/shipping-address-result";
         } else {
             log.info("{}", specAddr);
             model.addAttribute("specAddr", specAddr);
             return "redirect:/mypage/address";
-        }
+        }*/
     }
 }

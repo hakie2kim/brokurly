@@ -27,6 +27,10 @@
             );
         });
     };
+
+    function addShippingAddrs() {
+        alert("베송지 추가 완료");
+    }
 </script>
 <body>
 <div class="top">
