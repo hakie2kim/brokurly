@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%--]
   Created by IntelliJ IDEA.
   User: hakjun
   Date: 2024-02-02
@@ -401,10 +401,7 @@
             <div class="css-j0lifa ed9qr673">
                 <div class="css-fhxb3m ed9qr672">
                     <h2 class="css-1268zpe ed9qr671">공지사항</h2>
-                    <span class="css-a3vgo2 ed9qr670"
-                    >컬리의 새로운 소식들과 유용한 정보들을 한곳에서
-                    확인하세요.</span
-                    >
+                    <span class="css-a3vgo2 ed9qr670">컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요. </span>
                 </div>
             </div>
             <div class="css-e23nfx e16adls21">
@@ -416,12 +413,10 @@
             <ul class="css-1fttcpj e1cfowvj5">
                 <c:forEach var="NoticeListDto" items="${noticeListDtoList}">
                     <li>
-                        <a href="/board/detail?bno=${NoticeListDto.bno}">
-                                <div class="css-14yglsw e1cfowvj4">
+                        <a href="/board/detail?bno=${NoticeListDto.bno}&pageNo=${pageNo}" >
+                            <div class="css-14yglsw e1cfowvj4">
                                 <div class="css-3o6rrk e1cfowvj2">${NoticeListDto.bno}</div>
-                                <div class="css-fzefrb e1cfowvj2">
-                                    ${NoticeListDto.title}
-                                </div>
+                                <div class="css-fzefrb e1cfowvj2">${NoticeListDto.title}</div>
                                 <div class="css-3d2kks e1cfowvj2">${NoticeListDto.adminId}</div>
                                 <div class="css-b1hszl e1cfowvj2">${NoticeListDto.regDt}</div>
                             </div>
@@ -431,11 +426,13 @@
             </ul>
             <div class="css-1kbzkwh e14yho7m0">
                 <div class="css-sxxs1g eytury60">
-                    <button disabled="" type="button" class="css-rzcdhr e1hbwyso0">
-                        <div class="css-7qb0sc e1ilyb3p0">이전</div></button
-                    ><button type="button" class="css-1jwilit e1pk9060">
-                    <div class="css-7qb0sc e1ilyb3p0">다음</div>
-                </button>
+<%--                    disabled=""--%>
+                    <button  type="button" class="css-rzcdhr e1hbwyso0" onclick="location.href='http://localhost:8080/board/notice?page=${pageNo - 1}'">
+                        <div class="css-7qb0sc e1ilyb3p0">이전</div>
+                    </button>
+                    <button type="button" class="css-1jwilit e1pk9060" onclick="location.href='http://localhost:8080/board/notice?page=${pageNo + 1}'" >
+                        <div class="css-7qb0sc e1ilyb3p0">다음</div>
+                    </button>
                 </div>
             </div>
         </div>

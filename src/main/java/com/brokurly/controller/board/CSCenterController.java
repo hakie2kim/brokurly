@@ -21,10 +21,12 @@ import java.util.List;
 public class CSCenterController {
     private final NoticeService noticeService;
     private final FAQService faqService;
+
     @GetMapping("/notice")
-    public String notice(Model model) throws Exception {
-        List<NoticeListDto> noticeListDtoList = noticeService.getList();
+    public String notice(Integer page, Model model) throws Exception {
+        List<NoticeListDto> noticeListDtoList = noticeService.getList(page);
         model.addAttribute("noticeListDtoList", noticeListDtoList);
+        model.addAttribute("pageNo", page);
         return "board/noticeList";
     }
 
@@ -44,6 +46,7 @@ public class CSCenterController {
 
     @RequestMapping("/inquiry")
     public String inquiry() { return "board/inquiryList"; }
+
     @RequestMapping("/inquiryPost")
     public String inquiryPost() {
         return "board/inquiryPost";
