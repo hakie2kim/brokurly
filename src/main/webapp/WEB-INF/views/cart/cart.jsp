@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -10,22 +11,28 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body style="padding-right: 0px;">
+
 <div >
     <div></div>
     <div class="cart-1">
         <h2 class="cart-2">장바구니</h2>
         <div></div>
         <div class="cart-3">
+
             <div class="cart-4">
                 <div class="cart-6">
                     <div>
                         <label>
-                            <input type="checkbox" checked="">
-                            <span>전체선택 (2/2)</span>
+                            <!-- 체크박스 전체 여부 -->
+                            <div class="all_check_input_div">
+                                <input type="checkbox" class="all_check_input input_size_20" checked="checked">
+                                <span class="all_chcek_span">전체선택</span>
+                            </div>
                         </label>
                         <button>선택삭제</button>
                     </div>
                 </div>
+
                 <div>
                     <div>
                         <h4 class="cart-7">
@@ -38,34 +45,52 @@
                                 접기 버튼
                             </button>
                         </h4>
+                        <c:forEach items="${cart}"  var="ci">
+                        <c:if test="${ci.pkgType =='냉장'}">
                         <ul>
+                            <li class="cart_info_li">
+                                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                                <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
+                                <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
+                                <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
+                                <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
+                                <input type="hidden" class="individual_totalPrice_input" value="${ci.salePrice * ci.itemCnt}">
+                            </li>
                             <li class="cart-8">
                                 <label>
-                                    <input type="checkbox" checked="">
                                     <div>
+
                                     </div>
                                 </label>
-                                <a>
-                                    <span>[사진 넣기]</span>
+                                <a class="css-1u5t3pw">
+                                    <span class="css-1f44rj5"></span>
                                 </a>
-                                <div>
+                                <div class="css-14sb0pe">
                                     <a>
-                                        <p>밀푀유나베</p>
+                                        <p class="css-efcx1u">${ci.name}</p>
                                     </a>
-                                    <div></div>
+                                    <div ></div>
                                 </div>
-                                <div>
-                                    <button type="button">-</button>
-                                    <div>1</div>
-                                    <button type="button">+</button>
+                                <div class="css-1gueo66">
+                                    <button type="button" class="minus_btn css-8azp8" onclick='count("minus")' value='+'
+                                            aria-label="수량내리기"></button>
+                                    <div class="count css-6m57y0" >
+                                        <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="${ci.itemCnt}">
+                                    </div>
+                                    <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-'
+                                            aria-label="수량올리기"></button>
                                 </div>
-                                <div>
-                                    <span aria-label="판매 가격">16,900원</span>
+                                <div class="css-5w3ssu">
+                                    <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원" /></span>
+                                    <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}" pattern="#,### 원" /></span>
                                 </div>
-                                <button type="button">
+                                <button type="button" data-testid="delete">
+                                    <span class="css-6mgkir"></span>
                                 </button>
                             </li>
                         </ul>
+                        </c:if>
+                        </c:forEach>
                         <h4 class="cart-7">
                                 <span>
                                     <span>
@@ -77,38 +102,54 @@
                                 접기 버튼
                             </button>
                         </h4>
+                        <c:forEach items="${cart}"  var="ci">
+                        <c:if test="${ci.pkgType =='냉동'}">
                         <ul>
+                            <li class="cart_info_li">
+                                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                                <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
+                                <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
+                                <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
+                                <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
+                                <input type="hidden" class="individual_totalPrice_input" value="${ci.totalPrice}">
+                            </li>
                             <li class="cart-8">
-                                <label>
-                                    <input type="checkbox" checked="">
-                                    <div>
-                                    </div>
-                                </label>
-                                <a>
-                                    <span>[사진 넣기]</span>
+<%--                                <label>--%>
+<%--                                    <input type="checkbox" checked="">--%>
+<%--                                    <div>--%>
+<%--                                    </div>--%>
+<%--                                </label>--%>
+                                <a class="css-1u5t3pw">
+                                    <span class="css-1f44rj5"></span>
                                 </a>
                                 <div class="css-14sb0pe">
                                     <a>
-                                        <p class="css-efcx1u">손질 생새우살 200g (냉동)(26/30사이즈)</p>
+                                        <p class="css-efcx1u">${ci.name}</p>
                                     </a>
                                 </div>
                                 <div class="css-1gueo66">
                                     <button type="button" class="css-8azp8">-</button>
-                                    <div class="count css-6m57y0">1</div>
+                                    <div class="count css-6m57y0" >
+                                        <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="${ci.itemCnt}">
+                                    </div>
                                     <button type="button" class="css-18y6jr4">+</button>
                                 </div>
                                 <div class="css-5w3ssu">
-                                    <span aria-label="할인 가격">5,900원(할인가)</span>
-                                    <span aria-label="판매 가격">8,400원(원가)</span>
+                                    <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원" /></span>
+                                    <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}" pattern="#,### 원" /></span>
                                 </div>
                                 <button type="button" data-testid="delete">
                                     <span class="css-6mgkir"></span>
                                 </button>
                             </li>
                         </ul>
+                        </c:if>
+                        </c:forEach>
                     </div>
                 </div>
+
             </div>
+
             <div class="cart-5">
                 <div>
                     <div>
@@ -126,24 +167,24 @@
                     <div>
                         <div>
                             <span>상품금액</span>
-                            <span>25,300
+                            <span class="totalPrice_span">
                                     <span>원</span>
                                 </span>
                         </div>
                         <div>
                             <span>상품할인금액</span>
-                            <span>-2,500
+                            <span class="totalDiscountPrice">-2,500
                                     <span>원</span>
                                 </span>
                         </div>
                         <div>
                             <span>배송비</span>
-                            <span>무료 (첫구매 우대)</span>
+                            <span class="delivery_price"></span>
                         </div>
                         <div>
                             <span>결제예정금액</span>
                             <span>
-                                    <strong>22,800</strong>
+                                    <span class="finalTotalPrice_span"></span>
                                     <span>원</span>
                                 </span>
                         </div>
@@ -171,7 +212,103 @@
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+        setTotalInfo(); //계산정보 삽입
+    });
 
+    function setTotalInfo(){
+
+        /* 종합 정보 섹션 정보 삽입 */
+        let totalPrice = 0;				// 총 가격
+        let totalCount = 0;				// 총 갯수
+        let totalDiscount = 0;      //총 할인가격
+        let totalKind = 0;				// 총 종류
+        // let totalPoint = 0;				// 총 마일리지
+        let deliveryPrice = 0;			// 배송비
+        let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
+
+        $(".cart_info_li").each(function(index, element){
+
+            if($(element).find(".individual_cart_checkbox").is(":checked") === true){    //체크여부 확인용
+
+                // 총 가격
+                totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+                // 총 갯수
+                totalCount += parseInt($(element).find(".individual_itemCnt_input").val());
+                // totalCount += parseInt($(element).find(".quantity_input").val());
+                // 총 할인 가격
+                totalDiscount += parseInt($(element).find(".individual_discountPrice_input").val());
+                // 총 종류
+                totalKind += 1;
+                // // 총 마일리지
+                // totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+            }
+
+        });
+        /* 배송비 결정 */
+        if(totalPrice >= 40000){
+            deliveryPrice = 0;
+        } else if(totalPrice === 0){
+            deliveryPrice = 0;
+        } else {
+            deliveryPrice = 3000;
+        }
+        /* 최종 가격 */
+        finalTotalPrice = totalPrice + deliveryPrice;
+
+        /* 값 삽입 */
+        // 총 가격
+        $(".totalPrice_span").text(totalPrice);
+        console.log(totalPrice);
+        // 총 할인금액
+        $(".totalDiscountPrice").text("-" + totalDiscount);
+        // 총 갯수
+        $(".totalCount_span").text(totalCount);
+        // $(".quantity_input").val(totalCount);
+        // 총 종류
+        $(".totalKind_span").text(totalKind);
+        // // 총 마일리지
+        // $(".totalPoint_span").text(totalPoint);
+        // 배송비
+        $(".delivery_price").text(deliveryPrice);
+        // 최종 가격(총 가격 + 배송비)
+        $(".finalTotalPrice_span").text(finalTotalPrice);
+    }
+
+    //체크 여부에 따른 종합 정보 변화
+    $(".individual_cart_checkbox").on("change", function() {
+        if ($(".individual_cart_checkbox:checked").length === $(".individual_cart_checkbox").length) {  //체그박스가 전부 체크되면 전체 체크박스 체그로 바꿈
+            $(".all_check_input").prop('checked', true);
+        } else {
+            $(".all_check_input").prop('checked', false);
+        }
+        setTotalInfo($(".cart_info_li"));   //총 주문 정보 세팅(배송비, 총가격, 물품 수, 종류)
+    });
+
+
+    /* 체크박스 전체 선택 */
+    $(".all_check_input").on("click", function(){
+        if($(".all_check_input").prop("checked")){
+            $(".individual_cart_checkbox").prop('checked',true);
+        } else{
+            $(".individual_cart_checkbox").prop('checked',false);
+        }
+        /* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
+        setTotalInfo($(".cart_info_li"));
+    });
+
+
+    // 수량 버튼 조작
+    <%--let quantity = $(".quantity_input").val();--%>
+    <%--$(".plus_btn").on("click", function(){--%>
+    <%--    &lt;%&ndash;if(quantity <${ci.itemQty})  //재고까지만 구매가능하게&ndash;%&gt;--%>
+    <%--        $(".quantity_input").val(++quantity);--%>
+    <%--});--%>
+    <%--$(".minus_btn").on("click", function(){--%>
+    <%--    if(quantity > 1){--%>
+    <%--        $(".quantity_input").val(--quantity);--%>
+    <%--    }--%>
+    <%--});--%>
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
