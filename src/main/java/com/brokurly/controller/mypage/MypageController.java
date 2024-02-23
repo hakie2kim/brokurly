@@ -1,30 +1,27 @@
 package com.brokurly.controller.mypage;
 
-import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogExpDto;
-import com.brokurly.dto.mypage.PointLogUsageDto;
+import com.brokurly.dto.mypage.*;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mypage/point")
+@RequestMapping("/mypage")
 public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
 
-    @GetMapping("/usage")
+    @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -47,7 +44,7 @@ public class MypageController {
         return "/mypage/point-usage-log";
     }
 
-    @GetMapping("/exp")
+    @GetMapping("/point/exp")
     String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -70,7 +67,7 @@ public class MypageController {
         return "/mypage/point-exp-log";
     }
 
-    @GetMapping("/earning")
+    @GetMapping("/point/earning")
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -89,5 +86,45 @@ public class MypageController {
         model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         return "/mypage/point-earning-log";
+    }
+
+    @GetMapping("/address")
+    String manageAddress() {
+        return "/mypage/address";
+    }
+
+    @PostMapping("/address")
+    ResponseEntity<ShippingLocationDto> addShippingAddress(String addr, String specAddr) {
+        log.info("addr: {} specAddr: {}", addr, specAddr);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/address/shipping-address")
+    String shippingAddress() {
+        return "/mypage/shipping-address";
+    }
+
+    /*@GetMapping("/address/shipping-address/result/{fullAddr}")
+    String addAddressResult(@PathVariable String fullAddr, Model model) {
+        log.info("{}", fullAddr);
+        model.addAttribute("fullAddr", fullAddr);
+        return "/mypage/shipping-address-result";
+    }*/
+
+
+    @PostMapping("/address/shipping-address/result")
+    String shippingAddressResult(String addr, String specAddr, Model model) {
+        log.info("addr: {}", addr);
+        model.addAttribute("addr", addr);
+
+        return "/mypage/shipping-address-result";
+
+        /*if (specAddr == null) {
+            return "/mypage/shipping-address-result";
+        } else {
+            log.info("{}", specAddr);
+            model.addAttribute("specAddr", specAddr);
+            return "redirect:/mypage/address";
+        }*/
     }
 }

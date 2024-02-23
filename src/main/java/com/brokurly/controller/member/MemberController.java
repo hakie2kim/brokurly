@@ -1,6 +1,5 @@
 package com.brokurly.controller.member;
 
-
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.service.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
