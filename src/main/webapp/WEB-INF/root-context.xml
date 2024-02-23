@@ -58,8 +58,4 @@
             </list>
         </property>
     </bean>
-
-    <!--    <bean id="boardDao" class="com.jungsuk.repository.BoardDaoImpl">-->
-    <!--        <constructor-arg ref="sqlSession"/>-->
-    <!--    </bean>-->
 </beans>
