@@ -13,4 +13,5 @@ public class FAQListDto {
     private int bno;
     private String name;
     private String title;
+    private String content;
 }

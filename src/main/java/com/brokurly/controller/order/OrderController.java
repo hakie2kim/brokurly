@@ -1,15 +1,22 @@
 package com.brokurly.controller.order;
 
+import com.brokurly.dto.order.CheckoutDto;
+import com.brokurly.dto.order.ReceiverDetailsRequestChangeDto;
+import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.entity.member.Member;
-import com.brokurly.dto.order.ReceiverDetailsDto;
+import com.brokurly.service.member.MemberService;
+import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
-import com.brokurly.utils.StringFormatUtils;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,32 +25,65 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
+    private final OrderService orderService;
     private final ReceiverDetailsService receiverDetailsService;
-    Member member = new Member();
 
     @GetMapping("/checkout")
     public String showCheckout(Model model, HttpSession session) {
-//        String shipLocaId = (String) session.getAttribute("shipLocaId");
-        // 임시 데이터 삽입
-        ReceiverDetailsDto receiverDetails = receiverDetailsService.findReceiverDetails("124");
-        if (receiverDetails != null)
-            session.setAttribute("receiverDetails", receiverDetails);
+        CheckoutDto checkout = null;
+        try {
+            checkout = orderService.getCheckoutInfo("124", "hong");
+        } catch (NullPointerException e) {
+            log.error("NoReceiverDetailsException", e);
+        }
 
+        if (checkout != null)
+            session.setAttribute("checkout", checkout);
 
-//        model.addAttribute("member", session.getAttribute("member"));
-
-//        model.addAttribute("member", member);
-        model.addAttribute("receiverDetails", receiverDetails);
+        model.addAttribute("checkout", checkout);
+        model.addAttribute("member", new TestMember(checkout.getRcvName(), checkout.getTelNo(), "asd@naver.com"));
+      
         return "order/checkout";
+    }
+
+    @Getter
+    public static class TestMember {
+        private String name;
+        private String telNo;
+        private String email;
+
+        public TestMember(String name, String telNo, String email) {
+            this.name = name;
+            this.telNo = telNo;
+            this.email = email;
+        }
     }
 
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
-        ReceiverDetailsDto receiverDetails = (ReceiverDetailsDto) session.getAttribute("receiverDetails");
+        CheckoutDto checkout = (CheckoutDto) session.getAttribute("checkout");
 
-//        model.addAttribute("member", session.getAttribute("member"));
-//        model.addAttribute("member", member);
-        model.addAttribute("receiverDetails", receiverDetails);
+        model.addAttribute("checkout", checkout);
+
         return "order/receiver-details";
+    }
+
+    @PostMapping("/receiver-details")
+    @ResponseBody
+    public ResponseEntity<CheckoutDto> addReceiverDetails() {
+//        orderService.
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/receiver-details")
+    @ResponseBody
+    public ResponseEntity<ReceiverDetailsResponseDto> modifyReceiverDetails(
+            @ModelAttribute ReceiverDetailsRequestChangeDto requestChangeDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        ReceiverDetailsResponseDto changedReceiverDetails = receiverDetailsService.modifyReceiverDetails("124", requestChangeDto);
+        return new ResponseEntity<>(changedReceiverDetails, HttpStatus.OK);
     }
 }

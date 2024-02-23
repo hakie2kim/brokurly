@@ -41,6 +41,7 @@ public class FAQBoard {
                 .bno(bno)
                 .name(name)
                 .title(title)
+                .content(content)
                 .build();
     }
 }
