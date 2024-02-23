@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -37,20 +38,13 @@
             </div>
             <h2>
               <span class="goods-118">${goods.dcRt}<!-- -->%</span> <!-- 할인율 -->
-              <span class="goods-119" id="resultPrice">18990
-<%--                <fmt:formatNumber pattern="#,###"--%>
-<%--                                  value="${goods.itemDcAmt}"/>--%>
-
+              <span class="goods-119" id="resultPrice"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
               </span>
-              <span>원</span>
             </h2>
             <span class="goods-45">
                                 <span>
-<%--                                  <fmt:formatNumber pattern="#,###"--%>
-<%--                                                    value="${goods.price}"/>--%>
-
+                                  <fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
                                 </span>
-                                  <!-- -->원</span><!-- 상품 가격 -->
                             </span>
             <p class="goods-120">원산지: ${goods.origin}</p>
             <div class="goods-121">적립 제외 상품입니다.</div>
@@ -120,20 +114,17 @@
                       <span class="goods-100" name="point_fl">적립제외상품</span>
                       <div class="goods-103">
                         <div class="goods-104">
-                          <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                                  aria-label="수량내리기"></button>
-                          <div class="count goods-106" id="count" name="item_cnt">1</div>
-                          <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                                  aria-label="수량올리기"></button>
+                          <button class="minus_btn goods-105" type="button" aria-label="수량내리기"></button>
+                          <div class="goods-106">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                          <button class="plus_btn goods-107" type="button" aria-label="수량올리기"></button>
                         </div>
                         <div>
-                          <span class="goods-8" >${goods.price}
-<%--                            <fmt:formatNumber pattern="#,###"--%>
-<%--                                              value="${goods.price}"/>--%>
+                          <span class="goods-8" ><fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
                             </span>
-                          <span id="price">18990
-<%--                            <fmt:formatNumber pattern="#,###"--%>
-<%--                               value="${goods.itemDcAmt}"/>원--%>
+                          <span id="price">
+                          <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
                           </span>
                         </div>
                       </div>
@@ -145,17 +136,14 @@
                 <div>
                   <div class="goods-42">
                     <span>총 상품금액 :</span>
-                    <span class="goods-108" id="sum">18990
-<%--                      <fmt:formatNumber pattern="#,###"--%>
-<%--                           value="${goods.itemDcAmt}"/>--%>
+                    <span class="totalPrice goods-108"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
                     </span>
-                    <span class="goods-109">원</span>
                   </div>
                   <div class="goods-43">
                     <span class="goods-110">적립</span>
                     <span>구매 시
-                                                <strong>0원 적립</strong>
-                                            </span>
+                        <strong>0원 적립</strong>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -171,7 +159,7 @@
                                         </span>
                 </button>
                 <div class="goods-113">
-                  <button class="cart-button goods-115" type="button" radius="3">
+                  <button class="btn_cart goods-115" type="button" radius="3" id="addBtn">
                     <span class="goods-114 ">장바구니 담기</span>
                   </button>
                 </div>
@@ -975,28 +963,24 @@
             <div>
               <div class="goods-37">
                   <span class="goods-38">
-                      <span>[KF365] 양념 소불고기 1kg (냉장)</span>
+                      <span>${goods.name}</span>
                       <span>적립제외상품</span>
                   </span>
                 <span class="goods-39">
                   <div class="goods-104">
-                      <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                              aria-label="수량내리기">+</button>
-                      <div class="count goods-106" id="count2">1</div>
-                      <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                              aria-label="수량올리기">-</button>
+                      <button class="minus_btn goods-105" type="button" onclick='count("minus")' value='+'
+                              aria-label="수량내리기"></button>
+                          <div class="goods-106" name="item_cnt">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                      <button class="plus_btn goods-107" type="button" onclick='count("plus")' value='-'
+                              aria-label="수량올리기"></button>
                   </div>
                   <span class="goods-40">
-                      <span class="goods-41">
-<%--                        <fmt:formatNumber pattern="#,###"--%>
-<%--                                          value="${goods.price}"/> --%>
-                        ${goods.price}
-                        원</span>
+                      <span class="goods-41"><fmt:formatNumber value="${goods.price}" pattern="#,### 원" /></span>
                       <span id = "dicPrice">
-<%--                        <fmt:formatNumber pattern="#,###"--%>
-<%--                                          value="${goods.itemDcAmt}"/>--%>
-
-                        원</span>
+                        <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                    </span>
                   </span>
                 </span>
               </div>
@@ -1005,17 +989,17 @@
           <div class="goods-59"><!-- 버튼 누르면 사라지게-->
             <div>
               <div class="goods-42">
-                <span>총 상품금액 :</span>
-                <span class="goods-108" id="price2">
-<%--                  <fmt:formatNumber pattern="#,###"--%>
-<%--                                    value=""/>--%>
+                <span>총 상품금액 :
+
                 </span>
-                <span class="goods-109">원</span>
+                <span class="totalPrice goods-108" id="price2">
+                  <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                </span>
               </div>
               <div class="goods-43">
                 <span class="goods-110">적립</span>
                 <span>구매 시
-                                    <strong>0원 적립</strong></span>
+                  <strong>0원 적립</strong></span>
               </div>
             </div>
           </div>
@@ -1218,7 +1202,6 @@
       });
   }
 
-
   document.querySelectorAll(".goods-22").forEach((item) => {
       // 모든 드롭다운 토글 행에 대한 클릭 이벤트 리스너 추가
       item.addEventListener("click", () => {
@@ -1241,109 +1224,64 @@
       });
   });
 
-  //할인가 적용
-  // $(document).ready(function(){
-  // let oriResult = document.getElementById('originPrice');
-  // let disResult = document.getElementById('discount');
-  // let priResult = document.getElementById('price');
-  // let oriNumber = parseInt(originResult.innerText);
-  // let disNumber = parseInt(disResult.innerText);
-  // let priNumber = parseInt(priResult.innerText);
+  // 수량 버튼 조작
+  let totalPrice = ${goods.salePrice};
+  let quantity = $(".quantity_input").val();
 
-  // priNumber = oriNumbers - (oriNumber + disNumber);
-  // document.getElementById('price').innerHTML = priNumber;
-
-  // });
-
-
-  // //상품 개수에 따른 가격 변동
-  function count(type) {
-      let cntResult = document.getElementById('count'); //상품 개수
-      let priResult = document.getElementById('price'); //상품 가격
-      let sumResult = document.getElementById('sum');   //총 가격
-
-      let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로
-      let priNumber = parseInt(priResult.innerText);  //문자값을 숫자로
-      let sumNumber = parseInt(sumResult.innerText);
-
-      if (type === 'plus') {  //증가
-          cntNumber += 1;
-          sumNumber = sumNumber + priNumber;
-      } else if (type === 'minus' && cntNumber > 1) { //감소
-          cntNumber -= 1;
-          sumNumber = sumNumber - priNumber;
+  $(".plus_btn").on("click", function(){
+      if(quantity < ${goods.itemQty}) { //재고까지만 구매가능하게
+          $(".quantity_input").val(++quantity);
+          totalPrice += ${goods.salePrice}; // 가격 증가
+          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
       }
-      cntResult.innerText = cntNumber;    //숫자 값 문자열
-      sumResult.innerText = sumNumber;
-      document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동
-      document.getElementById('price2').innerHTML = sumNumber;
+  });
+  $(".minus_btn").on("click", function(){
+      if(quantity > 1) {
+          $(".quantity_input").val(--quantity);
+          totalPrice -= ${goods.salePrice}; // 가격 감소
+          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
+      }
+  });
+
+
+  // 서버로 전송할 데이터
+  const form = {
+      custId : '${customer.custId}',
+      itemId : '${goods.itemId}',
+      // custId : 'hong',
+      // itemId : '1234',
+      itemCnt : ''
   }
+  // 장바구니 추가 버튼
+  $(".btn_cart").on("click", function(e){
+      form.itemCnt = $(".quantity_input").val();
+      $.ajax({
+          url: '/cart/add',
+          type: 'POST',
+          data: form,
+          dataType: "text",
+          // data: {
+          //     custId: "hong",
+          //     itemId: "1234",
+          //     itemCnt: $(".quantity_input").val()
+          // },
+          success: function(result){
+              cartAlert(result);
+          }
+      })
+  });
 
-
-  <%--// 천 단위 구분기호(콤마)를 추가하는 함수--%>
-  <%--function addCommasToNumber(number) {--%>
-  <%--    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
-  <%--}--%>
-
-  <%--// 상품 정보를 가져오고 콤마를 추가하여 결과를 화면에 표시하는 함수--%>
-  <%--function getProductInfo() {--%>
-  <%--    var oPrice = ${goods.price}; // 상품 할인 전 가격--%>
-  <%--    var disAmnt = ${goods.itemDcAmt}; // 뺄 가격--%>
-  <%--    var resultPrice = oPrice - disAmnt; // 할인된 가격--%>
-
-  <%--    // 결과에 콤마 추가--%>
-  <%--    var formattedOPrice = addCommasToNumber(oPrice)+"원";--%>
-  <%--    var formattedResultPrice = addCommasToNumber(resultPrice)+"원";--%>
-
-  <%--    // 결과를 화면에 표시--%>
-  <%--    document.getElementById("price3").innerHTML = formattedOPrice;--%>
-  <%--    document.getElementById("resultPrice2").value = formattedResultPrice;--%>
-  <%--    document.getElementById("originPrice").value = formattedResultPrice;--%>
-  <%--}--%>
-
-  <%--// 페이지 로드시 상품 정보를 가져옴--%>
-  <%--getProductInfo();--%>
-
-
-
-
-
-  // 상품 개수에 따른 가격 변동
-  <%--function count(type) {--%>
-  <%--    let cntResult = document.getElementById('count'); //상품 개수--%>
-  <%--    let priResult = ${goods.price}-${goods.itemDcAmt}; //상품 가격--%>
-  <%--    let sumResult = priResult;   //총 가격--%>
-
-  <%--    let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로--%>
-
-  <%--    if (type === 'plus') {  //증가--%>
-  <%--        cntNumber += 1;--%>
-  <%--        sumResult = sumResult + priResult;--%>
-  <%--    } else if (type === 'minus' && cntNumber > 1) { //감소--%>
-  <%--        cntNumber -= 1;--%>
-  <%--        sumResult = sumResult - priResult;--%>
-  <%--    }--%>
-  <%--    cntResult.innerText = cntNumber;    //숫자 값 문자열--%>
-  <%--    // sumResult.innerText = sumResult;--%>
-
-  <%--    document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동--%>
-
-  <%--    document.getElementById('price2').innerHTML = sumResult;--%>
-  // }
-
-
-  <%--$(document).ready(function () { //main()--%>
-  <%--    $('.cart-button').on("click", function () {--%>
-  <%--        let form = $('#forma');--%>
-  <%--        form.attr("action", "<c:url value='/seller/productscreate/write'/>");--%>
-  <%--        form.attr("method", "post");--%>
-  <%--        form.submit();--%>
-  <%--        alert("저장되었습니다.");--%>
-  <%--        alert(form);--%>
-  <%--    });--%>
-
-  // })
-
+  function cartAlert(result){
+      if(result == '0'){
+          alert("장바구니에 추가를 하지 못하였습니다.");
+      } else if(result == '1'){
+          alert("장바구니에 추가되었습니다.");
+      } else if(result == '2'){
+          alert("장바구니에 이미 추가되어져 있습니다.");
+      } else if(result == '5'){
+          alert("로그인이 필요합니다.");
+      }
+  }
 
 
 

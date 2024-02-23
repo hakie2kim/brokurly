@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.cart.CartDao">
+<mapper namespace="com.brokurly.repository.cart.CustomerCartDao">
 
     <!-- CREATE -->
     <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
@@ -17,20 +17,26 @@
         SELECT * FROM cart
     </sql>
 
-    <select id="getCart" resultType="Cart">
-        SELECT a.custId, a.itemId, a.itemCnt, b.name, b.price, b.shipType, b.pkgType, b.itemDcAmt
-        FROM cart a left outer join goods b on a.itemId = b.itemId
+    <select id="getCart" resultType="CustomerCart">
+        SELECT a.cust_id, a.item_id, a.item_cnt, b.name, b.price, b.ship_type, b.pkg_type, b.item_dc_amt
+        FROM cart a left outer join item b on a.item_id = b.item_id
         WHERE cust_id = #{custId}
     </select>
 
-    <select id="selectByCustId" resultType="Cart">
+    <select id="selectByCustId" resultType="CustomerCart">
         <include refid="select"/>
         WHERE cust_id = #{custId}
     </select>
 
-    <select id="selectByItemId" resultType="Cart">
+    <select id="selectByItemId" resultType="CustomerCart">
         <include refid="select"/>
         WHERE item_id = #{itemId}
+    </select>
+
+    <select id="checkCart" resultType="CustomerCart">
+        <include refid="select"/>
+        WHERE cust_id = #{custId}
+        AND item_id = #{itemId}
     </select>
 
     <!-- UPDATE -->

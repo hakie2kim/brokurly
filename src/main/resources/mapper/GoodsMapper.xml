@@ -17,6 +17,13 @@
              #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt} )
     </insert>
 
+    <insert id="addCart">
+        INSERT INTO cart
+        (item_id, cust_id, item_cnt)
+        VALUES
+        (#{itemId}, #{custId}, #{itemCnt})
+    </insert>
+
     <!-- READ -->
     <sql id="select">
         SELECT * FROM item

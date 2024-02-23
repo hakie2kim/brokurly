@@ -1,4 +1,3 @@
-/*
 package com.brokurly.controller.member;
 
 
@@ -100,4 +99,4 @@ public class MemberController {
         return "index";
     }
 
-}*/
+}

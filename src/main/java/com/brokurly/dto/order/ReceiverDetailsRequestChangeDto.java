@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class ReceiverDetailsChangeDto {
+public class ReceiverDetailsRequestChangeDto {
     @NotBlank
     @Length(min = 1, max = 10)
     @Pattern(regexp = "^[가-힣\\s]+$")

@@ -32,11 +32,6 @@
         WHERE ship_loca_id = #{shipLocaId}
     </select>
 
-    <select id="selectByRcvDtlId" resultType="ReceiverDetails">
-        <include refid="select"/>
-        WHERE rcv_dtl_id = #{rcvDtlId}
-    </select>
-
     <!-- UPDATE -->
     <update id="update">
         UPDATE receiver_details

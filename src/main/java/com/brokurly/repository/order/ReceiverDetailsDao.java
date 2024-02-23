@@ -14,7 +14,6 @@ public interface ReceiverDetailsDao {
     int count();
     List<ReceiverDetails> selectAll();
     ReceiverDetails selectByShipLocaId(String shipLocaId);
-    ReceiverDetails selectByRcvDtlId(String rcvDtlId);
 
     // UPDATE
     int update(ReceiverDetails receiverDetails);
