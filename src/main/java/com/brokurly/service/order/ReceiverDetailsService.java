@@ -1,8 +1,8 @@
 package com.brokurly.service.order;
 
 import com.brokurly.entity.order.ReceiverDetails;
-import com.brokurly.dto.order.ReceiverDetailsChangeDto;
-import com.brokurly.dto.order.ReceiverDetailsDto;
+import com.brokurly.dto.order.ReceiverDetailsRequestChangeDto;
+import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.repository.order.ReceiverDetailsDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReceiverDetailsService {
     private final ReceiverDetailsDao receiverDetailsDao;
 
-    public ReceiverDetailsDto findReceiverDetails(String shipLocaId) {
+    public ReceiverDetailsResponseDto findReceiverDetails(String shipLocaId) {
         ReceiverDetails receiverDetails = receiverDetailsDao.selectByShipLocaId(shipLocaId);
         return receiverDetails.toResponseDto();
     }
 
     @Transactional
-    public ReceiverDetailsDto modifyReceiverDetails(String shipLocaId, ReceiverDetailsChangeDto changeDto) {
+    public ReceiverDetailsResponseDto modifyReceiverDetails(String shipLocaId, ReceiverDetailsRequestChangeDto changeDto) {
         ReceiverDetails receiverDetails = receiverDetailsDao.selectByShipLocaId(shipLocaId);
         receiverDetails.changeReceiverDetails(changeDto);
         receiverDetailsDao.update(receiverDetails);
