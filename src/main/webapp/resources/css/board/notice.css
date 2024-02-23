@@ -8,6 +8,7 @@ html, button, input, select, textarea {
     border-bottom: 1px solid rgb(244, 244, 244);
 }
 
+/* 아래 페이지 이동 바 공간*/
 .css-1kbzkwh {
     display: flex;
     -webkit-box-pack: center;
@@ -15,6 +16,7 @@ html, button, input, select, textarea {
     padding: 60px 0px 30px;
 }
 
+/* 게시글 list의 번호 영역 */
 .css-3o6rrk {
     text-align: center;
     padding: 20px 0px;
@@ -22,6 +24,7 @@ html, button, input, select, textarea {
     flex-basis: 50px;
 }
 
+/* 게시글 List의 제목 영역 */
 .css-fzefrb {
     padding: 20px 0px 20px 20px;
     color: rgb(76, 76, 76);
@@ -29,6 +32,7 @@ html, button, input, select, textarea {
     text-align: left;
 }
 
+/* 게시글 List의 게시글 영역 */
 .css-3d2kks {
     text-align: center;
     padding: 20px 0px;
@@ -36,6 +40,7 @@ html, button, input, select, textarea {
     flex-basis: 100px;
 }
 
+/* 게시글 list의 작성일 영역*/
 .css-b1hszl {
     text-align: center;
     padding: 20px 0px;
@@ -43,12 +48,14 @@ html, button, input, select, textarea {
     color: rgb(153, 153, 153);
 }
 
+/* 왼쪽 다른 CS Board 이동 탭 */
 .css-g4g0eu.active, .css-g4g0eu:hover {
     background-color: rgb(250, 250, 250);
     color: rgb(17,150,127);
     font-weight: 500;
 }
 
+/* 게시글 페이지 이동 버튼 */
 .css-rzcdhr:disabled {
     background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-disabled.svg);
     cursor: default;
@@ -67,6 +74,7 @@ html, button, input, select, textarea {
     background-size: cover;
 }
 
+/* 이전, 다음 */
 .css-7qb0sc {
     overflow: hidden;
     position: absolute;
@@ -75,10 +83,12 @@ html, button, input, select, textarea {
     height: 1px;
 }
 
+/* 이전, 다음 */
 .css-sxxs1g button + button {
     margin-left: 12px;
 }
 
+/* 이전, 다음 버튼 */
 .css-1jwilit {
     width: 44px;
     height: 44px;
