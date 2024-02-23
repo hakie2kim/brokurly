@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/mypage/shipping-address.css'/>"/>
     <title>컬리 - 마켓컬리/뷰티컬리</title>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     window.onload = () => {
@@ -66,10 +67,12 @@
                         extraAddr = " (" + extraAddr + ")";
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample3_extraAddress").value = extraAddr;
+                    // document.getElementById("sample3_extraAddress").value = extraAddr;
                 } else {
-                    document.getElementById("sample3_extraAddress").value = "";
+                    // document.getElementById("sample3_extraAddress").value = "";
                 }
+
+                addr += extraAddr;
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 // document.getElementById("sample6_postcode").value = data.zonecode;
@@ -86,6 +89,29 @@
 
                 // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
                 // document.body.scrollTop = currentScroll;
+
+                // GET
+                // window.location.href="/mypage/address/shipping-address/result/" + addr + extraAddr;
+
+                // POST
+                const formElem = document.querySelector("#addr");
+                formElem.querySelector("input[name='addr']").value = addr;
+                formElem.submit();
+
+                /*$.ajax({
+                    url: "/mypage/address/shipping-address/result",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        "fullAddr" : addr + extraAddr
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    },
+                    error: function (request, error) {
+                        alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    }
+                })*/
             },
             // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
             // onresize: function (size) {
@@ -100,6 +126,9 @@
     }
 </script>
 <body>
+<form id="addr" action="/mypage/address/shipping-address/result" method="post">
+    <input name="addr" type="hidden" />
+</form>
 <div id="wrap"></div>
 </body>
 </html>

@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -99,5 +97,26 @@ public class MypageController {
     @GetMapping("/address/shipping-address")
     String addAddress() {
         return "/mypage/shipping-address";
+    }
+
+    /*@GetMapping("/address/shipping-address/result/{fullAddr}")
+    String addAddressResult(@PathVariable String fullAddr, Model model) {
+        log.info("{}", fullAddr);
+        model.addAttribute("fullAddr", fullAddr);
+        return "/mypage/shipping-address-result";
+    }*/
+
+    @PostMapping("/address/shipping-address/result")
+    String addAddressResult(String addr, String specAddr, Model model) {
+        log.info("{}", addr);
+        model.addAttribute("addr", addr);
+
+        if (specAddr == null) {
+            return "/mypage/shipping-address-result";
+        } else {
+            log.info("{}", specAddr);
+            model.addAttribute("specAddr", specAddr);
+            return "redirect:/mypage/address";
+        }
     }
 }
