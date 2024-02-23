@@ -9,6 +9,7 @@ public interface MemberDao {
     int insert(Member member);
     void insertSnsMember(Member member);
     Member selectSnsMember(String snsId);
+    String findBySnsId(String snsId);
     int countMemberAll();
     int countMember(String custId);
     int countEmail(String email);

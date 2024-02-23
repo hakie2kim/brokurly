@@ -1,40 +1,52 @@
 package com.brokurly.controller.cart;
 
-import com.brokurly.entity.cart.CustomerCart;
-import com.brokurly.entity.member.Member;
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.service.cart.CustomerCartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 
 @Slf4j
 @Controller
+@RequestMapping("/cart")
 @RequiredArgsConstructor
 public class CustomerCartController {
 
     private final CustomerCartService customerCartService;
 
-    @PostMapping("/cart/add")
+    /* 장바구니 추가 */
+    @PostMapping("/add")
     @ResponseBody
-    public String addCartPOST(CustomerCart customerCart, HttpServletRequest request) {
-//        // 로그인 체크
-        HttpSession session = request.getSession();
-        Member member = (Member)session.getAttribute("member");
-        System.out.println(member);
-//        Member member = (Member)session.getAttribute("member");
-//        if(member == null) {
-//            return "5";
-//        }
+    public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
+        // 로그인 체크
+        String member = (String) session.getAttribute("member");
+//        System.out.println(member);
+        log.info(" member = {}",member);
+        log.info("cusCart={}",customerCartDto);
+
+        if (member == null) {
+            return "5";
+        }
 
         // 카트 등록
-        int result = customerCartService.insert(customerCart);
+//        return String.valueOf(customerCartService.addCart(customerCart));
+        int result = customerCartService.addCart(customerCartDto);
         return result + "";
+    }
 
+    /* 장바구니 페이지 이동 */
+    @GetMapping("/{custId}")
+    public String cartPageGET(@PathVariable("custId") String custId, Model model) {
+        List<CustomerCartDto> cart = customerCartService.getCartList(custId);
+//        ArrayList<CustomerCartDto> collect = cart.stream().map(carte -> carte.makeFullDto()).collect(Collectors.toCollection(ArrayList::new));
+        model.addAttribute("cart", cart);
+
+        return "cart/cart";
     }
 
 

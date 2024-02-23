@@ -25,7 +25,7 @@
     <a href="board/notice">윤호 - 공지사항</a>
 </div>
 <div>
-    <a href="seller/productscreate">수경 - 상품 등록</a>
+    <a href="seller/productsCreate">수경 - 상품 등록</a>
 </div>
 <div>
     <a href="cart">준한 - 상품 장바구니</a>

@@ -1,6 +1,5 @@
-
 package com.brokurly.entity.goods;
-
+import com.brokurly.dto.goods.GoodsListDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
@@ -37,6 +36,28 @@ public class Goods {
   private int revCnt;
   private String stdySellerFl;
 
+  //추가
+  private int salePrice;  //할인이 들어간 가격
+
+  public void initSaleTotal(){
+    salePrice = price - itemDcAmt;
+    if (salePrice < 0)
+      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
+  }
+  public GoodsListDto makeGoodsList(){
+    return GoodsListDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .disPrice(price-itemDcAmt)
+            .itemDcAmt(itemDcAmt)
+            .revCnt(revCnt)
+            .shipType(shipType)
+            .build();
+  }
+
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
             .itemId(itemId)
@@ -56,12 +77,10 @@ public class Goods {
             .adultVerifFl(adultVerifFl)
             .cateCode(cateCode)
             .itemQty(itemQty)
-            .wishCnt(wishCnt)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .sellCnt(sellCnt)
-            .revCnt(revCnt)
             .stdySellerFl(stdySellerFl)
+            .salePrice(salePrice)
             .build();
   }
 
@@ -92,13 +111,9 @@ public class Goods {
     this.adultVerifFl = goodsDto.getAdultVerifFl();
     this.cateCode = goodsDto.getCateCode();
     this.itemQty = goodsDto.getItemQty();
-    this.wishCnt = goodsDto.getWishCnt();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.sellCnt = goodsDto.getSellCnt();
-    this.revCnt = goodsDto.getRevCnt();
     this.stdySellerFl = goodsDto.getStdySellerFl();
+    this.salePrice = goodsDto.getSalePrice();
   }
-
 }
-

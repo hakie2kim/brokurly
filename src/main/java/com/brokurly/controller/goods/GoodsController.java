@@ -21,37 +21,15 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class GoodsController {
 
-private final GoodsService goodsService;
+  private final GoodsService goodsService;
 
   // 상품 상세페이지로 값 전달
   @GetMapping("/{itemId}")
   public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
+    session.setAttribute("member", "hong");
     GoodsDto goods = goodsService.searchGoods(itemId);  // 임시 상품번호
     model.addAttribute("goods", goods);
     return "goods/goods";
   }
-
-//  @PostMapping("/add")
-//  public String addCart(CartDto cartDto) {
-//    log.info("a={}", cartDto.getCustId());
-//    log.info("itemCnt={}", cartDto.getItemCnt());
-//    log.info("itemId={}", cartDto.getItemId());
-//    goodsService.addCart(cartDto);
-//    return "redirect:/cart";
-//  }
-
-
-//  @GetMapping("/goodSDetail")
-//  public String getGoodsDetailPage(@RequestParam("item_id")int itemtId, Model model) {
-//    //itemId를 사용하여 상품 정보 조회
-//
-//
-//    Goods goods = service.getProductById(itemId);
-//
-//    // 조회된 상품 정보를 모델에 추가하여 뷰로 전달
-//    model.addAttribute("goods", goods);
-//
-//    return "goods/goodsDetail"; // productDetail.jsp와 같은 뷰 페이지를 반환합니다.
-//  }
 
 }

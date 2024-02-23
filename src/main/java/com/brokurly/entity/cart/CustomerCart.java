@@ -4,7 +4,6 @@ package com.brokurly.entity.cart;
 import com.brokurly.dto.cart.CustomerCartDto;
 import lombok.*;
 
-
 @Builder
 @ToString
 @EqualsAndHashCode
@@ -36,11 +35,7 @@ public class CustomerCart {
 //            throw  new RuntimeException("상품 개수가 1개 이상이어야합니다");
 //        }
     }
-    public CustomerCartDto makeFullDto(CustomerCartDto customerCartDto) {   //setter
-        int salePrice = customerCartDto.getPrice() - customerCartDto.getItemDcAmt();
-        if (salePrice < 0)
-            throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-        int totalPrice = salePrice * itemCnt;
+    public CustomerCartDto makeFullDto() {   //setter
 
         return CustomerCartDto.builder()
                 .itemId(itemId)
@@ -51,6 +46,8 @@ public class CustomerCart {
                 .shipType(shipType) //배송타입(새벽배송)
                 .pkgType(pkgType) //포장타입(냉장,냉동)
                 .itemDcAmt(itemDcAmt)
+                .salePrice(salePrice)
+                .totalPrice(totalPrice)
                 .build();
     }
     public void changeStatus (CustomerCartDto customerCartDto){ //getter
@@ -62,7 +59,7 @@ public class CustomerCart {
         this.shipType = customerCartDto.getShipType();
         this.pkgType = customerCartDto.getPkgType();
         this.itemDcAmt = customerCartDto.getItemDcAmt();
-        this.salePrice = customerCartDto.getSalePrice();;
+        this.salePrice = customerCartDto.getSalePrice();
         this.totalPrice = customerCartDto.getTotalPrice();
 
     }

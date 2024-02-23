@@ -5,6 +5,8 @@ import com.brokurly.entity.cart.Cart;
 import com.brokurly.entity.goods.Goods;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface GoodsDao {
 
@@ -18,4 +20,5 @@ public interface GoodsDao {
   // DELTE
   int deleteByItemId(String itemId);
 
+  List<Goods> selectGoodsListbyCateCode(String cateCode);
 }
