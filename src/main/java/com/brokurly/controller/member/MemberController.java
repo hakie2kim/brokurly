@@ -1,6 +1,4 @@
-/*
 package com.brokurly.controller.member;
-
 
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.service.member.MemberService;
@@ -100,4 +98,4 @@ public class MemberController {
         return "index";
     }
 
-}*/
+}

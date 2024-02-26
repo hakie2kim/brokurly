@@ -26,18 +26,20 @@ public class CartService {
 //    cartDao.insert(cart); //domain값을 dao에
 //  }
 
-    public List<CartDto> findItemsInCustomerCart(String custId) {
-        List<Cart> cartList = cartDao.selectByCustId(custId);
+    public List<CartDto> findItemsInCustomerCart(String custId) {   //
+        List<Cart> cartList = cartDao.selectByCustId(custId);   //
         List<CartDto> itemList = new ArrayList<>();
         for (Cart cart : cartList) {
             GoodsForCartDto goodsDto = goodsService.searchGoodsForCart(cart.getItemId());
-            CartDto cartDto = cart.makeFullDto(goodsDto);
+            CartDto cartDto = cart.makeFullDto(goodsDto);   //
             itemList.add(cartDto);
         }
         return itemList;
     }
 
     //goodDto받아오기
+
+
 
 
 

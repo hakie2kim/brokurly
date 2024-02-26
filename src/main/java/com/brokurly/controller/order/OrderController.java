@@ -39,6 +39,7 @@ public class OrderController {
 
         model.addAttribute("checkout", checkout);
         model.addAttribute("member", new TestMember(checkout.getRcvName(), checkout.getTelNo(), "asd@naver.com"));
+      
         return "order/checkout";
     }
 
@@ -67,6 +68,7 @@ public class OrderController {
         CheckoutDto checkout = (CheckoutDto) session.getAttribute("checkout");
 
         model.addAttribute("checkout", checkout);
+
         return "order/receiver-details";
     }
 

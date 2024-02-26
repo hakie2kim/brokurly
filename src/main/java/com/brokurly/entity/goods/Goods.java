@@ -36,6 +36,14 @@ public class Goods {
   private int revCnt;
   private String stdySellerFl;
 
+  //추가
+  private int salePrice;  //할인이 들어간 가격
+
+  public void initSaleTotal(){
+    salePrice = price - itemDcAmt;
+    if (salePrice < 0)
+      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
+  }
   public GoodsListDto makeGoodsList(){
     return GoodsListDto.builder()
             .itemId(itemId)
@@ -71,7 +79,9 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .stdySellerFl(stdySellerFl).build();
+            .stdySellerFl(stdySellerFl)
+            .salePrice(salePrice)
+            .build();
   }
 
   public GoodsForCartDto toGoodsForCartDto() {
@@ -105,5 +115,6 @@ public class Goods {
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
     this.stdySellerFl = goodsDto.getStdySellerFl();
+    this.salePrice = goodsDto.getSalePrice();
   }
 }
