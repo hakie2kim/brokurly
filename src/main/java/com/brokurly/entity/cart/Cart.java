@@ -16,10 +16,6 @@ public class Cart {   //1. insert(넣을 값)할  값을 담을 Dto를 만듦
   private int itemCnt;
 
   public CartDto makeFullDto(GoodsForCartDto goodsDto){   //setter
-    int disPrice = goodsDto.getPrice() - goodsDto.getItemDcAmt();
-    if (disPrice < 0)
-      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-
     return CartDto.builder()
             .itemId(itemId)
             .itemCnt(itemCnt)
@@ -27,7 +23,7 @@ public class Cart {   //1. insert(넣을 값)할  값을 담을 Dto를 만듦
             .price(goodsDto.getPrice()) //상품 원가
             .shipType(goodsDto.getShipType()) //배송타입(새벽배송)
             .pkgType(goodsDto.getPkgType()) //포장타입(냉장,냉동)
-            .disPrice(disPrice) //할인된 금액
+            .itemDcAmt(goodsDto.getItemDcAmt()) //할인된 금액
             .build();
   }
 

@@ -17,5 +17,5 @@ public class CartDto {
     private int price;  //상품 가격
     private String shipType;  //샛별배송여부
     private String pkgType;   //포장타입
-    private int disPrice; //상품 할인된 가격
+    private int itemDcAmt;
 }

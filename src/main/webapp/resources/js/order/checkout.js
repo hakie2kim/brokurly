@@ -1,57 +1,51 @@
 window.onload = () => {
     // 주문 상품창 요약 & 리스트 변환 기능
-    const orderGoodsButton = document.querySelector(".info-type1-title").children[1];
-    orderGoodsButton.addEventListener("click", () => {
-        let buttonText = orderGoodsButton.innerHTML;
+    const orderGoodsButton = $(".info-type1-title").children().eq(1);
+    orderGoodsButton.click(() => {
+        let buttonText = orderGoodsButton.html();
         if (buttonText === "⋁") {
-            orderGoodsButton.innerHTML = "&xwedge;";
-            document.getElementById("order-goods").style.display = "none";
-            document.getElementById("order-goods-list").style.display = "block";
+            orderGoodsButton.html("&xwedge;");
+            $("#order-goods").css("display", "none");
+            $("#order-goods-list").css("display", "block");
         } else {
-            orderGoodsButton.innerHTML = "&xvee;";
-            document.getElementById("order-goods").style.display = "block";
-            document.getElementById("order-goods-list").style.display = "none";
+            orderGoodsButton.html("&xvee;");
+            $("#order-goods").show();
+            $("#order-goods-list").hide();
         }
     });
 
     // 배송지 변경 모달 띄우기
-    const smallModal = document.querySelector(".small-modal");
-    const locationChangeButton = document.getElementById("location-change");
-    locationChangeButton.addEventListener("click", () => {
-        smallModal.style.display = "block";
-        document.body.style.overflow = "hidden";
+    $("#location-change").click(() => {
+        $(".small-modal").show();
+        $("body").css('overflow', 'hidden');
     });
 
     // 배송지 변경 모달 끄기
-    const cancelButton = document.getElementById("small-modal-cancel");
-    cancelButton.addEventListener("click", () => {
-        smallModal.style.display = "none";
-        document.body.style.removeProperty("overflow");
+    $("#small-modal-cancel").click(() => {
+        $(".small-modal").hide();
+        $("body").css("overflow", "");
     });
 
     // 배송지 변경 리다이렉트
-    const okButton = document.getElementById("small-modal-ok");
-    okButton.addEventListener("click", () => {
+    $("#small-modal-ok").click(() => {
         window.location.href = '/cart';
     });
 
     // 결제 정보 헤더에 붙이기
-    window.addEventListener("scroll", () => {
-        const headerBottom = document.querySelector("header").offsetHeight;
-        const rightElement = document.getElementById("right");
-        const scrollPosition = window.scrollY;
-        const rightTop = rightElement.getBoundingClientRect().top;
+    $(window).on("scroll", function () {
+        const headerBottom = $("header").outerHeight();
+        const rightElement = $("#right");
+        const scrollPosition = $(this).scrollTop();
 
         if (scrollPosition <= headerBottom) {
-            rightElement.style.top = scrollPosition - headerBottom + "px";
+            rightElement.css("top", scrollPosition - headerBottom + "px");
         } else {
-            rightElement.style.top = "150px";
+            rightElement.css("top", "150px");
         }
     });
 
     // 배송 요청사항 입력창 띄우기
-    const receiverDetails = document.querySelector(".receiver-details-btn");
-    receiverDetails.addEventListener("click", () => {
+    $(".receiver-details-btn").click(() => {
         const left = screen.width / 2 - 300;
         const top = screen.height / 2 - 350;
         window.open(
@@ -59,25 +53,49 @@ window.onload = () => {
             "_blank",
             "width=600px, height=700px, left=" + left + ", top=" + top
         );
-    });
+    })
 
     // 개인정보 수집 동의 정보 조회
-    const bigModal = document.querySelectorAll(".big-modal");
-    const showModalButton = document.querySelectorAll(".personal-info-consent");
-    for (let i = 0; i < bigModal.length; i++) {
-        showModalButton[i].addEventListener("click", () => {
-            bigModal[i].style.display = "block";
-            document.body.style.overflow = "hidden";
+    $(".personal-info-consent").each(function (i) {
+        $(this).click(function () {
+            $(".big-modal").eq(i).show();
+            $("body").css("overflow", "hidden");
         });
-    }
+    });
 
     // 개인정보 수집 동의 정보 모달창 닫기
-    const closeModalButton = document.querySelectorAll(".big-modal-content");
-    for (let i = 0; i < bigModal.length; i++) {
-        closeModalButton[i].addEventListener("click", () => {
-            bigModal[i].style.display = "none";
-            document.body.style.removeProperty("overflow");
+    $(".big-modal-content").each(function () {
+        $(this).click(function () {
+            $(".big-modal").hide();
+            $("body").css("overflow", "");
         });
+    });
+
+    const $kakaopay = $("#kakaopay");
+    const $creditCard = $("#credit-card");
+    $kakaopay.click(() => {
+        offPaymentButton();
+
+        if ($kakaopay.val() === "false") {
+            $kakaopay.val("true")
+            $kakaopay.addClass("kakaopay");
+        }
+    })
+
+    $creditCard.click(() => {
+        offPaymentButton();
+
+        if ($creditCard.val() === "false") {
+            $creditCard.val("true");
+            $creditCard.addClass("credit-card");
+        }
+    })
+
+    function offPaymentButton() {
+        $(".payment-button").each(function () {
+            $(this).val("false");
+            $(this).removeClass().addClass("payment-button");
+        })
     }
 };
 
@@ -87,4 +105,34 @@ function updateReceiverDetails(data) {
     $("#checkout-enterMthd").text(data.enterMthd);
     $("#checkout-name").text(data.rcvName);
     $("#checkout-telNo").text(data.telNo);
+}
+
+function redirectPayment() {
+    let paymentAmount = {
+        "orderAmt": parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
+        "itemAmt": parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),
+        "itemDcAmt": parseInt($("#item-dc-amount").text().replace(/[,\s원]/g, ''), 10)
+    };
+
+    $(".payment-button").each(function () {
+        if ($(this).val() === "true") {
+            switch ($(this).attr("id")) {
+                case "kakaopay":
+                    fetch("/payment/kakaopay", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(paymentAmount)
+                    })
+                        .then(response => response.text())
+                        .then(url => window.location.href = url)
+                        .catch(error => console.log("Error: ", error));
+                    break;
+                case "credit-card":
+                    window.location.href = "/payment/credit-card";
+                    break;
+            }
+        }
+    });
 }

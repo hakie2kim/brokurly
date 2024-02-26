@@ -78,6 +78,7 @@ public class Goods {
     return GoodsForCartDto.builder()
             .name(name)
             .price(price)
+            .itemDcAmt(itemDcAmt)
             .shipType(shipType)
             .pkgType(pkgType)
             .build();
