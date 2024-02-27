@@ -1,10 +1,11 @@
 package com.brokurly.service.order;
 
 import com.brokurly.dto.cart.CartDto;
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.entity.payment.PaymentAmount;
-import com.brokurly.service.cart.CartService;
+import com.brokurly.service.cart.CustomerCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final CartService cartService;
+    private final CustomerCartService cartService;
     private final ReceiverDetailsService receiverDetailsService;
 
     public CheckoutDto getCheckoutInfo(String shipLocaId, String custId) {
-        List<CartDto> cartList = cartService.findItemsInCustomerCart(custId);
+        List<CustomerCartDto> cartList = cartService.getCartList(custId);
         ReceiverDetailsResponseDto receiverDetails = receiverDetailsService.findReceiverDetails(shipLocaId);
 
         if (receiverDetails == null)

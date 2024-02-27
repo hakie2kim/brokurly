@@ -39,7 +39,7 @@ public class OrderController {
 
         model.addAttribute("checkout", checkout);
         model.addAttribute("member", new TestMember(checkout.getRcvName(), checkout.getTelNo(), "asd@naver.com"));
-      
+
         return "order/checkout";
     }
 
@@ -75,7 +75,6 @@ public class OrderController {
     @PostMapping("/receiver-details")
     @ResponseBody
     public ResponseEntity<CheckoutDto> addReceiverDetails() {
-//        orderService.
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

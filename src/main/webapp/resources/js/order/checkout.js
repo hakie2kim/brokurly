@@ -101,17 +101,38 @@ window.onload = () => {
 
 // 서버에서 Ajax 요청이 성공적으로 처리되었을 때 호출되는 콜백 함수
 function updateReceiverDetails(data) {
-    $("#checkout-rcvPlace").text(data.rcvPlace);
-    $("#checkout-enterMthd").text(data.enterMthd);
+    $("#checkout-rcv-place").text(data.rcvPlace);
+    $("#checkout-enter-mthd").text(data.enterMthd);
     $("#checkout-name").text(data.rcvName);
     $("#checkout-telNo").text(data.telNo);
+    $("#checkout-place-exp").text(data.placeExp);
+    $("#checkout-msg-time").text(data.msgTime);
 }
 
 function redirectPayment() {
-    let paymentAmount = {
-        "orderAmt": parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
-        "itemAmt": parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),
-        "itemDcAmt": parseInt($("#item-dc-amount").text().replace(/[,\s원]/g, ''), 10)
+    const customerCart = [];
+    $(".item-list").each(function () {
+        customerCart.push({
+            name: $(this).find($(".item-name")).text(),
+            itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
+            price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
+
+        })
+    });
+
+    let checkoutInfo = {
+        rcvName: $("#checkout-name").text(),
+        telNo: $("#checkout-tel-no").text(),
+        rcvPlace: $("#checkout-rcv-place").text(),
+        enterMthd: $("#checkout-enter-mthd").text(),
+        placeExp: $("#checkout-place-exp").text(),
+        msgTime: $("#checkout-msg-time").text(),
+        customerCart: customerCart,
+        paymentAmount: {
+            orderAmt: parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
+            itemAmt: parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),
+            itemDcAmt: parseInt($("#item-dc-amount").text().replace(/[,\s원]/g, ''), 10),
+        }
     };
 
     $(".payment-button").each(function () {
@@ -123,9 +144,13 @@ function redirectPayment() {
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(paymentAmount)
+                        body: JSON.stringify(checkoutInfo)
                     })
-                        .then(response => response.text())
+                        .then(response => {
+                            if (!response.ok)
+                                throw new Error(`Server responded with status: ${response.status}`);
+                            return response.text()
+                        })
                         .then(url => window.location.href = url)
                         .catch(error => console.log("Error: ", error));
                     break;

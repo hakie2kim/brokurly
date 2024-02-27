@@ -1,6 +1,7 @@
 package com.brokurly.entity.payment;
 
 import com.brokurly.dto.cart.CartDto;
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,8 +28,8 @@ public class PaymentAmount {
     private static final int SHIPPING_FEE = 3000;
     private static final int FREE_SHIPPING_AMOUT = 40000;
 
-    public PaymentAmountCheckoutDto toCheckoutDto(List<CartDto> itemList) {
-        for (CartDto item : itemList) {
+    public PaymentAmountCheckoutDto toCheckoutDto(List<CustomerCartDto> itemList) {
+        for (CustomerCartDto item : itemList) {
             // 상품 금액
             itemAmt += item.getPrice() * item.getItemCnt();
             // 상품 할인 금액

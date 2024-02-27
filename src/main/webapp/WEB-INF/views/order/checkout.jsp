@@ -32,9 +32,9 @@
             <c:forEach items="${checkout.customerCart}" var="item">
                 <div class="item-list">
                     <div>상품 사진</div>
-                    <div>${item.name}</div>
-                    <div>${item.itemCnt}개</div>
-                    <div>${item.price}원</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-cnt">${item.itemCnt}개</div>
+                    <div class="item-price">${item.price}원</div>
                 </div>
             </c:forEach>
         </div>
@@ -45,11 +45,11 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div>${member.name}</div>
+            <div id="rcv-name">${member.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div>${member.telNo}</div>
+            <div id="tel-no">${member.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
@@ -101,10 +101,12 @@
             </c:if>
             <c:if test="${checkout != null && member != null}">
                 <div>
-                    <div><span id="checkout-rcvPlace">${checkout.rcvPlace}</span> | <span
-                            id="checkout-enterMthd">${checkout.enterMthd}</span></div>
-                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-telNo">${member.telNo}</span>
+                    <div><span id="checkout-rcv-place">${checkout.rcvPlace}</span> | <span
+                            id="checkout-enter-mthd">${checkout.enterMthd}</span></div>
+                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-tel-no">${member.telNo}</span>
                     </div>
+                    <div id="checkout-place-exp" style="display: none;"></div>
+                    <div id="checkout-msg-time" style="display: none;"></div>
                     <button class="receiver-details-btn">수정</button>
                 </div>
             </c:if>
