@@ -31,7 +31,5 @@ public class GoodsDto {
   private int itemQty;
   private String bsnsNo;
   private String itemSpec;
-  private String stdySellerFl;
-
 
 }

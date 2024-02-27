@@ -22,7 +22,7 @@ public class BestPageController {
 
 //        CategoryDto categoryDto = new CategoryDto();
 
-        List<CategoryDto> selectMain = categoryService.readMain();
+        List<CategoryDto> selectMain = categoryService.readPrimary();
         m.addAttribute("selectMain", selectMain);
 
 
@@ -33,7 +33,7 @@ public class BestPageController {
     public String bestpage(Model m) throws Exception {
 //        CategoryDto categoryDto = new CategoryDto();
 
-        List<CategoryDto> selectMain = categoryService.readMain();
+        List<CategoryDto> selectMain = categoryService.readPrimary();
         m.addAttribute("selectMain", selectMain);
 
         return "categories/best-page";

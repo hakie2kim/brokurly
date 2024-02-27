@@ -25,7 +25,7 @@ public class CategoryService {
 
     //카테고리 대분류 가져오기
     @Transactional
-    public List<CategoryDto> readMain() {
+    public List<CategoryDto> readPrimary() {
         //domain list 전체 가져오기
         List<Category> categoryList = categoryDao.selectPrimary();
 

@@ -4,7 +4,7 @@
 
 <mapper namespace="com.brokurly.repository.goods.GoodsImageDao">
     <!-- CREATE -->
-    <insert id="insert">
+    <insert id="insertGoodsImage">
         INSERT INTO item_image
             (img, rep_img_fl, item_id)
         VALUES

@@ -1,4 +1,5 @@
 package com.brokurly.entity.goods;
+import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
@@ -33,7 +34,6 @@ public class Goods {
   private String itemSpec;
   private int sellCnt;
   private int revCnt;
-  private String stdySellerFl;
 
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
@@ -56,7 +56,7 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .stdySellerFl(stdySellerFl).build();
+            .build();
   }
 
   public GoodsForCartDto toGoodsForCartDto() {
@@ -65,6 +65,17 @@ public class Goods {
             .price(price)
             .shipType(shipType)
             .pkgType(pkgType)
+            .build();
+  }
+
+  public GoodsByBsnsNoDto toGoodsByBsnsNoDto(String bsnsNo){
+    return GoodsByBsnsNoDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .bsnsNo(this.bsnsNo)
             .build();
   }
 
@@ -88,6 +99,5 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.stdySellerFl = goodsDto.getStdySellerFl();
   }
 }

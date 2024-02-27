@@ -27,6 +27,11 @@
         WHERE item_id = #{itemId}
     </select>
 
+    <select id="selectByBsnsNo" resultType="Goods">
+        <include refid="select"/>
+        WHERE bsns_no = #{bsnsNo}
+    </select>
+
     <!-- UPDATE -->
     <update id="update">
         UPDATE item
