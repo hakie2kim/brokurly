@@ -18,10 +18,9 @@ public class FAQService {
     private final FAQBoardDao faqBoardDao;
     private final FAQCateDao faqCateDao;
 
-
     public List<FAQListDto> getFaqList() {
-        List<FAQBoard> faqBoardList =  faqBoardDao.selectFAQList();
-        List<FAQCate> faqCateList =  faqCateDao.selectFAQCateList();
+        List<FAQBoard> faqBoardList = faqBoardDao.selectFAQList();
+        List<FAQCate> faqCateList = faqCateDao.selectFAQCateList();
         return new FAQBoard().pleasejoin(faqBoardList, faqCateList);
     }
 }

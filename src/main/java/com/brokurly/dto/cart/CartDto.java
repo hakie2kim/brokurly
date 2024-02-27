@@ -15,12 +15,12 @@ public class CartDto {
 
 //  //상품테이블
 //  private String name;  //상품이름
-//  private int price;  //상품 가격
+  private int price;  //상품 가격
 //  private String shipType;  //샛별배송여부
 //  private String pkgType;   //포장타입
-//  private int itemDcAmt;  //할인되는 금액
-//
-//  //추가
+  private int itemDcAmt;  //할인되는 금액
+
+  //추가
 //  private int salePrice;  //할인이 들어간 가격
 //  private int totalPrice; //수량에 따른 총 가격
 //
