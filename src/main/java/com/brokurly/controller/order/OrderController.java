@@ -3,8 +3,6 @@ package com.brokurly.controller.order;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsRequestChangeDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
-import com.brokurly.entity.member.Member;
-import com.brokurly.service.member.MemberService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
 import lombok.Getter;
@@ -12,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,15 +39,22 @@ public class OrderController {
 
         model.addAttribute("checkout", checkout);
         model.addAttribute("member", new TestMember(checkout.getRcvName(), checkout.getTelNo(), "asd@naver.com"));
-      
+
         return "order/checkout";
+    }
+
+    @GetMapping("/checkout/success")
+    public String paymentSuccess(@ModelAttribute String amonut,
+                                 @ModelAttribute String orderId,
+                                 @ModelAttribute String userId) {
+        return "order/success";
     }
 
     @Getter
     public static class TestMember {
-        private String name;
-        private String telNo;
-        private String email;
+        private final String name;
+        private final String telNo;
+        private final String email;
 
         public TestMember(String name, String telNo, String email) {
             this.name = name;
@@ -71,7 +75,6 @@ public class OrderController {
     @PostMapping("/receiver-details")
     @ResponseBody
     public ResponseEntity<CheckoutDto> addReceiverDetails() {
-//        orderService.
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

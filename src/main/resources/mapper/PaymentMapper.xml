@@ -5,7 +5,7 @@
 <mapper namespace="com.brokurly.repository.order.PaymentDao">
     <!-- CREATE -->
     <insert id="insert">
-        INSERT INTO payment
+        INSERT INTO paymentDetails
             (pay_no, pay_mthd, pay_stat, pay_req_dt, pay_conf_dt, order_amt,
              ship_fee, cpn_dc_amt, card_dc_amt, point_dc_amt, pay_amt, order_id)
         VALUES
@@ -15,7 +15,7 @@
 
     <!-- READ -->
     <sql id="select">
-        SELECT * FROM payment
+        SELECT * FROM paymentDetails
     </sql>
 
     <select id="selectAll" resultType="Payment">

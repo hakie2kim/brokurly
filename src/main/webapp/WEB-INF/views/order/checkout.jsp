@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -31,9 +32,9 @@
             <c:forEach items="${checkout.customerCart}" var="item">
                 <div class="item-list">
                     <div>상품 사진</div>
-                    <div>${item.name}</div>
-                    <div>${item.itemCnt}개</div>
-                    <div>${item.price}원</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-cnt">${item.itemCnt}개</div>
+                    <div class="item-price">${item.price}원</div>
                 </div>
             </c:forEach>
         </div>
@@ -44,11 +45,11 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div>${member.name}</div>
+            <div id="rcv-name">${member.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div>${member.telNo}</div>
+            <div id="tel-no">${member.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
@@ -100,10 +101,12 @@
             </c:if>
             <c:if test="${checkout != null && member != null}">
                 <div>
-                    <div><span id="checkout-rcvPlace">${checkout.rcvPlace}</span> | <span
-                            id="checkout-enterMthd">${checkout.enterMthd}</span></div>
-                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-telNo">${member.telNo}</span>
+                    <div><span id="checkout-rcv-place">${checkout.rcvPlace}</span> | <span
+                            id="checkout-enter-mthd">${checkout.enterMthd}</span></div>
+                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-tel-no">${member.telNo}</span>
                     </div>
+                    <div id="checkout-place-exp" style="display: none;"></div>
+                    <div id="checkout-msg-time" style="display: none;"></div>
                     <button class="receiver-details-btn">수정</button>
                 </div>
             </c:if>
@@ -142,7 +145,8 @@
                             <div>0 원</div>
                         </div>
                         <div id="point-input">
-                            <input type="text" placeholder="0"/>
+                            <input type="text" placeholder="0"
+                                   <c:if test="${true}">disabled</c:if> />
                             <button>모두사용</button>
                         </div>
                     </div>
@@ -156,10 +160,14 @@
             <hr/>
             <div class="info-type2">
                 <div>결제수단 선택</div>
-                <button type="button" class="kakaopay">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik03LjUxNSAyLjhDMy4zNjUgMi44IDAgNS40NDUgMCA4LjcwN2MwIDEuOTM4IDEuMTg3IDMuNjU3IDMuMDIxIDQuNzM0LS4xOTEuNzY4LS42ODQgMi43NDItLjc1IDIuOTU3LS4wODMuMjY2LS4xMDMgMS4wNDYuNzAyLjUxMi42MzQtLjQyIDIuNDc5LTEuNyAzLjU3LTIuMzQ4LjMxOC4wMzMuNjQyLjA1MS45NzIuMDUxIDQuMTUgMCA3LjUxNS0yLjY0NCA3LjUxNS01LjkwNiAwLTMuMjYyLTMuMzY1LTUuOTA3LTcuNTE1LTUuOTA3TTIxLjA0OCA0LjExM2MxLjUxNy0xLjMxMyAzLjQ2OC0xLjUwOCA0Ljg5My0uNTg1IDEuNzA3IDEuMTA2IDIuMTY4IDIuNzU0IDIuMTY4IDQuODkyIDAgMi40LTEuMTE1IDMuOTY4LTEuNjQyIDQuNDYtLjUyNi40OTMtMS42NzMgMS4yOTItMi44OCAxLjI5MkgyMS40MnYzLjc4NGgtMi45MTFWMy4yODJoMi4xMDZzLjI2LjU0OC40MzMuODN6bTEuOTUxIDEuMTUzYy0uNjk3IDAtMS4xNTMuMTc3LTEuNTMzLjQ3N3Y2LjMwNmgxLjEzOGMuNTU4IDAgMi41NDctLjUwNyAyLjU0Ny0zLjM4MyAwLS42NzctLjA5LTEuMzg1LS4yNzgtMS45LS4zNTctLjk3Ny0xLjI0Ny0xLjUtMS44NzQtMS41ek0zMy44MTcgMy4wNDZjMi4wODUgMCAyLjk0Mi43MTggMy40NDggMS4zNTQuNDgxLjYwNC44NjIgMS40OTcuODYyIDIuOHY2LjY4aC0yLjI2di0uOTU0cy0uNDQyLjQyLTEuMzc5LjgzMWMtLjk4LjQzLTIuNjUzLjg3Ny00LjA0MS0uMTg0LTEuMzk3LTEuMDY4LTEuMi0zLjQ3MS0uODUyLTQuMTU0LjQ4LS45MzggMS4zNjMtMS45NjggMy43MTYtMS45NjhoMi4wMjl2LS45MDhjMC0uNTU0LS41ODMtMS4xMDctMS43My0xLjEwNy0xLjI4IDAtMS44MzMuMTkyLTIuODE3LjYzNWwtLjk5Ni0xLjk0M3MxLjQ5Ni0xLjA4MiA0LjAyLTEuMDgyem0xLjQ3NyA2LjI1aC0xLjQxNWMtLjU5OSAwLTEuOTYxLjIxNi0xLjk2MSAxLjQ3NyAwIDEuMjgzIDEuMDkgMS4yNiAxLjQ0OCAxLjIzIDEuMDg5LS4wOTEgMS45MzgtLjc5NCAxLjkzOC0uNzk0bC0uMDEtMS45MTN6TTQ3LjA2MSAzLjA0NmwtMi4yOTEgOC4xMTEtMi41NC04LjExLTIuODQ5LjgyczMuNSA5LjM4MyAzLjYyNCA5Ljc4M2MuMTIzLjQtLjAwNS44NTgtLjI4IDEuMzIyLS4zNzEuNjMtMS44MjYgMi4wMy0xLjgyNiAyLjAzbDEuODc4IDEuNjYzcy44NTctLjY4OCAxLjc0NS0xLjc1NWMuNzQzLS44OTIgMS42MzYtMi44MyAxLjkzOC0zLjU3Ny44NTktMi4xMTkgMy40Mi05LjQ2NiAzLjQyLTkuNDY2bC0yLjgxOS0uODJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo="
-                         alt="카카오페이">
-                </button>
+                <div>
+                    <button type="button" id="kakaopay" class="payment-button" value="false"
+                            style="margin-bottom: 10px">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik03LjUxNSAyLjhDMy4zNjUgMi44IDAgNS40NDUgMCA4LjcwN2MwIDEuOTM4IDEuMTg3IDMuNjU3IDMuMDIxIDQuNzM0LS4xOTEuNzY4LS42ODQgMi43NDItLjc1IDIuOTU3LS4wODMuMjY2LS4xMDMgMS4wNDYuNzAyLjUxMi42MzQtLjQyIDIuNDc5LTEuNyAzLjU3LTIuMzQ4LjMxOC4wMzMuNjQyLjA1MS45NzIuMDUxIDQuMTUgMCA3LjUxNS0yLjY0NCA3LjUxNS01LjkwNiAwLTMuMjYyLTMuMzY1LTUuOTA3LTcuNTE1LTUuOTA3TTIxLjA0OCA0LjExM2MxLjUxNy0xLjMxMyAzLjQ2OC0xLjUwOCA0Ljg5My0uNTg1IDEuNzA3IDEuMTA2IDIuMTY4IDIuNzU0IDIuMTY4IDQuODkyIDAgMi40LTEuMTE1IDMuOTY4LTEuNjQyIDQuNDYtLjUyNi40OTMtMS42NzMgMS4yOTItMi44OCAxLjI5MkgyMS40MnYzLjc4NGgtMi45MTFWMy4yODJoMi4xMDZzLjI2LjU0OC40MzMuODN6bTEuOTUxIDEuMTUzYy0uNjk3IDAtMS4xNTMuMTc3LTEuNTMzLjQ3N3Y2LjMwNmgxLjEzOGMuNTU4IDAgMi41NDctLjUwNyAyLjU0Ny0zLjM4MyAwLS42NzctLjA5LTEuMzg1LS4yNzgtMS45LS4zNTctLjk3Ny0xLjI0Ny0xLjUtMS44NzQtMS41ek0zMy44MTcgMy4wNDZjMi4wODUgMCAyLjk0Mi43MTggMy40NDggMS4zNTQuNDgxLjYwNC44NjIgMS40OTcuODYyIDIuOHY2LjY4aC0yLjI2di0uOTU0cy0uNDQyLjQyLTEuMzc5LjgzMWMtLjk4LjQzLTIuNjUzLjg3Ny00LjA0MS0uMTg0LTEuMzk3LTEuMDY4LTEuMi0zLjQ3MS0uODUyLTQuMTU0LjQ4LS45MzggMS4zNjMtMS45NjggMy43MTYtMS45NjhoMi4wMjl2LS45MDhjMC0uNTU0LS41ODMtMS4xMDctMS43My0xLjEwNy0xLjI4IDAtMS44MzMuMTkyLTIuODE3LjYzNWwtLjk5Ni0xLjk0M3MxLjQ5Ni0xLjA4MiA0LjAyLTEuMDgyem0xLjQ3NyA2LjI1aC0xLjQxNWMtLjU5OSAwLTEuOTYxLjIxNi0xLjk2MSAxLjQ3NyAwIDEuMjgzIDEuMDkgMS4yNiAxLjQ0OCAxLjIzIDEuMDg5LS4wOTEgMS45MzgtLjc5NCAxLjkzOC0uNzk0bC0uMDEtMS45MTN6TTQ3LjA2MSAzLjA0NmwtMi4yOTEgOC4xMTEtMi41NC04LjExLTIuODQ5LjgyczMuNSA5LjM4MyAzLjYyNCA5Ljc4M2MuMTIzLjQtLjAwNS44NTgtLjI4IDEuMzIyLS4zNzEuNjMtMS44MjYgMi4wMy0xLjgyNiAyLjAzbDEuODc4IDEuNjYzcy44NTctLjY4OCAxLjc0NS0xLjc1NWMuNzQzLS44OTIgMS42MzYtMi44MyAxLjkzOC0zLjU3Ny44NTktMi4xMTkgMy40Mi05LjQ2NiAzLjQyLTkuNDY2bC0yLjgxOS0uODJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo="
+                             alt="카카오페이">
+                    </button>
+                    <button type="button" id="credit-card" class="payment-button" value="false">신용카드</button>
+                </div>
             </div>
         </div>
         <div>
@@ -191,26 +199,29 @@
                 </p>
             </div>
         </div>
-        <button id="pay-btn">98,090원 결제하기</button>
+        <c:set var="paymentAmount" value="${checkout.paymentAmount}"/>
+        <button id="pay-button" onclick="redirectPayment()">
+            <fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/>원 결제하기
+        </button>
     </div>
     <div id="right">
         <h3>결제 금액</h3>
         <div id="right-inner">
             <div>
                 <div>주문금액</div>
-                <div>98,090 원</div>
+                <div id="order-amount"><fmt:formatNumber value="${paymentAmount.orderAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>ㄴ 상품금액</div>
-                <div>110,670 원</div>
+                <div id="item-amount"><fmt:formatNumber value="${paymentAmount.itemAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>ㄴ 상품할인금액</div>
-                <div>-12,580 원</div>
+                <div id="item-dc-amount"><fmt:formatNumber value="${paymentAmount.itemDcAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>배송비</div>
-                <div>0원</div>
+                <div id="ship-fee"><fmt:formatNumber value="${paymentAmount.shipFee}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>쿠폰할인</div>
@@ -227,7 +238,7 @@
             <hr/>
             <div>
                 <div>최종결제금액</div>
-                <div>98,090 원</div>
+                <div><fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div></div>
