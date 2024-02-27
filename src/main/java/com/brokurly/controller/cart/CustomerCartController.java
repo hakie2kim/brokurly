@@ -4,6 +4,8 @@ import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.service.cart.CustomerCartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +34,7 @@ public class CustomerCartController {
         if (member == null) {
             return "5";
         }
-
         // 카트 등록
-//        return String.valueOf(customerCartService.addCart(customerCart));
         int result = customerCartService.addCart(customerCartDto);
         return result + "";
     }
@@ -45,9 +45,28 @@ public class CustomerCartController {
         List<CustomerCartDto> cart = customerCartService.getCartList(custId);
 //        ArrayList<CustomerCartDto> collect = cart.stream().map(carte -> carte.makeFullDto()).collect(Collectors.toCollection(ArrayList::new));
         model.addAttribute("cart", cart);
-
         return "cart/cart";
     }
 
+    //장바구니 수량 수정
+    @PostMapping("/update")
+    @ResponseBody
+    public ResponseEntity<CustomerCartDto> updateCartPOST(@ModelAttribute CustomerCartDto customerCartDto) {
+//        log.info("cartDto = {}", customerCartDto);
+        CustomerCartDto cartDto = customerCartService.update(customerCartDto);
+
+        if (cartDto == null) {
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+        return new ResponseEntity<>(cartDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
+        CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
+//        return "cart/cart";
+        return "redirect:/cart/{custId}";
+    }
 
 }
