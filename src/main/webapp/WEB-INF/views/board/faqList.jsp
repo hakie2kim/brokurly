@@ -432,7 +432,7 @@
                     >
                 </div>
                 <div class="css-fhxb3m ed9qr672">
-                    <div class="css-14dor01 e1xhuuuq0">
+                    <div class="css-14dor01 e1xhuuuq0" onclick="popup()">
                         <div>
                             <div class="MuiFormControl-root css-tzsjye">
                                 <div
@@ -484,8 +484,8 @@
                 <div class="css-1ym8aqm e16adls20">제목</div>
             </div>
             <ul class="css-1fttcpj e1cfowvj5">
-                <c:forEach var="faqListDto" items="${FaqListDtoList}">
-                    <li class="css-e0dnmk e1cfowvj3" onclick="this.showContent()">
+                <c:forEach var="faqListDto" items="${FAQListDtoList}">
+                    <li class="css-e0dnmk e1cfowvj3">
                         <div class="css-14yglsw e1cfowvj4">
                             <div class="css-dx3647 e1cfowvj2">${faqListDto.bno}</div>
                             <div class="css-1tixomb e1cfowvj2">${faqListDto.name}</div>
@@ -494,48 +494,21 @@
                             </div>
                         </div>
                     </li>
-                </c:forEach>
-                <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;">
-                    <div class="css-1kj0ddz eec36oi0">
-                        <div>■ 포장재 회수 안내
-
-                            컬리에서는 아래와 같이 수도권 샛별배송지역에 한해서 일부 포장재의 회수 서비스를 진행하고 있습니다.
-
-                            - 대상지역 : 수도권 샛별배송 지역 + 컬리 퍼플 박스 주문 건
-
-                            - 회수대상 : 컬리 퍼플 박스포장 방법으로 주문 시, 발생한 냉장/냉동 포장한 비닐
-
-                            * 1회 최대 2장
-
-                            * 기타 종이소재 포장재( 완충재, 종이봉투, 종이테이프등) 및 아이스팩은 미회수
-
-                            - 회수방법 :
-
-                            ① 상품 수령 후 비닐에서 송장을 제거해주세요
-
-                            ② 다음 주문 시 컬리 퍼플 박스 안에 비닐을 넣어두세요
-
-                            ③ 새로운 주문이 배송 됨과 동시에 배송 기사님께서 퍼플박스 안의 비닐을 회수합니다
-
-
-                            [참고]
-
-                            ▣ 간혹, 배송매니저님들께서 깜빡하고 회수를 잊으시거나 부득이 회수가 어려운 경우로 누락될 수 있습니다. 고객님의 너그러운 양해 부탁드리며 고객센터 문의 남겨주시면
-                            배송 매니저님께 잊지 않으시도록 꼭 전달 드리겠습니다.
-
-                            ▣ 상세 내용은 컬리홈&gt;공지사항 게시판에서 확인 할 수 있습니다.
-
-                            ▣ 종이박스 회수는 2022년 7월 1일부로 종료되었습니다.
+                    <li class="css-d3v9zr e1cfowvj0">
+                        <div class="css-1kj0ddz eec36oi0">
+                            <div>
+                                ${faqListDto.content}
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </c:forEach>
             </ul>
             <div class="css-1kbzkwh e14yho7m0">
                 <div class="css-sxxs1g eytury60">
-                    <button disabled="" type="button" class="css-rzcdhr e1hbwyso0">
+                    <button type="button" class="css-rzcdhr e1hbwyso0" onclick="location.href='${pageContext.request.contextPath}/board/faqboard?page=${pageNo - 1}'">
                         <div class="css-7qb0sc e1ilyb3p0">이전</div>
                     </button>
-                    <button type="button" class="css-1jwilit e1pk9060">
+                    <button type="button" class="css-1jwilit e1pk9060" onclick="location.href='${pageContext.request.contextPath}/board/faqboard?page=${pageNo + 1}'">
                         <div class="css-7qb0sc e1ilyb3p0">다음</div>
                     </button>
                 </div>
@@ -545,40 +518,63 @@
 </div>
 </body>
 <script>
-    function showContent() {
-        let listDiv = document.createElement('li');
-        listDiv.class = 'css-d3v9zr'
+    // function changeAct() {
+    //     let acc = document.getElementsByClassName("css-e0dnmk e1cfowvj3");
+    //     for (let i = 0; i < acc.length; i++) {
+    //         if (acc[i] !== this) {
+    //             acc[i].classList.remove("act");
+    //         } else {
+    //             acc[i].classList.toggle("act")
+    //         }
+    //     }
+    // }
+    //
+    // function refresh() {
+    //     let acc = document.getElementsByClassName("css-e0dnmk e1cfowvj3");
+    //     for (let j = 0; j < acc.length; j++) {
+    //         let panel = acc[j].nextElementSibling;
+    //         if (acc[j].classList.contains("act")) {
+    //             panel.style.maxHeight = panel.scrollHeight + "px";
+    //             panel.style.animation = "fadeIn ease-out 0.4s"
+    //         } else {
+    //             panel.style.maxHeight = null;
+    //             panel.style.animation = "fadeOut ease-out 0.4s"
+    //         }
+    //     }
+    // }
 
-        listDiv.style.position = 'relative';
-        listDiv.style.display = 'inline-block';
-        listDiv.style.opacity = '1';
-        listDiv.style.height = 'auto';
+    let acc = document.getElementsByClassName("css-e0dnmk e1cfowvj3");
+    let i;
 
-        listDiv.showDetails = function () {
-            let contentDiv = document.createElement('div');
-            contentDiv.class = 'css-1kj0ddz'
-            contentDiv.innerHTML = '${faqListDto.content}';
-
-            contentDiv.style.position = 'relative'
-            contentDiv.style.padding = '30px 30px 30px 70px';
-            contentDiv.style.textAlign = 'left';
-            contentDiv.style.color = 'rgb(76,76,76)';
-            contentDiv.style.whiteSpace = 'pre-line';
-
-            this.appendChild(contentDiv);
-
-        };
-        listDiv.showDetails();
-        this.parentNode.insertBefore(listDiv, this.nextSibling);
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            // 현재 클릭된 요소를 제외하고 모든 "notice" 요소에서 "act" 클래스를 제거
+            for (let j = 0; j < acc.length; j++) {
+                if (acc[j] !== this) {
+                    acc[j].classList.remove("act");
+                    // 다음 형제 요소의 최대 높이를 null로 설정하여 접히도록
+                    let panel = acc[j].nextElementSibling;
+                    panel.style.maxHeight = null;
+                    panel.style.animation = "fadeOut ease-out 0.4s"
+                }
+            }
+            // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
+            this.classList.toggle("act");
+            let panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+                panel.style.animation = "fadeOut ease-out 0.4s"
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.animation = "fadeIn ease-out 0.4s"
+            }
+        });
     }
 
-    // function showDetails(Object) {
-    //     Object.innerHTML = '${noticeListDtoList.detail}';
-    //     Object.style.position = 'relative'
-    //     Object.style.display = 'inline-block'
-    //     Object.style.opacity = 1;
-    //     Object.style.height = auto;
-    // }
+    function popup() {
+        
+    }
+
 </script>
 </html>
 
