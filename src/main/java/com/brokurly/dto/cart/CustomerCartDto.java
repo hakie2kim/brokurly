@@ -20,6 +20,7 @@ public class CustomerCartDto {
     private String shipType;  //샛별배송여부
     private String pkgType;   //포장타입
     private int itemDcAmt;  //할인되는 금액
+    private int itemQty; //재고량
 
     //추가
     private int salePrice;  //할인이 들어간 가격

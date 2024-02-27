@@ -258,11 +258,21 @@ h2 {
     letter-spacing: -0.5px;
 }
 
-#pay-btn {
+#pay-button {
     display: block;
     margin: 100px auto;
     width: 240px;
     height: 60px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    background: #11967f;
+    border: 1px solid #11967f;
+    border-radius: 3px;
+}
+
+#pay-button:hover {
+    cursor: pointer;
 }
 
 #yellow-circle {
@@ -279,17 +289,33 @@ h2 {
     text-align: left;
 }
 
-.kakaopay {
+.payment-button {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 60%;
+    width: 70%;
     height: 48px;
-    border: 1px solid rgb(246, 229, 0);
-    font-size: 14px;
-    color: rgb(255, 255, 255);
-    background: rgb(246, 229, 0);
-    font-weight: 500;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4f4f4f;
     border-radius: 3px;
+    border: 1px solid rgb(226, 226, 226);
+    background: white;
+}
+
+.payment-button:hover {
+    cursor: pointer;
+}
+
+.kakaopay {
+    border: 1px solid rgb(246, 229, 0);
+    background: rgb(246, 229, 0);
+}
+
+.credit-card {
+    color: white;
+    border: 1px solid #11967f;
+    background: #11967f;
 }

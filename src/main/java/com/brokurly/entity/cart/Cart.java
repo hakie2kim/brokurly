@@ -18,10 +18,6 @@ public class Cart {   //1. insert(넣을 값)할  값을 담을 Dto를 만듦
 
 
   public CartDto makeFullDto(GoodsForCartDto goodsDto){   //setter
-    int disPrice = goodsDto.getPrice() - goodsDto.getItemDcAmt();
-    if (disPrice < 0)
-      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-
     return CartDto.builder()
             .itemId(itemId)
             .itemCnt(itemCnt)
