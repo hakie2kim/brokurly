@@ -1,8 +1,11 @@
 package com.brokurly.controller.mypage;
 
 import com.brokurly.dto.mypage.*;
+import com.brokurly.entity.mypage.ShippingLocation;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
+import com.brokurly.service.mypage.ShippingLocationService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import java.util.List;
 public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
+    private final ShippingLocationService shippingLocationService;
 
     @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
@@ -93,10 +97,24 @@ public class MypageController {
         return "/mypage/address";
     }
 
+    @Getter
+    static class FullAddress {
+        private String addr;
+        private String specAddr;
+    }
+
     @PostMapping("/address")
-    ResponseEntity<ShippingLocationDto> addShippingAddress(String addr, String specAddr) {
-        log.info("addr: {} specAddr: {}", addr, specAddr);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @ResponseBody
+    ResponseEntity<ShippingLocationAddDto> addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+        String addr = shippingLocationAddFormDto.getAddr();
+        String specAddr = shippingLocationAddFormDto.getSpecAddr();
+        String defAddrFl = Boolean.parseBoolean(shippingLocationAddFormDto.getDefAddrFl()) ? "Y" : "N";
+        log.info("@PostMapping(\"/address\") addShippingAddress addr: {} specAddr: {} defAddrFl: {}", addr, specAddr, defAddrFl);
+
+        ShippingLocationAddDto shippingLocationAddDto = shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
+        // 모든 배송지 리스트를 등록 시간 역순으로 갖고 오는 service 기능
+
+        return new ResponseEntity<>(shippingLocationAddDto, HttpStatus.OK);
     }
 
     @GetMapping("/address/shipping-address")
@@ -111,10 +129,9 @@ public class MypageController {
         return "/mypage/shipping-address-result";
     }*/
 
-
     @PostMapping("/address/shipping-address/result")
-    String shippingAddressResult(String addr, String specAddr, Model model) {
-        log.info("addr: {}", addr);
+    String shippingAddressResult(String addr, Model model) {
+        log.info("@PostMapping(\"/address/shipping-address/result\") shippingAddressResult addr: {}", addr);
         model.addAttribute("addr", addr);
 
         return "/mypage/shipping-address-result";
