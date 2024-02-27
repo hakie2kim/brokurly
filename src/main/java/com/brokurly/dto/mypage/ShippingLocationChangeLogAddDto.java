@@ -2,20 +2,21 @@ package com.brokurly.dto.mypage;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-public class ShippingLocationDto {
-    private String shipLocaId;
+public class ShippingLocationChangeLogAddDto {
+    private String name;
+    private String telNo;
     private String addr;
     private String specAddr;
     private String defAddrFl;
-    private String shipLocaRegDt;
-    private String telNo;
-    private String recAddr;
-    private String recName;
-    private String delFl;
+    private String chgStatus;
+    private String custId;
+    private String shipLocaId;
 }

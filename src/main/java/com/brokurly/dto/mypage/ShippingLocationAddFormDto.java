@@ -7,15 +7,10 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class ShippingLocationDto {
-    private String shipLocaId;
+public class ShippingLocationAddFormDto {
     private String addr;
     private String specAddr;
     private String defAddrFl;
-    private String shipLocaRegDt;
-    private String telNo;
-    private String recAddr;
-    private String recName;
-    private String delFl;
 }

@@ -156,7 +156,12 @@
       <artifactId>sdk</artifactId>
       <version>4.3.0</version>
     </dependency>
-
+    <!-- RandomStringUtils -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>test</finalName>
