@@ -267,12 +267,36 @@ html, button, input, select, textarea {
     font-weight: 500;
 }
 
+/* 늘어나는 공간 */
+.css-d3v9zr {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    height: auto;
+    text-align: left;
+    color: rgb(76, 76, 76);
+
+
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+/* 늘어나는 공간 내 텍스트 공간*/
 .css-1kj0ddz {
     position: relative;
     padding: 30px 30px 30px 70px;
     text-align: left;
     color: rgb(76, 76, 76);
-    white-space: pre-line;
+    overflow: hidden;
+}
+
+.css-1kj0ddz {
+    position: relative;
+    padding: 30px 30px 30px 70px;
+    text-align: left;
+    color: rgb(76, 76, 76);
+    overflow: hidden;
 }
 
 .css-1kj0ddz::after {
@@ -283,14 +307,6 @@ html, button, input, select, textarea {
     width: 24px;
     height: 12px;
     background: url(https://res.kurly.com/images/common/icon_faq.gif) 0px 0px no-repeat;
-}
-
-/* 추가되는 Detail */
-.css-d3v9zr {
-    position: relative;
-    display: inline-block;
-    opacity: 0;
-    height: auto;
 }
 
 .css-1kbzkwh {
@@ -343,6 +359,15 @@ html, button, input, select, textarea {
     background-size: cover;
 }
 
+@keyframes fadeIn {
+    0%      { opacity: 0}
+    100%    { opacity: 1}
+}
+
+@keyframes fadeOut {
+    100%    { opacity: 1}
+    0%      { opacity: 0}
+}
 /*html, button, input, select, textarea {*/
 /*    font-family: "Noto Sans", "malgun gothic", AppleGothic, dotum, sans-serif;*/
 /*}*/

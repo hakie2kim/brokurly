@@ -1191,6 +1191,7 @@
                   panel.style.maxHeight = null;
               }
           }
+
           // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
           this.classList.toggle("act");
           let panel = this.nextElementSibling;
