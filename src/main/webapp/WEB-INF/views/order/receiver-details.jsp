@@ -42,6 +42,7 @@
                     id="receiver-phone"
                     name="telNo"
                     placeholder="숫자만 입력해 주세요"
+                    maxlength="11"
                     type="text"
                     value="<c:if test='${checkout != null}'>${checkout.telNo}</c:if>"/>
         </div>

@@ -20,21 +20,22 @@ public class CustomerCart {
     private String shipType;  //샛별배송여부
     private String pkgType;   //포장타입
     private int itemDcAmt;  //할인되는 금액
+    private int itemQty; //재고량
 
     //추가
     private int salePrice;  //할인이 들어간 가격
     private int totalPrice; //수량에 따른 총 가격
 
-    public void initSaleTotal(){
+    public void initSaleTotal() {
         salePrice = price - itemDcAmt;
         totalPrice = salePrice * itemCnt;
-        if (salePrice < 0)
+        if (salePrice < 0) {
             throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-//        }else if (itemCnt > 0) {
-//
-//            throw  new RuntimeException("상품 개수가 1개 이상이어야합니다");
-//        }
+        } else if (itemCnt < 1) {
+            throw new RuntimeException("상품 개수가 1개 이상이어야합니다");
+        }
     }
+
     public CustomerCartDto makeFullDto() {   //setter
 
         return CustomerCartDto.builder()
@@ -48,9 +49,11 @@ public class CustomerCart {
                 .itemDcAmt(itemDcAmt)
                 .salePrice(salePrice)
                 .totalPrice(totalPrice)
+                .itemQty(itemQty)
                 .build();
     }
-    public void changeStatus (CustomerCartDto customerCartDto){ //getter
+
+    public void changeStatus(CustomerCartDto customerCartDto) { //getter
         this.custId = customerCartDto.getCustId();
         this.itemId = customerCartDto.getItemId();
         this.itemCnt = customerCartDto.getItemCnt();
@@ -61,9 +64,8 @@ public class CustomerCart {
         this.itemDcAmt = customerCartDto.getItemDcAmt();
         this.salePrice = customerCartDto.getSalePrice();
         this.totalPrice = customerCartDto.getTotalPrice();
-
+        this.itemQty =customerCartDto.getItemQty();
     }
-
 
 
 }

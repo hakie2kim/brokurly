@@ -1247,10 +1247,9 @@
 
   // 서버로 전송할 데이터
   const form = {
-      custId : '${customer.custId}',
+      <%--custId : '${customer.custId}',--%>
       itemId : '${goods.itemId}',
-      // custId : 'hong',
-      // itemId : '1234',
+      custId : 'hong',
       itemCnt : ''
   }
   // 장바구니 추가 버튼

@@ -15,7 +15,6 @@ import java.util.List;
 public class CustomerCartService {
 
     private final CustomerCartDao customerCartDao;
-
     @Transactional
     public int addCart(CustomerCartDto customerCartDto) {   //장바구니 상품 추가
 
@@ -27,8 +26,7 @@ public class CustomerCartService {
         if (checkCart != null) {
             return 2;   //이걸 이제 개수를 추가하는걸로 변경해야됨
         }
-        //장바구니 등록 & 에러 시 0 반환
-        try {
+        try {   //장바구니 등록 & 에러 시 0 반환
             return customerCartDao.insert(customerCart);
         } catch (Exception e) {
             log.info("result=",e);
@@ -49,6 +47,32 @@ public class CustomerCartService {
 //            List<AttachImageVO> imageList = customerCartDao.getAttachList(itemId);
 //            customerCart.setImageList(imageList);
         }
+        return customerCartDto;
+    }
+
+    @Transactional
+    public CustomerCartDto update(CustomerCartDto customerCartDto){     //장바구니 상품 수량 변경
+
+        CustomerCart customerCart = new CustomerCart();
+        customerCart.changeStatus(customerCartDto);
+        customerCart.initSaleTotal();
+
+        //장바구니 등록 & 에러 시 0 반환
+        try {
+            customerCartDao.update(customerCart);
+            return customerCart.makeFullDto();
+        } catch (Exception e) {
+            log.info("result=",e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Transactional
+    public CustomerCartDto deleteCart(CustomerCartDto customerCartDto) {   //장바구니 상품 삭제
+
+        CustomerCart customerCart = new CustomerCart(); //비어있는 CustomerCart 도메인 만들기
+        customerCart.changeStatus(customerCartDto); //customerCartDto 있는 값으로 customerCart의 상태를 변경한다
+        customerCartDao.deleteOneItem(customerCart);
         return customerCartDto;
     }
 }
