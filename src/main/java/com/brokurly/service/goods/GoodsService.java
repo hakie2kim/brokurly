@@ -1,8 +1,6 @@
 package com.brokurly.service.goods;
 
-
 import com.brokurly.dto.cart.CartDto;
-import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import com.brokurly.entity.goods.Goods;
@@ -11,11 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -24,9 +17,9 @@ public class GoodsService {
     private final GoodsDao goodsDao;
 
     //상품 조회
-    public GoodsDto searchGoods(String itemId) {
+    public GoodsDto searchGoods(String itemId) {    //상품정보 불러오기
         Goods goods = goodsDao.selectByItemId(itemId);
-
+        goods.initSaleTotal();  //할인가격 계산 값
         return goods.makeFullDto();
     }
 
@@ -42,6 +35,5 @@ public class GoodsService {
 //    cart.changeStatus(cartDto);
         goodsDao.insert(goods);
     }
-
 
 }

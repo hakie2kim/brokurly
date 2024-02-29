@@ -17,6 +17,13 @@
              #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt} )
     </insert>
 
+    <insert id="addCart">
+        INSERT INTO cart
+        (item_id, cust_id, item_cnt)
+        VALUES
+        (#{itemId}, #{custId}, #{itemCnt})
+    </insert>
+
     <!-- READ -->
     <sql id="select">
         SELECT * FROM item
@@ -30,6 +37,12 @@
     <select id="selectByBsnsNo" resultType="Goods">
         <include refid="select"/>
         WHERE bsns_no = #{bsnsNo}
+    </select>
+
+    <select id="selectGoodsListByCateCode" resultType="Goods">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode}, '%');
     </select>
 
     <!-- UPDATE -->

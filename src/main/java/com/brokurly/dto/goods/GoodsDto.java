@@ -32,4 +32,8 @@ public class GoodsDto {
   private String bsnsNo;
   private String itemSpec;
 
+  private String stdySellerFl;
+  //추가
+  private int salePrice;  //할인이 들어간 가격
+
 }

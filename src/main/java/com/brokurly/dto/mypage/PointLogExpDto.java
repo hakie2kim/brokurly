@@ -1,13 +1,15 @@
 package com.brokurly.dto.mypage;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
-@Getter @Setter @ToString @EqualsAndHashCode
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@Builder
+@AllArgsConstructor
 public class PointLogExpDto {
     private int pointAmt;
     private Date procDt;

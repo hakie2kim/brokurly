@@ -1,96 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <script>
-        window.onload = () => {
-            // 주문 상품창 요약 & 리스트 변환 기능
-            const orderGoodsButton = document.querySelector(".info-type1-title").children[1];
-            orderGoodsButton.addEventListener("click", () => {
-                let buttonText = orderGoodsButton.innerHTML;
-                if (buttonText === "⋁") {
-                    orderGoodsButton.innerHTML = "&xwedge;";
-                    document.getElementById("order-goods").style.display = "none";
-                    document.getElementById("order-goods-list").style.display = "block";
-                } else {
-                    orderGoodsButton.innerHTML = "&xvee;";
-                    document.getElementById("order-goods").style.display = "block";
-                    document.getElementById("order-goods-list").style.display = "none";
-                }
-            });
-
-            // 배송지 변경 모달 띄우기
-            const smallModal = document.querySelector(".small-modal");
-            const locationChangeButton = document.getElementById("location-change");
-            locationChangeButton.addEventListener("click", () => {
-                smallModal.style.display = "block";
-                document.body.style.overflow = "hidden";
-            });
-
-            // 배송지 변경 모달 끄기
-            const cancelButton = document.getElementById("small-modal-cancel");
-            cancelButton.addEventListener("click", () => {
-                smallModal.style.display = "none";
-                document.body.style.removeProperty("overflow");
-            });
-
-            // 배송지 변경 리다이렉트
-            const okButton = document.getElementById("small-modal-ok");
-            okButton.addEventListener("click", () => {
-                window.location.href = '/cart';
-            });
-
-            // 결제 정보 헤더에 붙이기
-            window.addEventListener("scroll", () => {
-                const headerBottom = document.querySelector("header").offsetHeight;
-                const rightElement = document.getElementById("right");
-                const scrollPosition = window.scrollY;
-                const rightTop = rightElement.getBoundingClientRect().top;
-
-                if (scrollPosition <= headerBottom) {
-                    rightElement.style.top = scrollPosition - headerBottom + "px";
-                } else {
-                    rightElement.style.top = "150px";
-                }
-            });
-
-            // 배송 요청사항 입력창 띄우기
-            const receiverDetails = document.querySelector(".receiver-details-btn");
-            receiverDetails.addEventListener("click", () => {
-                const left = screen.width / 2 - 300;
-                const top = screen.height / 2 - 350;
-                window.open(
-                    "/order/receiver-details",
-                    "_blank",
-                    "width=600px, height=700px, left=" + left + ", top=" + top
-                );
-            });
-
-            // 개인정보 수집 동의 정보 조회
-            const bigModal = document.querySelectorAll(".big-modal");
-            const showModalButton = document.querySelectorAll(".personal-info-consent");
-            for (let i = 0; i < bigModal.length; i++) {
-                showModalButton[i].addEventListener("click", () => {
-                    bigModal[i].style.display = "block";
-                    document.body.style.overflow = "hidden";
-                });
-            }
-
-            // 개인정보 수집 동의 정보 모달창 닫기
-            const closeModalButton = document.querySelectorAll(".big-modal-content");
-            for (let i = 0; i < bigModal.length; i++) {
-                closeModalButton[i].addEventListener("click", () => {
-                    bigModal[i].style.display = "none";
-                    document.body.style.removeProperty("overflow");
-                });
-            }
-        };
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/order/checkout.css'/>"/>
+    <script type="text/javascript" src="<c:url value='/resources/js/order/checkout.js'/>"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>브로컬리</title>
 </head>
 <body>
@@ -103,8 +26,18 @@
             <button id="order-goods-change">&xvee;</button>
         </div>
         <hr/>
-        <div id="order-goods">실속 바나나 1kg 외 2개 상품을 주문합니다.</div>
-        <div id="order-goods-list" style="display: none">상품 리스트 반복문</div>
+        <div id="order-goods">${checkout.customerCart[0].name} 외 ${fn:length(checkout.customerCart) - 1}개 상품을 주문합니다.
+        </div>
+        <div id="order-goods-list" style="display: none">
+            <c:forEach items="${checkout.customerCart}" var="item">
+                <div class="item-list">
+                    <div>상품 사진</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-cnt">${item.itemCnt}개</div>
+                    <div class="item-price">${item.price}원</div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 
     <div class="info-type1">
@@ -112,11 +45,11 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div>${member.name}</div>
+            <div id="rcv-name">${member.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div>${member.telNo}</div>
+            <div id="tel-no">${member.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
@@ -158,7 +91,7 @@
 
         <div class="info-type2">
             <div>배송 요청사항</div>
-            <c:if test="${receiverDetails == null}">
+            <c:if test="${checkout == null}">
                 <div>
                     <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
                     <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
@@ -166,10 +99,14 @@
                     <button class="receiver-details-btn">입력</button>
                 </div>
             </c:if>
-            <c:if test="${receiverDetails != null && member != null}">
+            <c:if test="${checkout != null && member != null}">
                 <div>
-                    <div>${receiverDetails.rcvPlace} | ${receiverDetails.enterMthd}</div>
-                    <div>${member.name},${member.telNo}</div>
+                    <div><span id="checkout-rcv-place">${checkout.rcvPlace}</span> | <span
+                            id="checkout-enter-mthd">${checkout.enterMthd}</span></div>
+                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-tel-no">${member.telNo}</span>
+                    </div>
+                    <div id="checkout-place-exp" style="display: none;"></div>
+                    <div id="checkout-msg-time" style="display: none;"></div>
                     <button class="receiver-details-btn">수정</button>
                 </div>
             </c:if>
@@ -208,7 +145,8 @@
                             <div>0 원</div>
                         </div>
                         <div id="point-input">
-                            <input type="text" placeholder="0"/>
+                            <input type="text" placeholder="0"
+                                   <c:if test="${true}">disabled</c:if> />
                             <button>모두사용</button>
                         </div>
                     </div>
@@ -220,6 +158,17 @@
         <div>
             <h3>결제수단</h3>
             <hr/>
+            <div class="info-type2">
+                <div>결제수단 선택</div>
+                <div>
+                    <button type="button" id="kakaopay" class="payment-button" value="false"
+                            style="margin-bottom: 10px">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxwYXRoIGQ9Ik03LjUxNSAyLjhDMy4zNjUgMi44IDAgNS40NDUgMCA4LjcwN2MwIDEuOTM4IDEuMTg3IDMuNjU3IDMuMDIxIDQuNzM0LS4xOTEuNzY4LS42ODQgMi43NDItLjc1IDIuOTU3LS4wODMuMjY2LS4xMDMgMS4wNDYuNzAyLjUxMi42MzQtLjQyIDIuNDc5LTEuNyAzLjU3LTIuMzQ4LjMxOC4wMzMuNjQyLjA1MS45NzIuMDUxIDQuMTUgMCA3LjUxNS0yLjY0NCA3LjUxNS01LjkwNiAwLTMuMjYyLTMuMzY1LTUuOTA3LTcuNTE1LTUuOTA3TTIxLjA0OCA0LjExM2MxLjUxNy0xLjMxMyAzLjQ2OC0xLjUwOCA0Ljg5My0uNTg1IDEuNzA3IDEuMTA2IDIuMTY4IDIuNzU0IDIuMTY4IDQuODkyIDAgMi40LTEuMTE1IDMuOTY4LTEuNjQyIDQuNDYtLjUyNi40OTMtMS42NzMgMS4yOTItMi44OCAxLjI5MkgyMS40MnYzLjc4NGgtMi45MTFWMy4yODJoMi4xMDZzLjI2LjU0OC40MzMuODN6bTEuOTUxIDEuMTUzYy0uNjk3IDAtMS4xNTMuMTc3LTEuNTMzLjQ3N3Y2LjMwNmgxLjEzOGMuNTU4IDAgMi41NDctLjUwNyAyLjU0Ny0zLjM4MyAwLS42NzctLjA5LTEuMzg1LS4yNzgtMS45LS4zNTctLjk3Ny0xLjI0Ny0xLjUtMS44NzQtMS41ek0zMy44MTcgMy4wNDZjMi4wODUgMCAyLjk0Mi43MTggMy40NDggMS4zNTQuNDgxLjYwNC44NjIgMS40OTcuODYyIDIuOHY2LjY4aC0yLjI2di0uOTU0cy0uNDQyLjQyLTEuMzc5LjgzMWMtLjk4LjQzLTIuNjUzLjg3Ny00LjA0MS0uMTg0LTEuMzk3LTEuMDY4LTEuMi0zLjQ3MS0uODUyLTQuMTU0LjQ4LS45MzggMS4zNjMtMS45NjggMy43MTYtMS45NjhoMi4wMjl2LS45MDhjMC0uNTU0LS41ODMtMS4xMDctMS43My0xLjEwNy0xLjI4IDAtMS44MzMuMTkyLTIuODE3LjYzNWwtLjk5Ni0xLjk0M3MxLjQ5Ni0xLjA4MiA0LjAyLTEuMDgyem0xLjQ3NyA2LjI1aC0xLjQxNWMtLjU5OSAwLTEuOTYxLjIxNi0xLjk2MSAxLjQ3NyAwIDEuMjgzIDEuMDkgMS4yNiAxLjQ0OCAxLjIzIDEuMDg5LS4wOTEgMS45MzgtLjc5NCAxLjkzOC0uNzk0bC0uMDEtMS45MTN6TTQ3LjA2MSAzLjA0NmwtMi4yOTEgOC4xMTEtMi41NC04LjExLTIuODQ5LjgyczMuNSA5LjM4MyAzLjYyNCA5Ljc4M2MuMTIzLjQtLjAwNS44NTgtLjI4IDEuMzIyLS4zNzEuNjMtMS44MjYgMi4wMy0xLjgyNiAyLjAzbDEuODc4IDEuNjYzcy44NTctLjY4OCAxLjc0NS0xLjc1NWMuNzQzLS44OTIgMS42MzYtMi44MyAxLjkzOC0zLjU3Ny44NTktMi4xMTkgMy40Mi05LjQ2NiAzLjQyLTkuNDY2bC0yLjgxOS0uODJ6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo="
+                             alt="카카오페이">
+                    </button>
+                    <button type="button" id="credit-card" class="payment-button" value="false">신용카드</button>
+                </div>
+            </div>
         </div>
         <div>
             <h3>개인정보 수집/제공</h3>
@@ -250,26 +199,29 @@
                 </p>
             </div>
         </div>
-        <button id="pay-btn">98,090원 결제하기</button>
+        <c:set var="paymentAmount" value="${checkout.paymentAmount}"/>
+        <button id="pay-button" onclick="redirectPayment()">
+            <fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/>원 결제하기
+        </button>
     </div>
     <div id="right">
         <h3>결제 금액</h3>
         <div id="right-inner">
             <div>
                 <div>주문금액</div>
-                <div>98,090 원</div>
+                <div id="order-amount"><fmt:formatNumber value="${paymentAmount.orderAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>ㄴ 상품금액</div>
-                <div>110,670 원</div>
+                <div id="item-amount"><fmt:formatNumber value="${paymentAmount.itemAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>ㄴ 상품할인금액</div>
-                <div>-12,580 원</div>
+                <div id="item-dc-amount"><fmt:formatNumber value="${paymentAmount.itemDcAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>배송비</div>
-                <div>0원</div>
+                <div id="ship-fee"><fmt:formatNumber value="${paymentAmount.shipFee}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div>쿠폰할인</div>
@@ -286,7 +238,7 @@
             <hr/>
             <div>
                 <div>최종결제금액</div>
-                <div>98,090 원</div>
+                <div><fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div></div>

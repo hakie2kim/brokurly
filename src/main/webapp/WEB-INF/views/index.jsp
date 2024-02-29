@@ -19,6 +19,9 @@
     <a href="mypage/point/usage">학준 - 적립금 내역</a>
 </div>
 <div>
+    <a href="mypage/address">학준 - 배송지 관리</a>
+</div>
+<div>
     <a href="member/signup">소라 - 회원가입</a>
 </div>
 <div>
