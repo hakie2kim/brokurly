@@ -42,10 +42,10 @@
               </span>
             </h2>
             <span class="goods-45">
-                                <span>
-                                  <fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
-                                </span>
-                            </span>
+              <span class="originPrice">
+                <fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
+              </span>
+            </span>
             <p class="goods-120">원산지: ${goods.origin}</p>
             <div class="goods-121">적립 제외 상품입니다.</div>
             <ul>
@@ -82,25 +82,6 @@
                   <p class="goods-101">${goods.capa}</p>
                 </dd>
               </li>
-              <li class="goods-98">
-                <dt class="goods-99">알레르기정보</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">- 쇠고기, 대두, 밀 함유
-                    본 제품은 돼지고기, 닭고기, 우유, 계란, 새우, 토마토, 오징어, 조개류(굴,바지락,개량조개)를 사용한 제품과 같은 제조시설에서 제조하고 있습니다.</p>
-                </dd>
-              </li>
-              <li class="goods-98">
-                <dt class="goods-99">소비기한(또는 유통기한)정보</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">수령일 포함 최소 3일 남은 제품을 보내 드립니다.</p>
-                </dd>
-              </li>
-              <li class="goods-98">
-                <dt class="goods-99">안내사항</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">해당 상품은 냉장 제품입니다 상품 수령 후 최대한 빠른 시일내에 섭취를 권장드립니다.</p>
-                </dd>
-              </li>
             </ul>
             <div>
               <div>
@@ -121,7 +102,7 @@
                           <button class="plus_btn goods-107" type="button" aria-label="수량올리기"></button>
                         </div>
                         <div>
-                          <span class="goods-8" ><fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
+                          <span class="goods-8 originPrice" ><fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
                             </span>
                           <span id="price">
                           <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
@@ -149,14 +130,14 @@
               </div>
               <div class="goods-111">
                 <button class="goods-112" onclick="heartToggle()" width="56" height="56" radius="3">
-                                        <span>
-                                            <img src="/resources/image/heartX.png" alt="" class="img1" id="heart">
-                                        </span>
+                  <span>
+                      <img src="/resources/image/heartX.png" alt="" class="img1" id="heart">
+                  </span>
                 </button>
                 <button class="goods-112" onclick="bellToggle()" width="56" height="56" radius="3">
-                                        <span>
-                                            <img src="/resources/image/bellX.png" alt="" class="img1" id="bell">
-                                        </span>
+                  <span>
+                      <img src="/resources/image/bellX.png" alt="" class="img1" id="bell">
+                  </span>
                 </button>
                 <div class="goods-113">
                   <button class="btn_cart goods-115" type="button" radius="3" id="addBtn">
@@ -202,29 +183,30 @@
                       <img
                           src="https://img-cf.kurly.com/cdn-cgi/image/width=1010,quality=90/shop/data/goodsview/20210804/gv00000208742_1.jpg">
                       <!--상품설명 이미지-->
+
                     </div>
                     <div>
                       <h3>
-                        <small>합리적으로 즐기는 온 가족 반찬</small>
-                        [KF365] 양념 소불고기
+                        <small>${goods.exp}</small>
+                        ${goods.name}
                       </h3>
                       <p>${goods.itemSpec}</p>
                     </div>
                   </div>
-                  <div>
-                    <h3>
-                      <span>BroKurly’s Tip</span>
-                    </h3>
-                    <div>
-                      <div>
-                        <p>
-                          <strong>보관법</strong>
-                          <b>・</b>
-                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+<%--                  <div>--%>
+<%--                    <h3>--%>
+<%--                      <span>BroKurly’s Tip</span>--%>
+<%--                    </h3>--%>
+<%--                    <div>--%>
+<%--                      <div>--%>
+<%--                        <p>--%>
+<%--                          <strong>보관법</strong>--%>
+<%--                          <b>・</b>--%>
+<%--                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.--%>
+<%--                        </p>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
                 </div>
               </div>
             </div>
@@ -235,39 +217,42 @@
                   src="https://img-cf.kurly.com/cdn-cgi/image/width=1010,quality=90/shop/data/goodsview/20230904/gv00000723355_1.jpg"
                   alt="자세히보기 이미지">
             </div>
+            <input type="hidden" class="itemAnnCate" value="${announcement.itemAnnCate}" >
+            <input type="hidden" class="itemAnn" value="${announcement.itemAnn}" >
             <div class="goods-12">
               <h3>상품고시정보</h3>
               <ul class="goods-9">
-                <li class="goods-10">제품명</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">식품의 유형</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">생산자 및 소재지 (수입품의 경우 생산자, 수입자 및 제조국)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">제조연월일, 소비기한 또는 품질유지기한</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">포장단위별 내용물의 용량(중량), 수량</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">원재료명 (｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지 표시 포함) 및 함량(원재료 함량 표시대상 식품에 한함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">영양성분 (영양성분 표시대상 식품에 한함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">유전자변형식품에 해당하는 경우의 표시</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">수입식품의 경우 “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">소비자 상담 관련 전화번호</li>
-                <li class="goods-11">컬리 고객행복센터 (1644-1107)</li>
-                <li class="goods-10"></li>
+                <li class="goodsAnn">제품명</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">식품의 유형</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">생산자 및 소재지 (수입품의 경우 생산자, 수입자 및 제조국)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">제조연월일, 소비기한 또는 품질유지기한</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">포장단위별 내용물의 용량(중량), 수량</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">원재료명 (｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지 표시 포함) 및 함량(원재료 함량 표시대상 식품에 한함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">영양성분 (영양성분 표시대상 식품에 한함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">유전자변형식품에 해당하는 경우의 표시</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">수입식품의 경우 “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">소비자 상담 관련 전화번호</li>
+                <li class="goodsAnnCate">컬리 고객행복센터 (1644-1107)</li>
+                <li class="goodsAnn"></li>
+                <li class="goodsAnnCate">1644-1107</li>
               </ul>
             </div>
             <div class="goods-12">
               <h3>판매자정보</h3>
               <ul class="goods-9">
                 <li class="goods-10">판매자</li>
-                <li class="goods-11">컬리</li>
+                <li class="goods-11">${goods.sellerName}</li>
               </ul>
             </div>
             <div>
@@ -977,7 +962,7 @@
                               aria-label="수량올리기"></button>
                   </div>
                   <span class="goods-40">
-                      <span class="goods-41"><fmt:formatNumber value="${goods.price}" pattern="#,### 원" /></span>
+                      <span class="goods-41 originPrice"><fmt:formatNumber value="${goods.price}" pattern="#,### 원" /></span>
                       <span id = "dicPrice">
                         <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
                     </span>
@@ -1142,7 +1127,7 @@
 
 
   //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
-  var heartCnt = 0;
+  let heartCnt = 0;
 
   function heartToggle() {
       heartCnt++;
@@ -1283,7 +1268,33 @@
       }
   }
 
+  //상품 고시정보
+  $(document).ready(function () {
+      let goodsAnn = $(".itemAnn").val();
+      let goodsAnnCate = $(".itemAnnCate").val();
+      goodsAnn = goodsAnn.split(",");
+      goodsAnnCate = goodsAnnCate.split(",");
 
+      $(".goodsAnnCate").each(function(index) {
+          $(this).html(goodsAnn[index] || ''); // goodsAnnCate 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
+      });
+      $(".goodsAnn").each(function(index) {
+          $(this).html(goodsAnnCate[index] || ''); // goodsAnn 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
+      });
+  });
+
+  //상품가격 할인가격 같으면 할인율과 할인전 가격 숨기기
+  $(document).ready(function () {
+    let salePrice = ${goods.salePrice};
+    let price = ${goods.price};
+
+    if ( salePrice === price ){
+        $(".goods-118").hide();
+        $(".originPrice").hide();
+
+    }
+
+  });
 
   </script>
 

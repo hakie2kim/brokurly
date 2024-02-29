@@ -142,6 +142,9 @@ button {
 }
 
 .searchbox-text {
+    position: relative;
+    top: -7px;
+
     width: 300px;
     background-color: inherit;
     border: none;
@@ -152,6 +155,9 @@ button {
 
 .searchbox-btn{
     position: relative;
+
+    left: 20px;
+
     width: 30px;
     height: 30px;
     margin: 10px;
