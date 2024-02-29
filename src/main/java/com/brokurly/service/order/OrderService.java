@@ -1,6 +1,5 @@
 package com.brokurly.service.order;
 
-import com.brokurly.dto.cart.CartDto;
 import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
@@ -10,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -21,16 +21,11 @@ public class OrderService {
         List<CustomerCartDto> cartList = cartService.getCartList(custId);
         ReceiverDetailsResponseDto receiverDetails = receiverDetailsService.findReceiverDetails(shipLocaId);
 
-        if (receiverDetails == null)
-            throw new NullPointerException("해당 배송지 아이디에 맞는 요청사항이 존재하지 않습니다.");
+        if (cartList == null)
+            throw new IllegalStateException("주문을 위해서는 반드시 상품 목록이 필요합니다.");
 
         return CheckoutDto.builder()
-                .rcvName(receiverDetails.getRcvName())
-                .telNo(receiverDetails.getTelNo())
-                .rcvPlace(receiverDetails.getRcvPlace())
-                .enterMthd(receiverDetails.getEnterMthd())
-                .placeExp(receiverDetails.getPlaceExp())
-                .msgTime(receiverDetails.getMsgTime())
+                .receiverDetails(receiverDetails)
                 .customerCart(cartList)
                 .paymentAmount(new PaymentAmount().toCheckoutDto(cartList))
                 .build();

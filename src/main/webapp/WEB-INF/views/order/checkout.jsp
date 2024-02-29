@@ -26,10 +26,15 @@
             <button id="order-goods-change">&xvee;</button>
         </div>
         <hr/>
-        <div id="order-goods">${checkout.customerCart[0].name} 외 ${fn:length(checkout.customerCart) - 1}개 상품을 주문합니다.
+        <c:set var="customerCart" value="${checkout.customerCart}"/>
+        <c:set var="numOfItemType" value="${fn:length(customerCart) - 1}"/>
+        <div id="order-goods">
+            ${customerCart[0].name}
+            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType}개</c:if>
+            상품을 주문합니다.
         </div>
         <div id="order-goods-list" style="display: none">
-            <c:forEach items="${checkout.customerCart}" var="item">
+            <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
                     <div>상품 사진</div>
                     <div class="item-name">${item.name}</div>
@@ -90,26 +95,42 @@
         </div>
 
         <div class="info-type2">
-            <div>배송 요청사항</div>
-            <c:if test="${checkout == null}">
-                <div>
-                    <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
-                    <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
-                    <p class="caution">배송 요청사항을 입력해주세요</p>
-                    <button class="receiver-details-btn">입력</button>
-                </div>
-            </c:if>
-            <c:if test="${checkout != null && member != null}">
-                <div>
-                    <div><span id="checkout-rcv-place">${checkout.rcvPlace}</span> | <span
-                            id="checkout-enter-mthd">${checkout.enterMthd}</span></div>
-                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-tel-no">${member.telNo}</span>
+            <div id="receiver-details-title">배송 요청사항</div>
+            <c:set var="receiverDetails" value="${checkout.receiverDetails}"/>
+            <div class="check-receiver-details" style="display: none">${receiverDetails == null}</div>
+            <div class="receiver-info">
+                <c:if test="${receiverDetails == null}">
+                    <div>
+                        <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
+                        <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
+                        <p class="caution">배송 요청사항을 입력해주세요</p>
+                        <button class="receiver-details-btn">입력</button>
                     </div>
-                    <div id="checkout-place-exp" style="display: none;"></div>
-                    <div id="checkout-msg-time" style="display: none;"></div>
-                    <button class="receiver-details-btn">수정</button>
+                </c:if>
+                <div class="small-modal">
+                    <div class="small-modal-border">
+                        <div class="small-modal-content">배송 요청사항을 입력해주세요.</div>
+                        <div class="small-modal-buttons">
+                            <button id="receiver-details-modal-ok" onclick="redirectReceiverDetails()">확인</button>
+                        </div>
+                    </div>
                 </div>
-            </c:if>
+                <c:if test="${receiverDetails != null && member != null}">
+                    <div>
+                        <div>
+                            <span id="checkout-rcv-place">${receiverDetails.rcvPlace}</span> |
+                            <span id="checkout-enter-mthd">${receiverDetails.enterMthd}</span>
+                        </div>
+                        <div>
+                            <span id="checkout-name">${member.name}</span>,
+                            <span id="checkout-tel-no">${member.telNo}</span>
+                        </div>
+                        <div id="checkout-place-exp" style="display: none;"></div>
+                        <div id="checkout-msg-time" style="display: none;"></div>
+                        <button class="receiver-details-btn">수정</button>
+                    </div>
+                </c:if>
+            </div>
         </div>
     </div>
 </section>

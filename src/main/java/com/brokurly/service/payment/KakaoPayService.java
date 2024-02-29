@@ -6,7 +6,7 @@ import com.brokurly.dto.payment.KakaoPayApproveRequestDto;
 import com.brokurly.dto.payment.KakaoPayApproveResponseDto;
 import com.brokurly.dto.payment.KakaoPayReadyRequestDto;
 import com.brokurly.dto.payment.KakaoPayReadyResponseDto;
-import com.brokurly.utils.OrderNumberGenerator;
+import com.brokurly.utils.IdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
@@ -35,8 +35,8 @@ public class KakaoPayService {
     public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto) {
         KakaoPayReadyRequestDto requestDto = KakaoPayReadyRequestDto.builder()
                 .cid(CLIENT_ID)
-                .partner_order_id(OrderNumberGenerator.generateOrderNumber())
-                .partner_user_id(checkoutDto.getRcvName())
+                .partner_order_id(IdGenerator.generateOrderNumber())
+                .partner_user_id(checkoutDto.getReceiverDetails().getRcvName())
                 .item_name(getItemName(checkoutDto.getCustomerCart()))
                 .quantity(getQuantity(checkoutDto.getCustomerCart()))
                 .total_amount(checkoutDto.getPaymentAmount().getOrderAmt())

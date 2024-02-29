@@ -218,6 +218,11 @@ h2 {
     cursor: pointer;
 }
 
+#receiver-details-modal-ok {
+    width: 100%;
+    height: 57px;
+}
+
 .big-modal-content {
     width: 30%;
     height: 80%;
