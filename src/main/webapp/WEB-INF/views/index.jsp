@@ -29,6 +29,8 @@
 </div>
 <div>
     <a href="seller/productsCreate">수경 - 상품 등록</a>
+    <br>
+    <a href="seller/productsOriginList">수경 - 상품 조회/수정</a>
 </div>
 <div>
     <a href="cart">준한 - 상품 장바구니</a>

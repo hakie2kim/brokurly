@@ -2,8 +2,6 @@ package com.brokurly.service.categories;
 
 import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.entity.categories.Category;
-import com.brokurly.entity.categories.Category;
-import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.repository.categories.CategoryDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
