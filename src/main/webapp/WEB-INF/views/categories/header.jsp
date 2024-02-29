@@ -187,17 +187,20 @@
 
             <div class="searchbox-wrap">
                 <div class="searchbox">
+                    <form id="search_container" method="get" action="/search">
                     <input
                             id="gnb_search"
                             placeholder="검색어를 입력해주세요"
                             required=""
                             class="searchbox-text"
+                            name="sword"
                             value=""
                     /><button
                         id="submit"
                         aria-label="submit"
                         class="searchbox-btn"
                 ></button>
+                    </form>
                 </div>
             </div>
 
@@ -244,7 +247,7 @@
                                         <div class="css-11n7bn4 e1vs1ym81">
                                             <!-- 이미지 파일명 설정 -->
                                             <img src="/resources/image/icon-<c:out value="${loop.index + 1}" />.png" alt="${item.exp}" class="css-ar6ptu e1vs1ym82" />
-                                            <span class="css-mhaka4 e1vs1ym84"><a href="/categories/${item.codeId}">${item.exp}</a></span>
+                                            <span class="css-mhaka4 e1vs1ym84"><a href="/categories/${item.codeId}?page=1">${item.exp}</a></span>
 
                                         </div>
                                     </li>
