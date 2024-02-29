@@ -1,5 +1,9 @@
 package com.brokurly.entity.goods;
+<<<<<<< HEAD
+import com.brokurly.dto.goods.GoodsByBsnsNoDto;
+=======
 import com.brokurly.dto.goods.GoodsListDto;
+>>>>>>> 26af7bd561c0346c759ed9087adcf4613f5faa20
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
@@ -34,8 +38,15 @@ public class Goods {
   private String itemSpec;
   private int sellCnt;
   private int revCnt;
-  private String stdySellerFl;
 
+  //추가
+  private int salePrice;  //할인이 들어간 가격
+
+  public void initSaleTotal(){
+    salePrice = price - itemDcAmt;
+    if (salePrice < 0)
+      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
+  }
   public GoodsListDto makeGoodsList(){
     return GoodsListDto.builder()
             .itemId(itemId)
@@ -71,15 +82,28 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .stdySellerFl(stdySellerFl).build();
+            .salePrice(salePrice)
+            .build();
   }
 
   public GoodsForCartDto toGoodsForCartDto() {
     return GoodsForCartDto.builder()
             .name(name)
             .price(price)
+            .itemDcAmt(itemDcAmt)
             .shipType(shipType)
             .pkgType(pkgType)
+            .build();
+  }
+
+  public GoodsByBsnsNoDto toGoodsByBsnsNoDto(String bsnsNo){
+    return GoodsByBsnsNoDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .bsnsNo(this.bsnsNo)
             .build();
   }
 
@@ -103,6 +127,6 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.stdySellerFl = goodsDto.getStdySellerFl();
+    this.salePrice = goodsDto.getSalePrice();
   }
 }

@@ -19,7 +19,15 @@ public class NoticePageHandler {
     public void refreshPages(int totalCnt, int firstOfPage) {
         this.totalCnt = totalCnt;
         this.totalPages = totalCnt/pagesize + (totalCnt%pagesize == 0 ? 0 : 1);
-        this.firstOfPage = firstOfPage;
+        try {
+            if (0 < firstOfPage && firstOfPage < totalPages) {
+                this.firstOfPage = firstOfPage;
+            } else {
+                throw new Exception("out of bound");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.page = totalPages - firstOfPage/pagesize;
         this.showPrev = page != 1;
         this.showNext = page != totalPages;

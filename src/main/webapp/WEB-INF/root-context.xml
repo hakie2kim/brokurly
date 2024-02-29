@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="spring-security.xml"/>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 <!--                <property name="url" value="jdbc:mysql://192.168.129.114:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>-->
@@ -12,6 +14,7 @@
 <!--                <property name="password" value="1234"/>-->
         <property name="password" value="12341234"/>
     </bean>
+
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -33,11 +36,14 @@
     </bean>
 
     <!--  Validation 관련 Bean 추가  -->
-<!--        <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
-<!--        <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">-->
-<!--            <property name="validator" ref="validator"/>-->
-<!--        </bean>-->
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor">
+        <property name="validator" ref="validator"/>
+    </bean>
+
+    <!--  WebClient 사용을 위한 의존성 주입  -->
+    <bean id="clientHttpConnector" class="org.springframework.http.client.reactive.ReactorClientHttpConnector"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8"/>
@@ -47,8 +53,4 @@
             </list>
         </property>
     </bean>
-
-    <!--    <bean id="boardDao" class="com.jungsuk.repository.BoardDaoImpl">-->
-    <!--        <constructor-arg ref="sqlSession"/>-->
-    <!--    </bean>-->
 </beans>

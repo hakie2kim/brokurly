@@ -17,6 +17,19 @@
              #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt} )
     </insert>
 
+    <insert id="addCart">
+        INSERT INTO cart
+        (item_id, cust_id, item_cnt)
+        VALUES
+        (#{itemId}, #{custId}, #{itemCnt})
+    </insert>
+
+    <insert id="insertAnnouncement">
+        INSERT INTO item_announcement
+            (item_id, item_ann, item_ann_cate)
+        VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
+    </insert>
+
     <!-- READ -->
     <sql id="select">
         SELECT * FROM item
@@ -27,12 +40,19 @@
         WHERE item_id = #{itemId}
     </select>
 
+    <select id="selectByBsnsNo" resultType="Goods">
+        <include refid="select"/>
+        WHERE bsns_no = #{bsnsNo}
+    </select>
+
+
     <select id="selectGoodsListByCateCode" resultType="Goods">
         select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode},'%')
         limit #{limit} offset #{start}
     </select>
+
 
 
     <select id="sortGoodsList" resultType="Goods">
@@ -112,7 +132,6 @@
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode},'%')
     </select>
-
 
 
     <!-- UPDATE -->

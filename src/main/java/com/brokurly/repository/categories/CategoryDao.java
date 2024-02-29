@@ -16,9 +16,6 @@ public interface CategoryDao {
 
     void deleteAll();
 
-    //    카테고리 대분류 가져오기
-    List<Category> selectPrimary();
-
     List<Category> getCategoryExpByPrimary(String codeId);
 
     // CREATE
@@ -40,6 +37,5 @@ public interface CategoryDao {
 
     //카테고리 삭제
     int delete(String exp);
-
 
 }

@@ -1,23 +1,38 @@
 package com.brokurly.service.order;
 
+import com.brokurly.dto.cart.CartDto;
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.order.CheckoutDto;
-import com.brokurly.dto.order.ReceiverDetailsDto;
-import com.brokurly.service.cart.CartService;
-import com.brokurly.service.order.ReceiverDetailsService;
+import com.brokurly.dto.order.ReceiverDetailsResponseDto;
+import com.brokurly.entity.payment.PaymentAmount;
+import com.brokurly.service.cart.CustomerCartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
-    private final CartService cartService;
+    private final CustomerCartService cartService;
     private final ReceiverDetailsService receiverDetailsService;
 
-    public CheckoutDto getCheckoutInfo() {
-        // 배송지 정보 가져오는 서비스 필요
-        ReceiverDetailsDto receiverDetailsDto = receiverDetailsService.findReceiverDetails("추가 예정");
+    public CheckoutDto getCheckoutInfo(String shipLocaId, String custId) {
+        List<CustomerCartDto> cartList = cartService.getCartList(custId);
+        ReceiverDetailsResponseDto receiverDetails = receiverDetailsService.findReceiverDetails(shipLocaId);
 
+        if (receiverDetails == null)
+            throw new NullPointerException("해당 배송지 아이디에 맞는 요청사항이 존재하지 않습니다.");
 
-        return null;
+        return CheckoutDto.builder()
+                .rcvName(receiverDetails.getRcvName())
+                .telNo(receiverDetails.getTelNo())
+                .rcvPlace(receiverDetails.getRcvPlace())
+                .enterMthd(receiverDetails.getEnterMthd())
+                .placeExp(receiverDetails.getPlaceExp())
+                .msgTime(receiverDetails.getMsgTime())
+                .customerCart(cartList)
+                .paymentAmount(new PaymentAmount().toCheckoutDto(cartList))
+                .build();
     }
 }

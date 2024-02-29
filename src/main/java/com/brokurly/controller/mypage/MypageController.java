@@ -1,30 +1,31 @@
 package com.brokurly.controller.mypage;
 
-import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogExpDto;
-import com.brokurly.dto.mypage.PointLogUsageDto;
+import com.brokurly.dto.mypage.*;
+import com.brokurly.entity.mypage.ShippingLocation;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
+import com.brokurly.service.mypage.ShippingLocationService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mypage/point")
+@RequestMapping("/mypage")
 public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
+    private final ShippingLocationService shippingLocationService;
 
-    @GetMapping("/usage")
+    @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -32,6 +33,7 @@ public class MypageController {
         int pointLogUsageCount = pointLogService.getPointLogUsageCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "사용");
         model.addAttribute("period", period);
@@ -39,13 +41,14 @@ public class MypageController {
         model.addAttribute("pointLogUsageCount", pointLogUsageCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogUsageList);
 
         return "/mypage/point-usage-log";
     }
 
-    @GetMapping("/exp")
+    @GetMapping("/point/exp")
     String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
@@ -53,6 +56,7 @@ public class MypageController {
         int pointLogExpCount = pointLogService.getPointLogExpCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "소멸");
         model.addAttribute("period", period);
@@ -60,39 +64,22 @@ public class MypageController {
         model.addAttribute("pointLogExpCount", pointLogExpCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         log.info("{}", pointLogExpCount);
 
         return "/mypage/point-exp-log";
     }
 
-    @GetMapping("/earning")
+    @GetMapping("/point/earning")
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
-//        for (PointAndPointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
-//            String orderId = pointLogUsageDto.getOrderId();
-//            int pointAmt = pointLogUsageDto.getPointAmt();
-//            Date procDt = pointLogUsageDto.getProcDt();
-//            String pointSpec = pointLogUsageDto.getPointSpec();
-//
-//            /*String pointSpecDetails = "";
-//            if (orderId == null) {
-//                pointSpecDetails = new SimpleDateFormat("MM/dd까지 사용가능").format(pointLogUsageDto.getProcDt());
-//            } else {
-//                pointSpecDetails = String.format("주문번호 (%s)", orderId);
-//            }*/
-//
-//            String pointStat = pointLogUsageDto.getPointStat();
-//            Date expDt = pointService.findPointByPointId(pointLogUsageDto.get)
-//
-//            pointLogEarningList.add(new PointAndPointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
-//        }
-
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
+        int totalPointsToBeExpired = pointService.getTotalPointsToBeExpired(custId);
 
         model.addAttribute("type", "적립");
         model.addAttribute("period", period);
@@ -100,7 +87,61 @@ public class MypageController {
         model.addAttribute("pointLogEarningCount", pointLogEarningCount);
         model.addAttribute("totalAvailPoints", totalAvailPoints);
         model.addAttribute("totalAccumulPoints", totalAccumulPoints);
+        model.addAttribute("totalPointsToBeExpired", totalPointsToBeExpired);
 
         return "/mypage/point-earning-log";
+    }
+
+    @GetMapping("/address")
+    String manageAddress() {
+        return "/mypage/address";
+    }
+
+    @Getter
+    static class FullAddress {
+        private String addr;
+        private String specAddr;
+    }
+
+    @PostMapping("/address")
+    @ResponseBody
+    ResponseEntity<ShippingLocationAddDto> addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+        String addr = shippingLocationAddFormDto.getAddr();
+        String specAddr = shippingLocationAddFormDto.getSpecAddr();
+        String defAddrFl = Boolean.parseBoolean(shippingLocationAddFormDto.getDefAddrFl()) ? "Y" : "N";
+        log.info("@PostMapping(\"/address\") addShippingAddress addr: {} specAddr: {} defAddrFl: {}", addr, specAddr, defAddrFl);
+
+        ShippingLocationAddDto shippingLocationAddDto = shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
+        // 모든 배송지 리스트를 등록 시간 역순으로 갖고 오는 service 기능
+
+        return new ResponseEntity<>(shippingLocationAddDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/address/shipping-address")
+    String shippingAddress() {
+        return "/mypage/shipping-address";
+    }
+
+    /*@GetMapping("/address/shipping-address/result/{fullAddr}")
+    String addAddressResult(@PathVariable String fullAddr, Model model) {
+        log.info("{}", fullAddr);
+        model.addAttribute("fullAddr", fullAddr);
+        return "/mypage/shipping-address-result";
+    }*/
+
+    @PostMapping("/address/shipping-address/result")
+    String shippingAddressResult(String addr, Model model) {
+        log.info("@PostMapping(\"/address/shipping-address/result\") shippingAddressResult addr: {}", addr);
+        model.addAttribute("addr", addr);
+
+        return "/mypage/shipping-address-result";
+
+        /*if (specAddr == null) {
+            return "/mypage/shipping-address-result";
+        } else {
+            log.info("{}", specAddr);
+            model.addAttribute("specAddr", specAddr);
+            return "redirect:/mypage/address";
+        }*/
     }
 }

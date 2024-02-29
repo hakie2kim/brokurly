@@ -60,7 +60,7 @@ public class CategoryService {
     public List<CategoryDto> findCategoryByPrimary(String codeId) {
 
         List<Category> categoryList = categoryDao.getCategoryExpByPrimary(codeId);
-        List<CategoryDto> categoryDto =new ArrayList<>();
+        List<CategoryDto> categoryDto = new ArrayList<>();
 
         for (Category category : categoryList) { //categoryList에서 Category(도메인)를 하나씩 꺼내서
             categoryDto.add(category.makeFullDto());    //makeDto메서드를 이용해 Dto로 만들어
