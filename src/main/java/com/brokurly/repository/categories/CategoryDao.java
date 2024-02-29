@@ -27,7 +27,7 @@ public interface CategoryDao {
 
     //READ
     //카테고리 대분류 가져오기
-    List<Category> selectPrimary();
+//    List<Category> selectPrimary();
 
     //카테고리 중분류 가져오기
     List<Category> selectMiddle(@RequestParam String codeId);
@@ -36,7 +36,7 @@ public interface CategoryDao {
     int count() throws Exception;
 
     //카테고리 전체 삭제
-    int deleteAll();
+//    int deleteAll();
 
     //카테고리 삭제
     int delete(String exp);
