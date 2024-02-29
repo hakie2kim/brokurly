@@ -17,6 +17,7 @@ public interface ShippingLocationDao {
     int countAll();
 
     // UPDATE
+    int updateByShipLocaId(ShippingLocation shippingLocation);
 
     // DELETE
     int deleteAll();

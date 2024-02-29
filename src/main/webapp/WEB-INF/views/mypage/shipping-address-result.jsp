@@ -43,12 +43,13 @@
                     "defAddrFl": defAddrFl
                 }),
                 success: function (response) {
-                    alert("Your form has been sent successfully.");
+                    // alert("Your form has been sent successfully.");
                     window.close();
-                    window.opener.addShippingAddrs();
+                    // window.opener.addShippingAddrs();
+                    window.opener.location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Your form was not sent successfully.");
+                    // alert("Your form was not sent successfully.");
                 }
             })
         })
