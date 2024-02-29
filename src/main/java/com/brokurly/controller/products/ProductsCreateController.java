@@ -38,7 +38,7 @@ public class ProductsCreateController {
 
     @PostMapping("/productsCreate/write")
     public String writeproducts(Model m, GoodsDto goodsDto, GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
-            , GoodsImageDto goodsImageDto) {
+            ) {
         String a = goodsDto.getName();
         m.addAttribute("mode","new");
         log.info("a={}", a);
@@ -55,9 +55,9 @@ public class ProductsCreateController {
         productsCreateService.write(goodsDto);
         productsCreateService.writeAnnouncement(goodsAnnouncementDto);
         productsCreateService.writeKeyword(searchKeywordDto);
-        productsCreateService.writeGoodsImage(goodsImageDto);
+//        productsCreateService.writeGoodsImage(goodsImageDto);
 
-        return "seller/productsOriginList?bsnsNo=";
+        return "seller/productsOriginList";
         //나중에 상품 등록 확인 페이지 만들고 연결하기
     }
 
@@ -99,64 +99,40 @@ public class ProductsCreateController {
         return "seller/productsCreate";  //읽기
     }
 
-//    @PostMapping("/uploadAjaxAction")
-//    public void uploadAjaxAction(MultipartFile[] uploadFile){
-//        log.info("uploadAjaxActionPOST.......");
-////        log.info("파일 이름 : " + uploadFile.getOriginalFilename());
-////        log.info("파일 타입 : " + uploadFile.getContentType());
-////        log.info("파일 크기 : " + uploadFile.getSize());
-//        String uploadFolder = "/Users/sookyung/Desktop/kurlyimg";
-//
-//        //날짜 폴더 경로
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date date = new Date();
-//        String str = sdf.format(date);
-//        String datePath = str.replace("-", File.separator);
-//
-////        폴더 생성
-//        File uploadPath = new File(uploadFolder, datePath);
-//
-//        if(uploadPath.exists() == false) {
-//            uploadPath.mkdirs();
-//        }
-//        for(MultipartFile multipartFile : uploadFile){
-////            파일 이름
-//            String uploadFileName = multipartFile.getOriginalFilename();
-//
-////          uuid 적용 파일 이름
-//            String uuid = UUID.randomUUID().toString();
-//            uploadFileName = uuid+"_"+uploadFileName;  //파일 이름 중복 피하기 위해
-//            log.info("uuid={}",uploadFileName);
-////            파일 위치, 파일 이름을 합친 File객체
-//            File saveFile = new File(uploadPath, uploadFileName);
-////            파일 저장
-//            try{
-//                multipartFile.transferTo(saveFile);
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     @PostMapping("/img")
-    public String saveFile(@RequestParam("file") MultipartFile file) throws IOException {
+    @ResponseBody
+    public void saveFile(@RequestParam("file")MultipartFile file ,GoodsImageDto goodsImageDto ) throws IOException {
         log.info("request={}",file);
-        String uploadDir = "/Users/sookyung/Desktop/kurlyimg";
-//        String itemName = file.toString();
-//        log.info("itemName={}",itemName);
+        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
         if(!file.isEmpty()){
+
+            // 파일 이름
             String filename = file.getOriginalFilename();
-            log.info("file.getOriginalFilename={}",filename);
+            String filename2 = file.toString();
 
             String fullpath = uploadDir + filename;
-            file.transferTo(new File(fullpath));
+
+            log.info("file.getOriginalFilename={}",filename);
+            log.info("file.getResource={}",filename2);
+
+//          uuid 적용 파일 이름
+            String uuid = UUID.randomUUID().toString();
+            filename = uuid+"_"+filename;  //파일 이름 중복 피하기 위해
+            log.info("uuid={}",filename);
+////         파일 위치, 파일 이름을 합친 File객체
+            File saveFile = new File(fullpath, filename);
+
+            //1. 파일 저장하기
+            file.transferTo(saveFile);
+
+            //2. url 서비스로 보내기
+            log.info("GoodsImageDto={}",goodsImageDto.toString());
+            productsCreateService.writeGoodsImage(goodsImageDto);
+
+
         }
 
-        //1. 파일 저장하기
-
-        //2. url 서비스로 보내기
-
-        return "upload-form";
     }
 
 }

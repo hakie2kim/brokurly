@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<form id="forma">
+<form id="forma" action="/seller/productsCreate/write" method="post">
 
     <!-- 카테고리 -->
 
@@ -96,7 +96,7 @@
                                                maxlength="160"
                                                value="${goodsDto.name}"
                                                title="상품명 입력"
-<%--                                        ${mode=="new"? '': 'readonly="readonly"'}/>--%>
+                                        <%--                                        ${mode=="new"? '': 'readonly="readonly"'}/>--%>
 
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                                     id="search3"
                                                     value="${goodsDto.exp}"
                                                     maxlength="160"
-<%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            <%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
 
                                             />
                                         </div>
@@ -181,7 +181,7 @@
                                                    type="text"
                                                    value="${goodsDto.price}"
                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-<%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            <%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
                                             />
                                         </div>
                                         <span class="input-group-addon">원</span>
@@ -252,7 +252,7 @@
                                                            max="100"
                                                            onkeyup="ShowPrice()"
                                                            value="${goodsDto.dcRt}"
-<%--                                                    ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    <%--                                                    ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                     />
                                                     <input name="dcRt1"
@@ -311,7 +311,7 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    id="stock"
                                                    value="${goodsDto.itemQty}"
-<%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            <%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                    placeholder="숫자만 입력"
                                             />
                                         </div>
@@ -329,7 +329,7 @@
     </ui-view>
     <!----><!----><!---->
 
-    <!-- 펀매자 -->
+    <!-- 판매자 -->
     <ui-view name="stock" id="anchor-stock"
     ><!---->
         <div class="form-section">
@@ -353,7 +353,7 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    placeholder="사업자등록번호"
                                                    value="${goodsDto.bsnsNo}"
-<%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            <%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
                                             />
 
                                         </div>
@@ -363,7 +363,7 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    id="seller_name"
                                                    value="${goodsDto.sellerName}"
-<%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            <%--                                            ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                    placeholder="판매자이름"/>
                                         </div>
                                     </div>
@@ -397,58 +397,69 @@
                             class="ng-pristine ng-invalid ng-invalid-required"
                     >
 
-                        <form class="form-sub-wrap" action="/seller/productsCreate" method="post" enctype="multipart/form-data">
-                            <label class="control-label"> 대표이미지 <!----></label>
-                            <input type="hidden"
-                                   name="">
-                            <!-- test -->
-<%--                            <input type="file" accept="image/*" onchange="loadFile(this)"/>--%>
 
-                            <div class="input-content">
-                                <div class="pc">
-                                    <div
-                                            class="seller-product-img add-img"
-                                    >
-                                        <div class="wrap-img">
-                                            <!----><!---->
-                                            <div>
-                                                <ul class="img-list"
-                                                >
-                                                    <!----><!---->
-                                                    <li id>
-                                                        <!----><!---->
-                                                        <div
-                                                                class="register-img"
-                                                                style=""
-                                                        >
-                                                            <!-- 이미지 띄울 곳 -->
-                                                            <div class="btn-add-img" id="image-show"></div>
+                        <label class="control-label"> 대표이미지 <!----></label>
+                        <input type="hidden"
+                               name="">
 
-                                                        </div>
-                                                        <!---->
-                                                    </li>
-                                                    <!---->
-                                                </ul>
-                                            </div>
-                                            <!---->
+                        <div class="input-content">
+                            <div class="pc">
+                                <div
+                                        class="seller-product-img add-img"
+                                >
+                                    <div class="wrap-img">
+                                        <!----><!---->
+                                        <div>
+                                            <ul class="img-list"
+                                            >
+
+                                                <li id>
+
+                                                <%--대표이미지 multipart-form data이용--%>
+                                                <%--form2--%>
+                                                <br>
+                                                <form name="formb" id="formb" action="/seller/img" method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
+                                                    <button type="button" id="sendButton" name="sendButton" onclick="img_ajax();">사진 전송</button>
+
+                                                </form>
+                                                <%--form2 끝--%>
+
+                                                <!----><!---->
+
+<%--                                                    <!----><!---->--%>
+<%--                                                    <div--%>
+<%--                                                            class="register-img"--%>
+<%--                                                            style=""--%>
+<%--                                                    >--%>
+<%--&lt;%&ndash;                                                        <!-- 이미지 띄울 곳 -->&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                        <div class="btn-add-img" id="image-show"></div>&ndash;%&gt;--%>
+
+<%--&lt;%&ndash;                                                    </div>&ndash;%&gt;--%>
+<%--                                                    <!---->--%>
+                                                </li>
+                                                <!---->
+                                            </ul>
                                         </div>
+                                        <!---->
                                     </div>
-
-                                    <!----><!---->
-                                    <div
-                                            class="form-group"
-                                    >
-                                        <p
-                                                class="sub-text text-primary mg-reset"
-                                        >
-                                            권장 크기 : 1000 X 1000(윈도 대상 750 X
-                                            1000), 300 X 300 이상
-                                        </p>
-                                    </div>
-                                    <!----><!---->
                                 </div>
+
+                                <!----><!---->
+                                <div
+                                        class="form-group"
+                                >
+                                    <p
+                                            class="sub-text text-primary mg-reset"
+                                    >
+                                        권장 크기 : 1000 X 1000(윈도 대상 750 X
+                                        1000), 300 X 300 이상
+                                    </p>
+                                </div>
+                                <!----><!---->
                             </div>
-                        </form>
+                        </div>
+                        <%--</form>--%>
                     </div>
 
 
@@ -463,7 +474,8 @@
                                 <!----></label>
 
                             <!-- test -->
-                            <input type="file" accept="image/*" onchange="loadFile(this)"/>
+<%--                            <input type="file" accept="image/*" onchange="loadFile(this)"/>--%>
+
 
 
                             <div class="input-content">
@@ -583,10 +595,9 @@
                                 <textarea name="itemSpec"
                                           type="text"
                                           value=""
-<%--                                ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                <%--${mode=="new"? '': 'readonly="readonly"'}--%>
                                           class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern ng-valid-maxlength"
-                                          style="height: 250px">${goodsDto.itemSpec}
-                                </textarea>
+                                          style="height: 250px">${goodsDto.itemSpec} </textarea>
                             </div>
                             <br>
                             <span class="sub-text text-danger"
@@ -729,7 +740,7 @@
                                                                        type="text"
                                                                        class="form-control"
                                                                        value="${goodsDto.pkgType}"
-<%--                                                                ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                                <%--                                                                ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                                        placeholder="포장타입(상온, 냉장, 냉동)"
                                                                        maxlength="50"
                                                                 />
@@ -1761,7 +1772,7 @@
                                                     <input name="itemIdList"
                                                            class="itemId"
                                                            id="itemId1"
-                                                    <%--                                                            type="hidden"--%>
+                                                    <%--  type="hidden"--%>
                                                     >
                                                     <input name="keyword"
                                                            type="text"
@@ -1802,17 +1813,6 @@
                                                            class="form-control"
                                                            placeholder="카테고리코드"
                                                     />
-                                                    <%--    이미지 test      --%>
-                                                    <div class="form_section">
-                                                        <div class="form_section_title">
-                                                            <label>상품 이미지</label>
-                                                        </div>
-                                                        <div class="form_section_content">
-                                                            <input type="file" id="fileItem" name="uploadFile"
-                                                                   style="height: 30px;" multiple>
-                                                        </div>
-                                                    </div>
-                                                    <%--                                                    --%>
 
                                                 </div>
                                             </div>
@@ -1833,13 +1833,9 @@
                 </div>
             </div>
         </ui-view><!----><!----><!---->
+        <%--        <button type="button" onclick="submitForm('forma')">submit</button>--%>
 </form>
 <%--form 태그 끝--%>
-
-<%--이미지 test2 multipart-form data이용--%>
-<%--form2--%>
-<form name="formb" action="/seller/img" method="post" enctype="multipart/form-data">
-    <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
 
 
 <!-- 취소, 저장버튼 -->
@@ -1850,7 +1846,7 @@
         취소
     </button>
 
-    <input type="submit" value="submit"
+    <button type="button" value="submit" onclick="submitForm('formb')"
             id="writeBtn"
             class="btn">
               <span class="content">저장하기</span
@@ -1859,12 +1855,10 @@
             class="progress-inner notransition"
     ></span
     ></span>
-</input>
+    </button>
 
 </div>
 
-</form>
-<%--form2 끝--%>
 
 <%--Ajax--%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -1914,97 +1908,46 @@
         }
     }
 
-    // searchKeyword
-    // let keywordNum = $("input[name='keyword']").length;
-    // let keywordSetting = function (keyword, itemIdList){
-    //     this.keyword = keyword;
-    //     this.itemIdList = itemIdList;
-    // }
-    // let param = [];
-    // for(i=0; i<keywordNum; i++){
-    //     let keywordSetting = new keywordSetting(
-    //         $("input[name='keyword']").eq(i).val(),
-    //         $("input[name='itemIdList']").eq(i).val()
-    //
-    //     )
-    //     param.push(keywordSetting);
-    //     console.log(param);
-    // }
+    //대표이미지 저장
+    function img_ajax() {
+
+        //formData객체 생성
+        let formData = new FormData();
+        let fileInput = document.querySelector("#file");
+        let itemId = document.getElementById("itemId").value
+        let tmpPath = URL.createObjectURL(fileInput.files[0]);
+        formData.append('file', fileInput.files[0]);
+        // formData.append('name', name.value);
+        formData.append('img', tmpPath);
+        formData.append('repImgFl', 'Y');
+        formData.append('itemId', itemId);
 
 
-    // //이미지 test
-    // $("input[type='file']").on("change", function (e) {
-    //     //FlieList 객체에 접근
-    //     let formData = new FormData();  //객체 생성
-    //     let fileInput = $(`input[name="uploadFile"]`);
-    //     let fileList = fileInput[0].files;
-    //     let fileObj = fileList[0];
-    //
-    //     //     형식 안 맞을 시 경고창
-    //     if (!fileCheck(fileObj.name, fileObj.size)) {
-    //         return false;
-    //     }
-    //     //형식 맞으면, 파일을 FormData에 추가
-    //     for (let i = 0; i < fileList.length; i++) {
-    //         formData.append("uploadFile", fileList[i]);
-    //     }
-    // //   파일 서버로 전송하는 ajax
-    //     $.ajax({
-    //         url: 'uploadAjaxAction',
-    //         processData : false,
-    //         contentType : false,
-    //         data: formData,
-    //         type: 'POST',
-    //         dataType: 'json'
-    //     })
-    //
-    //
-    //
-    // });
-    //
-    // /* var, method related with attachFile */
-    // let regex = new RegExp("(.*?)\.(jpg|png)$");
-    // let maxSize = 1048576; //1MB
-    //
-    // function fileCheck(fileName, fileSize) {
-    //
-    //     if (fileSize >= maxSize) {
-    //         alert("파일 사이즈 초과");
-    //         return false;
-    //     }
-    //
-    //     if (!regex.test(fileName)) {
-    //         alert("해당 종류의 파일은 업로드할 수 없습니다.");
-    //         return false;
-    //     }
-    //
-    //     return true;
-    //
-    // }
+        console.log(formData);
 
-    //이미지 test2
-    const form = document.getElementById('form');
-    form.addEventListener('submit',submitForm);
-    function  submitForm(e){
-        e.preventDefault();
+        $.ajax({
+            url: '/seller/img',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                alert("Image uploaded successfully:", response);
+
+                alert(tmpPath);
+
+            },
+            error: function (error) {
+                alert("Error uploading image:", error);
+                // 에러 처리 코드 추가
+                alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                alert("error:" + error);
+            }
+        });
+
     }
 
-    const name = document.getElementById('name');
-    const files = document.getElementById('files');
 
-    //formData객체 생성
-    const formData = new FormData();
-    // formData.append('name', name.value);
-    for(let i=0; i<files.files.length; i++){
-        formData.append('image',files.files[i])
-    }
-
-    fetch('http://localhost:8080/seller/img',{
-        method:'POST',
-        body:formData
-    }).then((res)=>console.log(res)).catch((err)=>('Error occured',err))
-
-    console.log(formData);
 
 
     // 좌측 네비
@@ -2058,63 +2001,60 @@
 
     // 이미지------------------------------------------------
 
-    // 이미지 넣기
-    var acc = document.getElementsByClassName("menuitem");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function () {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
-
-    // 대표 이미지 파일 가져오기
-    function loadFile(input) {
-        let file = input.files[0]; // 선택된 파일 가져오기
-
-        let newImage = document.createElement("img"); //새 이미지 추가
-
-        //이미지 source 가져오기
-
-        newImage.src = URL.createObjectURL(file);
-        newImage.name = "img";
-        newImage.id = "img-id";
-        newImage.style.width = "100%";
-        newImage.style.height = "100%";
-        newImage.style.objectFit = "cover";
-        //이미지를 image-show div에 추가
-
-        let container = document.getElementById("image-show");
-        container.appendChild(newImage);
-    }
-
-    // 추가 이미지 파일 가져오기
-    function loadFile(input) {
-        let file2 = input.files[0]; // 선택된 파일 가져오기
-
-        let newImage = document.createElement("img"); //새 이미지 추가
-
-        //이미지 source 가져오기
-        newImage.src = URL.createObjectURL(file2);
-        newImage.value = URL.createObjectURL(file2);
-        newImage.id = "img-id";
-        newImage.style.width = "100%";
-        newImage.style.height = "100%";
-        newImage.style.objectFit = "cover";
-
-        //이미지를 image-show div에 추가
-        let container = document.getElementById("image-show");
-        container.appendChild(newImage);
-    }
-
-
-    // 등록버튼------------------------------------------------
+    // // 이미지 넣기
+    // var acc = document.getElementsByClassName("menuitem");
+    // var i;
+    //
+    // for (i = 0; i < acc.length; i++) {
+    //     acc[i].addEventListener("click", function () {
+    //         this.classList.toggle("active");
+    //         var panel = this.nextElementSibling;
+    //         if (panel.style.maxHeight) {
+    //             panel.style.maxHeight = null;
+    //         } else {
+    //             panel.style.maxHeight = panel.scrollHeight + "px";
+    //         }
+    //     });
+    // }
+    //
+    // // 대표 이미지 파일 가져오기
+    // function loadFile(input) {
+    //     let file = input.files[0]; // 선택된 파일 가져오기
+    //
+    //     let newImage = document.createElement("img"); //새 이미지 추가
+    //
+    //     //이미지 source 가져오기
+    //
+    //     newImage.src = URL.createObjectURL(file);
+    //     newImage.name = "img";
+    //     newImage.id = "img-id";
+    //     newImage.style.width = "100%";
+    //     newImage.style.height = "100%";
+    //     newImage.style.objectFit = "cover";
+    //
+    //     //이미지를 image-show div에 추가
+    //     let container = document.getElementById("image-show");
+    //     container.appendChild(newImage);
+    // }
+    //
+    // // 추가 이미지 파일 가져오기
+    // function loadFile(input) {
+    //     let file2 = input.files[0]; // 선택된 파일 가져오기
+    //
+    //     let newImage = document.createElement("img"); //새 이미지 추가
+    //
+    //     //이미지 source 가져오기
+    //     newImage.src = URL.createObjectURL(file2);
+    //     newImage.value = URL.createObjectURL(file2);
+    //     newImage.id = "img-id";
+    //     newImage.style.width = "100%";
+    //     newImage.style.height = "100%";
+    //     newImage.style.objectFit = "cover";
+    //
+    //     //이미지를 image-show div에 추가
+    //     let container = document.getElementById("image-show");
+    //     container.appendChild(newImage);
+    // }
 
     //     '등록버튼' 값 보내기
     $(document).ready(function () { //main()
@@ -2123,15 +2063,13 @@
             form.attr("action", "<c:url value='/seller/productsCreate/write'/>");
             form.attr("method", "post");
             form.submit();
+
             alert("저장되었습니다.");
-            alert(form);
-        //   img
-        //     let form2 = $('#formb');
-            // form2.attr("action",)
+
 
         });
     })
-    //
+
 </script>
 
 </body>

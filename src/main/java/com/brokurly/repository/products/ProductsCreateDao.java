@@ -3,7 +3,6 @@ package com.brokurly.repository.products;
 import com.brokurly.entity.goods.Goods;
 import com.brokurly.entity.goods.GoodsAnnouncement;
 import com.brokurly.entity.goods.GoodsImage;
-import com.brokurly.entity.goods.ItemAnnouncement;
 import com.brokurly.entity.search.SearchKeyword;
 import org.apache.ibatis.annotations.Mapper;
 
