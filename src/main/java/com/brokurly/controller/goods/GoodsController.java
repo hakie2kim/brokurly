@@ -2,6 +2,7 @@ package com.brokurly.controller.goods;
 
 
 import com.brokurly.dto.cart.CartDto;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.service.goods.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,10 @@ public class GoodsController {
   public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
     session.setAttribute("member", "hong");
     GoodsDto goods = goodsService.searchGoods(itemId);  // 임시 상품번호
+    GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId);
     model.addAttribute("goods", goods);
+    model.addAttribute("announcement", announcement);
+
     return "goods/goods";
   }
 

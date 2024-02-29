@@ -1,7 +1,9 @@
 package com.brokurly.entity.goods;
-import com.brokurly.dto.goods.GoodsListDto;
+
+import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.dto.goods.GoodsListDto;
 import lombok.*;
 import java.util.Date;
 
@@ -34,7 +36,6 @@ public class Goods {
   private String itemSpec;
   private int sellCnt;
   private int revCnt;
-  private String stdySellerFl;
 
   //추가
   private int salePrice;  //할인이 들어간 가격
@@ -79,7 +80,6 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .stdySellerFl(stdySellerFl)
             .salePrice(salePrice)
             .build();
   }
@@ -91,6 +91,17 @@ public class Goods {
             .itemDcAmt(itemDcAmt)
             .shipType(shipType)
             .pkgType(pkgType)
+            .build();
+  }
+
+  public GoodsByBsnsNoDto toGoodsByBsnsNoDto(String bsnsNo){
+    return GoodsByBsnsNoDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .bsnsNo(this.bsnsNo)
             .build();
   }
 
@@ -114,7 +125,6 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.stdySellerFl = goodsDto.getStdySellerFl();
     this.salePrice = goodsDto.getSalePrice();
   }
 }

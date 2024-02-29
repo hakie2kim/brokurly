@@ -28,12 +28,6 @@
               <!-- 체크박스 전체 여부 -->
               <div class="all_check_input_div">
                 <input type="checkbox" class="all_check_input input_size_20" checked="checked">
-<%--                <div class="css-79hxr7 e1dcessg1">--%>
-<%--                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">--%>
-<%--                    <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#5f0080"></path>--%>
-<%--                    <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>--%>
-<%--                  </svg>--%>
-<%--                </div>--%>
                 <span class="all_chcek_span">전체선택
                   <span class="totalKind_span"></span>
                 </span>
@@ -48,19 +42,20 @@
           <div>
             <h4 class="cart-7">
               <span>
-                  <span class="css-12dwhid">
-                      <span class="css-qct1ee"></span>
+                  <span class="css-12dwhid ">
+                    <span class="css-qct1ee"></span>
                   </span>냉장 상품
               </span>
-              <button data-testid="fold-button">
-                접기 버튼
+              <button data-testid="fold-button" class="fold_button" id="button1">
+                <span class="arrow"></span>
               </button>
             </h4>
+            <div id="content1" >
             <c:forEach items="${cart}" var="ci" >
               <c:if test="${ci.pkgType =='냉장'}">
-                <ul>
-                  <li class="cart_info_li">
-                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                <ul class="ul">
+                  <li class="cart-8">
+                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked" >
                     <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
                     <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
                     <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
@@ -69,13 +64,7 @@
                     <input type="hidden" class="individual_totalDiscountPrice_input" value="${ci.itemDcAmt * ci.itemCnt}">
                     <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
                     <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
-                  </li>
-                  <li class="cart-8">
-                    <label>
-                      <div>
 
-                      </div>
-                    </label>
                     <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
                       <span class="css-1f44rj5"></span>
                     </a>
@@ -109,6 +98,7 @@
                 </ul>
               </c:if>
             </c:forEach>
+            </div>
             <h4 class="cart-7">
                 <span>
                     <span class="css-12dwhid">
@@ -116,15 +106,16 @@
                     </span>
                     냉동 상품
                 </span>
-              <button data-testid="fold-button">
-                접기 버튼
+              <button data-testid="fold-button" class="fold_button " id="button2">
+                <span class="arrow"></span>
               </button>
             </h4>
+            <div id="content2" >
             <c:forEach items="${cart}" var="ci">
               <c:if test="${ci.pkgType =='냉동'}">
-                <ul>
-                  <li class="cart_info_li">
-                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                <ul class="ul" >
+                  <li class="cart-8">
+                    <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked" id="chk">
                     <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
                     <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
                     <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
@@ -132,15 +123,10 @@
                     <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
                     <input type="hidden" class="individual_totalDiscountPrice_input" value="${ci.itemDcAmt * ci.itemCnt}">
                     <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
-<%--                    <input type="hidden" class="individual_totalPrice_input" value="${ci.totalPrice}">--%>
                     <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
-                  </li>
-                  <li class="cart-8">
-                      <%--                                <label>--%>
-                      <%--                                    <input type="checkbox" checked="">--%>
-                      <%--                                    <div>--%>
-                      <%--                                    </div>--%>
-                      <%--                                </label>--%>
+<%--                    <div class="css-79hxr7">--%>
+<%--                      <img src="/resources/image/checked.png" class="checkImg" >--%>
+<%--                    </div>--%>
                     <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
                       <span class="css-1f44rj5"></span>
                     </a>
@@ -159,7 +145,7 @@
                       <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-' aria-label="수량올리기"></button>
                     </div>
                     <div class="css-5w3ssu">
-                      <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원"/></span>
+                      <span aria-label="할인 가격" class="salePrice"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원"/></span>
                       <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}" pattern="#,### 원"/></span>
                     </div>
                     <button type="button" data-testid="delete" class="delete_btn">
@@ -169,6 +155,66 @@
                 </ul>
               </c:if>
             </c:forEach>
+            </div>
+            <h4 class="cart-7">
+              <span>
+                  <span class="css-12dwhid ">
+                    <span class="css-k9umm5"></span>
+                  </span>상온 상품
+              </span>
+              <button data-testid="fold-button" class="fold_button" id="button3">
+                <span class="arrow"></span>
+              </button>
+            </h4>
+            <div id="content3" >
+              <c:forEach items="${cart}" var="ci" >
+                <c:if test="${ci.pkgType =='상온'}">
+                  <ul class="ul">
+                    <li class="cart-8">
+                      <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked" >
+                      <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
+                      <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
+                      <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
+                      <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
+                      <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
+                      <input type="hidden" class="individual_totalDiscountPrice_input" value="${ci.itemDcAmt * ci.itemCnt}">
+                      <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
+                      <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
+
+                      <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
+                        <span class="css-1f44rj5"></span>
+                      </a>
+                      <div class="css-14sb0pe">
+                        <a href="http://localhost:8080/goods/${ci.itemId}" style="text-decoration: none; color: black">
+                          <p class="css-efcx1u">${ci.name}</p>
+                        </a>
+                        <div></div>
+                      </div>
+                      <div class="css-1gueo66">
+                        <button type="button" class="minus_btn css-8azp8" onclick='count("minus")' value='+'
+                                aria-label="수량내리기"></button>
+                        <div class="count css-6m57y0">
+                          <label>
+                            <input type="text" disabled="disabled"
+                                   style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;"
+                                   class="quantity_input" value="${ci.itemCnt}">
+                          </label>
+                        </div>
+                        <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-'
+                                aria-label="수량올리기"></button>
+                      </div>
+                      <div class="css-5w3ssu">
+                        <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원"/></span>
+                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}" pattern="#,### 원"/></span>
+                      </div>
+                      <button type="button" data-testid="delete" class="delete_btn">
+                        <span class="css-6mgkir"></span>
+                      </button>
+                    </li>
+                  </ul>
+                </c:if>
+              </c:forEach>
+            </div>
           </div>
         </div>
 
@@ -232,10 +278,17 @@
       </div>
     </div>
   </div>
+<%--  주문 form --%>
+  <form action="<c:url value="/order/checkout"/>" method="get" class="order_form">
+
+  </form>
 </div>
 <script>
     $(document).ready(function () {
         setTotalInfo(); //계산정보 삽입
+
+
+
     });
 
     function setTotalInfo() {
@@ -249,7 +302,7 @@
         let deliveryPrice = 0;			// 배송비
         let finalTotalPrice = 0; 		// 최종 가격(총 가격 + 배송비)
 
-        $(".cart_info_li").each(function (index, element) {
+        $(".cart-8").each(function (index, element) {
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {    //체크여부 확인용
 
                 // 총 가격
@@ -267,6 +320,7 @@
                 totalKind += 1;
                 // // 총 마일리지
                 // totalPoint += parseInt($(element).find(".individual_totalPoint_input").val());
+
             }
         });
         /* 배송비 결정 */
@@ -284,6 +338,7 @@
             totalDiscount = "-" + totalDiscount;
         }
 
+
         /* 값 삽입 */
         // 총 가격
         // $(".totalPrice_span").text(totalPrice);
@@ -292,7 +347,6 @@
         $(".totalDiscountPrice").text(new Intl.NumberFormat('ko-KR').format(totalDiscount) + " 원");
         // 총 갯수
         $(".totalCount_span").text(totalCount);
-        // $(".quantity_input").val(totalCount);
         // 총 종류
         $(".totalKind_span").text( "(" + totalKind + "/" + $(".individual_cart_checkbox").length + ")" );
         // // 총 마일리지
@@ -305,12 +359,12 @@
 
     //체크 여부에 따른 종합 정보 변화
     $(".individual_cart_checkbox").on("change", function () {
-        if ($(".individual_cart_checkbox:checked").length === $(".individual_cart_checkbox").length) {  //체그박스가 전부 체크되면 전체 체크박스 체그로 바꿈
+        if ($(".individual_cart_checkbox:checked").length === $(".individual_cart_checkbox").length) {  //체그박스가 전부 체크되면 전체 체크박스 체크로 바꿈
             $(".all_check_input").prop('checked', true);
         } else {
             $(".all_check_input").prop('checked', false);
         }
-        setTotalInfo($(".cart_info_li"));   //총 주문 정보 세팅(배송비, 총가격, 물품 수, 종류)
+        setTotalInfo($(".cart-8"));   //총 주문 정보 세팅(배송비, 총가격, 물품 수, 종류)
     });
 
     /* 체크박스 전체 선택 */
@@ -321,7 +375,7 @@
             $(".individual_cart_checkbox").prop('checked', false);
         }
         /* 총 주문 정보 세팅(배송비, 총 가격, 마일리지, 물품 수, 종류) */
-        setTotalInfo($(".cart_info_li"));
+        setTotalInfo($(".cart-8"));
     });
 
     /* 수량버튼 */
@@ -351,15 +405,14 @@
                 itemCnt: quantity
             },
             success: function () {
-                setTotalInfo($(".cart_info_li"));
+                setTotalInfo($(".cart-8"));
             }
         })
     });
     $(".minus_btn").on("click", function () {
         let inputField = $(this).parent("div").find("input");
         let quantity = parseInt(inputField.val());
-        let itemIdField = $(this).closest("ul").find(".individual_itemId_input");
-        let itemId = itemIdField.val();
+        let itemId = $(this).closest("ul").find(".individual_itemId_input").val();
         let totalPrice = $(this).closest("ul").find(".individual_totalPrice_input").val();
         let itemPrice = $(this).closest("ul").find(".individual_itemPrice_input").val();
         let discount = $(this).closest("ul").find(".individual_discountPrice_input").val();
@@ -381,7 +434,7 @@
                 itemCnt: quantity,
             },
             success: function () {
-                setTotalInfo($(".cart_info_li"));
+                setTotalInfo($(".cart-8"));
             }
         })
     });
@@ -436,6 +489,75 @@
         }
     });
 
+    // 장바구니 냉장/냉동 카테고리 여닫기
+    $(document).ready(function () {
+        $('.fold_button').on('click', function () {
+            // 버튼의 ID를 사용하여 해당 content를 식별
+            let contentId = $(this).attr('id').replace('button', 'content');
+            $('#' + contentId).toggleClass('hide');
+            // 버튼의 자식 요소인 화살표 요소 선택
+            let arrow = $(this).find('.arrow');
+            // 'turn' 클래스가 있는지 확인
+            let hasTurnClass = arrow.hasClass('turn');
+            // 'turn' 클래스를 토글
+            arrow.toggleClass('turn', !hasTurnClass);
+        });
+    });
+
+    // 상품가격과 할인가격이 같으면 상품가격 원래가격 숨기기
+    // content1 처리
+    $('#content1 .ul').find('.cart-8').each(function () {
+        let salePrice = $(this).find('.individual_salePrice_input').val(); // 할인 가격
+        let price = $(this).find('.individual_itemPrice_input').val(); // 판매 가격
+        if (salePrice === price) {
+            $(this).find('.css-cwmxfz').hide(); // 판매 가격을 숨김
+        }
+    });
+    // content2 처리
+    $('#content2 .ul').find('.cart-8').each(function () {
+        let salePrice = $(this).find('.individual_salePrice_input').val(); // 할인 가격
+        let price = $(this).find('.individual_itemPrice_input').val(); // 판매 가격
+        if (salePrice === price) {
+            $(this).find('.css-cwmxfz').hide();
+        }
+    });
+    $('#content3 .ul').find('.cart-8').each(function () {
+        let salePrice = $(this).find('.individual_salePrice_input').val(); // 할인 가격
+        let price = $(this).find('.individual_itemPrice_input').val(); // 판매 가격
+        if (salePrice === price) {
+            $(this).find('.css-cwmxfz').hide();
+        }
+    });
+
+
+    /* 주문 페이지 이동 */
+    $(".order_btn").on("click", function(){
+
+        let form_contents ='';
+        let orderNumber = 0;
+
+        $(".cart-8").each(function(index, element){
+
+            if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+
+                let itemId = $(element).find(".individual_itemId_input").val();
+                let itemCnt = $(element).find(".individual_itemCnt_input").val();
+
+                let itemId_input = "<input name='orders[" + orderNumber + "].itemId' type='hidden' value='" + itemId + "'>";
+                form_contents += itemId_input;
+
+                let itemCnt_input = "<input name='orders[" + orderNumber + "].itemCnt' type='hidden' value='" + itemCnt + "'>";
+                form_contents += itemCnt_input;
+
+                orderNumber += 1;
+
+            }
+        });
+
+        $(".order_form").html(form_contents);
+        $(".order_form").submit();
+
+    });
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
