@@ -28,6 +28,7 @@
         <typeAlias type="com.brokurly.entity.goods.ItemAnnouncement" alias="ItemAnnouncement"/>
         <typeAlias type="com.brokurly.entity.cart.CustomerCart" alias="CustomerCart"/>
         <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
+        <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
 
     </typeAliases>
 </configuration>

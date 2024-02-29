@@ -3,6 +3,7 @@ package com.brokurly.repository.goods;
 
 import com.brokurly.entity.cart.Cart;
 import com.brokurly.entity.goods.Goods;
+import com.brokurly.entity.goods.GoodsAnnouncement;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface GoodsDao {
   int deleteByItemId(String itemId);
 
   List<Goods> selectGoodsListbyCateCode(String cateCode);
+
+
 }

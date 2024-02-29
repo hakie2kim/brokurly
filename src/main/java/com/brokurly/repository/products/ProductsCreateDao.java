@@ -23,5 +23,5 @@ public interface ProductsCreateDao {
     int updateSearchKeyword(SearchKeyword searchKeyword);
     SearchKeyword selectSearchKeywordByKeyword(String keyword);
 
-
+    GoodsAnnouncement findByItemId(String itemId);  //상품고시정보 조회
 }

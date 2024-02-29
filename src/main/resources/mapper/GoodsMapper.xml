@@ -24,6 +24,12 @@
         (#{itemId}, #{custId}, #{itemCnt})
     </insert>
 
+    <insert id="insertAnnouncement">
+        INSERT INTO item_announcement
+            (item_id, item_ann, item_ann_cate)
+        VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
+    </insert>
+
     <!-- READ -->
     <sql id="select">
         SELECT * FROM item
@@ -39,6 +45,8 @@
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode}, '%');
     </select>
+
+
 
     <!-- UPDATE -->
     <update id="update">
