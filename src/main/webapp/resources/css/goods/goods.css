@@ -1167,6 +1167,7 @@ a { /*하이퍼 링크 줄 제거 */
     text-align: center;
     color: rgb(51, 51, 51);
 }
+
 .panel {    /*후기 공지사항 내용 레이아웃*/
     width: 100%;
     padding-right: 20px;
@@ -1180,6 +1181,7 @@ a { /*하이퍼 링크 줄 제거 */
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+
 .goods-92 { /*후기 사진 하단 레이아웃*/
     display: -webkit-box;
     display: -webkit-flex;

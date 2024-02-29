@@ -1,5 +1,7 @@
 package com.brokurly.service.goods;
 
+
+import com.brokurly.dto.cart.CartDto;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
@@ -8,9 +10,11 @@ import com.brokurly.entity.goods.GoodsAnnouncement;
 import com.brokurly.repository.goods.GoodsDao;
 import com.brokurly.repository.products.ProductsCreateDao;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class GoodsService {
@@ -35,9 +39,18 @@ public class GoodsService {
         return goods.toGoodsForCartDto();
     }
 
-    public GoodsAnnouncementDto searchGoodsAnnouncement(String itemId){
+
+    public GoodsAnnouncementDto searchGoodsAnnouncement(String itemId) {
         GoodsAnnouncement goodsAnnouncement = productsCreateDao.findByItemId(itemId);
         return goodsAnnouncement.makeFullDto();
+    }
+    //상품 카트에 담기
+    @Transactional
+    public void addCart(CartDto cartDto) {
+        Goods goods = new Goods();
+//    cart.changeStatus(cartDto);
+        goodsDao.insert(goods);
+
     }
 
 }

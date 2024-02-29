@@ -5,14 +5,19 @@
 <mapper namespace="com.brokurly.repository.products.ProductsCreateDao">
     <!-- item -->
 
+    <sql id="select">
+        SELECT * FROM item
+    </sql>
+
+
     <insert id="insert" >
         INSERT INTO item
             (item_id, name, exp, price, dc_rt, item_dc_amt, origin, point_fl, cpn_elg_fl, ship_type,
              seller_name, pkg_type, capa, sell_unit, adult_verif_fl, cate_code, item_qty,
-              bsns_no, item_spec, stdy_seller_fl)
+              bsns_no, item_spec)
         VALUES (#{itemId}, #{name}, #{exp}, #{price}, #{dcRt}, #{itemDcAmt}, #{origin}, #{pointFl},
                 #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType}, #{capa}, #{sellUnit},
-                #{adultVerifFl}, #{cateCode}, #{itemQty}, #{bsnsNo}, #{itemSpec}, #{stdySellerFl})
+                #{adultVerifFl}, #{cateCode}, #{itemQty}, #{bsnsNo}, #{itemSpec})
     </insert>
 
 
@@ -27,10 +32,16 @@
     </update>
 
 
-    <select id="selectItemByItemId" resultType="Goods">
+    <select id="selectByItemId" resultType="Goods">
         SELECT *
         FROM item
         WHERE item_id = #{itemId}
+    </select>
+
+<!--    -->
+    <select id="selectByBsnsNo" resultType="Goods">
+        <include refid="select"/>
+        WHERE bsns_no = #{bsnsNo}
     </select>
 
     <!--  itemAnnouncement  -->
@@ -40,8 +51,8 @@
         VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
     </insert>
 
-    <select id="selectAnnouncementByItemId">
-        SELECT *
+    <select id="selectAnnouncementByItemId" resultType="string">
+        SELECT item_ann
         FROM item_announcement
         WHERE item_id = #{itemId}
     </select>
@@ -60,19 +71,48 @@
         WHERE keyword = #{keyword}
     </update>
 
-    <select id="selectSearchKeywordByKeyword" resultType="SearchKeyword">
+    <select id="selectByKeyword" resultType="SearchKeyword">
         SELECT *
         FROM search_keyword
         WHERE keyword = #{keyword}
     </select>
 
+<<<<<<< HEAD
     <select id="findByItemId" resultType="GoodsAnnouncement">
         SELECT *
         FROM item_announcement
         WHERE item_id = #{itemId}
     </select>
+=======
+    <!--  keyword 존재하는지 확인  -->
+    <select id="selectKeywordExist" resultType="int">
+        SELECT EXISTS (SELECT keyword
+                      FROM search_keyword
+                      WHERE keyword=#{keyword})
+    </select>
 
+    <!--  SELECT itemIdList   -->
+    <select id="selectItemIdListByKeyword" resultType="string">
+        SELECT item_id_list
+        FROM search_keyword
+        WHERE keyword=#{keyword}
+    </select>
 
+    <!--  기존 문자열에 추가해서 UPDATE하기  -->
+    <update id="updateItemIdList">
+        UPDATE SEARCH_KEYWORD
+        SET item_id_list = CONCAT(item_id_list,',',#{itemIdList})
+        WHERE keyword = #{keyword}
+    </update>
+>>>>>>> 1580a11aa018798ad7e4c8004748d0be752a0771
+
+    <!--insertGoodsImage-->
+    <insert id="insertGoodsImage">
+        INSERT INTO item_image
+            (img, rep_img_fl, item_id)
+        VALUES
+            (#{img}, #{repImgFl}, #{itemId})
+    </insert>
 
 
 </mapper>

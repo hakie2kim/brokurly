@@ -38,9 +38,10 @@ public class CSCenterController {
     }
 
     @RequestMapping("/faqboard")
-    public String faq(Model model) throws Exception {
-        List<FAQListDto> FAQListDtoList = faqService.getFaqList();
+    public String faq(Integer page, Model model) throws Exception {
+        List<FAQListDto> FAQListDtoList = faqService.getFaqList(page);
         model.addAttribute("FAQListDtoList", FAQListDtoList);
+        model.addAttribute("pageNo", page);
         return "board/faqList";
     }
 
