@@ -28,9 +28,9 @@
         });
     };
 
-    function addShippingAddrs() {
+    /*function addShippingAddrs() {
         alert("베송지 추가 완료");
-    }
+    }*/
 </script>
 <body>
 <div class="top">
@@ -202,139 +202,61 @@
         </div>
         <div class="deli-list">
             <ul>
-                <li>
-                    <div style="display: flex">
-                        <div class="column default">
-                            <label for="kurly-address-18241898"
-                            ><input
-                                    id="kurly-address-18241898"
-                                    type="checkbox"
-                                    value="18241898"
-                                    checked
-                            />
-                                <div style="margin-right: 12px">
-                                    <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                                d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                                                fill="#5f0080"
-                                        ></path>
-                                        <path
-                                                d="M7 12.6667L10.3846 16L18 8.5"
-                                                stroke="#fff"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="column address">
-                            <div>
-                                <div class="default-addr-icon">기본 배송지</div>
-                                서울 양천구 목동서로 100 (목동신시가지아파트3단지) 310동
-                                603호
+                <c:forEach var="shippingLocation" items="${shippingLocationList}">
+                    <li>
+                        <div style="display: flex">
+                            <div class="column default">
+                                <label for="kurly-address-18241898"
+                                ><input
+                                        id="kurly-address-18241898"
+                                        type="checkbox"
+                                        value="18241898"
+                                        checked
+                                />
+                                    <div style="margin-right: 12px">
+                                        <svg
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                    d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                                                    fill="#5f0080"
+                                            ></path>
+                                            <path
+                                                    d="M7 12.6667L10.3846 16L18 8.5"
+                                                    stroke="#fff"
+                                                    stroke-width="1.5"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </label>
                             </div>
-                        </div>
-                        <div class="column deli-to">정충교</div>
-                        <div class="column tel-no">010-2288-7320</div>
-                        <div class="column deli-type">
-                            <span type="direct">샛별배송</span>
-                        </div>
-                        <div class="column fix">
-                            <button>
-                                <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g fill="none" fill-rule="evenodd">
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                                d="m13.83 5.777 4.393 4.393-10.58 10.58H3.25v-4.394l10.58-10.58zm3.204-2.527c.418 0 .837.16 1.157.48l2.08 2.08a1.63 1.63 0 0 1 0 2.314l-2.157 2.156-4.394-4.394 2.157-2.156c.32-.32.738-.48 1.157-.48z"
-                                                stroke="#ccc"
-                                                stroke-width="1.5"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div style="display: flex">
-                        <div class="column default">
-                            <label for="kurly-address-22936411"
-                            ><input
-                                    id="kurly-address-22936411"
-                                    type="checkbox"
-                                    value="22936411"
-                            />
-                                <div style="margin-right: 12px">
-                                    <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                                d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                stroke="#ddd"
-                                                fill="#fff"
-                                        ></path>
-                                        <path
-                                                d="M7 12.6667L10.3846 16L18 8.5"
-                                                stroke="#ddd"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
+                            <div class="column address">
+                                <div>
+                                    <c:if test="${shippingLocation.defAddrFl eq 'Y'}">
+                                        <div class="default-addr-icon">기본 배송지</div>
+                                    </c:if>
+                                    ${shippingLocation.addr} ${shippingLocation.specAddr}
                                 </div>
-                            </label>
-                        </div>
-                        <div class="column address">
-                            <div>
-                                경기 성남시 분당구 판교역로 100 (백현마을6단지아파트) 10층 F
-                                강의실
                             </div>
-                        </div>
-                        <div class="column deli-to">김학준</div>
-                        <div class="column tel-no">010-1234-5611</div>
-                        <div class="column deli-type">
-                            <div>
+                            <div class="column deli-to">${shippingLocation.recName}</div>
+                            <div class="column tel-no">${shippingLocation.telNo}</div>
+                            <div class="column deli-type">
                                 <span type="direct">샛별배송</span>
                             </div>
+                            <div class="column fix">
+                                <button>
+                                    <img src="/resources/image/modify.png"  width="24px" height="24px">
+                                </button>
+                            </div>
                         </div>
-                        <div class="column fix">
-                            <button>
-                                <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g fill="none" fill-rule="evenodd">
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                                d="m13.83 5.777 4.393 4.393-10.58 10.58H3.25v-4.394l10.58-10.58zm3.204-2.527c.418 0 .837.16 1.157.48l2.08 2.08a1.63 1.63 0 0 1 0 2.314l-2.157 2.156-4.394-4.394 2.157-2.156c.32-.32.738-.48 1.157-.48z"
-                                                stroke="#ccc"
-                                                stroke-width="1.5"
-                                        ></path>
-                                    </g>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>

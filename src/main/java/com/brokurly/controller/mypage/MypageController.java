@@ -93,28 +93,32 @@ public class MypageController {
     }
 
     @GetMapping("/address")
-    String manageAddress() {
+    String manageAddress(Model model) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
+        model.addAttribute("shippingLocationList", shippingLocationList);
         return "/mypage/address";
-    }
-
-    @Getter
-    static class FullAddress {
-        private String addr;
-        private String specAddr;
     }
 
     @PostMapping("/address")
     @ResponseBody
-    ResponseEntity<ShippingLocationAddDto> addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+    HttpStatus addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
         String addr = shippingLocationAddFormDto.getAddr();
         String specAddr = shippingLocationAddFormDto.getSpecAddr();
         String defAddrFl = Boolean.parseBoolean(shippingLocationAddFormDto.getDefAddrFl()) ? "Y" : "N";
         log.info("@PostMapping(\"/address\") addShippingAddress addr: {} specAddr: {} defAddrFl: {}", addr, specAddr, defAddrFl);
 
-        ShippingLocationAddDto shippingLocationAddDto = shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
-        // 모든 배송지 리스트를 등록 시간 역순으로 갖고 오는 service 기능
+        // 기본 배송지로 설정할 경우, 나머지 기본 배송지 설정을 해제
+        if (defAddrFl.equals("Y"))
+            shippingLocationService.unflagDefAddr(custId);
 
-        return new ResponseEntity<>(shippingLocationAddDto, HttpStatus.OK);
+        shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
+//        List<ShippingLocationDto> shippingLocationListByCustomer = shippingLocationService.getShippingLocationListByCustomer(custId);
+
+//        return new ResponseEntity<>("배송지 추가", HttpStatus.OK);
+        return HttpStatus.OK;
     }
 
     @GetMapping("/address/shipping-address")

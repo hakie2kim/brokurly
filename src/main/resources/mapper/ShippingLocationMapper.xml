@@ -87,7 +87,12 @@
         FROM shipping_location
     </select>
 
-    <!--UPDATE 없음-->
+    <!--UPDATE-->
+    <update id="updateByShipLocaId">
+        UPDATE shipping_location
+        SET spec_addr = #{specAddr}, def_addr_fl = #{defAddrFl}, tel_no = #{telNo}, rec_addr = #{recAddr}, rec_name = #{recName}, del_fl = #{delFl}
+        WHERE ship_loca_id = #{shipLocaId}
+    </update>
 
     <!--DELETE-->
     <delete id="deleteAll">

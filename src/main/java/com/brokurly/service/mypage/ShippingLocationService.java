@@ -1,12 +1,13 @@
 package com.brokurly.service.mypage;
 
-import com.brokurly.dto.mypage.ShippingLocationAddDto;
-import com.brokurly.dto.mypage.ShippingLocationDto;
-import com.brokurly.dto.mypage.ShippingLocationManagementDto;
+import com.brokurly.dto.mypage.*;
 import com.brokurly.entity.mypage.ShippingLocation;
 import com.brokurly.entity.mypage.ShippingLocationAndShoppingLocationChangeLog;
+import com.brokurly.entity.mypage.ShippingLocationChangeLog;
+import com.brokurly.repository.mypage.ShippingLocationChangeLogDao;
 import com.brokurly.repository.mypage.ShippingLocationDao;
 import com.brokurly.utils.RandomGeneratorUtils;
+import com.brokurly.utils.StringFormatUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,9 +25,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ShippingLocationService {
     private final ShippingLocationDao shippingLocationDao;
+    private final ShippingLocationChangeLogDao shippingLocationChangeLogDao;
 
     @Transactional
-    public ShippingLocationAddDto addNewShippingLocation(String addr, String specAddr, String defAddrFl) {
+    public void addNewShippingLocation(String addr, String specAddr, String defAddrFl) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
         String shipLocaId = RandomGeneratorUtils.randomGeneratedShipLocaId();
 
         // ShippingLocationAddDto -> ShippingLocation
@@ -33,18 +38,52 @@ public class ShippingLocationService {
         ShippingLocationAddDto shippingLocationAddDto = new ShippingLocationAddDto(shipLocaId, addr, specAddr, defAddrFl, currDateAsYYYYMMDD(), "N");
         shippingLocation.updateShippingLocationAddDto(shippingLocationAddDto);
 
+        // 배송지 정보 추가
         shippingLocationDao.insert(shippingLocation);
 
-        return shippingLocationAddDto;
+        // ShippingLocationAddDto -> ShippingLocationChangeLog
+        ShippingLocationChangeLog shippingLocationChangeLog = new ShippingLocationChangeLog();
+        ShippingLocationChangeLogAddDto shippingLocationChangeLogAddDto = new ShippingLocationChangeLogAddDto(null, null, addr, specAddr, defAddrFl, "추가", custId, shipLocaId);
+        shippingLocationChangeLog.updateShippingLocationChangeLogAddDto(shippingLocationChangeLogAddDto);
+
+        // 배송지 변경 이력 추가
+        shippingLocationChangeLogDao.insert(shippingLocationChangeLog);
     }
 
     public List<ShippingLocationDto> getShippingLocationListByCustomer(String custId) {
         return shippingLocationDao.selectByCustomer(custId)
                 .stream()
                 .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationDto)
-                .filter(sl -> "N".equals(sl.getDelFl()))
-                .sorted(Comparator.comparing(ShippingLocationDto::getShipLocaRegDt).reversed())
+                .filter(sl -> "N".equals(sl.getDelFl())) // 삭제된 배송지는 제외
+                .sorted(Comparator.comparing(ShippingLocationDto::getShipLocaRegDt).reversed()) // 최근 등록 순으로 배열
+                .peek(sl -> {
+                    // 01000010001 -> 010-0001-0001
+                    if (sl.getTelNo() != null) {
+                        String formattedTelNo = StringFormatUtils.formatPhoneNumber(sl.getTelNo());
+                        sl.setTelNo(formattedTelNo);
+                    }
+                })
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void unflagDefAddr(String custId) {
+        ShippingLocationUpdateDto shippingLocationUpdateDtoHavingDefAddr = shippingLocationDao.selectByCustomer(custId)
+                .stream()
+                .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationUpdateDto)
+                .filter(sl -> sl.getDefAddrFl().equals("Y"))
+                .findAny()
+                .orElseGet(() -> null);
+
+        if (shippingLocationUpdateDtoHavingDefAddr != null) {
+            shippingLocationUpdateDtoHavingDefAddr.setDefAddrFl("N");
+
+            // ShippingLocation -> updateShippingLocationUpdateDto
+            ShippingLocation shippingLocation = new ShippingLocation();
+            shippingLocation.updateShippingLocationUpdateDto(shippingLocationUpdateDtoHavingDefAddr);
+
+            shippingLocationDao.updateByShipLocaId(shippingLocation);
+        }
     }
 
     private static String currDateAsYYYYMMDD() {
