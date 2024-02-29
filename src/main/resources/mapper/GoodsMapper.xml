@@ -34,7 +34,12 @@
         WHERE item_id = #{itemId}
     </select>
 
-    <select id="selectGoodsListbyCateCode" resultType="Goods">
+    <select id="selectByBsnsNo" resultType="Goods">
+        <include refid="select"/>
+        WHERE bsns_no = #{bsnsNo}
+    </select>
+
+    <select id="selectGoodsListByCateCode" resultType="Goods">
         select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode}, '%');

@@ -26,10 +26,10 @@ public class CategoryController {
     @GetMapping("/productsCreate")
     public String readCategory(Model m) throws Exception {
 
-        List<CategoryDto> selectMain = categoryService.readPrimary();
-        m.addAttribute("selectMain", selectMain);
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
         log.info("model={}",m);
-        log.info("selectMain={}", selectMain);
+        log.info("selectPrimary={}", selectPrimary);
 
         return "seller/productsCreate";
     }

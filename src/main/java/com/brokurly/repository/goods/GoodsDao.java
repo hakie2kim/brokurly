@@ -20,5 +20,5 @@ public interface GoodsDao {
   // DELTE
   int deleteByItemId(String itemId);
 
-  List<Goods> selectGoodsListbyCateCode(String cateCode);
+  List<Goods> selectGoodsListByCateCode(String cateCode);
 }
