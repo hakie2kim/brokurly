@@ -40,5 +40,5 @@ public interface ProductsCreateDao {
     //Goodsimage 상품 이미지
     int insertGoodsImage(GoodsImage goodsImage);
 
-
+    GoodsAnnouncement findByItemId(String itemId);  //상품고시정보 조회
 }

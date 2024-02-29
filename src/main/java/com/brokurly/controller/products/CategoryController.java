@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/seller")
 public class CategoryController {
 
-   private final CategoryService categoryService;
+    private final CategoryService categoryService;
 
     //생성자 추가해서 주입받기
     @Autowired
