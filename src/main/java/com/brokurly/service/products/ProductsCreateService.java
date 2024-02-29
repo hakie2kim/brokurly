@@ -65,8 +65,13 @@ public class ProductsCreateService {
     //상품 조회
     public GoodsDto searchGoods(String itemId) {
         Goods goods = productsCreateDao.selectByItemId(itemId);
-
         return goods.makeFullDto();
+    }
+
+    //고시정보 조회
+    public GoodsAnnouncementDto searchAnnouncement(String itemId){
+        GoodsAnnouncement goodsAnnouncement = productsCreateDao.selectAnnouncementByItemId(itemId);
+       return goodsAnnouncement.makeFullDto();
     }
 
 

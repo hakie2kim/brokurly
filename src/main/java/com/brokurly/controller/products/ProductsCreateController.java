@@ -6,6 +6,7 @@ import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsImageDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.entity.goods.GoodsAnnouncement;
 import com.brokurly.service.goods.GoodsService;
 import com.brokurly.service.products.ProductsCreateService;
 import lombok.extern.slf4j.Slf4j;
@@ -92,9 +93,15 @@ public class ProductsCreateController {
     @GetMapping("/productsOriginList/read")
     public String read(String itemId, Model m) {
         GoodsDto goodsDto = productsCreateService.searchGoods(itemId);
-//        GoodsAnnouncement goodsAnnouncement = goodsService.
+        GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
+
 //        log.info("goodsDto??={}", goodsDto);
+        log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
+
         m.addAttribute("goodsDto", goodsDto);
+        m.addAttribute("goodsAnnouncement", goodsAnnouncementDto);
+
+
 
         return "seller/productsCreate";  //읽기
     }

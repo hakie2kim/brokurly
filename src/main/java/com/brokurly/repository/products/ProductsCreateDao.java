@@ -22,7 +22,7 @@ public interface ProductsCreateDao {
 
     //goodsAnnouncement 상품고시정보
     int insertAnnouncement(GoodsAnnouncement goodsAnnouncementAnnouncement);
-    String selectAnnouncementByItemId(String itemId);
+    GoodsAnnouncement selectAnnouncementByItemId(String itemId);
 
 
     //searchKeyword 키워드

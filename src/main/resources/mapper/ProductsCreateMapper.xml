@@ -51,7 +51,7 @@
         VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
     </insert>
 
-    <select id="selectAnnouncementByItemId" resultType="string">
+    <select id="selectAnnouncementByItemId" resultType="GoodsAnnouncement">
         SELECT item_ann
         FROM item_announcement
         WHERE item_id = #{itemId}

@@ -20,7 +20,7 @@ public class GoodsListService {
 
     public List<GoodsListDto> readGoodsList(String cateCode){
 
-        List<Goods> goodsList = goodsDao.selectGoodsListbyCateCode(cateCode);
+        List<Goods> goodsList = goodsDao.selectGoodsListByCateCode(cateCode);
         List<GoodsListDto> goodsListDto = new ArrayList<>();
 
         for(Goods goods : goodsList){

@@ -14,7 +14,7 @@ public interface CategoryDao {
 
     int deletebyId (String codeId);
 
-    void deleteAll();
+    int deleteAll();
 
     List<Category> getCategoryExpByPrimary(String codeId);
 
