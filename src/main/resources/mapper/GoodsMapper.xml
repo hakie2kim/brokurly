@@ -45,12 +45,93 @@
         WHERE bsns_no = #{bsnsNo}
     </select>
 
+
     <select id="selectGoodsListByCateCode" resultType="Goods">
         select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
-        where cate_code LIKE CONCAT(#{cateCode}, '%');
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+        limit #{limit} offset #{start}
     </select>
 
+
+
+    <select id="sortGoodsList" resultType="Goods">
+        SELECT
+        item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        FROM
+        ITEM
+        WHERE
+        cate_code LIKE CONCAT(#{cateCode},'%')
+        <choose>
+            <when test="sortedtype == 4">
+                ORDER BY price - item_dc_amt ASC
+            </when>
+            <when test="sortedtype == 5">
+                ORDER BY price - item_dc_amt DESC
+            </when>
+            <when test="sortedtype == 2">
+                ORDER BY sell_cnt DESC
+            </when>
+            <when test="sortedtype == 3">
+                ORDER BY dc_rt DESC
+            </when>
+            <when test="sortedtype == 1">
+                ORDER BY reg_dt DESC
+            </when>
+        </choose>
+        LIMIT #{limit} OFFSET #{start}
+    </select>
+
+
+
+
+
+
+<!--    <select id="sortGoodsListByRegDate" resultType="Goods">-->
+<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--        order by reg_dt desc-->
+<!--        limit #{limit} offset #{start}-->
+<!--    </select>-->
+
+<!--    <select id="sortGoodsListByLowPrice" resultType="Goods">-->
+<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--        order by price-item_dc_amt asc-->
+<!--         limit #{limit} offset #{start}-->
+<!--    </select>-->
+
+<!--    <select id="sortGoodsListByHighPrice" resultType="Goods">-->
+<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--        order by price-item_dc_amt desc-->
+<!--        limit #{limit} offset #{start}-->
+<!--    </select>-->
+
+<!--    <select id="sortGoodsListBySellCnt" resultType="Goods">-->
+<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--        order by sell_cnt desc-->
+<!--        limit #{limit} offset #{start}-->
+<!--    </select>-->
+
+<!--    <select id="sortGoodsListByDcRt" resultType="Goods">-->
+<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--        order by dc_rt desc-->
+<!--        limit #{limit} offset #{start}-->
+<!--    </select>-->
+
+    <select id="countGoodsListByCateCode" resultType="int">
+        select count(*)
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+    </select>
 
 
     <!-- UPDATE -->
