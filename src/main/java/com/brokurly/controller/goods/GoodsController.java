@@ -22,18 +22,18 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class GoodsController {
 
-  private final GoodsService goodsService;
+    private final GoodsService goodsService;
 
-  // 상품 상세페이지로 값 전달
-  @GetMapping("/{itemId}")
-  public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
-    session.setAttribute("member", "hong");
-    GoodsDto goods = goodsService.searchGoods(itemId);  // 임시 상품번호
-    GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId);
-    model.addAttribute("goods", goods);
-    model.addAttribute("announcement", announcement);
+    // 상품 상세페이지로 값 전달
+    @GetMapping("/{itemId}")
+    public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
+        session.setAttribute("member", "hong");
+        GoodsDto goods = goodsService.searchGoods(itemId);  // 임시 상품번호
+        GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId);
+        model.addAttribute("goods", goods);
+        model.addAttribute("announcement", announcement);
 
-    return "goods/goods";
-  }
+        return "goods/goods";
+    }
 
 }

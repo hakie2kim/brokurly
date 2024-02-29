@@ -16,13 +16,13 @@ window.onload = () => {
 
     // 배송지 변경 모달 띄우기
     $("#location-change").click(() => {
-        $(".small-modal").show();
+        $(".shipping-location-modal").show();
         $("body").css('overflow', 'hidden');
     });
 
     // 배송지 변경 모달 끄기
     $("#small-modal-cancel").click(() => {
-        $(".small-modal").hide();
+        $(".shipping-location-modal").hide();
         $("body").css("overflow", "");
     });
 
@@ -137,12 +137,13 @@ function saveReceiverDetails(receiverDetails) {
 
 function redirectReceiverDetails() {
     window.location.href = "#receiver-details-title";
+    $(".receiver-details-modal").hide();
 }
 
 function redirectPayment() {
     // 배송 요청사항이 없으면, 주문을 못하게 모달 띄우기
     if ($(".check-receiver-details").text() === "true") {
-
+        $(".receiver-details-modal").show();
         return;
     }
 

@@ -81,7 +81,7 @@
                 <button id="location-change">변경</button>
             </div>
         </div>
-        <div class="small-modal">
+        <div class="small-modal shipping-location-modal">
             <div class="small-modal-border">
                 <div class="small-modal-content">
                     <p>장바구니로 이동하여</p>
@@ -107,7 +107,7 @@
                         <button class="receiver-details-btn">입력</button>
                     </div>
                 </c:if>
-                <div class="small-modal">
+                <div class="small-modal receiver-details-modal">
                     <div class="small-modal-border">
                         <div class="small-modal-content">배송 요청사항을 입력해주세요.</div>
                         <div class="small-modal-buttons">

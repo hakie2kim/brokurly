@@ -11,10 +11,10 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class GoodsReivewBoardDto {
-  private String revNo;
-  private String itemId;
-  private String custId;
-  private String content;
-  private Timestamp regDt;
-  private int likeCnt;
+    private String revNo;
+    private String itemId;
+    private String custId;
+    private String content;
+    private Timestamp regDt;
+    private int likeCnt;
 }
