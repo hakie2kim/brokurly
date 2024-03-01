@@ -114,7 +114,7 @@ public class MypageController {
         if (defAddrFl.equals("Y"))
             shippingLocationService.unflagDefAddr(custId);
 
-        shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
+        shippingLocationService.addNewShippingLocation(custId, addr, specAddr, defAddrFl);
 //        List<ShippingLocationDto> shippingLocationListByCustomer = shippingLocationService.getShippingLocationListByCustomer(custId);
 
 //        return new ResponseEntity<>("배송지 추가", HttpStatus.OK);

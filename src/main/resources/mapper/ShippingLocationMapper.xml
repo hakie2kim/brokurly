@@ -5,13 +5,13 @@
 <mapper namespace="com.brokurly.repository.mypage.ShippingLocationDao">
     <!-- CREATE -->
     <insert id="insert">
-        INSERT INTO shipping_location (ship_loca_id, addr, spec_addr, def_addr_fl, ship_loca_reg_dt, tel_no, rec_addr, rec_name, del_fl)
-        VALUES (#{shipLocaId}, #{addr}, #{specAddr}, #{defAddrFl}, #{shipLocaRegDt}, #{telNo}, #{recAddr}, #{recName}, #{delFl})
+        INSERT INTO shipping_location (ship_loca_id, addr, spec_addr, def_addr_fl, ship_loca_reg_dt, tel_no, rec_addr, rec_name, del_fl, curr_addr_fl)
+        VALUES (#{shipLocaId}, #{addr}, #{specAddr}, #{defAddrFl}, #{shipLocaRegDt}, #{telNo}, #{recAddr}, #{recName}, #{delFl}, #{currAddrFl})
     </insert>
 
     <!-- READ -->
     <sql id="select">
-        SELECT ship_loca_id, addr, spec_addr, def_addr_fl, ship_loca_reg_dt, tel_no, rec_addr, rec_name, del_fl
+        SELECT ship_loca_id, addr, spec_addr, def_addr_fl, ship_loca_reg_dt, tel_no, rec_addr, rec_name, del_fl, curr_addr_fl
         FROM shipping_location
     </sql>
 
@@ -20,7 +20,7 @@
     </select>
 
     <select id="selectByCustomer" resultType="ShippingLocationAndShoppingLocationChangeLog">
-        SELECT sl.ship_loca_id, sl.addr, sl.spec_addr, sl.def_addr_fl, ship_loca_reg_dt, sl.tel_no, rec_addr, rec_name, sl.del_fl,
+        SELECT sl.ship_loca_id, sl.addr, sl.spec_addr, sl.def_addr_fl, ship_loca_reg_dt, sl.tel_no, rec_addr, rec_name, sl.del_fl, curr_addr_fl,
             ship_chg_no, name, chg_status, chg_dt, cust_id
         FROM shipping_location sl
         INNER JOIN shipping_location_change_log slcl
@@ -28,7 +28,7 @@
         WHERE cust_id = #{custId}
     </select>
 
-    <select id="selectUsageByCustomerAndPeriod" resultType="PointLog">
+    <!--<select id="selectUsageByCustomerAndPeriod" resultType="PointLog">
         <include refid="select"/>
         WHERE cust_id = #{custId}
           AND point_stat = '사용'
@@ -80,7 +80,7 @@
         WHERE cust_id = #{custId}
           AND point_stat LIKE '%적립%'
           AND proc_dt BETWEEN date_sub(now(), interval #{period} month) AND now()
-    </select>
+    </select>-->
 
     <select id="countAll" resultType="int">
         SELECT count(*)
@@ -90,7 +90,7 @@
     <!--UPDATE-->
     <update id="updateByShipLocaId">
         UPDATE shipping_location
-        SET spec_addr = #{specAddr}, def_addr_fl = #{defAddrFl}, tel_no = #{telNo}, rec_addr = #{recAddr}, rec_name = #{recName}, del_fl = #{delFl}
+        SET spec_addr = #{specAddr}, def_addr_fl = #{defAddrFl}, tel_no = #{telNo}, rec_addr = #{recAddr}, rec_name = #{recName}, del_fl = #{delFl}, curr_addr_fl = #{currAddrFl}
         WHERE ship_loca_id = #{shipLocaId}
     </update>
 
@@ -100,11 +100,11 @@
         FROM shipping_location
     </delete>
 
-    <delete id="deleteByPointNo">
+    <!--<delete id="deleteByPointNo">
         DELETE
         FROM point_log
         WHERE point_no = #{pointNo}
-    </delete>
+    </delete>-->
 
 <!--    &lt;!&ndash; CREATE &ndash;&gt;-->
 <!--    <insert id="insert" useGeneratedKeys="true" keyProperty="bno">-->
