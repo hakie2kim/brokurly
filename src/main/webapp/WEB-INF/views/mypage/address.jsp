@@ -206,42 +206,47 @@
                     <li>
                         <div style="display: flex">
                             <div class="column default">
-                                <label for="kurly-address-18241898"
-                                ><input
-                                        id="kurly-address-18241898"
-                                        type="checkbox"
-                                        value="18241898"
-                                        checked
+                                <input type="checkbox" name="currAddrFl"
+                                        <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
+                                            checked
+                                        </c:if>
                                 />
-                                    <div style="margin-right: 12px">
-                                        <svg
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                                                    fill="#5f0080"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#fff"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                </label>
+                                    <%--<label for="kurly-address-18241898"
+                                    ><input
+                                            id="kurly-address-18241898"
+                                            type="checkbox"
+                                            value="18241898"
+                                            checked
+                                    />
+                                        <div style="margin-right: 12px">
+                                            <svg
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                        d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                                                        fill="#5f0080"
+                                                ></path>
+                                                <path
+                                                        d="M7 12.6667L10.3846 16L18 8.5"
+                                                        stroke="#fff"
+                                                        stroke-width="1.5"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </label>--%>
                             </div>
                             <div class="column address">
                                 <div>
                                     <c:if test="${shippingLocation.defAddrFl eq 'Y'}">
                                         <div class="default-addr-icon">기본 배송지</div>
                                     </c:if>
-                                    ${shippingLocation.addr} ${shippingLocation.specAddr}
+                                        ${shippingLocation.addr} ${shippingLocation.specAddr}
                                 </div>
                             </div>
                             <div class="column deli-to">${shippingLocation.recName}</div>
@@ -251,7 +256,7 @@
                             </div>
                             <div class="column fix">
                                 <button>
-                                    <img src="/resources/image/modify.png"  width="24px" height="24px">
+                                    <img src="/resources/image/modify.png" width="24px" height="24px">
                                 </button>
                             </div>
                         </div>

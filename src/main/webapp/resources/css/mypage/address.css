@@ -26,9 +26,22 @@ ul {
     list-style-type: none;
 }
 
-input[type="checkbox"] {
-    box-sizing: border-box;
-    padding: 0;
+[type="checkbox"] {
+    width: 2em;
+    height: 2em;
+    appearance: none;
+    border-radius: 50%;
+    border: 1px solid rgb(221, 221, 221);
+    background: url(/resources/image/img-check-gray.png) no-repeat center;
+}
+
+[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+[type="checkbox"]:checked {
+    background: #11967f url(/resources/image/img-check.png) no-repeat center center;
+    border: 0;
 }
 
 /* TOP */
@@ -367,17 +380,17 @@ span,
     flex-basis: 60px;
 }
 
-.bottom .content .deli-list .column.default label {
+/*.bottom .content .deli-list .column.default label {
     box-sizing: border-box;
     margin: 0;
-}
+}*/
 
-.bottom .content .deli-list .column.default input {
+/*.bottom .content .deli-list .column.default input {
     overflow: hidden;
     position: absolute;
     width: 1px;
     height: 1px;
-}
+}*/
 
 .bottom .content .deli-list .column.address {
     flex: 1 1 0%;

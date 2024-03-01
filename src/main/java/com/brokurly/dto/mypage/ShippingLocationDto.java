@@ -19,5 +19,4 @@ public class ShippingLocationDto {
     private String recName;
     private String delFl;
     private String currAddrFl;
-
 }
