@@ -16,7 +16,8 @@ public interface ProductsCreateDao {
     Goods selectByItemId(String itemId);
     int updateItem(Goods goods);
 
-    List<Goods> selectByBsnsNo(String bsns_no);
+    List<Goods> selectByBsnsNo(String bsnsNo);
+    int deleteByItemId(String itemId);
 
 
 

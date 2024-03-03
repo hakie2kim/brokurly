@@ -263,7 +263,7 @@
                     </div>
                 </div>
 
-                <!-- 저장버튼 -->
+                <!-- 상품등록버튼 -->
                 <div class="panel-footer">
                     <div
                             class="seller-btn-area"

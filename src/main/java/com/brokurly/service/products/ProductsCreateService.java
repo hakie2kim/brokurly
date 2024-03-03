@@ -40,23 +40,64 @@ public class ProductsCreateService {
 
     // 상품정보고시 table에 insert
     @Transactional
-    public int writeAnnouncement(GoodsAnnouncementDto goodsAnnouncementDto){
+    public int writeAnnouncement(GoodsAnnouncementDto goodsAnnouncementDto) {
         GoodsAnnouncement goodsAnnouncement = new GoodsAnnouncement();
         goodsAnnouncement.changeStatus(goodsAnnouncementDto);
-       return productsCreateDao.insertAnnouncement(goodsAnnouncement);
+        return productsCreateDao.insertAnnouncement(goodsAnnouncement);
     }
 
     // SearchKeyword table에 insert
     @Transactional
-    public int writeKeyword(SearchKeywordDto searchKeywordDto){
-        SearchKeyword searchKeyword = new SearchKeyword();
-        searchKeyword.changeStatus(searchKeywordDto);
-       return productsCreateDao.insertSearchKeyword(searchKeyword);
+    public void writeKeyword(SearchKeywordDto searchKeywordDto) {
+        //1. keyword나누기
+        String[] keywords = searchKeywordDto.getKeyword().split(",");
+        String oneitemId = searchKeywordDto.getItemIdList();
+
+        //2. keyword 존재여부 확인
+        for (int i = 0; i < keywords.length; i++) {
+            int result = productsCreateDao.selectKeywordExist(keywords[i]);
+            log.info("result={}", result);
+            if (result == 1) {
+                //3-1. 존재O
+                //4-1. item_id_list 가져와서 id 있는지 확인하기
+                List<String> itemIdList = productsCreateDao.selectItemIdListByKeyword(keywords[i]);
+                log.info("itemIdList={}", itemIdList);
+                //idlist를 ,로 잘라서 하나씩 비교한다.
+                String[] itemId = itemIdList.get(0).split(",");
+
+                boolean shouldUpdate = true;  // 업데이트 여부를 판단하는 변수 추가
+
+                for (int j = 0; j < itemId.length; j++) {
+                    if (itemId[j].equals(oneitemId)) {
+                        shouldUpdate = false;  // "itemId"가 이미 존재하면 업데이트하지 않음
+                        break;  // 루프 종료
+                    }
+                }
+
+                if (shouldUpdate) {
+                    SearchKeywordDto searchKeywordDto1 = new SearchKeywordDto(keywords[i], oneitemId); //dto만들기
+                    SearchKeyword searchKeyword = new SearchKeyword();  //도메인
+                    searchKeyword.changeStatus(searchKeywordDto1);
+                    productsCreateDao.updateItemIdList(searchKeyword);
+                }
+
+
+            } else {
+                //3-2. 존재X 새로생성해서 추가
+                SearchKeywordDto searchKeywordDto1 = new SearchKeywordDto(keywords[i], oneitemId); //dto만들기
+                SearchKeyword searchKeyword = new SearchKeyword();  //도메인
+                searchKeyword.changeStatus(searchKeywordDto1);
+                productsCreateDao.insertSearchKeyword(searchKeyword);
+
+            }
+
+        }
+
     }
 
     //GoodsImage insert
     @Transactional
-    public int writeGoodsImage(GoodsImageDto goodsImageDto){
+    public int writeGoodsImage(GoodsImageDto goodsImageDto) {
         GoodsImage goodsImage = new GoodsImage();
         goodsImage.changeStatus(goodsImageDto);
         return productsCreateDao.insertGoodsImage(goodsImage);
@@ -69,9 +110,9 @@ public class ProductsCreateService {
     }
 
     //고시정보 조회
-    public GoodsAnnouncementDto searchAnnouncement(String itemId){
+    public GoodsAnnouncementDto searchAnnouncement(String itemId) {
         GoodsAnnouncement goodsAnnouncement = productsCreateDao.selectAnnouncementByItemId(itemId);
-       return goodsAnnouncement.makeFullDto();
+        return goodsAnnouncement.makeFullDto();
     }
 
 
@@ -91,6 +132,12 @@ public class ProductsCreateService {
         log.info("dto={}", dtoList);
 
         return dtoList;
+    }
+
+    // 상품 삭제
+    @Transactional
+    public int removeByItemId(String ItemId) {
+        return productsCreateDao.deleteByItemId(ItemId);
     }
 
 }

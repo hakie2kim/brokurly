@@ -43,7 +43,8 @@
                                             <li>
                                                 <button type="button" id="maincate${status.count}" href=""
                                                         onclick="s_ajax(${status.count});"
-                                                        value="${selectMainC.codeId}">${selectMainC.exp}</button>
+                                                        value="${selectMainC.codeId}">${selectMainC.exp}
+                                                </button>
                                             </li>
                                             <!---->
                                         </c:forEach>
@@ -65,8 +66,8 @@
                                            style="width: 100%; height: 1px;" disabled>
                                 </div>
                             </div><!---->
-                            <p class="info-result text-info" style="">선택한 카테고리 : <strong>가구/인테리어&gt;DIY자재/용품</strong>
-                            </p>
+
+                            선택한 카테고리 : <div class="Cate-result" style="display: inline-block"></div>
 
                             <p class="sub-text text-primary">상품과 맞지 않는 카테고리에 등록할 경우 강제 이동되거나 판매중지, 판매금지 될 수 있습니다.</p>
                             <br><!----><!----><!----><!----><!----><!---->
@@ -269,6 +270,12 @@
                                         <div class="total-price">
                                             <div class="input-content">
                                                 <div id="showResult"></div>
+                                                <input
+                                                        type="hidden"
+                                                        name="salePrice"
+                                                        id="salePrice"
+                                                        value=""
+                                                >
 
                                             </div>
                                         </div>
@@ -415,28 +422,32 @@
 
                                                 <li id>
 
-                                                <%--대표이미지 multipart-form data이용--%>
-                                                <%--form2--%>
-                                                <br>
-                                                <form name="formb" id="formb" action="/seller/img" method="post" enctype="multipart/form-data">
-                                                    <input type="file" id="file" name="file" accept=".jpg, .jpeg, .png"/>
-                                                    <button type="button" id="sendButton" name="sendButton" onclick="img_ajax();">사진 전송</button>
+                                                    <%--대표이미지 multipart-form data이용--%>
+                                                    <%--form2--%>
+                                                    <br>
+                                                    <form name="formb" id="formb" action="/seller/img" method="post"
+                                                          enctype="multipart/form-data">
+                                                        <input type="file" id="file" name="file"
+                                                               accept=".jpg, .jpeg, .png"/>
+                                                        <button type="button" id="sendButton" name="sendButton"
+                                                                onclick="img_ajax();">사진 전송
+                                                        </button>
 
-                                                </form>
-                                                <%--form2 끝--%>
+                                                    </form>
+                                                    <%--form2 끝--%>
 
-                                                <!----><!---->
+                                                    <!----><!---->
 
-<%--                                                    <!----><!---->--%>
-<%--                                                    <div--%>
-<%--                                                            class="register-img"--%>
-<%--                                                            style=""--%>
-<%--                                                    >--%>
-<%--&lt;%&ndash;                                                        <!-- 이미지 띄울 곳 -->&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                                        <div class="btn-add-img" id="image-show"></div>&ndash;%&gt;--%>
+                                                    <%--                                                    <!----><!---->--%>
+                                                    <%--                                                    <div--%>
+                                                    <%--                                                            class="register-img"--%>
+                                                    <%--                                                            style=""--%>
+                                                    <%--                                                    >--%>
+                                                    <%--&lt;%&ndash;                                                        <!-- 이미지 띄울 곳 -->&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;                                                        <div class="btn-add-img" id="image-show"></div>&ndash;%&gt;--%>
 
-<%--&lt;%&ndash;                                                    </div>&ndash;%&gt;--%>
-<%--                                                    <!---->--%>
+                                                    <%--&lt;%&ndash;                                                    </div>&ndash;%&gt;--%>
+                                                    <%--                                                    <!---->--%>
                                                 </li>
                                                 <!---->
                                             </ul>
@@ -474,8 +485,7 @@
                                 <!----></label>
 
                             <!-- test -->
-<%--                            <input type="file" accept="image/*" onchange="loadFile(this)"/>--%>
-
+                            <%--                            <input type="file" accept="image/*" onchange="loadFile(this)"/>--%>
 
 
                             <div class="input-content">
@@ -651,7 +661,7 @@
                             <div>
                                 <div class="form-sub-wrap">
                                     <label class="control-label"
-                                    >브랜드
+                                    >상호
                                         <!----><!----></label>
                                     <div class="input-content">
                                         <div class="form-inline">
@@ -666,7 +676,7 @@
                                                             >
                                                                 <input class="form-control"
                                                                        type="text"
-                                                                       placeholder="브랜드를 입력해주세요."
+                                                                       placeholder="상호명을 입력해주세요."
                                                                        maxlength="50"
 
                                                                 />
@@ -689,36 +699,6 @@
                                     </div>
                                 </div>
                                 <!---->
-                                <div class="form-sub-wrap">
-                                    <label class="control-label"
-                                    >제조사
-                                    </label>
-                                    <div class="input-content">
-                                        <div class="form-inline">
-                                            <div class="form-group">
-                                                <div class="input-group auto-complete">
-                                                    <div class="seller-input-wrap">
-                                                        <div
-                                                                class="selectize-control ng-pristine ng-untouched ng-valid single plugin-inputMaxlength"
-                                                        >
-                                                            <div
-                                                                    class="selectize-input items not-full ng-valid ng-pristine"
-                                                            >
-                                                                <input
-                                                                        type="text"
-                                                                        class="form-control"
-                                                                        placeholder="제조사를 입력해주세요."
-                                                                        maxlength="50"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!-- 포장타입 -->
                                 <div class="form-sub-wrap">
@@ -781,35 +761,13 @@
                                                             >
                                                                 <div data-value="LOCAL"
                                                                      class="item">
-                                                                    국산<br><br>
 
-                                                                    시/도/군
                                                                     <input name="origin" type="text"
                                                                            class="form-control"
-                                                                           placeholder="ex. 서울특별시"
-                                                                    >
-                                                                    <br>
-                                                                    수입산<br><br>
-                                                                    국가명
-                                                                    <input name="origin" type="text"
-                                                                           class="form-control"
-                                                                           placeholder="ex. 미국"
+                                                                           placeholder="ex.국산/수입산(미국)"
                                                                     >
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                        class="fix-area2 ng-hide">
-                                                    <div class="form-group">
-                                                        <div class="seller-input-wrap">
-                                                            <input
-                                                                    type="text"
-                                                                    class="form-control ng-pristine ng-untouched ng-empty ng-valid-pattern ng-valid-maxlength ng-valid ng-valid-required"
-                                                                    placeholder="수입사입력"
-                                                                    name="origin"
-                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -822,80 +780,7 @@
                             </div>
                         </div>
                         <!----><!----><!----><!----><!---->
-                        <div
-                                class="form-sub-wrap"
-                        >
-                            <label class="control-label"
-                            >제조일자
-                            </label>
-                            <div class="input-content">
-                                <div class="form-inline">
-                                    <div class="form-group only-date">
-                                        <div class="seller-calendar">
-                                            <div class="input-daterange date form-inline">
-                                                <div class="form-group">
-                                                    <div
-                                                            class="form-group _date_dropdown seller-datetime-picker _error_date_3348700136 dropdown"
-                                                    >
-                                                        <div
-                                                                class="input-group dropdown-toggle dropdown_2072354656"
-                                                        >
-                                                            <label for="date">
-                                                                <input
-                                                                        type="date"
-                                                                        max="2060-12-31"
-                                                                        min="TODAY"
-                                                                        value=""
-                                                                        class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
-                                                                /></label>
-                                                            <!-- 달력보기 -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!----><!---->
-                        <div
-                                class="form-sub-wrap"
-                        >
-                            <label class="control-label">유효일자</label>
-                            <div class="input-content">
-                                <div class="form-inline">
-                                    <div class="form-group only-date">
-                                        <div class="seller-calendar">
-                                            <div class="input-daterange date form-inline">
-                                                <div class="form-group">
-                                                    <div
-                                                            class="form-group _date_dropdown seller-datetime-picker _error_date_2177498493 dropdown"
-                                                    >
-                                                        <div
-                                                                class="input-group dropdown-toggle dropdown_3524647589"
-                                                        >
-                                                            <label for="date">
-                                                                <input
-                                                                        type="date"
-                                                                        max="2060-12-31"
-                                                                        min="TODAY"
-                                                                        value=""
-                                                                        class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
 
-                                                                /></label>
-                                                            <!---->
-                                                        </div>
-                                                        <!---->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!----><!----><!---->
                         <div
                                 class="form-sub-wrap"
                         >
@@ -1021,8 +906,7 @@
                 >
                     <label class="col-lg-2 col-sm-3 col-xs-6 control-label"
                     >상품정보제공고시
-                        <!----><!----></label
-                    >
+                        <!----><!----></label>
                     <div class="col-lg-10 col-sm-9 col-xs-6 input-content">
                         <div
                                 class="set-option"
@@ -1089,6 +973,7 @@
                                         <div class="seller-input-wrap">
                                             <input name="itemAnn"
                                                    type="text"
+                                                   value="${goodsAnnouncement[1]}"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_foodItem"
                                                    maxlength="200"
@@ -1111,6 +996,7 @@
                                         <div class="seller-input-wrap">
                                             <input name="capa"
                                                    type="text"
+                                                   value="${goodsAnnouncement[2]}"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_weight"
                                             />
@@ -1130,7 +1016,8 @@
                                     >
                                         <input name="itemAnnCate"
                                                type="hidden"
-                                               value="판매단위"
+                                               value="${goodsAnnouncement[2]}"
+                                        <%--                                               value="판매단위"--%>
                                         />
                                         <!----></label
                                     >
@@ -1141,6 +1028,7 @@
                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_amount"
+                                                   value="${goodsAnnouncement[3]}"
                                                    maxlength="200"
                                                    placeholder="숫자만입력"
                                             />
@@ -1183,7 +1071,7 @@
                                                                                id="date"
                                                                                max="2060-12-31"
                                                                                min="TODAY"
-                                                                               value=""
+                                                                               value="${goodsAnnouncement[4]}"
                                                                                class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
 
                                                                         /></label>
@@ -1237,7 +1125,7 @@
                                                                                type="date"
                                                                                max="20620-12-31"
                                                                                min="TODAY"
-                                                                               value=""
+                                                                               value="${goodsAnnouncement[5]}"
                                                                                class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
 
                                                                         /></label>
@@ -1271,6 +1159,7 @@
                                                    type="text"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_producer"
+                                                   value="${goodsAnnouncement[6]}"
                                                    maxlength="200"
                                             />
                                         </div>
@@ -1300,6 +1189,7 @@
                                         >
                                             <input name="itemAnn"
                                                    type="text"
+                                                   value="${goodsAnnouncement[7]}"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_relevantLawContent"
                                             />
@@ -1340,6 +1230,7 @@
                                         <div class="seller-input-wrap">
                                             <input name="itemAnn"
                                                    type="text"
+                                                   value="${goodsAnnouncement[8]}"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_productComposition"
                                                    maxlength="200"
@@ -1359,12 +1250,13 @@
                                     ><!----></label
                                     >
                                     <div class="input-content form-group">
-                                  <textarea name="itemAnn"
-                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                            rows="3"
-                                            id="prd_keep"
-                                            maxlength="500"
-                                  ></textarea>
+                                        <input name="itemAnn"
+                                               class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                               rows="3"
+                                               value="${goodsAnnouncement[9]}"
+                                               id="prd_keep"
+                                               maxlength="500"
+                                        ></input>
                                     </div>
                                 </div>
                                 <div class="form-sub-wrap">
@@ -1378,11 +1270,12 @@
                                     ><!----></label
                                     >
                                     <div class="input-content form-group">
-                                  <textarea name="itemAnn"
-                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                            rows="3"
-                                            id="prd_adCaution"
-                                  ></textarea>
+                                        <input name="itemAnn"
+                                               class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                               rows="3"
+                                               value="${goodsAnnouncement[10]}"
+                                               id="prd_adCaution"
+                                        ></input>
                                         <p class="sub-text text-primary">
                                             ｢식품 등의 표시ㆍ 광고에 관한 법률 시행규칙｣
                                             제5조 및 [별표 2]에 따른 표시사항을 말함
@@ -1406,6 +1299,7 @@
                                         <div class="seller-input-wrap">
                                             <input name="itemAnn"
                                                    type="text"
+                                                   value="${goodsAnnouncement[11]}"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
                                                    id="prd_customerServicePhoneNumber"
                                             />
@@ -1483,6 +1377,7 @@
                                                         type="radio"
                                                         name="shipType"
                                                         id="NORMAL"
+
                                                         class="ng-valid ng-not-empty ng-touched ng-dirty"
                                                         value="일반배송"
                                                 />
@@ -1766,33 +1661,22 @@
                                                 >
                                                     <input name="keyword"
                                                            type="text"
-                                                           class="form-control1"
-                                                           placeholder="태그1"
-                                                    />
+                                                           class="form-control"
+                                                           placeholder="태그1"/>
+
                                                     <input name="itemIdList"
                                                            class="itemId"
                                                            id="itemId1"
-                                                    <%--  type="hidden"--%>
+                                                           type="hidden"
                                                     >
                                                     <input name="keyword"
                                                            type="text"
-                                                           class="form-control2"
-                                                           placeholder="태그2"
-                                                    />
-                                                    <%--                                                    <input name="itemIdList"--%>
-                                                    <%--                                                           class="itemId"--%>
-                                                    <%--                                                           id="itemId2"--%>
-                                                    <%--                                                    >--%>
-
+                                                           class="form-control"
+                                                           placeholder="태그2"/>
                                                     <input name="keyword"
                                                            type="text"
-                                                           class="form-control3"
-                                                           placeholder="태그3"
-                                                    />
-                                                    <%--                                                    <input name="itemIdList"--%>
-                                                    <%--                                                           class="itemId"--%>
-                                                    <%--                                                           id="itemId3"--%>
-                                                    <%--                                                    >--%>
+                                                           class="form-control"
+                                                           placeholder="태그3"/>
 
                                                     <%--  일단 값 넣어보자  --%>
                                                     <input name="itemDcAmt"
@@ -1803,13 +1687,14 @@
                                                     />
                                                     <input name="itemId"
                                                            id="itemId"
-                                                    <%--                                                           type="hidden"--%>
+                                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                                           type="hidden"
                                                            class="itemId"
                                                            placeholder="아이템아이디"
                                                     />
                                                     <input name="cateCode"
                                                            id="cateCode"
-                                                           type="text"
+                                                           type="hidden"
                                                            class="form-control"
                                                            placeholder="카테고리코드"
                                                     />
@@ -1838,12 +1723,12 @@
 <%--form 태그 끝--%>
 
 
-<!-- 취소, 저장버튼 -->
+<!-- 삭제, 저장버튼 -->
 <div class="seller-btn-area btn-group-xlg hidden-xs">
-    <button
+    <button id="removeBtn"
             type="button"
             class="btn btn-default">
-        취소
+        삭제
     </button>
 
     <button type="button" value="submit" onclick="submitForm('formb')"
@@ -1853,8 +1738,8 @@
               ><span class="progress"
     ><span
             class="progress-inner notransition"
-    ></span
     ></span>
+    </span>
     </button>
 
 </div>
@@ -1867,6 +1752,8 @@
         function s_ajax(i) {
 
             let codeId = $("#maincate" + i).val();
+            let codeExp = $("#maincate" + i).html();
+
             alert(codeId)
             $.ajax({
                 url: "/seller/ajax",
@@ -1880,21 +1767,38 @@
                     $("ul#middledata").children().remove();
                     $.each(list, function (i, data) {
                         let li = document.createElement('li');
-                        let button = document.createElement('button');
+                        let button = document.createElement('a');
+
+                        button.role = "button";
                         button.textContent = data.exp;
-                        button.value = data.codeId;
+                        button.name = "categorys";
                         button.id = "child_button" + i;
+
+                        //중분류 클릭하면 카테고리 코드가 중분류의 번호로 바뀌어야 함
+                        button.addEventListener('click',function (){
+                            $('#cateCode').val(data.codeId);
+
+                            // 선택한 카테고리 :
+                            $('.Cate-result').text(codeExp+" > "+data.exp);
+                            $('.Cate-result').css("color","#003103");
+                            $('.Cate-result').css("font-weight","bold");
+                            $('.Cate-result').css("font-size","14px");
+
+
+                            $('a').removeClass('clicked'); // 모든 버튼에서 clicked 클래스 제거
+                            $(this).addClass('clicked'); // 클릭된 버튼에 clicked 클래스 추가
+
+                            // $('.clicked').closest('li').css("background-color","#0147097e");
+                            // $('.clicked').closest('li').css("color","#ffffff");
+
+                            alert("button clicked");
+
+
+                        });
                         li.appendChild(button);
                         $middledata.append(li);
-                        // $('#child_button'+i).click(choose);
-                        // function choose(){
-                        //     let cateCode = document.getElementsByName('cateCode');
-                        //     cateCode.value = data.codeId;
-
-                        // }
 
                     })
-
 
                 },
                 error: function (request, error) {
@@ -1914,10 +1818,10 @@
         //formData객체 생성
         let formData = new FormData();
         let fileInput = document.querySelector("#file");
+
         let itemId = document.getElementById("itemId").value
         let tmpPath = URL.createObjectURL(fileInput.files[0]);
         formData.append('file', fileInput.files[0]);
-        // formData.append('name', name.value);
         formData.append('img', tmpPath);
         formData.append('repImgFl', 'Y');
         formData.append('itemId', itemId);
@@ -1947,13 +1851,6 @@
 
     }
 
-    //문자열 자르기
-
-
-
-
-
-
 
     // 좌측 네비
     var acc = document.getElementsByClassName("accordion");
@@ -1978,8 +1875,9 @@
 
         var savePrice = Math.floor(originPrice * (rate / 100) / 10) * 10;
         var resultPrice = originPrice - savePrice;
-        document.querySelector("#showResult").innerHTML = resultPrice + "원 (" + savePrice + " 원 할인)"
-        document.querySelector("#dc_price").value = savePrice
+        document.querySelector("#showResult").innerHTML = resultPrice + "원 (" + savePrice + " 원 할인)";
+        document.querySelector("#dc_price").value = savePrice;
+        document.querySelector("#salePrice").value = resultPrice;
     }
 
     // 동시입력 가능
@@ -1999,8 +1897,7 @@
     }
     document.getElementById("itemId").value = newId();
     document.getElementById("itemId1").value = newId();
-    // document.getElementById("itemId2").value = newId();
-    // document.getElementById("itemId3").value = newId();
+
 
     // document.getElementsByClassName("itemId").value = newId();
 
@@ -2068,9 +1965,19 @@
             form.attr("action", "<c:url value='/seller/productsCreate/write'/>");
             form.attr("method", "post");
             form.submit();
-
             alert("저장되었습니다.");
 
+        });
+    })
+
+    //삭제버튼
+    $(document).ready(function () { //main()
+        $('#removeBtn').on("click", function () {
+            if (!confirm("정말로 삭제하시겠습니까?")) return;
+            let form = $('#forma');
+            form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");
+            form.attr("method", "post");
+            form.submit();
         });
     })
 
