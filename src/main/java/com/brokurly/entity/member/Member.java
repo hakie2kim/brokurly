@@ -1,5 +1,6 @@
 package com.brokurly.entity.member;
 
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 
 import lombok.*;
@@ -31,7 +32,6 @@ public class Member {
 
     private String snsId;
 
-
     public MemberAndSignupDto makeFullDto(){
         return MemberAndSignupDto.builder()
                 .custId(custId)
@@ -46,6 +46,13 @@ public class Member {
                 .build();
     }
 
+    public MemberAndLoginDto makeLoginDto(){
+        return MemberAndLoginDto.builder()
+                .custId(custId)
+                .pwd(pwd)
+                .name(name)
+                .build();
+    }
 
     public void changeStatus(MemberAndSignupDto memberAndSignupDto) {
         this.custId = memberAndSignupDto.getCustId();
@@ -59,6 +66,11 @@ public class Member {
         this.snsId = memberAndSignupDto.getSnsId();
     }
 
+    public void changeStatus(MemberAndLoginDto memberAndLoginDto){
+        this.custId = memberAndLoginDto.getCustId();
+        this.pwd = memberAndLoginDto.getPwd();
+        this.name = memberAndLoginDto.getName();
+    }
 
 
 }

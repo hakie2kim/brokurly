@@ -9,6 +9,7 @@
         <param-value>
             /WEB-INF/root-context.xml
             /WEB-INF/spring-security.xml
+            /WEB-INF/email-context.xml
         </param-value>
     </context-param>
 

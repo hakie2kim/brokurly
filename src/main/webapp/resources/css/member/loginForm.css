@@ -41,13 +41,15 @@ a {
 }
 
 .loginBtn,
-.regBtn {
+.regBtn,
+.findBtn {
     font-size: 16px;
     font-weight: 500;
     border-radius: var(--main-border-radius);
 }
 
-.loginBtn {
+.loginBtn,
+.findBtn {
     background-color: var(--main-color);
     border: none;
     color: white;
