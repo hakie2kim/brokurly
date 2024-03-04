@@ -1,7 +1,14 @@
 package com.brokurly.controller.mypage;
 
+
+import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
+import com.brokurly.dto.mypage.PointLogEarningDto;
+import com.brokurly.dto.mypage.PointLogExpDto;
+import com.brokurly.dto.mypage.PointLogUsageDto;
+
 import com.brokurly.dto.mypage.*;
 import com.brokurly.entity.mypage.ShippingLocation;
+
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
@@ -76,6 +83,27 @@ public class MypageController {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
+
+//        for (PointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
+//            String orderId = pointLogUsageDto.getOrderId();
+//            int pointAmt = pointLogUsageDto.getPointAmt();
+//            Date procDt = pointLogUsageDto.getProcDt();
+//            String pointSpec = pointLogUsageDto.getPointSpec();
+//
+//            /*String pointSpecDetails = "";
+//            if (orderId == null) {
+//                pointSpecDetails = new SimpleDateFormat("MM/dd까지 사용가능").format(pointLogUsageDto.getProcDt());
+//            } else {
+//                pointSpecDetails = String.format("주문번호 (%s)", orderId);
+//            }*/
+//
+//            String pointStat = pointLogUsageDto.getPointStat();
+//            Date expDt = pointService.findPointByPointId(pointLogUsageDto.get)
+//
+//            pointLogEarningList.add(new PointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
+//        }
+
+
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
