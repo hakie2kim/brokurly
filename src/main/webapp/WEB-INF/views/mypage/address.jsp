@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/mypage/address.css'/>"/>
     <title>컬리 - 마켓컬리/뷰티컬리</title>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = () => {
         const receiverDetails = document.querySelector(".add-new-deli");
@@ -26,11 +27,25 @@
                 "width=600, height=700, left=" + left + ", top=" + top
             );
         });
-    };
 
-    /*function addShippingAddrs() {
-        alert("베송지 추가 완료");
-    }*/
+        $(".checkbox").on("click", function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: "/mypage/address",
+                method: "POST",
+                data: $(this).serialize(),
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (response) {
+                    alert("Your form has been sent successfully.");
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            })
+        });
+    };
 </script>
 <body>
 <div class="top">
@@ -206,40 +221,16 @@
                     <li>
                         <div style="display: flex">
                             <div class="column default">
-                                <input type="checkbox" name="currAddrFl"
-                                        <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
-                                            checked
-                                        </c:if>
-                                />
-                                    <%--<label for="kurly-address-18241898"
-                                    ><input
-                                            id="kurly-address-18241898"
-                                            type="checkbox"
-                                            value="18241898"
-                                            checked
-                                    />
-                                        <div style="margin-right: 12px">
-                                            <svg
-                                                    width="24"
-                                                    height="24"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                                <path
-                                                        d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
-                                                        fill="#5f0080"
-                                                ></path>
-                                                <path
-                                                        d="M7 12.6667L10.3846 16L18 8.5"
-                                                        stroke="#fff"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                ></path>
-                                            </svg>
-                                        </div>
-                                    </label>--%>
+                                <c:if test="${shippingLocation.currAddrFl eq 'N'}">
+                                    <form class="checkbox" method="post">
+                                        <input type="hidden" name="_method" value="patch"/>
+                                        <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
+                                        <input type="hidden" name="currAddrFl" value="Y"/>
+                                    </form>
+                                </c:if>
+                                <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
+                                    <div class="checkbox-checked"></div>
+                                </c:if>
                             </div>
                             <div class="column address">
                                 <div>

@@ -107,6 +107,24 @@ public class ShippingLocationService {
         }
     }
 
+    @Transactional
+    public void changeCurrAddr(String custId, ShippingLocationUpdateDto shippingLocationUpdateDto) {
+        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
+        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+
+        // 기존 현재 배송지를 모두 N으로 바꿈
+        unflagCurrAddrFl(custId);
+
+        // 기존 ShippingLocation 정보 갖고 옴
+        ShippingLocation shippingLocation = shippingLocationDao.selectByShipLocaId(shipLocaId);
+        // UpdateDto를 통해 갖고 온 정보 (currAddrFl)로 변경
+        ShippingLocationUpdateDto shippingLocationUpdateCurrAddrDto = shippingLocation.makeShippingLocationUpdateDto();
+        shippingLocationUpdateCurrAddrDto.setCurrAddrFl(currAddrFl);
+        shippingLocation.updateShippingLocationUpdateDto(shippingLocationUpdateCurrAddrDto);
+
+        shippingLocationDao.updateByShipLocaId(shippingLocation);
+    }
+
     private static String currDateAsYYYYMMDD() {
         LocalDate currLD = LocalDate.now();
         DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");

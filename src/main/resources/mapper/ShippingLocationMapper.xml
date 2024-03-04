@@ -19,6 +19,11 @@
         <include refid="select"/>
     </select>
 
+    <select id="selectByShipLocaId" resultType="ShippingLocation">
+        <include refid="select"/>
+        WHERE ship_loca_id = ${shipLocaId}
+    </select>
+
     <select id="selectByCustomer" resultType="ShippingLocationAndShoppingLocationChangeLog">
         SELECT sl.ship_loca_id, sl.addr, sl.spec_addr, sl.def_addr_fl, ship_loca_reg_dt, sl.tel_no, rec_addr, rec_name, sl.del_fl, curr_addr_fl,
             ship_chg_no, name, chg_status, chg_dt, cust_id
@@ -27,6 +32,7 @@
         ON sl.ship_loca_id = slcl.ship_loca_id
         WHERE cust_id = #{custId}
     </select>
+
 
     <!--<select id="selectUsageByCustomerAndPeriod" resultType="PointLog">
         <include refid="select"/>
