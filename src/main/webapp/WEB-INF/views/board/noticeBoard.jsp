@@ -59,6 +59,9 @@
                     width="150"
                     height="42"
                     radius="0"
+<%--                    해당 게시글을 누른 시점의 페이지를 저장하고 그 페이지로 돌아가도록 하고 싶다.--%>
+<%--                    onclick="location.href='http://localhost:8080/board/notice?page=${pageNo}'"--%>
+<%--                    컨트롤러를 호출하는 링크 어떻게? 직접적이지 않게.--%>
             >
                 <span class="css-nytqmg e4nu7ef1">목록</span>
             </button>

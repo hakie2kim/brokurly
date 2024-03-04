@@ -17,6 +17,12 @@
         SELECT * FROM cart
     </sql>
 
+    <select id="getCart" resultType="Cart">
+        SELECT a.custId, a.itemId, a.itemCnt, b.name, b.price, b.shipType, b.pkgType, b.itemDcAmt
+        FROM cart a left outer join goods b on a.itemId = b.itemId
+        WHERE cust_id = #{custId}
+    </select>
+
     <select id="selectByCustId" resultType="Cart">
         <include refid="select"/>
         WHERE cust_id = #{custId}

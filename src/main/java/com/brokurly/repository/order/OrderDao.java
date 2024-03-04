@@ -14,7 +14,6 @@ public interface OrderDao {
     // READ
     List<Order> selectByCustId(String custId);
     List<OrderAndPayment> selectByCustIdWithJoin(String custId);
-
     List<Order> selectByOrderId(String orderId);
 
     // UPDATE

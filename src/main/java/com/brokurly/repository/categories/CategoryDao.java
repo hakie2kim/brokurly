@@ -9,13 +9,22 @@ import java.util.List;
 
 @Mapper
 public interface CategoryDao {
+
+    int insert(Category category);
+
+    int deletebyId (String codeId);
+
+    void deleteAll();
+
+    List<Category> getCategoryExpByPrimary(String codeId);
+
     // CREATE
     //카테고리 추가
     int insertCategory(CategoryDto categoryDto);
 
     //READ
     //카테고리 대분류 가져오기
-    List<Category> selectPrimary();
+//    List<Category> selectPrimary();
 
     //카테고리 중분류 가져오기
     List<Category> selectMiddle(@RequestParam String codeId);
@@ -24,10 +33,9 @@ public interface CategoryDao {
     int count() throws Exception;
 
     //카테고리 전체 삭제
-    int deleteAll();
+//    int deleteAll();
 
     //카테고리 삭제
     int delete(String exp);
-
 
 }

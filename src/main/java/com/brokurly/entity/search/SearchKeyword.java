@@ -4,7 +4,6 @@ package com.brokurly.entity.search;
 import com.brokurly.dto.search.SearchKeywordDto;
 import lombok.*;
 
-
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor

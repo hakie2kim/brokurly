@@ -15,7 +15,7 @@ public class PageHandler {
     private boolean showPrev;   //  이전 페이지로 이동하는 링크를 보여줄 것인지 여부
     private boolean showNext;   //  다음 페이지로 이동하는 링크를 보여줄 것인지 여부
 
-    private final int naviSize = 10;  //  페이지 내비게이션의 크기
+    private final int naviSize = 5;  //  페이지 내비게이션의 크기
     private int beginPage;  //  내비게이션의 첫번째 페이지
     private int endPage;    //  내비게이션의 마지막 페이지
 
@@ -29,7 +29,7 @@ public class PageHandler {
         this.pageSize = pageSize;
 
         totalPage = (int) Math.ceil(totalCnt / (double) pageSize);
-        beginPage = page / naviSize * naviSize + 1;
+        beginPage = (page-1) / naviSize * naviSize + 1;
         endPage = Math.min(beginPage + naviSize - 1, totalPage);
         showPrev = beginPage != 1;
         showNext = endPage != totalPage;

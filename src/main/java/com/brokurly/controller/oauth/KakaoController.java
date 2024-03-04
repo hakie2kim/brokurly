@@ -57,7 +57,10 @@ public class KakaoController {
         // 일치하는 snsId가 있으면 멤버객체(회원정보)에 담음
         log.warn("카카오로 로그인");
         String userId = memberService.findBySnsId(snsId);
-      //  MemberAndSignupDto dto = memberService.findByUserId(userId);
+
+        log.info("userId = {}", userId);
+     //   MemberAndSignupDto dto = memberService.findByUserId(userId);
+
 
       //  log.warn("memberAndSignupDto : " + dto);
 //        Authentication auth = new AbstractAuthenticationToken(user, null, roles);

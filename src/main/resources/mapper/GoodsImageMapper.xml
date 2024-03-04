@@ -4,7 +4,7 @@
 
 <mapper namespace="com.brokurly.repository.goods.GoodsImageDao">
     <!-- CREATE -->
-    <insert id="insert">
+    <insert id="insertGoodsImage">
         INSERT INTO item_image
             (img, rep_img_fl, item_id)
         VALUES
@@ -19,6 +19,13 @@
     <select id="selectByItemId" resultType="GoodsImage">
         <include refid="select"/>
         WHERE item_id = #{itemId}
+    </select>
+
+    <select id="getThumbnailByItemId" resultType="String">
+        SELECT img
+        from ITEM_IMAGE
+        WHERE item_id=#{itemId}
+        AND rep_img_fl='Y';
     </select>
 
     <!-- UPDATE -->

@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -37,21 +38,14 @@
             </div>
             <h2>
               <span class="goods-118">${goods.dcRt}<!-- -->%</span> <!-- 할인율 -->
-              <span class="goods-119" id="resultPrice">18990
-<%--                <fmt:formatNumber pattern="#,###"--%>
-<%--                                  value="${goods.itemDcAmt}"/>--%>
-
+              <span class="goods-119" id="resultPrice"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
               </span>
-              <span>원</span>
             </h2>
             <span class="goods-45">
-                                <span>
-<%--                                  <fmt:formatNumber pattern="#,###"--%>
-<%--                                                    value="${goods.price}"/>--%>
-
-                                </span>
-                                  <!-- -->원</span><!-- 상품 가격 -->
-                            </span>
+              <span class="originPrice">
+                <fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
+              </span>
+            </span>
             <p class="goods-120">원산지: ${goods.origin}</p>
             <div class="goods-121">적립 제외 상품입니다.</div>
             <ul>
@@ -88,25 +82,6 @@
                   <p class="goods-101">${goods.capa}</p>
                 </dd>
               </li>
-              <li class="goods-98">
-                <dt class="goods-99">알레르기정보</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">- 쇠고기, 대두, 밀 함유
-                    본 제품은 돼지고기, 닭고기, 우유, 계란, 새우, 토마토, 오징어, 조개류(굴,바지락,개량조개)를 사용한 제품과 같은 제조시설에서 제조하고 있습니다.</p>
-                </dd>
-              </li>
-              <li class="goods-98">
-                <dt class="goods-99">소비기한(또는 유통기한)정보</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">수령일 포함 최소 3일 남은 제품을 보내 드립니다.</p>
-                </dd>
-              </li>
-              <li class="goods-98">
-                <dt class="goods-99">안내사항</dt>
-                <dd class="goods-102">
-                  <p class="goods-101">해당 상품은 냉장 제품입니다 상품 수령 후 최대한 빠른 시일내에 섭취를 권장드립니다.</p>
-                </dd>
-              </li>
             </ul>
             <div>
               <div>
@@ -120,20 +95,17 @@
                       <span class="goods-100" name="point_fl">적립제외상품</span>
                       <div class="goods-103">
                         <div class="goods-104">
-                          <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                                  aria-label="수량내리기"></button>
-                          <div class="count goods-106" id="count" name="item_cnt">1</div>
-                          <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                                  aria-label="수량올리기"></button>
+                          <button class="minus_btn goods-105" type="button" aria-label="수량내리기"></button>
+                          <div class="goods-106">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                          <button class="plus_btn goods-107" type="button" aria-label="수량올리기"></button>
                         </div>
                         <div>
-                          <span class="goods-8" >${goods.price}
-<%--                            <fmt:formatNumber pattern="#,###"--%>
-<%--                                              value="${goods.price}"/>--%>
+                          <span class="goods-8 originPrice" ><fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
                             </span>
-                          <span id="price">18990
-<%--                            <fmt:formatNumber pattern="#,###"--%>
-<%--                               value="${goods.itemDcAmt}"/>원--%>
+                          <span id="price">
+                          <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
                           </span>
                         </div>
                       </div>
@@ -145,33 +117,30 @@
                 <div>
                   <div class="goods-42">
                     <span>총 상품금액 :</span>
-                    <span class="goods-108" id="sum">18990
-<%--                      <fmt:formatNumber pattern="#,###"--%>
-<%--                           value="${goods.itemDcAmt}"/>--%>
+                    <span class="totalPrice goods-108"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
                     </span>
-                    <span class="goods-109">원</span>
                   </div>
                   <div class="goods-43">
                     <span class="goods-110">적립</span>
                     <span>구매 시
-                                                <strong>0원 적립</strong>
-                                            </span>
+                        <strong>0원 적립</strong>
+                    </span>
                   </div>
                 </div>
               </div>
               <div class="goods-111">
                 <button class="goods-112" onclick="heartToggle()" width="56" height="56" radius="3">
-                                        <span>
-                                            <img src="/resources/image/heartX.png" alt="" class="img1" id="heart">
-                                        </span>
+                  <span>
+                      <img src="/resources/image/heartX.png" alt="" class="img1" id="heart">
+                  </span>
                 </button>
                 <button class="goods-112" onclick="bellToggle()" width="56" height="56" radius="3">
-                                        <span>
-                                            <img src="/resources/image/bellX.png" alt="" class="img1" id="bell">
-                                        </span>
+                  <span>
+                      <img src="/resources/image/bellX.png" alt="" class="img1" id="bell">
+                  </span>
                 </button>
                 <div class="goods-113">
-                  <button class="cart-button goods-115" type="button" radius="3">
+                  <button class="btn_cart goods-115" type="button" radius="3" id="addBtn">
                     <span class="goods-114 ">장바구니 담기</span>
                   </button>
                 </div>
@@ -214,29 +183,30 @@
                       <img
                           src="https://img-cf.kurly.com/cdn-cgi/image/width=1010,quality=90/shop/data/goodsview/20210804/gv00000208742_1.jpg">
                       <!--상품설명 이미지-->
+
                     </div>
                     <div>
                       <h3>
-                        <small>합리적으로 즐기는 온 가족 반찬</small>
-                        [KF365] 양념 소불고기
+                        <small>${goods.exp}</small>
+                        ${goods.name}
                       </h3>
                       <p>${goods.itemSpec}</p>
                     </div>
                   </div>
-                  <div>
-                    <h3>
-                      <span>BroKurly’s Tip</span>
-                    </h3>
-                    <div>
-                      <div>
-                        <p>
-                          <strong>보관법</strong>
-                          <b>・</b>
-                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+<%--                  <div>--%>
+<%--                    <h3>--%>
+<%--                      <span>BroKurly’s Tip</span>--%>
+<%--                    </h3>--%>
+<%--                    <div>--%>
+<%--                      <div>--%>
+<%--                        <p>--%>
+<%--                          <strong>보관법</strong>--%>
+<%--                          <b>・</b>--%>
+<%--                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.--%>
+<%--                        </p>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
                 </div>
               </div>
             </div>
@@ -247,39 +217,42 @@
                   src="https://img-cf.kurly.com/cdn-cgi/image/width=1010,quality=90/shop/data/goodsview/20230904/gv00000723355_1.jpg"
                   alt="자세히보기 이미지">
             </div>
+            <input type="hidden" class="itemAnnCate" value="${announcement.itemAnnCate}" >
+            <input type="hidden" class="itemAnn" value="${announcement.itemAnn}" >
             <div class="goods-12">
               <h3>상품고시정보</h3>
               <ul class="goods-9">
-                <li class="goods-10">제품명</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">식품의 유형</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">생산자 및 소재지 (수입품의 경우 생산자, 수입자 및 제조국)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">제조연월일, 소비기한 또는 품질유지기한</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">포장단위별 내용물의 용량(중량), 수량</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">원재료명 (｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지 표시 포함) 및 함량(원재료 함량 표시대상 식품에 한함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">영양성분 (영양성분 표시대상 식품에 한함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">유전자변형식품에 해당하는 경우의 표시</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">수입식품의 경우 “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
-                <li class="goods-11">상품설명 및 상품이미지 참조</li>
-                <li class="goods-10">소비자 상담 관련 전화번호</li>
-                <li class="goods-11">컬리 고객행복센터 (1644-1107)</li>
-                <li class="goods-10"></li>
+                <li class="goodsAnn">제품명</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">식품의 유형</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">생산자 및 소재지 (수입품의 경우 생산자, 수입자 및 제조국)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">제조연월일, 소비기한 또는 품질유지기한</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">포장단위별 내용물의 용량(중량), 수량</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">원재료명 (｢농수산물의 원산지 표시 등에 관한 법률｣에 따른 원산지 표시 포함) 및 함량(원재료 함량 표시대상 식품에 한함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">영양성분 (영양성분 표시대상 식품에 한함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">유전자변형식품에 해당하는 경우의 표시</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">소비자 안전을 위한 주의사항 (｢식품 등의 표시ㆍ광고에 관한 법률 시행규칙｣ 제5조 및 [별표 2]에 따른 표시사항을 말함)</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">수입식품의 경우 “수입식품안전관리 특별법에 따른 수입신고를 필함”의 문구</li>
+                <li class="goodsAnnCate">상품설명 및 상품이미지 참조</li>
+                <li class="goodsAnn">소비자 상담 관련 전화번호</li>
+                <li class="goodsAnnCate">컬리 고객행복센터 (1644-1107)</li>
+                <li class="goodsAnn"></li>
+                <li class="goodsAnnCate">1644-1107</li>
               </ul>
             </div>
             <div class="goods-12">
               <h3>판매자정보</h3>
               <ul class="goods-9">
                 <li class="goods-10">판매자</li>
-                <li class="goods-11">컬리</li>
+                <li class="goods-11">${goods.sellerName}</li>
               </ul>
             </div>
             <div>
@@ -975,28 +948,24 @@
             <div>
               <div class="goods-37">
                   <span class="goods-38">
-                      <span>[KF365] 양념 소불고기 1kg (냉장)</span>
+                      <span>${goods.name}</span>
                       <span>적립제외상품</span>
                   </span>
                 <span class="goods-39">
                   <div class="goods-104">
-                      <button class="goods-105" type="button" onclick='count("minus")' value='+'
-                              aria-label="수량내리기">+</button>
-                      <div class="count goods-106" id="count2">1</div>
-                      <button class="goods-107" type="button" onclick='count("plus")' value='-'
-                              aria-label="수량올리기">-</button>
+                      <button class="minus_btn goods-105" type="button" onclick='count("minus")' value='+'
+                              aria-label="수량내리기"></button>
+                          <div class="goods-106" name="item_cnt">
+                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                          </div>
+                      <button class="plus_btn goods-107" type="button" onclick='count("plus")' value='-'
+                              aria-label="수량올리기"></button>
                   </div>
                   <span class="goods-40">
-                      <span class="goods-41">
-<%--                        <fmt:formatNumber pattern="#,###"--%>
-<%--                                          value="${goods.price}"/> --%>
-                        ${goods.price}
-                        원</span>
+                      <span class="goods-41 originPrice"><fmt:formatNumber value="${goods.price}" pattern="#,### 원" /></span>
                       <span id = "dicPrice">
-<%--                        <fmt:formatNumber pattern="#,###"--%>
-<%--                                          value="${goods.itemDcAmt}"/>--%>
-
-                        원</span>
+                        <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                    </span>
                   </span>
                 </span>
               </div>
@@ -1005,17 +974,17 @@
           <div class="goods-59"><!-- 버튼 누르면 사라지게-->
             <div>
               <div class="goods-42">
-                <span>총 상품금액 :</span>
-                <span class="goods-108" id="price2">
-<%--                  <fmt:formatNumber pattern="#,###"--%>
-<%--                                    value=""/>--%>
+                <span>총 상품금액 :
+
                 </span>
-                <span class="goods-109">원</span>
+                <span class="totalPrice goods-108" id="price2">
+                  <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                </span>
               </div>
               <div class="goods-43">
                 <span class="goods-110">적립</span>
                 <span>구매 시
-                                    <strong>0원 적립</strong></span>
+                  <strong>0원 적립</strong></span>
               </div>
             </div>
           </div>
@@ -1158,7 +1127,7 @@
 
 
   //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
-  var heartCnt = 0;
+  let heartCnt = 0;
 
   function heartToggle() {
       heartCnt++;
@@ -1207,6 +1176,7 @@
                   panel.style.maxHeight = null;
               }
           }
+
           // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
           this.classList.toggle("act");
           let panel = this.nextElementSibling;
@@ -1217,7 +1187,6 @@
           }
       });
   }
-
 
   document.querySelectorAll(".goods-22").forEach((item) => {
       // 모든 드롭다운 토글 행에 대한 클릭 이벤트 리스너 추가
@@ -1241,111 +1210,91 @@
       });
   });
 
-  //할인가 적용
-  // $(document).ready(function(){
-  // let oriResult = document.getElementById('originPrice');
-  // let disResult = document.getElementById('discount');
-  // let priResult = document.getElementById('price');
-  // let oriNumber = parseInt(originResult.innerText);
-  // let disNumber = parseInt(disResult.innerText);
-  // let priNumber = parseInt(priResult.innerText);
+  // 수량 버튼 조작
+  let totalPrice = ${goods.salePrice};
+  let quantity = $(".quantity_input").val();
 
-  // priNumber = oriNumbers - (oriNumber + disNumber);
-  // document.getElementById('price').innerHTML = priNumber;
-
-  // });
-
-
-  // //상품 개수에 따른 가격 변동
-  function count(type) {
-      let cntResult = document.getElementById('count'); //상품 개수
-      let priResult = document.getElementById('price'); //상품 가격
-      let sumResult = document.getElementById('sum');   //총 가격
-
-      let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로
-      let priNumber = parseInt(priResult.innerText);  //문자값을 숫자로
-      let sumNumber = parseInt(sumResult.innerText);
-
-      if (type === 'plus') {  //증가
-          cntNumber += 1;
-          sumNumber = sumNumber + priNumber;
-      } else if (type === 'minus' && cntNumber > 1) { //감소
-          cntNumber -= 1;
-          sumNumber = sumNumber - priNumber;
+  $(".plus_btn").on("click", function(){
+      if(quantity < ${goods.itemQty}) { //재고까지만 구매가능하게
+          $(".quantity_input").val(++quantity);
+          totalPrice += ${goods.salePrice}; // 가격 증가
+          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
       }
-      cntResult.innerText = cntNumber;    //숫자 값 문자열
-      sumResult.innerText = sumNumber;
-      document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동
-      document.getElementById('price2').innerHTML = sumNumber;
+  });
+  $(".minus_btn").on("click", function(){
+      if(quantity > 1) {
+          $(".quantity_input").val(--quantity);
+          totalPrice -= ${goods.salePrice}; // 가격 감소
+          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
+      }
+  });
+
+
+  // 서버로 전송할 데이터
+  const form = {
+      <%--custId : '${customer.custId}',--%>
+      itemId : '${goods.itemId}',
+      custId : 'hong',
+      itemCnt : ''
+  }
+  // 장바구니 추가 버튼
+  $(".btn_cart").on("click", function(e){
+      form.itemCnt = $(".quantity_input").val();
+      $.ajax({
+          url: '/cart/add',
+          type: 'POST',
+          data: form,
+          dataType: "text",
+          // data: {
+          //     custId: "hong",
+          //     itemId: "1234",
+          //     itemCnt: $(".quantity_input").val()
+          // },
+          success: function(result){
+              cartAlert(result);
+          }
+      })
+  });
+
+  function cartAlert(result){
+      if(result == '0'){
+          alert("장바구니에 추가를 하지 못하였습니다.");
+      } else if(result == '1'){
+          alert("장바구니에 추가되었습니다.");
+      } else if(result == '2'){
+          alert("장바구니에 이미 추가되어져 있습니다.");
+      } else if(result == '5'){
+          alert("로그인이 필요합니다.");
+      }
   }
 
+  //상품 고시정보
+  $(document).ready(function () {
+      let goodsAnn = $(".itemAnn").val();
+      let goodsAnnCate = $(".itemAnnCate").val();
+      goodsAnn = goodsAnn.split(",");
+      goodsAnnCate = goodsAnnCate.split(",");
 
-  <%--// 천 단위 구분기호(콤마)를 추가하는 함수--%>
-  <%--function addCommasToNumber(number) {--%>
-  <%--    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--%>
-  <%--}--%>
+      $(".goodsAnnCate").each(function(index) {
+          $(this).html(goodsAnn[index] || ''); // goodsAnnCate 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
+      });
+      $(".goodsAnn").each(function(index) {
+          $(this).html(goodsAnnCate[index] || ''); // goodsAnn 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
+      });
+  });
 
-  <%--// 상품 정보를 가져오고 콤마를 추가하여 결과를 화면에 표시하는 함수--%>
-  <%--function getProductInfo() {--%>
-  <%--    var oPrice = ${goods.price}; // 상품 할인 전 가격--%>
-  <%--    var disAmnt = ${goods.itemDcAmt}; // 뺄 가격--%>
-  <%--    var resultPrice = oPrice - disAmnt; // 할인된 가격--%>
+  //상품가격 할인가격 같으면 할인율과 할인전 가격 숨기기
+  $(document).ready(function () {
+    let salePrice = ${goods.salePrice};
+    let price = ${goods.price};
 
-  <%--    // 결과에 콤마 추가--%>
-  <%--    var formattedOPrice = addCommasToNumber(oPrice)+"원";--%>
-  <%--    var formattedResultPrice = addCommasToNumber(resultPrice)+"원";--%>
+    if ( salePrice === price ){
+        $(".goods-118").hide();
+        $(".originPrice").hide();
 
-  <%--    // 결과를 화면에 표시--%>
-  <%--    document.getElementById("price3").innerHTML = formattedOPrice;--%>
-  <%--    document.getElementById("resultPrice2").value = formattedResultPrice;--%>
-  <%--    document.getElementById("originPrice").value = formattedResultPrice;--%>
-  <%--}--%>
+    }
 
-  <%--// 페이지 로드시 상품 정보를 가져옴--%>
-  <%--getProductInfo();--%>
-
-
-
-
-
-  // 상품 개수에 따른 가격 변동
-  <%--function count(type) {--%>
-  <%--    let cntResult = document.getElementById('count'); //상품 개수--%>
-  <%--    let priResult = ${goods.price}-${goods.itemDcAmt}; //상품 가격--%>
-  <%--    let sumResult = priResult;   //총 가격--%>
-
-  <%--    let cntNumber = parseInt(cntResult.innerText);  //문자값을 숫자로--%>
-
-  <%--    if (type === 'plus') {  //증가--%>
-  <%--        cntNumber += 1;--%>
-  <%--        sumResult = sumResult + priResult;--%>
-  <%--    } else if (type === 'minus' && cntNumber > 1) { //감소--%>
-  <%--        cntNumber -= 1;--%>
-  <%--        sumResult = sumResult - priResult;--%>
-  <%--    }--%>
-  <%--    cntResult.innerText = cntNumber;    //숫자 값 문자열--%>
-  <%--    // sumResult.innerText = sumResult;--%>
-
-  <%--    document.getElementById('count2').innerHTML = cntNumber;    //아래 상품선택과 연동--%>
-
-  <%--    document.getElementById('price2').innerHTML = sumResult;--%>
-  // }
-
-
-  <%--$(document).ready(function () { //main()--%>
-  <%--    $('.cart-button').on("click", function () {--%>
-  <%--        let form = $('#forma');--%>
-  <%--        form.attr("action", "<c:url value='/seller/productscreate/write'/>");--%>
-  <%--        form.attr("method", "post");--%>
-  <%--        form.submit();--%>
-  <%--        alert("저장되었습니다.");--%>
-  <%--        alert(form);--%>
-  <%--    });--%>
-
-  // })
-
-
-
+  });
 
   </script>
 

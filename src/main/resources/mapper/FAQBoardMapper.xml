@@ -5,7 +5,11 @@
 <mapper namespace="com.brokurly.repository.board.FAQBoardDao">
     <select id="selectFAQList" resultType="FAQBoard">
         SELECT *
-        FROM FAQ_BOARD
-        ORDER BY bno DESC
+        FROM (
+                 SELECT *
+                 FROM FAQ_BOARD
+                 ORDER BY bno DESC
+             )
+        ORDERS LIMIT #{limit} OFFSET #{start}
     </select>
 </mapper>
