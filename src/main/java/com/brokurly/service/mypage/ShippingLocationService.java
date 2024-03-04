@@ -28,13 +28,14 @@ public class ShippingLocationService {
     private final ShippingLocationChangeLogDao shippingLocationChangeLogDao;
 
     @Transactional
-    public void addNewShippingLocation(String addr, String specAddr, String defAddrFl) {
-        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
-
+    public void addNewShippingLocation(String custId, String addr, String specAddr, String defAddrFl) {
         String shipLocaId = RandomGeneratorUtils.randomGeneratedShipLocaId();
 
         // ShippingLocationAddDto -> ShippingLocation
         ShippingLocation shippingLocation = new ShippingLocation();
+        // 현재 배송지를 모두 N으로 바꿈
+        unflagCurrAddrFl(custId);
+        // 배송지 추가할 때 currAddrFl의 기본값은 "Y"
         ShippingLocationAddDto shippingLocationAddDto = new ShippingLocationAddDto(shipLocaId, addr, specAddr, defAddrFl, currDateAsYYYYMMDD(), "N");
         shippingLocation.updateShippingLocationAddDto(shippingLocationAddDto);
 
@@ -84,6 +85,44 @@ public class ShippingLocationService {
 
             shippingLocationDao.updateByShipLocaId(shippingLocation);
         }
+    }
+
+    @Transactional
+    public void unflagCurrAddrFl(String custId) {
+        ShippingLocationUpdateDto shippingLocationUpdateDtoHavingCurrAddr = shippingLocationDao.selectByCustomer(custId)
+                .stream()
+                .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationUpdateDto)
+                .filter(sl -> sl.getCurrAddrFl().equals("Y"))
+                .findAny()
+                .orElseGet(() -> null);
+
+        if (shippingLocationUpdateDtoHavingCurrAddr != null) {
+            shippingLocationUpdateDtoHavingCurrAddr.setCurrAddrFl("N");
+
+            // ShippingLocation -> updateShippingLocationUpdateDto
+            ShippingLocation shippingLocation = new ShippingLocation();
+            shippingLocation.updateShippingLocationUpdateDto(shippingLocationUpdateDtoHavingCurrAddr);
+
+            shippingLocationDao.updateByShipLocaId(shippingLocation);
+        }
+    }
+
+    @Transactional
+    public void changeCurrAddr(String custId, ShippingLocationUpdateDto shippingLocationUpdateDto) {
+        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
+        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+
+        // 기존 현재 배송지를 모두 N으로 바꿈
+        unflagCurrAddrFl(custId);
+
+        // 기존 ShippingLocation 정보 갖고 옴
+        ShippingLocation shippingLocation = shippingLocationDao.selectByShipLocaId(shipLocaId);
+        // UpdateDto를 통해 갖고 온 정보 (currAddrFl)로 변경
+        ShippingLocationUpdateDto shippingLocationUpdateCurrAddrDto = shippingLocation.makeShippingLocationUpdateDto();
+        shippingLocationUpdateCurrAddrDto.setCurrAddrFl(currAddrFl);
+        shippingLocation.updateShippingLocationUpdateDto(shippingLocationUpdateCurrAddrDto);
+
+        shippingLocationDao.updateByShipLocaId(shippingLocation);
     }
 
     private static String currDateAsYYYYMMDD() {

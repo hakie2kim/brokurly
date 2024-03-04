@@ -77,13 +77,12 @@
         WHERE keyword = #{keyword}
     </select>
 
-<<<<<<< HEAD
     <select id="findByItemId" resultType="GoodsAnnouncement">
         SELECT *
         FROM item_announcement
         WHERE item_id = #{itemId}
     </select>
-=======
+
     <!--  keyword 존재하는지 확인  -->
     <select id="selectKeywordExist" resultType="int">
         SELECT EXISTS (SELECT keyword
@@ -104,7 +103,6 @@
         SET item_id_list = CONCAT(item_id_list,',',#{itemIdList})
         WHERE keyword = #{keyword}
     </update>
->>>>>>> 1580a11aa018798ad7e4c8004748d0be752a0771
 
     <!--insertGoodsImage-->
     <insert id="insertGoodsImage">
