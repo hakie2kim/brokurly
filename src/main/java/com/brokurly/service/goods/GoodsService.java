@@ -1,30 +1,54 @@
 package com.brokurly.service.goods;
 
 
-import com.brokurly.dto.cart.CartDto;
+
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.dto.goods.GoodsInquiryLogDto;
 import com.brokurly.entity.goods.Goods;
 import com.brokurly.entity.goods.GoodsAnnouncement;
+import com.brokurly.entity.goods.GoodsInquiryLog;
 import com.brokurly.repository.goods.GoodsDao;
+import com.brokurly.repository.goods.GoodsInquiryLogDao;
 import com.brokurly.repository.products.ProductsCreateDao;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 @Slf4j
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class GoodsService {
 
     private final GoodsDao goodsDao;
     private ProductsCreateDao productsCreateDao;
+//    private GoodsImageDao goodsImageDao;
+    private GoodsInquiryLogDao goodsInquiryLogDao;
+
+    @Autowired
+    public GoodsService(GoodsDao goodsDao ){
+        this.goodsDao = goodsDao;
+
+    }
 
     @Autowired
     public void ProductsCreateService(ProductsCreateDao productsCreateDao) {
         this.productsCreateDao = productsCreateDao;
+    }
+
+//    @Autowired
+//    public void GoodsImageService(GoodsImageDao goodsImageDao){
+//        this.goodsImageDao = goodsImageDao;
+//    }
+
+    @Autowired
+    public void GoodsInquiryLogService(GoodsInquiryLogDao goodsInquiryLogDao){
+        this.goodsInquiryLogDao = goodsInquiryLogDao;
     }
 
     //상품 조회
@@ -39,18 +63,25 @@ public class GoodsService {
         return goods.toGoodsForCartDto();
     }
 
-
-    public GoodsAnnouncementDto searchGoodsAnnouncement(String itemId) {
+    public GoodsAnnouncementDto searchGoodsAnnouncement(String itemId) {    //상품고시정보 불러오기
         GoodsAnnouncement goodsAnnouncement = productsCreateDao.findByItemId(itemId);
         return goodsAnnouncement.makeFullDto();
     }
-    //상품 카트에 담기
-    @Transactional
-    public void addCart(CartDto cartDto) {
-        Goods goods = new Goods();
-//    cart.changeStatus(cartDto);
-        goodsDao.insert(goods);
 
+//    public GoodsImageDto searchGoodsImage(String itemId){     //상품 이미지 불러오기
+//        GoodsImage goodsImage = goodsImageDao.selectByItemId(itemId);
+//        return goodsImage.makeFullDto();
+//    }
+
+    public List<GoodsInquiryLogDto> searchGoodsInquiryLog(String itemId){
+        List<GoodsInquiryLog> goodsInquiryLogList = goodsInquiryLogDao.selectByItemId(itemId);
+        List<GoodsInquiryLogDto> goodsInquiryLogDto = new ArrayList<>();
+
+        for(GoodsInquiryLog goodsInquiryLog : goodsInquiryLogList){
+            goodsInquiryLogDto.add(goodsInquiryLog.makeFullDto());
+        }
+
+        return goodsInquiryLogDto;
     }
 
 }

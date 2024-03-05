@@ -13,6 +13,7 @@ public class CustomerCart {
     private String itemId;
     private int itemCnt;  //카트에 담긴 상품 개수
     private String custId;
+    private String itemCk;  //추가사항 - 상품 체크여부
 
     //상품테이블
     private String name;  //상품이름
@@ -50,6 +51,7 @@ public class CustomerCart {
                 .salePrice(salePrice)
                 .totalPrice(totalPrice)
                 .itemQty(itemQty)
+                .itemCk(itemCk)
                 .build();
     }
 
@@ -64,7 +66,8 @@ public class CustomerCart {
         this.itemDcAmt = customerCartDto.getItemDcAmt();
         this.salePrice = customerCartDto.getSalePrice();
         this.totalPrice = customerCartDto.getTotalPrice();
-        this.itemQty =customerCartDto.getItemQty();
+        this.itemQty = customerCartDto.getItemQty();
+        this.itemCk = customerCartDto.getItemCk();
     }
 
 

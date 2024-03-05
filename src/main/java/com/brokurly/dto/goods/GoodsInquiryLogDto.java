@@ -9,6 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class GoodsInquiryLogDto {
+  private int inqNo;
   private String custId;
   private String itemId;
   private String inqTitle;
@@ -18,5 +19,7 @@ public class GoodsInquiryLogDto {
   private String replyStat;
   private String replyContent;
   private String replyDt;
-  private int inqNo;
+
+  //상품 테이블
+  private String name;
 }
