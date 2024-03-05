@@ -18,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.NoSuchElementException;
 
 @Slf4j
 @Controller
@@ -28,11 +27,29 @@ public class OrderController {
     private final OrderService orderService;
     private final ReceiverDetailsService receiverDetailsService;
 
+    private final String testShipLocaId = "111";
+    @Getter
+    @Setter
+    public static class TestCustomer {
+        private String id;
+        private String name;
+        private String telNo;
+        private String email;
+
+        public TestCustomer(String id, String name, String telNo, String email) {
+            this.id = id;
+            this.name = name;
+            this.telNo = telNo;
+            this.email = email;
+        }
+    }
+
     @GetMapping("/checkout")
     public String showCheckout(Model model, HttpSession session) {
+        TestCustomer customer = new TestCustomer("hong", "홍길동", "01022223333", "asd@naver.com");
         CheckoutDto checkout = null;
         try {
-            checkout = orderService.getCheckoutInfo("111", "hong");
+            checkout = orderService.getCheckoutInfo(testShipLocaId, customer.getId());
         } catch (IllegalStateException e) {
             log.error("상품 목록이 존재하지 않음", e);
         }
@@ -40,13 +57,12 @@ public class OrderController {
         if (checkout != null && checkout.getReceiverDetails() != null)
             session.setAttribute("receiverDetails", checkout.getReceiverDetails());
 
-        TestMember member = new TestMember("홍길동", "01022223333", "asd@naver.com");
-        member.setTelNo(StringFormatUtils.formatPhoneNumber(member.getTelNo()));
+        customer.setTelNo(StringFormatUtils.formatPhoneNumber(customer.getTelNo()));
 
-        session.setAttribute("member", member);
+        session.setAttribute("customer", customer);
 
+        model.addAttribute("customer", customer);
         model.addAttribute("checkout", checkout);
-        model.addAttribute("member", member);
 
         return "order/checkout";
     }
@@ -58,27 +74,13 @@ public class OrderController {
         return "order/success";
     }
 
-    @Getter
-    @Setter
-    public static class TestMember {
-        private String name;
-        private String telNo;
-        private String email;
-
-        public TestMember(String name, String telNo, String email) {
-            this.name = name;
-            this.telNo = telNo;
-            this.email = email;
-        }
-    }
-
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
         ReceiverDetailsResponseDto receiverDetails = (ReceiverDetailsResponseDto) session.getAttribute("receiverDetails");
-        TestMember member = (TestMember) session.getAttribute("member");
+        TestCustomer customer = (TestCustomer) session.getAttribute("customer");
 
         model.addAttribute("receiverDetails", receiverDetails);
-        model.addAttribute("member", member);
+        model.addAttribute("customer", customer);
 
         return "order/receiver-details";
     }
@@ -86,16 +88,24 @@ public class OrderController {
     @PostMapping("/receiver-details")
     @ResponseBody
     public ResponseEntity<ReceiverDetailsResponseDto> saveReceiverDetails(
-            @ModelAttribute ReceiverDetailsRequestDto requestSaveDto, BindingResult bindingResult) {
+            @ModelAttribute ReceiverDetailsRequestDto requestSaveDto,
+            BindingResult bindingResult, HttpSession session) {
 
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        requestSaveDto.setShipLocaId("111");
-        requestSaveDto.setCustId("hong");
+        TestCustomer customer = (TestCustomer) session.getAttribute("customer");
+
+        requestSaveDto.setShipLocaId(testShipLocaId);
+        requestSaveDto.setCustId(customer.getId());
 
         ReceiverDetailsResponseDto savedReceiverDetails = receiverDetailsService.saveReceiverDetails(requestSaveDto);
         return new ResponseEntity<>(savedReceiverDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "order/test";
     }
 
     @PatchMapping("/receiver-details")
@@ -106,7 +116,7 @@ public class OrderController {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        ReceiverDetailsResponseDto changedReceiverDetails = receiverDetailsService.modifyReceiverDetails("111", requestChangeDto);
+        ReceiverDetailsResponseDto changedReceiverDetails = receiverDetailsService.modifyReceiverDetails(testShipLocaId, requestChangeDto);
         return new ResponseEntity<>(changedReceiverDetails, HttpStatus.OK);
     }
 }

@@ -17,7 +17,10 @@
     <title>브로컬리</title>
 </head>
 <body>
-<header></header>
+<header>
+    <jsp:include page="../categories/header.jsp"/>
+<%--    <%@ include file="../categories/header.jsp" %>--%>
+</header>
 <section>
     <h2>주문서</h2>
     <div class="info-type1">
@@ -50,16 +53,16 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div id="rcv-name">${member.name}</div>
+            <div id="rcv-name">${customer.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div id="tel-no">${member.telNo}</div>
+            <div id="tel-no">${customer.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-                ${member.email}
+                ${customer.email}
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
@@ -82,6 +85,7 @@
             </div>
         </div>
         <div class="small-modal shipping-location-modal">
+            <div class="cust-id" style="display: none">${customer.id}</div>
             <div class="small-modal-border">
                 <div class="small-modal-content">
                     <p>장바구니로 이동하여</p>
@@ -115,15 +119,15 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${receiverDetails != null && member != null}">
+                <c:if test="${receiverDetails != null && customer != null}">
                     <div>
                         <div>
                             <span id="checkout-rcv-place">${receiverDetails.rcvPlace}</span> |
                             <span id="checkout-enter-mthd">${receiverDetails.enterMthd}</span>
                         </div>
                         <div>
-                            <span id="checkout-name">${member.name}</span>,
-                            <span id="checkout-tel-no">${member.telNo}</span>
+                            <span id="checkout-name">${customer.name}</span>,
+                            <span id="checkout-tel-no">${customer.telNo}</span>
                         </div>
                         <div id="checkout-place-exp" style="display: none;"></div>
                         <div id="checkout-msg-time" style="display: none;"></div>

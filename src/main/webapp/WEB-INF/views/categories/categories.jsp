@@ -11,32 +11,33 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
     <link rel="stylesheet" href="<c:url value='/resources/css/categories/best-page.css'/>"/>
-<style>
-    [type="checkbox"] {
-        width: 18px;
-        height: 18px;
-        margin-right: 10px;
-        appearance: none;
-        border-radius: 50%;
-        border: 1px solid rgb(221, 221, 221);
-        background: url(/resources/image/img-check-gray.png) no-repeat center;
-    }
+    <style>
+        [type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            appearance: none;
+            border-radius: 50%;
+            border: 1px solid rgb(221, 221, 221);
+            background: url(/resources/image/img-check-gray.png) no-repeat center;
+        }
 
-    [type="checkbox"]:hover,
-    .result-buttons button:hover {
-        cursor: pointer;
-    }
+        [type="checkbox"]:hover,
+        .result-buttons button:hover {
+            cursor: pointer;
+        }
 
-    [type="checkbox"]:checked {
-        background: #11967f url(/resources/image/img-check.png) no-repeat center center;
-        border: 0;
-    }
-</style>
-
+        [type="checkbox"]:checked {
+            background: #11967f url(/resources/image/img-check.png) no-repeat center center;
+            border: 0;
+        }
+    </style>
+    <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>
 </head>
 <body>
 <%--<%@ include file="header.jsp" %>--%>
@@ -468,33 +469,34 @@
                         </button>
                         <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2" >
-<%--                                    <button class="css-cate-btn">--%>
-                                        <input type="checkbox" onclick="addQueryString('dawn')" value="dawn"/>
+                                <a class="css-cate-list-2">
+                                    <%--                                    <button class="css-cate-btn">--%>
+                                    <input type="checkbox" onclick="addQueryString('dawn')" value="dawn"/>
 
-<%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-<%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-<%--                                            <path class="myPath" d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-<%--                                                  stroke="#ddd" fill="none"></path>--%>
-<%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-<%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-<%--                                        </svg>--%>
-<%--                                    </button>--%>
+                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
+                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
+                                    <%--                                            <path class="myPath" d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
+                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
+                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
+                                    <%--                                        </svg>--%>
+                                    <%--                                    </button>--%>
                                     <span class="css-cate-txt">샛별배송</span><span class="css-cate-cnt">647</span>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2" >
-                                    <input type="checkbox" onclick="addQueryString('normal_parcel')" value="normal_parcel"/>
-<%--                                    <button class="css-cate-btn">--%>
-<%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-<%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-<%--                                            <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-<%--                                                  stroke="#ddd" fill="none"></path>--%>
-<%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-<%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-<%--                                        </svg>--%>
-<%--                                    </button>--%>
+                                <a class="css-cate-list-2">
+                                    <input type="checkbox" onclick="addQueryString('normal_parcel')"
+                                           value="normal_parcel"/>
+                                    <%--                                    <button class="css-cate-btn">--%>
+                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
+                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
+                                    <%--                                            <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
+                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
+                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
+                                    <%--                                        </svg>--%>
+                                    <%--                                    </button>--%>
                                     <span class="css-cate-txt">판매자배송</span><span
                                         class="css-cate-cnt">5</span>
                                 </a>
@@ -513,61 +515,61 @@
                         <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
                             <li class="css-cate-list-1">
                                 <a href="/categories/907?page=1&amp;filters=price%3A-2990"
-                                                                class="css-cate-list-2">
-                                <button class="css-cate-btn">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                              fill="#fff" stroke="#ddd"></path>
-                                    </svg>
-                                </button>
-                                <span class="css-cate-txt">2,990원 미만</span><span
-                                    class="css-cate-cnt">111</span>
+                                   class="css-cate-list-2">
+                                    <button class="css-cate-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
+                                                  fill="#fff" stroke="#ddd"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">2,990원 미만</span><span
+                                        class="css-cate-cnt">111</span>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
                                 <a
-                                    href="/categories/907?page=1&amp;filters=price%3A2990-4290"
-                                    class="css-cate-list-2">
-                                <button class="css-cate-btn">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                              fill="#fff" stroke="#ddd"></path>
-                                    </svg>
-                                </button>
-                                <span class="css-cate-txt">2,990원 ~ 4,290원</span>
+                                        href="/categories/907?page=1&amp;filters=price%3A2990-4290"
+                                        class="css-cate-list-2">
+                                    <button class="css-cate-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
+                                                  fill="#fff" stroke="#ddd"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">2,990원 ~ 4,290원</span>
                                     <span
-                                    class="css-cate-cnt">141</span>
+                                            class="css-cate-cnt">141</span>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
                                 <a
-                                    href="/categories/907?page=1&amp;filters=price%3A4290-5990"
-                                    class="css-cate-list-2">
-                                <button class="css-cate-btn">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                              fill="#fff" stroke="#ddd"></path>
-                                    </svg>
-                                </button>
-                                <span class="css-cate-txt">4,290원 ~ 5,990원</span><span
-                                    class="css-cate-cnt">116</span>
+                                        href="/categories/907?page=1&amp;filters=price%3A4290-5990"
+                                        class="css-cate-list-2">
+                                    <button class="css-cate-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
+                                                  fill="#fff" stroke="#ddd"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">4,290원 ~ 5,990원</span><span
+                                        class="css-cate-cnt">116</span>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
                                 <a href="/categories/907?page=1&amp;filters=price%3A5990-"
-                                                                class="css-cate-list-2">
-                                <button class="css-cate-btn">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                              fill="#fff" stroke="#ddd"></path>
-                                    </svg>
-                                </button>
-                                <span class="css-cate-txt">5,990원 이상</span><span
-                                    class="css-cate-cnt">142</span>
+                                   class="css-cate-list-2">
+                                    <button class="css-cate-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
+                                                  fill="#fff" stroke="#ddd"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">5,990원 이상</span><span
+                                        class="css-cate-cnt">142</span>
                                 </a>
                             </li>
                         </nav>
@@ -613,39 +615,19 @@
                             </div>
                         </li>
                         <li class="css-sorted-menu">
-                            <a
-<%--                                    href="http://localhost:8080/categories/${codeId}?page=1&sortedtype=1"--%>
-                                    onclick="callServiceForSortedType()" class="css-19ce13b eudxpx30"
-                            >신상품순</a
-                            >
+                            <a class="css-19ce13b eudxpx30 recent-order">신상품순</a>
                         </li>
                         <li class="css-sorted-menu">
-                            <a
-                                    href="http://localhost:8080/categories/${codeId}?page=1&sortedType=2"
-                                    class="css-19ce13b eudxpx30"
-                            >판매량순</a
-                            >
+                            <a class="css-19ce13b eudxpx30 sell-amount-order">판매량순</a>
                         </li>
                         <li class="css-sorted-menu">
-                            <a
-                                    href="http://localhost:8080/categories/${codeId}?page=1&sortedType=3"
-                                    class="css-19ce13b eudxpx30"
-                            >혜택순</a
-                            >
+                            <a class="css-19ce13b eudxpx30 discount-order">혜택순</a>
                         </li>
                         <li class="css-sorted-menu">
-                            <a
-                                    href="http://localhost:8080/categories/${codeId}?page=1&sortedType=4"
-                                    class="css-19ce13b eudxpx30"
-                            >낮은 가격순</a
-                            >
+                            <a class="css-19ce13b eudxpx30 low-price-order">낮은 가격순</a>
                         </li>
                         <li class="css-sorted-menu">
-                            <a
-                                    href="http://localhost:8080/categories/${codeId}?page=1&sortedType=5"
-                                    class="css-19ce13b eudxpx30"
-                            >높은 가격순</a
-                            >
+                            <a class="css-19ce13b eudxpx30 high-price-order">높은 가격순</a>
                         </li>
                     </ul>
                 </div>
@@ -762,28 +744,26 @@
                 <c:param name="sortedtype" value="${param.sortedtype}"/>
             </c:if>
         </c:url>
-        <a class="css-1d20dg7 e82lnfz0" href="${urlPaging}">
+        <a class="css-1d20dg7 e82lnfz0 to-start">
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII="
                  alt="처음 페이지로 이동하기 아이콘"/>
         </a>
 
         <%-- 이전 페이지 이동 --%>
-        <c:if test="${ph.beginPage ne '1'}">
-            <c:url var="urlPaging" value="/categories/${codeId}">
-                <c:param name="page" value="${ph.beginPage-1}"/>
-                <c:if test="${not empty param.sortedtype}">
-                    <c:param name="sortedtype" value="${param.sortedtype}"/>
-                </c:if>
-            </c:url>
-            <a class="css-1d20dg7 e82lnfz0" href="${urlPaging}">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC"
-                     alt="이전 페이지로 이동하기 아이콘"/>
-            </a>
-        </c:if>
+        <c:url var="urlPaging" value="/categories/${codeId}">
+            <c:param name="page" value="${pageHandler.beginPage-1}"/>
+            <c:if test="${not empty param.sortedtype}">
+                <c:param name="sortedtype" value="${param.sortedtype}"/>
+            </c:if>
+        </c:url>
+        <a class="css-1d20dg7 e82lnfz0 move-once to-prev">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC"
+                 alt="이전 페이지로 이동하기 아이콘"/>
+        </a>
 
 
         <%-- 페이지 목록--%>
-        <c:forEach var="num" begin="${ph.beginPage}" end="${ph.endPage}">
+        <c:forEach var="num" begin="${pageHandler.beginPage}" end="${pageHandler.endPage}">
             <c:url var="urlPaging" value="/categories/${codeId}">
                 <c:param name="page" value="${num}"/>
                 <c:if test="${not empty param.sortedtype}">
@@ -791,36 +771,33 @@
                 </c:if>
             </c:url>
 
-            <a class="e82lnfz0 ${ph.page == num ? "css-19yo1fh":"css-1d20dg7"}" href="${urlPaging}">${num}</a>
+            <a class="page-number e82lnfz0 ${pageHandler.page == num ? "css-19yo1fh":"css-1d20dg7"}">${num}</a>
 
-            <%--            <a class=" e82lnfz0 ${ph.page == num ? "css-19yo1fh":"css-1d20dg7"}"--%>
+            <%--            <a class=" e82lnfz0 ${pageHandler.page == num ? "css-19yo1fh":"css-1d20dg7"}"--%>
             <%--               href="<c:url value='/categories/${codeId}?page=${num}'/>">${num}</a>--%>
         </c:forEach>
 
 
         <%-- 다음 페이지로 이동 --%>
-        <c:if test="${ph.endPage ne ph.totalPage}">
-            <c:url var="urlPaging" value="/categories/${codeId}">
-                <c:param name="page" value="${ph.endPage+1}"/>
-                <c:if test="${not empty param.sortedtype}">
-                    <c:param name="sortedtype" value="${param.sortedtype}"/>
-                </c:if>
-            </c:url>
-            <a class="css-1d20dg7 e82lnfz0" href="${urlPaging}">
-                <img
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg=="
-                        alt="다음 페이지로 이동하기 아이콘"/>
-            </a>
-        </c:if>
-
-        <%-- 맨끝 페이지로 이동 --%>
         <c:url var="urlPaging" value="/categories/${codeId}">
-            <c:param name="page" value="${ph.totalPage}"/>
+            <c:param name="page" value="${pageHandler.endPage+1}"/>
             <c:if test="${not empty param.sortedtype}">
                 <c:param name="sortedtype" value="${param.sortedtype}"/>
             </c:if>
         </c:url>
-        <a class="css-1d20dg7 e82lnfz0" href="${urlPaging}">
+        <a class="css-1d20dg7 e82lnfz0 move-once to-next">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg=="
+                 alt="다음 페이지로 이동하기 아이콘"/>
+        </a>
+
+        <%-- 맨끝 페이지로 이동 --%>
+        <c:url var="urlPaging" value="/categories/${codeId}">
+            <c:param name="page" value="${pageHandler.totalPage}"/>
+            <c:if test="${not empty param.sortedtype}">
+                <c:param name="sortedtype" value="${param.sortedtype}"/>
+            </c:if>
+        </c:url>
+        <a class="css-1d20dg7 e82lnfz0 to-end">
             <img
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII="
                     alt="마지막 페이지로 이동하기 아이콘"/></a>
@@ -828,142 +805,5 @@
 
     </div>
 </div>
-
-<script>
-    let codeId
-    let sortedType=0
-    let page=1
-    let uri
-
-
-    function callServiceForSortedType() {
-
-        $.ajax({
-            url: `/categories/${codeId}?sortedType=${sortedType}&page=${page}`,
-            type: "GET",
-            data: {
-                "codeId":codeId,
-                "sortedType":sortedType,
-                "page":page
-            },
-            success: function(response) {
-
-            },
-            error: function(xhr, status, error) {
-                // 오류 처리 로직
-            }
-        });
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    function addQueryString(text) {
-
-        var storageKey = 'filter_' + text;
-        if (localStorage.getItem(storageKey) == null) {
-            localStorage.setItem(storageKey, '0');
-        }
-        var clickCnt = localStorage.getItem(storageKey);
-        var url = window.location.href;
-
-        var result;
-        var encodedText = encodeURIComponent(text); // 미리 encode 해두기
-        console.log(clickCnt);
-
-        if (clickCnt === '0') {
-            if (!url.includes('filters')) {
-                if (!url.includes(encodedText)) {
-                    result = url + '&filters=delivery_type' + encodeURIComponent(':') + encodedText;
-                } else {
-                    result = url;
-                }
-            } else {
-                if (!url.includes(encodedText)) {
-                    result = url + encodeURIComponent(',') + encodedText;
-                } else {
-                    result = url;
-                }
-            }
-            clickCnt = '1';
-
-        } else if (clickCnt === '1') {
-            if (url.includes(encodedText + encodeURIComponent(','))) {
-                result = url.replace(encodedText + encodeURIComponent(','), "");
-            } else if (url.includes(encodeURIComponent(',') + encodedText)) {
-                result = url.replace(encodeURIComponent(',') + encodedText, "");
-            } else {
-                result = url.replace('&filters=delivery_type%3A' + encodedText, "");
-            }
-            clickCnt = '0';
-
-        }
-        localStorage.setItem(storageKey, clickCnt);
-        window.location.href = result;
-
-    }
-
-
-    // let clickCnt =0
-    //
-    // function addQueryString(text){
-    //
-    //     var url = window.location.href;
-    //     var result;
-    //
-    //
-    //
-    //
-    //     if(clickCnt===0) {
-    //         if (!url.includes('filters')) {
-    //             if (!url.includes(text)) {
-    //
-    //                 result = url + '&filters=delivery_type' + encodeURIComponent(':' + text);
-    //                 console.log(clickCnt);
-    //             } else {
-    //                 result = url;
-    //             }
-    //         } else {
-    //             if (!url.includes(text)) {
-    //
-    //                 result = url + encodeURIComponent(',' + text);
-    //             } else {
-    //                 result = url;
-    //             }
-    //         }
-    //         clickCnt=1;
-    //
-    //
-    //     }
-    //      else if(clickCnt===1){
-    //          if(!url.includes(encodeURIComponent(','))){
-    //
-    //              result = url.replace('delivery_type%3A' + encodeURIComponent(text), "");
-    //          }
-    //          else{
-    //
-    //              result = url.replace( encodeURIComponent(','+text), "");
-    //          }
-    //
-    //
-    //          clickCnt =0;
-    //      }
-    //
-    //     window.location.href = result;
-    //
-    // }
-
-
-</script>
-
-
 </body>
 </html>

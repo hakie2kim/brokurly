@@ -28,7 +28,7 @@ window.onload = () => {
 
     // 배송지 변경 리다이렉트
     $("#small-modal-ok").click(() => {
-        window.location.href = '/cart';
+        window.location.href = '/cart/' + $(".cust-id").text();
     });
 
     // 결제 정보 헤더에 붙이기
@@ -157,13 +157,15 @@ function redirectPayment() {
         })
     });
 
-    let checkoutInfo = {
-        rcvName: $("#checkout-name").text(),
-        telNo: $("#checkout-tel-no").text(),
-        rcvPlace: $("#checkout-rcv-place").text(),
-        enterMthd: $("#checkout-enter-mthd").text(),
-        placeExp: $("#checkout-place-exp").text(),
-        msgTime: $("#checkout-msg-time").text(),
+    let checkoutInfo= {
+        receiverDetails: {
+            rcvName: $("#checkout-name").text(),
+            telNo: $("#checkout-tel-no").text(),
+            rcvPlace: $("#checkout-rcv-place").text(),
+            enterMthd: $("#checkout-enter-mthd").text(),
+            placeExp: $("#checkout-place-exp").text(),
+            msgTime: $("#checkout-msg-time").text()
+        },
         customerCart: customerCart,
         paymentAmount: {
             orderAmt: parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
