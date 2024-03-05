@@ -9,7 +9,7 @@
             <mvc:interceptor>
                 <mvc:mapping path="/member/signup"/>
 <!--                <mvc:mapping path="/member/logout"/> mapping path 추가 -->
-                <bean class="com.brokurly.interceptor.LoginCheckInterceptor"></bean>
+                <bean class="com.brokurly.interceptor.LoginCheckInterceptor"/>
             </mvc:interceptor>
         </mvc:interceptors>
 

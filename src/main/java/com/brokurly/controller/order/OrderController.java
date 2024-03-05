@@ -1,13 +1,12 @@
 package com.brokurly.controller.order;
 
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
-import com.brokurly.utils.StringFormatUtils;
-import lombok.Getter;
-import lombok.Setter;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,40 +28,28 @@ public class OrderController {
     private final ReceiverDetailsService receiverDetailsService;
 
     private final String testShipLocaId = "111";
-    @Getter
-    @Setter
-    public static class TestCustomer {
-        private String id;
-        private String name;
-        private String telNo;
-        private String email;
-
-        public TestCustomer(String id, String name, String telNo, String email) {
-            this.id = id;
-            this.name = name;
-            this.telNo = telNo;
-            this.email = email;
-        }
-    }
 
     @GetMapping("/checkout")
     public String showCheckout(Model model, HttpSession session) {
-        TestCustomer customer = new TestCustomer("hong", "홍길동", "01022223333", "asd@naver.com");
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            loginMember = new MemberAndLoginDto("hong", "1234", "홍길동");
+
         CheckoutDto checkout = null;
         try {
-            checkout = orderService.getCheckoutInfo(testShipLocaId, customer.getId());
+            checkout = orderService.getCheckoutInfo(testShipLocaId, loginMember.getCustId());
         } catch (IllegalStateException e) {
             log.error("상품 목록이 존재하지 않음", e);
         }
 
+        log.info("checkout = {}", checkout);
+
         if (checkout != null && checkout.getReceiverDetails() != null)
             session.setAttribute("receiverDetails", checkout.getReceiverDetails());
 
-        customer.setTelNo(StringFormatUtils.formatPhoneNumber(customer.getTelNo()));
+//        customer.setTelNo(StringFormatUtils.formatPhoneNumber(customer.getTelNo()));
 
-        session.setAttribute("customer", customer);
-
-        model.addAttribute("customer", customer);
+        model.addAttribute("loginMember", loginMember);
         model.addAttribute("checkout", checkout);
 
         return "order/checkout";
@@ -78,11 +65,7 @@ public class OrderController {
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
         ReceiverDetailsResponseDto receiverDetails = (ReceiverDetailsResponseDto) session.getAttribute("receiverDetails");
-        TestCustomer customer = (TestCustomer) session.getAttribute("customer");
-
         model.addAttribute("receiverDetails", receiverDetails);
-        model.addAttribute("customer", customer);
-
         return "order/receiver-details";
     }
 
@@ -95,10 +78,12 @@ public class OrderController {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        TestCustomer customer = (TestCustomer) session.getAttribute("customer");
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            loginMember = new MemberAndLoginDto("hong", "1234", "홍길동");
 
         requestSaveDto.setShipLocaId(testShipLocaId);
-        requestSaveDto.setCustId(customer.getId());
+        requestSaveDto.setCustId(loginMember.getCustId());
 
         ReceiverDetailsResponseDto savedReceiverDetails = receiverDetailsService.saveReceiverDetails(requestSaveDto);
         return new ResponseEntity<>(savedReceiverDetails, HttpStatus.OK);

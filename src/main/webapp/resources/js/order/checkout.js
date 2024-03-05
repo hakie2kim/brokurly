@@ -153,7 +153,6 @@ function redirectPayment() {
             name: $(this).find($(".item-name")).text(),
             itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
             price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
-
         })
     });
 
@@ -171,6 +170,9 @@ function redirectPayment() {
             orderAmt: parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
             itemAmt: parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),
             itemDcAmt: parseInt($("#item-dc-amount").text().replace(/[,\s원]/g, ''), 10),
+            shipFee: parseInt($("#ship-fee").text().replace(/[,\s원]/g, ''), 10),
+            point: parseInt($("#use-point").text().replace(/[,\s원]/g, ''), 10),
+            payAmt: parseInt($("#pay-amount").text().replace(/[,\s원]/g, ''), 10)
         }
     };
 

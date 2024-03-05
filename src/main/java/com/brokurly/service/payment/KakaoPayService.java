@@ -32,10 +32,10 @@ public class KakaoPayService {
                 .build();
     }
 
-    public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto) {
+    public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto, String orderId) {
         KakaoPayReadyRequestDto requestDto = KakaoPayReadyRequestDto.builder()
                 .cid(CLIENT_ID)
-                .partner_order_id(IdGenerator.generateOrderNumber())
+                .partner_order_id(orderId)
                 .partner_user_id(checkoutDto.getReceiverDetails().getRcvName())
                 .item_name(getItemName(checkoutDto.getCustomerCart()))
                 .quantity(getQuantity(checkoutDto.getCustomerCart()))

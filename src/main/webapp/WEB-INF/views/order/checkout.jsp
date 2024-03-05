@@ -19,7 +19,6 @@
 <body>
 <header>
     <jsp:include page="../categories/header.jsp"/>
-<%--    <%@ include file="../categories/header.jsp" %>--%>
 </header>
 <section>
     <h2>주문서</h2>
@@ -53,16 +52,16 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div id="rcv-name">${customer.name}</div>
+            <div id="rcv-name">${loginMember.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div id="tel-no">${customer.telNo}</div>
+<%--            <div id="tel-no">${loginMember.telNo}</div>--%>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-                ${customer.email}
+<%--                ${loginMember.email}--%>
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
@@ -85,7 +84,7 @@
             </div>
         </div>
         <div class="small-modal shipping-location-modal">
-            <div class="cust-id" style="display: none">${customer.id}</div>
+            <div class="cust-id" style="display: none">${loginMember.custId}</div>
             <div class="small-modal-border">
                 <div class="small-modal-content">
                     <p>장바구니로 이동하여</p>
@@ -119,15 +118,15 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${receiverDetails != null && customer != null}">
+                <c:if test="${receiverDetails != null}">
                     <div>
                         <div>
                             <span id="checkout-rcv-place">${receiverDetails.rcvPlace}</span> |
                             <span id="checkout-enter-mthd">${receiverDetails.enterMthd}</span>
                         </div>
                         <div>
-                            <span id="checkout-name">${customer.name}</span>,
-                            <span id="checkout-tel-no">${customer.telNo}</span>
+                            <span id="checkout-name">${receiverDetails.rcvName}</span>,
+                            <span id="checkout-tel-no">${receiverDetails.telNo}</span>
                         </div>
                         <div id="checkout-place-exp" style="display: none;"></div>
                         <div id="checkout-msg-time" style="display: none;"></div>
@@ -256,13 +255,13 @@
                 <div>카드즉시할인</div>
                 <div>0원</div>
             </div>
-            <div>
+            <div id="use-point">
                 <div>적립금</div>
                 <div>0원</div>
             </div>
             <hr/>
             <div>
-                <div>최종결제금액</div>
+                <div id="pay-amount">최종결제금액</div>
                 <div><fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>

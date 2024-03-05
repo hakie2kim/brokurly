@@ -2,10 +2,9 @@ package com.brokurly.utils;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
-import java.util.Random;
 
 public class IdGenerator {
-    public static String generateOrderNumber() {
+    public static String generateOrderId() {
         final SecureRandom random = new SecureRandom();
         final int randomStringLength = 6;
         final String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

@@ -6,11 +6,11 @@
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO orders
-            (order_id, seller_id, cust_id, order_stat, order_dt, total_item_qty, total_price,
+            (order_id, cust_id, total_item_qty, total_price,
              total_dc_amt, order_amt, ship_fee, order_addr, ship_no)
         VALUES
-            (#{orderId}, #{sellerId}, #{custId}, #{orderStat}, #{orderDt}, #{totalItemQty},
-             #{totalPrice}, #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{orderAddr}, #{shipNo})
+            (#{orderId}, #{custId}, #{totalItemQty}, #{totalPrice},
+             #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{orderAddr}, #{shipNo})
     </insert>
 
     <!-- READ -->
@@ -38,5 +38,8 @@
     <!-- UPDATE -->
 
     <!-- DELETE -->
-
+    <delete id="deleteById">
+        DELETE FROM orders
+        WHERE order_id = #{orderId}
+    </delete>
 </mapper>

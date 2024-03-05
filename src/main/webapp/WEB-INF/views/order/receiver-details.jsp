@@ -35,7 +35,7 @@
                     name="rcvName"
                     placeholder="이름을 입력해 주세요"
                     type="text"
-                    value="<c:if test='${member != null}'>${member.name}</c:if>"/>
+                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
         </div>
         <div>
             <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
@@ -45,7 +45,7 @@
                     placeholder="숫자만 입력해 주세요"
                     maxlength="11"
                     type="text"
-                    value="<c:if test='${member != null}'>${fn:replace(member.telNo, '-', '')}</c:if>"/>
+                    value="<c:if test='${receiverDetails != null}'>${fn:replace(receiverDetails.telNo, '-', '')}</c:if>"/>
         </div>
     </div>
 

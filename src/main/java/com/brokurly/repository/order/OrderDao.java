@@ -19,4 +19,5 @@ public interface OrderDao {
     // UPDATE
 
     // DELTE
+    int deleteById(String orderId);
 }
