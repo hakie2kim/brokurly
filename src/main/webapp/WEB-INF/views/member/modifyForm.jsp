@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Sora
-  Date: 2024-02-05
-  Time: 오후 2:22
+  Date: 2024-03-03
+  Time: 오전 1:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -39,7 +39,7 @@
         </div>
         <!-- modal end -->
 
-        <span class="register-header">회원가입</span>
+        <span class="register-header">개인 정보 수정</span>
         <div class="Required-entr-div">
             <span class="Required-entr__label">*&nbsp;</span>필수입력사항
         </div>
@@ -55,8 +55,8 @@
                         id="custId"
                         name="custId"
                         maxlength="17"
+                        value="${memberDto.custId}"
                 />
-                <button type="button" id="custId_btn" class="open-modal-btn">중복확인</button>
             </div>
             <div class="id-info-div">
           <span
@@ -96,6 +96,7 @@
                         title="이 입력란을 작성하세요"
                         id="name"
                         name="name"
+                        value="${memberDto.name}"
                 />
             </div>
             <div class="name-info-div">
@@ -144,44 +145,44 @@
           >휴대폰 번호를 입력해 주세요</span
           >
             </div>
-<%--            <div class="column-div">--%>
-<%--          <span class="register-div__label"--%>
-<%--          >주소<span class="Required-entr__label">*</span></span--%>
-<%--          >--%>
-<%--                <button class="register-div__btn">주소검색</button>--%>
-<%--            </div>--%>
-<%--            <div class="order-info__label">--%>
-<%--                배송지에 따라 상품정보가 달라질 수 있습니다.--%>
-<%--            </div>--%>
-<%--            <div class="column-div">--%>
-<%--                <span class="register-div__label">성별</span>--%>
-<%--                <input type="radio" id="sex-m" name="sex" value="M"/>--%>
-<%--                <label for="sex-m">남자</label>--%>
-<%--                <input type="radio" id="sex-f" name="sex" value="F"/>--%>
-<%--                <label for="sex-f">여자</label>--%>
-<%--                <input type="radio" id="sex-none" name="sex" value="N"/>--%>
-<%--                <label for="sex-none">선택안함</label>--%>
-    <div class="css-82a6rk e744wfw3 column-div">
-        <span class="register-div__label">성별</span>
-        <div class="css-14wodj6 es1pbny0">
-        <label class="css-z9g6s0 et8nqc33" for="sex-man">
-            <input data-testid="radio-MALE" id="sex-man" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="M">
-            <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
-            <span aria-labelledby="sex-man" class="css-mgd87h et8nqc31">남자</span>
-        </label>
-        <label class="css-z9g6s0 et8nqc33" for="sex-woman">
-            <input data-testid="radio-FEMALE" id="sex-woman" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="F">
-            <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
-            <span aria-labelledby="sex-woman" class="css-mgd87h et8nqc31">여자</span>
-        </label>
-            <label class="css-z9g6s0 et8nqc33" for="sex-none">
-                <input data-testid="radio-NONE" id="sex-none" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="N" checked="">
-                <span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span>
-                <span aria-labelledby="sex-none" class="css-mgd87h et8nqc31">선택안함</span>
-            </label>
-        </div>
-    </div>
-<%--            </div>--%>
+            <%--            <div class="column-div">--%>
+            <%--          <span class="register-div__label"--%>
+            <%--          >주소<span class="Required-entr__label">*</span></span--%>
+            <%--          >--%>
+            <%--                <button class="register-div__btn">주소검색</button>--%>
+            <%--            </div>--%>
+            <%--            <div class="order-info__label">--%>
+            <%--                배송지에 따라 상품정보가 달라질 수 있습니다.--%>
+            <%--            </div>--%>
+            <%--            <div class="column-div">--%>
+            <%--                <span class="register-div__label">성별</span>--%>
+            <%--                <input type="radio" id="sex-m" name="sex" value="M"/>--%>
+            <%--                <label for="sex-m">남자</label>--%>
+            <%--                <input type="radio" id="sex-f" name="sex" value="F"/>--%>
+            <%--                <label for="sex-f">여자</label>--%>
+            <%--                <input type="radio" id="sex-none" name="sex" value="N"/>--%>
+            <%--                <label for="sex-none">선택안함</label>--%>
+            <div class="css-82a6rk e744wfw3 column-div">
+                <span class="register-div__label">성별</span>
+                <div class="css-14wodj6 es1pbny0">
+                    <label class="css-z9g6s0 et8nqc33" for="sex-man">
+                        <input data-testid="radio-MALE" id="sex-man" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="M">
+                        <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
+                        <span aria-labelledby="sex-man" class="css-mgd87h et8nqc31">남자</span>
+                    </label>
+                    <label class="css-z9g6s0 et8nqc33" for="sex-woman">
+                        <input data-testid="radio-FEMALE" id="sex-woman" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="F">
+                        <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
+                        <span aria-labelledby="sex-woman" class="css-mgd87h et8nqc31">여자</span>
+                    </label>
+                    <label class="css-z9g6s0 et8nqc33" for="sex-none">
+                        <input data-testid="radio-NONE" id="sex-none" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="N" checked="">
+                        <span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span>
+                        <span aria-labelledby="sex-none" class="css-mgd87h et8nqc31">선택안함</span>
+                    </label>
+                </div>
+            </div>
+            <%--            </div>--%>
             <div class="birth-div column-div">
                 <span class="register-div__label">생년월일</span>
                 <div class="birth-div__column">

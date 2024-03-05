@@ -4,10 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="spring-security.xml"/>
+    <import resource="email-context.xml"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-<!--                <property name="url" value="jdbc:mysql://192.168.129.102:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>-->
+<!--        g        <property name="url" value="jdbc:mysql://192.168.129.102:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>-->
         <property name="url" value="jdbc:mysql://localhost:3306/brokurly?useUnicode=true&amp;characterEncoding=utf8"/>
 <!--                <property name="username" value="brokurly"/>-->
         <property name="username" value="root"/>
@@ -42,6 +43,7 @@
 
     <!--  WebClient 사용을 위한 의존성 주입  -->
     <bean id="clientHttpConnector" class="org.springframework.http.client.reactive.ReactorClientHttpConnector"/>
+
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="utf-8"/>

@@ -7,8 +7,8 @@ import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
 import com.brokurly.utils.StringFormatUtils;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
 
 @Slf4j
 @Controller
