@@ -16,9 +16,11 @@
         <typeAlias type="com.brokurly.entity.mypage.Point" alias="Point"/>
         <typeAlias type="com.brokurly.entity.mypage.PointLog" alias="PointLog"/>
         <typeAlias type="com.brokurly.entity.mypage.PointAndPointLog" alias="PointAndPointLog"/>
+
         <typeAlias type="com.brokurly.entity.mypage.ShippingLocation" alias="ShippingLocation"/>
         <typeAlias type="com.brokurly.entity.mypage.ShippingLocationChangeLog" alias="ShippingLocationChangeLog"/>
         <typeAlias type="com.brokurly.entity.mypage.ShippingLocationAndShoppingLocationChangeLog" alias="ShippingLocationAndShoppingLocationChangeLog"/>
+
         <typeAlias type="com.brokurly.entity.categories.Category" alias="Category"/>
         <typeAlias type="com.brokurly.entity.cart.Cart" alias="Cart"/>
         <typeAlias type="com.brokurly.entity.goods.Goods" alias="Goods"/>

@@ -1,7 +1,14 @@
 package com.brokurly.controller.mypage;
 
+
+import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
+import com.brokurly.dto.mypage.PointLogEarningDto;
+import com.brokurly.dto.mypage.PointLogExpDto;
+import com.brokurly.dto.mypage.PointLogUsageDto;
+
 import com.brokurly.dto.mypage.*;
 import com.brokurly.entity.mypage.ShippingLocation;
+
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
@@ -76,6 +83,27 @@ public class MypageController {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
+
+//        for (PointLogEarningDto pointLogEarningDto : pointLogEarningList_) {
+//            String orderId = pointLogUsageDto.getOrderId();
+//            int pointAmt = pointLogUsageDto.getPointAmt();
+//            Date procDt = pointLogUsageDto.getProcDt();
+//            String pointSpec = pointLogUsageDto.getPointSpec();
+//
+//            /*String pointSpecDetails = "";
+//            if (orderId == null) {
+//                pointSpecDetails = new SimpleDateFormat("MM/dd까지 사용가능").format(pointLogUsageDto.getProcDt());
+//            } else {
+//                pointSpecDetails = String.format("주문번호 (%s)", orderId);
+//            }*/
+//
+//            String pointStat = pointLogUsageDto.getPointStat();
+//            Date expDt = pointService.findPointByPointId(pointLogUsageDto.get)
+//
+//            pointLogEarningList.add(new PointLogEarningDto(pointNo, orderId, pointAmt, procDt, pointSpec, pointStat, expDt));
+//        }
+
+
         int pointLogEarningCount = pointLogService.getPointLogEarningCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
         int totalAccumulPoints = pointLogService.getTotalAccumulPoints(custId);
@@ -93,28 +121,48 @@ public class MypageController {
     }
 
     @GetMapping("/address")
-    String manageAddress() {
+    String manageAddress(Model model) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
+        model.addAttribute("shippingLocationList", shippingLocationList);
         return "/mypage/address";
-    }
-
-    @Getter
-    static class FullAddress {
-        private String addr;
-        private String specAddr;
     }
 
     @PostMapping("/address")
     @ResponseBody
-    ResponseEntity<ShippingLocationAddDto> addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+    HttpStatus addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
         String addr = shippingLocationAddFormDto.getAddr();
         String specAddr = shippingLocationAddFormDto.getSpecAddr();
         String defAddrFl = Boolean.parseBoolean(shippingLocationAddFormDto.getDefAddrFl()) ? "Y" : "N";
         log.info("@PostMapping(\"/address\") addShippingAddress addr: {} specAddr: {} defAddrFl: {}", addr, specAddr, defAddrFl);
 
-        ShippingLocationAddDto shippingLocationAddDto = shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
-        // 모든 배송지 리스트를 등록 시간 역순으로 갖고 오는 service 기능
+        // 기본 배송지로 설정할 경우, 나머지 기본 배송지 설정을 해제
+        if (defAddrFl.equals("Y"))
+            shippingLocationService.unflagDefAddr(custId);
 
-        return new ResponseEntity<>(shippingLocationAddDto, HttpStatus.OK);
+        shippingLocationService.addNewShippingLocation(custId, addr, specAddr, defAddrFl);
+//        List<ShippingLocationDto> shippingLocationListByCustomer = shippingLocationService.getShippingLocationListByCustomer(custId);
+
+//        return new ResponseEntity<>("배송지 추가", HttpStatus.OK);
+        return HttpStatus.OK;
+    }
+
+    @PatchMapping("/address")
+    @ResponseBody
+//    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+    HttpStatus modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+        System.out.println("MypageController.modifyShippingAddress");
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
+        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+        log.info("ship_loca_id: {} curr_addr_fl: {}",shipLocaId, currAddrFl);
+
+        shippingLocationService.changeCurrAddr(custId, shippingLocationUpdateDto);
+
+        return HttpStatus.OK;
     }
 
     @GetMapping("/address/shipping-address")

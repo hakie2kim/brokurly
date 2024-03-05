@@ -3,7 +3,11 @@ package com.brokurly.entity.mypage;
 import com.brokurly.dto.mypage.ShippingLocationAddDto;
 import com.brokurly.dto.mypage.ShippingLocationDto;
 import com.brokurly.dto.mypage.ShippingLocationManagementDto;
+import com.brokurly.dto.mypage.ShippingLocationUpdateDto;
 import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @ToString
@@ -15,11 +19,12 @@ public class ShippingLocation {
     private String addr;
     private String specAddr;
     private String defAddrFl;
-    private String shipLocaRegDt;
+    private Date shipLocaRegDt = java.sql.Timestamp.valueOf(LocalDateTime.now());
     private String telNo;
     private String recAddr;
     private String recName;
     private String delFl;
+    private String currAddrFl = "Y";
 
     public ShippingLocationDto makeShippingLocationDto() {
         return ShippingLocationDto.builder()
@@ -27,11 +32,11 @@ public class ShippingLocation {
                 .addr(addr)
                 .specAddr(specAddr)
                 .defAddrFl(defAddrFl)
-                .shipLocaRegDt(shipLocaRegDt)
                 .telNo(telNo)
                 .recAddr(recAddr)
                 .recName(recName)
                 .delFl(delFl)
+                .currAddrFl(currAddrFl)
                 .build();
     }
 
@@ -40,11 +45,11 @@ public class ShippingLocation {
        this.addr = shippingLocationDto.getAddr();
        this.specAddr = shippingLocationDto.getSpecAddr();
        this.defAddrFl = shippingLocationDto.getDefAddrFl();
-       this.shipLocaRegDt = shippingLocationDto.getShipLocaRegDt();
        this.telNo = shippingLocationDto.getTelNo();
        this.recAddr = shippingLocationDto.getRecAddr();
        this.recName = shippingLocationDto.getRecName();
        this.delFl = shippingLocationDto.getDelFl();
+       this.currAddrFl = shippingLocationDto.getCurrAddrFl();
     }
 
     public ShippingLocationManagementDto makeShippingLocationManagementDto() {
@@ -53,7 +58,6 @@ public class ShippingLocation {
                 .addr(addr)
                 .specAddr(specAddr)
                 .defAddrFl(defAddrFl)
-                .shipLocaRegDt(shipLocaRegDt)
                 .telNo(telNo)
                 .recName(recName)
                 .delFl(delFl)
@@ -65,7 +69,6 @@ public class ShippingLocation {
         this.addr = shippingLocationManagementDto.getAddr();
         this.specAddr = shippingLocationManagementDto.getSpecAddr();
         this.defAddrFl = shippingLocationManagementDto.getDefAddrFl();
-        this.shipLocaRegDt = shippingLocationManagementDto.getShipLocaRegDt();
         this.telNo = shippingLocationManagementDto.getTelNo();
         this.recName = shippingLocationManagementDto.getRecName();
         this.delFl = shippingLocationManagementDto.getDelFl();
@@ -77,7 +80,6 @@ public class ShippingLocation {
                 .addr(addr)
                 .specAddr(specAddr)
                 .defAddrFl(defAddrFl)
-                .shipLocaRegDt(shipLocaRegDt)
                 .delFl(delFl)
                 .build();
     }
@@ -87,7 +89,30 @@ public class ShippingLocation {
         this.addr = shippingLocationAddDto.getAddr();
         this.specAddr = shippingLocationAddDto.getSpecAddr();
         this.defAddrFl = shippingLocationAddDto.getDefAddrFl();
-        this.shipLocaRegDt = shippingLocationAddDto.getShipLocaRegDt();
         this.delFl = shippingLocationAddDto.getDelFl();
+    }
+
+    public ShippingLocationUpdateDto makeShippingLocationUpdateDto() {
+        return ShippingLocationUpdateDto.builder()
+                .shipLocaId(shipLocaId)
+                .specAddr(specAddr)
+                .defAddrFl(defAddrFl)
+                .telNo(telNo)
+                .recAddr(recAddr)
+                .recName(recName)
+                .delFl(delFl)
+                .currAddrFl(currAddrFl)
+                .build();
+    }
+
+    public void updateShippingLocationUpdateDto(ShippingLocationUpdateDto shippingLocationUpdateDto) {
+        this.shipLocaId = shippingLocationUpdateDto.getShipLocaId();
+        this.specAddr = shippingLocationUpdateDto.getSpecAddr();
+        this.defAddrFl = shippingLocationUpdateDto.getDefAddrFl();
+        this.telNo = shippingLocationUpdateDto.getTelNo();
+        this.recAddr = shippingLocationUpdateDto.getRecAddr();
+        this.recName = shippingLocationUpdateDto.getRecName();
+        this.delFl = shippingLocationUpdateDto.getDelFl();
+        this.currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
     }
 }

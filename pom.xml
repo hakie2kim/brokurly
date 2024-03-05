@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com</groupId>
-    <artifactId>brokurly</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>brokurly Maven Webapp</name>
-    <url>https://maven.apache.org</url>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com</groupId>
+  <artifactId>brokurly</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>brokurly Maven Webapp</name>
+  <url>https://maven.apache.org</url>
 
-    <properties>
-        <junit.version>5.0.3</junit.version>
-        <spring.version>5.3.20</spring.version>
-    </properties>
+  <properties>
+    <junit.version>5.0.3</junit.version>
+    <spring.version>5.3.20</spring.version>
+  </properties>
 
     <dependencies>
         <dependency>
@@ -119,7 +119,6 @@
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
-
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -186,6 +185,18 @@
           <artifactId>commons-lang3</artifactId>
           <version>3.12.0</version>
         </dependency>
+       <!-- mail 인증을 위한 라이브러리 -->
+        <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4.7</version>
+        </dependency>
+        <!-- mail 서포트 -->
+        <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>${spring.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -202,3 +213,4 @@
         </plugins>
     </build>
 </project>
+
