@@ -65,8 +65,13 @@ public class CustomerCartController {
     @ResponseBody
     public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
-//        return "cart/cart";
         return "redirect:/cart/{custId}";
     }
 
+    @PostMapping("/vacate")
+    @ResponseBody
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto){
+        CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
+
+    }
 }

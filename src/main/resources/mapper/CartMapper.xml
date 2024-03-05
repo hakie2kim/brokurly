@@ -55,8 +55,4 @@
         WHERE cust_id = #{custId}
     </delete>
 
-
-
-
-
 </mapper>

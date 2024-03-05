@@ -48,7 +48,7 @@
         <include refid="select"/>
         WHERE code_id LIKE CONCAT(#{cateCode}, '%');
     </select>
-  
+
     <!--  UPDATE  -->
     <update id="update">
         UPDATE category_code

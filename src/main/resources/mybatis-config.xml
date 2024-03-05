@@ -28,10 +28,10 @@
         <typeAlias type="com.brokurly.entity.board.Notice" alias="Notice"/>
         <typeAlias type="com.brokurly.entity.board.FAQBoard" alias="FAQBoard"/>
         <typeAlias type="com.brokurly.entity.board.FAQCate" alias="FAQCate"/>
-        <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
         <typeAlias type="com.brokurly.entity.cart.CustomerCart" alias="CustomerCart"/>
         <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
+        <typeAlias type="com.brokurly.entity.goods.GoodsInquiryLog" alias="GoodsInquiryLog"/>
 
     </typeAliases>
 </configuration>
