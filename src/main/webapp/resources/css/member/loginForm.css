@@ -81,3 +81,10 @@ input:focus {
     line-height: 20px;
     margin-bottom: 20px;
 }
+
+.register-div__label {
+
+    width: 139px;
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -2,12 +2,18 @@ package com.brokurly.controller.member;
 
 
 import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.service.member.MemberService;
+import com.brokurly.utils.MailHandler;
+import com.brokurly.utils.MailTempKey;
 import com.brokurly.utils.SessionConst;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,13 +31,19 @@ import java.util.stream.Stream;
 @Slf4j
 @Controller
 @RequestMapping("/member")
+@PropertySource("classpath:application.properties")
 public class MemberController {
 
 
     private final MemberService memberService;
+    private final JavaMailSender javaMailSender;
 
-    MemberController(MemberService memberService){
+    @Value("${email.username}")
+    private String email;
+
+    MemberController(MemberService memberService, JavaMailSender javaMailSender){
         this.memberService = memberService;
+        this.javaMailSender = javaMailSender;
     }
 
     // local signup start
@@ -124,7 +136,7 @@ public class MemberController {
 
             Map<String,String> validatorRs = memberService.validateHandling(errors);
             Stream<String> streamValidatorRs = validatorRs.keySet().stream();
-                            streamValidatorRs.forEach(i -> model.addAttribute(i));
+            streamValidatorRs.forEach(i -> model.addAttribute(i));
 
             return "member/loginForm";
         }
@@ -176,11 +188,34 @@ public class MemberController {
     //local login end
 
     //find id&pwd
-    @GetMapping("/find/pwd")
+    @GetMapping("/find/password")
     public String findIdByEmail(){
         return "/member/findForm";
     }
 
+    // email 인증을 통한 pwd 재설정
+    @PostMapping("/find/password")
+    public void sendEmail(MemberAndMailAuthDto memberAndMailAuthDto) throws Exception{
+        // 랜덤 문자열을 생성해서 mailKey에 넣기
+        String mailKey = new MailTempKey().getKey();
+        memberAndMailAuthDto.setMailKey(mailKey);
+
+        log.info("mailKey = {}", mailKey);
+
+        // 이메일 발송
+        MailHandler sendMail = new MailHandler(javaMailSender);
+        sendMail.setSubject("[Brokurly] 인증코드 안내]"); // 메일 제목
+        sendMail.setText(
+                "<h1>Brokurly 비밀번호 재설정</h1>" +
+                        "<br>아래의 인증 번호를 확인해주세요<br>" +
+                        "<h3>" +mailKey + "</h3>"+
+                        "<br><br>이메일 인증 절차에 따라 이메일 인증코드를 발급해드립니다."+
+                        "<br>인증코드는 이메일 발송 시점으로부터 3분동안 유효합니다."
+        );
+        sendMail.setFrom(email,"브로컬리");
+        sendMail.setTo(memberAndMailAuthDto.getEmail());
+        sendMail.send();
+    }
     // mypage/info/modify
     @GetMapping("/info/modify")
     public String modify(HttpServletRequest req, Model model){
