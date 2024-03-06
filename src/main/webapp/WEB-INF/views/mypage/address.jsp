@@ -37,7 +37,6 @@
                 data: $(this).serialize(),
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 success: function (response) {
-                    alert("Your form has been sent successfully.");
                     window.location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -46,6 +45,18 @@
             })
         });
     };
+
+    function modifyShippingLocation(shipLocaId) {
+        console.log("modifyShippingLocation(shipLocaId)");
+
+        const left = screen.width / 2 - 300;
+        const top = screen.height / 2 - 350;
+        window.open(
+            "/mypage/address/shipping-address/update/" + shipLocaId,
+            "_blank",
+            "width=600, height=700, left=" + left + ", top=" + top
+        );
+    }
 </script>
 <body>
 <div class="top">
@@ -245,7 +256,7 @@
                             <div class="column deli-type">
                                 <span type="direct">샛별배송</span>
                             </div>
-                            <div class="column fix">
+                            <div class="column fix" onclick="modifyShippingLocation('${shippingLocation.shipLocaId}')">
                                 <button>
                                     <img src="/resources/image/modify.png" width="24px" height="24px">
                                 </button>
