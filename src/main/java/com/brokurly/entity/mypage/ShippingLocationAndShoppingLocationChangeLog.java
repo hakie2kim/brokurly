@@ -20,7 +20,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
     private String addr;
     private String specAddr;
     private String defAddrFl;
-    private String shipLocaRegDt;
+    private Date shipLocaRegDt;
     private String telNo;
     private String recAddr;
     private String recName;

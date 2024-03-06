@@ -17,7 +17,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -67,6 +66,11 @@ public class ShippingLocationService {
                 .collect(Collectors.toList());
     }
 
+    public ShippingLocationModifyPageDto getShippingLocationToModifyByShipLocaId(String shipLocaId) {
+        return shippingLocationDao.selectByShipLocaId(shipLocaId)
+                .makeShippingLocationModifyPageDto();
+    }
+
     @Transactional
     public void unflagDefAddr(String custId) {
         ShippingLocationUpdateDto shippingLocationUpdateDtoHavingDefAddr = shippingLocationDao.selectByCustomer(custId)
@@ -107,22 +111,61 @@ public class ShippingLocationService {
         }
     }
 
+    // 배송지 수정 (address-update.jsp)
     @Transactional
-    public void changeCurrAddr(String custId, ShippingLocationUpdateDto shippingLocationUpdateDto) {
-        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
-        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+    public void modifyShippingLocation(String custId, ShippingLocationModifyDto shippingLocationModifyDto) {
+        String shipLocaId = shippingLocationModifyDto.getShipLocaId();
+        String specAddr = shippingLocationModifyDto.getSpecAddr();
+        String defAddrFl = shippingLocationModifyDto.getDefAddrFl();
+        String telNo = shippingLocationModifyDto.getTelNo();
+        String recName = shippingLocationModifyDto.getRecName();
 
-        // 기존 현재 배송지를 모두 N으로 바꿈
+        // 기본 배송지로 설정할 경우 다른 배송지의 기본 배송지 값을 N으로 변경
+        if ("Y".equals(defAddrFl))
+            unflagDefAddr(custId);
+
+        // 기존 ShippingLocation 정보 갖고 옴
+        ShippingLocation shippingLocationExisting = shippingLocationDao.selectByShipLocaId(shipLocaId);
+
+        shippingLocationModifyDto = shippingLocationExisting.makeShippingLocationModifyDto();
+        shippingLocationModifyDto.setSpecAddr(specAddr);
+        shippingLocationModifyDto.setDefAddrFl(defAddrFl);
+        shippingLocationModifyDto.setTelNo(telNo);
+        shippingLocationModifyDto.setRecName(recName);
+
+        /*// 현재 주소만을 바꾸려는 경우
+        // 1. 기존 현재 배송지를 모두 N으로 바꿈
+        // 2. 바꾸려는 shipLocaId의 currAddrFl를 Y로 변경
+        if ("Y".equals(currAddrFl)) {
+            unflagCurrAddrFl(custId);
+            shippingLocationUpdateCurrAddrDto.setCurrAddrFl(currAddrFl);
+        } else { // 현재 주소 제외 배송지를 수정하려는 경우
+        }*/
+
+        shippingLocationExisting.updateShippingLocationModifyDto(shippingLocationModifyDto);
+
+        log.info("{}", shippingLocationExisting);
+
+        shippingLocationDao.updateByShipLocaId(shippingLocationExisting);
+    }
+
+    // 현재 배송지 수정 (address.jsp)
+    @Transactional
+    public void modifyCurrShippingLocation(String custId, String shipLocaId) {
+        // 1. 기존 현재 배송지를 모두 N으로 바꿈
         unflagCurrAddrFl(custId);
 
         // 기존 ShippingLocation 정보 갖고 옴
-        ShippingLocation shippingLocation = shippingLocationDao.selectByShipLocaId(shipLocaId);
-        // UpdateDto를 통해 갖고 온 정보 (currAddrFl)로 변경
-        ShippingLocationUpdateDto shippingLocationUpdateCurrAddrDto = shippingLocation.makeShippingLocationUpdateDto();
-        shippingLocationUpdateCurrAddrDto.setCurrAddrFl(currAddrFl);
-        shippingLocation.updateShippingLocationUpdateDto(shippingLocationUpdateCurrAddrDto);
+        ShippingLocation shippingLocationExisting = shippingLocationDao.selectByShipLocaId(shipLocaId);
+        // 2. 바꾸려는 shipLocaId의 currAddrFl를 Y로 변경
+        ShippingLocationModifyDto shippingLocationModifyDto = shippingLocationExisting.makeShippingLocationModifyDto();
+        shippingLocationModifyDto.setCurrAddrFl("Y");
 
-        shippingLocationDao.updateByShipLocaId(shippingLocation);
+        shippingLocationExisting.updateShippingLocationModifyDto(shippingLocationModifyDto);
+
+        log.info("{}", shippingLocationExisting);
+
+        shippingLocationDao.updateByShipLocaId(shippingLocationExisting);
     }
 
     private static String currDateAsYYYYMMDD() {
