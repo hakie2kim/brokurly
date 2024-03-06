@@ -31,18 +31,28 @@
         $(".checkbox").on("click", function (e) {
             e.preventDefault();
 
-            $.ajax({
-                url: "/mypage/address",
+            const shipLocaId = $(this).children().val();
+
+            fetch("/mypage/address/shipping-address/update-curraddr/" + shipLocaId, {
+                method: "PATCH",
+            })
+                .then(response => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+            /*$.ajax({
+                url: "mypage/address/shipping-address/update/" + shipLocaId,
                 method: "POST",
-                data: $(this).serialize(),
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 success: function (response) {
                     window.location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.error(textStatus, errorThrown);
                 }
-            })
+            })*/
         });
     };
 
@@ -233,11 +243,13 @@
                         <div style="display: flex">
                             <div class="column default">
                                 <c:if test="${shippingLocation.currAddrFl eq 'N'}">
-                                    <form class="checkbox" method="post">
+                                    <%--<form class="checkbox" method="post">
                                         <input type="hidden" name="_method" value="patch"/>
                                         <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
-                                        <input type="hidden" name="currAddrFl" value="Y"/>
-                                    </form>
+                                    </form>--%>
+                                    <div class="checkbox">
+                                        <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
+                                    </div>
                                 </c:if>
                                 <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
                                     <div class="checkbox-checked"></div>

@@ -188,6 +188,17 @@ public class MypageController {
         return HttpStatus.OK;
     }
 
+    @PatchMapping("/address/shipping-address/update-curraddr/{shipLocaId}")
+    @ResponseBody
+//    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        // 현재 배송지 수정
+        shippingLocationService.modifyCurrShippingLocation(custId, shipLocaId);
+        return HttpStatus.OK;
+    }
+
     @GetMapping("/address/shipping-address")
     String shippingAddress() {
         return "/mypage/shipping-address";
