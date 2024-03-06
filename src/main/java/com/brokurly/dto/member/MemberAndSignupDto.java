@@ -15,9 +15,9 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberAndSignupDto {
-    @NotBlank(message = "아이디를 입력해 주세요")
-    @Pattern(regexp = "^[a-z]+[a-z0-9]{5,17}$",
-            message = "id regEx is checked. back") //6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합
+//    @NotBlank(message = "아이디를 입력해 주세요")
+//    @Pattern(regexp = "^[a-z]+[a-z0-9]{5,17}$",
+//            message = "id regEx is checked. back") //6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합
     private String custId;
 
     @NotBlank(message = "비밀번호를 입력해 주세요")

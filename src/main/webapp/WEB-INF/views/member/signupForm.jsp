@@ -26,7 +26,6 @@
 <form id="frm" action="<c:url value="/member/signup"/>" method="POST">
     <input type="hidden" name="_method" value="POST">
     <section>
-
         <!-- modal start -->
         <div class="modal">
             <div class="modal_content_body">
@@ -34,7 +33,7 @@
                 <!-- modalContent -->
             </div>
             <div class="modal_alert_body">
-                <button type="button" class="close-modal-btn">확인</button>
+                <button  type="button" class="close-modal-btn btn">확인</button>
             </div>
         </div>
         <!-- modal end -->
@@ -46,23 +45,46 @@
         <div class="register-div">
             <div class="column-div">
           <span class="register-div__label"
-          >아이디<span class="Required-entr__label">*</span></span
+          >이메일<span class="Required-entr__label">*</span></span
           >
                 <input
                         type="text"
-                        placeholder="아이디를 입력해 주세요"
+                        placeholder="예: brokurly@gmail.com"
                         title="이 입력란을 작성하세요"
-                        id="custId"
-                        name="custId"
-                        maxlength="17"
+                        id="email"
+                        name="email"
                 />
-                <button type="button" id="custId_btn" class="open-modal-btn">중복확인</button>
+                <button type="button" id="email_btn" class="open-modal-btn btn">중복확인</button>
             </div>
-            <div class="id-info-div">
+            <div class="email-info-div">
           <span
-          >6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합</span
+          >이메일 형식으로 입력해 주세요</span
           >
             </div>
+            <div class="email-infoSec-div">
+          <span
+          >이메일을 입력해주세요</span
+          >
+            </div>
+<%--            <div class="column-div">--%>
+<%--          <span class="register-div__label"--%>
+<%--          >아이디<span class="Required-entr__label">*</span></span--%>
+<%--          >--%>
+<%--                <input--%>
+<%--                        type="text"--%>
+<%--                        placeholder="아이디를 입력해 주세요"--%>
+<%--                        title="이 입력란을 작성하세요"--%>
+<%--                        id="custId"--%>
+<%--                        name="custId"--%>
+<%--                        maxlength="17"--%>
+<%--                />--%>
+<%--                <button type="button" id="custId_btn" class="open-modal-btn">중복확인</button>--%>
+<%--            </div>--%>
+<%--            <div class="id-info-div">--%>
+<%--          <span--%>
+<%--          >6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합</span--%>
+<%--          >--%>
+<%--            </div>--%>
             <div class="column-div">
           <span class="register-div__label"
           >비밀번호<span class="Required-entr__label">*</span></span
@@ -103,29 +125,29 @@
           >이름을 입력해 주세요</span
           >
             </div>
-            <div class="column-div">
-          <span class="register-div__label"
-          >이메일<span class="Required-entr__label">*</span></span
-          >
-                <input
-                        type="text"
-                        placeholder="예: brokurly@gmail.com"
-                        title="이 입력란을 작성하세요"
-                        id="email"
-                        name="email"
-                />
-                <button type="button" id="email_btn" class="open-modal-btn">중복확인</button>
-            </div>
-            <div class="email-info-div">
-          <span
-          >이메일 형식으로 입력해 주세요</span
-          >
-            </div>
-            <div class="email-infoSec-div">
-          <span
-          >이메일을 입력해주세요</span
-          >
-            </div>
+<%--            <div class="column-div">--%>
+<%--          <span class="register-div__label"--%>
+<%--          >이메일<span class="Required-entr__label">*</span></span--%>
+<%--          >--%>
+<%--                <input--%>
+<%--                        type="text"--%>
+<%--                        placeholder="예: brokurly@gmail.com"--%>
+<%--                        title="이 입력란을 작성하세요"--%>
+<%--                        id="email"--%>
+<%--                        name="email"--%>
+<%--                />--%>
+<%--                <button type="button" id="email_btn" class="open-modal-btn">중복확인</button>--%>
+<%--            </div>--%>
+<%--            <div class="email-info-div">--%>
+<%--          <span--%>
+<%--          >이메일 형식으로 입력해 주세요</span--%>
+<%--          >--%>
+<%--            </div>--%>
+<%--            <div class="email-infoSec-div">--%>
+<%--          <span--%>
+<%--          >이메일을 입력해주세요</span--%>
+<%--          >--%>
+<%--            </div>--%>
             <div class="column-div">
           <span class="register-div__label"
           >휴대폰<span class="Required-entr__label">*</span></span
@@ -137,7 +159,7 @@
                         id="telNo"
                         name="telNo"
                 />
-                <button type="button" class="open-modal-btn" value="3" id="telNo_btn">인증번호 받기</button>
+                <button type="button" class="open-modal-btn btn" value="3" id="telNo_btn">인증번호 받기</button>
             </div>
             <div class="telNo-info-div">
           <span
@@ -189,14 +211,21 @@
                     <input type="text" id="mm" placeholder="MM" /><span>/</span>
                     <input type="text" id="dd" placeholder="DD" />
                     <input type="hidden" id="yyyymmdd" value="" name="birthDt">
+                    <div class="yyyy-info-div">
+          <span
+          >
+            태어난 년도 4자리를 정확하게 입력해주세요.</span
+          >
+                    </div>
                 </div>
             </div>
         </div>
         <hr />
         <div class="agreement-div">
-        <span class="register-div__label"
-        >이용약관동의<span class="Required-entr__label">*</span></span
+        <div class="register-div__label"
+        >이용약관동의<span class="Required-entr__label">*</span></div
         >
+            <div class="test_div">
             <div class="agreement-div__column">
                 <div>
                     <input type="radio" id="agreement1" /><label for="agreement1"
@@ -244,9 +273,10 @@
             >본인은 만 14세 이상입니다.<span>(필수)</span></label
             >
             </div>
+            </div>
         </div>
         <hr />
-        <button type="button" class="register-btn">가입하기</button>
+        <button type="button" class="register-btn btn">가입하기</button>
     </section>
 </form>
 <script>
@@ -259,6 +289,8 @@
         let name = document.querySelector("#name");
         let email = document.querySelector("#email");
         let telNo = document.querySelector("#telNo");
+
+        let yyyy = document.querySelector("#yyyy");
 
         let regBtn = document.querySelector(".register-btn");
 
@@ -283,6 +315,7 @@
             const idRegEx = /^[a-z]+[a-z0-9]{5,17}$/g; // 아이디 정규식
             const emailRegEx = /[a-z0-9]+@gmail.com/; // 이메일 정규식 > 추후에 메일인증을 gmail로 구현할 예정
             const telNoRegEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;  // 휴대폰번호 > 숫자만 가능 01?-4자리-4자리
+            const yyyyRegEx = /d{4}/; // yyyy 연도
 
             let inputed = "";
             let regEx = "";
@@ -297,16 +330,17 @@
                 let telNo = document.querySelector("#telNo").value.trim();
                 inputed = telNo.slice(0,3)+'-'+telNo.slice(3,7)+"-"+telNo.slice(7,telNo.length);
                 regEx = telNoRegEx;
+            }else if(value === 4){
+                inputed = yyyy.value.trim();
+                regEx = yyyyRegEx;
             }
 
             return !regEx.test(inputed) || !inputed;
         }
 
+        // 휴대폰 번호 유효성 검사
         telNo.addEventListener("input", () => {
-            const regEx = /[^-0-9]/g;
-            let telNoInfoDiv = document.querySelector(".telNo-info-div");
-
-            if(regEx.test(telNo.value)){
+            if(regExp(3)){
                 telNo.value = telNo.value.replace(/[^-0-9]/g, "");
                 telNoInfoDiv.style.display = "block";
             }else{
@@ -315,7 +349,17 @@
 
         });
 
-        // // 이름 유효성 검사
+        yyyy.addEventListener("input", () => {
+            let yyyyInfoDiv = document.querySelector(".yyyy-info-div");
+
+            if(regExp(4)){
+                yyyyInfoDiv.style.display = "block";
+            }else{
+                yyyyInfoDiv.style.display = "none";
+            }
+        });
+
+        // 이름 유효성 검사
         name.addEventListener("input", () => {
             let nameInfoDiv = document.querySelector(".name-info-div");
 

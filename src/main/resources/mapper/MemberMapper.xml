@@ -28,7 +28,7 @@
         (cust_id, pwd, name, email, tel_no, sex,
          birth_dt, consent,sns_id)
         VALUES
-            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
+            (#{email}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
              #{birthDt}, '0' ,'0')
     </insert>
 

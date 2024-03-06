@@ -52,6 +52,7 @@
     </div>
 </section>
 </form>
+
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 <script>
     window.onload = function(){

@@ -5,18 +5,19 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-        <mvc:interceptors>
-            <mvc:interceptor>
-                <mvc:mapping path="/member/signup"/>
-<!--                <mvc:mapping path="/member/logout"/> mapping path 추가 -->
-                <bean class="com.brokurly.interceptor.LoginCheckInterceptor"></bean>
-            </mvc:interceptor>
-        </mvc:interceptors>
+<!--        <mvc:interceptors>-->
+<!--            <mvc:interceptor>-->
+<!--                <mvc:mapping path="/member/signup"/>-->
+<!--&lt;!&ndash;                <mvc:mapping path="/member/logout"/> mapping path 추가 &ndash;&gt;-->
+<!--                <bean class="com.brokurly.interceptor.LoginCheckInterceptor"></bean>-->
+<!--            </mvc:interceptor>-->
+<!--        </mvc:interceptors>-->
 
 
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:resources mapping="/include/**" location="WEB-INF/views/include/" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>

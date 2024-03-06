@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="loginName" value="${loginName}"/>
+<c:set var="loginSession" value="${pageContext.request.getSession(false)==null ? '' : loginName}"/>
 <html>
 <head>
     <title>Title</title>
@@ -17,9 +19,9 @@
 <body>
 <%--<%@ include file="header.jsp" %>--%>
 <%--<c:import url="header.jsp" />--%>
-<jsp:include page="header.jsp">
-    <jsp:param name="selectMain" value="${selectMain}"/>
-</jsp:include>
+<%--<jsp:include page="../include/header.jsp">--%>
+<%--    <jsp:param name="selectMain" value="${selectMain}"/>--%>
+<%--</jsp:include>--%>
 
 <div class="best-page">
     <div class="best-menu-wrap1">
@@ -675,6 +677,7 @@
     /></a>
     </div>
 </div>
+
 
 
 </body>

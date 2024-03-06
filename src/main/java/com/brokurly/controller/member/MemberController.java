@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,7 +88,7 @@ public class MemberController {
 //            streamValidatorRs.forEach(i -> log.info("i = {} ", i));
 
 
-            return "/signup";
+            return "member/signup";
         }
 
         memberService.signUp(memberAndSignupDto);
@@ -114,7 +115,7 @@ public class MemberController {
      * @return String
      */
     @PostMapping("/login")
-    public String login(@Valid MemberAndLoginDto memberAndLoginDto, String reqURI,Errors errors, HttpServletResponse res, HttpServletRequest req, Model model){
+    public String login(@Valid MemberAndLoginDto memberAndLoginDto, String reqURI, Errors errors, HttpServletResponse res, HttpServletRequest req, Model model, RedirectAttributes Ra){
         // 비밀번호는 암호화 처리 되어있음.
 
         // 1. 로그인 정보 넘어오면 유효성 확인
@@ -141,11 +142,17 @@ public class MemberController {
         HttpSession session = req.getSession();
         //  3-1. 세션 있으면 있는 세션 반환, 없으면 신규 생성 후 메인 이동 (기본값 true)
         session.setAttribute(SessionConst.LOGIN_MEMBER, resultLoginDto);
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
+        String loginName = custIdDto.getName();
+        log.info("loginName = {}", loginName);
+
+        session.setAttribute("loginName",loginName);
+//        Ra.addFlashAttribute("loginName",loginName);
 
 //        return "redirect:/categories/best-page" *** db 연결 후 수정;
         // 4. reqURL 여부에 따른 이동
-        reqURI = reqURI == null || reqURI.equals("") ? "/" : reqURI;
+        reqURI = reqURI == null || reqURI.equals("") ? "/categories/best-page" : reqURI;
 
         return "redirect:"+reqURI;
     }
@@ -161,9 +168,9 @@ public class MemberController {
             session.invalidate();
         }
 
-        //return "redirect:/categories/best-page";
+        return "redirect:/categories/best-page";
 
-        return "redirect:/";
+//        return "redirect:/";
     }
 
     //local login end

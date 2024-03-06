@@ -8,7 +8,7 @@ body {
     font-family: var(--main-font);
 }
 section {
-    height: 100vh;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
