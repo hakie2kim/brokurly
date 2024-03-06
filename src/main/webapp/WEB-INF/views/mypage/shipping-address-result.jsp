@@ -83,7 +83,7 @@
     </div>
     <div class="row3">
         <label>
-            <input type="checkbox" name="defAddrFl"/>
+            <input type="checkbox" name="defAddrFl" />
             <span style="margin-left: 5px">기본 배송지로 저장</span>
         </label>
     </div>

@@ -142,10 +142,26 @@ public class MypageController {
         if (defAddrFl.equals("Y"))
             shippingLocationService.unflagDefAddr(custId);
 
-        shippingLocationService.addNewShippingLocation(addr, specAddr, defAddrFl);
+        shippingLocationService.addNewShippingLocation(custId, addr, specAddr, defAddrFl);
 //        List<ShippingLocationDto> shippingLocationListByCustomer = shippingLocationService.getShippingLocationListByCustomer(custId);
 
 //        return new ResponseEntity<>("배송지 추가", HttpStatus.OK);
+        return HttpStatus.OK;
+    }
+
+    @PatchMapping("/address")
+    @ResponseBody
+//    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+    HttpStatus modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+        System.out.println("MypageController.modifyShippingAddress");
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
+        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+        log.info("ship_loca_id: {} curr_addr_fl: {}",shipLocaId, currAddrFl);
+
+        shippingLocationService.changeCurrAddr(custId, shippingLocationUpdateDto);
+
         return HttpStatus.OK;
     }
 

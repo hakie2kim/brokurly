@@ -25,6 +25,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
     private String recAddr;
     private String recName;
     private String delFl;
+    private String currAddrFl;
 
     // ShoppingLocationChangeLog
     private int shipChgNo;
@@ -44,6 +45,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
                 .recAddr(recAddr)
                 .recName(recName)
                 .delFl(delFl)
+                .currAddrFl(currAddrFl)
                 .build();
     }
 
@@ -57,6 +59,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
        this.recAddr = shippingLocationDto.getRecAddr();
        this.recName = shippingLocationDto.getRecName();
        this.delFl = shippingLocationDto.getDelFl();
+       this.currAddrFl = shippingLocationDto.getCurrAddrFl();
     }
 
     public ShippingLocationUpdateDto makeShippingLocationUpdateDto() {
@@ -68,6 +71,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
                 .recAddr(recAddr)
                 .recName(recName)
                 .delFl(delFl)
+                .currAddrFl(currAddrFl)
                 .build();
     }
 
@@ -79,5 +83,6 @@ public class ShippingLocationAndShoppingLocationChangeLog {
         this.recAddr = shippingLocationUpdateDto.getRecAddr();
         this.recName = shippingLocationUpdateDto.getRecName();
         this.delFl = shippingLocationUpdateDto.getDelFl();
+        this.currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
     }
 }

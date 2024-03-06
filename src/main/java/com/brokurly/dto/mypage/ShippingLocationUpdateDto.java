@@ -16,4 +16,5 @@ public class ShippingLocationUpdateDto {
     private String recAddr;
     private String recName;
     private String delFl;
+    private String currAddrFl;
 }

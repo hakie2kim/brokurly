@@ -77,7 +77,6 @@
         WHERE keyword = #{keyword}
     </select>
 
-
     <select id="findByItemId" resultType="GoodsAnnouncement">
         SELECT *
         FROM item_announcement

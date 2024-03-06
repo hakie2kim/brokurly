@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -19,6 +18,27 @@
   <div class="header0">
   </div>
 
+  <%--  <div id="container">--%>
+  <%--    <h2>Lorem Ipsum</h2>--%>
+  <%--    <button id="btn-modal">모달 창 열기 버튼</button>--%>
+  <%--    <div id="lorem-ipsum"></div>--%>
+  <%--  </div>--%>
+  <%--  <button id="btn-modal">모달 창 열기 버튼</button>--%>
+  <%--  <div id="modal" class="modal-overlay">--%>
+  <%--    <div class="modal-window">--%>
+  <%--      <div class="title">--%>
+  <%--        <h2>모달</h2>--%>
+  <%--      </div>--%>
+  <%--      <div class="close-area">X</div>--%>
+  <%--      <div class="content">--%>
+  <%--        <p>가나다라마바사 아자차카타파하</p>--%>
+  <%--        <p>가나다라마바사 아자차카타파하</p>--%>
+  <%--        <p>가나다라마바사 아자차카타파하</p>--%>
+  <%--        <p>가나다라마바사 아자차카타파하</p>--%>
+  <%--      </div>--%>
+  <%--    </div>--%>
+  <%--  </div>--%>
+
   <div class="goods-0">
     <div class="header1"> <!-- 해더 나중에 수정해야됨 -->
       <div class="header2">
@@ -38,12 +58,12 @@
             </div>
             <h2>
               <span class="goods-118">${goods.dcRt}<!-- -->%</span> <!-- 할인율 -->
-              <span class="goods-119" id="resultPrice"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+              <span class="goods-119" id="resultPrice"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원"/>
               </span>
             </h2>
             <span class="goods-45">
               <span class="originPrice">
-                <fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
+                <fmt:formatNumber value="${goods.price}" pattern="#,### 원"/>
               </span>
             </span>
             <p class="goods-120">원산지: ${goods.origin}</p>
@@ -97,15 +117,17 @@
                         <div class="goods-104">
                           <button class="minus_btn goods-105" type="button" aria-label="수량내리기"></button>
                           <div class="goods-106">
-                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                            <input type="text" disabled="disabled"
+                                   style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;"
+                                   class="quantity_input" value="1">
                           </div>
                           <button class="plus_btn goods-107" type="button" aria-label="수량올리기"></button>
                         </div>
                         <div>
-                          <span class="goods-8 originPrice" ><fmt:formatNumber value="${goods.price}" pattern="#,### 원" />
+                          <span class="goods-8 originPrice"><fmt:formatNumber value="${goods.price}" pattern="#,### 원"/>
                             </span>
                           <span id="price">
-                          <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                          <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원"/>
                           </span>
                         </div>
                       </div>
@@ -116,8 +138,8 @@
               <div>
                 <div>
                   <div class="goods-42">
-                    <span>총 상품금액 :</span>
-                    <span class="totalPrice goods-108"><fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                    <span>총 상품금액 : </span>
+                    <span class="totalPrice goods-108"><fmt:formatNumber value="${goods.salePrice}" pattern=" #,### 원"/>
                     </span>
                   </div>
                   <div class="goods-43">
@@ -193,20 +215,20 @@
                       <p>${goods.itemSpec}</p>
                     </div>
                   </div>
-<%--                  <div>--%>
-<%--                    <h3>--%>
-<%--                      <span>BroKurly’s Tip</span>--%>
-<%--                    </h3>--%>
-<%--                    <div>--%>
-<%--                      <div>--%>
-<%--                        <p>--%>
-<%--                          <strong>보관법</strong>--%>
-<%--                          <b>・</b>--%>
-<%--                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.--%>
-<%--                        </p>--%>
-<%--                      </div>--%>
-<%--                    </div>--%>
-<%--                  </div>--%>
+                  <%--                  <div>--%>
+                  <%--                    <h3>--%>
+                  <%--                      <span>BroKurly’s Tip</span>--%>
+                  <%--                    </h3>--%>
+                  <%--                    <div>--%>
+                  <%--                      <div>--%>
+                  <%--                        <p>--%>
+                  <%--                          <strong>보관법</strong>--%>
+                  <%--                          <b>・</b>--%>
+                  <%--                          -2~10℃에서 냉장 보관하세요. 신선한 상태로 보내드리는 냉장육이므로, 수령 후 가급적 빠른 시일 내에 섭취하는 것이 좋습니다.--%>
+                  <%--                        </p>--%>
+                  <%--                      </div>--%>
+                  <%--                    </div>--%>
+                  <%--                  </div>--%>
                 </div>
               </div>
             </div>
@@ -217,8 +239,8 @@
                   src="https://img-cf.kurly.com/cdn-cgi/image/width=1010,quality=90/shop/data/goodsview/20230904/gv00000723355_1.jpg"
                   alt="자세히보기 이미지">
             </div>
-            <input type="hidden" class="itemAnnCate" value="${announcement.itemAnnCate}" >
-            <input type="hidden" class="itemAnn" value="${announcement.itemAnn}" >
+            <input type="hidden" class="itemAnnCate" value="${announcement.itemAnnCate}">
+            <input type="hidden" class="itemAnn" value="${announcement.itemAnn}">
             <div class="goods-12">
               <h3>상품고시정보</h3>
               <ul class="goods-9">
@@ -621,7 +643,8 @@
                         </div>
                         <button class="likeX">
                                                         <span>
-                                                            <img src="/resources/image/like1.png" alt="" class="img2" id="like1">
+                                                            <img src="/resources/image/like1.png" alt="" class="img2"
+                                                                 id="like1">
                                                         </span>
                           <span>도움돼요 3</span>
                         </button>
@@ -646,8 +669,10 @@
                         이상으로 맛있어서 레시피 공유해볼게요! 👩‍🍳 </p>
                       <div>
                         <button>
-                          <span style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                              <span style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
+                          <span
+                              style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
+                              <span
+                                  style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
                                   <img alt="" aria-hidden="true"
                                        src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
                                        style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
@@ -743,7 +768,7 @@
                   </li>
                   <li>
                     배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이컬리내
-                    <a href="/mypage/inquiry/list">1:1 문의</a>에 남겨주세요.
+                    <a href="/board/inquiry">1:1 문의</a>에 남겨주세요.
                   </li>
                 </ul>
               </div>
@@ -759,168 +784,187 @@
                   </tr>
                   </thead>
                   <!-- ------------------------------------------------------------------------------------------------------------- -->
-                  <tbody>
-                  <tr class="goods-22">                <!--1번 행-->
-                    <td class="goods-65">품절표시가 없네요</td>
-                    <td class="goods-23">이*우</td>
-                    <td class="goods-23">2024.02.07</td>
-                    <td class="goods-23">답변대기</td>
-                  </tr>
+                  <c:forEach items="${inquiry}" var="in">
+                    <input type="hidden" class="inquiryNumber" value="${in.inqNo}">
+                    <tbody>
+                    <tr class="goods-22">
+                      <td class="goods-65">${in.inqTitle}</td>
+                      <td class="goods-23 maskingName">${in.name}</td>
+                      <td class="goods-23">${in.regDt}</td>
+                      <td class="goods-26">${in.replyStat}</td>
+                    </tr>
 
-                  <tr class="goods-25">            <!--1번 행 답변-->
-                    <td colspan="4">
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-67"></span>
-                          </div>
-                          <div class="goods-58">
-                            <span>구매하면 품절인데 구매버튼은 계속 유지됩니다.<br></span>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- ------------------------------------------------------------------------------------------------------------- -->
-
-                  <tr class="goods-22">                <!--2번 행-->
-                    <td class="goods-65">상품이 터져서왔어요</td>
-                    <td class="goods-23">한*수</td>
-                    <td class="goods-23">2024.02.01</td>
-                    <td class="goods-26">답변완료</td>
-                  </tr>
-
-                  <tr class="goods-25">                <!--2번 행 답변-->
-                    <td colspan="4">
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-67"></span>
-                          </div>
-                          <div class="goods-58">
-                            <span>위에 비닐이 터져서 고기가노출된상태로왔어요<br/></span>
-                            <span>생고기다보니 위생적이지않아 교환접수부탁드립니다.<br/></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="css-tnubsz e1ptpt003">
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-68"></span>
-                          </div>
-                          <div class="goods-58">
-                            <div>
-                              안녕하세요 고객님<br/><br/>현재 문의량이 많아
-                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을
-                              드리고자 하였음에도, 시간이 지난 현재 답변을
-                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/>
+                    <tr class="goods-25">
+                      <td colspan="4">
+                        <div>
+                          <div class="goods-57">
+                            <div class="goods-66">
+                              <span class="goods-67"></span>
+                            </div>
+                            <div class="goods-58">
+                              <span>${in.inqContent}<br/></span>
                             </div>
                           </div>
                         </div>
-                        <div class="goods-69">2024.02.01</div>
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- ------------------------------------------------------------------------------------------------------------- -->
-                  <tr class="goods-22">                       <!--3번 행-->
-                    <td class="goods-65">포장다찢어져서왔어요</td>
-                    <td class="goods-23">김*란</td>
-                    <td class="goods-23">2024.01.31</td>
-                    <td class="goods-26">답변완료</td>
-                  </tr>
-
-                  <tr class="goods-25">    <!--3번 행 답변-->
-                    <td colspan="4">
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-67"></span>
-                          </div>
-                          <div class="goods-58">
-                            <span>포장다 찢어져서왔어요<br/></span>
-                            <span>환불이나 교환해주세요<br/></span>
-                            <span><br/></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-68"></span>
-                          </div>
-                          <div class="goods-58">
-                            <div>
-                              안녕하세요. 고객님<br/>먼저, 바쁘신 일상에서 귀한
-                              시간 내어 통화에 응해주셔서 진심으로 감사
-                              인사드립니다.<br/><br/>고객님께서 문의하신 내용은
-                              유선상으로 안내해 드렸으나 다시 한번 상세한 내용을
-                              안내해 드립니다.<br/><br/>기대하고 주문하신 상품의
-                              포장이 파손되어 많이 놀라시고 당황하셨을 것 같아 다시
-                              한 번 죄송한 마음입니다<br/><br/>바쁜 시간 통화에
-                              응해주시어 다시 한번 감사드리며, 다양한 채널로
-                              남겨주신 목소리들을 지속해서 모니터링하고 있어
-                              앞으로도 고객님께 안전하고 신선한 먹거리와 고객님의
-                              일상을 더욱 풍족하게 해드릴 수 있는 상품을 제공하고자
-                              최선을 다하는 컬리가 되겠습니다.<br/><br/>감사합니다.<br/>Better
-                              Life for All. BroKurly
+                        <div class="css-tnubsz e1ptpt003">
+                          <div class="goods-57">
+                            <div class="goods-66">
+                              <span class="goods-68"></span>
+                            </div>
+                            <div class="goods-58">
+                              <div>
+                                  ${in.replyContent}<br/>
+                              </div>
                             </div>
                           </div>
+                          <div class="goods-69">${in.replyDt}
+                              <%--                          <fmt:parseDate let="dateString" value="${in.replyDt}" pattern="yyyyMMdd" />--%>
+                              <%--                          <fmt:formatDate value="${in.replyDt}" dateStyle="default"/>--%>
+                          </div>
                         </div>
-                        <div class="goods-69">2024.02.02</div>
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- ------------------------------------------------------------------------------------------------------------- -->
-                  <tr class="goods-22">                               <!--4번 행-->
-                    <td class="goods-65">배송이 엉망으로 왔어요</td>
-                    <td class="goods-23">박*하</td>
-                    <td class="goods-23">2024.01.31</td>
-                    <td class="goods-26">답변완료</td>
-                  </tr>
+                      </td>
+                    </tr>
+                    <!-- ------------------------------------------------------------------------------------------------------------- -->
 
-                  <tr class="goods-25">        <!--4번 행 답변-->
-                    <td colspan="4">
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-67"></span>
-                          </div>
-                          <div class="goods-58">
-                            <span>고기 포장이 찢겨서 배송됐습니다<br/></span>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div class="goods-57">
-                          <div class="goods-66">
-                            <span class="goods-68"></span>
-                          </div>
-                          <div class="goods-58">
-                            <div>
-                              안녕하세요 고객님<br/><br/>현재 문의량이 많아
-                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을
-                              드리고자<br/>하였음에도 시간이 지난 현재 답변을
-                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/><br/>저
-                              또한 상담원이기 전에 소비자로서 고객님에게 공감이 되어
-                              많이 불편하셨을 거 같아 너무 죄송합니다.<br/><br/>고객님께서
-                              문의주신 내용은 이전 1:1문의 상담을 통해 안내 받으신
-                              것으로 확인 되었습니다.<br/>조금 더 신속하게 안내해
-                              드리지 못한 점 고객님의 너그러운 양해 부탁
-                              드립니다.<br/><br/>안내드린 내용을 통해 문의 주신
-                              사항이 해결 되셨길 바랍니다.<br/><br/>이후에
-                              추가적인 문의사항이 있으시면 언제든
-                              고객행복센터(☎1644-1107) / [1:1] 문의 게시판 / 실시간
-                              카카오톡 채팅 상담을 이용해주세요.<br/><br/>감사합니다.<br/>Better
-                              Life for All. BroKurly
-                            </div>
-                          </div>
-                        </div>
-                        <div class="goods-69">2024.02.01</div>
-                      </div>
-                    </td>
-                  </tr>
-                  <!-- ------------------------------------------------------------------------------------------------------------- -->
-                  </tbody>
+                      <%--                  <tr class="goods-22">                <!--2번 행-->--%>
+                      <%--                    <td class="goods-65">상품이 터져서왔어요</td>--%>
+                      <%--                    <td class="goods-23">한*수</td>--%>
+                      <%--                    <td class="goods-23">2024.02.01</td>--%>
+                      <%--                    <td class="goods-26">답변완료</td>--%>
+                      <%--                  </tr>--%>
+
+                      <%--                  <tr class="goods-25">                <!--2번 행 답변-->--%>
+                      <%--                    <td colspan="4">--%>
+                      <%--                      <div>--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-67"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <span>위에 비닐이 터져서 고기가노출된상태로왔어요<br/></span>--%>
+                      <%--                            <span>생고기다보니 위생적이지않아 교환접수부탁드립니다.<br/></span>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                      </div>--%>
+                      <%--                      <div class="css-tnubsz e1ptpt003">--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-68"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <div>--%>
+                      <%--                              안녕하세요 고객님<br/><br/>현재 문의량이 많아--%>
+                      <%--                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을--%>
+                      <%--                              드리고자 하였음에도, 시간이 지난 현재 답변을--%>
+                      <%--                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/>--%>
+                      <%--                            </div>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                        <div class="goods-69">2024.02.01</div>--%>
+                      <%--                      </div>--%>
+                      <%--                    </td>--%>
+                      <%--                  </tr>--%>
+                      <%--                  <!-- ------------------------------------------------------------------------------------------------------------- -->--%>
+                      <%--                  <tr class="goods-22">                       <!--3번 행-->--%>
+                      <%--                    <td class="goods-65">포장다찢어져서왔어요</td>--%>
+                      <%--                    <td class="goods-23">김*란</td>--%>
+                      <%--                    <td class="goods-23">2024.01.31</td>--%>
+                      <%--                    <td class="goods-26">답변완료</td>--%>
+                      <%--                  </tr>--%>
+
+                      <%--                  <tr class="goods-25">    <!--3번 행 답변-->--%>
+                      <%--                    <td colspan="4">--%>
+                      <%--                      <div>--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-67"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <span>포장다 찢어져서왔어요<br/></span>--%>
+                      <%--                            <span>환불이나 교환해주세요<br/></span>--%>
+                      <%--                            <span><br/></span>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                      </div>--%>
+                      <%--                      <div>--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-68"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <div>--%>
+                      <%--                              안녕하세요. 고객님<br/>먼저, 바쁘신 일상에서 귀한--%>
+                      <%--                              시간 내어 통화에 응해주셔서 진심으로 감사--%>
+                      <%--                              인사드립니다.<br/><br/>고객님께서 문의하신 내용은--%>
+                      <%--                              유선상으로 안내해 드렸으나 다시 한번 상세한 내용을--%>
+                      <%--                              안내해 드립니다.<br/><br/>기대하고 주문하신 상품의--%>
+                      <%--                              포장이 파손되어 많이 놀라시고 당황하셨을 것 같아 다시--%>
+                      <%--                              한 번 죄송한 마음입니다<br/><br/>바쁜 시간 통화에--%>
+                      <%--                              응해주시어 다시 한번 감사드리며, 다양한 채널로--%>
+                      <%--                              남겨주신 목소리들을 지속해서 모니터링하고 있어--%>
+                      <%--                              앞으로도 고객님께 안전하고 신선한 먹거리와 고객님의--%>
+                      <%--                              일상을 더욱 풍족하게 해드릴 수 있는 상품을 제공하고자--%>
+                      <%--                              최선을 다하는 컬리가 되겠습니다.<br/><br/>감사합니다.<br/>Better--%>
+                      <%--                              Life for All. BroKurly--%>
+                      <%--                            </div>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                        <div class="goods-69">2024.02.02</div>--%>
+                      <%--                      </div>--%>
+                      <%--                    </td>--%>
+                      <%--                  </tr>--%>
+                    <!-- ------------------------------------------------------------------------------------------------------------- -->
+                      <%--                  <tr class="goods-22">                               <!--4번 행-->--%>
+                      <%--                    <td class="goods-65">배송이 엉망으로 왔어요</td>--%>
+                      <%--                    <td class="goods-23">박*하</td>--%>
+                      <%--                    <td class="goods-23">2024.01.31</td>--%>
+                      <%--                    <td class="goods-26">답변완료</td>--%>
+                      <%--                  </tr>--%>
+
+                      <%--                  <tr class="goods-25">        <!--4번 행 답변-->--%>
+                      <%--                    <td colspan="4">--%>
+                      <%--                      <div>--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-67"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <span>고기 포장이 찢겨서 배송됐습니다<br/></span>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                      </div>--%>
+                      <%--                      <div>--%>
+                      <%--                        <div class="goods-57">--%>
+                      <%--                          <div class="goods-66">--%>
+                      <%--                            <span class="goods-68"></span>--%>
+                      <%--                          </div>--%>
+                      <%--                          <div class="goods-58">--%>
+                      <%--                            <div>--%>
+                      <%--                              안녕하세요 고객님<br/><br/>현재 문의량이 많아--%>
+                      <%--                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을--%>
+                      <%--                              드리고자<br/>하였음에도 시간이 지난 현재 답변을--%>
+                      <%--                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/><br/>저--%>
+                      <%--                              또한 상담원이기 전에 소비자로서 고객님에게 공감이 되어--%>
+                      <%--                              많이 불편하셨을 거 같아 너무 죄송합니다.<br/><br/>고객님께서--%>
+                      <%--                              문의주신 내용은 이전 1:1문의 상담을 통해 안내 받으신--%>
+                      <%--                              것으로 확인 되었습니다.<br/>조금 더 신속하게 안내해--%>
+                      <%--                              드리지 못한 점 고객님의 너그러운 양해 부탁--%>
+                      <%--                              드립니다.<br/><br/>안내드린 내용을 통해 문의 주신--%>
+                      <%--                              사항이 해결 되셨길 바랍니다.<br/><br/>이후에--%>
+                      <%--                              추가적인 문의사항이 있으시면 언제든--%>
+                      <%--                              고객행복센터(☎1644-1107) / [1:1] 문의 게시판 / 실시간--%>
+                      <%--                              카카오톡 채팅 상담을 이용해주세요.<br/><br/>감사합니다.<br/>Better--%>
+                      <%--                              Life for All. BroKurly--%>
+                      <%--                            </div>--%>
+                      <%--                          </div>--%>
+                      <%--                        </div>--%>
+                      <%--                        <div class="goods-69">2024.02.01</div>--%>
+                      <%--                      </div>--%>
+                      <%--                    </td>--%>
+                      <%--                  </tr>--%>
+                    <!-- ------------------------------------------------------------------------------------------------------------- -->
+                    </tbody>
+                  </c:forEach>
                 </table>
               </div>
               <div class="goods-71">
@@ -956,15 +1000,18 @@
                       <button class="minus_btn goods-105" type="button" onclick='count("minus")' value='+'
                               aria-label="수량내리기"></button>
                           <div class="goods-106" name="item_cnt">
-                            <input type ="text" disabled="disabled" style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;" class="quantity_input" value="1">
+                            <input type="text" disabled="disabled"
+                                   style="background-color: rgb(255, 255, 255); text-align: center; width: 30px; border: none;"
+                                   class="quantity_input" value="1">
                           </div>
                       <button class="plus_btn goods-107" type="button" onclick='count("plus")' value='-'
                               aria-label="수량올리기"></button>
                   </div>
                   <span class="goods-40">
-                      <span class="goods-41 originPrice"><fmt:formatNumber value="${goods.price}" pattern="#,### 원" /></span>
-                      <span id = "dicPrice">
-                        <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                      <span class="goods-41 originPrice"><fmt:formatNumber value="${goods.price}"
+                                                                           pattern="#,### 원"/></span>
+                      <span id="dicPrice">
+                        <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원"/>
                     </span>
                   </span>
                 </span>
@@ -978,7 +1025,7 @@
 
                 </span>
                 <span class="totalPrice goods-108" id="price2">
-                  <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원" />
+                  <fmt:formatNumber value="${goods.salePrice}" pattern="#,### 원"/>
                 </span>
               </div>
               <div class="goods-43">
@@ -1015,292 +1062,542 @@
     </button>
   </div>
 </div>
-  <script>    // 기능
+<%--      모달         --%>
 
-  $('.goods-34').on('click', function () {
-      document.querySelector('.goods-36').classList.toggle('show')
-  });   //하단 상품선택 버튼 기능(숨김)
-  $('.goods-34').on('click', function () {
-      document.querySelector('.goods-44').classList.toggle('show')
-  });   //하단 상품선택 버튼 기능(숨김)
-  $('.goods-34').on('click', function () {
-      document.querySelector('.goods-59').classList.toggle('show')
-  });   //하단 상품선택 버튼 기능(숨김)
-  $('.goods-34').on('click', function () {
-      document.querySelector('.arrow').classList.toggle('down')
-  });      //하단 상품선택 버튼 기능(화살표 아래로 변경)
-  $('.goods-34').on('click', function () {
-      document.querySelector('.goods-34').classList.toggle('on')
-  });    //하단 상품선택 버튼 기능(하단 구역 설정)
-
-  $('.goods-61').on('click', function () {
-      document.querySelector('.goods-49').classList.toggle('show')
-  });   //상품후기 회원등급 필터 버튼
-
-
-  $(document).ready(function () {  //고객행복센터 닫기 버튼 기능(공용)
-      $('.goods-15').on('click', function () {
-          var contentId = $(this).attr('id').replace('button', 'content');
-          $('#' + contentId).toggleClass('hide');
-          var buttonText = $(this).text() === '자세히보기' ? '닫기' : '자세히보기';
-          $(this).text(buttonText);
-      });
-  });
-
-
-  //우측 하단 위로 바로가기 버튼 기능
-  let $topButton = $(".goods-60");
-  $(window).scroll(function () {
-      if ($(this).scrollTop() > 20) {
-          $topButton.fadeIn();
-      } else {
-          $topButton.fadeOut();
-      }
-  });
-  $topButton.click(function () {
-      $("body, html").animate({scrollTop: 0}, 500);
-  });
-
-
-  // 상단 메뉴바 - 버튼 클릭으로 해당 세션 이동 기능
-  $('.goods-5> ul > li > a').click(function (e) {
-      e.preventDefault(); // 기본 이벤트 동작 중지
-
-      let href = $(this).attr('href');
-      if (!href) return; // href 값이 없는 경우 동작 중지
-
-      let targetTop = $(href).offset().top - 115; // 대상 위치 계산
-      $('html, body').stop().animate({scrollTop: targetTop}, 300); // 스크롤 애니메이션 적용
-  });
-
-  function Page__updateIndicatorActive() {
-      let scrollTop = $(window).scrollTop();
-      // 역순으로 검색해야 편하다
-      $($('.goods-19').get().reverse()).each(function (index, node) {
-          let $node = $(this);
-          let offsetTop = parseInt($node.attr('data-offset-top'));
-
-          if (scrollTop >= offsetTop) {
-              // 기존 녀석에게 활성화 풀고
-              $('.goods-5 > ul > li.active').removeClass('active');
-              // 해당하는 녀석에게 활성화 넣고
-              let currentPageIndex = $node.index();
-              $('.goods-5 > ul > li').eq(currentPageIndex).addClass('active');
-              $('html').attr('data-current-page-index', currentPageIndex);
-              return false; // 더 이상 다른 페이지를 검사하지 않는다.
-          }
-      });
-  }
-
-  // 각 페이지의 offsetTop 속성을 업데이트
-  function Page__updateOffsetTop() {
-      $('.goods-19').each(function (index, node) {
-          let $page = $(node);
-          let offsetTop = $page.offset().top - 115;
-          $page.attr('data-offset-top', offsetTop);
-      });
-      // 계산이 바뀌었으니까, 다시 상태 업데이트
-      Page__updateIndicatorActive();
-  }
-
-  // 각 페이지의 offsetTop 속성을 업데이트
-  function Page__updateOffsetTop() {
-      $('.goods-19').each(function (index, node) {
-          var $page = $(node);
-          var offsetTop = $page.offset().top - 115;
-          $page.attr('data-offset-top', offsetTop);
-      });
-      // 계산이 바뀌었으니까, 다시 상태 업데이트
-      Page__updateIndicatorActive();
-  }
-
-  function Page__init() {
-      Page__updateOffsetTop();
-  }
-
-  // 페이지 초기화로 상단 메뉴바 버튼 업데이트
-  Page__init();
-  // 화면이 리사이즈 할 때 마다, offsetTop을 다시계산
-  $(window).resize(Page__updateOffsetTop);
-  // 스크롤이 될 때 마다, 인디케이터의 상태를 갱신
-  $(window).scroll(Page__updateIndicatorActive);
+<div role="presentation" class="MuiDialog-root css-b5lr18" style="position: fixed; z-index: 1300; inset: 0px; display: none;">
+  <div class="MuiBackdrop-root" aria-hidden="true"
+       style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"></div>
+  <div tabindex="0" data-test="sentinelStart"></div>
+  <div class="MuiDialog-container MuiDialog-scrollPaper" role="none presentation" tabindex="-1"
+       style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;">
+    <div
+        class="MuiPaper-root MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm MuiDialog-paperFullWidth MuiPaper-elevation24 MuiPaper-rounded"
+        role="dialog">
+      <div class="MuiDialogContent-root css-ew9uri">
+        <div class="css-190e3ze eg43r0m0">
+          <div class="css-1c7i6of et95tiw2">
+            <div class="css-1d3g9q7 et95tiw1">상품 문의하기</div>
+            <span class="css-e50sj0 et95tiw0"></span></div>
+          <div class="css-1tm481w eell72m3">
+            <div class="css-l4dbne eell72m2"><img
+                src="https://product-image.kurly.com/product/image/6969f9b7-49ad-46ec-9b36-9e0cfcf4499f.jpg"
+                class="css-1vpfo16 eell72m1"></div>
+            <div class="css-1mysn55 eell72m0"><span>${goods.name}</span></div>
+          </div>
+          <div class="css-4qu8li e43j10r2">
+            <div class="css-171jy4 e43j10r1"><span>제목</span></div>
+            <div class="css-ehb3da e43j10r0">
+              <div class="css-1u16q1v e1uzxhvi6">
+                <div height="42" class="css-1xbd2py e1uzxhvi3">
+                  <input data-testid="input-box" name="subject" placeholder="제목을 입력해 주세요" type="text" height="42" class="css-cjei9u e1uzxhvi2" value="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="css-4qu8li e43j10r2">
+            <div class="css-171jy4 e43j10r1"><span>내용</span></div>
+            <div class="css-ehb3da e43j10r0">
+              <div class="css-17xxk8 e6w4oc80">
+                <div class="css-0 e1tjt2bn7">
+                  <div class="css-l45xk5">
+                    <textarea inputmode="text" aria-label="textarea-message" name="content" class="css-5etceh" ></textarea>
+                    <div class="placeholder css-1ofzfyp">
+                      <div class="css-ylej1f"><strong>상품문의 작성 전 확인해 주세요</strong>
+                        <ul>
+                          <li>답변은 영업일 기준 2~3일 소요됩니다.</li>
+                          <li>해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</li>
+                          <li>배송관련, 주문(취소/교환/환불)관련 문의 및 요청사항은 마이컬리 내 1:1 문의에 남겨주세요.</li>
+                        </ul>
+                        <strong>제품</strong>
+                        <ul>
+                          <li>입고일 : 품절 상품 입고 일이 확정된 경우, 섬네일에 기재되어 있습니다. (종 모양을 클릭하여, 재입고 알림 설정 가능)</li>
+                          <li>제품 상세정보 : 영양성분 및 함량, 용량, 보관 및 취급 방법 등 제품 정보는 상세이미지 또는 상세정보에서 확인 가능합니다.</li>
+                        </ul>
+                        <strong>주문취소</strong>
+                        <ul>
+                          <li>배송 단계별로 주문취소 방법이 상이합니다.</li>
+                          <li>[입금확인] 단계 : [마이컬리 &gt; 주문내역 상세페이지] 에서 직접 취소 가능</li>
+                          <li>[입금확인] 이후 단계 : 고객센터로 문의</li>
+                          <li>생산이 시작된 [상품 준비중] 이후에는 취소가 제한되는 점 고객님의 양해 부탁드립니다.</li>
+                          <li>비회원은 모바일 App 또는 모바일 웹사이트에서 [마이컬리 &gt; 비회원 주문 조회 페이지]에서 취소가 가능합니다.</li>
+                          <li>일부 예약상품은 배송 3~4일 전에만 취소 가능합니다.</li>
+                        </ul>
+                        <p>※ 주문상품의 부분 취소는 불가능합니다. 전체 주문 취소 후 재구매 해주세요.</p><strong>배송</strong>
+                        <ul>
+                          <li>주문 완료 후 배송 방법(샛별배송/하루배송)은 변경이 불가능합니다.</li>
+                          <li>배송일 배송시간 지정은 불가능합니다. (예약배송 포함)</li>
+                        </ul>
+                        <p>※ 전화번호, 이메일, 주소, 계좌번호 등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다.</p></div>
+                    </div>
+                    <span class="content-length-counter css-dbwxb9 e1tjt2bn0"><span><span class="css-14kcwq8 e1tjt2bn2">0 </span><span
+                        class="css-14kcwq8 e1tjt2bn3">/ 5000</span></span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="css-4qu8li e43j10r2">
+            <div class="css-171jy4 e43j10r1"><span></span></div>
+            <div class="css-ehb3da e43j10r0"><label class="css-1t9yijl e1dcessg3">
+              <input name="isSecret" type="checkbox" class="css-agvwxo e1dcessg2">
+              <div class="css-79hxr7 e1dcessg1">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                      stroke="#ddd" fill="#fff"></path>
+                  <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg>
+              </div>
+              <span>비밀글로 문의하기</span></label></div>
+          </div>
+          <div class="css-f9c7pn e6wys6s0">
+            <button class="css-wg85j7 e4nu7ef3" type="button"><span class="css-nytqmg e4nu7ef1">취소</span></button>
+            <button class="css-f4f4h7 e4nu7ef3" type="button" disabled=""><span class="css-nytqmg e4nu7ef1">등록</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div tabindex="0" data-test="sentinelEnd"></div>
+</div>
 
 
-  //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
-  let heartCnt = 0;
+<script>    // 기능
 
-  function heartToggle() {
-      heartCnt++;
-      if (heartCnt % 2 === 1) {
-          document.getElementById("heart").src = "/resources/image/heartO.png";
-          document.getElementById("heart2").src = "/resources/image/heartO.png";
-      } else {
-          document.getElementById("heart").src = "/resources/image/heartX.png";
-          document.getElementById("heart2").src = "/resources/image/heartX.png";
-      }
-  }
+$('.goods-34').on('click', function () {
+    document.querySelector('.goods-36').classList.toggle('show')
+});   //하단 상품선택 버튼 기능(숨김)
+$('.goods-34').on('click', function () {
+    document.querySelector('.goods-44').classList.toggle('show')
+});   //하단 상품선택 버튼 기능(숨김)
+$('.goods-34').on('click', function () {
+    document.querySelector('.goods-59').classList.toggle('show')
+});   //하단 상품선택 버튼 기능(숨김)
+$('.goods-34').on('click', function () {
+    document.querySelector('.arrow').classList.toggle('down')
+});      //하단 상품선택 버튼 기능(화살표 아래로 변경)
+$('.goods-34').on('click', function () {
+    document.querySelector('.goods-34').classList.toggle('on')
+});    //하단 상품선택 버튼 기능(하단 구역 설정)
 
-
-  //알림 버튼 누르면 사진 변경 다시 누르면 원상태로
-  var bellCnt = 0;
-
-  function bellToggle() {
-      bellCnt++;
-      if (bellCnt % 2 === 1) {
-          $("#bell, #bell2").attr("src", "/resources/image/bellO.png");
-      } else {
-          $("#bell, #bell2").attr("src", "/resources/image/bellX.png");
-      }
-  }
-
-  //도움돼요 버튼 누르면 사진 변경 다시 누르면 원상태로 +
-  // var likeCnt = 0;
-  // function likeToggle() {
-  //     likeCnt++;
-  //     $("#like, #bell2").attr("src", likeCnt % 2 == 1 ? "likeO.png" : "like1.png");
-  // }
+$('.goods-61').on('click', function () {
+    document.querySelector('.goods-49').classList.toggle('show')
+});   //상품후기 회원등급 필터 버튼
 
 
-  //후기 공지사항 드롭다운 토글과 다른곳 열린곳 닫기 기능
-  let acc = document.getElementsByClassName("notice");
-  let i;
-
-  for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function () {
-          // 현재 클릭된 요소를 제외하고 모든 "notice" 요소에서 "act" 클래스를 제거
-          for (let j = 0; j < acc.length; j++) {
-              if (acc[j] !== this) {
-                  acc[j].classList.remove("act");
-                  // 다음 형제 요소의 최대 높이를 null로 설정하여 접히도록
-                  let panel = acc[j].nextElementSibling;
-                  panel.style.maxHeight = null;
-              }
-          }
-
-          // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
-          this.classList.toggle("act");
-          let panel = this.nextElementSibling;
-          if (panel.style.maxHeight) {
-              panel.style.maxHeight = null;
-          } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-      });
-  }
-
-  document.querySelectorAll(".goods-22").forEach((item) => {
-      // 모든 드롭다운 토글 행에 대한 클릭 이벤트 리스너 추가
-      item.addEventListener("click", () => {
-          const nextRow = item.nextElementSibling; // 다음 행 선택
-          const allDropdowns = document.querySelectorAll(".goods-25"); // 모든 드롭다운 콘텐츠 행 가져오기
-
-          // 다른 드롭다운 닫기
-          allDropdowns.forEach((dropdown) => {
-              if (dropdown !== nextRow && dropdown.style.display === "table-row") {
-                  dropdown.style.display = "none";
-              }
-          });
-
-          // 현재 드롭다운 표시 여부를 토글
-          if (nextRow.style.display === "table-row") {
-              nextRow.style.display = "none"; // 이미 표시 중이면 숨김
-          } else {
-              nextRow.style.display = "table-row"; // 숨겨져 있으면 표시
-          }
-      });
-  });
-
-  // 수량 버튼 조작
-  let totalPrice = ${goods.salePrice};
-  let quantity = $(".quantity_input").val();
-
-  $(".plus_btn").on("click", function(){
-      if(quantity < ${goods.itemQty}) { //재고까지만 구매가능하게
-          $(".quantity_input").val(++quantity);
-          totalPrice += ${goods.salePrice}; // 가격 증가
-          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
-      }
-  });
-  $(".minus_btn").on("click", function(){
-      if(quantity > 1) {
-          $(".quantity_input").val(--quantity);
-          totalPrice -= ${goods.salePrice}; // 가격 감소
-          $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
-      }
-  });
+$(document).ready(function () {  //고객행복센터 닫기 버튼 기능(공용)
+    $('.goods-15').on('click', function () {
+        let contentId = $(this).attr('id').replace('button', 'content');
+        $('#' + contentId).toggleClass('hide');
+        let buttonText = $(this).text() === '자세히보기' ? '닫기' : '자세히보기';
+        $(this).text(buttonText);
+    });
+});
 
 
-  // 서버로 전송할 데이터
-  const form = {
-      <%--custId : '${customer.custId}',--%>
-      itemId : '${goods.itemId}',
-      custId : 'hong',
-      itemCnt : ''
-  }
-  // 장바구니 추가 버튼
-  $(".btn_cart").on("click", function(e){
-      form.itemCnt = $(".quantity_input").val();
-      $.ajax({
-          url: '/cart/add',
-          type: 'POST',
-          data: form,
-          dataType: "text",
-          // data: {
-          //     custId: "hong",
-          //     itemId: "1234",
-          //     itemCnt: $(".quantity_input").val()
-          // },
-          success: function(result){
-              cartAlert(result);
-          }
-      })
-  });
+//우측 하단 위로 바로가기 버튼 기능
+let $topButton = $(".goods-60");
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 20) {
+        $topButton.fadeIn();
+    } else {
+        $topButton.fadeOut();
+    }
+});
+$topButton.click(function () {
+    $("body, html").animate({scrollTop: 0}, 500);
+});
 
-  function cartAlert(result){
-      if(result == '0'){
-          alert("장바구니에 추가를 하지 못하였습니다.");
-      } else if(result == '1'){
-          alert("장바구니에 추가되었습니다.");
-      } else if(result == '2'){
-          alert("장바구니에 이미 추가되어져 있습니다.");
-      } else if(result == '5'){
-          alert("로그인이 필요합니다.");
-      }
-  }
 
-  //상품 고시정보
-  $(document).ready(function () {
-      let goodsAnn = $(".itemAnn").val();
-      let goodsAnnCate = $(".itemAnnCate").val();
-      goodsAnn = goodsAnn.split(",");
-      goodsAnnCate = goodsAnnCate.split(",");
+// 상단 메뉴바 - 버튼 클릭으로 해당 세션 이동 기능
+$('.goods-5> ul > li > a').click(function (e) {
+    e.preventDefault(); // 기본 이벤트 동작 중지
 
-      $(".goodsAnnCate").each(function(index) {
-          $(this).html(goodsAnn[index] || ''); // goodsAnnCate 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
-      });
-      $(".goodsAnn").each(function(index) {
-          $(this).html(goodsAnnCate[index] || ''); // goodsAnn 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당하고, 그렇지 않으면 빈 문자열 할당
-      });
-  });
+    let href = $(this).attr('href');
+    if (!href) return; // href 값이 없는 경우 동작 중지
 
-  //상품가격 할인가격 같으면 할인율과 할인전 가격 숨기기
-  $(document).ready(function () {
+    let targetTop = $(href).offset().top - 115; // 대상 위치 계산
+    $('html, body').stop().animate({scrollTop: targetTop}, 300); // 스크롤 애니메이션 적용
+});
+
+function Page__updateIndicatorActive() {
+    let scrollTop = $(window).scrollTop();
+    // 역순으로 검색해야 편하다
+    $($('.goods-19').get().reverse()).each(function (index, node) {
+        let $node = $(this);
+        let offsetTop = parseInt($node.attr('data-offset-top'));
+
+        if (scrollTop >= offsetTop) {
+            // 기존 녀석에게 활성화 풀고
+            $('.goods-5 > ul > li.active').removeClass('active');
+            // 해당하는 녀석에게 활성화 넣고
+            let currentPageIndex = $node.index();
+            $('.goods-5 > ul > li').eq(currentPageIndex).addClass('active');
+            $('html').attr('data-current-page-index', currentPageIndex);
+            return false; // 더 이상 다른 페이지를 검사하지 않는다.
+        }
+    });
+}
+
+// 각 페이지의 offsetTop 속성을 업데이트
+function Page__updateOffsetTop() {
+    $('.goods-19').each(function (index, node) {
+        let $page = $(node);
+        let offsetTop = $page.offset().top - 115;
+        $page.attr('data-offset-top', offsetTop);
+    });
+    // 계산이 바뀌었으니까, 다시 상태 업데이트
+    Page__updateIndicatorActive();
+}
+
+// 각 페이지의 offsetTop 속성을 업데이트
+function Page__updateOffsetTop() {
+    $('.goods-19').each(function (index, node) {
+        let $page = $(node);
+        let offsetTop = $page.offset().top - 115;
+        $page.attr('data-offset-top', offsetTop);
+    });
+    // 계산이 바뀌었으니까, 다시 상태 업데이트
+    Page__updateIndicatorActive();
+}
+
+function Page__init() {
+    Page__updateOffsetTop();
+}
+
+// 페이지 초기화로 상단 메뉴바 버튼 업데이트
+Page__init();
+// 화면이 리사이즈 할 때 마다, offsetTop을 다시계산
+$(window).resize(Page__updateOffsetTop);
+// 스크롤이 될 때 마다, 인디케이터의 상태를 갱신
+$(window).scroll(Page__updateIndicatorActive);
+
+
+//찜 버튼 누르면 사진 변경 다시 누르면 원상태로
+let heartCnt = 0;
+
+function heartToggle() {
+    heartCnt++;
+    if (heartCnt % 2 === 1) {
+        document.getElementById("heart").src = "/resources/image/heartO.png";
+        document.getElementById("heart2").src = "/resources/image/heartO.png";
+    } else {
+        document.getElementById("heart").src = "/resources/image/heartX.png";
+        document.getElementById("heart2").src = "/resources/image/heartX.png";
+    }
+}
+
+
+//알림 버튼 누르면 사진 변경 다시 누르면 원상태로
+let bellCnt = 0;
+
+function bellToggle() {
+    bellCnt++;
+    if (bellCnt % 2 === 1) {
+        $("#bell, #bell2").attr("src", "/resources/image/bellO.png");
+    } else {
+        $("#bell, #bell2").attr("src", "/resources/image/bellX.png");
+    }
+}
+
+//도움돼요 버튼 누르면 사진 변경 다시 누르면 원상태로 +
+// let likeCnt = 0;
+// function likeToggle() {
+//     likeCnt++;
+//     $("#like, #bell2").attr("src", likeCnt % 2 == 1 ? "likeO.png" : "like1.png");
+// }
+
+
+//후기 공지사항 드롭다운 토글과 다른곳 열린곳 닫기 기능
+let acc = document.getElementsByClassName("notice");
+let i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        // 현재 클릭된 요소를 제외하고 모든 "notice" 요소에서 "act" 클래스를 제거
+        for (let j = 0; j < acc.length; j++) {
+            if (acc[j] !== this) {
+                acc[j].classList.remove("act");
+                // 다음 형제 요소의 최대 높이를 null로 설정하여 접히도록
+                let panel = acc[j].nextElementSibling;
+                panel.style.maxHeight = null;
+            }
+        }
+
+        // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
+        this.classList.toggle("act");
+        let panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+}
+
+document.querySelectorAll(".goods-22").forEach((item) => {
+    // 모든 드롭다운 토글 행에 대한 클릭 이벤트 리스너 추가
+    item.addEventListener("click", () => {
+        const nextRow = item.nextElementSibling; // 다음 행 선택
+        const allDropdowns = document.querySelectorAll(".goods-25"); // 모든 드롭다운 콘텐츠 행 가져오기
+
+        // 다른 드롭다운 닫기
+        allDropdowns.forEach((dropdown) => {
+            if (dropdown !== nextRow && dropdown.style.display === "table-row") {
+                dropdown.style.display = "none";
+            }
+        });
+
+        // 현재 드롭다운 표시 여부를 토글
+        if (nextRow.style.display === "table-row") {
+            nextRow.style.display = "none"; // 이미 표시 중이면 숨김
+        } else {
+            nextRow.style.display = "table-row"; // 숨겨져 있으면 표시
+        }
+    });
+});
+
+// 수량 버튼 조작
+let totalPrice = ${goods.salePrice};
+let quantity = $(".quantity_input").val();
+
+$(".plus_btn").on("click", function () {
+    if (quantity < ${goods.itemQty}) { //재고까지만 구매가능하게
+        $(".quantity_input").val(++quantity);
+        totalPrice += ${goods.salePrice}; // 가격 증가
+        $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
+    }
+});
+$(".minus_btn").on("click", function () {
+    if (quantity > 1) {
+        $(".quantity_input").val(--quantity);
+        totalPrice -= ${goods.salePrice}; // 가격 감소
+        $(".totalPrice").text(new Intl.NumberFormat('ko-KR').format(totalPrice) + " 원"); // 총 가격 업데이트
+    }
+});
+
+
+// 서버로 전송할 데이터
+const form = {
+    <%--custId : '${customer.custId}',--%>
+    itemId: '${goods.itemId}',
+    custId: 'hong',
+    itemCnt: ''
+}
+// 장바구니 추가 버튼
+$(".btn_cart").on("click", function (e) {
+    form.itemCnt = $(".quantity_input").val();
+    $.ajax({
+        url: '/cart/add',
+        type: 'POST',
+        data: form,
+        dataType: "text",
+        // data: {
+        //     custId: "hong",
+        //     itemId: "1234",
+        //     itemCnt: $(".quantity_input").val()
+        // },
+        success: function (result) {
+            cartAlert(result);
+        }
+    })
+});
+
+function cartAlert(result) {
+    if (result == '0') {
+        alert("장바구니에 추가를 하지 못하였습니다.");
+    } else if (result == '1') {
+        alert("장바구니에 추가되었습니다.");
+    } else if (result == '2') {
+        alert("장바구니에 이미 추가되어져 있습니다.");
+    } else if (result == '5') {
+        alert("로그인이 필요합니다.");
+    }
+}
+
+//상품 고시정보
+$(document).ready(function () {
+    let goodsAnn = $(".itemAnn").val();
+    let goodsAnnCate = $(".itemAnnCate").val();
+    goodsAnn = goodsAnn.split(",");
+    goodsAnnCate = goodsAnnCate.split(",");
+
+    $(".goodsAnnCate").each(function (index) {
+        $(this).html(goodsAnn[index] || ''); // goodsAnnCate 배열이 해당 인덱스를 가지고 있으면 해당 값을 할당, 그렇지 않으면 빈 문자열 할당
+    });
+    $(".goodsAnn").each(function (index) {
+        $(this).html(goodsAnnCate[index] || '');
+    });
+});
+
+//상품가격 할인가격 같으면 할인율과 할인전 가격 숨기기
+$(document).ready(function () {
     let salePrice = ${goods.salePrice};
     let price = ${goods.price};
 
-    if ( salePrice === price ){
+    if (salePrice === price) {
         $(".goods-118").hide();
         $(".originPrice").hide();
-
     }
-
-  });
-
-  </script>
+});
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-          crossorigin="anonymous"></script>
+//답변상태에 따른 글자색상 변경
+$(document).ready(function () {
+    $('.goods-26').each(function () {
+        // 현재 요소를 $(this)를 사용하여 선택
+        let reply = $(this);
+        // 내용 확인 후 색상 변경
+        if (reply.text().trim() === '처리완료') {
+            reply.css('color', '#11967f'); // 녹색으로 설정
+        } else {
+            reply.css('color', 'rgb(153, 153, 153)'); // 검은색으로 설정
+        }
+    });
+});
+
+
+//문의 작성자 이름 중간 *로 바꾸기
+$(document).ready(function () {
+    $('.maskingName').each(function () {
+        let maskedName;
+        let originName = $(this).text(); // 클래스 maskingName의 텍스트 가져오기
+        let length = originName.length;
+
+        // originName 값이 2글자 초과이면서 2글자 이하일 때의 조건문을 작성합니다.
+        if (length > 2) {
+            // 첫 번째 문자를 제외한 부분을 '*'로 대체합니다.
+            maskedName = originName.charAt(0) + '*'.repeat(length - 2) + originName.charAt(length - 1);
+        } else if (length === 2) {
+            // 두 번째 글자를 '*'로 대체합니다.
+            maskedName = originName.charAt(0) + '*';
+        } else {
+            // 2글자 미만이면 그대로 표시합니다.
+            maskedName = originName;
+        }
+        // maskedName 값을 현재 요소의 텍스트로 설정합니다.
+        $(this).text(maskedName);
+    });
+});
+
+
+//모달
+// const loremIpsum = document.getElementById("lorem-ipsum")
+// fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+//     .then(response => response.text())
+//     .then(result => loremIpsum.innerHTML = result)
+// const modal = document.getElementById("modal")
+//
+// function modalOn() {
+//     modal.style.display = "flex"
+// }
+//
+// function isModalOn() {
+//     return modal.style.display === "flex"
+// }
+//
+// function modalOff() {
+//     modal.style.display = "none"
+// }
+//
+// const btnModal = document.getElementById("btn-modal")
+// btnModal.addEventListener("click", e => {
+//     modalOn()
+// })
+// const closeBtn = modal.querySelector(".close-area")
+// closeBtn.addEventListener("click", e => {
+//     modalOff()
+// })
+// modal.addEventListener("click", e => {
+//     const evTarget = e.target
+//     if (evTarget.classList.contains("modal-overlay")) {
+//         modalOff()
+//     }
+// })
+// window.addEventListener("keyup", e => {
+//     if (isModalOn() && e.key === "Escape") {
+//         modalOff()
+//     }
+// })
+
+//모달창 보이게
+$('.goods-62').on('click', function () {
+    let modal = $('.MuiDialog-root'); // MuiDialog-root 클래스를 가진 요소를 선택합니다.
+    modal.css('display', 'block'); // display 속성을 'block'으로 설정합니다.
+});
+$('.css-wg85j7').on('click', function () {  //취소버튼 누르면 닫히게
+    let modal = $('.MuiDialog-root');
+    modal.css('display', 'none');
+});
+$('.css-e50sj0').on('click', function () {  //X버튼 누르면 닫히게
+    let modal = $('.MuiDialog-root');
+    modal.css('display', 'none');
+});
+
+
+
+
+// $(document).ready(function() {
+//     $('.css-0').on('focus', '.css-5etceh', function() {
+//         $(this).siblings('.placeholder').hide();
+//     });
+//
+//     $('.css-0').on('blur', '.css-5etceh', function() {
+//         if ($(this).val().trim() === '') {
+//             $(this).siblings('.placeholder').show();
+//         }
+//     });
+// });
+
+// window.onload = function() {
+//     const textarea = document.querySelector('.css-5etceh.e1tjt2bn1');
+//     const placeholder = document.querySelector('.placeholder.css-1ofzfyp.e1tjt2bn6');
+//
+//     textarea.addEventListener('focus', function() {
+//         placeholder.style.display = 'none';
+//     });
+//
+//     textarea.addEventListener('blur', function() {
+//         if (textarea.value === '') {
+//             placeholder.style.display = 'block';
+//         }
+//     });
+// };
+// $('.css-5etceh').on('click', function () {  //X버튼 누르면 닫히게
+//     let modal = $('.placeholder');
+//     modal.css('display', 'none');
+// });
+
+$('.css-l45xk5').on('click', function () {
+    $('.placeholder').hide();
+    $('.css-5etceh').focus();
+});
+$('.css-l45xk5').on('blur', function () {
+
+    $('.placeholder').show();
+
+});
+
+
+//
+// 클릭 이벤트 대신 focus 이벤트 핸들러를 등록합니다.
+// $('.css-l45xk5').on('focus', function () {
+//     // 클래스를 toggle하는 대신 classList에 hide 클래스를 추가합니다.
+//     $('.css-l45xk5').hide();
+// });
+//
+// // blur 이벤트 핸들러를 등록합니다.
+// $('.css-l45xk5').on('blur', function () {
+//     // 클래스를 toggle하는 대신 classList에서 hide 클래스를 제거합니다.
+//     document.querySelector('.css-l45xk5').classList.remove('hide');
+// });
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>

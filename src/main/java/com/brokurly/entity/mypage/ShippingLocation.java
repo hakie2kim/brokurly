@@ -24,6 +24,7 @@ public class ShippingLocation {
     private String recAddr;
     private String recName;
     private String delFl;
+    private String currAddrFl = "Y";
 
     public ShippingLocationDto makeShippingLocationDto() {
         return ShippingLocationDto.builder()
@@ -35,6 +36,7 @@ public class ShippingLocation {
                 .recAddr(recAddr)
                 .recName(recName)
                 .delFl(delFl)
+                .currAddrFl(currAddrFl)
                 .build();
     }
 
@@ -47,6 +49,7 @@ public class ShippingLocation {
        this.recAddr = shippingLocationDto.getRecAddr();
        this.recName = shippingLocationDto.getRecName();
        this.delFl = shippingLocationDto.getDelFl();
+       this.currAddrFl = shippingLocationDto.getCurrAddrFl();
     }
 
     public ShippingLocationManagementDto makeShippingLocationManagementDto() {
@@ -98,6 +101,7 @@ public class ShippingLocation {
                 .recAddr(recAddr)
                 .recName(recName)
                 .delFl(delFl)
+                .currAddrFl(currAddrFl)
                 .build();
     }
 
@@ -109,5 +113,6 @@ public class ShippingLocation {
         this.recAddr = shippingLocationUpdateDto.getRecAddr();
         this.recName = shippingLocationUpdateDto.getRecName();
         this.delFl = shippingLocationUpdateDto.getDelFl();
+        this.currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
     }
 }

@@ -75,4 +75,14 @@ public class CustomerCartService {
         customerCartDao.deleteOneItem(customerCart);
         return customerCartDto;
     }
+
+    @Transactional
+    public CustomerCartDto vacateCart(CustomerCartDto customerCartDto) {   //주문완료 후 장바구니 비우기
+
+        CustomerCart customerCart = new CustomerCart(); //비어있는 CustomerCart 도메인 만들기
+        customerCart.changeStatus(customerCartDto); //customerCartDto 있는 값으로 customerCart의 상태를 변경한다
+        customerCartDao.vacateCart(customerCart);
+        return customerCartDto;
+    }
+
 }
