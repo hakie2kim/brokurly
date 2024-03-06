@@ -50,6 +50,7 @@
         WHERE item_id = #{ItemId}
     </delete>
 
+
     <!--  itemAnnouncement  -->
     <insert id="insertAnnouncement">
         INSERT INTO item_announcement
@@ -62,6 +63,13 @@
         FROM item_announcement
         WHERE item_id = #{itemId}
     </select>
+
+    <select id="findByItemId" resultType="GoodsAnnouncement">
+        SELECT *
+        FROM item_announcement
+        WHERE item_id = #{itemId}
+    </select>
+
 
     <!--  SearchKeyword  -->
     <insert id="insertSearchKeyword">
@@ -83,12 +91,6 @@
         WHERE keyword = #{keyword}
     </select>
 
-    <select id="findByItemId" resultType="GoodsAnnouncement">
-        SELECT *
-        FROM item_announcement
-        WHERE item_id = #{itemId}
-    </select>
-
     <!--  keyword 존재하는지 확인  -->
     <select id="selectKeywordExist" resultType="int">
         SELECT EXISTS (SELECT keyword
@@ -102,6 +104,14 @@
         FROM search_keyword
         WHERE keyword=#{keyword}
     </select>
+
+    <!--  SELECT Keyword   -->
+    <select id="selectKeywordByItemId" resultType="string">
+        SELECT keyword
+        FROM search_keyword
+        WHERE item_id_list like CONCAT('%',#{itemIdList},'%')
+    </select>
+
 
     <!--  기존 문자열에 추가해서 UPDATE하기  -->
     <update id="updateItemIdList">

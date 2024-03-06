@@ -34,19 +34,19 @@ public class CategoryController {
         return "seller/productsCreate";
     }
 
-    @GetMapping ("/ajax")
-    @ResponseBody
-    public List<CategoryDto> test(@RequestParam String codeId){
-
-        log.info("codeId컨트롤러임={}",codeId);
-
-        List<CategoryDto> selectMiddle = categoryService.readMiddle(codeId);
-        log.info("selectMiddle컨트롤러={}",selectMiddle);
-
-//        log.info("middlemodel={}",model);
-
-        return selectMiddle;
-    }
+//    @GetMapping ("/ajax")
+//    @ResponseBody
+//    public List<CategoryDto> test(@RequestParam String codeId){
+//
+//        log.info("codeId컨트롤러임={}",codeId);
+//
+//        List<CategoryDto> selectMiddle = categoryService.readMiddle(codeId);
+//        log.info("selectMiddle컨트롤러={}",selectMiddle);
+//
+////        log.info("middlemodel={}",model);
+//
+//        return selectMiddle;
+//    }
 
 
 

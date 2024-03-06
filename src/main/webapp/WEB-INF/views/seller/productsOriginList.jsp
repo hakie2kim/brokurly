@@ -15,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/seller/productsOriginList.css'/>"/>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
 </head>
 <body>
 <div id="seller-content" class="seller-sub-frame">
@@ -233,12 +235,14 @@
                                 <div width="100" class="css-16tcewl e16adls20">상품아이디</div>
                                 <div width="100" class="css-16tcewl e16adls20">원가</div>
                                 <div width="100" class="css-16tcewl e16adls20">할인율</div>
-
                                 <div width="100" class="css-16tcewl e16adls20">판매가격</div>
+                                <div width="100" class="css-16tcewl e16adls20"></div>
                             </div>
 
                             <!-- 목록 -->
+
                             <c:forEach var="goodsByB" items="${goodsByBsnsNo}" varStatus="status">
+                                <form action="" id="form">
 
                                 <div class="css-e23nfx2 e16adls21">
                                     <div width="50" class="css-mbsaqp e16adls20">${status.count}</div>
@@ -254,8 +258,22 @@
                                     <fmt:parseNumber value="${goodsByB.itemDcAmt}" var="dcAmt"/>
                                     <div width="100" id="resultprice"
                                          class="css-16tcewl e16adls20"> ${price - dcAmt}</div>
-                                </div>
 
+                                    <div width="100" class="css-16tcewl e16adls20">
+                                        <button type="button" id="modifyBtn" onclick="modify(${goodsByB.itemId})">
+<%--                                            <a href="<c:url value='/seller/productsOriginList/read?itemId=${goodsByB.itemId}'/>">수정</a>--%>
+                                            수정
+                                          </button>
+
+
+                                        <button type="button" id="removeBtn" name="${goodsByB.itemId}" onclick="confirmDelete(${goodsByB.itemId})">
+                                        삭제
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                                </form>
                             </c:forEach>
 
 
@@ -285,6 +303,34 @@
 </div>
 
 <script>
+
+<%--  삭제버튼  --%>
+    function confirmDelete(itemId) {
+        // 경고 창 표시
+        console.log(itemId);
+        if (confirm("삭제하시겠습니까?")) {
+            // 확인을 눌렀을 경우, 링크 이동
+            window.location.href = '/seller/productsCreate/remove?itemId=' + itemId;
+
+        } else {
+            // 취소를 눌렀을 경우, 아무 동작 없음
+        }
+    }
+
+<%--  수정버튼  --%>
+function modify(itemId) {
+    // 경고 창 표시
+    console.log(itemId);
+    if (confirm("수정하시겠습니까?")) {
+        // 확인을 눌렀을 경우, 링크 이동
+        window.location.href = '/seller/productsOriginList/read?itemId=' + itemId;
+
+
+    } else {
+        // 취소를 눌렀을 경우, 아무 동작 없음
+    }
+}
+
 
 </script>
 </body>

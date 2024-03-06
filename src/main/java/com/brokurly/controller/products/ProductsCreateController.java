@@ -6,16 +6,24 @@ import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsImageDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.entity.search.SearchKeyword;
+import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.parsing.Location;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletContext;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,6 +36,7 @@ import java.util.UUID;
 public class ProductsCreateController {
 
     private ProductsCreateService productsCreateService;
+//    private CategoryController categoryController;
 
     @Autowired
     public ProductsCreateController(ProductsCreateService productsCreateService) {
@@ -54,25 +63,29 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
+        return "seller/productsOriginList?bsnsNo=4659877658";
+    }
+
+    @PostMapping ("/productsOriginList")
+    public String selectByBsnsId2(Model m) {
+        String bsnsNo = "4659877658";  //판매자 로그인 기능 구현 후 세션에서 가져오기
+//    log.info("goodsByBsnsNoDto={}",goodsByBsnsNoDto);
+        List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
+        m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
+        m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
+//        log.info("m={}", m);
         return "seller/productsOriginList";
     }
 
-//    @GetMapping("/write")
-//    public String write(Model m){
-//        m.addAttribute("mode"
-//        ,"new");
-//        return "productsCreate"; //쓰기
-//    }
 
-
-    @GetMapping("productsOriginList")
+    @GetMapping("/productsOriginList")
     public String selectByBsnsId(Model m) {
         String bsnsNo = "4659877658";  //판매자 로그인 기능 구현 후 세션에서 가져오기
 //    log.info("goodsByBsnsNoDto={}",goodsByBsnsNoDto);
         List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
         m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
         m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
-        log.info("m={}", m);
+//        log.info("m={}", m);
         return "seller/productsOriginList";
     }
 
@@ -81,17 +94,22 @@ public class ProductsCreateController {
     public String read(String itemId, Model m) {
         GoodsDto goodsDto = productsCreateService.searchGoods(itemId);
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
+        List<String> searchKeyword = productsCreateService.searchKeyword(itemId);
 
         log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
         log.info("readItemId={}", itemId);
+        log.info("searchKeyword={}", searchKeyword);
+
 
         //상품고시정보 ,로 잘라서 배열로 만들기
         String[] anno = goodsAnnouncementDto.getItemAnn().split(",");
 //        for (int i = 0; i < anno.length; i++) {
 //            log.info("anno={}", anno[i]);
 //        }
+
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
+        m.addAttribute("keyword", searchKeyword);
 
 
         return "seller/productsCreate";  //읽기
@@ -99,11 +117,13 @@ public class ProductsCreateController {
 
 
     //상품 등록 정보 삭제
-    @PostMapping("/productsCreate/remove")
-    public String removeProducts(@RequestParam String itemId) {
+    @RequestMapping(value = "/productsCreate/remove",method = RequestMethod.GET)
+    public String removeProducts(String itemId) throws Exception {
 
         log.info("removeitemId={}", itemId);
         int result = productsCreateService.removeByItemId(itemId);
+        if(result!=1)//1이 아니라면 예외 발생
+            throw new Exception("board remove error");
 
         //삭제된 후 다시 판매자 bsnsNo에 맞는 페이지로
         return "redirect:/seller/productsOriginList";
@@ -113,8 +133,15 @@ public class ProductsCreateController {
 //    @PostMapping("/img")
 //    public void saveFile(@RequestParam("file") MultipartFile file, GoodsImageDto goodsImageDto) throws IOException {
 //        log.info("request={}", file);
-////        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
-//        String uploadDir = System.getProperty("user.dir") + "/src/main/webapp/resources/image/goodsImg/"; //파일 저장 경로
+//        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
+////        String uploadDir = System.getProperty("user.dir") + "/src/main/webapp/resources/image/goodsImg/"; //파일 저장 경로
+////        String uploadDir =  "resources/image/goodsImg/"; //파일 저장 경로
+//
+//        // "goodsImage" 디렉토리에 파일 저장
+////        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
+////        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
+////        String uploadDir = resource.getFile().getAbsolutePath();
+//
 //        if (!file.isEmpty()) {
 //
 ////            // 파일 이름
@@ -173,9 +200,11 @@ public class ProductsCreateController {
         log.info("file = {}", multipartFile);
         try {
             // 현재 프로젝트의 절대 경로를 가져옵니다
-            String projectPath = System.getProperty("user.home") +
-                    File.separator + "IdeaProjects" +
-                    File.separator + "brokurly";
+            String projectPath = System.getProperty("user.dir");
+//                    + File.separator + "IdeaProjects" +
+//                    File.separator + "brokurly";
+
+//            FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
 
             log.info("dir = {}", projectPath);
 
@@ -199,8 +228,11 @@ public class ProductsCreateController {
             String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
 
             Path savePath = Paths.get(filePath);
+
             // 파일을 저장합니다
             multipartFile.transferTo(savePath);
+
+            log.info("filename={}",filePath);
 
             // 파일의 저장 경로를 반환합니다
             return HttpStatus.OK;

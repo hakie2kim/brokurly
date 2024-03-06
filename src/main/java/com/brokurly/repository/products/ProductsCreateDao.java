@@ -37,6 +37,7 @@ public interface ProductsCreateDao {
 
     List<String> selectItemIdListByKeyword(String keyword);
 
+    List<String> selectKeywordByItemId(String ItemIdList);
 
     //Goodsimage 상품 이미지
     int insertGoodsImage(GoodsImage goodsImage);

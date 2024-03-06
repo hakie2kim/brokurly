@@ -81,14 +81,12 @@ public class ProductsCreateService {
                     productsCreateDao.updateItemIdList(searchKeyword);
                 }
 
-
             } else {
                 //3-2. 존재X 새로생성해서 추가
                 SearchKeywordDto searchKeywordDto1 = new SearchKeywordDto(keywords[i], oneitemId); //dto만들기
                 SearchKeyword searchKeyword = new SearchKeyword();  //도메인
                 searchKeyword.changeStatus(searchKeywordDto1);
                 productsCreateDao.insertSearchKeyword(searchKeyword);
-
             }
 
         }
@@ -115,13 +113,20 @@ public class ProductsCreateService {
         return goodsAnnouncement.makeFullDto();
     }
 
+    //searchKeyword 조회
+    public List<String> searchKeyword(String itemId){
+    List<String> searchKeyword = productsCreateDao.selectKeywordByItemId(itemId);
+        log.info("itemId={}",itemId);
+        return searchKeyword;
+    }
+
 
     //bsnsNo로 상품 조회
     @Transactional
     public List<GoodsByBsnsNoDto> readByBsnsNo(String bsnsNo) {
         //1. Goods 도메인 리스트를 받아온다.
         List<Goods> goodsList = productsCreateDao.selectByBsnsNo("4659877658");
-        log.info("goodsList={}", goodsList);
+//        log.info("goodsList={}", goodsList);
 
         //2. 비어있는 dto list 만들기
         List<GoodsByBsnsNoDto> dtoList = new ArrayList<>();

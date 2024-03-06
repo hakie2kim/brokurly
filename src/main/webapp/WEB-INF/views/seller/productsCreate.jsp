@@ -611,7 +611,7 @@
                             </div>
                             <br>
                             <span class="sub-text text-danger"
-                            >외부 링크(네이버 폼 등)를 통한
+                            >외부 링크를 통한
                                   개인정보(휴대폰 번호, 이메일 주소) 수집은
                                   금지되므로 등록시 노출이 제재될 수 있습니다.
                                   <br
@@ -626,7 +626,7 @@
                                 있습니다.<br/>
                                 안전거래정책에 위배될 경우 관리자에 의해 제재조치가 있을
                                 수 있습니다.<br/>
-                                네이버 이외의 외부링크, 일부 스크립트 및
+                                일부 외부링크, 스크립트 및
                                 태그는 자동 삭제될 수 있습니다.<br/>
                                 상세설명 권장 크기 : 가로 860px
                                 <br/>
@@ -659,45 +659,45 @@
                         <!----><!----><!----><!---->
                         <div>
                             <div>
-                                <div class="form-sub-wrap">
-                                    <label class="control-label"
-                                    >상호
-                                        <!----><!----></label>
-                                    <div class="input-content">
-                                        <div class="form-inline">
-                                            <div class="form-group">
-                                                <div class="input-group auto-complete">
-                                                    <div class="seller-input-wrap">
-                                                        <div
-                                                                class="selectize-control ng-pristine ng-untouched ng-valid single plugin-inputMaxlength"
-                                                        >
-                                                            <div
-                                                                    class="selectize-input items not-full ng-valid ng-pristine"
-                                                            >
-                                                                <input class="form-control"
-                                                                       type="text"
-                                                                       placeholder="상호명을 입력해주세요."
-                                                                       maxlength="50"
+<%--                                <div class="form-sub-wrap">--%>
+<%--                                    <label class="control-label"--%>
+<%--                                    >상호--%>
+<%--                                        <!----><!----></label>--%>
+<%--                                    <div class="input-content">--%>
+<%--                                        <div class="form-inline">--%>
+<%--                                            <div class="form-group">--%>
+<%--                                                <div class="input-group auto-complete">--%>
+<%--                                                    <div class="seller-input-wrap">--%>
+<%--                                                        <div--%>
+<%--                                                                class="selectize-control ng-pristine ng-untouched ng-valid single plugin-inputMaxlength"--%>
+<%--                                                        >--%>
+<%--                                                            <div--%>
+<%--                                                                    class="selectize-input items not-full ng-valid ng-pristine"--%>
+<%--                                                            >--%>
+<%--                                                                <input class="form-control"--%>
+<%--                                                                       type="text"--%>
+<%--                                                                       placeholder="상호명을 입력해주세요."--%>
+<%--                                                                       maxlength="50"--%>
 
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!---->
-                                        <div class="form-group">
-                                            <div class="seller-input narrow-input">
-                                                <div>
-                                                    <!---->
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!---->
-                                    </div>
-                                </div>
+<%--                                                                />--%>
+<%--                                                            </div>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <!---->--%>
+<%--                                        <div class="form-group">--%>
+<%--                                            <div class="seller-input narrow-input">--%>
+<%--                                                <div>--%>
+<%--                                                    <!---->--%>
+<%--                                                    <!---->--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <!---->--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                                 <!---->
 
                                 <!-- 포장타입 -->
@@ -765,6 +765,8 @@
                                                                     <input name="origin" type="text"
                                                                            class="form-control"
                                                                            placeholder="ex.국산/수입산(미국)"
+                                                                           value="${goodsDto.origin}"
+
                                                                     >
                                                                 </div>
                                                             </div>
@@ -796,6 +798,7 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="cpnElgFl"
                                             value="Y"
+                                            <c:if test="${goodsDto.cpnElgFl eq 'Y'}">checked</c:if>
                                     />
                                     <label
                                             for="coupon"
@@ -807,6 +810,8 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="cpnElgFl"
                                             value="N"
+                                            <c:if test="${goodsDto.cpnElgFl eq 'N'}">checked</c:if>
+
                                     />
                                     <label for="coupon2">불가능</label>
                                 </div>
@@ -829,6 +834,8 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="pointFl"
                                             value="Y"
+                                            <c:if test="${goodsDto.pointFl eq 'Y'}">checked</c:if>
+
                                     />
                                     <label
                                             for="point1"
@@ -840,6 +847,8 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="pointFl"
                                             value="N"
+                                            <c:if test="${goodsDto.pointFl eq 'N'}">checked</c:if>
+
                                     />
                                     <label for="point2">불가능</label>
                                 </div>
@@ -862,6 +871,8 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="adultVerifFl"
                                             value="Y"
+                                            <c:if test="${goodsDto.adultVerifFl eq 'Y'}">checked</c:if>
+
                                     />
                                     <label
                                             for="child1"
@@ -873,6 +884,8 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="adultVerifFl"
                                             value="N"
+                                            <c:if test="${goodsDto.adultVerifFl eq 'N'}">checked</c:if>
+
                                     />
                                     <label for="child2">불가능</label>
                                 </div>
@@ -1380,6 +1393,8 @@
 
                                                         class="ng-valid ng-not-empty ng-touched ng-dirty"
                                                         value="일반배송"
+                                                        <c:if test="${goodsDto.shipType eq '일반배송'}">checked</c:if>
+
                                                 />
                                                     <label ng-repeat-end="" for="NORMAL"
                                                     >일반배송</label
@@ -1389,6 +1404,8 @@
                                                         id="TODAY"
                                                         class="ng-valid ng-not-empty ng-dirty ng-touched ng-valid-parse"
                                                         value="샛별배송"
+                                                        <c:if test="${goodsDto.shipType eq '샛별배송'}">checked</c:if>
+
                                                 />
                                                     <label for="TODAY"
                                                     >샛별배송</label
@@ -1662,6 +1679,7 @@
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
+                                                           value="${keyword[0]}"
                                                            placeholder="태그1"/>
 
                                                     <input name="itemIdList"
@@ -1672,10 +1690,12 @@
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
+                                                           value="${keyword[1]}"
                                                            placeholder="태그2"/>
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
+                                                           value="${keyword[2]}"
                                                            placeholder="태그3"/>
 
                                                     <%--  일단 값 넣어보자  --%>
