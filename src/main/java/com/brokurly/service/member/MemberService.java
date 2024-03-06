@@ -2,7 +2,9 @@ package com.brokurly.service.member;
 
 
 import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
+import com.brokurly.entity.member.Member;
 import org.springframework.validation.Errors;
 
 import java.util.Map;
@@ -22,5 +24,8 @@ public interface MemberService {
     int getCountAll();
     int getCount(String custId);
     int getCountEmail(String email);
+    int emailAuthFail(String custId);
+    int updateMailKey(MemberAndMailAuthDto memberAndMailAuthDto);
+    int updateMailAuth(MemberAndMailAuthDto memberAndMailAuthDto);
     int removeAll();
 }
