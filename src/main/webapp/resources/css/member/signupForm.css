@@ -6,10 +6,11 @@
 }
 body {
     font-family: var(--main-font);
-    margin: 0;
-    padding: auto;
+    heigth : 100vh;
+    /*margin: 0;*/
+    /*padding: auto;*/
 }
-section, form {
+section, #frm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,7 +39,7 @@ input:focus {
     outline: 1px solid black;
 }
 
-button {
+.btn {
     width: 120px;
     height: 44px;
     border: var(--main-border);
@@ -69,7 +70,7 @@ button {
 }
 
 .register-div__label {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 139px;
     font-size: 14px;
     font-weight: 500;
@@ -92,9 +93,15 @@ button {
 
 }
 .agreement-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    /*flex-direction: column;*/
+    /* background-color: aqua; */
+}
+.test_div{
     display: flex;
     flex-direction: column;
-    /* background-color: aqua; */
 }
 
 .register-header {
@@ -163,7 +170,8 @@ label {
 .name-info-div,
 .email-info-div,
 .email-infoSec-div,
-.telNo-info-div{
+.telNo-info-div,
+.yyyy-info-div{
     display: flex;
     justify-content: center;
     padding-top: 4px;
