@@ -227,4 +227,13 @@ public class MypageController {
         }*/
     }
 
+
+    @GetMapping("/address/shipping-address/list")
+    String shippingAddressList(Model model) {
+        String custId = "hakie2kim";     //임시
+        List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
+        model.addAttribute("shippingLocationList", shippingLocationList);
+        return "/cart/delivery-address";
+    }
+
 }
