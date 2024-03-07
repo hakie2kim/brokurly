@@ -17,12 +17,10 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = () => {
+        const shipLocaId = $('input[name=shipLocaId]').val();
+
         $(".modify").on("click", function (e) {
             e.preventDefault();
-
-            console.dir($(".shippingLoca").serialize());
-
-            const shipLocaId = $('input[name=shipLocaId]').val();
 
             $.ajax({
                 url: "/mypage/address/shipping-address/update/" + shipLocaId,
@@ -37,6 +35,21 @@
                     console.error(textStatus, errorThrown);
                 }
             })
+        });
+
+        $(".delete").on("click", function (e) {
+            e.preventDefault();
+
+            fetch("/mypage/address/" + shipLocaId, {
+                method: "DELETE"
+            })
+                .then((response) => {
+                    window.close();
+                    window.opener.location.reload(); // 해당 팝업을 연 페이지를 reload함
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         });
     };
 </script>
@@ -104,7 +117,7 @@
         </div>
         <c:if test="${shippingLocationModifyPageDto.defAddrFl eq 'N'}">
             <div class="defAddrCheckbox">
-                <input type="checkbox" name="defAddrFl" />
+                <input type="checkbox" name="defAddrFl"/>
                 <span style="margin-left: 5px">기본 배송지로 저장</span>
             </div>
         </c:if>

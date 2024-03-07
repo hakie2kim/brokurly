@@ -142,6 +142,7 @@ public class ShippingLocation {
                 .defAddrFl(defAddrFl)
                 .telNo(telNo)
                 .recName(recName)
+                .delFl(delFl)
                 .currAddrFl(currAddrFl)
                 .build();
     }
@@ -152,6 +153,7 @@ public class ShippingLocation {
         this.defAddrFl = shippingLocationModifyDto.getDefAddrFl();
         this.telNo = shippingLocationModifyDto.getTelNo();
         this.recName = shippingLocationModifyDto.getRecName();
+        this.delFl = shippingLocationModifyDto.getDelFl();
         this.currAddrFl = shippingLocationModifyDto.getCurrAddrFl();
     }
 }
