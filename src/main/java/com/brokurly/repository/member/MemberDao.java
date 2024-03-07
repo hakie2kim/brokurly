@@ -20,6 +20,9 @@ public interface MemberDao {
     int countMemberByLogin(Member member);
     int countMember(String custId);
     int countEmail(String email);
+    int emailAuthFail(String custId);
+    int updateMailKey(Member member);
+    int updateMailAuth(Member member);
     int deleteMemberAll();
     int deleteMember(String custId);
 

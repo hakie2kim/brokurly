@@ -32,23 +32,41 @@ public class KakaoController {
         String userName = (String)result.get("name");
         String email = (String)result.get("email");
         String userpw = snsId;
+        String telNo = (String)result.get("phoneNum");
+        telNo = telNo.replace("+82 ","0").replaceAll("-","");
+
+        log.info("telNo = {}",telNo);
+
+        String birthYear = (String)result.get("birthYear");
+        String birthDay = (String)result.get("birthDay");
+        String birthDt = birthYear+birthDay; // yyyymmdd
+
+        log.info("birthDt = {}",birthDt);
+
+        String sex = (String)result.get("gender");
+        sex = sex.equals("female") ? "F" : "M";
+
+        log.info("sex = {}",sex);
 
         MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
 
-         // log.info(" memberServiece.kakaoLogin(snsId) = {} ", memberService.kakaoLogin(snsId));
+        // log.info(" memberServiece.kakaoLogin(snsId) = {} ", memberService.kakaoLogin(snsId));
 
         // oauthId(email) , custId(email 앞의 id), sns비밀번호(snsId), userName, regDate
         // 1. customer 테이블에 일치하는 snsId 없을 시 oauth 테이블에 회원가입
-            // 1-1. customer 테이블 확인
+        // 1-1. customer 테이블 확인
         if (memberService.kakaoLogin(snsId) == 0) {
-                log.info("kakao register");
-                memberAndSignupDto.setCustId(email);
-                memberAndSignupDto.setPwd(userpw);
-                memberAndSignupDto.setName(userName);
-                memberAndSignupDto.setSnsId(snsId);
-                // 1-2. customer 테이블에 insert
-                memberService.kakaoJoin(memberAndSignupDto);
-            }
+            log.info("kakao register");
+            memberAndSignupDto.setCustId(email);
+            memberAndSignupDto.setPwd(userpw);
+            memberAndSignupDto.setName(userName);
+            memberAndSignupDto.setTelNo(telNo);
+            memberAndSignupDto.setSex(sex);
+            memberAndSignupDto.setBirthDt(birthDt);
+            memberAndSignupDto.setSnsId(snsId);
+            // 1-2. customer 테이블에 insert
+            memberService.kakaoJoin(memberAndSignupDto);
+        }
 
         // 1.로그인 폼을 거치지 않고 컨트롤러에서 로그인 처리
         // 2. 로그인에 성공하면, Access Token을 클라이언트에 전송한다.
@@ -59,10 +77,10 @@ public class KakaoController {
         String userId = memberService.findBySnsId(snsId);
 
         log.info("userId = {}", userId);
-     //   MemberAndSignupDto dto = memberService.findByUserId(userId);
+        //   MemberAndSignupDto dto = memberService.findByUserId(userId);
 
 
-      //  log.warn("memberAndSignupDto : " + dto);
+        //  log.warn("memberAndSignupDto : " + dto);
 //        Authentication auth = new AbstractAuthenticationToken(user, null, roles);
 
         return  "redirect:/categories/best-page";

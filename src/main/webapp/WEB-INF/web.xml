@@ -62,4 +62,14 @@
         <filter-name>httpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!-- include -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>/WEB-INF/views/member/*</url-pattern>
+            <url-pattern>/WEB-INF/views/categories/*</url-pattern>
+            <include-prelude>/WEB-INF/views/include/header.jsp</include-prelude>
+            <include-coda>/WEB-INF/views/include/footer.jsp</include-coda>
+        </jsp-property-group>
+    </jsp-config>
 </web-app>
