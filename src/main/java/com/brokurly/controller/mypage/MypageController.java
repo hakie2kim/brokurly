@@ -199,6 +199,13 @@ public class MypageController {
         return HttpStatus.OK;
     }
 
+    @DeleteMapping("/address/{shipLocaId}")
+    @ResponseBody
+    HttpStatus removeShippingLocation(@PathVariable String shipLocaId) {
+        shippingLocationService.removeShippingLocation(shipLocaId);
+        return HttpStatus.OK;
+    }
+
     @GetMapping("/address/shipping-address")
     String shippingAddress() {
         return "/mypage/shipping-address";
