@@ -1,9 +1,6 @@
 package com.brokurly.entity.mypage;
 
-import com.brokurly.dto.mypage.ShippingLocationAddDto;
-import com.brokurly.dto.mypage.ShippingLocationDto;
-import com.brokurly.dto.mypage.ShippingLocationManagementDto;
-import com.brokurly.dto.mypage.ShippingLocationUpdateDto;
+import com.brokurly.dto.mypage.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -84,5 +81,14 @@ public class ShippingLocationAndShoppingLocationChangeLog {
         this.recName = shippingLocationUpdateDto.getRecName();
         this.delFl = shippingLocationUpdateDto.getDelFl();
         this.currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+    }
+
+
+    public ShippingLocationCurrDto makeShippingLocationCurrDto() {
+        return ShippingLocationCurrDto.builder()
+                .addr(addr)
+                .specAddr(specAddr)
+                .currAddrFl(currAddrFl)
+                .build();
     }
 }

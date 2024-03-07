@@ -66,6 +66,15 @@ public class ShippingLocationService {
                 .collect(Collectors.toList());
     }
 
+    public ShippingLocationCurrDto getCurrShippingLocationByCustomer(String custId) {
+        return shippingLocationDao.selectByCustomer(custId)
+                .stream()
+                .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationCurrDto)
+                .filter(sl -> "Y".equals(sl.getCurrAddrFl())) // 삭제된 배송지는 제외
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
     public ShippingLocationModifyPageDto getShippingLocationToModifyByShipLocaId(String shipLocaId) {
         return shippingLocationDao.selectByShipLocaId(shipLocaId)
                 .makeShippingLocationModifyPageDto();
