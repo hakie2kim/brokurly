@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.brokurly.repository.goods.GoodsReviewBoardDao">
+    <!-- CREATE -->
+
+    <!-- READ -->
+    <sql id="select">
+        SELECT * FROM item_review_board
+    </sql>
+
+    <select id="selectByItemId" resultType="GoodsReivewBoard">
+        SELECT a.*, b.name, b.grade
+        FROM item_review_board a left outer join customer b ON a.cust_id = b.cust_id
+        WHERE item_id = #{itemId}
+        ORDER BY like_cnt DESC
+    </select>
+
+    <select id="dateSort" resultType="GoodsReivewBoard">
+        SELECT a.*, b.name, b.grade
+        FROM item_review_board a left outer join customer b ON a.cust_id = b.cust_id
+        WHERE item_id = #{itemId}
+        ORDER BY reg_dt DESC
+    </select>
+
+
+    <!-- UPDATE -->
+
+
+    <!-- DELETE -->
+
+
+</mapper>

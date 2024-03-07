@@ -242,7 +242,7 @@
               <div>
                 <span type="direct">샛별배송</span>
               </div>
-              <button class="css-122i3z7" type="button" height="36" radius="3">
+              <button class="css-122i3z7" type="button" height="36" radius="3" onclick="showPopup();">
                 <span>배송지 변경</span>
               </button>
             </div>
@@ -315,7 +315,6 @@
 
         $(".cart-8").each(function (index, element) {
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {    //체크여부 확인용
-
                 // 총 가격
                 totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
 
@@ -543,6 +542,7 @@
         if (quantity < itemQty) {    //재고보다 수량이 적어야 한다
             quantity++; // 수량 증가
             inputField.val(quantity); // 증가된 수량을 입력란에 설정
+            $(this).closest("ul").find(".individual_itemCnt_input").val(quantity) ;
             $(this).closest("ul").find(".individual_totalPrice_input").val(parseInt(totalPrice) + parseInt(itemPrice));
             $(this).closest("ul").find(".individual_totalDiscountPrice_input").val(parseInt(totalDiscount) + parseInt(discount));
         }
@@ -574,6 +574,7 @@
         if (quantity > 1) {
             quantity--; // 수량 감소
             inputField.val(quantity); // 증가된 수량을 입력란에 설정
+            $(this).closest("ul").find(".individual_itemCnt_input").val(quantity) ;
             $(this).closest("ul").find(".individual_totalPrice_input").val(parseInt(totalPrice) - parseInt(itemPrice));
             $(this).closest("ul").find(".individual_totalDiscountPrice_input").val(parseInt(totalDiscount) - parseInt(discount));
         }
@@ -789,6 +790,9 @@
         }
     });
 
+    function showPopup() {
+        window.open("/mypage/address/shipping-address/list", "a", "width=600, height=700, left=100, top=50");
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
