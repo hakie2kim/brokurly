@@ -15,11 +15,11 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-button {
-    overflow: visible;
-    background-color: transparent;
-    border: none;
-}
+/*button {*/
+/*    overflow: visible;*/
+/*    background-color: transparent;*/
+/*    border: none;*/
+/*}*/
 .header0 {
     position: relative;
     width: 1050px;
@@ -1238,6 +1238,7 @@ a { /*하이퍼 링크 줄 제거 */
     font-size: 12px;
     color: rgb(153, 153, 153);
 }
+
 .goods-97 { /*후기 회원등급 필터 버튼 레이아웃*/
     display: flex;
     -webkit-box-align: center;
