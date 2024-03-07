@@ -23,18 +23,20 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/member/loginForm.css'/> ">
 </head>
 <body>
-<form action="<c:url value='/member/login'/>" method="POST">
+<form action="<c:url value='/member/find/password'/>" method="POST">
     <input type="hidden" name="_method" value="POST">
     <section>
         <span class="login-header">비밀번호 재설정</span>
+        <input type="hidden" name="_method" value="POST">
         <div class="login-div">
             <div class="email-div">
-            <input
-                    class="login-div__column"
-                    type="text"
-                    name="email"
-                    placeholder="가입하신 이메일을 입력해주세요"
-            />
+                <span class="register-div__label">가입하신 이메일을 입력해주세요</span>
+                <input
+                        class="login-div__column"
+                        type="text"
+                        name="email"
+                        placeholder="가입하신 이메일을 입력해주세요"
+                />
                 <button>확인</button>
             </div>
             <button class="login-div__column loginBtn">인증번호 보내기</button>

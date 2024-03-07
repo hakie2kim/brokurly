@@ -28,7 +28,7 @@
         (cust_id, pwd, name, email, tel_no, sex,
          birth_dt, consent,sns_id)
         VALUES
-            (#{custId}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
+            (#{email}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
              #{birthDt}, '0' ,'0')
     </insert>
 
@@ -40,7 +40,7 @@
     <select id="selectMemberByLogin" resultType="Member">
         SELECT cust_id, pwd, name
         FROM customer
-         WHERE cust_id = #{custId}
+        WHERE cust_id = #{custId}
     </select>
     <select id="selectMemberBySnsId" resultType="Member">
         SELECT cust_id,
@@ -65,18 +65,19 @@
         FROM customer
         WHERE sns_id = #{snsId}
     </select>
-<!--    <select id="findByAuth">-->
-<!--        SELECT cust_id-->
-<!--        FROM customer-->
-<!--        WHERE email = #{snsId}-->
-<!--    </select>-->
+    <!--    <select id="findByAuth">-->
+    <!--        SELECT cust_id-->
+    <!--        FROM customer-->
+    <!--        WHERE email = #{snsId}-->
+    <!--    </select>-->
+
     <insert id="insertSnsMember">
         INSERT INTO customer
         (cust_id, pwd, name, email, tel_no, sex,
-            birth_dt, consent,sns_id)
+         birth_dt, consent,sns_id)
         VALUES
-            (#{custId}, #{pwd}, #{name}, #{custId}, '01015121542', 'N',
-        '1695-02-18', '0' ,#{snsId})
+            (#{custId}, #{pwd}, #{name}, #{custId}, #{telNo}, #{sex},
+             #{birthDt}, '0' ,#{snsId})
     </insert>
     <!-- KAKAO LOGIN END-->
 
@@ -105,18 +106,24 @@
         WHERE email = #{email}
     </select>
 
+    <!--    이메일 인증 : 로그인 시 인증여부를 체크(안했으면 0 반환)-->
+    <select id="emailAuthFail" resultType="int">
+        <include refid="count"/>
+        WHERE cust_id = #{custId} AND mail_auth=1
+    </select>
+
     <!-- UPDATE -->
     <update id="updateMailKey">
         UPDATE customer
         SET   mail_key = #{mailKey}
         WHERE email    = #{email}
-        AND   cust_id  = #{custId}
+          AND   cust_id  = #{custId}
     </update>
     <update id="updateMailAuth">
         UPDATE customer
         SET     mail_auth = 1
         WHERE   email     = #{email}
-        AND     mail_key  = #{mailKey}
+          AND     mail_key  = #{mailKey}
     </update>
     <!-- DELETE -->
     <delete id="deleteMemberAll">

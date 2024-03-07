@@ -3,6 +3,7 @@ package com.brokurly.service.member;
 
 
 import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.entity.member.Member;
 import com.brokurly.repository.member.MemberDao;
@@ -21,8 +22,8 @@ import java.util.Map;
 @Service
 @Slf4j
 public class MemberServiceImpl implements MemberService {
-   private final MemberDao memberDao;
-   private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MemberDao memberDao;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     MemberServiceImpl(MemberDao memberDao,BCryptPasswordEncoder bCryptPasswordEncoder){
         this.memberDao = memberDao;
@@ -65,10 +66,10 @@ public class MemberServiceImpl implements MemberService {
      */
     @Override
     public MemberAndLoginDto localLogin(MemberAndLoginDto memberAndLoginDto){
-       Member member = new Member();
-       // 1. 사용자가 입력한 아이디와 맞는 id,pwd를 가져옴
-       member.changeStatus(memberAndLoginDto);
-       member = memberDao.selectMemberByLogin(member);
+        Member member = new Member();
+        // 1. 사용자가 입력한 아이디와 맞는 id,pwd를 가져옴
+        member.changeStatus(memberAndLoginDto);
+        member = memberDao.selectMemberByLogin(member);
 
         // 2. 사용자 입력한 pwd와 가져온 pwd가 match 되는지 확인
         if(bCryptPasswordEncoder.matches(memberAndLoginDto.getPwd(),member.makeLoginDto().getPwd())){
@@ -76,16 +77,16 @@ public class MemberServiceImpl implements MemberService {
             return member.makeLoginDto();
         }
 
-       return null;
+        return null;
     }
 
     // 카카오 로그인 start
     @Override
     public MemberAndSignupDto signUpBySns(String snsId){
         Member member = memberDao.selectMemberBySnsId(snsId);
-     //   MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
+        //   MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
 
-      //  return memberAndSignupDto;
+        //  return memberAndSignupDto;
         return member.makeFullDto();
     }
 
@@ -126,6 +127,26 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int getCountEmail(String email) { return memberDao.countEmail(email); }
+
+    @Override
+    public int emailAuthFail(String custId){
+        return memberDao.emailAuthFail(custId);
+    }
+
+    @Override
+    public int updateMailKey(MemberAndMailAuthDto memberAndMailAuthDto){
+        Member member = new Member();
+        member.changeStatus(memberAndMailAuthDto);
+
+        return memberDao.updateMailKey(member);
+    }
+    @Override
+    public int updateMailAuth(MemberAndMailAuthDto memberAndMailAuthDto){
+        Member member = new Member();
+        member.changeStatus(memberAndMailAuthDto);
+
+        return memberDao.updateMailAuth(member);
+    }
 
     @Override
     public int removeAll(){

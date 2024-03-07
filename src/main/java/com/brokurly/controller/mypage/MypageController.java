@@ -2,21 +2,17 @@ package com.brokurly.controller.mypage;
 
 
 import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
-import com.brokurly.dto.mypage.PointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogExpDto;
 import com.brokurly.dto.mypage.PointLogUsageDto;
 
 import com.brokurly.dto.mypage.*;
-import com.brokurly.entity.mypage.ShippingLocation;
 
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -149,19 +145,57 @@ public class MypageController {
         return HttpStatus.OK;
     }
 
-    @PatchMapping("/address")
+    @GetMapping("/address/shipping-address/update/{shipLocaId}")
+    String modifyShippingLocation(@PathVariable String shipLocaId, Model model) {
+        ShippingLocationModifyPageDto shippingLocationModifyPageDto = shippingLocationService.getShippingLocationToModifyByShipLocaId(shipLocaId);
+        model.addAttribute("shippingLocationModifyPageDto", shippingLocationModifyPageDto);
+        return "/mypage/address-update";
+    }
+
+    @PatchMapping("/address/shipping-address/update/{shipLocaId}")
     @ResponseBody
 //    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
-    HttpStatus modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
-        System.out.println("MypageController.modifyShippingAddress");
+    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId, @ModelAttribute ShippingLocationModifyDto shippingLocationModifyDto) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
-        String shipLocaId = shippingLocationUpdateDto.getShipLocaId();
-        String currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
-        log.info("ship_loca_id: {} curr_addr_fl: {}",shipLocaId, currAddrFl);
+        shippingLocationModifyDto.setShipLocaId(shipLocaId);
+        String specAddr = shippingLocationModifyDto.getSpecAddr();
 
-        shippingLocationService.changeCurrAddr(custId, shippingLocationUpdateDto);
+        String defAddrFl = shippingLocationModifyDto.getDefAddrFl().equals("on") ? "Y" : "N";
+        shippingLocationModifyDto.setDefAddrFl(defAddrFl);
 
+        String telNo = shippingLocationModifyDto.getTelNo().isEmpty() ? null : shippingLocationModifyDto.getTelNo();
+        shippingLocationModifyDto.setTelNo(telNo);
+
+        String recName = shippingLocationModifyDto.getRecName();
+
+        /*// 현재 배송지 수정
+        String currAddrFl = shippingLocationModifyDto.getCurrAddrFl().equals("on") ? "Y" : "N";
+        if ("Y".equals(currAddrFl)) {
+            shippingLocationService.modifyCurrShippingLocation(custId, shipLocaId);
+            return HttpStatus.OK;
+        }*/
+
+        /*log.info("ship_loca_id: {} specAddr: {} defAddrFl: {} telNo: {} recName: {} currAddrFl: {}",
+                shipLocaId, specAddr, defAddrFl, telNo, recName, currAddrFl
+        );*/
+        log.info("ship_loca_id: {} specAddr: {} defAddrFl: {} telNo: {} recName: {}",
+                shipLocaId, specAddr, defAddrFl, telNo, recName
+        );
+
+        shippingLocationService.modifyShippingLocation(custId, shippingLocationModifyDto);
+
+        return HttpStatus.OK;
+    }
+
+    @PatchMapping("/address/shipping-address/update-curraddr/{shipLocaId}")
+    @ResponseBody
+//    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
+    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        // 현재 배송지 수정
+        shippingLocationService.modifyCurrShippingLocation(custId, shipLocaId);
         return HttpStatus.OK;
     }
 
@@ -192,4 +226,5 @@ public class MypageController {
             return "redirect:/mypage/address";
         }*/
     }
+
 }

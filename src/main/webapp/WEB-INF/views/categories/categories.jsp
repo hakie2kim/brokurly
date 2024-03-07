@@ -42,7 +42,7 @@
 <body>
 <%--<%@ include file="header.jsp" %>--%>
 <%--<c:import url="header.jsp" />--%>
-<jsp:include page="header.jsp">
+<jsp:include page="../include/header.jsp">
     <jsp:param name="selectMain" value="${selectMain}"/>
 </jsp:include>
 

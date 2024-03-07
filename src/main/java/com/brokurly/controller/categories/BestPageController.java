@@ -36,7 +36,7 @@ public class BestPageController {
         m.addAttribute("selectMain", selectMain);
 
 
-        return "/categories/header";
+        return "include/header";
     }
 
     @GetMapping("/best-page")

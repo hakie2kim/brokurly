@@ -8,7 +8,7 @@ body {
     font-family: var(--main-font);
 }
 section {
-    height: 100vh;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,4 +80,11 @@ input:focus {
     font-weight: 800;
     line-height: 20px;
     margin-bottom: 20px;
+}
+
+.register-div__label {
+
+    width: 139px;
+    font-size: 14px;
+    font-weight: 500;
 }

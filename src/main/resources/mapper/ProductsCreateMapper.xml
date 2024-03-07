@@ -104,6 +104,7 @@
         WHERE keyword = #{keyword}
     </update>
 
+
     <!--insertGoodsImage-->
     <insert id="insertGoodsImage">
         INSERT INTO item_image
