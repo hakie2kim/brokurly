@@ -4,16 +4,19 @@ import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.entity.order.Order;
+import com.brokurly.entity.order.OrderItemList;
 import com.brokurly.entity.payment.PaymentAmount;
 import com.brokurly.repository.order.OrderDao;
 import com.brokurly.service.cart.CustomerCartService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -41,9 +44,17 @@ public class OrderService {
         if (checkoutDto == null)
             throw new IllegalArgumentException();
 
+        // 주문 내역 저장
         Order order = new Order();
         order.changeOrder(checkoutDto, orderId, custId);
         orderDao.insert(order);
+
+        // 주문 상품 목록 저장
+        for (CustomerCartDto customerCartDto : checkoutDto.getCustomerCart()) {
+            OrderItemList itemList = new OrderItemList();
+            itemList.changeOrderItemList(customerCartDto, orderId);
+            orderDao.insertItemList(itemList);
+        }
     }
 
     @Transactional

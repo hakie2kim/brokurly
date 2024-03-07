@@ -6,13 +6,16 @@ import com.brokurly.dto.payment.KakaoPayApproveRequestDto;
 import com.brokurly.dto.payment.KakaoPayApproveResponseDto;
 import com.brokurly.dto.payment.KakaoPayReadyRequestDto;
 import com.brokurly.dto.payment.KakaoPayReadyResponseDto;
-import com.brokurly.utils.IdGenerator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -20,10 +23,13 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@PropertySource("classpath:application.properties")
 public class KakaoPayService {
     private final WebClient webClient;
-    private static final String CLIENT_ID = "TC0ONETIME";
-    private static final String SECRET_KEY = "DEV7A4E20E00FB8E6B9769563EDDD14423A69B4C";
+    @Value("${kakaopay.clientId}")
+    private String clientId;
+    @Value("${kakaopay.secretKey}")
+    private String secretKey;
 
     public KakaoPayService(ClientHttpConnector clientHttpConnector) {
         this.webClient = WebClient.builder()
@@ -34,7 +40,7 @@ public class KakaoPayService {
 
     public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto, String orderId) {
         KakaoPayReadyRequestDto requestDto = KakaoPayReadyRequestDto.builder()
-                .cid(CLIENT_ID)
+                .cid(clientId)
                 .partner_order_id(orderId)
                 .partner_user_id(checkoutDto.getReceiverDetails().getRcvName())
                 .item_name(getItemName(checkoutDto.getCustomerCart()))
@@ -49,11 +55,14 @@ public class KakaoPayService {
         return webClient.post()
                 .uri("/online/v1/payment/ready")
                 .headers(httpHeaders -> {
-                    httpHeaders.set("Authorization", "SECRET_KEY " + SECRET_KEY);
+                    httpHeaders.set("Authorization", "SECRET_KEY " + secretKey);
                     httpHeaders.setContentType(MediaType.APPLICATION_JSON);
                 })
                 .body(BodyInserters.fromValue(requestDto))
                 .retrieve()
+                .onStatus(HttpStatus::isError, clientResponse -> {
+                    throw new ResponseStatusException(clientResponse.statusCode());
+                })
                 .bodyToMono(KakaoPayReadyResponseDto.class)
                 .map(response -> {
                     response.setPartner_order_id(requestDto.getPartner_order_id());
@@ -82,7 +91,7 @@ public class KakaoPayService {
 
     public Mono<KakaoPayApproveResponseDto> approve(String pg_token, Map<String, String> paramMap) {
         KakaoPayApproveRequestDto requestDto = KakaoPayApproveRequestDto.builder()
-                .cid(CLIENT_ID)
+                .cid(clientId)
                 .tid(paramMap.get("tid"))
                 .partner_order_id(paramMap.get("orderId"))
                 .partner_user_id(paramMap.get("userId"))
@@ -92,7 +101,7 @@ public class KakaoPayService {
         return webClient.post()
                 .uri("/online/v1/payment/approve")
                 .headers(httpHeaders -> {
-                    httpHeaders.set("Authorization", "SECRET_KEY " + SECRET_KEY);
+                    httpHeaders.set("Authorization", "SECRET_KEY " + secretKey);
                     httpHeaders.setContentType(MediaType.APPLICATION_JSON);
                 })
                 .body(BodyInserters.fromValue(requestDto))

@@ -147,13 +147,15 @@ function redirectPayment() {
         return;
     }
 
-    const customerCart = [];
+    const customerCartList = [];
     $(".item-list").each(function () {
-        customerCart.push({
+        let customerCart = {
+            itemId: $(this).find($(".item-id")).text(),
             name: $(this).find($(".item-name")).text(),
             itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
             price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
-        })
+        }
+        customerCartList.push(customerCart);
     });
 
     let checkoutInfo= {
@@ -165,7 +167,7 @@ function redirectPayment() {
             placeExp: $("#checkout-place-exp").text(),
             msgTime: $("#checkout-msg-time").text()
         },
-        customerCart: customerCart,
+        customerCart: customerCartList,
         paymentAmount: {
             orderAmt: parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
             itemAmt: parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),

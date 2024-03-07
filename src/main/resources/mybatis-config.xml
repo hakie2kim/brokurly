@@ -9,6 +9,7 @@
     <typeAliases>
         <typeAlias type="com.brokurly.entity.member.Member" alias="Member"/>
         <typeAlias type="com.brokurly.entity.order.Order" alias="Order"/>
+        <typeAlias type="com.brokurly.entity.order.OrderItemList" alias="OrderItemList"/>
         <typeAlias type="com.brokurly.entity.payment.PaymentDetails" alias="Payment"/>
         <typeAlias type="com.brokurly.entity.order.OrderAndPayment" alias="OrderAndPayment"/>
         <typeAlias type="com.brokurly.entity.order.ReceiverDetails" alias="ReceiverDetails"/>

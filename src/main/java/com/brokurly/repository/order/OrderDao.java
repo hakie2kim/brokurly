@@ -2,6 +2,7 @@ package com.brokurly.repository.order;
 
 import com.brokurly.entity.order.Order;
 import com.brokurly.entity.order.OrderAndPayment;
+import com.brokurly.entity.order.OrderItemList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface OrderDao {
     // CREATE
     int insert(Order order);
+
+    int insertItemList(OrderItemList itemList);
 
     // READ
     List<Order> selectByCustId(String custId);

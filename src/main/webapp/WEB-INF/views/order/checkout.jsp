@@ -17,9 +17,6 @@
     <title>브로컬리</title>
 </head>
 <body>
-<header>
-    <jsp:include page="../categories/header.jsp"/>
-</header>
 <section>
     <h2>주문서</h2>
     <div class="info-type1">
@@ -39,6 +36,7 @@
             <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
                     <div>상품 사진</div>
+                    <div class="item-id" style="display: none">${item.itemId}</div>
                     <div class="item-name">${item.name}</div>
                     <div class="item-cnt">${item.itemCnt}개</div>
                     <div class="item-price">${item.price}원</div>

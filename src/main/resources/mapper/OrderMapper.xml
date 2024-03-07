@@ -13,6 +13,13 @@
              #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{orderAddr}, #{shipNo})
     </insert>
 
+    <insert id="insertItemList">
+        INSERT INTO order_item_list
+            (order_id, item_id, item_qty, item_price)
+        VALUES
+            (#{orderId}, #{itemId}, #{itemQty}, #{itemPrice})
+    </insert>
+
     <!-- READ -->
     <sql id="select">
         SELECT * FROM orders
