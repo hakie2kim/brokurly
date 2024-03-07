@@ -54,7 +54,7 @@
             </div>
             <div>
               <h1>${goods.name}</h1>
-              <h2 class="goods-117">100g당 : 1,999원</h2>
+<%--              <h2 class="goods-117">100g당 : 1,999원</h2>--%>
             </div>
             <h2>
               <span class="goods-118">${goods.dcRt}<!-- -->%</span> <!-- 할인율 -->
@@ -72,7 +72,7 @@
               <li class="goods-98">
                 <dt class="goods-99">배송</dt>
                 <dd class="goods-102">
-                  <p class="goods-101">${goods.shipType}배송</p>
+                  <p class="goods-101">${goods.shipType}</p>
                   <p class="goods-100">23시 전 주문 시 내일 아침 7시 전 도착
                     (대구·부산·울산 샛별배송 운영시간 별도 확인)</p>
                 </dd>
@@ -151,9 +151,10 @@
                 </div>
               </div>
               <div class="goods-111">
+                <input type="hidden" class="like_input" value="${wishList}">
                 <button class="goods-112" onclick="heartToggle()" width="56" height="56" radius="3">
                   <span>
-                      <img src="/resources/image/heartX.png" alt="" class="img1" id="heart">
+                      <img src="/resources/image/heartX.png" alt="" class="img1 heart" id="heart">
                   </span>
                 </button>
                 <button class="goods-112" onclick="bellToggle()" width="56" height="56" radius="3">
@@ -185,7 +186,7 @@
             <li class="goods-7">
               <a href="#section3" class="goods-4">
                 <span>후기</span>
-                <span>(<!-- -->76,724<!-- -->)</span>
+                <span class="review1 "></span>
               </a>
             </li>
             <li class="goods-7">
@@ -458,7 +459,7 @@
               </div>
               <div>
                 <div class="goods-92">
-                  <span class="goods-93">총 76,724개</span>
+                  <span class="goods-93"></span>
                   <div class="goods-94">
                     <button class="goods-95">추천순</button>
                     <button class="goods-96">최근등록순</button>
@@ -535,43 +536,43 @@
                         </li>
                         <li>
                           <button type="button" class="goods-51">
-                                                                <span>
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                                            stroke="#ddd" fill="none"></path>
-                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"
-                                                                              stroke="#ddd" stroke-width="1.5"
-                                                                              stroke-linecap="round"
-                                                                              stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
+                              <span>
+                                  <svg width="24" height="24" viewBox="0 0 24 24"
+                                       fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path
+                                          d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                          stroke="#ddd" fill="none"></path>
+                                      <path d="M7 12.6667L10.3846 16L18 8.5"
+                                            stroke="#ddd" stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"></path>
+                                  </svg>
+                              </span>
                             <div>
-                                                                    <span>일반
-                                                                        <span class="goods-55">9,999+</span>
-                                                                    </span>
+                              <span>일반
+                                  <span class="goods-55">9,999+</span>
+                              </span>
                             </div>
                           </button>
                         </li>
                         <li>
                           <button type="button" class="goods-51">
-                                                                <span>
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                                            stroke="#ddd" fill="none"></path>
-                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"
-                                                                              stroke="#ddd" stroke-width="1.5"
-                                                                              stroke-linecap="round"
-                                                                              stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
+                            <span>
+                                <svg width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                        stroke="#ddd" fill="none"></path>
+                                    <path d="M7 12.6667L10.3846 16L18 8.5"
+                                          stroke="#ddd" stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
                             <div>
-                                                                    <span>멤버스
-                                                                        <span class="goods-55">3,621</span>
-                                                                    </span>
+                              <span>멤버스
+                                  <span class="goods-55">3,621</span>
+                              </span>
                             </div>
                           </button>
                         </li>
@@ -605,139 +606,141 @@
                     </div>
                   </div>
                 </div>
+                <c:forEach items="${review}" var="re">
                 <div class="goods-17">
                   <div class="goods-18">
                     <div>
                       <span>베스트</span>
-                      <span>멤버스</span>
-                      <span>김**</span>
+                      <span>${re.grade}</span>
+                      <span>${re.name}</span>
                     </div>
                   </div>
                   <article>
                     <div>
                       <div>
-                        <h3>[KF365] 양념 소불고기 1kg (냉장)</h3>
+                        <h3>${goods.name}</h3>
                       </div>
-                      <p>이건 고기도 큼직하고 자잘한 고기들이 별로 없어서 좋았어요~</p>
+                      <p>${re.content}</p>
                       <div>
                         <button>
-                                                        <span
-                                                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                                                            <span
-                                                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                                                <img alt="" aria-hidden="true"
-                                                                     src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
-                                                                     style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                                                            </span>
-                                                            <img alt="리뷰 이미지 썸네일"
-                                                                 src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg"
-                                                                 decoding="async" data-nimg="intrinsic"
-                                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-                                                                 srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 2x">
-                                                        </span>
+                          <span
+                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
+                            <span
+                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
+                                <img alt="" aria-hidden="true"
+                                     src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
+                                     style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
+                            </span>
+                            <img alt="리뷰 이미지 썸네일"
+                                 src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg"
+                                 decoding="async" data-nimg="intrinsic"
+                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
+                                 srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 2x">
+                          </span>
                         </button>
                       </div>
                       <footer>
                         <div>
-                          <span>2024.01.29</span>
+                          <span>${re.regDt}</span>
                         </div>
                         <button class="likeX">
-                                                        <span>
-                                                            <img src="/resources/image/like1.png" alt="" class="img2"
-                                                                 id="like1">
-                                                        </span>
-                          <span>도움돼요 3</span>
-                        </button>
-                      </footer>
-                    </div>
-                  </article>
-                </div>
-                <div class="goods-17">
-                  <div class="goods-18">
-                    <div>
-                      <span>베스트</span>
-                      <span>라벤더</span>
-                      <span>권**</span>
-                    </div>
-                  </div>
-                  <article>
-                    <div>
-                      <div>
-                        <h3>[KF365] 양념 소불고기 1kg (냉장)</h3>
-                      </div>
-                      <p>집에 또띠아 남은 것과 유통기한이 임박한 사워크림이 있어서 소불고기 사서 퀘사디아 만들어먹었어요. 퀘사디아는 난생 처음 도전해보는데 정말 간단하게 만들 수 있지만 기대
-                        이상으로 맛있어서 레시피 공유해볼게요! 👩‍🍳 </p>
-                      <div>
-                        <button>
-                          <span
-                              style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                              <span
-                                  style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                  <img alt="" aria-hidden="true"
-                                       src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
-                                       style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                              </span>
-                              <img alt="리뷰 이미지 썸네일"
-                                   src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg"
-                                   decoding="async" data-nimg="intrinsic"
-                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-                                   srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg 2x">
+                          <span>
+                              <img src="/resources/image/like1.png" alt="" class="img2"
+                                   id="like1">
                           </span>
-                        </button>
-                        <button>
-                          <span
-                              style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                              <span
-                                  style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                  <img alt="" aria-hidden="true"
-                                       src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
-                                       style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                              </span>
-                              <img alt="리뷰 이미지 썸네일"
-                                   src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg"
-                                   decoding="async" data-nimg="intrinsic"
-                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-                                   srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg 2x">
-                          </span>
-                        </button>
-                      </div>
-                      <footer>
-                        <div>
-                          <span>2023.12.19</span>
-                        </div>
-                        <button>
-                          <span></span>
-                          <span>도움돼요 40</span>
+                          <span>도움돼요<span>${re.likeCnt}</span></span>
                         </button>
                       </footer>
                     </div>
                   </article>
                 </div>
-                <div class="goods-17">
-                  <div class="goods-18">
-                    <div>
-                      <span>멤버스</span>
-                      <span>박**</span>
-                    </div>
-                  </div>
-                  <article>
-                    <div>
-                      <div>
-                        <h3>[KF365] 양념 소불고기 1kg (냉장)</h3>
-                      </div>
-                      <p>양도 많고 맛도 괜찮아서 좋아요.집에있는 파,버섯 넣고 같이 볶아내면 딱입니다.</p>
-                      <footer>
-                        <div>
-                          <span>2024.02.01</span>
-                        </div>
-                        <button>
-                          <span></span>
-                          <span>도움돼요</span>
-                        </button>
-                      </footer>
-                    </div>
-                  </article>
-                </div>
+                </c:forEach>
+<%--                <div class="goods-17">--%>
+<%--                  <div class="goods-18">--%>
+<%--                    <div>--%>
+<%--                      <span>베스트</span>--%>
+<%--                      <span>라벤더</span>--%>
+<%--                      <span>권**</span>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <article>--%>
+<%--                    <div>--%>
+<%--                      <div>--%>
+<%--                        <h3>[KF365] 양념 소불고기 1kg (냉장)</h3>--%>
+<%--                      </div>--%>
+<%--                      <p>집에 또띠아 남은 것과 유통기한이 임박한 사워크림이 있어서 소불고기 사서 퀘사디아 만들어먹었어요. 퀘사디아는 난생 처음 도전해보는데 정말 간단하게 만들 수 있지만 기대--%>
+<%--                        이상으로 맛있어서 레시피 공유해볼게요! 👩‍🍳 </p>--%>
+<%--                      <div>--%>
+<%--                        <button>--%>
+<%--                          <span--%>
+<%--                              style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">--%>
+<%--                              <span--%>
+<%--                                  style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">--%>
+<%--                                  <img alt="" aria-hidden="true"--%>
+<%--                                       src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"--%>
+<%--                                       style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">--%>
+<%--                              </span>--%>
+<%--                              <img alt="리뷰 이미지 썸네일"--%>
+<%--                                   src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg"--%>
+<%--                                   decoding="async" data-nimg="intrinsic"--%>
+<%--                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"--%>
+<%--                                   srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/c41f1d7c-7375-4558-9a78-3b4e31b78f65.jpeg 2x">--%>
+<%--                          </span>--%>
+<%--                        </button>--%>
+<%--                        <button>--%>
+<%--                          <span--%>
+<%--                              style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">--%>
+<%--                              <span--%>
+<%--                                  style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">--%>
+<%--                                  <img alt="" aria-hidden="true"--%>
+<%--                                       src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"--%>
+<%--                                       style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">--%>
+<%--                              </span>--%>
+<%--                              <img alt="리뷰 이미지 썸네일"--%>
+<%--                                   src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg"--%>
+<%--                                   decoding="async" data-nimg="intrinsic"--%>
+<%--                                   style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"--%>
+<%--                                   srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20231219/3632aa82-771f-454e-9e0f-3c5ed414caef.jpeg 2x">--%>
+<%--                          </span>--%>
+<%--                        </button>--%>
+<%--                      </div>--%>
+<%--                      <footer>--%>
+<%--                        <div>--%>
+<%--                          <span>2023.12.19</span>--%>
+<%--                        </div>--%>
+<%--                        <button>--%>
+<%--                          <span></span>--%>
+<%--                          <span>도움돼요 40</span>--%>
+<%--                        </button>--%>
+<%--                      </footer>--%>
+<%--                    </div>--%>
+<%--                  </article>--%>
+<%--                </div>--%>
+<%--                <div class="goods-17">--%>
+<%--                  <div class="goods-18">--%>
+<%--                    <div>--%>
+<%--                      <span>멤버스</span>--%>
+<%--                      <span>박**</span>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <article>--%>
+<%--                    <div>--%>
+<%--                      <div>--%>
+<%--                        <h3>[KF365] 양념 소불고기 1kg (냉장)</h3>--%>
+<%--                      </div>--%>
+<%--                      <p>양도 많고 맛도 괜찮아서 좋아요.집에있는 파,버섯 넣고 같이 볶아내면 딱입니다.</p>--%>
+<%--                      <footer>--%>
+<%--                        <div>--%>
+<%--                          <span>2024.02.01</span>--%>
+<%--                        </div>--%>
+<%--                        <button>--%>
+<%--                          <span></span>--%>
+<%--                          <span>도움돼요</span>--%>
+<%--                        </button>--%>
+<%--                      </footer>--%>
+<%--                    </div>--%>
+<%--                  </article>--%>
+<%--                </div>--%>
               </div>
               <div class="goods-75">
                 <button class="goods-76">
@@ -1039,7 +1042,7 @@
             <div class="goods-116">
               <button class="goods-112" onclick="heartToggle()" width="56" height="56" radius="3">
                                 <span>
-                                    <img src="/resources/image/heartX.png" alt="" class="img1" id="heart2">
+                                    <img src="/resources/image/heartX.png" alt="" class="img1 heart" id="heart2">
                                 </span>
               </button>
               <button class="goods-112" onclick="bellToggle()" width="56" height="56" radius="3">
@@ -1274,19 +1277,115 @@ $(window).resize(Page__updateOffsetTop);
 $(window).scroll(Page__updateIndicatorActive);
 
 
-//찜 버튼 누르면 사진 변경 다시 누르면 원상태로
-let heartCnt = 0;
+// //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
+// let heartCnt = 0;
+//
+// function heartToggle() {
+//     heartCnt++;
+//     if (heartCnt % 2 === 1) {
+//         document.getElementById("heart").src = "/resources/image/heartO.png";
+//         document.getElementById("heart2").src = "/resources/image/heartO.png";
+//     } else {
+//         document.getElementById("heart").src = "/resources/image/heartX.png";
+//         document.getElementById("heart2").src = "/resources/image/heartX.png";
+//     }
+// }
 
-function heartToggle() {
-    heartCnt++;
-    if (heartCnt % 2 === 1) {
-        document.getElementById("heart").src = "/resources/image/heartO.png";
-        document.getElementById("heart2").src = "/resources/image/heartO.png";
-    } else {
-        document.getElementById("heart").src = "/resources/image/heartX.png";
-        document.getElementById("heart2").src = "/resources/image/heartX.png";
+//찜 버튼 누르면 사진 변경 다시 누르면 원상태로
+$(document).ready(function () {
+    let like = $(".like_input").val();
+        if (like === "1") {
+            $(".heart").attr("src", "/resources/image/heartO.png");
+        } else {
+            $(".heart").attr("src", "/resources/image/heartX.png");
+        }
+});
+
+    function heartToggle() {
+        let like = $(".like_input").val();
+        if (like === "1") {
+
+            $.ajax({
+
+                url: '/goods/deleteWish',
+                type: 'POST',
+                dataType: "text",
+                data: {
+                    custId: "hong",
+                    itemId: "${goods.itemId}"
+                },
+                success: function (data) {
+                    $(".heart").attr("src", "/resources/image/heartX.png");
+                    // location.reload();
+                    $(".like_input").val(0);
+                    alert("찜 삭제");
+
+                }
+            })
+        }else {
+
+            $.ajax({
+                url: '/goods/addWish',
+                type: 'POST',
+                dataType: "text",
+                data: {
+                    custId: "hong",
+                    itemId: "${goods.itemId}"
+                    },
+                success: function (data) {
+                    $(".heart").attr("src", "/resources/image/heartO.png");
+                    $(".like_input").val(1);
+                    // location.reload();
+                    alert("찜 추가");
+                }
+
+            })
+        }
+
     }
-}
+<%--$(document).ready(function () {--%>
+<%--    let like = $(".like_input").val();--%>
+
+<%--    function heartToggle() {--%>
+<%--        if (like === "1") {--%>
+<%--            $.ajax({--%>
+<%--                url: '/goods/deleteWish',--%>
+<%--                type: 'POST',--%>
+<%--                dataType: "text",--%>
+<%--                data: {--%>
+<%--                    custId: "hong",--%>
+<%--                    itemId: ${goods.itemId} // 수정된 부분--%>
+<%--                },--%>
+<%--                success: function () {--%>
+<%--                    $(".heart").attr("src", "/resources/image/heartX.png");--%>
+<%--                    alert("찜 삭제")--%>
+<%--                }--%>
+<%--            })--%>
+<%--        } else {--%>
+<%--            $.ajax({--%>
+<%--                url: '/goods/addWish',--%>
+<%--                type: 'POST',--%>
+<%--                dataType: "text",--%>
+<%--                data: {--%>
+<%--                    custId: "hong",--%>
+<%--                    itemId: ${goods.itemId} // 수정된 부분--%>
+<%--                },--%>
+<%--                success: function () {--%>
+<%--                    $(".heart").attr("src", "/resources/image/heartO.png");--%>
+<%--                    alert("찜 추가")--%>
+<%--                }--%>
+<%--            })--%>
+<%--        }--%>
+
+<%--    }--%>
+
+<%--    if (like === "1") {--%>
+<%--        $(".heart").attr("src", "/resources/image/heartO.png");--%>
+<%--    } else {--%>
+<%--        $(".heart").attr("src", "/resources/image/heartX.png");--%>
+<%--    }--%>
+
+<%--});--%>
 
 
 //알림 버튼 누르면 사진 변경 다시 누르면 원상태로
@@ -1592,6 +1691,59 @@ $('.css-l45xk5').on('blur', function () {
 //     // 클래스를 toggle하는 대신 classList에서 hide 클래스를 제거합니다.
 //     document.querySelector('.css-l45xk5').classList.remove('hide');
 // });
+
+//상품후기 개수 카운트용
+$(document).ready(function () {
+  let reviewCnt = 0;
+
+  $(".goods-17").each(function (){
+      reviewCnt +=1;
+    });
+  $(".goods-93").text("총 " + new Intl.NumberFormat('ko-KR').format(reviewCnt) + "개")
+  $(".review1").text("( " + new Intl.NumberFormat('ko-KR').format(reviewCnt) + " )")
+});
+
+//정렬
+$(".goods-95").on("click", function () {
+    $(".goods-95").css('color', 'rgb(51, 51, 51)');
+    $(".goods-96").css('color', 'rgb(153, 153, 153)');
+});
+
+$(".goods-96").on("click", function () {
+    $(this).css('color', 'rgb(51, 51, 51)');
+    $(".goods-95").css('color', 'rgb(153, 153, 153)');
+
+    // $.ajax({
+    //     url: '/goods/dateSort',
+    //     method: "POST",
+    //     // dataType: "text",
+    //     // data: {
+    //     //     custId: "hong",
+    //     //     itemId: "1708410569506"
+    //     // },
+    //     success: function () {
+    //         location.reload();
+    //         alert("삭제 완료");
+    //     }
+    // });
+
+    // // review 배열을 생성하고
+    // var reviewArray = [];
+    // $(".goods-17").each(function() {
+    //     var regDt = $(this).find("span:nth-child(4)").text();
+    //     reviewArray.push({ element: $(this), regDt: regDt });
+    // });
+    //
+    // reviewArray.sort(function(a, b) {
+    //     return new Date(b.regDt) - new Date(a.regDt);
+    // });
+    //
+    // // 정렬된 요소를 DOM에 다시 적용
+    // $(".goods-17").remove();
+    // for (var i = 0; i < reviewArray.length; i++) {
+    //     $(".goods-container").append(reviewArray[i].element);
+    // }
+});
 
 </script>
 
