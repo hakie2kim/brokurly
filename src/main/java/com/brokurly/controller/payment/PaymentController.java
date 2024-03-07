@@ -63,11 +63,6 @@ public class PaymentController {
         redirectAttributes.addFlashAttribute("userId", response.getPartner_user_id());
         redirectAttributes.addFlashAttribute("amount", response.getAmount().getTotal());
 
-        // 사용이 끝난 세션 정보 제거
-        session.removeAttribute("tid");
-        session.removeAttribute("userId");
-        session.removeAttribute("orderId");
-
         return "redirect:/order/checkout/success";
     }
 

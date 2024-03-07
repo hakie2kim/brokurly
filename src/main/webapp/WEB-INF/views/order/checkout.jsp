@@ -29,10 +29,10 @@
         </div>
         <hr/>
         <c:set var="customerCart" value="${checkout.customerCart}"/>
-        <c:set var="numOfItemType" value="${fn:length(customerCart) - 1}"/>
+        <c:set var="numOfItemType" value="${fn:length(customerCart)}"/>
         <div id="order-goods">
             ${customerCart[0].name}
-            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType}개</c:if>
+            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType - 1}개</c:if>
             상품을 주문합니다.
         </div>
         <div id="order-goods-list" style="display: none">

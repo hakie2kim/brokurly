@@ -23,7 +23,7 @@ public class OrderService {
     private final ReceiverDetailsService receiverDetailsService;
 
     public CheckoutDto getCheckoutInfo(String shipLocaId, String custId) {
-        List<CustomerCartDto> cartList = cartService.getCartList(custId);
+        List<CustomerCartDto> cartList = cartService.getCartList(custId, true);
         ReceiverDetailsResponseDto receiverDetails = receiverDetailsService.findReceiverDetails(shipLocaId);
 
         if (cartList == null)

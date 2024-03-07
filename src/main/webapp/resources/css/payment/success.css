@@ -1,0 +1,146 @@
+html,
+body,
+hr {
+    margin: 0;
+    padding: 0;
+    background-color: #eeeeee;
+    font-family: "Noto Sans";
+    font-weight: 500;
+}
+
+.background {
+    width: 100%;
+    height: 950px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer {
+    width: 400px;
+    height: 90%;
+    padding: 30px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+}
+
+.check {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.greeting {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.greeting span {
+    font-weight: 600;
+}
+
+.info {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #eeeeee;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.info div {
+    width: 80%;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.order-number {
+    border-top: 1px solid #cdcdcd;
+}
+
+hr {
+    margin-bottom: 30px;
+    border: none;
+    height: 1px;
+    background-color: #cdcdcd;
+}
+
+.payment-info {
+    margin-bottom: 30px;
+}
+
+.payment {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.amount {
+    font-size: 18px;
+}
+
+.point {
+    text-align: right;
+    color: #11967f;
+}
+
+.point div:nth-child(2) {
+    font-size: 13px;
+}
+
+.notice {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+.notice li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+.list {
+    display: flex;
+}
+
+.list span {
+    margin-right: 5px;
+    color: #cfcfcf;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    height: 55px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.show-order {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+}
+
+.go-shopping {
+    background-color: #11967f;
+    border: 1px solid #11967f;
+    color: #ffffff;
+}
