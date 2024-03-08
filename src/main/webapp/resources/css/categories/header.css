@@ -109,8 +109,8 @@
     color: rgb(181, 181, 181);
     cursor: pointer;
 }
-
-button {
+/*button*/
+.btnheader {
     overflow: visible;
     background-color: transparent;
     border: none;

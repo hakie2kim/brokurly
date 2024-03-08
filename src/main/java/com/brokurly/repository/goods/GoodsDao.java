@@ -1,9 +1,9 @@
 package com.brokurly.repository.goods;
 
 
+import com.brokurly.dto.categories.PriceFilterDto;
 import com.brokurly.entity.cart.Cart;
 import com.brokurly.entity.goods.Goods;
-import com.brokurly.entity.goods.GoodsAnnouncement;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,7 +36,7 @@ public interface GoodsDao {
     int countGoodsListByCateCode(String cateCode);
 
     List<Goods> sortGoodsList(@Param("cateCode") String cateCode, @Param("limit") int limit,
-                              @Param("start") int start, @Param("sortedtype") String sortedtype);
+                              @Param("start") int start, @Param("sortedType") String sortedType);
 
     List<Goods> sortGoodsListByRegDate(@Param("cateCode") String cateCode, @Param("limit") int limit,
                                        @Param("start") int start);
@@ -54,6 +54,39 @@ public interface GoodsDao {
                                     @Param("start") int start);
 
     List<Goods> selectGoodsListByCateCode(String cateCode);
+
+    Goods getLowestPriceGoods(String cateCode);
+    Goods getHighestPriceGoods(String cateCode);
+
+    List<Goods> goodsListByPriceFilter(@Param("cateCode") String cateCode,
+                                       @Param("limit") int limit,
+                                       @Param("start") int start,
+                                       @Param("sortedType") String sortedType,
+                                       @Param("filter") PriceFilterDto filter);
+    int countGoodsListByPriceFilter(@Param("cateCode") String cateCode,
+                                    @Param("sortedType") String sortedType,
+                                    @Param("filter") PriceFilterDto filter);
+
+    List<Goods> selectGoodsListByitemIdList(@Param("limit") int limit,
+                                            @Param("start") int start,
+                                            @Param("itemId") List<String> itemId);
+    Goods getLowestPriceGoodsByitemIdList(@Param("itemId") List<String> itemId);
+    Goods getHighestPriceGoodsByitemIdList(@Param("itemId") List<String> itemId);
+
+    int countGoodsListByitemIdList(@Param("itemId") List<String> itemId);
+
+    List<Goods> goodsListByIdListAndFilter(
+                                       @Param("limit") int limit,
+                                       @Param("start") int start,
+                                       @Param("sortedType") String sortedType,
+                                       @Param("filter") PriceFilterDto filter,
+                                       @Param("itemId") List<String> itemId);
+
+    int countGoodsListByIdListAndFilter(
+                                    @Param("sortedType") String sortedType,
+                                    @Param("filter") PriceFilterDto filter,
+                                    @Param("itemId") List<String> itemId);
+
 
 
 }

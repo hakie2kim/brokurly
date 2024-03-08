@@ -1,9 +1,7 @@
 package com.brokurly.entity.goods;
-<<<<<<< HEAD
+
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
-=======
 import com.brokurly.dto.goods.GoodsListDto;
->>>>>>> 26af7bd561c0346c759ed9087adcf4613f5faa20
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
 import lombok.*;
@@ -60,6 +58,7 @@ public class Goods {
             .shipType(shipType)
             .build();
   }
+
 
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
