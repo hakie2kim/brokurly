@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 @ToString
 @Builder
 @EqualsAndHashCode
-@AllArgsConstructor
 public class GoodsReviewBoardDto {
   private String revNo;
   private String itemId;

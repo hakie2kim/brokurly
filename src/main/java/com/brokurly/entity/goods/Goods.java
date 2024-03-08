@@ -1,10 +1,10 @@
 package com.brokurly.entity.goods;
 
-import com.brokurly.dto.goods.*;
-
-
+import com.brokurly.dto.goods.GoodsByBsnsNoDto;
+import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.dto.goods.GoodsListDto;
 import lombok.*;
-
 import java.util.Date;
 
 @ToString
@@ -36,6 +36,8 @@ public class Goods {
   private String itemSpec;
   private int sellCnt;
   private int revCnt;
+  private String stdySellerFl;
+
 
   public GoodsListDto makeGoodsList(){
     return GoodsListDto.builder()
@@ -72,7 +74,6 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-//            .salePrice(price - itemDcAmt)
             .build();
   }
   public GoodsDetailDto detailMakeFullDto() {
@@ -141,7 +142,7 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-//    this.salePrice = goodsDto.getSalePrice();
+
   }
 
 

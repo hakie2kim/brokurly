@@ -153,7 +153,7 @@ ul {
     font-size: 15px;
 }
 .text-primary {
-    color: #00c73c;
+    color: #003103;
 }
 .panel-seller .panel-heading + .panel-body {
     border-top: 1px solid #e2e6ee;
@@ -177,8 +177,8 @@ ul {
 }
 .btn-primary {
     color: #fff;
-    background-color: #00c73c;
-    border-color: #00ae34;
+    background-color: #003103;
+    border-color: #003103;
 }
 .btn {
     display: inline-block;

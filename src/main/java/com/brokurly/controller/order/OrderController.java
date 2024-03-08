@@ -1,13 +1,12 @@
 package com.brokurly.controller.order;
 
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.order.CheckoutDto;
-import com.brokurly.dto.order.ReceiverDetailsRequestChangeDto;
+import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
-
-import lombok.Getter;
-
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,20 +27,30 @@ public class OrderController {
     private final OrderService orderService;
     private final ReceiverDetailsService receiverDetailsService;
 
+    private final String testShipLocaId = "111";
+
     @GetMapping("/checkout")
     public String showCheckout(Model model, HttpSession session) {
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            loginMember = new MemberAndLoginDto("hong", "1234", "홍길동");
+
         CheckoutDto checkout = null;
         try {
-            checkout = orderService.getCheckoutInfo("124", "hong");
-        } catch (NullPointerException e) {
-            log.error("NoReceiverDetailsException", e);
+            checkout = orderService.getCheckoutInfo(testShipLocaId, loginMember.getCustId());
+        } catch (IllegalStateException e) {
+            log.error("상품 목록이 존재하지 않음", e);
         }
 
-        if (checkout != null)
-            session.setAttribute("checkout", checkout);
+        log.info("checkout = {}", checkout);
 
+        if (checkout != null && checkout.getReceiverDetails() != null)
+            session.setAttribute("receiverDetails", checkout.getReceiverDetails());
+
+//        customer.setTelNo(StringFormatUtils.formatPhoneNumber(customer.getTelNo()));
+
+        model.addAttribute("loginMember", loginMember);
         model.addAttribute("checkout", checkout);
-        model.addAttribute("member", new TestMember(checkout.getRcvName(), checkout.getTelNo(), "asd@naver.com"));
 
         return "order/checkout";
     }
@@ -53,43 +62,47 @@ public class OrderController {
         return "order/success";
     }
 
-    @Getter
-    public static class TestMember {
-        private final String name;
-        private final String telNo;
-        private final String email;
-
-        public TestMember(String name, String telNo, String email) {
-            this.name = name;
-            this.telNo = telNo;
-            this.email = email;
-        }
-    }
-
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
-        CheckoutDto checkout = (CheckoutDto) session.getAttribute("checkout");
-
-        model.addAttribute("checkout", checkout);
-
+        ReceiverDetailsResponseDto receiverDetails = (ReceiverDetailsResponseDto) session.getAttribute("receiverDetails");
+        model.addAttribute("receiverDetails", receiverDetails);
         return "order/receiver-details";
     }
 
     @PostMapping("/receiver-details")
     @ResponseBody
-    public ResponseEntity<CheckoutDto> addReceiverDetails() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ReceiverDetailsResponseDto> saveReceiverDetails(
+            @ModelAttribute ReceiverDetailsRequestDto requestSaveDto,
+            BindingResult bindingResult, HttpSession session) {
+
+        if (bindingResult.hasErrors())
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            loginMember = new MemberAndLoginDto("hong", "1234", "홍길동");
+
+        requestSaveDto.setShipLocaId(testShipLocaId);
+        requestSaveDto.setCustId(loginMember.getCustId());
+
+        ReceiverDetailsResponseDto savedReceiverDetails = receiverDetailsService.saveReceiverDetails(requestSaveDto);
+        return new ResponseEntity<>(savedReceiverDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "order/test";
     }
 
     @PatchMapping("/receiver-details")
     @ResponseBody
     public ResponseEntity<ReceiverDetailsResponseDto> modifyReceiverDetails(
-            @ModelAttribute ReceiverDetailsRequestChangeDto requestChangeDto, BindingResult bindingResult) {
+            @ModelAttribute ReceiverDetailsRequestDto requestChangeDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        ReceiverDetailsResponseDto changedReceiverDetails = receiverDetailsService.modifyReceiverDetails("124", requestChangeDto);
+        ReceiverDetailsResponseDto changedReceiverDetails = receiverDetailsService.modifyReceiverDetails(testShipLocaId, requestChangeDto);
         return new ResponseEntity<>(changedReceiverDetails, HttpStatus.OK);
     }
 }

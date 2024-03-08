@@ -150,24 +150,20 @@ window.onload = () => {
 
     $('textarea[name="placeExp"]').prop('disabled', true);
 
-    $('input[type=radio][name=enterMthd]').click(function() {
+    $('input[type=radio][name=enterMthd]').click(function () {
         let selectedId = $(this).attr('id');
 
         $('textarea[name="placeExp"]').prop('disabled', true).val('');
 
         if (selectedId === 'password-radio') {
             $('#password-text').prop('disabled', false);
-        }
-        else if (selectedId === 'security-call-radio') {
+        } else if (selectedId === 'security-call-radio') {
             $('.security-call-textarea textarea').prop('disabled', false);
-        }
-        else if (selectedId === 'door-etc-radio') {
+        } else if (selectedId === 'door-etc-radio') {
             $('.door-etc-textarea textarea').prop('disabled', false);
-        }
-        else if (selectedId === 'etc') {
+        } else if (selectedId === 'etc') {
             $('.etc-textarea textarea').prop('disabled', false);
-        }
-        else if (selectedId === 'receiving-room') {
+        } else if (selectedId === 'receiving-room') {
             $('.receiving-room-textarea textarea').prop('disabled', false);
         }
     });
@@ -183,13 +179,18 @@ window.onload = () => {
             method: "POST",
             data: $(this).serialize(),
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            success: (data) => {
-                window.opener.updateReceiverDetails(data);
+            success: (receiverDetails) => {
+                if ($(".check-receiver-details").text() === 'false') {
+                    window.opener.modifyReceiverDetails(receiverDetails);
+                } else {
+                    window.opener.saveReceiverDetails(receiverDetails);
+                }
                 window.close();
             },
             error: (jqXHR, textStatus, errorThrown) => {
+                alert("fail");
                 console.error(textStatus, errorThrown);
             }
-        })
+        });
     });
 }

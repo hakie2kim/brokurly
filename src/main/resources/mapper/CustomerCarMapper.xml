@@ -21,6 +21,9 @@
         SELECT a.cust_id, a.item_id, a.item_cnt, a.item_ck, b.name, b.price, b.ship_type, b.pkg_type, b.item_dc_amt, b.item_qty
         FROM cart a left outer join item b on a.item_id = b.item_id
         WHERE cust_id = #{custId}
+        <if test="flag">
+            AND item_ck = 'Y'
+        </if>
     </select>
 
     <select id="selectByCustId" resultType="CustomerCart">

@@ -23,11 +23,11 @@ public class MailTempKey {
     private String smsNum = "";
 
    public String getKey() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
        for (int i = 0; i < 6; i++) {
-           int r = (int) (Math.random() * 8) + 1; // 보낼 인증번호 랜덤생성
-           sb.append(Integer.toString(r));
+           // 보낼 인증번호 랜덤생성
+           sb.append((int) (Math.random() * 8) + 1);
        }
        return sb.toString();
    }
