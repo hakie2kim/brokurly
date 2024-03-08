@@ -1,4 +1,5 @@
 package com.brokurly.entity.goods;
+
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
@@ -73,7 +74,30 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-//            .salePrice(price-itemDcAmt)
+            .build();
+  }
+  public GoodsDetailDto detailMakeFullDto() {
+    return GoodsDetailDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .salePrice(price - itemDcAmt)
             .build();
   }
 
@@ -120,4 +144,6 @@ public class Goods {
     this.itemSpec = goodsDto.getItemSpec();
 
   }
+
+
 }

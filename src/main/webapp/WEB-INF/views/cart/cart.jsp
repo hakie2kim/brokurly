@@ -258,6 +258,33 @@
                     </div>
                 </div>
 
+
+      </div>
+
+      <div class="cart-5">
+        <div class="css-50ad8x">
+          <div class="css-oft680">
+            <h3 class="css-1guaarh">배송지</h3>
+            <div>
+              <p class="address">${address.addr}${address.specAddr}</p>
+              <input type="hidden" class="addressId" value="${address.shipLocaId}">
+              <div>
+                <span type="direct">샛별배송</span>
+              </div>
+              <button class="css-122i3z7" type="button" height="36" radius="3" onclick="showPopup();">
+                <span>배송지 변경</span>
+              </button>
+            </div>
+          </div>
+          <div class="css-1t6so8j">
+            <div class="css-8jmoub">
+              <span class="css-vmo0an">상품금액</span>
+              <span class="totalPrice_span"></span>
+            </div>
+            <div class="css-t4mc5m">
+              <span>상품할인금액</span>
+              <span class="totalDiscountPrice"></span>
+
             </div>
 
             <div class="cart-5">
@@ -318,10 +345,10 @@
             </div>
         </div>
     </div>
-    <%--  주문 form --%>
-    <form action="<c:url value="/order/checkout"/>" method="get" class="order_form">
 
-    </form>
+  </div>
+  <%--  주문 form --%>
+
 </div>
 <script>
     $(document).ready(function () {
@@ -748,7 +775,7 @@
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {	//체크여부
                 let itemId = $(element).find(".individual_itemId_input").val();
                 let itemCnt = $(element).find(".individual_itemCnt_input").val();
-
+                let shipLocaId = $(".addressId").val();
                 $.ajax({
                     url: '/cart/update',
                     method: "POST",
@@ -760,6 +787,7 @@
                         itemCk: 'Y'
                     },
                     success: function () {
+                        sessionStorage.setItem("shipLocaId", shipLocaId);
                         location.replace("/order/checkout"); // 페이지 이동
                     }
                 });

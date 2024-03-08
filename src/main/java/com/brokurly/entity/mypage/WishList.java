@@ -1,6 +1,7 @@
 package com.brokurly.entity.mypage;
 
 import com.brokurly.dto.mypage.WishListDto;
+import com.brokurly.dto.mypage.WishListItemDto;
 import lombok.*;
 
 @ToString
@@ -23,5 +24,6 @@ public class WishList {
         this.itemId = wishListDto.getItemId();
         this.custId = wishListDto.getCustId();
     }
+
 
 }
