@@ -111,8 +111,8 @@
     color: rgb(181, 181, 181);
     cursor: pointer;
 }
-/*button*/
-.btnheader {
+
+button {
     overflow: visible;
     background-color: transparent;
     border: none;
@@ -242,7 +242,7 @@
     height: 100%;
 }
 
-/* 메뉴아이콘 */
+/* 硫붾돱�꾩씠肄� */
 .css-1k5gn9s {
     width: 16px;
     height: 14px;
@@ -314,7 +314,6 @@
     box-sizing: border-box;
     margin: 0;
 }
-
 
 
 

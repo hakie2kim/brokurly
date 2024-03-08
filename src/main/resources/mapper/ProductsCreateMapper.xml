@@ -108,11 +108,11 @@
     </select>
 
 
-    <select id="findByItemId" resultType="GoodsAnnouncement">
-        SELECT *
-        FROM item_announcement
-        WHERE item_id = #{itemId}
-    </select>
+<!--    <select id="findByItemId" resultType="GoodsAnnouncement">-->
+<!--        SELECT *-->
+<!--        FROM item_announcement-->
+<!--        WHERE item_id = #{itemId}-->
+<!--    </select>-->
 
     <!--  keyword 존재하는지 확인  -->
     <select id="selectKeywordExist" resultType="int">

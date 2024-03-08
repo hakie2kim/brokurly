@@ -103,30 +103,6 @@ public class BestPageController {
     public ResponseEntity<Map<String, Object>> categoryPageAjax(Model model, @PathVariable String codeId,
                                                                 @RequestParam(required = false) String sortedType,
                                                                 @RequestParam(required = false) Integer page,
-                                                                @RequestParam(required = false) String filters) {
-
-        log.info("codeId = {}", codeId);
-        log.info("sortedType = {}", sortedType);
-
-        Map<String, Object> responseMap = new HashMap<>();
-        List<GoodsListDto> sortedGoodsList = goodsListService.sortGoodsList(codeId, page, sortedType);
-        log.info("sortedGoodsList={}", sortedGoodsList);
-        responseMap.put("sortedGoodsList", sortedGoodsList);
-        log.info("responseMap ={}", responseMap);
-
-        int totalCnt = goodsListService.countGoodsList(codeId);
-        PageHandler pageHandler = new PageHandler(totalCnt, page);
-        responseMap.put("pageHandler", pageHandler);
-        log.info("pageHandler={}", pageHandler);
-
-        return new ResponseEntity<>(responseMap, HttpStatus.OK);
-    }
-
-    @PostMapping("/{codeId}")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> categoryPageAjax(Model model, @PathVariable String codeId,
-                                                                @RequestParam(required = false) String sortedType,
-                                                                @RequestParam(required = false) Integer page,
                                                                 @RequestParam(required = false) String filters,
                                                                 @RequestParam(required = false) String PriceFilterNum) {
         log.info("codeId = {}", codeId);

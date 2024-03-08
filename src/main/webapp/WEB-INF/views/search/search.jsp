@@ -86,9 +86,6 @@
 </head>
 <body>
 
-<jsp:include page="/categories/header">
-    <jsp:param name="selectMain" value="${selectMain}"/>
-</jsp:include>
 
 <div class="best-page">
     <div class="best-menu-wrap1">
@@ -735,11 +732,15 @@
                                 <p class="css-1wejlc3 e1c07x486">${goodsListDto.exp}</p>
                                 <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
                                     <div>
+                                        <c:if test="${goodsListDto.dcRt} != 0">
                                         <span class="dimmed-price css-18tpqqq ei5rudb1">${goodsListDto.price}
                                             <span class="won">원</span></span>
+                                        </c:if>
                                     </div>
                                     <div class="discount">
+                                        <c:if test="${goodsListDto.dcRt} != 0">
                                         <span class="discount-rate css-19lkxd2 ei5rudb0">${goodsListDto.dcRt}%</span>
+                                        </c:if>
                                         <span class="sales-price css-18tpqqq ei5rudb1">${goodsListDto.disPrice}
                                             <span class="won">원</span></span>
                                     </div>
