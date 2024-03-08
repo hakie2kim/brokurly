@@ -66,6 +66,15 @@ public class ShippingLocationService {
                 .collect(Collectors.toList());
     }
 
+    public ShippingLocationCurrDto getCurrShippingLocationByCustomer(String custId) {
+        return shippingLocationDao.selectByCustomer(custId)
+                .stream()
+                .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationCurrDto)
+                .filter(sl -> "Y".equals(sl.getCurrAddrFl())) // 삭제된 배송지는 제외
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
     public ShippingLocationModifyPageDto getShippingLocationToModifyByShipLocaId(String shipLocaId) {
         return shippingLocationDao.selectByShipLocaId(shipLocaId)
                 .makeShippingLocationModifyPageDto();
@@ -155,17 +164,37 @@ public class ShippingLocationService {
         // 1. 기존 현재 배송지를 모두 N으로 바꿈
         unflagCurrAddrFl(custId);
 
-        // 기존 ShippingLocation 정보 갖고 옴
+        // 2. 기존 ShippingLocation 정보 갖고 옴
         ShippingLocation shippingLocationExisting = shippingLocationDao.selectByShipLocaId(shipLocaId);
-        // 2. 바꾸려는 shipLocaId의 currAddrFl를 Y로 변경
+        // 3. 바꾸려는 shipLocaId의 currAddrFl를 Y로 변경
         ShippingLocationModifyDto shippingLocationModifyDto = shippingLocationExisting.makeShippingLocationModifyDto();
         shippingLocationModifyDto.setCurrAddrFl("Y");
 
+        // 4. 기존 ShippingLocation을 업데이트
         shippingLocationExisting.updateShippingLocationModifyDto(shippingLocationModifyDto);
 
         log.info("{}", shippingLocationExisting);
 
         shippingLocationDao.updateByShipLocaId(shippingLocationExisting);
+
+        // 4. 로그 테이블에 추가
+    }
+
+    @Transactional
+    public void removeShippingLocation(String shipLocaId) {
+        // 1. 기존 ShippingLocation 정보 갖고 옴
+        ShippingLocation shippingLocationExisting = shippingLocationDao.selectByShipLocaId(shipLocaId);
+
+        // 2. 바꾸려는 shipLocaId의 delFl를 Y로 변경
+        ShippingLocationModifyDto shippingLocationModifyDto = shippingLocationExisting.makeShippingLocationModifyDto();
+        shippingLocationModifyDto.setDelFl("Y");
+
+        // 3. 기존 ShippingLocation을 업데이트
+        shippingLocationExisting.updateShippingLocationModifyDto(shippingLocationModifyDto);
+
+        shippingLocationDao.updateByShipLocaId(shippingLocationExisting);
+
+        // 4. 로그 테이블에 추가
     }
 
     private static String currDateAsYYYYMMDD() {
