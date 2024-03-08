@@ -106,13 +106,6 @@
             display: none;
         }
 
-
-
-
-
-
-
-
         .css-1cbaoeg {
             width: 266px;
             height: 100%;
@@ -134,7 +127,6 @@
             animation-range-end: normal;
         }
 
-
         .css-e0dnmk {
             cursor: pointer;
         }
@@ -150,12 +142,6 @@
             color: rgb(51, 51, 51);
             line-height: 22px;
         }
-
-
-
-
-
-
     </style>
 
 </head>

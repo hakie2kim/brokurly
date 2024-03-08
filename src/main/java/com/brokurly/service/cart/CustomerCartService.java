@@ -34,8 +34,8 @@ public class CustomerCartService {
         }
     }
 
-    public List<CustomerCartDto> getCartList(String custId) {    //장바구니 상품 불러오기
-        List<CustomerCart> cartList = customerCartDao.getCart(custId);
+    public List<CustomerCartDto> getCartList(String custId, boolean flag) {    //장바구니 상품 불러오기
+        List<CustomerCart> cartList = customerCartDao.getCart(custId, flag);
         List<CustomerCartDto> customerCartDto = new ArrayList<>();
 
         for (CustomerCart customerCart : cartList) {    //cartList에서 CustomerCart(엔티티)를 하나씩 꺼내서

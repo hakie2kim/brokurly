@@ -143,5 +143,4 @@
         VALUES (#{img}, #{repImgFl}, #{itemId})
     </insert>
 
-
 </mapper>
