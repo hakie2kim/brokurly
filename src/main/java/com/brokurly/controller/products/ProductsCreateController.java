@@ -232,50 +232,50 @@ public class ProductsCreateController {
             return HttpStatus.SERVICE_UNAVAILABLE;
         }
     }
-
-    @PostMapping("/img")
-    public String upload(@RequestParam("file") MultipartFile multipartFile, Model model) {
-        log.info("file = {}", multipartFile);
-        try {
-            // 현재 프로젝트의 절대 경로를 가져옵니다
-            String projectPath = System.getProperty("user.home") +
-//                    File.separator + "IdeaProjects" +
-                    File.separator + "brokurly";
-
-            log.info("dir = {}", projectPath);
-            log.info("path = {}", System.getProperty("user.dir"));
-
-            // 이미지를 저장할 폴더의 경로를 지정합니다
-            String uploadDir = projectPath +
-                    File.separator + "src" +
-                    File.separator + "main" +
-                    File.separator + "webapp" +
-                    File.separator + "resources" +
-                    File.separator + "image" +
-                    File.separator + "goodsImage";
-
-            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
-
-            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
-            File dir = new File(uploadDir);
-            if (!dir.exists()) dir.mkdirs();
-
-            // 파일 이름을 정의합니다
-            String originalFilename = multipartFile.getOriginalFilename();
-            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
-
-            Path savePath = Paths.get(filePath);
-            // 파일을 저장합니다
-            multipartFile.transferTo(savePath);
-
-            model.addAttribute("image", filePath);
-
-            // 파일의 저장 경로를 반환합니다
-            return "order/test";
-        } catch (IOException e) {
-            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
-            return e.getMessage();
-        }
-    }
+//
+//    @PostMapping("/img")
+//    public String upload(@RequestParam("file") MultipartFile multipartFile, Model model) {
+//        log.info("file = {}", multipartFile);
+//        try {
+//            // 현재 프로젝트의 절대 경로를 가져옵니다
+//            String projectPath = System.getProperty("user.home") +
+////                    File.separator + "IdeaProjects" +
+//                    File.separator + "brokurly";
+//
+//            log.info("dir = {}", projectPath);
+//            log.info("path = {}", System.getProperty("user.dir"));
+//
+//            // 이미지를 저장할 폴더의 경로를 지정합니다
+//            String uploadDir = projectPath +
+//                    File.separator + "src" +
+//                    File.separator + "main" +
+//                    File.separator + "webapp" +
+//                    File.separator + "resources" +
+//                    File.separator + "image" +
+//                    File.separator + "goodsImage";
+//
+//            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
+//
+//            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
+//            File dir = new File(uploadDir);
+//            if (!dir.exists()) dir.mkdirs();
+//
+//            // 파일 이름을 정의합니다
+//            String originalFilename = multipartFile.getOriginalFilename();
+//            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
+//
+//            Path savePath = Paths.get(filePath);
+//            // 파일을 저장합니다
+//            multipartFile.transferTo(savePath);
+//
+//            model.addAttribute("image", filePath);
+//
+//            // 파일의 저장 경로를 반환합니다
+//            return "order/test";
+//        } catch (IOException e) {
+//            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
+//            return e.getMessage();
+//        }
+//    }
 
 }

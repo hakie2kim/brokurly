@@ -1,9 +1,6 @@
 package com.brokurly.entity.goods;
 
-import com.brokurly.dto.goods.GoodsByBsnsNoDto;
-import com.brokurly.dto.goods.GoodsDto;
-import com.brokurly.dto.goods.GoodsForCartDto;
-import com.brokurly.dto.goods.GoodsListDto;
+import com.brokurly.dto.goods.*;
 import lombok.*;
 import java.util.Date;
 

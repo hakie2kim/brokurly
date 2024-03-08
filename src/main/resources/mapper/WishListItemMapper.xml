@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.mypage.WishListDao">
+<mapper namespace="com.brokurly.repository.mypage.WishListItem">
 
     <!-- CREATE -->
     <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
