@@ -88,9 +88,7 @@ public class ProductsCreateService {
                 searchKeyword.changeStatus(searchKeywordDto1);
                 productsCreateDao.insertSearchKeyword(searchKeyword);
             }
-
         }
-
     }
 
     //GoodsImage insert
@@ -114,12 +112,11 @@ public class ProductsCreateService {
     }
 
     //searchKeyword 조회
-    public List<String> searchKeyword(String itemId){
-    List<String> searchKeyword = productsCreateDao.selectKeywordByItemId(itemId);
-        log.info("itemId={}",itemId);
+    public List<String> searchKeyword(String itemId) {
+        List<String> searchKeyword = productsCreateDao.selectKeywordByItemId(itemId);
+        log.info("itemId={}", itemId);
         return searchKeyword;
     }
-
 
     //bsnsNo로 상품 조회
     @Transactional
@@ -138,6 +135,25 @@ public class ProductsCreateService {
 
         return dtoList;
     }
+
+    // 상품 업데이트
+    @Transactional
+    public void updateGoods(String itemId,GoodsDto goodsDto){
+        //itemId로 찾기
+        Goods goods = productsCreateDao.selectByItemId(itemId);
+        GoodsDto goodsChangeDto = goods.makeFullDto();
+        log.info("goodsChangeDto={}",goodsChangeDto);
+        log.info("goodsDto={}",goodsDto);
+
+        goods.changeStatus(goodsDto);
+        productsCreateDao.updateItem(goods);
+
+    }
+
+
+    // 고시정보 업데이트
+
+    // searchKeyword 업데이트
 
     // 상품 삭제
     @Transactional

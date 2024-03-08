@@ -30,7 +30,6 @@ public class GoodsService {
     //상품 조회
     public GoodsDto searchGoods(String itemId) {    //상품정보 불러오기
         Goods goods = goodsDao.selectByItemId(itemId);
-        goods.initSaleTotal();  //할인가격 계산 값
         return goods.makeFullDto();
     }
 

@@ -22,8 +22,9 @@ public interface ProductsCreateDao {
 
 
     //goodsAnnouncement 상품고시정보
-    int insertAnnouncement(GoodsAnnouncement goodsAnnouncementAnnouncement);
+    int insertAnnouncement(GoodsAnnouncement goodsAnnouncement);
     GoodsAnnouncement selectAnnouncementByItemId(String itemId);
+//    int updateAnnouncement(GoodsAnnouncement goodsAnnouncement);
 
 
     //searchKeyword 키워드

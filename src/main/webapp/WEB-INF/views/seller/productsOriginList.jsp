@@ -247,7 +247,7 @@
                                 <div class="css-e23nfx2 e16adls21">
                                     <div width="50" class="css-mbsaqp e16adls20">${status.count}</div>
                                     <div class="css-1ym8aqm e16adls20">
-                                        <a href="<c:url value='/seller/productsOriginList/read?itemId=${goodsByB.itemId}'/>">${goodsByB.name}</a>
+                                        <a href="<c:url value='/seller/productsCreate/read?itemId=${goodsByB.itemId}'/>">${goodsByB.name}</a>
                                     </div>
                                     <div width="100" class="css-16tcewl e16adls20">${goodsByB.itemId}</div>
                                     <div width="100" class="css-16tcewl e16adls20">${goodsByB.price}</div>
@@ -262,7 +262,7 @@
                                     <div width="100" class="css-16tcewl e16adls20">
                                         <button type="button" id="modifyBtn" onclick="modify(${goodsByB.itemId})">
 <%--                                            <a href="<c:url value='/seller/productsOriginList/read?itemId=${goodsByB.itemId}'/>">수정</a>--%>
-                                            수정
+                                            상품보기
                                           </button>
 
 
@@ -311,7 +311,6 @@
         if (confirm("삭제하시겠습니까?")) {
             // 확인을 눌렀을 경우, 링크 이동
             window.location.href = '/seller/productsCreate/remove?itemId=' + itemId;
-
         } else {
             // 취소를 눌렀을 경우, 아무 동작 없음
         }
@@ -323,7 +322,7 @@ function modify(itemId) {
     console.log(itemId);
     if (confirm("수정하시겠습니까?")) {
         // 확인을 눌렀을 경우, 링크 이동
-        window.location.href = '/seller/productsOriginList/read?itemId=' + itemId;
+        window.location.href = '/seller/productsCreate/read?itemId=' + itemId;
 
 
     } else {

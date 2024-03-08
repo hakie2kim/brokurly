@@ -4,26 +4,16 @@ package com.brokurly.controller.products;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
-import com.brokurly.dto.goods.GoodsImageDto;
 import com.brokurly.dto.search.SearchKeywordDto;
-import com.brokurly.entity.search.SearchKeyword;
-import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.Location;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.ServletContext;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,7 +26,6 @@ import java.util.UUID;
 public class ProductsCreateController {
 
     private ProductsCreateService productsCreateService;
-//    private CategoryController categoryController;
 
     @Autowired
     public ProductsCreateController(ProductsCreateService productsCreateService) {
@@ -44,8 +33,12 @@ public class ProductsCreateController {
     }
 
     @PostMapping("/productsCreate/write")
-    public String writeproducts(Model m, GoodsDto goodsDto, GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
+    public String writeproducts( GoodsDto goodsDto, Model m
+                                ,GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
     ) {
+//        if (bindingResult.hasErrors()){
+//            return "validation-result";
+//        }
         String a = goodsDto.getName();
         m.addAttribute("mode", "new");
         log.info("a={}", a);
@@ -63,18 +56,16 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
-        return "seller/productsOriginList?bsnsNo=4659877658";
+        return "seller/productsOriginList";
     }
 
-    @PostMapping ("/productsOriginList")
-    public String selectByBsnsId2(Model m) {
-        String bsnsNo = "4659877658";  //판매자 로그인 기능 구현 후 세션에서 가져오기
-//    log.info("goodsByBsnsNoDto={}",goodsByBsnsNoDto);
-        List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
-        m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
-        m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
-//        log.info("m={}", m);
-        return "seller/productsOriginList";
+    @PostMapping("/productsCreate/modify")
+    public String modify(GoodsDto goodsDto,String itemId, Model m){
+        log.info("goodsDto={}", goodsDto);
+
+        m.addAttribute("mode", "new");
+        productsCreateService.updateGoods(itemId,goodsDto);
+        return "redirect:seller/productsCreate";
     }
 
 
@@ -90,7 +81,7 @@ public class ProductsCreateController {
     }
 
 
-    @GetMapping("/productsOriginList/read")
+    @GetMapping("/productsCreate/read")
     public String read(String itemId, Model m) {
         GoodsDto goodsDto = productsCreateService.searchGoods(itemId);
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
@@ -100,13 +91,13 @@ public class ProductsCreateController {
         log.info("readItemId={}", itemId);
         log.info("searchKeyword={}", searchKeyword);
 
-
         //상품고시정보 ,로 잘라서 배열로 만들기
         String[] anno = goodsAnnouncementDto.getItemAnn().split(",");
 //        for (int i = 0; i < anno.length; i++) {
 //            log.info("anno={}", anno[i]);
 //        }
 
+        m.addAttribute("mode","readonly");
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
         m.addAttribute("keyword", searchKeyword);
