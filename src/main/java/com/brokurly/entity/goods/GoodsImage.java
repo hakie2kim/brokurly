@@ -1,12 +1,10 @@
 package com.brokurly.entity.goods;
 
 import com.brokurly.dto.goods.GoodsImageDto;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @ToString
+@Builder
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor

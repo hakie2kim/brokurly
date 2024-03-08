@@ -43,12 +43,11 @@
                     "defAddrFl": defAddrFl
                 }),
                 success: function (response) {
-                    alert("Your form has been sent successfully.");
                     window.close();
-                    window.opener.addShippingAddrs();
+                    window.opener.location.reload(); // 해당 팝업을 연 페이지를 reload함
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Your form was not sent successfully.");
+                    console.error(textStatus, errorThrown);
                 }
             })
         })
@@ -82,7 +81,7 @@
     </div>
     <div class="row3">
         <label>
-            <input type="checkbox" name="defAddrFl"/>
+            <input type="checkbox" name="defAddrFl" />
             <span style="margin-left: 5px">기본 배송지로 저장</span>
         </label>
     </div>

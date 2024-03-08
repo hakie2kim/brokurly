@@ -25,6 +25,12 @@
     <a href="member/signup">소라 - 회원가입</a>
 </div>
 <div>
+    <a href="member/login">소라 - 로그인</a>
+</div>
+<div>
+    <a href="member/logout">소라 - 로그아웃</a>
+</div>
+<div>
     <a href="board/notice">윤호 - 공지사항</a>
 </div>
 <div>

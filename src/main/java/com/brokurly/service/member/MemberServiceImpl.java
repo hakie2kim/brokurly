@@ -2,12 +2,16 @@ package com.brokurly.service.member;
 
 
 
+import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.entity.member.Member;
 import com.brokurly.repository.member.MemberDao;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -16,11 +20,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class MemberServiceImpl implements MemberService {
-    @Autowired
-    MemberDao memberDao;
+    private final MemberDao memberDao;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    MemberServiceImpl(MemberDao memberDao,BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.memberDao = memberDao;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     // 회원가입 시 , 유효성 체크
@@ -37,12 +45,51 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public int signUp(MemberAndSignupDto memberAndSignupDto) {
+        memberAndSignupDto.setPwd(bCryptPasswordEncoder.encode(memberAndSignupDto.getPwd()));
         Member member = new Member();
         member.changeStatus(memberAndSignupDto);
         return memberDao.insert(member);
     }
 
-    // 카카오 로그인
+    // mypage/info/modify
+    @Override
+    public MemberAndSignupDto readMemberByOne(String custId){
+        Member member = new Member();
+        member = memberDao.selectMemberByOne(custId);
+
+        return member.makeFullDto();
+    }
+    /**
+     * @desc local 로그인 id/pwd 체크
+     * @param memberAndLoginDto
+     * @return memberAndLoginDt
+     */
+    @Override
+    public MemberAndLoginDto localLogin(MemberAndLoginDto memberAndLoginDto){
+        Member member = new Member();
+        // 1. 사용자가 입력한 아이디와 맞는 id,pwd를 가져옴
+        member.changeStatus(memberAndLoginDto);
+        member = memberDao.selectMemberByLogin(member);
+
+        // 2. 사용자 입력한 pwd와 가져온 pwd가 match 되는지 확인
+        if(bCryptPasswordEncoder.matches(memberAndLoginDto.getPwd(),member.makeLoginDto().getPwd())){
+            // 3. 일치하면 객체 return
+            return member.makeLoginDto();
+        }
+
+        return null;
+    }
+
+    // 카카오 로그인 start
+    @Override
+    public MemberAndSignupDto signUpBySns(String snsId){
+        Member member = memberDao.selectMemberBySnsId(snsId);
+        //   MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
+
+        //  return memberAndSignupDto;
+        return member.makeFullDto();
+    }
+
     @Override
     public void kakaoJoin(MemberAndSignupDto memberAndSignupDto){
         Member member = new Member();
@@ -54,13 +101,10 @@ public class MemberServiceImpl implements MemberService {
 
     }
     @Override
-    public MemberAndSignupDto kakaoLogin(String snsId){
-        log.info("snsId = {}",snsId);
-        Member member = memberDao.selectSnsMember(snsId);
-        if(member == null){
-            return null;
-        }
-        return member.makeFullDto();
+    public int kakaoLogin(String snsId){
+        log.debug("snsId = {}",snsId);
+
+        return memberDao.selectSnsMember(snsId);
     }
     @Override
     public String findBySnsId(String snsId){
@@ -69,6 +113,8 @@ public class MemberServiceImpl implements MemberService {
 
         return findSnsId;
     }
+
+    // 카카오 로그인 end
     @Override
     public int getCountAll(){
         return memberDao.countMemberAll();
@@ -81,6 +127,26 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int getCountEmail(String email) { return memberDao.countEmail(email); }
+
+    @Override
+    public int emailAuthFail(String custId){
+        return memberDao.emailAuthFail(custId);
+    }
+
+    @Override
+    public int updateMailKey(MemberAndMailAuthDto memberAndMailAuthDto){
+        Member member = new Member();
+        member.changeStatus(memberAndMailAuthDto);
+
+        return memberDao.updateMailKey(member);
+    }
+    @Override
+    public int updateMailAuth(MemberAndMailAuthDto memberAndMailAuthDto){
+        Member member = new Member();
+        member.changeStatus(memberAndMailAuthDto);
+
+        return memberDao.updateMailAuth(member);
+    }
 
     @Override
     public int removeAll(){

@@ -5,10 +5,12 @@
     --main-border: 1px solid #11967f;
 }
 body {
-    margin: 0;
-    padding: auto;
+    font-family: var(--main-font);
+    heigth : 100vh;
+    /*margin: 0;*/
+    /*padding: auto;*/
 }
-section, form {
+section, #frm {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,7 +39,7 @@ input:focus {
     outline: 1px solid black;
 }
 
-button {
+.btn {
     width: 120px;
     height: 44px;
     border: var(--main-border);
@@ -68,7 +70,7 @@ button {
 }
 
 .register-div__label {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 139px;
     font-size: 14px;
     font-weight: 500;
@@ -91,9 +93,15 @@ button {
 
 }
 .agreement-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    /*flex-direction: column;*/
+    /* background-color: aqua; */
+}
+.test_div{
     display: flex;
     flex-direction: column;
-    /* background-color: aqua; */
 }
 
 .register-header {
@@ -113,6 +121,8 @@ button {
 
 .column-div {
     margin-top: 10px;
+    display:flex;
+
 }
 
 ::placeholder {
@@ -160,7 +170,8 @@ label {
 .name-info-div,
 .email-info-div,
 .email-infoSec-div,
-.telNo-info-div{
+.telNo-info-div,
+.yyyy-info-div{
     display: flex;
     justify-content: center;
     padding-top: 4px;
@@ -237,3 +248,82 @@ label {
 }
 
 /* modal css end */
+
+/* radio css start */
+.css-z9g6s0 {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 12px 0px 9px;
+}
+
+/*.css-82a6rk {*/
+/*    flex: 1 1 0%;*/
+/*}*/
+
+
+
+
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+ .css-1pes2r6 {
+     overflow: hidden;
+     position: absolute;
+     width: 1px;
+     height: 1px;
+     clip: rect(0px, 0px, 0px, 0px);
+ }
+
+.css-14wodj6 > label > span {
+    font-size: 14px;
+}
+
+ .css-5xw1m2 {
+     min-width: 24px;
+     min-height: 24px;
+     display: inline-block;
+     position: relative;
+     border-radius: 50%;
+     background-color: var(--main-color);
+ }
+
+.css-1vic0rk {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: white;
+}
+
+ .css-mgd87h {
+     position: relative;
+     font-size: 16px;
+     margin-left: 12px;
+ }
+
+
+ .css-198i9ca {
+     min-width: 24px;
+     min-height: 24px;
+     display: inline-block;
+     position: relative;
+     border-radius: 50%;
+     background-color: white;
+     border: 1px solid rgb(221, 221, 221);
+ }
+.css-14wodj6 {
+    width: 333px;
+    height: 46px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-direction: row;
+}
+/* radio css end */
