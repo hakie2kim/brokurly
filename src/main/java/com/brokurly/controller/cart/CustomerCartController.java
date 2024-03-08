@@ -42,7 +42,7 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
-        List<CustomerCartDto> cart = customerCartService.getCartList(custId);
+        List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
 //        ArrayList<CustomerCartDto> collect = cart.stream().map(carte -> carte.makeFullDto()).collect(Collectors.toCollection(ArrayList::new));
         model.addAttribute("cart", cart);
         return "cart/cart";
@@ -65,8 +65,13 @@ public class CustomerCartController {
     @ResponseBody
     public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
-//        return "cart/cart";
         return "redirect:/cart/{custId}";
     }
 
+    @PostMapping("/vacate")
+    @ResponseBody
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto){
+        CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
+
+    }
 }

@@ -17,7 +17,6 @@
     <title>브로컬리</title>
 </head>
 <body>
-<header></header>
 <section>
     <h2>주문서</h2>
     <div class="info-type1">
@@ -26,12 +25,18 @@
             <button id="order-goods-change">&xvee;</button>
         </div>
         <hr/>
-        <div id="order-goods">${checkout.customerCart[0].name} 외 ${fn:length(checkout.customerCart) - 1}개 상품을 주문합니다.
+        <c:set var="customerCart" value="${checkout.customerCart}"/>
+        <c:set var="numOfItemType" value="${fn:length(customerCart)}"/>
+        <div id="order-goods">
+            ${customerCart[0].name}
+            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType - 1}개</c:if>
+            상품을 주문합니다.
         </div>
         <div id="order-goods-list" style="display: none">
-            <c:forEach items="${checkout.customerCart}" var="item">
+            <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
                     <div>상품 사진</div>
+                    <div class="item-id" style="display: none">${item.itemId}</div>
                     <div class="item-name">${item.name}</div>
                     <div class="item-cnt">${item.itemCnt}개</div>
                     <div class="item-price">${item.price}원</div>
@@ -45,16 +50,16 @@
         <hr/>
         <div class="info-type2">
             <div>보내는 분</div>
-            <div id="rcv-name">${member.name}</div>
+            <div id="rcv-name">${loginMember.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <div id="tel-no">${member.telNo}</div>
+<%--            <div id="tel-no">${loginMember.telNo}</div>--%>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-                ${member.email}
+<%--                ${loginMember.email}--%>
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
@@ -76,7 +81,8 @@
                 <button id="location-change">변경</button>
             </div>
         </div>
-        <div class="small-modal">
+        <div class="small-modal shipping-location-modal">
+            <div class="cust-id" style="display: none">${loginMember.custId}</div>
             <div class="small-modal-border">
                 <div class="small-modal-content">
                     <p>장바구니로 이동하여</p>
@@ -90,26 +96,42 @@
         </div>
 
         <div class="info-type2">
-            <div>배송 요청사항</div>
-            <c:if test="${checkout == null}">
-                <div>
-                    <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
-                    <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
-                    <p class="caution">배송 요청사항을 입력해주세요</p>
-                    <button class="receiver-details-btn">입력</button>
-                </div>
-            </c:if>
-            <c:if test="${checkout != null && member != null}">
-                <div>
-                    <div><span id="checkout-rcv-place">${checkout.rcvPlace}</span> | <span
-                            id="checkout-enter-mthd">${checkout.enterMthd}</span></div>
-                    <div><span id="checkout-name">${member.name}</span>,<span id="checkout-tel-no">${member.telNo}</span>
+            <div id="receiver-details-title">배송 요청사항</div>
+            <c:set var="receiverDetails" value="${checkout.receiverDetails}"/>
+            <div class="check-receiver-details" style="display: none">${receiverDetails == null}</div>
+            <div class="receiver-info">
+                <c:if test="${receiverDetails == null}">
+                    <div>
+                        <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
+                        <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
+                        <p class="caution">배송 요청사항을 입력해주세요</p>
+                        <button class="receiver-details-btn">입력</button>
                     </div>
-                    <div id="checkout-place-exp" style="display: none;"></div>
-                    <div id="checkout-msg-time" style="display: none;"></div>
-                    <button class="receiver-details-btn">수정</button>
+                </c:if>
+                <div class="small-modal receiver-details-modal">
+                    <div class="small-modal-border">
+                        <div class="small-modal-content">배송 요청사항을 입력해주세요.</div>
+                        <div class="small-modal-buttons">
+                            <button id="receiver-details-modal-ok" onclick="redirectReceiverDetails()">확인</button>
+                        </div>
+                    </div>
                 </div>
-            </c:if>
+                <c:if test="${receiverDetails != null}">
+                    <div>
+                        <div>
+                            <span id="checkout-rcv-place">${receiverDetails.rcvPlace}</span> |
+                            <span id="checkout-enter-mthd">${receiverDetails.enterMthd}</span>
+                        </div>
+                        <div>
+                            <span id="checkout-name">${receiverDetails.rcvName}</span>,
+                            <span id="checkout-tel-no">${receiverDetails.telNo}</span>
+                        </div>
+                        <div id="checkout-place-exp" style="display: none;"></div>
+                        <div id="checkout-msg-time" style="display: none;"></div>
+                        <button class="receiver-details-btn">수정</button>
+                    </div>
+                </c:if>
+            </div>
         </div>
     </div>
 </section>
@@ -231,13 +253,13 @@
                 <div>카드즉시할인</div>
                 <div>0원</div>
             </div>
-            <div>
+            <div id="use-point">
                 <div>적립금</div>
                 <div>0원</div>
             </div>
             <hr/>
             <div>
-                <div>최종결제금액</div>
+                <div id="pay-amount">최종결제금액</div>
                 <div><fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>

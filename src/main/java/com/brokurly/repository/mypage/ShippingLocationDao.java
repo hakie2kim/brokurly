@@ -14,9 +14,11 @@ public interface ShippingLocationDao {
     // READ
     List<ShippingLocation> selectAll();
     List<ShippingLocationAndShoppingLocationChangeLog> selectByCustomer(String custId);
+    ShippingLocation selectByShipLocaId(String shipLocaId);
     int countAll();
 
     // UPDATE
+    int updateByShipLocaId(ShippingLocation shippingLocation);
 
     // DELETE
     int deleteAll();

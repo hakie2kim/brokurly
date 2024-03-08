@@ -5,6 +5,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -15,13 +20,19 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@PropertySource("classpath:application.properties")
 public class KaKaoService {
+
+    @Value("${kakao.clientId}")
+    private String client_id;
 
     public String getReturnAccessToken(String code){
 
         String access_token = "";
         String refresh_token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
+
+
         try{
 
             URL url = new URL(reqURL);
@@ -35,8 +46,8 @@ public class KaKaoService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code")
-                    .append("&client_id=f39a2fb5e58b5dd7a5dce238991677e8")
-                    .append("&redirect_uri=http://localhost:80/kakao_callback") // 앱 callback 경로
+                    .append("&client_id="+client_id)
+                    .append("&redirect_uri=http://localhost:8080/kakao_callback") // 앱 callback 경로
                     .append("&code="+code);
             bw.write(sb.toString());
             bw.flush();
@@ -75,13 +86,13 @@ public class KaKaoService {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            log.info("url = {}",url);
+            log.debug("url = {}",url);
 
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
             conn.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
             int responseCode = conn.getResponseCode();
-            log.info("responseCode = {}", responseCode);
+            log.debug("responseCode = {}", responseCode);
 
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -104,10 +115,18 @@ public class KaKaoService {
             String id = element.getAsJsonObject().get("id").getAsString();
             String name = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            String phoneNum = kakao_account.getAsJsonObject().get("phone_number").getAsString();
+            String birthYear = kakao_account.getAsJsonObject().get("birthyear").getAsString();
+            String birthDay = kakao_account.getAsJsonObject().get("birthday").getAsString();
+            String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
 
             resultMap.put("name", name);
             resultMap.put("id",id);
             resultMap.put("email",email);
+            resultMap.put("phoneNum", phoneNum);
+            resultMap.put("birthYear", birthYear);
+            resultMap.put("birthDay", birthDay);
+            resultMap.put("gender",gender);
 
         }catch (IOException e){
             e.printStackTrace();

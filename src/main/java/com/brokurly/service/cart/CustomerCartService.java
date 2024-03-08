@@ -34,8 +34,8 @@ public class CustomerCartService {
         }
     }
 
-    public List<CustomerCartDto> getCartList(String custId) {    //장바구니 상품 불러오기
-        List<CustomerCart> cartList = customerCartDao.getCart(custId);
+    public List<CustomerCartDto> getCartList(String custId, boolean flag) {    //장바구니 상품 불러오기
+        List<CustomerCart> cartList = customerCartDao.getCart(custId, flag);
         List<CustomerCartDto> customerCartDto = new ArrayList<>();
 
         for (CustomerCart customerCart : cartList) {    //cartList에서 CustomerCart(엔티티)를 하나씩 꺼내서
@@ -75,4 +75,14 @@ public class CustomerCartService {
         customerCartDao.deleteOneItem(customerCart);
         return customerCartDto;
     }
+
+    @Transactional
+    public CustomerCartDto vacateCart(CustomerCartDto customerCartDto) {   //주문완료 후 장바구니 비우기
+
+        CustomerCart customerCart = new CustomerCart(); //비어있는 CustomerCart 도메인 만들기
+        customerCart.changeStatus(customerCartDto); //customerCartDto 있는 값으로 customerCart의 상태를 변경한다
+        customerCartDao.vacateCart(customerCart);
+        return customerCartDto;
+    }
+
 }

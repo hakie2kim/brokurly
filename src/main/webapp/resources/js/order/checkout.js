@@ -16,19 +16,19 @@ window.onload = () => {
 
     // 배송지 변경 모달 띄우기
     $("#location-change").click(() => {
-        $(".small-modal").show();
+        $(".shipping-location-modal").show();
         $("body").css('overflow', 'hidden');
     });
 
     // 배송지 변경 모달 끄기
     $("#small-modal-cancel").click(() => {
-        $(".small-modal").hide();
+        $(".shipping-location-modal").hide();
         $("body").css("overflow", "");
     });
 
     // 배송지 변경 리다이렉트
     $("#small-modal-ok").click(() => {
-        window.location.href = '/cart';
+        window.location.href = '/cart/' + $(".cust-id").text();
     });
 
     // 결제 정보 헤더에 붙이기
@@ -45,7 +45,7 @@ window.onload = () => {
     });
 
     // 배송 요청사항 입력창 띄우기
-    $(".receiver-details-btn").click(() => {
+    $(document).on("click", ".receiver-details-btn", () => {
         const left = screen.width / 2 - 300;
         const top = screen.height / 2 - 350;
         window.open(
@@ -100,7 +100,7 @@ window.onload = () => {
 };
 
 // 서버에서 Ajax 요청이 성공적으로 처리되었을 때 호출되는 콜백 함수
-function updateReceiverDetails(data) {
+function modifyReceiverDetails(data) {
     $("#checkout-rcv-place").text(data.rcvPlace);
     $("#checkout-enter-mthd").text(data.enterMthd);
     $("#checkout-name").text(data.rcvName);
@@ -109,29 +109,72 @@ function updateReceiverDetails(data) {
     $("#checkout-msg-time").text(data.msgTime);
 }
 
+function saveReceiverDetails(receiverDetails) {
+    const $receiverInfo = $(".receiver-info");
+    $receiverInfo.html("");
+
+    // 장소 정보 업데이트
+    const $rcvPlace = $("<span id='checkout-rcv-place'></span>").text(receiverDetails.rcvPlace + " | ");
+    const $enterMthd = $("<span id='checkout-enter-mthd'></span>").text(receiverDetails.enterMthd);
+    const $place = $("<div></div>");
+    $place.append($rcvPlace);
+    $place.append($enterMthd);
+    $receiverInfo.append($place);
+
+    // 수령자 정보 업데이트
+    const $name = $("<span id='checkout-name'></span>").text(receiverDetails.rcvName + ", ");
+    const telNo = receiverDetails.telNo.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    const $telNo = $("<span id='checkout-tel-no'></span>").text(telNo);
+    const $receiver = $("<div></div>");
+    $receiver.append($name);
+    $receiver.append($telNo);
+    $receiverInfo.append($receiver);
+
+    // 버튼 추가
+    const $button = $("<button class='receiver-details-btn'>수정</button>");
+    $receiverInfo.append($button);
+}
+
+function redirectReceiverDetails() {
+    window.location.href = "#receiver-details-title";
+    $(".receiver-details-modal").hide();
+}
+
 function redirectPayment() {
-    const customerCart = [];
+    // 배송 요청사항이 없으면, 주문을 못하게 모달 띄우기
+    if ($(".check-receiver-details").text() === "true") {
+        $(".receiver-details-modal").show();
+        return;
+    }
+
+    const customerCartList = [];
     $(".item-list").each(function () {
-        customerCart.push({
+        let customerCart = {
+            itemId: $(this).find($(".item-id")).text(),
             name: $(this).find($(".item-name")).text(),
             itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
             price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
-
-        })
+        }
+        customerCartList.push(customerCart);
     });
 
-    let checkoutInfo = {
-        rcvName: $("#checkout-name").text(),
-        telNo: $("#checkout-tel-no").text(),
-        rcvPlace: $("#checkout-rcv-place").text(),
-        enterMthd: $("#checkout-enter-mthd").text(),
-        placeExp: $("#checkout-place-exp").text(),
-        msgTime: $("#checkout-msg-time").text(),
-        customerCart: customerCart,
+    let checkoutInfo= {
+        receiverDetails: {
+            rcvName: $("#checkout-name").text(),
+            telNo: $("#checkout-tel-no").text(),
+            rcvPlace: $("#checkout-rcv-place").text(),
+            enterMthd: $("#checkout-enter-mthd").text(),
+            placeExp: $("#checkout-place-exp").text(),
+            msgTime: $("#checkout-msg-time").text()
+        },
+        customerCart: customerCartList,
         paymentAmount: {
             orderAmt: parseInt($("#order-amount").text().replace(/[,\s원]/g, ''), 10),
             itemAmt: parseInt($("#item-amount").text().replace(/[,\s원]/g, ''), 10),
             itemDcAmt: parseInt($("#item-dc-amount").text().replace(/[,\s원]/g, ''), 10),
+            shipFee: parseInt($("#ship-fee").text().replace(/[,\s원]/g, ''), 10),
+            point: parseInt($("#use-point").text().replace(/[,\s원]/g, ''), 10),
+            payAmt: parseInt($("#pay-amount").text().replace(/[,\s원]/g, ''), 10)
         }
     };
 

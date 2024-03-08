@@ -1,10 +1,11 @@
 package com.brokurly.entity.goods;
 
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
-import com.brokurly.dto.goods.GoodsListDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.dto.goods.GoodsListDto;
 import lombok.*;
+
 import java.util.Date;
 
 @ToString
@@ -36,15 +37,9 @@ public class Goods {
   private String itemSpec;
   private int sellCnt;
   private int revCnt;
+  private String stdySellerFl;
 
-  //추가
-  private int salePrice;  //할인이 들어간 가격
 
-  public void initSaleTotal(){
-    salePrice = price - itemDcAmt;
-    if (salePrice < 0)
-      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-  }
   public GoodsListDto makeGoodsList(){
     return GoodsListDto.builder()
             .itemId(itemId)
@@ -81,7 +76,7 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .salePrice(salePrice)
+//            .salePrice(price-itemDcAmt)
             .build();
   }
 
@@ -126,6 +121,6 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.salePrice = goodsDto.getSalePrice();
+
   }
 }

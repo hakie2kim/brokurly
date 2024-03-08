@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class BestPageController {
         m.addAttribute("selectMain", selectMain);
 
 
-        return "/categories/header";
+        return "include/header";
     }
 
     @GetMapping("/best-page")
@@ -71,10 +72,11 @@ public class BestPageController {
 
         // 카테고리별 & 분류 타입에 따라 상품 나열하기
         List<GoodsListDto> goodsListDto;
+
+        if (page == null) page = 1;
         if (sortedType != null) {
             goodsListDto = goodsListService.sortGoodsList(codeId, page, sortedType);
         } else {
-            if (page == null) page = 1;
             goodsListDto = goodsListService.readGoodsList(codeId, page);
         }
         //가격 필터의 기준값들
@@ -94,6 +96,30 @@ public class BestPageController {
         model.addAttribute("criteria", criteria);
 
         return "categories/categories";
+    }
+
+    @PostMapping("/{codeId}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> categoryPageAjax(Model model, @PathVariable String codeId,
+                                                                @RequestParam(required = false) String sortedType,
+                                                                @RequestParam(required = false) Integer page,
+                                                                @RequestParam(required = false) String filters) {
+
+        log.info("codeId = {}", codeId);
+        log.info("sortedType = {}", sortedType);
+
+        Map<String, Object> responseMap = new HashMap<>();
+        List<GoodsListDto> sortedGoodsList = goodsListService.sortGoodsList(codeId, page, sortedType);
+        log.info("sortedGoodsList={}", sortedGoodsList);
+        responseMap.put("sortedGoodsList", sortedGoodsList);
+        log.info("responseMap ={}", responseMap);
+
+        int totalCnt = goodsListService.countGoodsList(codeId);
+        PageHandler pageHandler = new PageHandler(totalCnt, page);
+        responseMap.put("pageHandler", pageHandler);
+        log.info("pageHandler={}", pageHandler);
+
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
 
     @PostMapping("/{codeId}")

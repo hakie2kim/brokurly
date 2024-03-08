@@ -92,18 +92,20 @@
 
 .mainlogo-img {
     flex: 0 0 82px;
+    width: 202px;
+    height: 100px;
 }
 
 .css-mxd3pm.active, .css-mxd3pm:hover {
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #11967f;
 }
 
 .css-mxd3pm {
     flex-shrink: 0;
-    margin-left: 20px;
+    margin-left: -10px;
     font-size: 18px;
-    font-weight: normal;
+    font-weight: bold;
     line-height: 1.33;
     letter-spacing: normal;
     color: rgb(181, 181, 181);
@@ -135,7 +137,7 @@
     width: 400px;
     height: 48px;
     padding-left: 14px;
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid #11967f;
     border-radius: 6px;
     background-color: rgb(255, 255, 255);
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
@@ -211,6 +213,7 @@
 
 .header {
     box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+    margin-bottom: 50px;
 }
 .menu-bar{
     min-width: 1050px;
@@ -298,7 +301,7 @@
 
 .delivery-nt-txt {
     font-weight: 500;
-    color: rgb(95, 0, 128);
+    color: #11967f;
 }
 
 .css-1px7x3s {
