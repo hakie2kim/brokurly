@@ -13,9 +13,6 @@
     </insert>
 
     <!-- READ -->
-    <sql id="select">
-        SELECT * FROM wishlist
-    </sql>
 
 <!--    <select id="getCart" resultType="Cart">-->
 <!--        SELECT a.custId, a.itemId, a.itemCnt, b.name, b.price, b.shipType, b.pkgType, b.itemDcAmt-->
@@ -23,19 +20,14 @@
 <!--        WHERE cust_id = #{custId}-->
 <!--    </select>-->
 
-<!--    <select id="searchByCustId" resultType="WishList">-->
-<!--        SELECT a.*, b.*-->
-<!--        FROM wishlist a-->
-<!--                 JOIN item b ON a.cust_id = b.cust_id-->
-<!--        WHERE cust_id = #{custId}-->
+    <select id="searchByCustId" resultType="WishListItem">
+        SELECT a.*, b.*
+        FROM wishlist a
+                 JOIN item b ON a.cust_id = b.cust_id
+        WHERE cust_id = #{custId}
 
-<!--    </select>-->
-
-    <select id="selectByItemId" resultType="WishList">
-        <include refid="select"/>
-        WHERE item_id = #{itemId}
-        AND cust_id = #{custId}
     </select>
+
 
     <!-- UPDATE -->
 <!--    <update id="update">-->

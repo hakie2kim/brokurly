@@ -238,7 +238,8 @@
           <div class="css-oft680">
             <h3 class="css-1guaarh">배송지</h3>
             <div>
-              <p>경기 용인시 기흥구 동백7로 56 (호수마을서해그랑블)</p>
+              <p class="address">${address.addr}${address.specAddr}</p>
+              <input type="hidden" class="addressId" value="${address.shipLocaId}">
               <div>
                 <span type="direct">샛별배송</span>
               </div>
@@ -292,9 +293,7 @@
     </div>
   </div>
   <%--  주문 form --%>
-  <form action="<c:url value="/order/checkout"/>" method="get" class="order_form">
 
-  </form>
 </div>
 <script>
     $(document).ready(function () {
@@ -719,7 +718,7 @@
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {	//체크여부
                 let itemId = $(element).find(".individual_itemId_input").val();
                 let itemCnt = $(element).find(".individual_itemCnt_input").val();
-
+                let shipLocaId = $(".addressId").val();
                 $.ajax({
                     url: '/cart/update',
                     method: "POST",
@@ -731,6 +730,7 @@
                         itemCk: 'Y'
                     },
                     success: function () {
+                        sessionStorage.setItem("shipLocaId", shipLocaId);
                         location.replace("/order/checkout"); // 페이지 이동
                     }
                 });

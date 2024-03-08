@@ -11,6 +11,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 public class ShippingLocationCurrDto {
+    private String shipLocaId;
     private String addr;
     private String specAddr;
     private String currAddrFl;

@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,12 @@ public class GoodsController {
   // 상품 상세페이지로 값 전달
   @GetMapping("/{itemId}")
   public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
-    session.setAttribute("member", "hong");
-    GoodsDto goods = goodsService.searchGoods(itemId);  // 상품정보
+    session.setAttribute("member", "hakie2kim");
+    GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
     GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
 //    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
     List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
-    int wishList = goodsService.searchWish(itemId, "hong"); //상품 찜
+    int wishList = goodsService.searchWish(itemId, "hakie2kim"); //상품 찜
     List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
 
     model.addAttribute("goods", goods);
@@ -43,6 +44,7 @@ public class GoodsController {
     model.addAttribute("review",review);
     return "goods/goods";
   }
+
   @PostMapping("/addWish")
   @ResponseBody
   public ResponseEntity<String> addWishPost(WishListDto wishListDto){
@@ -65,4 +67,7 @@ public class GoodsController {
 //  }
 
 
+//  public GoodsDto updateWishCnt(GoodsDto goodsDto){
+//
+//  }
 }

@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Document</title>
   <link rel="stylesheet" href="<c:url value='/resources/css/cart/delivery-address.css'/>"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body class="vsc-initialized">
 <div id="__next" data-reactroot="">
@@ -61,11 +63,14 @@
 
 
             <c:if test="${shippingLocation.currAddrFl eq 'N'}">
-              <form class="checkbox" method="post">
-                <input type="hidden" name="_method" value="patch"/>
+<%--              <form class="checkbox" method="post">--%>
+<%--                <input type="hidden" name="_method" value="patch"/>--%>
+<%--                <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>--%>
+<%--                <input type="hidden" name="currAddrFl" value="Y"/>--%>
+<%--              </form>--%>
+              <div class="checkbox">
                 <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
-                <input type="hidden" name="currAddrFl" value="Y"/>
-              </form>
+              </div>
             </c:if>
             <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
               <div class="checkbox-checked"></div>
@@ -185,37 +190,37 @@
 
   <script>
       window.onload = () => {
+          console.dir(window.opener);
+
           const receiverDetails = document.querySelector(".add-new-deli");
           receiverDetails.addEventListener("click", () => {
               const left = screen.width / 2 - 300;
               const top = screen.height / 2 - 350;
-              window.open(
+              window.opener.open( //window.open 으로하면 부모창값이 바뀌므로 중간에 opener를 넣어 부모창 주소를 보내줌
                   "/mypage/address/shipping-address",
                   "a",
-                  "width=600, height=700, left=100, top=50"
+                  "width=600, height=700, left=" + left + ", top=" + top
               );
           });
 
           $(".checkbox").on("click", function (e) {
               e.preventDefault();
 
-              $.ajax({
-                  url: "/mypage/address",
-                  method: "POST",
-                  data: $(this).serialize(),
-                  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                  success: function (response) {
-                      alert("Your form has been sent successfully.");
-                      window.location.reload();
-                  },
-                  error: function (jqXHR, textStatus, errorThrown) {
-                      console.error(textStatus, errorThrown);
-                  }
+              const shipLocaId = $(this).children().val();
+
+              fetch("/mypage/address/shipping-address/update-curraddr/" + shipLocaId, {
+                  method: "PATCH",
               })
+                  .then(response => {
+                      // window.location.reload();
+                      window.opener.location.reload(); //부모창 새로고침
+                      window.close(); //창 닫기
+                  })
+                  .catch(error => {
+                      console.log(error);
+                  })
           });
       };
-
-
 
 </script>
 

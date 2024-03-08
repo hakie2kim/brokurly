@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 가격에 ,찍기 기능용--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- 가격에 ,찍기 기능용--%>
+<% pageContext.setAttribute("replaceChar", "\n"); %>  <%-- 후기 줄바꾸기용--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 <head>
@@ -620,7 +622,7 @@
                       <div>
                         <h3>${goods.name}</h3>
                       </div>
-                      <p>${re.content}</p>
+                      <p>${fn:replace(re.content, replaceChar, "<br/>")}</p>
                       <div>
                         <button>
                           <span
@@ -648,7 +650,9 @@
                               <img src="/resources/image/like1.png" alt="" class="img2"
                                    id="like1">
                           </span>
-                          <span>도움돼요<span>${re.likeCnt}</span></span>
+                          <span>도움돼요
+                            <span>${re.likeCnt}</span>
+                          </span>
                         </button>
                       </footer>
                     </div>
@@ -1290,6 +1294,54 @@ $(window).scroll(Page__updateIndicatorActive);
 //         document.getElementById("heart2").src = "/resources/image/heartX.png";
 //     }
 // }
+ //도움돼요 버튼 누르면 사진 변경 다시 누르면 원상태로, 카운트
+
+
+$(document).ready(function() {
+    $('.likeX').click(likeToggle);
+});
+
+// function likeToggle() {
+//     var $imgElement = $(this).find(".img2");
+//
+//     // 이미지 소스를 변경
+//     if ($imgElement.attr("src") === "/resources/image/like1.png") {
+//         $imgElement.attr("src", "/resources/image/likeO.png");
+//     } else {
+//         $imgElement.attr("src", "/resources/image/like1.png");
+//     }
+// }
+function likeToggle() {
+    var $imgElement = $(this).find(".img2");
+    var likeCnt = parseInt($(this).find(".likeCount").text()); // 좋아요 카운트 값 가져오기
+    var reviewId = $(this).data("review-id"); // 리뷰 ID 가져오기
+
+    $.ajax({
+        url: '/updateLikeCount', // 서버의 업데이트 좋아요 카운트를 처리하는 엔드포인트로 변경해야 합니다.
+        method: 'POST', // 또는 GET, PUT 등을 사용할 수 있습니다.
+        data: {
+            reviewId: reviewId,
+            likeCnt: likeCnt
+        },
+        success: function(response) {
+            // 서버에서 처리 결과를 받은 후 클라이언트 측에서 좋아요 카운트 업데이트
+            if (response.success) {
+                if ($imgElement.attr("src") === "/resources/image/like1.png") {
+                    $imgElement.attr("src", "/resources/image/likeO.png");
+                    $(this).find(".likeCount").text(likeCnt + 1); // 좋아요 카운트 증가
+                } else {
+                    $imgElement.attr("src", "/resources/image/like1.png");
+                    $(this).find(".likeCount").text(likeCnt - 1); // 좋아요 카운트 감소
+                }
+            } else {
+                alert("좋아요 처리에 실패했습니다.");
+            }
+        },
+        error: function() {
+            alert("서버와의 통신 중 오류가 발생했습니다.");
+        }
+    });
+}
 
 //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
 $(document).ready(function () {
@@ -1498,6 +1550,7 @@ $(".btn_cart").on("click", function (e) {
         //     itemCnt: $(".quantity_input").val()
         // },
         success: function (result) {
+
             cartAlert(result);
         }
     })
