@@ -1,10 +1,7 @@
 package com.brokurly.controller.goods;
 
 
-import com.brokurly.dto.goods.GoodsAnnouncementDto;
-import com.brokurly.dto.goods.GoodsDto;
-import com.brokurly.dto.goods.GoodsInquiryLogDto;
-import com.brokurly.dto.goods.GoodsReviewBoardDto;
+import com.brokurly.dto.goods.*;
 import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.service.goods.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
