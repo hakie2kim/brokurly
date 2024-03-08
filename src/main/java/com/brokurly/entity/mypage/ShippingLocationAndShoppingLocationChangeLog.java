@@ -86,6 +86,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
 
     public ShippingLocationCurrDto makeShippingLocationCurrDto() {
         return ShippingLocationCurrDto.builder()
+                .shipLocaId(shipLocaId)
                 .addr(addr)
                 .specAddr(specAddr)
                 .currAddrFl(currAddrFl)

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.brokurly.repository.mypage.WishListDao">
+<mapper namespace="com.brokurly.repository.mypage.WishListItem">
 
     <!-- CREATE -->
     <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
@@ -13,9 +13,6 @@
     </insert>
 
     <!-- READ -->
-    <sql id="select">
-        SELECT * FROM wishlist
-    </sql>
 
 <!--    <select id="getCart" resultType="Cart">-->
 <!--        SELECT a.custId, a.itemId, a.itemCnt, b.name, b.price, b.shipType, b.pkgType, b.itemDcAmt-->
@@ -23,19 +20,14 @@
 <!--        WHERE cust_id = #{custId}-->
 <!--    </select>-->
 
-<!--    <select id="searchByCustId" resultType="WishList">-->
-<!--        SELECT a.*, b.*-->
-<!--        FROM wishlist a-->
-<!--                 JOIN item b ON a.cust_id = b.cust_id-->
-<!--        WHERE cust_id = #{custId}-->
+    <select id="searchByCustId" resultType="WishListItem">
+        SELECT a.*, b.*
+        FROM wishlist a
+                 JOIN item b ON a.cust_id = b.cust_id
+        WHERE cust_id = #{custId}
 
-<!--    </select>-->
-
-    <select id="selectByItemId" resultType="WishList">
-        <include refid="select"/>
-        WHERE item_id = #{itemId}
-        AND cust_id = #{custId}
     </select>
+
 
     <!-- UPDATE -->
 <!--    <update id="update">-->

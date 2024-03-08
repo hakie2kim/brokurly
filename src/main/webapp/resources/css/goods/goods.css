@@ -15,11 +15,11 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-/*button {*/
-/*    overflow: visible;*/
-/*    background-color: transparent;*/
-/*    border: none;*/
-/*}*/
+button {
+    overflow: visible;
+    background-color: transparent;
+    border: none;
+}
 .header0 {
     position: relative;
     width: 1050px;
