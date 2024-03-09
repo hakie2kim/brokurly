@@ -150,23 +150,23 @@
     <div class="head-1">
         <div class="login-wrap">
             <c:if test="${loginSession eq '로그인'}">
-            <a class="lg-text" href="<c:url value='/member/signup'/>">${signup}</a>
-            <div class="lg-bar"></div>
+                <a class="lg-text" href="<c:url value='/member/signup'/>">${signup}</a>
+                <div class="lg-bar"></div>
             </c:if>
             <c:if test="${loginSession eq '로그인'}">
-            <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
+                <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
             </c:if>
             <c:if test="${loginSession ne '로그인'}">
-            <div class="lg-text3wrap">
-               <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span class="css-1lrerrk eo4j3y50"></span
-               ></a>
-                <div class="menu cs-bar-wrap">
-                    <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
+                <div class="lg-text3wrap">
+                    <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span class="css-1lrerrk eo4j3y50"></span
+                    ></a>
+                    <div class="menu cs-bar-wrap">
+                        <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
+                    </div>
                 </div>
-            </div>
             </c:if>
 
-                <div class="lg-bar"></div>
+            <div class="lg-bar"></div>
             <div class="lg-text3wrap">
                 <a class="lg-text"
                 >고객센터 <span class="css-1lrerrk eo4j3y50"></span
@@ -192,18 +192,18 @@
             <div class="searchbox-wrap">
                 <div class="searchbox">
                     <form id="search_container" method="get" action="/search">
-                    <input
-                            id="gnb_search"
-                            placeholder="검색어를 입력해주세요"
-                            required=""
-                            class="searchbox-text"
-                            name="sword"
-                            value=""
-                    /><button
-                        id="submit"
-                        aria-label="submit"
-                        class="searchbox-btn"
-                ></button>
+                        <input
+                                id="gnb_search"
+                                placeholder="검색어를 입력해주세요"
+                                required=""
+                                class="searchbox-text"
+                                name="sword"
+                                value=""
+                        /><button
+                            id="submit"
+                            aria-label="submit"
+                            class="searchbox-btn"
+                    ></button>
                     </form>
                 </div>
             </div>
@@ -233,18 +233,18 @@
                     <div class="css-taug43 e7s0tnu0 dropdown-content">
                         <div width="0" class="css-9d3cf6 e1vs1ym87">
                             <ul class="css-13ct7qm e1vs1ym86" >
-<%--                                <li class="css-you2kh e1vs1ym83 menuItem1">--%>
+                                <%--                                <li class="css-you2kh e1vs1ym83 menuItem1">--%>
 
 
-<%--                                    <c:forEach var="item" items="${selectMain}">--%>
+                                <%--                                    <c:forEach var="item" items="${selectMain}">--%>
 
-<%--                                        <li class="css-you2kh e1vs1ym83 menuItem1">--%>
-<%--                                            <div class="css-11n7bn4 e1vs1ym81">--%>
-<%--                                                <img src="/resources/image/icon-.png" alt="채소" class="css-ar6ptu e1vs1ym82" />--%>
-<%--                                                <span class="css-mhaka4 e1vs1ym84">${item.exp}</span>--%>
-<%--                                            </div>--%>
-<%--                                        </li>--%>
-<%--                                    </c:forEach>--%>
+                                <%--                                        <li class="css-you2kh e1vs1ym83 menuItem1">--%>
+                                <%--                                            <div class="css-11n7bn4 e1vs1ym81">--%>
+                                <%--                                                <img src="/resources/image/icon-.png" alt="채소" class="css-ar6ptu e1vs1ym82" />--%>
+                                <%--                                                <span class="css-mhaka4 e1vs1ym84">${item.exp}</span>--%>
+                                <%--                                            </div>--%>
+                                <%--                                        </li>--%>
+                                <%--                                    </c:forEach>--%>
 
                                 <c:forEach var="item" items="${selectMain}" varStatus="loop">
                                     <li class="css-you2kh e1vs1ym83 menuItem1">
