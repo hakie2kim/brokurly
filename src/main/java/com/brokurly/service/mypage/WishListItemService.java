@@ -19,26 +19,32 @@ public class WishListItemService {
     private final WishListItemDao wishListItemDao;
 
     @Transactional
-    public int addWish(WishListItemDto wishListItemDto){
+    public int addWish(WishListItemDto wishListItemDto) {
         WishListItem wishListItem = new WishListItem();
         wishListItem.changeStatus(wishListItemDto);
         return wishListItemDao.insert(wishListItem);
     }
+
     @Transactional
-    public int deleteWish(WishListItemDto wishListItemDto){
+    public int deleteWish(WishListItemDto wishListItemDto) {
         WishListItem wishListItem = new WishListItem();
         wishListItem.changeStatus(wishListItemDto);
         return wishListItemDao.delete(wishListItem);
     }
 
     @Transactional
-    public List<WishListItemDto> searchWishList(String custId){
+    public List<WishListItemDto> searchWishList(String custId) {
         List<WishListItem> wishListItemList = wishListItemDao.searchByCustId(custId);
         List<WishListItemDto> wishListItemDto = new ArrayList<>();
 
-        for( WishListItem wishListItem : wishListItemList){
+        for (WishListItem wishListItem : wishListItemList) {
             wishListItemDto.add(wishListItem.makeFullWishListItem());
         }
         return wishListItemDto;
+    }
+
+    @Transactional
+    public int getWishListCounter(String custId) {
+        return wishListItemDao.searchByCustId(custId).size();
     }
 }

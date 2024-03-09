@@ -10,6 +10,7 @@ import com.brokurly.dto.mypage.*;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.service.mypage.WishListItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
     private final ShippingLocationService shippingLocationService;
+    private final WishListItemService wishListItemService;
 
     @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
@@ -234,7 +236,6 @@ public class MypageController {
         }*/
     }
 
-
     @GetMapping("/address/shipping-address/list")
     String shippingAddressList(Model model) {
         String custId = "hakie2kim";     //임시
@@ -243,4 +244,16 @@ public class MypageController {
         return "/cart/delivery-address";
     }
 
+    @GetMapping("/pick/list")
+    String pickList(Model model) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        List<WishListItemDto> wishListItemList = wishListItemService.searchWishList(custId);
+        int wishListItemCounter = wishListItemService.getWishListCounter(custId);
+
+        model.addAttribute("wishListItemList", wishListItemList);
+        model.addAttribute("wishListItemCounter", wishListItemCounter);
+
+        return "/mypage/pick-list";
+    }
 }
