@@ -1,7 +1,10 @@
 package com.brokurly.service.mypage;
 
+import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.dto.mypage.WishListItemDto;
+import com.brokurly.entity.mypage.WishList;
 import com.brokurly.entity.mypage.WishListItem;
+import com.brokurly.repository.mypage.WishListDao;
 import com.brokurly.repository.mypage.WishListItemDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,7 @@ import java.util.List;
 public class WishListItemService {
 
     private final WishListItemDao wishListItemDao;
+    private final WishListDao wishListDao;
 
     @Transactional
     public int addWish(WishListItemDto wishListItemDto) {
@@ -26,10 +30,10 @@ public class WishListItemService {
     }
 
     @Transactional
-    public int deleteWish(WishListItemDto wishListItemDto) {
-        WishListItem wishListItem = new WishListItem();
-        wishListItem.changeStatus(wishListItemDto);
-        return wishListItemDao.delete(wishListItem);
+    public int deleteWish(String itemId, String custId) {
+        WishList wishList = new WishList();
+        wishList.changeStatus(new WishListDto(itemId, custId));
+        return wishListDao.delete(wishList);
     }
 
     @Transactional

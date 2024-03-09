@@ -14,6 +14,24 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/mypage/pick-list.css'/>"/>
     <title>컬리 - 마켓컬리/뷰티컬리</title>
 </head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    window.onload = () => {
+        $('.css-17giheb.e4nu7ef3').on('click', (event) => {
+            const itemId = $(event.currentTarget).find('input[type=hidden]').val();
+
+            fetch("/mypage/pick/remove/" + itemId, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        })
+    }
+</script>
 <body>
 <div class="top">
     <div class="tiles">
@@ -175,10 +193,11 @@
             <c:if test="${wishListItemCounter ne 0}">
                 <c:forEach var="wishListItem" items="${wishListItemList}">
                     <div class="css-1pj4itr e1jp10d17" style="width: 100%">
-                        <a href="/goods/1000431280" class="css-zw1kn5 e1jp10d16"
-                        ><span width="60" height="78" class="css-s2pfj eq9umyc2"
-                        ><span
-                                style="
+                        <c:set var="wishListItemId" value="${wishListItem.itemId}"/>
+                        <a href="/goods/${wishListItemId}" class="css-zw1kn5 e1jp10d16">
+                            <span width="60" height="78" class="css-s2pfj eq9umyc2">
+                                <span
+                                        style="
                         box-sizing: border-box;
                         display: block;
                         overflow: hidden;
@@ -191,15 +210,15 @@
                         padding: 0px;
                         position: absolute;
                         inset: 0px;
-                      "
-                        ><img
-                                alt=""
-                                sizes="100vw"
-                                src="https://product-image.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/product/image/4b6bba61-b8a0-49c6-95f2-4c178f13319f.jpg"
-                                decoding="async"
-                                data-nimg="fill"
-                                class="css-0"
-                                style="
+                      ">
+                                    <img
+                                            alt=""
+                                            sizes="100vw"
+                                            src="https://product-image.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/product/image/4b6bba61-b8a0-49c6-95f2-4c178f13319f.jpg"
+                                            decoding="async"
+                                            data-nimg="fill"
+                                            class="css-0"
+                                            style="
                           position: absolute;
                           inset: 0px;
                           box-sizing: border-box;
@@ -214,14 +233,16 @@
                           min-height: 100%;
                           max-height: 100%;
                           object-fit: cover;
-                        "/></span></span
-                        ></a>
+                        "/>
+                                </span>
+                            </span>
+                        </a>
                         <div class="css-14z46lg e1jp10d15">
                             <div class="css-a3z6ut e1jp10d14">
                                 <div class="css-v2aaoi e1jp10d12">
-                                    <a href="/goods/1000431280" class="css-4ejps8 e1jp10d13"
-                                    >${wishListItem.name}</a
-                                    >
+                                    <a href="/goods/${wishListItemId}" class="css-4ejps8 e1jp10d13">
+                                            ${wishListItem.name}
+                                    </a>
                                 </div>
                                 <div class="css-1d6cvj1 e1jp10d11">
                                     <span class="css-x4qt93 e1alt0er2">${wishListItem.dcRt}%</span>
@@ -239,6 +260,7 @@
                                         height="36"
                                         radius="4"
                                 >
+                                    <input type="hidden" value="${wishListItemId}"/>
                                     <span class="css-abcde e4nu7ef1">삭제</span>
                                 </button>
                                 <button

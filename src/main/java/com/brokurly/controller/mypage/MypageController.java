@@ -256,4 +256,11 @@ public class MypageController {
 
         return "/mypage/pick-list";
     }
+
+    @DeleteMapping("/pick/remove/{itemId}")
+    HttpStatus removePick(@PathVariable String itemId) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        wishListItemService.deleteWish(itemId, custId);
+        return HttpStatus.OK;
+    }
 }
