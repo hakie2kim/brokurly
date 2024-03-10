@@ -36,7 +36,7 @@ public interface GoodsDao {
     int countGoodsListByCateCode(String cateCode);
 
     List<Goods> sortGoodsList(@Param("cateCode") String cateCode, @Param("limit") int limit,
-                              @Param("start") int start, @Param("sortedtype") String sortedtype);
+                              @Param("start") int start, @Param("sortedType") String sortedType);
 
     List<Goods> sortGoodsListByRegDate(@Param("cateCode") String cateCode, @Param("limit") int limit,
                                        @Param("start") int start);

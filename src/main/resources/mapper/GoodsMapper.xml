@@ -56,26 +56,23 @@
 
 
     <select id="sortGoodsList" resultType="Goods">
-        SELECT
-        item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
-        FROM
-        ITEM
-        WHERE
-        cate_code LIKE CONCAT(#{cateCode},'%')
+        SELECT item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        FROM ITEM
+        WHERE cate_code LIKE CONCAT(#{cateCode},'%')
         <choose>
-            <when test="sortedtype == 4">
+            <when test="sortedType == 4">
                 ORDER BY price - item_dc_amt ASC
             </when>
-            <when test="sortedtype == 5">
+            <when test="sortedType == 5">
                 ORDER BY price - item_dc_amt DESC
             </when>
-            <when test="sortedtype == 2">
+            <when test="sortedType == 2">
                 ORDER BY sell_cnt DESC
             </when>
-            <when test="sortedtype == 3">
+            <when test="sortedType == 3">
                 ORDER BY dc_rt DESC
             </when>
-            <when test="sortedtype == 1">
+            <when test="sortedType == 1">
                 ORDER BY reg_dt DESC
             </when>
         </choose>
