@@ -56,28 +56,244 @@
 
 
     <select id="sortGoodsList" resultType="Goods">
-        SELECT item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
-        FROM ITEM
-        WHERE cate_code LIKE CONCAT(#{cateCode},'%')
-        <choose>
-            <when test="sortedType == 4">
+        SELECT
+        item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        FROM
+        ITEM
+        WHERE
+        cate_code LIKE CONCAT(#{cateCode},'%')
+            <if test="sortedType == 4">
                 ORDER BY price - item_dc_amt ASC
-            </when>
-            <when test="sortedType == 5">
+            </if>
+            <if test="sortedType == 5">
                 ORDER BY price - item_dc_amt DESC
-            </when>
-            <when test="sortedType == 2">
+            </if>
+            <if test="sortedType == 2">
                 ORDER BY sell_cnt DESC
-            </when>
-            <when test="sortedType == 3">
+            </if>
+            <if test="sortedType == 3">
                 ORDER BY dc_rt DESC
-            </when>
-            <when test="sortedType == 1">
+            </if>
+            <if test="sortedType == 1">
                 ORDER BY reg_dt DESC
-            </when>
-        </choose>
+            </if>
         LIMIT #{limit} OFFSET #{start}
     </select>
+
+<!--리스트 중에 가장 낮은 가격의 상품-->
+    <select id="getLowestPriceGoods" resultType="Goods">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+        ORDER BY price ASC
+        LIMIT 1;
+    </select>
+
+<!--리스트 중에 가장 높은 가격의 상품-->
+    <select id="getHighestPriceGoods" resultType="Goods">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+        ORDER BY price DESC
+        LIMIT 1;
+    </select>
+
+
+
+    <select id="goodsListByPriceFilter" resultType="Goods">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+        <if test="filter.priceFilterNum == 1">
+            AND price-item_dc_amt &lt; #{filter.price1}
+        </if>
+        <if test="filter.priceFilterNum == 2">
+            AND price-item_dc_amt &gt;= #{filter.price1} AND price-item_dc_amt &lt; #{filter.price2}
+        </if>
+        <if test="filter.priceFilterNum == 3">
+            AND price-item_dc_amt &gt;= #{filter.price2} AND price-item_dc_amt &lt; #{filter.price3}
+        </if>
+        <if test="filter.priceFilterNum == 4">
+            AND price-item_dc_amt &gt;= #{filter.price3}
+        </if>
+        <if test="sortedType == 4">
+            ORDER BY price - item_dc_amt ASC
+        </if>
+        <if test="sortedType == 5">
+            ORDER BY price - item_dc_amt DESC
+        </if>
+        <if test="sortedType == 2">
+            ORDER BY sell_cnt DESC
+        </if>
+        <if test="sortedType == 3">
+            ORDER BY dc_rt DESC
+        </if>
+        <if test="sortedType == 1">
+            ORDER BY reg_dt DESC
+        </if>
+        LIMIT #{limit} OFFSET #{start}
+    </select>
+
+
+
+
+    <select id="countGoodsListByPriceFilter" resultType="int">
+        select  count(*)
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode},'%')
+
+        <if test="filter.priceFilterNum == 1">
+            AND price-item_dc_amt &lt; #{filter.price1}
+        </if>
+        <if test="filter.priceFilterNum == 2">
+            AND price-item_dc_amt &gt;= #{filter.price1} AND price-item_dc_amt &lt; #{filter.price2}
+        </if>
+        <if test="filter.priceFilterNum == 3">
+            AND price-item_dc_amt &gt;= #{filter.price2} AND price-item_dc_amt &lt; #{filter.price3}
+        </if>
+        <if test="filter.priceFilterNum == 4">
+            AND price-item_dc_amt &gt;= #{filter.price3}
+        </if>
+        <if test="sortedType == 4">
+            ORDER BY price - item_dc_amt ASC
+        </if>
+        <if test="sortedType == 5">
+            ORDER BY price - item_dc_amt DESC
+        </if>
+        <if test="sortedType == 2">
+            ORDER BY sell_cnt DESC
+        </if>
+        <if test="sortedType == 3">
+            ORDER BY dc_rt DESC
+        </if>
+        <if test="sortedType == 1">
+            ORDER BY reg_dt DESC
+        </if>
+
+    </select>
+
+
+
+<!--    검색할때 상품 리스트 출력 -->
+    <select id="selectGoodsListByitemIdList" resultType="Goods" parameterType="java.util.List">
+        select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        WHERE item_id IN
+            <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        limit #{limit} offset #{start}
+    </select>
+
+    <select id="getLowestPriceGoodsByitemIdList" resultType="Goods" parameterType="java.util.List">
+        select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        WHERE item_id IN
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY price ASC
+        LIMIT 1
+    </select>
+
+    <select id="getHighestPriceGoodsByitemIdList" resultType="Goods" parameterType="java.util.List">
+        select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        WHERE item_id IN
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY price DESC
+        LIMIT 1
+    </select>
+
+    <select id="countGoodsListByitemIdList" resultType="int" parameterType="java.util.List">
+        select count(*)
+        from ITEM
+        WHERE item_id IN
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="goodsListByIdListAndFilter" resultType="Goods" parameterType="java.util.List">
+        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        from ITEM
+        WHERE item_id IN
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="filter.priceFilterNum == 1">
+            AND price-item_dc_amt &lt; #{filter.price1}
+        </if>
+        <if test="filter.priceFilterNum == 2">
+            AND price-item_dc_amt &gt;= #{filter.price1} AND price-item_dc_amt &lt; #{filter.price2}
+        </if>
+        <if test="filter.priceFilterNum == 3">
+            AND price-item_dc_amt &gt;= #{filter.price2} AND price-item_dc_amt &lt; #{filter.price3}
+        </if>
+        <if test="filter.priceFilterNum == 4">
+            AND price-item_dc_amt &gt;= #{filter.price3}
+        </if>
+        <if test="sortedType == 4">
+            ORDER BY price - item_dc_amt ASC
+        </if>
+        <if test="sortedType == 5">
+            ORDER BY price - item_dc_amt DESC
+        </if>
+        <if test="sortedType == 2">
+            ORDER BY sell_cnt DESC
+        </if>
+        <if test="sortedType == 3">
+            ORDER BY dc_rt DESC
+        </if>
+        <if test="sortedType == 1">
+            ORDER BY reg_dt DESC
+        </if>
+        LIMIT #{limit} OFFSET #{start}
+    </select>
+
+    <select id="countGoodsListByIdListAndFilter" resultType="int">
+        select  count(*)
+        from ITEM
+        WHERE item_id IN
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+        <if test="filter.priceFilterNum == 1">
+            AND price-item_dc_amt &lt; #{filter.price1}
+        </if>
+        <if test="filter.priceFilterNum == 2">
+            AND price-item_dc_amt &gt;= #{filter.price1} AND price-item_dc_amt &lt; #{filter.price2}
+        </if>
+        <if test="filter.priceFilterNum == 3">
+            AND price-item_dc_amt &gt;= #{filter.price2} AND price-item_dc_amt &lt; #{filter.price3}
+        </if>
+        <if test="filter.priceFilterNum == 4">
+            AND price-item_dc_amt &gt;= #{filter.price3}
+        </if>
+        <if test="sortedType == 4">
+            ORDER BY price - item_dc_amt ASC
+        </if>
+        <if test="sortedType == 5">
+            ORDER BY price - item_dc_amt DESC
+        </if>
+        <if test="sortedType == 2">
+            ORDER BY sell_cnt DESC
+        </if>
+        <if test="sortedType == 3">
+            ORDER BY dc_rt DESC
+        </if>
+        <if test="sortedType == 1">
+            ORDER BY reg_dt DESC
+        </if>
+
+    </select>
+
+
+
+
 
 
 
@@ -124,10 +340,16 @@
 <!--        limit #{limit} offset #{start}-->
 <!--    </select>-->
 
+<!--    <select id="countGoodsListByCateCode" resultType="int">-->
+<!--        select count(*)-->
+<!--        from ITEM-->
+<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+<!--    </select>-->
+
     <select id="countGoodsListByCateCode" resultType="int">
-        select count(*)
-        from ITEM
-        where cate_code LIKE CONCAT(#{cateCode},'%')
+            select count(*)
+            from ITEM
+            where cate_code LIKE CONCAT(#{cateCode},'%')
     </select>
 
 

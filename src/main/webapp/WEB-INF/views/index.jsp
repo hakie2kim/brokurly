@@ -22,6 +22,9 @@
     <a href="mypage/address">학준 - 배송지 관리</a>
 </div>
 <div>
+    <a href="mypage/pick/list">학준 - 찜한 상품</a>
+</div>
+<div>
     <a href="member/signup">소라 - 회원가입</a>
 </div>
 <div>

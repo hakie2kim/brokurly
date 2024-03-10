@@ -1,9 +1,10 @@
 package com.brokurly.controller.categories;
 
 import com.brokurly.dto.categories.CategoryDto;
+import com.brokurly.dto.categories.PriceFilterDto;
 import com.brokurly.dto.goods.GoodsListDto;
-import com.brokurly.service.goods.GoodsListService;
 import com.brokurly.service.categories.CategoryService;
+import com.brokurly.service.goods.GoodsListService;
 import com.brokurly.utils.PageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -77,6 +78,8 @@ public class BestPageController {
         } else {
             goodsListDto = goodsListService.readGoodsList(codeId, page);
         }
+        //가격 필터의 기준값들
+        int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
 
         //필터=배송타입일때
         //필터=가격일때
@@ -89,6 +92,7 @@ public class BestPageController {
         model.addAttribute("goodsListDto", goodsListDto);
         model.addAttribute("totalCnt", totalCnt);
         model.addAttribute("pageHandler", pageHandler);
+        model.addAttribute("criteria", criteria);
 
         return "categories/categories";
     }
@@ -98,21 +102,43 @@ public class BestPageController {
     public ResponseEntity<Map<String, Object>> categoryPageAjax(Model model, @PathVariable String codeId,
                                                                 @RequestParam(required = false) String sortedType,
                                                                 @RequestParam(required = false) Integer page,
-                                                                @RequestParam(required = false) String filters) {
-
+                                                                @RequestParam(required = false) String filters,
+                                                                @RequestParam(required = false) String PriceFilterNum) {
         log.info("codeId = {}", codeId);
         log.info("sortedType = {}", sortedType);
+        log.info("page={}", page);
+        log.info("PriceFilterNum={}",PriceFilterNum);
 
         Map<String, Object> responseMap = new HashMap<>();
+
+        PriceFilterDto filter = PriceFilterDto.builder()
+                .priceFilterNum(PriceFilterNum)
+                .build();
+        log.info("filter={}",filter);
+
         List<GoodsListDto> sortedGoodsList = goodsListService.sortGoodsList(codeId, page, sortedType);
-        log.info("sortedGoodsList={}", sortedGoodsList);
+        log.info("sortedGoodsList={}",sortedGoodsList);
         responseMap.put("sortedGoodsList", sortedGoodsList);
         log.info("responseMap ={}", responseMap);
 
-        int totalCnt = goodsListService.countGoodsList(codeId);
+        //페이징
+        int totalCnt = goodsListService.countGoodsListByPriceFilter(codeId, sortedType, filter);
         PageHandler pageHandler = new PageHandler(totalCnt, page);
         responseMap.put("pageHandler", pageHandler);
-        log.info("pageHandler={}", pageHandler);
+        responseMap.put("totalCnt",totalCnt);
+        log.info("pageHandler={}",pageHandler);
+
+        //가격 필터 기준 값
+        int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
+        responseMap.put("criteria", criteria);
+        log.info("criteria={}", criteria);
+
+        // 필터적용한 상품리스트
+        List<GoodsListDto> readGoodsLisByFilter = goodsListService.readGoodsLisByFilter(codeId, page, sortedType, filter);
+        log.info("readGoodsLisByFilter={}",readGoodsLisByFilter);
+        responseMap.put("readGoodsLisByFilter",readGoodsLisByFilter);
+
+
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }

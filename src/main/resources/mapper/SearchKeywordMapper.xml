@@ -11,9 +11,22 @@
             (#{keyword}, #{itemIdList})
     </insert>
 
-<!--    &lt;!&ndash; READ &ndash;&gt;-->
+
     <sql id="select">
         SELECT * FROM SEARCH_KEYWORD
     </sql>
+
+    <select id="selectByTitle" resultType="searchKeyword">
+        <include refid="select"/>
+        WHERE keyword = #{keyword}
+    </select>
+
+    <select id="selectItemIdListByKeyword" resultType="String">
+        SELECT item_id_list
+        FROM SEARCH_KEYWORD
+        WHERE #{sword} LIKE CONCAT('%', keyword, '%')
+    </select>
+
+
 
 </mapper>
