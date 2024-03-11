@@ -28,6 +28,7 @@
         FROM item_inquiry_log a
                  JOIN customer b ON a.cust_id = b.cust_id
         WHERE item_id = #{itemId}
+        ORDER BY reg_dt DESC
     </select>
 
     <!-- UPDATE -->

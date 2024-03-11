@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface WishListDao {
 
-    List<WishList> searchByCustId(String custId);
+
     int insert(WishList wishList);
     int delete(WishList wishList);
 

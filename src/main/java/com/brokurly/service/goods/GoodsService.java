@@ -34,7 +34,7 @@ public class GoodsService {
     private GoodsReviewBoardDao goodsReviewBoardDao;
 
     @Autowired
-    public GoodsService(GoodsDao goodsDao ){
+    public GoodsService(GoodsDao goodsDao){
         this.goodsDao = goodsDao;
     }
 
@@ -65,10 +65,10 @@ public class GoodsService {
 
     //상품 조회
     @Transactional
-    public GoodsDto searchGoods(String itemId) {    //상품정보 불러오기
+    public GoodsDetailDto searchGoods(String itemId) {    //상품정보 불러오기
         Goods goods = goodsDao.selectByItemId(itemId);
 //        goods.initSaleTotal();  //할인가격 계산 값
-        return goods.makeFullDto();
+        return goods.detailMakeFullDto();
     }
 
     @Transactional
@@ -158,6 +158,14 @@ public int searchWish(String itemId, String custId) {
 //        }
 //        return goodsReviewBoardDto;
 //    }
+
+    @Transactional
+    public int updateWishCnt(GoodsDto goodsDto){
+        Goods goods = new Goods();
+        goods.changeStatus(goodsDto);
+
+        return goodsDao.update(goods);
+    }
 
 
 }

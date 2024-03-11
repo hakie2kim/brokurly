@@ -37,6 +37,7 @@
         <typeAlias type="com.brokurly.entity.goods.GoodsInquiryLog" alias="GoodsInquiryLog"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsReviewBoard" alias="GoodsReivewBoard"/>
         <typeAlias type="com.brokurly.entity.mypage.WishList" alias="WishList"/>
+        <typeAlias type="com.brokurly.entity.mypage.WishListItem" alias="WishListItem"/>
 
 
     </typeAliases>
