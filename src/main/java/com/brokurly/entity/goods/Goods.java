@@ -55,7 +55,6 @@ public class Goods {
             .build();
   }
 
-
   public GoodsDto makeFullDto() {
     return GoodsDto.builder()
             .itemId(itemId)
@@ -79,6 +78,30 @@ public class Goods {
             .itemSpec(itemSpec)
             .build();
   }
+
+  public GoodsUpdateDto updateDto() {
+    return GoodsUpdateDto.builder()
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .build();
+  }
+
   public GoodsDetailDto detailMakeFullDto() {
     return GoodsDetailDto.builder()
             .itemId(itemId)
@@ -147,6 +170,29 @@ public class Goods {
     this.itemSpec = goodsDto.getItemSpec();
 
   }
+
+  public void UpdateStatus(GoodsUpdateDto goodsUpdateDto) {
+    this.name = goodsUpdateDto.getName();
+    this.exp = goodsUpdateDto.getExp();
+    this.price = goodsUpdateDto.getPrice();
+    this.dcRt = goodsUpdateDto.getDcRt();
+    this.itemDcAmt = goodsUpdateDto.getItemDcAmt();
+    this.origin = goodsUpdateDto.getOrigin();
+    this.pointFl = goodsUpdateDto.getPointFl();
+    this.cpnElgFl = goodsUpdateDto.getCpnElgFl();
+    this.shipType = goodsUpdateDto.getShipType();
+    this.sellerName = goodsUpdateDto.getSellerName();
+    this.pkgType = goodsUpdateDto.getPkgType();
+    this.capa = goodsUpdateDto.getCapa();
+    this.sellUnit = goodsUpdateDto.getSellUnit();
+    this.adultVerifFl = goodsUpdateDto.getAdultVerifFl();
+    this.cateCode = goodsUpdateDto.getCateCode();
+    this.itemQty = goodsUpdateDto.getItemQty();
+    this.bsnsNo = goodsUpdateDto.getBsnsNo();
+    this.itemSpec = goodsUpdateDto.getItemSpec();
+
+  }
+
 
 
 }

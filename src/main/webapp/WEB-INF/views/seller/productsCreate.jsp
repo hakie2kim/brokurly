@@ -1714,11 +1714,11 @@
                                                     <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                     placeholder="태그1"/>
 
-                                                    <input name="itemIdList"
-                                                           class="itemId"
-                                                           id="itemId1"
-                                                           type="hidden"
-                                                    >
+<%--                                                    <input name="itemIdList"--%>
+<%--                                                           class="itemId"--%>
+<%--                                                           id="itemId1"--%>
+<%--                                                           type="hidden"--%>
+<%--                                                    >--%>
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
@@ -1739,13 +1739,39 @@
                                                            class="form-control"
                                                            placeholder="할인가격"
                                                     />
-                                                    <input name="itemId"
-                                                           id="itemId"
-                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
-                                                    type="hidden"
-                                                    class="itemId"
-                                                    placeholder="아이템아이디"
-                                                    />
+<%--&lt;%&ndash;                                                    jstl&ndash;%&gt;--%>
+<%--                                                    <c:if test="${not empty param.itemId}">--%>
+<%--                                                        <input name="itemId"--%>
+<%--                                                               id="itemId"--%>
+<%--                                                            &lt;%&ndash;                        ${mode=="new"? '': 'readonly="readonly"'}&ndash;%&gt;--%>
+<%--                                                            &lt;%&ndash;                                                    type="hidden"&ndash;%&gt;--%>
+<%--                                                               value="${param.itemId}"--%>
+<%--                                                               class="itemId"--%>
+<%--                                                               placeholder="아이템아이디"--%>
+<%--                                                        />--%>
+
+<%--                                                    </c:if>--%>
+
+                                                    <%
+                                                        String itemId = request.getParameter("itemId");
+                                                        if (itemId != null && !itemId.isEmpty()) {
+                                                    %>
+                                                    <input type="text" name="itemId" id="itemId" value="<%= itemId %>" readonly="readonly" />
+                                                    <input type="text" name="itemId1" id="itemId1" value="<%= itemId %>" readonly="readonly" />
+                                                    <%
+                                                        }
+                                                    %>
+
+
+
+                                                <%--                                                    <input name="itemId"--%>
+<%--                                                           id="itemId"--%>
+<%--                                                    &lt;%&ndash;                        ${mode=="new"? '': 'readonly="readonly"'}&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                    type="hidden"&ndash;%&gt;--%>
+<%--                                                           value="${goodsDto.itemId}"--%>
+<%--                                                    class="itemId"--%>
+<%--                                                    placeholder="아이템아이디"--%>
+<%--                                                    />--%>
                                                     <input name="cateCode"
                                                            id="cateCode"
                                                            type="hidden"
@@ -1783,6 +1809,12 @@
             type="button"
             class="btn btn-default">
         삭제
+    </button>
+
+    <button id="modifyBtn"
+            type="button"8
+            class="btn btn-default">
+        수정저장
     </button>
 
     <button type="button" value="submit" onclick="submitForm('formb')"
@@ -1949,11 +1981,19 @@
         // 1970/1/1 12:00 기준 경과한 밀리 초 -> 중복 발생X
         // 1초=1000밀리초
     }
-    document.getElementById("itemId").value = newId();
-    document.getElementById("itemId1").value = newId();
+    // document.getElementById("itemId").value = newId();
+    // document.getElementById("itemId1").value = newId();
 
+    // itemId 값이 이미 존재한다면 생성하지 않음
+    if (!document.getElementById("itemId").value) {
+        document.getElementById("itemId").value = newId();
+    }
 
-    // document.getElementsByClassName("itemId").value = newId();
+    // itemId1 값이 이미 존재한다면 생성하지 않음
+    if (!document.getElementById("itemId1").value) {
+        document.getElementById("itemId1").value = newId();
+    }
+
 
     // 이미지------------------------------------------------
 
@@ -2059,6 +2099,16 @@
             let form = $('#forma');
 
             form.attr("action", "<c:url value='/seller/productsCreate/write'/>");
+            form.attr("method", "post");
+            form.submit();
+            alert("저장되었습니다.");
+
+        });
+
+        $('#modifyBtn').on("click", function () {
+            let form = $('#forma');
+
+            form.attr("action", "<c:url value='/seller/productsCreate/modify'/>");
             form.attr("method", "post");
             form.submit();
             alert("저장되었습니다.");

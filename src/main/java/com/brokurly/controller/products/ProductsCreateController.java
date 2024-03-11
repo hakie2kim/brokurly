@@ -5,12 +5,12 @@ import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.goods.GoodsUpdateDto;
 import com.brokurly.dto.search.SearchKeywordDto;
 import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ import java.util.UUID;
 @RequestMapping("/seller")
 public class ProductsCreateController {
 
-    private final   ProductsCreateService productsCreateService;
+    private final ProductsCreateService productsCreateService;
     private final CategoryService categoryService;
 
 //    @Autowired
@@ -69,12 +69,13 @@ public class ProductsCreateController {
     }
 
     @PostMapping("/productsCreate/modify")
-    public String modify(GoodsDto goodsDto,String itemId, Model m){
-        log.info("goodsDto={}", goodsDto);
+    public String modify(GoodsUpdateDto goodsUpdateDto, String itemId, Model m){
+        log.info("goodsDto={}", goodsUpdateDto);
+        log.info("itemId={}", itemId);
 
-        m.addAttribute("mode", "new");
-        productsCreateService.updateGoods(itemId,goodsDto);
-        return "redirect:seller/productsCreate";
+//        m.addAttribute("mode", "new");
+        productsCreateService.updateGoods(itemId,goodsUpdateDto);
+        return "seller/productsOriginList";
     }
 
 //    @GetMapping("/productsCreate/new")
