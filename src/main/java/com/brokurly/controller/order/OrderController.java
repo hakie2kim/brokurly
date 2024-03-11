@@ -42,7 +42,7 @@ public class OrderController {
             log.error("상품 목록이 존재하지 않음", e);
         }
 
-        log.info("checkout = {}", checkout);
+//        log.info("checkout = {}", checkout);
 
         if (checkout != null && checkout.getReceiverDetails() != null)
             session.setAttribute("receiverDetails", checkout.getReceiverDetails());

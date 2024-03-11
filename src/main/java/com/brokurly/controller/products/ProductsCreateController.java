@@ -233,7 +233,7 @@ public class ProductsCreateController {
         }
     }
 
-    @PostMapping("/img")
+//    @PostMapping("/img")
     public String upload(@RequestParam("file") MultipartFile multipartFile, Model model) {
         log.info("file = {}", multipartFile);
         try {
