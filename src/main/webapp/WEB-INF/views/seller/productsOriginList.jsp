@@ -236,7 +236,6 @@
                                 <div width="100" class="css-16tcewl e16adls20">원가</div>
                                 <div width="100" class="css-16tcewl e16adls20">할인율</div>
                                 <div width="100" class="css-16tcewl e16adls20">판매가격</div>
-                                <div width="100" class="css-16tcewl e16adls20"></div>
                             </div>
 
                             <!-- 목록 -->
@@ -262,7 +261,7 @@
                                     <div width="100" class="css-16tcewl e16adls20">
                                         <button type="button" id="modifyBtn" onclick="modify(${goodsByB.itemId})">
 <%--                                            <a href="<c:url value='/seller/productsOriginList/read?itemId=${goodsByB.itemId}'/>">수정</a>--%>
-                                            상품보기
+                                            수정하기
                                           </button>
 
 

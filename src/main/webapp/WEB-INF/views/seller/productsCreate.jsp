@@ -88,18 +88,17 @@
             <div class="inner-content input-content">
                 <div class="form-section-sub">
                     <div class="form-sub-wrap">
-                        <input name="name"
-                               type="text"
-                               class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                               maxlength="160"
-                               value="${goodsDto.name}"
-                        ${mode=="new"? '': 'readonly="readonly"'}
-                               title="상품명 입력"
                         <div class="input-content">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="seller-input-wrap">
-
+                                        <input name="name"
+                                               type="text"
+                                               class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                               maxlength="160"
+                                               value="${goodsDto.name}"
+                                        <%--                                          ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                               title="상품명 입력"
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +126,7 @@
                                                     id="search3"
                                                     value="${goodsDto.exp}"
                                                     maxlength="160"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                             />
                                         </div>
                                     </div>
@@ -182,7 +181,7 @@
                                                    type="text"
                                                    value="${goodsDto.price}"
                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                             />
                                         </div>
                                         <span class="input-group-addon">원</span>
@@ -253,8 +252,8 @@
                                                            max="100"
                                                            onkeyup="ShowPrice()"
                                                            value="${goodsDto.dcRt}"
-                                                    ${mode=="new"? '': 'readonly="readonly"'}
-                                                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                     />
                                                     <input name="dcRt1"
                                                            type="hidden">
@@ -318,8 +317,8 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    id="stock"
                                                    value="${goodsDto.itemQty}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
-                                                   placeholder="숫자만 입력"
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            placeholder="숫자만 입력"
                                             />
                                         </div>
                                         <span class="input-group-addon">개</span>
@@ -360,7 +359,7 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    placeholder="사업자등록번호"
                                                    value="${goodsDto.bsnsNo}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                             />
 
                                         </div>
@@ -370,8 +369,8 @@
                                                    class="form-control ng-empty ng-valid-max ng-invalid ng-invalid-required ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
                                                    id="seller_name"
                                                    value="${goodsDto.sellerName}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
-                                                   placeholder="판매자이름"/>
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            placeholder="판매자이름"/>
                                         </div>
                                     </div>
                                     <br>
@@ -605,9 +604,10 @@
                                 <textarea name="itemSpec"
                                           type="text"
                                           value=""
-                                ${mode=="new"? '': 'readonly="readonly"'}
-                                          class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern ng-valid-maxlength"
-                                          style="height: 250px">${goodsDto.itemSpec} </textarea>
+                                <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-pattern
+                                ng-valid-maxlength"
+                                style="height: 250px">${goodsDto.itemSpec} </textarea>
                             </div>
                             <br>
                             <span class="sub-text text-danger"
@@ -720,9 +720,9 @@
                                                                        type="text"
                                                                        class="form-control"
                                                                        value="${goodsDto.pkgType}"
-                                                                ${mode=="new"? '': 'readonly="readonly"'}
-                                                                       placeholder="포장타입(상온, 냉장, 냉동)"
-                                                                       maxlength="50"
+                                                                <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                                placeholder="포장타입(상온, 냉장, 냉동)"
+                                                                maxlength="50"
                                                                 />
                                                             </div>
                                                         </div>
@@ -766,8 +766,7 @@
                                                                            class="form-control"
                                                                            placeholder="ex.국산/수입산(미국)"
                                                                            value="${goodsDto.origin}"
-                                                                    ${mode=="new"? '': 'readonly="readonly"'}
-
+                                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                                     >
                                                                 </div>
                                                             </div>
@@ -799,9 +798,9 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="cpnElgFl"
                                             value="Y"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.cpnElgFl eq 'Y'}">checked</c:if>
+                                    <c:if test="${goodsDto.cpnElgFl eq 'Y'}">checked</c:if>
                                     />
                                     <label
                                             for="coupon"
@@ -813,9 +812,9 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="cpnElgFl"
                                             value="N"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.cpnElgFl eq 'N'}">checked</c:if>
+                                    <c:if test="${goodsDto.cpnElgFl eq 'N'}">checked</c:if>
 
                                     />
                                     <label for="coupon2">불가능</label>
@@ -839,9 +838,9 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="pointFl"
                                             value="Y"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.pointFl eq 'Y'}">checked</c:if>
+                                    <c:if test="${goodsDto.pointFl eq 'Y'}">checked</c:if>
 
                                     />
                                     <label
@@ -854,9 +853,9 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="pointFl"
                                             value="N"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.pointFl eq 'N'}">checked</c:if>
+                                    <c:if test="${goodsDto.pointFl eq 'N'}">checked</c:if>
 
                                     />
                                     <label for="point2">불가능</label>
@@ -880,9 +879,9 @@
                                             class="ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="adultVerifFl"
                                             value="Y"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.adultVerifFl eq 'Y'}">checked</c:if>
+                                    <c:if test="${goodsDto.adultVerifFl eq 'Y'}">checked</c:if>
 
                                     />
                                     <label
@@ -895,9 +894,9 @@
                                             class="r-no-set ng-pristine ng-untouched ng-valid ng-not-empty"
                                             name="adultVerifFl"
                                             value="N"
-                                    ${mode=="new"? '': 'readonly="readonly"'}
+                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                            <c:if test="${goodsDto.adultVerifFl eq 'N'}">checked</c:if>
+                                    <c:if test="${goodsDto.adultVerifFl eq 'N'}">checked</c:if>
 
                                     />
                                     <label for="child2">불가능</label>
@@ -988,7 +987,7 @@
                             >
                                 <!---->
                                 <div class="form-sub-wrap">
-                                    <label class="control-label" for="prd_foodItem"
+                                    <label class="control-label"
                                     >품목 또는 명칭<!---->
                                         <input name="itemAnnCate"
                                                type="hidden"
@@ -1000,17 +999,18 @@
                                             <input name="itemAnn"
                                                    type="text"
                                                    value="${goodsAnnouncement[1]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
-                                                   class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                                   id="prd_foodItem"
-                                                   maxlength="200"
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid
+                                            ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                            id="prd_foodItem"
+                                            maxlength="200"
 
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-sub-wrap">
-                                    <label class="control-label" for="prd_weight"
+                                    <label class="control-label"
                                     >중량/용량<!----><i class="icon-must"
                                     ></i
                                     >
@@ -1024,10 +1024,11 @@
                                             <input name="capa"
                                                    type="text"
                                                    value="${goodsAnnouncement[2]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                                   class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                                   id="prd_weight"
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid
+                                            ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                            id="prd_weight"
                                             />
                                             <input name="itemAnn"
                                                    type="hidden"
@@ -1046,11 +1047,10 @@
                                         <input name="itemAnnCate"
                                                type="hidden"
                                                value="${goodsAnnouncement[2]}"
-                                        ${mode=="new"? '': 'readonly="readonly"'}
+                                        <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
                                         />
-                                        <!----></label
-                                    >
+                                        <!----></label>
                                     <div class="input-content form-group">
                                         <div class="seller-input-wrap">
                                             <input name="sellUnit"
@@ -1059,10 +1059,9 @@
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_amount"
                                                    value="${goodsAnnouncement[3]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
-
-                                                   maxlength="200"
-                                                   placeholder="숫자만입력"
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            maxlength="200"
+                                            placeholder="숫자만입력"
                                             />
                                             <input name="itemAnn"
                                                    type="hidden"
@@ -1104,9 +1103,10 @@
                                                                                max="2060-12-31"
                                                                                min="TODAY"
                                                                                value="${goodsAnnouncement[4]}"
-                                                                        ${mode=="new"? '': 'readonly="readonly"'}
-
-                                                                               class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
+                                                                        <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                                        class="form-control ng-pristine ng-untouched
+                                                                        ng-empty ng-valid-date-time-input ng-invalid
+                                                                        ng-invalid-required"
 
                                                                         /></label>
                                                                     <!---->
@@ -1160,9 +1160,11 @@
                                                                                max="20620-12-31"
                                                                                min="TODAY"
                                                                                value="${goodsAnnouncement[5]}"
-                                                                        ${mode=="new"? '': 'readonly="readonly"'}
+                                                                        <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                                                               class="form-control ng-pristine ng-untouched ng-empty ng-valid-date-time-input ng-invalid ng-invalid-required"
+                                                                        class="form-control ng-pristine ng-untouched
+                                                                        ng-empty ng-valid-date-time-input ng-invalid
+                                                                        ng-invalid-required"
 
                                                                         /></label>
                                                                     <!----><!----><!---->
@@ -1195,10 +1197,10 @@
                                                    type="text"
                                                    class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                    id="prd_producer"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                                   value="${goodsAnnouncement[6]}"
-                                                   maxlength="200"
+                                            value="${goodsAnnouncement[6]}"
+                                            maxlength="200"
                                             />
                                         </div>
                                     </div>
@@ -1206,7 +1208,6 @@
                                 <div class="form-sub-wrap">
                                     <label
                                             class="control-label"
-                                            for="prd_relevantLawContent"
                                     >세부 품목군별 표시사항<!----><i
                                             aria-label="필수항목"
                                             class="icon-must"
@@ -1228,10 +1229,11 @@
                                             <input name="itemAnn"
                                                    type="text"
                                                    value="${goodsAnnouncement[7]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                                   class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                                   id="prd_relevantLawContent"
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid
+                                            ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                            id="prd_relevantLawContent"
                                             />
 
                                             <p class="sub-text text-primary">
@@ -1256,7 +1258,6 @@
                                 <div class="form-sub-wrap">
                                     <label
                                             class="control-label"
-                                            for="prd_productComposition"
                                     >상품구성<!----><i
                                             class="icon-must"
                                             aria-label="필수항목"
@@ -1271,16 +1272,17 @@
                                             <input name="itemAnn"
                                                    type="text"
                                                    value="${goodsAnnouncement[8]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
-                                                   class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
-                                                   id="prd_productComposition"
-                                                   maxlength="200"
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid
+                                            ng-invalid-required ng-valid-pattern ng-valid-maxlength"
+                                            id="prd_productComposition"
+                                            maxlength="200"
                                             />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-sub-wrap">
-                                    <label class="control-label" for="prd_keep"
+                                    <label class="control-label"
                                     >보관방법 또는 취급방법<!----><i
                                             class="icon-must"
                                             aria-label="필수항목"
@@ -1294,15 +1296,15 @@
                                         <input name="itemAnn"
                                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                rows="3"
-                                        ${mode=="new"? '': 'readonly="readonly"'}
-                                               value="${goodsAnnouncement[9]}"
-                                               id="prd_keep"
-                                               maxlength="500"
-                                        ></input>
+                                        <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                        value="${goodsAnnouncement[9]}"
+                                        id="prd_keep"
+                                        maxlength="500"
+                                        />
                                     </div>
                                 </div>
                                 <div class="form-sub-wrap">
-                                    <label class="control-label" for="prd_adCaution"
+                                    <label class="control-label"
                                     >소비자 안전을 위한 주의사항<!----><i
                                             class="icon-must"
                                     ><input name="itemAnnCate"
@@ -1316,9 +1318,9 @@
                                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
                                                rows="3"
                                                value="${goodsAnnouncement[10]}"
-                                        ${mode=="new"? '': 'readonly="readonly"'}
+                                        <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                               id="prd_adCaution"
+                                        id="prd_adCaution"
                                         ></input>
                                         <p class="sub-text text-primary">
                                             ｢식품 등의 표시ㆍ 광고에 관한 법률 시행규칙｣
@@ -1329,7 +1331,6 @@
                                 <div class="form-sub-wrap">
                                     <label
                                             class="control-label"
-                                            for="prd_customerServicePhoneNumber"
                                     >소비자 상담 관련 전화번호<!----><i
                                             aria-label="필수항목"
                                             class="icon-must"
@@ -1344,10 +1345,11 @@
                                             <input name="itemAnn"
                                                    type="text"
                                                    value="${goodsAnnouncement[11]}"
-                                            ${mode=="new"? '': 'readonly="readonly"'}
+                                            <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
 
-                                                   class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-maxlength"
-                                                   id="prd_customerServicePhoneNumber"
+                                            class="form-control ng-pristine ng-untouched ng-empty ng-invalid
+                                            ng-invalid-required ng-valid-maxlength"
+                                            id="prd_customerServicePhoneNumber"
                                             />
                                         </div>
                                     </div>
@@ -1709,8 +1711,8 @@
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[0]}"
-                                                    ${mode=="new"? '': 'readonly="readonly"'}
-                                                           placeholder="태그1"/>
+                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    placeholder="태그1"/>
 
                                                     <input name="itemIdList"
                                                            class="itemId"
@@ -1721,14 +1723,14 @@
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[1]}"
-                                                    ${mode=="new"? '': 'readonly="readonly"'}
-                                                           placeholder="태그2"/>
+                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    placeholder="태그2"/>
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[2]}"
-                                                    ${mode=="new"? '': 'readonly="readonly"'}
-                                                           placeholder="태그3"/>
+                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    placeholder="태그3"/>
 
                                                     <%--  일단 값 넣어보자  --%>
                                                     <input name="itemDcAmt"
@@ -1739,10 +1741,10 @@
                                                     />
                                                     <input name="itemId"
                                                            id="itemId"
-                                                    ${mode=="new"? '': 'readonly="readonly"'}
-                                                           type="hidden"
-                                                           class="itemId"
-                                                           placeholder="아이템아이디"
+                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
+                                                    type="hidden"
+                                                    class="itemId"
+                                                    placeholder="아이템아이디"
                                                     />
                                                     <input name="cateCode"
                                                            id="cateCode"
@@ -1786,9 +1788,9 @@
     <button type="button" value="submit" onclick="submitForm('formb')"
             id="writeBtn"
             class="btn">
-        <%--              <span class="content">--%>
-        수정하기
-        <%--              </span>--%>
+                      <span class="content">
+        저장하기
+                      </span>
         <span class="progress"
         ><span
                 class="progress-inner notransition"
@@ -1929,7 +1931,7 @@
         var resultPrice = originPrice - savePrice;
         document.querySelector("#showResult").innerHTML = resultPrice + "원 (" + savePrice + " 원 할인)";
         document.querySelector("#dc_price").value = savePrice;
-        document.querySelector("#salePrice").value = resultPrice;
+        // document.querySelector("#salePrice").value = resultPrice;
     }
 
     // 동시입력 가능
@@ -2035,42 +2037,50 @@
     $(document).ready(function () { //main()
 
 
+        <%--$('#writeBtn').on("click", function () {--%>
+        <%--    //1. 읽기 상태이면 수정 상태로 변경--%>
+        <%--    let form = $('#form');  //form에 대한 참조 얻어오기--%>
+        <%--    let isReadOnly = $("input[name=exp]").attr('readonly'); //readonly인지 확인--%>
+
+        <%--    if (isReadOnly == 'readonly') {--%>
+        <%--        $("input").attr('readonly', false);  //title--%>
+        <%--        $("textarea").attr('readonly', false); //content--%>
+        <%--        $("#writeBtn").html("등록하기");--%>
+        <%--        return;--%>
+        <%--    }--%>
+
+        <%--    //2. 수정 상태이면, 수정된 내용을 서버로 전송--%>
+        <%--    form.attr("action", "<c:url value='/seller/productsCreate/modify'/>");--%>
+        <%--    form.attr("method", "post");--%>
+        <%--    form.submit();--%>
+        <%--});--%>
+
         $('#writeBtn').on("click", function () {
-            //1. 읽기 상태이면 수정 상태로 변경
-            let form = $('#form');  //form에 대한 참조 얻어오기
-            let isReadOnly = $("input[name=exp]").attr('readonly'); //readonly인지 확인
+            let form = $('#forma');
 
-            if (isReadOnly == 'readonly') {
-                $("input[name=exp]").attr('readonly', false);  //title
-                $("textarea").attr('readonly', false); //content
-                $("#writeBtn").html("등록하기");
-                // $("h2").html("게시물 수정");
-                return;
-            }
-
-            //2. 수정 상태이면, 수정된 내용을 서버로 전송
-            form.attr("action", "<c:url value='/seller/productsCreate/modify'/>");
-            form.attr("method", "post");
-            form.submit();
-        });
-
-        $('#writeBtn').on("click", function () {
-            let form = $('#form');
             form.attr("action", "<c:url value='/seller/productsCreate/write'/>");
             form.attr("method", "post");
             form.submit();
+            alert("저장되었습니다.");
 
         });
 
-        $('#removeBtn').on("click", function () {
-            if (!confirm("정말로 삭제하시겠습니까?")) return;
-            let form = $('#forma');
-            form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");
-            form.attr("method", "post");
-            form.submit();
-        });
+        //update시도 - itemId가 pk인데 중복된다고 에러남
+        //read?itemId=~~~ 떼서 itemId, dto보내기??
+        //하나의 버튼으로 write, update하고 싶음
 
-    });
+
+
+
+        <%--$('#removeBtn').on("click", function () {--%>
+        <%--    if (!confirm("정말로 삭제하시겠습니까?")) return;--%>
+        <%--    let form = $('#forma');--%>
+        <%--    form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");--%>
+        <%--    form.attr("method", "post");--%>
+        <%--    form.submit();--%>
+        <%--});--%>
+
+    })
 
 
     //삭제버튼

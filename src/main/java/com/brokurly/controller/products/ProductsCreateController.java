@@ -1,11 +1,14 @@
 package com.brokurly.controller.products;
 
 
+import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +25,21 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/seller")
 public class ProductsCreateController {
 
-    private ProductsCreateService productsCreateService;
+    private final   ProductsCreateService productsCreateService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    public ProductsCreateController(ProductsCreateService productsCreateService) {
-        this.productsCreateService = productsCreateService;
-    }
+//    @Autowired
+//    public ProductsCreateController(ProductsCreateService productsCreateService) {
+//        this.productsCreateService = productsCreateService;
+//    }
+//    @Autowired
+//    public ProductsCreateController(CategoryService categoryService) {
+//        this.categoryService = categoryService;
+//    }
 
     @PostMapping("/productsCreate/write")
     public String writeproducts( GoodsDto goodsDto, Model m
@@ -68,6 +77,14 @@ public class ProductsCreateController {
         return "redirect:seller/productsCreate";
     }
 
+//    @GetMapping("/productsCreate/new")
+//    public String writeNew(Model m){
+//        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+//        m.addAttribute("mode", "new");
+//        m.addAttribute("selectMain", selectPrimary);
+//        return "seller/productsCreate";
+//
+//    }
 
     @GetMapping("/productsOriginList")
     public String selectByBsnsId(Model m) {
@@ -87,6 +104,9 @@ public class ProductsCreateController {
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
         List<String> searchKeyword = productsCreateService.searchKeyword(itemId);
 
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
+
         log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
         log.info("readItemId={}", itemId);
         log.info("searchKeyword={}", searchKeyword);
@@ -97,7 +117,7 @@ public class ProductsCreateController {
 //            log.info("anno={}", anno[i]);
 //        }
 
-        m.addAttribute("mode","readonly");
+//        m.addAttribute("mode","readonly");
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
         m.addAttribute("keyword", searchKeyword);
