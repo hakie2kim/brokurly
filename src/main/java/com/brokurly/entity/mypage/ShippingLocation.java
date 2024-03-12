@@ -1,9 +1,6 @@
 package com.brokurly.entity.mypage;
 
-import com.brokurly.dto.mypage.ShippingLocationAddDto;
-import com.brokurly.dto.mypage.ShippingLocationDto;
-import com.brokurly.dto.mypage.ShippingLocationManagementDto;
-import com.brokurly.dto.mypage.ShippingLocationUpdateDto;
+import com.brokurly.dto.mypage.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -41,15 +38,37 @@ public class ShippingLocation {
     }
 
     public void updateShippingLocationDto(ShippingLocationDto shippingLocationDto) {
-       this.shipLocaId = shippingLocationDto.getShipLocaId();
-       this.addr = shippingLocationDto.getAddr();
-       this.specAddr = shippingLocationDto.getSpecAddr();
-       this.defAddrFl = shippingLocationDto.getDefAddrFl();
-       this.telNo = shippingLocationDto.getTelNo();
-       this.recAddr = shippingLocationDto.getRecAddr();
-       this.recName = shippingLocationDto.getRecName();
-       this.delFl = shippingLocationDto.getDelFl();
-       this.currAddrFl = shippingLocationDto.getCurrAddrFl();
+        this.shipLocaId = shippingLocationDto.getShipLocaId();
+        this.addr = shippingLocationDto.getAddr();
+        this.specAddr = shippingLocationDto.getSpecAddr();
+        this.defAddrFl = shippingLocationDto.getDefAddrFl();
+        this.telNo = shippingLocationDto.getTelNo();
+        this.recAddr = shippingLocationDto.getRecAddr();
+        this.recName = shippingLocationDto.getRecName();
+        this.delFl = shippingLocationDto.getDelFl();
+        this.currAddrFl = shippingLocationDto.getCurrAddrFl();
+    }
+
+    public ShippingLocationModifyPageDto makeShippingLocationModifyPageDto() {
+        return ShippingLocationModifyPageDto.builder()
+                .shipLocaId(shipLocaId)
+                .addr(addr)
+                .specAddr(specAddr)
+                .defAddrFl(defAddrFl)
+                .telNo(telNo)
+                .recName(recName)
+                .currAddrFl(currAddrFl)
+                .build();
+    }
+
+    public void updateShippingLocationModifyPageDto(ShippingLocationModifyPageDto shippingLocationModifyPageDto) {
+       this.shipLocaId = shippingLocationModifyPageDto.getShipLocaId();
+       this.addr = shippingLocationModifyPageDto.getAddr();
+       this.specAddr = shippingLocationModifyPageDto.getSpecAddr();
+       this.defAddrFl = shippingLocationModifyPageDto.getDefAddrFl();
+       this.telNo = shippingLocationModifyPageDto.getTelNo();
+       this.recName = shippingLocationModifyPageDto.getRecName();
+       this.currAddrFl = shippingLocationModifyPageDto.getCurrAddrFl();
     }
 
     public ShippingLocationManagementDto makeShippingLocationManagementDto() {
@@ -114,5 +133,27 @@ public class ShippingLocation {
         this.recName = shippingLocationUpdateDto.getRecName();
         this.delFl = shippingLocationUpdateDto.getDelFl();
         this.currAddrFl = shippingLocationUpdateDto.getCurrAddrFl();
+    }
+
+    public ShippingLocationModifyDto makeShippingLocationModifyDto() {
+        return ShippingLocationModifyDto.builder()
+                .shipLocaId(shipLocaId)
+                .specAddr(specAddr)
+                .defAddrFl(defAddrFl)
+                .telNo(telNo)
+                .recName(recName)
+                .delFl(delFl)
+                .currAddrFl(currAddrFl)
+                .build();
+    }
+
+    public void updateShippingLocationModifyDto(ShippingLocationModifyDto shippingLocationModifyDto) {
+        this.shipLocaId = shippingLocationModifyDto.getShipLocaId();
+        this.specAddr = shippingLocationModifyDto.getSpecAddr();
+        this.defAddrFl = shippingLocationModifyDto.getDefAddrFl();
+        this.telNo = shippingLocationModifyDto.getTelNo();
+        this.recName = shippingLocationModifyDto.getRecName();
+        this.delFl = shippingLocationModifyDto.getDelFl();
+        this.currAddrFl = shippingLocationModifyDto.getCurrAddrFl();
     }
 }

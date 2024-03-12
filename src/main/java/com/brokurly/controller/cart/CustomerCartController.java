@@ -1,7 +1,11 @@
 package com.brokurly.controller.cart;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.mypage.ShippingLocationCurrDto;
+import com.brokurly.dto.mypage.ShippingLocationDto;
+import com.brokurly.repository.mypage.ShippingLocationDao;
 import com.brokurly.service.cart.CustomerCartService;
+import com.brokurly.service.mypage.ShippingLocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +24,7 @@ import java.util.List;
 public class CustomerCartController {
 
     private final CustomerCartService customerCartService;
+    private final ShippingLocationService shippingLocationService;
 
     /* 장바구니 추가 */
     @PostMapping("/add")
@@ -42,9 +47,12 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
-        List<CustomerCartDto> cart = customerCartService.getCartList(custId);
-//        ArrayList<CustomerCartDto> collect = cart.stream().map(carte -> carte.makeFullDto()).collect(Collectors.toCollection(ArrayList::new));
+
+        List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
+        ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
+
         model.addAttribute("cart", cart);
+        model.addAttribute("address", address);
         return "cart/cart";
     }
 

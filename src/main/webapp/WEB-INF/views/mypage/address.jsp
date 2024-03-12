@@ -31,21 +31,42 @@
         $(".checkbox").on("click", function (e) {
             e.preventDefault();
 
-            $.ajax({
-                url: "/mypage/address",
+            const shipLocaId = $(this).children().val();
+
+            fetch("/mypage/address/shipping-address/update-curraddr/" + shipLocaId, {
+                method: "PATCH",
+            })
+                .then(response => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+            /*$.ajax({
+                url: "mypage/address/shipping-address/update/" + shipLocaId,
                 method: "POST",
-                data: $(this).serialize(),
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 success: function (response) {
-                    alert("Your form has been sent successfully.");
                     window.location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.error(textStatus, errorThrown);
                 }
-            })
+            })*/
         });
     };
+
+    function modifyShippingLocation(shipLocaId) {
+        console.log("modifyShippingLocation(shipLocaId)");
+
+        const left = screen.width / 2 - 300;
+        const top = screen.height / 2 - 350;
+        window.open(
+            "/mypage/address/shipping-address/update/" + shipLocaId,
+            "_blank",
+            "width=600, height=700, left=" + left + ", top=" + top
+        );
+    }
 </script>
 <body>
 <div class="top">
@@ -222,11 +243,13 @@
                         <div style="display: flex">
                             <div class="column default">
                                 <c:if test="${shippingLocation.currAddrFl eq 'N'}">
-                                    <form class="checkbox" method="post">
+                                    <%--<form class="checkbox" method="post">
                                         <input type="hidden" name="_method" value="patch"/>
                                         <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
-                                        <input type="hidden" name="currAddrFl" value="Y"/>
-                                    </form>
+                                    </form>--%>
+                                    <div class="checkbox">
+                                        <input type="hidden" name="shipLocaId" value="${shippingLocation.shipLocaId}"/>
+                                    </div>
                                 </c:if>
                                 <c:if test="${shippingLocation.currAddrFl eq 'Y'}">
                                     <div class="checkbox-checked"></div>
@@ -245,7 +268,7 @@
                             <div class="column deli-type">
                                 <span type="direct">샛별배송</span>
                             </div>
-                            <div class="column fix">
+                            <div class="column fix" onclick="modifyShippingLocation('${shippingLocation.shipLocaId}')">
                                 <button>
                                     <img src="/resources/image/modify.png" width="24px" height="24px">
                                 </button>

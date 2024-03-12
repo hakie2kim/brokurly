@@ -14,5 +14,6 @@ public class PaymentAmountCheckoutDto {
     private int itemAmt;
     private int itemDcAmt;
     private int shipFee;
+    private int point;
     private int payAmt;
 }

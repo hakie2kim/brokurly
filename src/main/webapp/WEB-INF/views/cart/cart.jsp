@@ -57,28 +57,35 @@
                 <c:if test="${ci.pkgType =='냉장'}">
                   <ul class="ul">
                     <li class="cart-8">
-                      <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                      <input type="checkbox" class="individual_cart_checkbox input_size_20"
+                             checked="checked">
                       <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
                       <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
                       <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
-                      <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
-                      <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
-                      <input type="hidden" class="individual_totalDiscountPrice_input" value="${ci.itemDcAmt * ci.itemCnt}">
+                      <input type="hidden" class="individual_salePrice_input"
+                             value="${ci.salePrice}">
+                      <input type="hidden" class="individual_discountPrice_input"
+                             value="${ci.itemDcAmt}">
+                      <input type="hidden" class="individual_totalDiscountPrice_input"
+                             value="${ci.itemDcAmt * ci.itemCnt}">
                       <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
-                      <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
+                      <input type="hidden" class="individual_totalPrice_input"
+                             value="${ci.price * ci.itemCnt}">
                       <input type="hidden" class="individual_checkbox_input" value="${ci.itemCk}">
 
                       <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
                         <span class="css-1f44rj5"></span>
                       </a>
                       <div class="css-14sb0pe">
-                        <a href="http://localhost:8080/goods/${ci.itemId}" style="text-decoration: none; color: black">
+                        <a href="http://localhost:8080/goods/${ci.itemId}"
+                           style="text-decoration: none; color: black">
                           <p class="css-efcx1u">${ci.name}</p>
                         </a>
                         <div></div>
                       </div>
                       <div class="css-1gueo66">
-                        <button type="button" class="minus_btn css-8azp8" onclick='count("minus")' value='+' aria-label="수량내리기"></button>
+                        <button type="button" class="minus_btn css-8azp8"
+                                onclick='count("minus")' value='+' aria-label="수량내리기"></button>
                         <div class="count css-6m57y0">
                           <label>
                             <input type="text" disabled="disabled"
@@ -86,12 +93,15 @@
                                    class="quantity_input" value="${ci.itemCnt}">
                           </label>
                         </div>
-                        <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-'
+                        <button type="button" class="plus_btn css-18y6jr4"
+                                onclick='count("plus")' value='-'
                                 aria-label="수량올리기"></button>
                       </div>
                       <div class="css-5w3ssu">
-                        <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원"/></span>
-                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}" pattern="#,### 원"/></span>
+                                                <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}"
+                                                                                           pattern="#,### 원"/></span>
+                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber
+                            value="${ci.price}" pattern="#,### 원"/></span>
                       </div>
                       <button type="button" data-testid="delete" class="delete_btn">
                         <span class="css-6mgkir"></span>
@@ -100,7 +110,7 @@
                   </ul>
                 </c:if>
               </c:forEach>
-          </div>
+            </div>
             <h4 class="cart-7" id="frozenItem">
                 <span>
                     <span class="css-12dwhid">
@@ -117,16 +127,20 @@
                 <c:if test="${ci.pkgType =='냉동'}">
                   <ul class="ul">
                     <li class="cart-8">
-                      <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked" id="chk">
+                      <input type="checkbox" class="individual_cart_checkbox input_size_20"
+                             checked="checked" id="chk">
                       <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
                       <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
                       <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
-                      <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
-                      <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
+                      <input type="hidden" class="individual_salePrice_input"
+                             value="${ci.salePrice}">
+                      <input type="hidden" class="individual_discountPrice_input"
+                             value="${ci.itemDcAmt}">
                       <input type="hidden" class="individual_totalDiscountPrice_input"
                              value="${ci.itemDcAmt * ci.itemCnt}">
                       <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
-                      <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
+                      <input type="hidden" class="individual_totalPrice_input"
+                             value="${ci.price * ci.itemCnt}">
                       <input type="hidden" class="individual_checkbox_input" value="${ci.itemCk}">
                         <%--                    <div class="css-79hxr7">--%>
                         <%--                      <img src="/resources/image/checked.png" class="checkImg" >--%>
@@ -135,12 +149,14 @@
                         <span class="css-1f44rj5"></span>
                       </a>
                       <div class="css-14sb0pe">
-                        <a href="http://localhost:8080/goods/${ci.itemId}" style="text-decoration: none; color: black">
+                        <a href="http://localhost:8080/goods/${ci.itemId}"
+                           style="text-decoration: none; color: black">
                           <p class="css-efcx1u">${ci.name}</p>
                         </a>
                       </div>
                       <div class="css-1gueo66">
-                        <button type="button" class="minus_btn css-8azp8" onclick='count("minus")' value='+'
+                        <button type="button" class="minus_btn css-8azp8"
+                                onclick='count("minus")' value='+'
                                 aria-label="수량내리기"></button>
                         <div class="count css-6m57y0">
                           <label>
@@ -149,14 +165,16 @@
                                    class="quantity_input" value="${ci.itemCnt}">
                           </label>
                         </div>
-                        <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-'
+                        <button type="button" class="plus_btn css-18y6jr4"
+                                onclick='count("plus")' value='-'
                                 aria-label="수량올리기"></button>
                       </div>
                       <div class="css-5w3ssu">
                         <span aria-label="할인 가격" class="salePrice"><fmt:formatNumber value="${ci.salePrice}"
                                                                                      pattern="#,### 원"/></span>
-                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}"
-                                                                                      pattern="#,### 원"/></span>
+                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber
+                            value="${ci.price}"
+                            pattern="#,### 원"/></span>
                       </div>
                       <button type="button" data-testid="delete" class="delete_btn">
                         <span class="css-6mgkir"></span>
@@ -181,29 +199,35 @@
                 <c:if test="${ci.pkgType =='상온'}">
                   <ul class="ul">
                     <li class="cart-8">
-                      <input type="checkbox" class="individual_cart_checkbox input_size_20" checked="checked">
+                      <input type="checkbox" class="individual_cart_checkbox input_size_20"
+                             checked="checked">
                       <input type="hidden" class="individual_itemId_input" value="${ci.itemId}">
                       <input type="hidden" class="individual_itemQty_input" value="${ci.itemQty}">
                       <input type="hidden" class="individual_itemPrice_input" value="${ci.price}">
-                      <input type="hidden" class="individual_salePrice_input" value="${ci.salePrice}">
-                      <input type="hidden" class="individual_discountPrice_input" value="${ci.itemDcAmt}">
+                      <input type="hidden" class="individual_salePrice_input"
+                             value="${ci.salePrice}">
+                      <input type="hidden" class="individual_discountPrice_input"
+                             value="${ci.itemDcAmt}">
                       <input type="hidden" class="individual_totalDiscountPrice_input"
                              value="${ci.itemDcAmt * ci.itemCnt}">
                       <input type="hidden" class="individual_itemCnt_input" value="${ci.itemCnt}">
-                      <input type="hidden" class="individual_totalPrice_input" value="${ci.price * ci.itemCnt}">
+                      <input type="hidden" class="individual_totalPrice_input"
+                             value="${ci.price * ci.itemCnt}">
                       <input type="hidden" class="individual_checkbox_input" value="${ci.itemCk}">
 
                       <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
                         <span class="css-1f44rj5"></span>
                       </a>
                       <div class="css-14sb0pe">
-                        <a href="http://localhost:8080/goods/${ci.itemId}" style="text-decoration: none; color: black">
+                        <a href="http://localhost:8080/goods/${ci.itemId}"
+                           style="text-decoration: none; color: black">
                           <p class="css-efcx1u">${ci.name}</p>
                         </a>
                         <div></div>
                       </div>
                       <div class="css-1gueo66">
-                        <button type="button" class="minus_btn css-8azp8" onclick='count("minus")' value='+'
+                        <button type="button" class="minus_btn css-8azp8"
+                                onclick='count("minus")' value='+'
                                 aria-label="수량내리기"></button>
                         <div class="count css-6m57y0">
                           <label>
@@ -212,13 +236,16 @@
                                    class="quantity_input" value="${ci.itemCnt}">
                           </label>
                         </div>
-                        <button type="button" class="plus_btn css-18y6jr4" onclick='count("plus")' value='-'
+                        <button type="button" class="plus_btn css-18y6jr4"
+                                onclick='count("plus")' value='-'
                                 aria-label="수량올리기"></button>
                       </div>
                       <div class="css-5w3ssu">
-                        <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}" pattern="#,### 원"/></span>
-                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber value="${ci.price}"
-                                                                                      pattern="#,### 원"/></span>
+                                                <span aria-label="할인 가격"><fmt:formatNumber value="${ci.salePrice}"
+                                                                                           pattern="#,### 원"/></span>
+                        <span class="css-cwmxfz" aria-label="판매 가격"><fmt:formatNumber
+                            value="${ci.price}"
+                            pattern="#,### 원"/></span>
                       </div>
                       <button type="button" data-testid="delete" class="delete_btn">
                         <span class="css-6mgkir"></span>
@@ -230,19 +257,18 @@
             </div>
           </div>
         </div>
-
       </div>
-
       <div class="cart-5">
         <div class="css-50ad8x">
           <div class="css-oft680">
             <h3 class="css-1guaarh">배송지</h3>
             <div>
-              <p>경기 용인시 기흥구 동백7로 56 (호수마을서해그랑블)</p>
+              <p class="address">${address.addr}${address.specAddr}</p>
+              <input type="hidden" class="addressId" value="${address.shipLocaId}">
               <div>
                 <span type="direct">샛별배송</span>
               </div>
-              <button class="css-122i3z7" type="button" height="36" radius="3">
+              <button class="css-122i3z7" type="button" height="36" radius="3" onclick="showPopup();">
                 <span>배송지 변경</span>
               </button>
             </div>
@@ -291,10 +317,10 @@
       </div>
     </div>
   </div>
-  <%--  주문 form --%>
-  <form action="<c:url value="/order/checkout"/>" method="get" class="order_form">
 
-  </form>
+</div>
+<%--  주문 form --%>
+
 </div>
 <script>
     $(document).ready(function () {
@@ -315,7 +341,6 @@
 
         $(".cart-8").each(function (index, element) {
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {    //체크여부 확인용
-
                 // 총 가격
                 totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
 
@@ -543,6 +568,8 @@
         if (quantity < itemQty) {    //재고보다 수량이 적어야 한다
             quantity++; // 수량 증가
             inputField.val(quantity); // 증가된 수량을 입력란에 설정
+
+            $(this).closest("ul").find(".individual_itemCnt_input").val(quantity);
             $(this).closest("ul").find(".individual_totalPrice_input").val(parseInt(totalPrice) + parseInt(itemPrice));
             $(this).closest("ul").find(".individual_totalDiscountPrice_input").val(parseInt(totalDiscount) + parseInt(discount));
         }
@@ -574,6 +601,8 @@
         if (quantity > 1) {
             quantity--; // 수량 감소
             inputField.val(quantity); // 증가된 수량을 입력란에 설정
+
+            $(this).closest("ul").find(".individual_itemCnt_input").val(quantity);
             $(this).closest("ul").find(".individual_totalPrice_input").val(parseInt(totalPrice) - parseInt(itemPrice));
             $(this).closest("ul").find(".individual_totalDiscountPrice_input").val(parseInt(totalDiscount) - parseInt(discount));
         }
@@ -718,7 +747,7 @@
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {	//체크여부
                 let itemId = $(element).find(".individual_itemId_input").val();
                 let itemCnt = $(element).find(".individual_itemCnt_input").val();
-
+                let shipLocaId = $(".addressId").val();
                 $.ajax({
                     url: '/cart/update',
                     method: "POST",
@@ -730,6 +759,7 @@
                         itemCk: 'Y'
                     },
                     success: function () {
+                        sessionStorage.setItem("shipLocaId", shipLocaId);
                         location.replace("/order/checkout"); // 페이지 이동
                     }
                 });
@@ -762,7 +792,7 @@
     // });
     // });
 
-//장바구니 상품 카테고리 보이고 안보이게
+    //장바구니 상품 카테고리 보이고 안보이게
     $(document).ready(function () {
         // 냉장 상품이 있는지 확인
         let hasColdItems = $("#content1").find(".cart-8").length > 0;
@@ -789,6 +819,9 @@
         }
     });
 
+    function showPopup() {
+        window.open("/mypage/address/shipping-address/list", "a", "width=600, height=700, left=100, top=50");
+    }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -1,13 +1,14 @@
 package com.brokurly.entity.order;
 
 import com.brokurly.dto.order.ReceiverDetailsDto;
-import com.brokurly.dto.order.ReceiverDetailsRequestChangeDto;
+import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import lombok.*;
 
 @ToString
 @EqualsAndHashCode
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ReceiverDetails {
     private String rcvDtlId;
@@ -46,7 +47,10 @@ public class ReceiverDetails {
                 .build();
     }
 
-    public void changeReceiverDetails(ReceiverDetailsRequestChangeDto changeDto) {
+    public void changeReceiverDetails(ReceiverDetailsRequestDto changeDto) {
+        this.rcvDtlId = changeDto.getRcvDtlId();
+        this.shipLocaId = changeDto.getShipLocaId();
+        this.custId = changeDto.getCustId();
         this.rcvName = changeDto.getRcvName();
         this.telNo = changeDto.getTelNo();
         this.rcvPlace = changeDto.getRcvPlace();

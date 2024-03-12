@@ -43,13 +43,11 @@
                     "defAddrFl": defAddrFl
                 }),
                 success: function (response) {
-                    // alert("Your form has been sent successfully.");
                     window.close();
-                    // window.opener.addShippingAddrs();
-                    window.opener.location.reload();
+                    window.opener.location.reload(); // 해당 팝업을 연 페이지를 reload함
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    // alert("Your form was not sent successfully.");
+                    console.error(textStatus, errorThrown);
                 }
             })
         })

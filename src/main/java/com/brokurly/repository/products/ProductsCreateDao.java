@@ -16,13 +16,15 @@ public interface ProductsCreateDao {
     Goods selectByItemId(String itemId);
     int updateItem(Goods goods);
 
-    List<Goods> selectByBsnsNo(String bsns_no);
+    List<Goods> selectByBsnsNo(String bsnsNo);
+    int deleteByItemId(String itemId);
 
 
 
     //goodsAnnouncement 상품고시정보
-    int insertAnnouncement(GoodsAnnouncement goodsAnnouncementAnnouncement);
-    String selectAnnouncementByItemId(String itemId);
+    int insertAnnouncement(GoodsAnnouncement goodsAnnouncement);
+    GoodsAnnouncement selectAnnouncementByItemId(String itemId);
+//    int updateAnnouncement(GoodsAnnouncement goodsAnnouncement);
 
 
     //searchKeyword 키워드
@@ -36,6 +38,7 @@ public interface ProductsCreateDao {
 
     List<String> selectItemIdListByKeyword(String keyword);
 
+    List<String> selectKeywordByItemId(String ItemIdList);
 
     //Goodsimage 상품 이미지
     int insertGoodsImage(GoodsImage goodsImage);
