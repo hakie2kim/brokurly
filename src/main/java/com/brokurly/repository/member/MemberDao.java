@@ -23,6 +23,7 @@ public interface MemberDao {
     int emailAuthFail(String custId);
     int updateMailKey(Member member);
     int updateMailAuth(Member member);
+    int updateMemberByPwd(Member member);
     int deleteMemberAll();
     int deleteMember(String custId);
 

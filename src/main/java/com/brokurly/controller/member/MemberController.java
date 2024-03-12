@@ -20,11 +20,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import retrofit2.http.Path;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -71,24 +75,31 @@ public class MemberController {
 
     @GetMapping("/signup/email/{email}")
     @ResponseBody
-    public ResponseEntity<String> checkEmail(@PathVariable String email){
+    public ResponseEntity<String> checkEmail(@PathVariable String email, Integer cnt){
+
+        //1. chk가 1일 경우 회원가입을 위한 이메일인증으로 카운트 0 (중복 불가)
+        //2. chk가 0일 경우 비밀번호 재설정을 위한 이메일 인증으로 카운트 1(가입 확인)
         try{
-            if(memberService.getCountEmail(email) == 1){
-                log.debug("memberService.getCountEmail(email) = {}", memberService.getCountEmail(email));
-                throw new Exception("Member EmailChk failed.");
-            }
-            return new ResponseEntity<String>("EMAILCHK_OK", HttpStatus.OK);
+
+            log.info("cnt = {}", cnt);
+            log.info("email = {}", email);
+                if (memberService.getCountEmail(email) == cnt) {
+                    log.info("memberService.getCountEmail(email) = {}", memberService.getCountEmail(email));
+                    throw new Exception("Member EmailChk failed.");
+                }
+                return new ResponseEntity<String>("EMAILCHK_OK", HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<String>("EMAILCHK_ERR", HttpStatus.BAD_REQUEST);
         }
+
     }
 
 
 
     @PostMapping("/signup")
     public String signUp(@Valid MemberAndSignupDto memberAndSignupDto, Errors errors, Model model) {
-
+        log.info("member = {}", memberAndSignupDto);
         if(errors.hasErrors()) {    // 유효성 검사에 실패한 필드가 있는지 확인
             // 회원가입 실패시, 입력 데이터를 유지
             model.addAttribute("memberAndSignupDto", memberAndSignupDto);
@@ -100,12 +111,12 @@ public class MemberController {
 //            streamValidatorRs.forEach(i -> log.info("i = {} ", i));
 
 
-            return "member/signup";
+            return "redirect:/member/signup";
         }
 
         memberService.signUp(memberAndSignupDto);
 
-        return  "redirect:/categories/best-page";
+        return  "redirect:/member/login";
     }
 
 
@@ -138,16 +149,23 @@ public class MemberController {
             Stream<String> streamValidatorRs = validatorRs.keySet().stream();
             streamValidatorRs.forEach(i -> model.addAttribute(i));
 
-            return "member/loginForm";
+            return "/member/loginForm";
         }
-        // 2. 비밀번호 암호화 부분 값 확인
-        MemberAndLoginDto resultLoginDto = new MemberAndLoginDto();
-        resultLoginDto = memberService.localLogin(memberAndLoginDto);
+        MemberAndLoginDto resultLoginDto = null;
+        try {
+            // 2. 비밀번호 암호화 부분 값 확인
+            resultLoginDto = new MemberAndLoginDto();
+            resultLoginDto = memberService.localLogin(memberAndLoginDto);
 
-        // 2-1. 불일치
-        if(resultLoginDto == null){
-            errors.reject("LOGINCHK_ERR","아이디 또는 비밀번호가 맞지 않습니다.");
-            return "member/loginForm";
+            // 2-1. 불일치
+            if(resultLoginDto == null){
+                errors.reject("id","아이디 또는 비밀번호가 맞지 않습니다.");
+                model.addAttribute("msg","아이디 또는 비밀번호가 맞지 않습니다.");
+
+                return "/member/loginForm";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // 3. 일치하면 세션에 저장
@@ -157,7 +175,7 @@ public class MemberController {
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         String loginName = custIdDto.getName();
-        log.info("loginName = {}", loginName);
+
 
         session.setAttribute("loginName",loginName);
 //        Ra.addFlashAttribute("loginName",loginName);
@@ -194,28 +212,42 @@ public class MemberController {
     }
 
     // email 인증을 통한 pwd 재설정
-    @PostMapping("/find/password")
-    public void sendEmail(MemberAndMailAuthDto memberAndMailAuthDto) throws Exception{
+    @PostMapping("/find/password/{email}")
+    @ResponseBody
+    public String sendEmail(@PathVariable String email){
+        MemberAndMailAuthDto memberAndMailAuthDto = new MemberAndMailAuthDto();
         // 랜덤 문자열을 생성해서 mailKey에 넣기
         String mailKey = new MailTempKey().getKey();
         memberAndMailAuthDto.setMailKey(mailKey);
+        memberAndMailAuthDto.setEmail(email);
 
         log.info("mailKey = {}", mailKey);
 
-        // 이메일 발송
-        MailHandler sendMail = new MailHandler(javaMailSender);
-        sendMail.setSubject("[Brokurly] 인증코드 안내]"); // 메일 제목
-        sendMail.setText(
-                "<h1>Brokurly 비밀번호 재설정</h1>" +
-                        "<br>아래의 인증 번호를 확인해주세요<br>" +
-                        "<h3>" +mailKey + "</h3>"+
-                        "<br><br>이메일 인증 절차에 따라 이메일 인증코드를 발급해드립니다."+
-                        "<br>인증코드는 이메일 발송 시점으로부터 3분동안 유효합니다."
-        );
-        sendMail.setFrom(email,"브로컬리");
-        sendMail.setTo(memberAndMailAuthDto.getEmail());
-        sendMail.send();
+        try {
+            // 이메일 발송
+            MailHandler sendMail = new MailHandler(javaMailSender);
+            sendMail.setSubject("[Brokurly] 인증코드 안내]"); // 메일 제목
+            sendMail.setText(
+                    "<h1>Brokurly 비밀번호 재설정</h1>" +
+                            "<br>아래의 인증 번호를 확인해주세요<br>" +
+                            "<h3>" +mailKey + "</h3>"+
+                            "<br><br>이메일 인증 절차에 따라 이메일 인증코드를 발급해드립니다."+
+                            "<br>인증코드는 이메일 발송 시점으로부터 3분동안 유효합니다."
+            );
+            sendMail.setFrom(this.email,"브로컬리");
+            sendMail.setTo(memberAndMailAuthDto.getEmail());
+            sendMail.send();
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return mailKey;
     }
+
     // mypage/info/modify
     @GetMapping("/info/modify")
     public String modify(HttpServletRequest req, Model model){
@@ -230,4 +262,24 @@ public class MemberController {
         return "/member/modifyForm";
     }
 
+
+    /**
+     * @des   비밀번호 재설정
+     * @return
+     */
+    @PostMapping("/find/password/reset")
+    public String changePassword(String emailHidden,Model model){
+
+        model.addAttribute("email",emailHidden);
+        return "/member/resetPwdForm";
+    }
+
+    @PatchMapping("/find/password/reset/{email}")
+    public String changePassword(@PathVariable String email, MemberAndLoginDto memberAndLoginDto){
+       // 새 비밀번호 암호화 후 업로드
+        memberAndLoginDto.setCustId(email);
+        memberService.chageNewPwd(memberAndLoginDto);
+
+        return "redirect:/member/login";
+    }
 }

@@ -21,6 +21,8 @@ public class MemberAndSignupDto {
     private String custId;
 
     @NotBlank(message = "비밀번호를 입력해 주세요")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$",
+             message = "영문/숫자/특수기호만 허용하며, 모두 조합")
     private String pwd;
 
     @NotBlank(message = "이름을 입력해 주세요")
