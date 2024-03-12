@@ -31,17 +31,12 @@
         .result-buttons button:hover {
             cursor: pointer;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
 
         [type="checkbox"]:checked {
             background: #11967f url(/resources/image/img-check.png) no-repeat center center;
             border: 0;
         }
-<<<<<<< HEAD
-=======
+
 
         .css-1uk9d3w {
             max-width: 840px;
@@ -70,7 +65,6 @@
             background: #11967f url(/resources/image/img-check.png) no-repeat center center;
             border: 0;
         }
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
     </style>
     <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>
 </head>
@@ -598,125 +592,6 @@
                             </button>
                         </nav>
                     </div>
-<<<<<<< HEAD
-                    <div class="side-category1">
-                        <button class="side-cate-btn">
-                            <div class="side-cate-txt">배송</div>
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999"
-                                 xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"
-                                 style="transform: rotate(0deg);">
-                                <path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
-                            </svg>
-                        </button>
-                        <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
-                            <li class="css-cate-list-1">
-                                <a class="css-cate-list-2">
-                                    <%--                                    <button class="css-cate-btn">--%>
-                                    <input type="checkbox" onclick="addQueryString('dawn')" value="dawn"/>
-
-                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-                                    <%--                                            <path class="myPath" d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
-                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-                                    <%--                                        </svg>--%>
-                                    <%--                                    </button>--%>
-                                    <span class="css-cate-txt">샛별배송</span><span class="css-cate-cnt">647</span>
-                                </a>
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a class="css-cate-list-2">
-                                    <input type="checkbox" onclick="addQueryString('normal_parcel')"
-                                           value="normal_parcel"/>
-                                    <%--                                    <button class="css-cate-btn">--%>
-                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-                                    <%--                                            <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
-                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-                                    <%--                                        </svg>--%>
-                                    <%--                                    </button>--%>
-                                    <span class="css-cate-txt">판매자배송</span><span
-                                        class="css-cate-cnt">5</span>
-                                </a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="side-category1">
-                        <button class="side-cate-btn">
-                            <div class="side-cate-txt">가격</div>
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999"
-                                 xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"
-                                 style="transform: rotate(0deg);">
-                                <path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
-                            </svg>
-                        </button>
-                        <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
-                            <li class="css-cate-list-1">
-                                <a href="/categories/907?page=1&amp;filters=price%3A-2990"
-                                   class="css-cate-list-2">
-                                    <button class="css-cate-btn">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                                  fill="#fff" stroke="#ddd"></path>
-                                        </svg>
-                                    </button>
-                                    <span class="css-cate-txt">2,990원 미만</span><span
-                                        class="css-cate-cnt">111</span>
-                                </a>
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/categories/907?page=1&amp;filters=price%3A2990-4290"
-                                        class="css-cate-list-2">
-                                    <button class="css-cate-btn">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                                  fill="#fff" stroke="#ddd"></path>
-                                        </svg>
-                                    </button>
-                                    <span class="css-cate-txt">2,990원 ~ 4,290원</span>
-                                    <span
-                                            class="css-cate-cnt">141</span>
-                                </a>
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/categories/907?page=1&amp;filters=price%3A4290-5990"
-                                        class="css-cate-list-2">
-                                    <button class="css-cate-btn">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                                  fill="#fff" stroke="#ddd"></path>
-                                        </svg>
-                                    </button>
-                                    <span class="css-cate-txt">4,290원 ~ 5,990원</span><span
-                                        class="css-cate-cnt">116</span>
-                                </a>
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a href="/categories/907?page=1&amp;filters=price%3A5990-"
-                                   class="css-cate-list-2">
-                                    <button class="css-cate-btn">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12 23.5C18.3513 23.5 23.5 18.3513 23.5 12C23.5 5.64873 18.3513 0.5 12 0.5C5.64873 0.5 0.5 5.64873 0.5 12C0.5 18.3513 5.64873 23.5 12 23.5Z"
-                                                  fill="#fff" stroke="#ddd"></path>
-                                        </svg>
-                                    </button>
-                                    <span class="css-cate-txt">5,990원 이상</span><span
-                                        class="css-cate-cnt">142</span>
-                                </a>
-                            </li>
-                        </nav>
-                    </div>
-=======
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
                 </div>
             </div>
 
@@ -758,21 +633,7 @@
                             </div>
                         </li>
                         <li class="css-sorted-menu">
-<<<<<<< HEAD
-                            <a class="css-19ce13b eudxpx30 recent-order">신상품순</a>
-                        </li>
-                        <li class="css-sorted-menu">
-                            <a class="css-19ce13b eudxpx30 sell-amount-order">판매량순</a>
-                        </li>
-                        <li class="css-sorted-menu">
-                            <a class="css-19ce13b eudxpx30 discount-order">혜택순</a>
-                        </li>
-                        <li class="css-sorted-menu">
-                            <a class="css-19ce13b eudxpx30 low-price-order">낮은 가격순</a>
-                        </li>
-                        <li class="css-sorted-menu">
-                            <a class="css-19ce13b eudxpx30 high-price-order">높은 가격순</a>
-=======
+
                             <%-- 클릭할때 클래스 이름 css-126imjl--%>
                             <a class="css-19ce13b eudxpx30">신상품순</a>
                         </li>
@@ -787,7 +648,6 @@
                         </li>
                         <li class="css-sorted-menu">
                             <a class="css-19ce13b eudxpx30">높은 가격순</a>
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
                         </li>
                     </ul>
                 </div>
@@ -981,8 +841,6 @@
 
     </div>
 </div>
-<<<<<<< HEAD
-=======
 
 
 <script>
@@ -1515,6 +1373,5 @@
 
 
 
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
 </body>
 </html>

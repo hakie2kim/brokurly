@@ -317,18 +317,12 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <%--  주문 form --%>
-    <form action="<c:url value="/order/checkout"/>" method="get" class="order_form">
 
-    </form>
-=======
   </div>
 
 </div>
 <%--  주문 form --%>
 
->>>>>>> 000870879411ea5536b5ebeadb94519d4a1ec900
 </div>
 <script>
     $(document).ready(function () {
