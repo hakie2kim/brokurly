@@ -3,46 +3,46 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="<c:url value='/resources/css/cart/cart.css'/>"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="<c:url value='/resources/css/cart/cart.css'/>"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body style="padding-right: 0px;">
 
 <div>
-  <div></div>
-  <div class="cart-1">
-    <h2 class="cart-2">장바구니</h2>
     <div></div>
-    <div class="cart-3">
+    <div class="cart-1">
+        <h2 class="cart-2">장바구니</h2>
+        <div></div>
+        <div class="cart-3">
 
-      <div class="cart-4">
-        <div class="cart-6">
-          <div class="css-zbxehx">
-            <label>
-              <!-- 체크박스 전체 여부 -->
-              <div class="all_check_input_div">
-                <input type="checkbox" class="all_check_input input_size_20" checked="checked">
-                <span class="all_chcek_span">전체선택
+            <div class="cart-4">
+                <div class="cart-6">
+                    <div class="css-zbxehx">
+                        <label>
+                            <!-- 체크박스 전체 여부 -->
+                            <div class="all_check_input_div">
+                                <input type="checkbox" class="all_check_input input_size_20" checked="checked">
+                                <span class="all_chcek_span">전체선택
                   <span class="totalKind_span"></span>
                 </span>
-              </div>
-            </label>
-            <span class="css-454d5e"></span>
-            <button class="selectDelete_btn">선택삭제</button>
-          </div>
-        </div>
-        <div class="emptyCart hide">  <%--장바구니 비었을때--%>
-          <p class="css-l1lu2l">장바구니에 담긴 상품이 없습니다</p>
-        </div>
-        <div>
-          <div>
-            <h4 class="cart-7" id="coldItem">
+                            </div>
+                        </label>
+                        <span class="css-454d5e"></span>
+                        <button class="selectDelete_btn">선택삭제</button>
+                    </div>
+                </div>
+                <div class="emptyCart hide">  <%--장바구니 비었을때--%>
+                    <p class="css-l1lu2l">장바구니에 담긴 상품이 없습니다</p>
+                </div>
+                <div>
+                    <div>
+                        <h4 class="cart-7" id="coldItem">
               <span>
                   <span class="css-12dwhid ">
                     <span class="css-qct1ee"></span>
@@ -291,31 +291,33 @@
               <span>
                   <span class="finalTotalPrice_span"></span>
               </span>
-            </div>
+                        </div>
 
-          </div>
-          <div class="css-8qz8ia">
-            <button type="button" height="56" class="order_btn">
-              <span>주문하기</span>
-            </button>
-            <ul class="css-19kxq7d">
-              <li class="css-1741abm">쿠폰/적립금은 주문서에서 사용 가능합니다</li>
-              <li class="css-1741abm">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
-              <li class="css-1741abm">[마이컬리 &gt; 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</li>
-              <li class="css-1741abm">쿠폰, 적립금 사용 금액을 제외한 실 결제 금액 기준으로 최종 산정됩니다.</li>
-              <li class="css-1741abm">상품별로 적립금 지급 기준이 다를 수 있습니다. (상품 상세 페이지에서 확인 가능합니다)</li>
-            </ul>
-          </div>
-          <!-- 수량 조정 form -->
-          <%--                    <form action="/update" method="post" class="quantity_update_form">--%>
-          <%--                        <input type="hidden" name="itemId" class="update_itemId">--%>
-          <%--                        <input type="hidden" name="itemCnt" class="update_itemCnt">--%>
-          <%--&lt;%&ndash;                        <input type="hidden" name="memberId" value="${customer.custId}">&ndash;%&gt;--%>
-          <%--                        <input type="hidden" name="custId" value="hong">--%>
-          <%--                    </form>--%>
+                    </div>
+                    <div class="css-8qz8ia">
+                        <button type="button" height="56" class="order_btn">
+                            <span>주문하기</span>
+                        </button>
+                        <ul class="css-19kxq7d">
+                            <li class="css-1741abm">쿠폰/적립금은 주문서에서 사용 가능합니다</li>
+                            <li class="css-1741abm">[주문완료] 상태일 경우에만 주문 취소 가능합니다.</li>
+                            <li class="css-1741abm">[마이컬리 &gt; 주문내역 상세페이지] 에서 직접 취소하실 수 있습니다.</li>
+                            <li class="css-1741abm">쿠폰, 적립금 사용 금액을 제외한 실 결제 금액 기준으로 최종 산정됩니다.</li>
+                            <li class="css-1741abm">상품별로 적립금 지급 기준이 다를 수 있습니다. (상품 상세 페이지에서 확인 가능합니다)</li>
+                        </ul>
+                    </div>
+                    <!-- 수량 조정 form -->
+                    <%--                    <form action="/update" method="post" class="quantity_update_form">--%>
+                    <%--                        <input type="hidden" name="itemId" class="update_itemId">--%>
+                    <%--                        <input type="hidden" name="itemCnt" class="update_itemCnt">--%>
+                    <%--&lt;%&ndash;                        <input type="hidden" name="memberId" value="${customer.custId}">&ndash;%&gt;--%>
+                    <%--                        <input type="hidden" name="custId" value="hong">--%>
+                    <%--                    </form>--%>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
+
   </div>
 
 </div>
