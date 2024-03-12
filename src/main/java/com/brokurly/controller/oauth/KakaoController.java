@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class KakaoController {
     private MemberService memberService;
 
     @GetMapping("/kakao_callback")
-    public String redirectkakao(@RequestParam String code, HttpSession session) throws IOException{
+    public String redirectkakao(@RequestParam String code, HttpServletRequest req) throws IOException{
 
         // 접속토큰 get
         String kakaoToken = kaKaoService.getReturnAccessToken(code);
@@ -35,18 +36,15 @@ public class KakaoController {
         String telNo = (String)result.get("phoneNum");
         telNo = telNo.replace("+82 ","0").replaceAll("-","");
 
-        log.info("telNo = {}",telNo);
 
         String birthYear = (String)result.get("birthYear");
         String birthDay = (String)result.get("birthDay");
         String birthDt = birthYear+birthDay; // yyyymmdd
 
-        log.info("birthDt = {}",birthDt);
 
         String sex = (String)result.get("gender");
         sex = sex.equals("female") ? "F" : "M";
 
-        log.info("sex = {}",sex);
 
         MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
 
@@ -66,6 +64,10 @@ public class KakaoController {
             memberAndSignupDto.setSnsId(snsId);
             // 1-2. customer 테이블에 insert
             memberService.kakaoJoin(memberAndSignupDto);
+        }else{
+//            2. 가입된 아이디가 있을 경우
+//                2-1. redirect:/member/login
+//                2-2. msg = '이미 가입된 계정이 있습니다'
         }
 
         // 1.로그인 폼을 거치지 않고 컨트롤러에서 로그인 처리
@@ -76,7 +78,8 @@ public class KakaoController {
         log.warn("카카오로 로그인");
         String userId = memberService.findBySnsId(snsId);
 
-        log.info("userId = {}", userId);
+        HttpSession session = req.getSession();
+        session.setAttribute("loginName", userName);
         //   MemberAndSignupDto dto = memberService.findByUserId(userId);
 
 

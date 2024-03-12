@@ -34,6 +34,6 @@
         <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsInquiryLog" alias="GoodsInquiryLog"/>
-
+        <typeAlias type="com.brokurly.entity.seller.Seller" alias="Seller"/>
     </typeAliases>
 </configuration>
