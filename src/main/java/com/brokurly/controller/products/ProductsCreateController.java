@@ -32,14 +32,7 @@ public class ProductsCreateController {
     private final ProductsCreateService productsCreateService;
     private final CategoryService categoryService;
 
-//    @Autowired
-//    public ProductsCreateController(ProductsCreateService productsCreateService) {
-//        this.productsCreateService = productsCreateService;
-//    }
-//    @Autowired
-//    public ProductsCreateController(CategoryService categoryService) {
-//        this.categoryService = categoryService;
-//    }
+
 
     @PostMapping("/productsCreate/write")
     public String writeproducts( GoodsDto goodsDto, Model m
@@ -65,7 +58,7 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
-        return "seller/productsOriginList";
+        return "redirect:/seller/productsOriginList";
     }
 
     @PostMapping("/productsCreate/modify")
@@ -73,19 +66,11 @@ public class ProductsCreateController {
         log.info("goodsDto={}", goodsUpdateDto);
         log.info("itemId={}", itemId);
 
-//        m.addAttribute("mode", "new");
         productsCreateService.updateGoods(itemId,goodsUpdateDto);
-        return "seller/productsOriginList";
+        return "redirect:/seller/productsOriginList";
     }
 
-//    @GetMapping("/productsCreate/new")
-//    public String writeNew(Model m){
-//        List<CategoryDto> selectPrimary = categoryService.readPrimary();
-//        m.addAttribute("mode", "new");
-//        m.addAttribute("selectMain", selectPrimary);
-//        return "seller/productsCreate";
-//
-//    }
+
 
     @GetMapping("/productsOriginList")
     public String selectByBsnsId(Model m) {

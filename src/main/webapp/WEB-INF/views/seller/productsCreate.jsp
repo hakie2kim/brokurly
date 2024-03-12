@@ -15,8 +15,10 @@
 
 </head>
 <body>
+<div class="productsCreateMain" style="margin-left:20%;padding:1px 16px;height:1000px;">
 
-<form id="forma" action="/seller/productsCreate/write" method="post">
+<form id="forma" action="/seller/productsCreate/write" method="post" style="margin-top: 55px">
+
 
     <!-- 카테고리 -->
 
@@ -1711,25 +1713,17 @@
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[0]}"
-                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                     placeholder="태그1"/>
 
-<%--                                                    <input name="itemIdList"--%>
-<%--                                                           class="itemId"--%>
-<%--                                                           id="itemId1"--%>
-<%--                                                           type="hidden"--%>
-<%--                                                    >--%>
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[1]}"
-                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                     placeholder="태그2"/>
                                                     <input name="keyword"
                                                            type="text"
                                                            class="form-control"
                                                            value="${keyword[2]}"
-                                                    <%--                        ${mode=="new"? '': 'readonly="readonly"'}--%>
                                                     placeholder="태그3"/>
 
                                                     <%--  일단 값 넣어보자  --%>
@@ -1739,39 +1733,24 @@
                                                            class="form-control"
                                                            placeholder="할인가격"
                                                     />
-<%--&lt;%&ndash;                                                    jstl&ndash;%&gt;--%>
-<%--                                                    <c:if test="${not empty param.itemId}">--%>
-<%--                                                        <input name="itemId"--%>
-<%--                                                               id="itemId"--%>
-<%--                                                            &lt;%&ndash;                        ${mode=="new"? '': 'readonly="readonly"'}&ndash;%&gt;--%>
-<%--                                                            &lt;%&ndash;                                                    type="hidden"&ndash;%&gt;--%>
-<%--                                                               value="${param.itemId}"--%>
-<%--                                                               class="itemId"--%>
-<%--                                                               placeholder="아이템아이디"--%>
-<%--                                                        />--%>
 
-<%--                                                    </c:if>--%>
-
+<%--                                                    itemId 생성--%>
                                                     <%
                                                         String itemId = request.getParameter("itemId");
                                                         if (itemId != null && !itemId.isEmpty()) {
                                                     %>
-                                                    <input type="text" name="itemId" id="itemId" value="<%= itemId %>" readonly="readonly" />
-                                                    <input type="text" name="itemId1" id="itemId1" value="<%= itemId %>" readonly="readonly" />
+                                                    <input type="hidden" name="itemId" id="itemId" value="<%= itemId %>" readonly="readonly" />
+                                                    <input type="hidden" name="itemId1" id="itemId1" value="<%= itemId %>" readonly="readonly" />
                                                     <%
-                                                        }
+                                                        }else{
+                                                            %>
+
+                                                    <input type="hidden" name="itemId" id="itemId" value="" readonly="readonly"  />
+                                                    <input type="hidden" name="itemIdList" id="itemId1" value="" readonly="readonly" />
+                                                    <%    }
                                                     %>
 
 
-
-                                                <%--                                                    <input name="itemId"--%>
-<%--                                                           id="itemId"--%>
-<%--                                                    &lt;%&ndash;                        ${mode=="new"? '': 'readonly="readonly"'}&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                                    type="hidden"&ndash;%&gt;--%>
-<%--                                                           value="${goodsDto.itemId}"--%>
-<%--                                                    class="itemId"--%>
-<%--                                                    placeholder="아이템아이디"--%>
-<%--                                                    />--%>
                                                     <input name="cateCode"
                                                            id="cateCode"
                                                            type="hidden"
@@ -1807,17 +1786,24 @@
 <div class="seller-btn-area btn-group-xlg hidden-xs">
     <button id="removeBtn"
             type="button"
-            class="btn btn-default">
+            class="btn">
         삭제
     </button>
 
+<%--    <button id=""--%>
+<%--            name="buttonControl"--%>
+<%--            type="button"--%>
+<%--            class="btn2">--%>
+
+<%--    </button>--%>
+
     <button id="modifyBtn"
-            type="button"8
+            type="button"
             class="btn btn-default">
         수정저장
     </button>
 
-    <button type="button" value="submit" onclick="submitForm('formb')"
+    <button type="button" value="submit" onclick="submitForm('forma')"
             id="writeBtn"
             class="btn">
                       <span class="content">
@@ -1830,8 +1816,14 @@
     </span>
     </button>
 
-</div>
+<%--    <button id="${itemId ? 'modifyBtn' : 'writeBtn'}"--%>
+<%--            type="button"--%>
+<%--            class="btn btn-default">--%>
+<%--        ${itemId ? '수정저장' : '저장하기'}--%>
+<%--    </button>--%>
 
+</div>
+</div>
 <%--Ajax--%>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
@@ -1981,9 +1973,6 @@
         // 1970/1/1 12:00 기준 경과한 밀리 초 -> 중복 발생X
         // 1초=1000밀리초
     }
-    // document.getElementById("itemId").value = newId();
-    // document.getElementById("itemId1").value = newId();
-
     // itemId 값이 이미 존재한다면 생성하지 않음
     if (!document.getElementById("itemId").value) {
         document.getElementById("itemId").value = newId();
@@ -1995,7 +1984,19 @@
     }
 
 
-    // 이미지------------------------------------------------
+    // // 버튼 제어
+    // let buttonControl = document.querySelector(".btn2");
+    //
+    // if (!document.getElementById("itemId").value) {
+    //     buttonControl.id = "writeBtn";
+    //     buttonControl.textContent = "등록";
+    // } else {
+    //     buttonControl.id = "modifyBtn";
+    //     buttonControl.textContent = "수정";
+    // }
+
+
+        // 이미지------------------------------------------------
 
     // // 이미지 넣기
     // var acc = document.getElementsByClassName("menuitem");
@@ -2115,35 +2116,18 @@
 
         });
 
-        //update시도 - itemId가 pk인데 중복된다고 에러남
-        //read?itemId=~~~ 떼서 itemId, dto보내기??
-        //하나의 버튼으로 write, update하고 싶음
-
-
-
-
-        <%--$('#removeBtn').on("click", function () {--%>
-        <%--    if (!confirm("정말로 삭제하시겠습니까?")) return;--%>
-        <%--    let form = $('#forma');--%>
-        <%--    form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");--%>
-        <%--    form.attr("method", "post");--%>
-        <%--    form.submit();--%>
-        <%--});--%>
-
-    })
-
 
     //삭제버튼
-    <%--$(document).ready(function () { //main()--%>
-    <%--    $('#removeBtn').on("click", function () {--%>
-    <%--        if (!confirm("정말로 삭제하시겠습니까?")) return;--%>
-    <%--        let form = $('#forma');--%>
-    <%--        form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");--%>
-    <%--        form.attr("method", "post");--%>
-    <%--        form.submit();--%>
-    <%--    });--%>
-    <%--})--%>
-
+    $(document).ready(function () { //main()
+        $('#removeBtn').on("click", function () {
+            if (!confirm("정말로 삭제하시겠습니까?")) return;
+            let form = $('#forma');
+            form.attr("action", "<c:url value='/seller/productsCreate/remove'/>");
+            form.attr("method", "get");
+            form.submit();
+        });
+    })
+    })
 </script>
 
 </body>
