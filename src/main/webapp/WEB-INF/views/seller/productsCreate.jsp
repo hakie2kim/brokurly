@@ -1790,13 +1790,6 @@
         삭제
     </button>
 
-<%--    <button id=""--%>
-<%--            name="buttonControl"--%>
-<%--            type="button"--%>
-<%--            class="btn2">--%>
-
-<%--    </button>--%>
-
     <button id="modifyBtn"
             type="button"
             class="btn btn-default">

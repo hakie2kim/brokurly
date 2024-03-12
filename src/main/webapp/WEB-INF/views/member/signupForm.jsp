@@ -49,7 +49,7 @@
           >
                 <input
                         type="text"
-                        placeholder="예: brokurly@gmail.com"
+                        placeholder="예: brokurly@kurly.com"
                         title="이 입력란을 작성하세요"
                         id="email"
                         name="email"
@@ -90,23 +90,31 @@
           >비밀번호<span class="Required-entr__label">*</span></span
           >
                 <input
-                        type="text"
+                        type="password"
                         placeholder="비밀번호를 입력해 주세요"
                         title="이 입력란을 작성하세요"
                         name="pwd"
+                        id="pwd"
+                        maxlength="15"
 
                 />
+            </div>
+            <div class="pwd-info-div">
             </div>
             <div class="column-div">
           <span class="register-div__label"
           >비밀번호확인<span class="Required-entr__label">*</span></span
           >
                 <input
-                        type="text"
+                        type="password"
                         placeholder="비밀번호를 한번 더 입력해 주세요"
                         title="이 입력란을 작성하세요"
+                        maxlength="15"
+                        id="pwdChk"
 
                 />
+            </div>
+            <div class="pwdChk-info-div">
             </div>
             <div class="column-div">
           <span class="register-div__label"
@@ -159,64 +167,49 @@
                         id="telNo"
                         name="telNo"
                 />
-                <button type="button" class="open-modal-btn btn" value="3" id="telNo_btn">인증번호 받기</button>
+                <button type="button" class="open-modal-btn btn" id="telNo_btn">인증번호 받기</button>
             </div>
-            <div class="telNo-info-div">
-          <span
-          >휴대폰 번호를 입력해 주세요</span
+            <div class="telNo-info-div"></div>
+            <div class="column-div" id="telNoChk-div">
+          <span class="register-div__label"
+          >&nbsp;&nbsp;&nbsp;<span class="Required-entr__label"></span></span
           >
+                <input
+                        type="text"
+                        placeholder="인증번호를 입력해주세요"
+                        title="이 입력란을 작성하세요"
+                        id="telNoChk"
+
+                />
+                <button type="button" class="open-modal-btn btn"  id="telNoChk_btn">인증번호 확인</button>
             </div>
-<%--            <div class="column-div">--%>
-<%--          <span class="register-div__label"--%>
-<%--          >주소<span class="Required-entr__label">*</span></span--%>
-<%--          >--%>
-<%--                <button class="register-div__btn">주소검색</button>--%>
-<%--            </div>--%>
-<%--            <div class="order-info__label">--%>
-<%--                배송지에 따라 상품정보가 달라질 수 있습니다.--%>
-<%--            </div>--%>
-<%--            <div class="column-div">--%>
-<%--                <span class="register-div__label">성별</span>--%>
-<%--                <input type="radio" id="sex-m" name="sex" value="M"/>--%>
-<%--                <label for="sex-m">남자</label>--%>
-<%--                <input type="radio" id="sex-f" name="sex" value="F"/>--%>
-<%--                <label for="sex-f">여자</label>--%>
-<%--                <input type="radio" id="sex-none" name="sex" value="N"/>--%>
-<%--                <label for="sex-none">선택안함</label>--%>
-    <div class="css-82a6rk e744wfw3 column-div">
-        <span class="register-div__label">성별</span>
-        <div class="css-14wodj6 es1pbny0">
-        <label class="css-z9g6s0 et8nqc33" for="sex-man">
-            <input data-testid="radio-MALE" id="sex-man" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="M">
-            <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
-            <span aria-labelledby="sex-man" class="css-mgd87h et8nqc31">남자</span>
-        </label>
-        <label class="css-z9g6s0 et8nqc33" for="sex-woman">
-            <input data-testid="radio-FEMALE" id="sex-woman" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="F">
-            <span class="css-5xw1m2 e2sqze61"><div class="css-1vic0rk e2sqze60"></div></span>
-            <span aria-labelledby="sex-woman" class="css-mgd87h et8nqc31">여자</span>
-        </label>
-            <label class="css-z9g6s0 et8nqc33" for="sex-none">
-                <input data-testid="radio-NONE" id="sex-none" name="sex" type="radio" class="css-1pes2r6 et8nqc32" value="N" checked="">
-                <span class="css-198i9ca e2sqze61"><div class="css-1dahn5m e2sqze60"></div></span>
-                <span aria-labelledby="sex-none" class="css-mgd87h et8nqc31">선택안함</span>
-            </label>
-        </div>
-    </div>
-<%--            </div>--%>
+            <div class="column-div" style="margin-top:20px;">
+                <span class="register-div__label">성별</span>
+                <div class="gender-div">
+                <div>
+                <input type="radio" id="sex-m" name="sex" value="M"/>
+                <label for="sex-m">남자</label>
+                </div>
+                <div>
+                <input type="radio" id="sex-f" name="sex" value="F"/>
+                <label for="sex-f">여자</label>
+                </div>
+                <div>
+                <input type="radio" id="sex-none" name="sex" value="N" checked/>
+                <label for="sex-none">선택안함</label>
+                </div>
+                    </div>
+            </div>
+
+
             <div class="birth-div column-div">
                 <span class="register-div__label">생년월일</span>
                 <div class="birth-div__column">
-                    <input type="text" id="yyyy" placeholder="YYYY" /><span>/</span>
-                    <input type="text" id="mm" placeholder="MM" /><span>/</span>
-                    <input type="text" id="dd" placeholder="DD" />
+                    <input type="text" id="yyyy" placeholder="YYYY" maxlength="4"/><span>/</span>
+                    <input type="text" id="mm" placeholder="MM" maxlength="2"/><span>/</span>
+                    <input type="text" id="dd" placeholder="DD" maxlength="2"/>
                     <input type="hidden" id="yyyymmdd" value="" name="birthDt">
-                    <div class="yyyy-info-div">
-          <span
-          >
-            태어난 년도 4자리를 정확하게 입력해주세요.</span
-          >
-                    </div>
+                    <div class="birth-info-div"></div>
                 </div>
             </div>
         </div>
@@ -228,11 +221,11 @@
             <div class="test_div">
             <div class="agreement-div__column">
                 <div>
-                    <input type="radio" id="agreement1" /><label for="agreement1"
+                    <input type="checkbox" id="agreement1" class="chk" /><label for="agreement1" style="font-weight: 500"
                 >전체 동의합니다.</label
                 >
                     <div class="agreement-label">
-                        <label>
+                        <label style="font-size: 12px;">
                             선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를
                             이용할 수 있습니다.
                         </label>
@@ -240,267 +233,46 @@
                 </div>
             </div>
             <div class="agreement-div__column">
-                <input type="radio" id="agreement2" /><label for="agreement2"
+                <input type="checkbox" id="agreement2" class="chk" /><label for="agreement2"
             >이용약관 동의<span>(필수)</span></label
             >
                 <a href="#"
-                ><span><label>약관보기></label></span></a
+                ><span><label class="agreement-label__chk" style="left:237px">약관보기></label></span></a
                 >
             </div>
             <div class="agreement-div__column">
-                <input type="radio" id="agreement3" /><label for="agreement3"
+                <input type="checkbox" id="agreement3" class="chk" /><label for="agreement3"
             >개인정보 수집 이용 동의<span>(필수)</span></label
             >
                 <a href="#"
-                ><span><label>약관보기></label></span></a
+                ><span><label class="agreement-label__chk">약관보기></label></span></a
                 >
             </div>
             <div class="agreement-div__column">
-                <input type="radio" id="agreement4" /><label for="agreement4"
+                <input type="checkbox" id="agreement4" class="chk" /><label for="agreement4"
             >개인정보 수집 이용 동의<span>(선택)</span></label
             >
                 <a href="#"
-                ><span><label>약관보기></label></span></a
+                ><span><label class="agreement-label__chk">약관보기></label></span></a
                 >
             </div>
             <div class="agreement-div__column">
-                <input type="radio" id="agreement5" /><label for="agreement5"
+                <input type="checkbox" id="agreement5" class="chk"/><label for="agreement5"
             >무료배송,할인쿠폰 등 혜택/정보 수신 동의<span>(선택)</span></label
             >
             </div>
             <div class="agreement-div__column">
-                <input type="radio" id="agreement6" /><label for="agreement6"
+                <input type="checkbox" id="agreement6"class="chk" /><label for="agreement6"
             >본인은 만 14세 이상입니다.<span>(필수)</span></label
             >
             </div>
             </div>
         </div>
-        <hr />
+        <input type="hidden" name="consent" id="consent"/>
+        <div class="line_div"></div>
         <button type="button" class="register-btn btn">가입하기</button>
     </section>
 </form>
-<script>
-    $(document).ready(function () {
-        let modal = document.querySelector(".modal");
-        let modalContent = document.querySelector("#modal_content");
-        let closeModalBtn = document.querySelector(".close-modal-btn");
-
-        let custId = document.querySelector("#custId");
-        let name = document.querySelector("#name");
-        let email = document.querySelector("#email");
-        let telNo = document.querySelector("#telNo");
-
-        let yyyy = document.querySelector("#yyyy");
-
-        let regBtn = document.querySelector(".register-btn");
-
-
-        // modal open
-        function openModal(msg) {
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden"; // 모달 작동 시 스크롤바 비활성화
-            modalContent.innerHTML = `<p>${'${msg}'}</p>`; //
-
-        }
-
-        // modal close
-        closeModalBtn.addEventListener("click", () => {
-            modal.style.display = "none";
-            document.body.style.overflow = "unset"; // 모달 작동 시 스크롤바 활성화
-
-        });
-
-
-        function regExp(value){
-            const idRegEx = /^[a-z]+[a-z0-9]{5,17}$/g; // 아이디 정규식
-            const emailRegEx = /[a-z0-9]+@gmail.com/; // 이메일 정규식 > 추후에 메일인증을 gmail로 구현할 예정
-            const telNoRegEx = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;  // 휴대폰번호 > 숫자만 가능 01?-4자리-4자리
-            const yyyyRegEx = /d{4}/; // yyyy 연도
-
-            let inputed = "";
-            let regEx = "";
-
-            if(value === 1){  // 아이디 정규식
-                inputed = custId.value.trim();
-                regEx = idRegEx;
-            }else if(value === 2){
-                inputed = document.querySelector("#email").value.trim();
-                regEx = emailRegEx;
-            }else if(value === 3){
-                let telNo = document.querySelector("#telNo").value.trim();
-                inputed = telNo.slice(0,3)+'-'+telNo.slice(3,7)+"-"+telNo.slice(7,telNo.length);
-                regEx = telNoRegEx;
-            }else if(value === 4){
-                inputed = yyyy.value.trim();
-                regEx = yyyyRegEx;
-            }
-
-            return !regEx.test(inputed) || !inputed;
-        }
-
-        // 휴대폰 번호 유효성 검사
-        telNo.addEventListener("input", () => {
-            if(regExp(3)){
-                telNo.value = telNo.value.replace(/[^-0-9]/g, "");
-                telNoInfoDiv.style.display = "block";
-            }else{
-                telNoInfoDiv.style.display = "none";
-            }
-
-        });
-
-        yyyy.addEventListener("input", () => {
-            let yyyyInfoDiv = document.querySelector(".yyyy-info-div");
-
-            if(regExp(4)){
-                yyyyInfoDiv.style.display = "block";
-            }else{
-                yyyyInfoDiv.style.display = "none";
-            }
-        });
-
-        // 이름 유효성 검사
-        name.addEventListener("input", () => {
-            let nameInfoDiv = document.querySelector(".name-info-div");
-
-            if(!name.value.trim()){
-                nameInfoDiv.style.display = "block";
-            }else{
-                nameInfoDiv.style.display = "none";
-            }
-        });
-
-        // 아이디 ajax로 유효성 검사
-        $("#custId").keydown(function(){
-            let idInfoDiv =  $(".id-info-div");
-
-            $.ajax({
-                success: function () {
-                    if (regExp(1)) {
-                        idInfoDiv.css("display", "block");
-                        $("#custId_btn").attr("disabled",false);
-                        $("#custId_btn").css("color","#11967f");
-                        $("#custId_btn").css("border-color","#11967f");
-                    }else{
-                        idInfoDiv.css("display","none");
-                    }
-                },
-            });
-        });
-
-
-
-
-        // 이메일 ajax로 유효성 검사
-        $("#email").keydown(function(){
-            let emailInfoDiv =  $(".email-info-div");
-
-            $.ajax({
-                success: function () {
-                    if (regExp(2)) {
-                        emailInfoDiv.css("display", "block");
-                        $("#email_btn").attr("disabled",false);
-                        $("#email_btn").css("color","#11967f");
-                        $("#email_btn").css("border-color","#11967f");
-                    }else{
-                        emailInfoDiv.css("display","none");
-                    }
-                },
-            });
-        });
-
-
-        //    id 중복체크 btn
-        $("#custId_btn").click(function(){
-            if(regExp(1)){
-                openModal("6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합");
-                return false;
-            }else{
-                let custIdVal = $("#custId").val();
-                $.ajax({
-                    type : 'GET',
-                    url : '/member/signup/'+custIdVal,
-                    success : function(result){
-                        alert("사용 할 수 있는 아이디입니다");
-                        $("#custId_btn").attr("disabled",true);
-                        $("#custId_btn").css("color","#dddddd");
-                        $("#custId_btn").css("border-color","#dddddd");
-
-                    },
-                    error : function(){
-                        alert("사용 불가능한 아이디입니다");
-                    }
-                }); // end of ajax
-            }
-        });
-
-
-        // email 중복체크 btn
-        $("#email_btn").click(function(){
-            if(regExp(2)){
-                openModal("이메일 형식으로 입력해 주세요");
-                return false;
-            }else{
-                let emailVal = $("#email").val();
-                $.ajax({
-                    type : 'GET',
-                    url : '/member/signup/email/'+emailVal,
-                    success : function(result){
-                        alert("사용 할 수 있는 이메일입니다");
-                        $("#email_btn").attr("disabled",true);
-                        $("#email_btn").css("color","#dddddd");
-                        $("#email_btn").css("border-color","#dddddd");
-                    },
-                    error : function(){
-                        alert("사용 불가능한 이메일입니다");
-                    }
-                }); // end of ajax
-            }
-        });
-
-        // 휴대폰번호 인증 api
-        $("#telNo_btn").click(function(){
-            if(regExp(3)){
-                openModal("telNo is failed") // 1. 숫자아니면 버튼 활성화 안함
-                return false;
-            }else{
-                let telNoVal = $("#telNo").val(); // 휴대폰 번호
-                $.ajax({
-                    type : "POST",
-                    url : "/sms/telNoCheck",
-                    data : {telNo : telNoVal},
-                    cache : false,
-                    success : function(data) {
-                        if (data == "err") { // 실패시
-                            alert("SEND ERR");
-                        } else {
-                            alert("SEND OK");
-                            // 성공시 데이터 저장
-                        }
-                    }
-                });     // end of ajax
-            }
-        });
-
-
-        regBtn.addEventListener("click", () =>{
-            // 생년월일 합치기
-            let yyyy = document.querySelector("#yyyy").value;
-            let mm = document.querySelector("#mm").value;
-            let dd = document.querySelector("#dd").value;
-            let yyyymmdd = document.querySelector("#yyyymmdd");
-            yyyymmdd.value = yyyy+mm+dd;
-
-
-            let signupFrm = document.querySelector("#frm");
-            signupFrm.submit();
-
-        });
-
-
-    });
-
-
-</script>
+<script type="text/javascript" src="<c:url value='/resources/js/member/member.js'/>"></script>
 </body>
 </html>

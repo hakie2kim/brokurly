@@ -84,9 +84,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberAndSignupDto signUpBySns(String snsId){
         Member member = memberDao.selectMemberBySnsId(snsId);
-        //   MemberAndSignupDto memberAndSignupDto = new MemberAndSignupDto();
 
-        //  return memberAndSignupDto;
         return member.makeFullDto();
     }
 
@@ -108,7 +106,6 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public String findBySnsId(String snsId){
-        log.info("snsId = {} ", snsId);
         String findSnsId = memberDao.findBySnsId(snsId);
 
         return findSnsId;
@@ -148,6 +145,15 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.updateMailAuth(member);
     }
 
+    @Override
+    public int chageNewPwd(MemberAndLoginDto memberAndLoginDto){
+        log.info("memberAndLoginDto = {}",memberAndLoginDto);
+        memberAndLoginDto.setPwd(bCryptPasswordEncoder.encode(memberAndLoginDto.getPwd()));
+        Member member = new Member();
+        member.changeStatus(memberAndLoginDto);
+
+        return memberDao.updateMemberByPwd(member);
+    }
     @Override
     public int removeAll(){
         return memberDao.deleteMemberAll();
