@@ -1,7 +1,9 @@
+<%@ page import="com.brokurly.dto.member.MemberAndLoginDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -18,67 +20,97 @@
 </head>
 <body>
 <section>
-    <h2>주문서</h2>
+    <h1>주문서</h1>
+    <div class="info-type1-title" id="no-margin-top">
+        <h3>주문 상품</h3>
+        <button id="order-goods-change">
+            <img src="<c:url value='/resources/image/down-arrow.png'/>" alt="">
+        </button>
+    </div>
+    <hr/>
     <div class="info-type1">
-        <div class="info-type1-title">
-            <h3>주문 상품</h3>
-            <button id="order-goods-change">&xvee;</button>
-        </div>
-        <hr/>
         <c:set var="customerCart" value="${checkout.customerCart}"/>
         <c:set var="numOfItemType" value="${fn:length(customerCart)}"/>
         <div id="order-goods">
-            ${customerCart[0].name}
-            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType - 1}개</c:if>
+            <span>${customerCart[0].name}<c:if test="${numOfItemType >= 2}"> 외 ${numOfItemType - 1}개</c:if></span>
             상품을 주문합니다.
         </div>
         <div id="order-goods-list" style="display: none">
             <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
-                    <div>상품 사진</div>
+                    <div class="item-img">상품 사진</div>
                     <div class="item-id" style="display: none">${item.itemId}</div>
-                    <div class="item-name">${item.name}</div>
+                    <div class="item-name"><span>${item.name}</span></div>
                     <div class="item-cnt">${item.itemCnt}개</div>
-                    <div class="item-price">${item.price}원</div>
+                    <div class="item-price-info">
+                        <span class="item-dc-price">
+                            <fmt:formatNumber value="${item.price - item.itemDcAmt}" pattern="#,##0"/>원
+                        </span>
+
+                        <span class="item-price" <c:if test="${item.itemDcAmt != 0}">style="display: none;"</c:if>>
+                            <fmt:formatNumber value="${item.price}" pattern="#,##0"/>원
+                        </span>
+                    </div>
                 </div>
+<%--                <hr class="list-hr"/>--%>
             </c:forEach>
         </div>
     </div>
 
-    <div class="info-type1">
+    <div class="info-type1-title">
         <h3>주문자 정보</h3>
-        <hr/>
+    </div>
+    <hr/>
+    <div class="info-type1">
         <div class="info-type2">
             <div>보내는 분</div>
             <div id="rcv-name">${loginMember.name}</div>
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-<%--            <div id="tel-no">${loginMember.telNo}</div>--%>
+            <div id="tel-no">${loginMember.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-<%--                ${loginMember.email}--%>
+                ${loginMember.email}
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
         </div>
     </div>
 
-    <div class="info-type1">
-        <div class="info-type1-title">
-            <h3>배송 정보</h3>
-            <a href="">배송지 변경 안내 ?</a>
+    <div class="info-type1-title">
+        <h3>배송 정보</h3>
+        <a>
+            <span>배송지 변경 안내 </span>
+            <img src="<c:url value='/resources/image/question-mark.png'/>" class="question-mark">
+        </a>
+        <div class="chat-box-head"></div>
+        <div class="chat-box-body">
+            <div>
+                <span>장바구니, 홈에서</span>
+                <span>배송지를 변경할 수 있어요</span>
+            </div>
+            <div>
+                <img src="<c:url value='/resources/image/x-mark.png'/>" class="x-mark">
+            </div>
         </div>
-        <hr/>
+    </div>
+    <hr/>
+    <div class="info-type1">
         <div class="info-type2">
             <div>배송지</div>
             <div>
-                <span id="default-delivery">기본 배송지</span>
-                <p>서울 강남구 강남로 111</p>
-                <p class="caution">상세 주소를 입력해주세요</p>
-                <button id="location-change">변경</button>
+                <c:if test="${location.defAddrFl == 'Y'}">
+                    <span id="default-delivery">기본 배송지</span>
+                </c:if>
+                <p>${location.addr}</p>
+                <c:if test="${location.specAddr == null}">
+                    <p class="caution">상세 주소를 입력해주세요</p>
+                </c:if>
+                <p>${location.specAddr}</p>
+                <button id="location-change" class="ship-button">변경</button>
             </div>
         </div>
         <div class="small-modal shipping-location-modal">
@@ -105,7 +137,7 @@
                         <!-- 요청사항 저장되어 있으면, 요청사항을 표시하고 버튼은 수정으로-->
                         <!-- 없으면, 아래와 같이 표시하고 버튼을 입력으로 -->
                         <p class="caution">배송 요청사항을 입력해주세요</p>
-                        <button class="receiver-details-btn">입력</button>
+                        <button class="receiver-details-btn ship-button">입력</button>
                     </div>
                 </c:if>
                 <div class="small-modal receiver-details-modal">
@@ -122,13 +154,13 @@
                             <span id="checkout-rcv-place">${receiverDetails.rcvPlace}</span> |
                             <span id="checkout-enter-mthd">${receiverDetails.enterMthd}</span>
                         </div>
-                        <div>
+                        <div class="receiver">
                             <span id="checkout-name">${receiverDetails.rcvName}</span>,
                             <span id="checkout-tel-no">${receiverDetails.telNo}</span>
                         </div>
                         <div id="checkout-place-exp" style="display: none;"></div>
                         <div id="checkout-msg-time" style="display: none;"></div>
-                        <button class="receiver-details-btn">수정</button>
+                        <button class="receiver-details-btn ship-button">수정</button>
                     </div>
                 </c:if>
             </div>
@@ -138,7 +170,9 @@
 <section id="bottom">
     <div id="left">
         <div>
-            <h3>쿠폰</h3>
+            <div class="info-type1-title">
+                <h3>쿠폰</h3>
+            </div>
             <hr/>
             <div class="info-type2">
                 <div>쿠폰 적용</div>
@@ -156,29 +190,32 @@
             </div>
         </div>
         <div>
-            <h3>적립금</h3>
+            <div class="info-type1-title">
+                <h3>적립금</h3>
+            </div>
             <hr/>
-            <div class="info-type2">
+            <div class="info-type2 point-div">
                 <div>적립금</div>
                 <div>
                     <div id="point">
                         <div>
                             <div>사용가능 잔액</div>
-                            <div>0 원</div>
+                            <div class="point-amount">0 원</div>
                         </div>
                         <div id="point-input">
                             <input type="text" placeholder="0"
                                    <c:if test="${true}">disabled</c:if> />
-                            <button>모두사용</button>
+                            <button <c:if test="${true}">disabled</c:if>>모두사용</button>
                         </div>
                     </div>
                     <div>사용 시 적립금이 먼저 소진됩니다.</div>
-                    <div>컬리캐시 사용 시 컬리페이 간편결제만 가능합니다.</div>
                 </div>
             </div>
         </div>
         <div>
-            <h3>결제수단</h3>
+            <div class="info-type1-title">
+                <h3>결제수단</h3>
+            </div>
             <hr/>
             <div class="info-type2">
                 <div>결제수단 선택</div>
@@ -193,7 +230,9 @@
             </div>
         </div>
         <div>
-            <h3>개인정보 수집/제공</h3>
+            <div class="info-type1-title">
+                <h3>개인정보 수집/제공</h3>
+            </div>
             <hr/>
             <div id="personal-info">
                 <div>
@@ -208,8 +247,7 @@
                     <p>전자지급 결제대행 서비스 이용약관 동의</p>
                     <button class="personal-info-consent">보기</button>
                 </div>
-                <div>위 내용을 확인하였으며 결제에 동의합니다.</div>
-                <hr style="border: 0; height: 1px; background-color: #e8e8e8"/>
+                <div class="acceptance">위 내용을 확인하였으며 결제에 동의합니다.</div>
             </div>
             <div class="personal-info-caution">
                 <p>
@@ -231,44 +269,43 @@
         <div id="right-inner">
             <div>
                 <div>주문금액</div>
-                <div id="order-amount"><fmt:formatNumber value="${paymentAmount.orderAmt}" pattern="#,##0"/> 원</div>
+                <div id="order-amount" class="amount">
+                    <fmt:formatNumber value="${paymentAmount.orderAmt}" pattern="#,##0"/> 원
+                </div>
             </div>
-            <div>
-                <div>ㄴ 상품금액</div>
+            <div class="order-detail">
+                <div>└ &nbsp;상품금액</div>
                 <div id="item-amount"><fmt:formatNumber value="${paymentAmount.itemAmt}" pattern="#,##0"/> 원</div>
             </div>
-            <div>
-                <div>ㄴ 상품할인금액</div>
+            <div class="order-detail">
+                <div>└ &nbsp;상품할인금액</div>
                 <div id="item-dc-amount"><fmt:formatNumber value="${paymentAmount.itemDcAmt}" pattern="#,##0"/> 원</div>
             </div>
-            <div>
+            <div class="payment-detail">
                 <div>배송비</div>
-                <div id="ship-fee"><fmt:formatNumber value="${paymentAmount.shipFee}" pattern="#,##0"/> 원</div>
+                <div id="ship-fee" class="amount">
+                    <fmt:formatNumber value="${paymentAmount.shipFee}" pattern="#,##0"/> 원
+                </div>
             </div>
-            <div>
+            <div class="payment-detail">
                 <div>쿠폰할인</div>
-                <div>0원</div>
+                <div class="amount">0 원</div>
             </div>
-            <div>
+            <div class="payment-detail">
                 <div>카드즉시할인</div>
-                <div>0원</div>
+                <div class="amount">0 원</div>
             </div>
-            <div id="use-point">
+            <div id="use-point" class="payment-detail">
                 <div>적립금</div>
-                <div>0원</div>
+                <div class="amount">0 원</div>
             </div>
-            <hr/>
-            <div>
+            <div class="final-amount">
                 <div id="pay-amount">최종결제금액</div>
                 <div><fmt:formatNumber value="${paymentAmount.payAmt}" pattern="#,##0"/> 원</div>
             </div>
             <div>
                 <div></div>
-                <div><span id="yellow-circle">적립</span> 구매 시 0원(5%)</div>
-            </div>
-            <div>
-                <div></div>
-                <%--  <div>컬리카드 결제 시 최대 4,905원 추가 적립</div>  --%>
+                <div class="point-info"><span id="yellow-circle">적립</span> 구매 시 0원(5%)</div>
             </div>
         </div>
     </div>
@@ -294,6 +331,5 @@
         <button>확인</button>
     </div>
 </div>
-<footer></footer>
 </body>
 </html>

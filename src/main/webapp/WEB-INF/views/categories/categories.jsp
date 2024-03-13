@@ -66,7 +66,7 @@
             border: 0;
         }
     </style>
-    <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>
+<%--    <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>--%>
 </head>
 <body>
 

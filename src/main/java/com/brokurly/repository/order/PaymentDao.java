@@ -13,6 +13,8 @@ public interface PaymentDao {
     // READ
     List<PaymentDetails> selectAll();
 
+    PaymentDetails selectByOrderId(String orderId);
+
     // UPDATE
 
     // DELETE

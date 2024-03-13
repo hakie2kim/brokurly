@@ -21,20 +21,6 @@ public class ReceiverDetails {
     private String placeExp;
     private String msgTime;
 
-    public ReceiverDetailsDto toDto() {
-        return ReceiverDetailsDto.builder()
-                .rcvDtlId(rcvDtlId)
-                .shipLocaId(shipLocaId)
-                .custId(custId)
-                .rcvName(rcvName)
-                .telNo(telNo)
-                .rcvPlace(rcvPlace)
-                .enterMthd(enterMthd)
-                .placeExp(placeExp)
-                .msgTime(msgTime)
-                .build();
-    }
-
     public ReceiverDetailsResponseDto toResponseDto() {
         return ReceiverDetailsResponseDto.builder()
                 .shipLocaId(shipLocaId)

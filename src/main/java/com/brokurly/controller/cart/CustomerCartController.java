@@ -1,11 +1,13 @@
 package com.brokurly.controller.cart;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.mypage.ShippingLocationDto;
 import com.brokurly.repository.mypage.ShippingLocationDao;
 import com.brokurly.service.cart.CustomerCartService;
 import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -31,13 +34,17 @@ public class CustomerCartController {
     @ResponseBody
     public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
         // 로그인 체크
-        String member = (String) session.getAttribute("member");
-//        System.out.println(member);
-        log.info(" member = {}",member);
-        log.info("cusCart={}",customerCartDto);
+//        String member = (String) session.getAttribute("member");
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();  //id값 가져와서
+        //session.setAttribute("custId",custId);
+        customerCartDto.setCustId(custId);  //id값 넣어주기
+        customerCartDto.setItemCk("N");
+//        log.info("customerCartDto.getCustId = {}",customerCartDto.getCustId());
 
-        if (member == null) {
-            return "5";
+        if (custId == null) {
+            // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
         }
         // 카트 등록
         int result = customerCartService.addCart(customerCartDto);
@@ -47,9 +54,13 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
+
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
+        List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
 
+
+        // 이제는 새로운 CustomerCartDto 객체를 생성하여 값을 설정합니다.
         model.addAttribute("cart", cart);
         model.addAttribute("address", address);
         return "cart/cart";
@@ -70,14 +81,14 @@ public class CustomerCartController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
+    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto) {
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
         return "redirect:/cart/{custId}";
     }
 
     @PostMapping("/vacate")
     @ResponseBody
-    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto){
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto) {
         CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
 
     }
