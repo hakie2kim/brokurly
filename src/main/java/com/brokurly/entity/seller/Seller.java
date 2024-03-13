@@ -4,6 +4,7 @@ import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.dto.seller.SellerAndLoginDto;
+import com.brokurly.dto.seller.SellerBsnsNoDto;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -42,5 +43,18 @@ public class Seller {
         this.pwd = sellerAndLoginDto.getPwd();
         this.name = sellerAndLoginDto.getName();
     }
+
+
+    public SellerBsnsNoDto makeBsnsDto(){
+        return SellerBsnsNoDto.builder()
+                .name(name)
+                .bsnsNo(bsnsNo)
+                .build();
+    }
+
+//    public void makeBsnsNo(SellerBsnsNoDto sellerBsnsNoDto){
+//        this.bsnsNo = sellerBsnsNoDto.getBsnsNo();
+//        this.name = sellerBsnsNoDto.getName();
+//    }
 
 }

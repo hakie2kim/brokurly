@@ -26,6 +26,7 @@
             margin: 0;
         }
 
+
         .whole {
             position: fixed;
             z-index: 20;
@@ -109,7 +110,6 @@
             color: white;
         }
 
-
     </style>
 
 
@@ -122,11 +122,11 @@
     <!-- 상단네비 -->
     <div id="top_navi" class="top_navi">
         <ul class="header_ul">
-            <li class="header_li"><a class="header_a"><img src="/resources/image/brokurlyAdmin.png" class="logo"
+            <li class="header_li"><a class="header_a" href="/categories/best-page"><img src="/resources/image/brokurlyAdmin.png" class="logo"
                                                            style="width: 50px; height: 20px;"></a></li>
-            <li class="header_li"><a class="header_a" href="">브로컬리</a></li>
-            <li class="header_li"><a class="header_a" href="">판매자센터</a></li>
-            <li class="header_li"><a class="header_a" href="">LOGOUT</a></li>
+            <li class="header_li"><a class="header_a" href="/categories/best-page">브로컬리</a></li>
+            <li class="header_li"><a class="header_a" href="">관리자센터</a></li>
+            <li class="header_li"><a class="header_a" href="/seller/login">LOGIN</a></li>
         </ul>
     </div>
 
@@ -149,8 +149,10 @@
                 <a href="#/notice/search" class="submenu_a">공지사항 관리 </a><!----><!---->
             </li><!----><!---->
         </ul>
-
     </div>
+
+
+
 </div>
 
 </body>

@@ -7,15 +7,24 @@ import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsUpdateDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.dto.seller.SellerAndLoginDto;
 import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
+import com.brokurly.service.seller.SellerService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,16 +40,18 @@ public class ProductsCreateController {
 
     private final ProductsCreateService productsCreateService;
     private final CategoryService categoryService;
+    private final SellerService sellerService;
 
 
 
     @PostMapping("/productsCreate/write")
-    public String writeproducts( GoodsDto goodsDto, Model m
-                                ,GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
+    public String writeproducts(@Valid GoodsDto goodsDto, BindingResult bindingResult,
+                                Model m, GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
     ) {
-//        if (bindingResult.hasErrors()){
-//            return "validation-result";
-//        }
+        if (bindingResult.hasErrors()){
+            log.info("상품 등록 실패");
+            return "productsCreate";
+        }
         String a = goodsDto.getName();
         m.addAttribute("mode", "new");
         log.info("a={}", a);
@@ -71,11 +82,20 @@ public class ProductsCreateController {
     }
 
 
-
     @GetMapping("/productsOriginList")
-    public String selectByBsnsId(Model m) {
-        String bsnsNo = "4659877658";  //판매자 로그인 기능 구현 후 세션에서 가져오기
-//    log.info("goodsByBsnsNoDto={}",goodsByBsnsNoDto);
+    public String selectByBsnsId(Model m, HttpServletResponse res, HttpServletRequest req) {
+
+        //1. 세션에서 id 불러오기
+        HttpSession session = req.getSession();
+        SellerAndLoginDto nameDto = (SellerAndLoginDto) session.getAttribute(SessionConst.LOGIN_SELLER);
+        log.info("nameDto={}",nameDto);
+        String nameDtoId = nameDto.getId();
+
+        //2. id로 bsnsNo찾기
+        String bsnsNo =sellerService.selectBsnsNo(nameDtoId).getBsnsNo();
+        log.info("bnsnNo={}",bsnsNo);
+
+
         List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
         m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
         m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
