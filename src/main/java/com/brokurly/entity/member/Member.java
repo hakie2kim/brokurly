@@ -1,5 +1,7 @@
 package com.brokurly.entity.member;
 
+import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndMailAuthDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 
 import lombok.*;
@@ -31,6 +33,8 @@ public class Member {
 
     private String snsId;
 
+    private Integer mailAuth;
+    private String  mailKey;
 
     public MemberAndSignupDto makeFullDto(){
         return MemberAndSignupDto.builder()
@@ -46,7 +50,22 @@ public class Member {
                 .build();
     }
 
+    public MemberAndLoginDto makeLoginDto(){
+        return MemberAndLoginDto.builder()
+                .custId(custId)
+                .pwd(pwd)
+                .name(name)
+                .build();
+    }
 
+    public MemberAndMailAuthDto makeMailDto(){
+        return MemberAndMailAuthDto.builder()
+                .custId(custId)
+                .email(email)
+                .mailAuth(mailAuth)
+                .mailKey(mailKey)
+                .build();
+    }
     public void changeStatus(MemberAndSignupDto memberAndSignupDto) {
         this.custId = memberAndSignupDto.getCustId();
         this.pwd = memberAndSignupDto.getPwd();
@@ -59,6 +78,17 @@ public class Member {
         this.snsId = memberAndSignupDto.getSnsId();
     }
 
+    public void changeStatus(MemberAndLoginDto memberAndLoginDto){
+        this.custId = memberAndLoginDto.getCustId();
+        this.pwd = memberAndLoginDto.getPwd();
+        this.name = memberAndLoginDto.getName();
+    }
 
 
+    public void changeStatus(MemberAndMailAuthDto memberAndMailAuthDto){
+        this.custId = memberAndMailAuthDto.getCustId();
+        this.email = memberAndMailAuthDto.getEmail();
+        this.mailAuth = memberAndMailAuthDto.getMailAuth();
+        this.mailKey = memberAndMailAuthDto.getMailKey();
+    }
 }

@@ -1,19 +1,25 @@
 package com.brokurly.controller.goods;
 
 
-import com.brokurly.dto.cart.CartDto;
-import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
+import com.brokurly.dto.goods.GoodsDetailDto;
+import com.brokurly.dto.goods.GoodsInquiryLogDto;
+import com.brokurly.dto.goods.GoodsReviewBoardDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.mypage.WishListDto;
+import com.brokurly.entity.goods.GoodsReviewBoard;
 import com.brokurly.service.goods.GoodsService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -21,15 +27,73 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class GoodsController {
 
-  private final GoodsService goodsService;
+    private final GoodsService goodsService;
 
-  // 상품 상세페이지로 값 전달
-  @GetMapping("/{itemId}")
-  public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
-    session.setAttribute("member", "hong");
-    GoodsDto goods = goodsService.searchGoods(itemId);  // 임시 상품번호
-    model.addAttribute("goods", goods);
-    return "goods/goods";
-  }
+    // 상품 상세페이지로 값 전달
+    @GetMapping("/{itemId}")
+    public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
+        // 세션에서 로그인 멤버 정보 가져오기
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        // 만약 로그인 멤버 정보가 없으면 로그인 페이지로 리다이렉트
+        if (custIdDto == null) {
+            // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
+        }
+        // 로그인 멤버 정보에서 필요한 값을 추출
+        String custId = custIdDto.getCustId();
+        // 세션에 고객 ID 저장
+//        session.setAttribute("member", custId);
+
+//        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//        String custId = custIdDto.getCustId();
+//        session.setAttribute("member", custId);
+
+        GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
+        GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
+//    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
+        List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
+        int wishList = goodsService.searchWish(itemId, custId); //상품 찜
+        List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
+
+        model.addAttribute("custId",custId);
+        model.addAttribute("goods", goods);
+        model.addAttribute("announcement", announcement);
+//    model.addAttribute("goodsImage", goodsImage);
+
+        model.addAttribute("inquiry", inquiry);
+        model.addAttribute("wishList", wishList);
+        model.addAttribute("review", review);
+        return "goods/goods";
+    }
+
+    @PostMapping("/addWish")
+    @ResponseBody
+    public ResponseEntity<String> addWishPost(WishListDto wishListDto) {
+        int result = goodsService.addWish(wishListDto); //String 이기에 int값 먼저 넣어줌
+        return new ResponseEntity<>(result + "", HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteWish")
+    @ResponseBody
+    public ResponseEntity<String> deleteWishPost(WishListDto wishListDto) {
+        int result = goodsService.deleteWish(wishListDto); //String 이기에 int값 먼저 넣어줌
+        return new ResponseEntity<>(result + "", HttpStatus.OK);
+    }
+
+//  @PostMapping("/dateSort")
+//  @ResponseBody
+//  public void sortReview(String itemId, Model model) {
+//    List<GoodsReviewBoardDto> review = goodsService.sortReview(itemId);
+//    model.addAttribute("review", review);
+////    return "goods/goods";
+//  }
+
+
+//    @PostMapping("/updateLikeCount")
+//    @ResponseBody
+//    public void likeCntUpdate(@ModelAttribute GoodsReviewBoardDto goodsReviewBoardDto) {
+//        int review = goodsService.likeCntUpdate(goodsReviewBoardDto);
+//    }
+
 
 }

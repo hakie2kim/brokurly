@@ -13,9 +13,9 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/seller")
-public class CategoryController {
+public class  CategoryController {
 
-   private final CategoryService categoryService;
+    private final CategoryService categoryService;
 
     //생성자 추가해서 주입받기
     @Autowired
@@ -26,10 +26,10 @@ public class CategoryController {
     @GetMapping("/productsCreate")
     public String readCategory(Model m) throws Exception {
 
-        List<CategoryDto> selectMain = categoryService.readPrimary();
-        m.addAttribute("selectMain", selectMain);
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
         log.info("model={}",m);
-        log.info("selectMain={}", selectMain);
+        log.info("selectPrimary={}", selectPrimary);
 
         return "seller/productsCreate";
     }

@@ -14,14 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CheckoutDto {
+    private String itemName;
     // 배송 요청사항 정보
-    private String rcvName;
-    private String telNo;
-    private String rcvPlace;
-    private String enterMthd;
-    private String placeExp;
-    private String msgTime;
-
+    private ReceiverDetailsResponseDto receiverDetails;
     // 주문 상품 목록
     private List<CustomerCartDto> customerCart;
     // 결제 금액

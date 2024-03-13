@@ -1,7 +1,13 @@
 package com.brokurly.controller.cart;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.mypage.ShippingLocationCurrDto;
+import com.brokurly.dto.mypage.ShippingLocationDto;
+import com.brokurly.repository.mypage.ShippingLocationDao;
 import com.brokurly.service.cart.CustomerCartService;
+import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,18 +26,21 @@ import java.util.List;
 public class CustomerCartController {
 
     private final CustomerCartService customerCartService;
+    private final ShippingLocationService shippingLocationService;
 
     /* 장바구니 추가 */
     @PostMapping("/add")
     @ResponseBody
     public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
         // 로그인 체크
-        String member = (String) session.getAttribute("member");
+//        String member = (String) session.getAttribute("member");
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
 //        System.out.println(member);
-        log.info(" member = {}",member);
-        log.info("cusCart={}",customerCartDto);
+//        log.info(" member = {}",member);
+//        log.info("cusCart={}",customerCartDto);
 
-        if (member == null) {
+        if (custId == null) {
             return "5";
         }
         // 카트 등록
@@ -42,9 +51,11 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
-        List<CustomerCartDto> cart = customerCartService.getCartList(custId);
-//        ArrayList<CustomerCartDto> collect = cart.stream().map(carte -> carte.makeFullDto()).collect(Collectors.toCollection(ArrayList::new));
+        List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
+        ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
+
         model.addAttribute("cart", cart);
+        model.addAttribute("address", address);
         return "cart/cart";
     }
 
@@ -65,8 +76,13 @@ public class CustomerCartController {
     @ResponseBody
     public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
-//        return "cart/cart";
         return "redirect:/cart/{custId}";
     }
 
+    @PostMapping("/vacate")
+    @ResponseBody
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto){
+        CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
+
+    }
 }

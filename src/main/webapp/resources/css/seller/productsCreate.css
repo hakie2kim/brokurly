@@ -1,7 +1,8 @@
 *{
     padding: 0;
-    margin: 0;
+    margin: 0
 }
+
 .seller-sub-frame {
     position: relative;
 }
@@ -16,7 +17,6 @@ body {
     height: 100%;
     min-height: 100%;
     font-family: 'Noto Sans KR', sans-serif;
-    /* font-family: 나눔고딕,NanumGothic,Helvetica Neue,Helvetica,AppleSDGothicNeo-Regular,Arial,맑은고딕,malgun gothic,돋움,dotum,sans-serif; */
     line-height: 20px;
     color: #4d5159;
     background-color: #edf0f5;
@@ -312,7 +312,7 @@ textarea {
     margin-left: 2px;
     vertical-align: middle;
     border-top: 4px dashed;
-    border-top: 4px solid\9;
+    border-top: 4px solid;
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
@@ -479,3 +479,8 @@ textarea {
      background-image: none;
      border: 1px solid #dbdde2;
  }
+/*카테고리 중분류 중 클릭된 요소만 색 변경*/
+.clicked {
+    background-color: #0147097e;
+    color: #ffffff;
+}

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -22,7 +23,7 @@
     </label>
 </div>
 <form action="" method="post" class="receiver-info">
-    <c:if test="${checkout != null}">
+    <c:if test="${receiverDetails != null}">
         <input type="hidden" name="_method" value="patch">
     </c:if>
     <!-- 배송 대상자 정보 -->
@@ -34,7 +35,7 @@
                     name="rcvName"
                     placeholder="이름을 입력해 주세요"
                     type="text"
-                    value="<c:if test='${checkout != null}'>${checkout.rcvName}</c:if>"/>
+                    value="${fn:trim(receiverDetails != null ? receiverDetails.rcvName : member.name)}"/>
         </div>
         <div>
             <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
@@ -44,7 +45,7 @@
                     placeholder="숫자만 입력해 주세요"
                     maxlength="11"
                     type="text"
-                    value="<c:if test='${checkout != null}'>${checkout.telNo}</c:if>"/>
+                    value="${fn:trim(receiverDetails != null ? receiverDetails.telNo : member.telNo)}"/>
         </div>
     </div>
 
@@ -60,7 +61,7 @@
                                     name="rcvPlace"
                                     id="front-door"
                                     class="receive-place"
-                                    <c:if test="${checkout == null || checkout.rcvPlace == '문 앞'}">checked</c:if>
+                                    <c:if test="${receiverDetails == null || receiverDetails.rcvPlace == '문 앞'}">checked</c:if>
                                     value="문 앞"/>
                             <span style="margin-left: 10px">문 앞</span>
                         </label>
@@ -72,7 +73,7 @@
                                     name="rcvPlace"
                                     id="etc-place"
                                     class="receive-place"
-                                    <c:if test="${checkout.rcvPlace == '기타 장소'}">checked</c:if>
+                                    <c:if test="${receiverDetails.rcvPlace == '기타 장소'}">checked</c:if>
                                     value="기타 장소"/>
                             <span style="margin-left: 10px">기타 장소</span>
                         </label>
@@ -89,7 +90,7 @@
                 <div class="door-detail title">공동현관 출입방법<span class="star">*</span></div>
                 <label for="password-radio" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="password-radio" value="공동현관 비밀번호"
-                           <c:if test="${checkout == null || checkout.enterMthd == '공동현관 비밀번호'}">checked</c:if>/>
+                           <c:if test="${receiverDetails == null || receiverDetails.enterMthd == '공동현관 비밀번호'}">checked</c:if>/>
                     <span style="margin-left: 10px">공동현관 비밀번호</span>
                 </label>
                 <input
@@ -128,12 +129,12 @@
                 </div>
                 <label for="free-entry-radio" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="free-entry-radio" value="자유 출입 가능"
-                           <c:if test="${checkout.enterMthd == '자유 출입 가능'}">checked</c:if>/>
+                           <c:if test="${receiverDetails.enterMthd == '자유 출입 가능'}">checked</c:if>/>
                     <span style="margin-left: 10px">자유 출입 가능</span>
                 </label>
                 <label for="security-call-radio" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="security-call-radio" value="경비실 호출"
-                           <c:if test="${checkout.enterMthd == '경비실 호출'}">checked</c:if>/>
+                           <c:if test="${receiverDetails.enterMthd == '경비실 호출'}">checked</c:if>/>
                     <span style="margin-left: 10px">경비실 호출</span>
                 </label>
                 <div class="textarea-div security-call-textarea">
@@ -144,7 +145,7 @@
                 </div>
                 <label for="door-etc-radio" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="door-etc-radio" value="문 앞 기타"
-                           <c:if test="${checkout.enterMthd == '문 앞 기타'}">checked</c:if>/>
+                           <c:if test="${receiverDetails.enterMthd == '문 앞 기타'}">checked</c:if>/>
                     <span style="margin-left: 10px">기타</span>
                 </label>
                 <div class="textarea-div door-etc-textarea">
@@ -160,7 +161,7 @@
                 <div class="etc-detail title">기타장소 세부사항<span class="star">*</span></div>
                 <label for="etc" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="etc" value="기타 장소 기타"
-                           <c:if test="${checkout.enterMthd == '기타 장소 기타'}">checked</c:if>/>
+                           <c:if test="${receiverDetails.enterMthd == '기타 장소 기타'}">checked</c:if>/>
                     <span style="margin-left: 10px">기타</span>
                 </label>
                 <div class="textarea-div etc-textarea">
@@ -171,7 +172,7 @@
                 </div>
                 <label for="receiving-room" class="receive-place-label">
                     <input type="radio" name="enterMthd" id="receiving-room" value="택배 수령실"
-                           <c:if test="${checkout.enterMthd == '택배 수령실'}">checked</c:if>/>
+                           <c:if test="${receiverDetails.enterMthd == '택배 수령실'}">checked</c:if>/>
                     <span style="margin-left: 10px">택배 수령실</span>
                 </label>
                 <div class="textarea-div receiving-room-textarea">
@@ -194,7 +195,7 @@
                 <div style="width: 50%">
                     <label for="after-shipping" class="receive-place-label">
                         <input type="radio" name="msgTime" id="after-shipping" class="receive-place"
-                               <c:if test="${checkout.msgTime == '배송 직후'}">checked</c:if>
+                               <c:if test="${receiverDetails == null || receiverDetails.msgTime == '배송 직후'}">checked</c:if>
                                value="배송 직후"/>
                         <span style="margin-left: 10px">배송 직후</span>
                     </label>
@@ -202,7 +203,7 @@
                 <div style="width: 50%">
                     <label for="7am" class="receive-place-label">
                         <input type="radio" name="msgTime" id="7am" class="receive-place"
-                               <c:if test="${checkout.msgTime == '오전 7시'}">checked</c:if>
+                               <c:if test="${receiverDetails.msgTime == '오전 7시'}">checked</c:if>
                                value="오전 7시"/>
                         <span style="margin-left: 10px">오전 7시</span>
                     </label>

@@ -1,11 +1,15 @@
 package com.brokurly.controller;
 
 import com.brokurly.service.SmsRestService;
+import com.brokurly.utils.MailTempKey;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
+import java.util.stream.IntStream;
+@Slf4j
 @RestController
 @RequestMapping("/sms")
 public class SmsRestController {
@@ -17,14 +21,12 @@ public class SmsRestController {
     @ResponseBody
     public String sendSMSSignup(@RequestParam(value="telNo") String telNo){
 
-        String smsNum = "";
-        for(int i=0; i < 6; i++) {
-            int r = (int) (Math.random() * 8) + 1; // 보낼 인증번호 랜덤생성
-            smsNum += Integer.toString(r);
-        }
+        // 랜덤 문자열을 생성해서 mailKey에 넣기
+        String smsNum = new MailTempKey().getKey();
 
-        smsRestService.certifiedPhoneNumber(telNo, smsNum);
+      //  smsRestService.certifiedPhoneNumber(telNo, smsNum);
 
+        log.info("smsNum : {}", smsNum);
         return smsNum;
     }
 }

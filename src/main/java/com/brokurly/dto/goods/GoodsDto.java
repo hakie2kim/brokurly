@@ -2,6 +2,7 @@ package com.brokurly.dto.goods;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -13,7 +14,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class GoodsDto {
   private String itemId;
+  @NotBlank(message = "이름은 필수 입력 값 입니다.")
   private String name;
+  @NotBlank(message = "필수 입력 값 입니다.")
   private String exp;
   private int price;
   private int dcRt;
@@ -32,7 +35,4 @@ public class GoodsDto {
   private String bsnsNo;
   private String itemSpec;
   private String stdySellerFl;
-  //추가
-  private int salePrice;  //할인이 들어간 가격
-
 }

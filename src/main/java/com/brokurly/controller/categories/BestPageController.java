@@ -1,19 +1,25 @@
 package com.brokurly.controller.categories;
 
 import com.brokurly.dto.categories.CategoryDto;
+import com.brokurly.dto.categories.PriceFilterDto;
 import com.brokurly.dto.goods.GoodsListDto;
-import com.brokurly.service.goods.GoodsListService;
 import com.brokurly.service.categories.CategoryService;
+import com.brokurly.service.goods.GoodsListService;
+import com.brokurly.utils.PageHandler;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/categories")
@@ -31,7 +37,7 @@ public class BestPageController {
         m.addAttribute("selectMain", selectMain);
 
 
-        return "/categories/header";
+        return "include/header";
     }
 
     @GetMapping("/best-page")
@@ -44,29 +50,96 @@ public class BestPageController {
         return "categories/best-page";
     }
 
-    @RequestMapping(value = "/{codeId}", method = RequestMethod.GET)
-    public String categoryPage(Model m, @PathVariable String codeId) throws Exception{
+    @GetMapping("/{codeId}")
+    public String categoryPage(Model model, @PathVariable String codeId,
+                               @RequestParam(required = false) String sortedType,
+                               @RequestParam(required = false) Integer page,
+                               @RequestParam(required = false) String filters) throws Exception {
 
+        log.info("filters = {}", filters);
+
+        //대분류 카테고리이름
         categoryService.readPrimary();
-
         List<CategoryDto> selectMain = categoryService.readPrimary();
-        m.addAttribute("selectMain", selectMain);
+        model.addAttribute("selectMain", selectMain);
 
+        //페이징
+        int totalCnt = goodsListService.countGoodsList(codeId);
+        PageHandler pageHandler = new PageHandler(totalCnt, page);
 
-        List<CategoryDto> categorydto = categoryService.findCategoryByPrimary(codeId);
-        List<GoodsListDto> goodsListDto = goodsListService.readGoodsList(codeId);
+        //중분류 카테고리이름
+        List<CategoryDto> categorydto = categoryService.findCategoryByPrimary(codeId.length() == 6 ? codeId.substring(0, 3) : codeId);
 
+        // 카테고리별 & 분류 타입에 따라 상품 나열하기
+        List<GoodsListDto> goodsListDto;
+        if (page == null) page = 1;
+        if (sortedType != null) {
+            goodsListDto = goodsListService.sortGoodsList(codeId, page, sortedType);
+        } else {
+            goodsListDto = goodsListService.readGoodsList(codeId, page);
+        }
+        //가격 필터의 기준값들
+        int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
 
+        //필터=배송타입일때
+        //필터=가격일때
+        //필터=배송&가격 둘다 있을떄
 
-        m.addAttribute("codeId",codeId);
+        model.addAttribute("codeId", codeId);
+        model.addAttribute("sortedType", sortedType);
 
-        m.addAttribute("categorydto",categorydto);
-        m.addAttribute("goodsListDto",goodsListDto);
-
-
-
+        model.addAttribute("categorydto", categorydto);
+        model.addAttribute("goodsListDto", goodsListDto);
+        model.addAttribute("totalCnt", totalCnt);
+        model.addAttribute("pageHandler", pageHandler);
+        model.addAttribute("criteria", criteria);
 
         return "categories/categories";
+    }
 
+    @PostMapping("/{codeId}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> categoryPageAjax(Model model, @PathVariable String codeId,
+                                                                @RequestParam(required = false) String sortedType,
+                                                                @RequestParam(required = false) Integer page,
+                                                                @RequestParam(required = false) String filters,
+                                                                @RequestParam(required = false) String PriceFilterNum) {
+        log.info("codeId = {}", codeId);
+        log.info("sortedType = {}", sortedType);
+        log.info("page={}", page);
+        log.info("PriceFilterNum={}",PriceFilterNum);
+
+        Map<String, Object> responseMap = new HashMap<>();
+
+        PriceFilterDto filter = PriceFilterDto.builder()
+                .priceFilterNum(PriceFilterNum)
+                .build();
+        log.info("filter={}",filter);
+
+        List<GoodsListDto> sortedGoodsList = goodsListService.sortGoodsList(codeId, page, sortedType);
+        log.info("sortedGoodsList={}",sortedGoodsList);
+        responseMap.put("sortedGoodsList", sortedGoodsList);
+        log.info("responseMap ={}", responseMap);
+
+        //페이징
+        int totalCnt = goodsListService.countGoodsListByPriceFilter(codeId, sortedType, filter);
+        PageHandler pageHandler = new PageHandler(totalCnt, page);
+        responseMap.put("pageHandler", pageHandler);
+        responseMap.put("totalCnt",totalCnt);
+        log.info("pageHandler={}",pageHandler);
+
+        //가격 필터 기준 값
+        int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
+        responseMap.put("criteria", criteria);
+        log.info("criteria={}", criteria);
+
+        // 필터적용한 상품리스트
+        List<GoodsListDto> readGoodsLisByFilter = goodsListService.readGoodsLisByFilter(codeId, page, sortedType, filter);
+        log.info("readGoodsLisByFilter={}",readGoodsLisByFilter);
+        responseMap.put("readGoodsLisByFilter",readGoodsLisByFilter);
+
+
+
+        return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
 }

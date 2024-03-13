@@ -5,14 +5,17 @@
     --main-border: 1px solid #11967f;
 }
 body {
-    margin: 0;
-    padding: auto;
+    font-family: var(--main-font);
+    heigth : 100vh;
+    /*margin: 0;*/
+    /*padding: auto;*/
 }
-section, form {
+section, #frm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 60px;
 }
 
 a {
@@ -21,23 +24,44 @@ a {
 }
 
 input[type="text"],
+input[type="password"],
 .register-div__btn {
     width: 333px;
     height: 46px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"]{
     border: 1px solid rgb(221, 221, 221);
     border-radius: var(--main-border-radius);
     font-size: 16px;
     font-weight: 400;
+    padding-left: 15px;
+}
+
+[type="radio"],[type="checkbox"] {
+    vertical-align: middle;
+    appearance: none;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+}
+
+[type="radio"]:checked, [type="checkbox"]:checked {
+    border: 0.6em solid #11967f;
+}
+
+
+[type="checkbox"]:hover{
+    cursor: pointer;
 }
 
 input:focus {
     outline: 1px solid black;
 }
 
-button {
+.btn {
     width: 120px;
     height: 44px;
     border: var(--main-border);
@@ -46,6 +70,11 @@ button {
     color: var(--main-color);
     font-size: 14px;
     margin-left: 10px;
+}
+
+.line_div{
+    padding: 10px 0px;
+    border-bottom: 1px solid rgb(51, 51, 51);
 }
 .birth-div {
     display: flex;
@@ -68,7 +97,7 @@ button {
 }
 
 .register-div__label {
-    display: inline-block;
+    /*display: inline-block;*/
     width: 139px;
     font-size: 14px;
     font-weight: 500;
@@ -91,9 +120,15 @@ button {
 
 }
 .agreement-div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
+    left: -20px;
+}
+.test_div{
     display: flex;
     flex-direction: column;
-    /* background-color: aqua; */
 }
 
 .register-header {
@@ -113,11 +148,13 @@ button {
 
 .column-div {
     margin-top: 10px;
+    display:flex;
+
 }
 
 ::placeholder {
     font-size: 14px;
-    padding: 0 11px 1px 15px;
+    padding: 0 11px 1px 0px;
 }
 .order-info__label {
     font-size: 12px;
@@ -136,6 +173,8 @@ button {
 }
 
 label {
+    position: relative;
+    left: 10px;
     font-size: 14px;
     color: #333333;
 }
@@ -149,7 +188,12 @@ label {
 }
 
 .agreement-label {
-    font-size: 4px;
+    position: relative;
+    left: 27px;
+}
+.agreement-label__chk {
+    left:180px;
+    color: var(--main-color);
 }
 
 .birth-div__column > *:focus {
@@ -160,15 +204,24 @@ label {
 .name-info-div,
 .email-info-div,
 .email-infoSec-div,
-.telNo-info-div{
+.pwd-info-div,
+.pwdChk-info-div,
+.telNo-info-div,
+.birth-info-div{
     display: flex;
     justify-content: center;
     padding-top: 4px;
     font-size: 13px;
     color: #ff0000;
     display: none;
+    position: relative;
+    left : 140px;
+    z-index: -1;
 }
 
+.birth-info-div{
+    left:0px;
+}
 /* modal css start */
 .modal {
     position: absolute;
@@ -184,6 +237,7 @@ label {
     background-color: rgba(0, 0, 0, 0.4);
 
     padding: 0;
+    z-index: 2;
 }
 
 .modal_content_body {
@@ -192,7 +246,7 @@ label {
     padding: 40px;
 
     width: 320px;
-    height: 66px;
+    /*height: 66px;*/
 
     text-align: center;
 
@@ -237,3 +291,26 @@ label {
 }
 
 /* modal css end */
+
+
+.gender-div {
+    width: 320px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 인증번호 확인 */
+#telNoChk-div{
+    display: none;
+    position: relative;
+    left: 125px;
+
+}
+
+#telNo_btn,
+#telNoChk_btn{
+    disabled : true;
+    color: #dddddd;
+    border-color: #dddddd;
+
+}

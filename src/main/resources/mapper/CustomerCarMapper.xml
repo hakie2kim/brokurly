@@ -7,9 +7,9 @@
     <!-- CREATE -->
     <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
         INSERT INTO cart
-            (item_id, cust_id, item_cnt)
+            (item_id, cust_id, item_cnt, item_ck)
         VALUES
-            (#{itemId}, #{custId}, #{itemCnt})
+            (#{itemId}, #{custId}, #{itemCnt}, #{itemCk})
     </insert>
 
     <!-- READ -->
@@ -18,9 +18,12 @@
     </sql>
 
     <select id="getCart" resultType="CustomerCart">
-        SELECT a.cust_id, a.item_id, a.item_cnt, b.name, b.price, b.ship_type, b.pkg_type, b.item_dc_amt, b.item_qty
+        SELECT a.cust_id, a.item_id, a.item_cnt, a.item_ck, b.name, b.price, b.ship_type, b.pkg_type, b.item_dc_amt, b.item_qty
         FROM cart a left outer join item b on a.item_id = b.item_id
         WHERE cust_id = #{custId}
+        <if test="flag">
+            AND item_ck = 'Y'
+        </if>
     </select>
 
     <select id="selectByCustId" resultType="CustomerCart">
@@ -42,9 +45,18 @@
     <!-- UPDATE -->
     <update id="update">
         UPDATE cart
-        SET item_cnt = #{itemCnt}
+        SET item_cnt = #{itemCnt} ,
+            item_ck = #{itemCk}
         WHERE cust_id = #{custId}
         AND item_id = #{itemId}
+    </update>
+
+    <update id="duplicationAdd">
+        UPDATE cart
+        SET item_cnt = item_cnt + #{itemCnt} ,
+            item_ck = #{itemCk}
+        WHERE cust_id = #{custId}
+          AND item_id = #{itemId}
     </update>
 
 
@@ -61,7 +73,11 @@
         WHERE cust_id = #{custId}
     </delete>
 
-
+    <delete id="vacateCart">
+        DELETE FROM cart
+        WHERE cust_id = #{custId}
+          AND item_ck = #{itemCk}
+    </delete>
 
 
 

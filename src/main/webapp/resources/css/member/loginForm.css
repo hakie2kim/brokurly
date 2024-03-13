@@ -8,7 +8,8 @@ body {
     font-family: var(--main-font);
 }
 section {
-    height: 100vh;
+    margin-top: 100px;
+    margin-bottom: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +17,7 @@ section {
 }
 .login-div {
     width: 340px;
-    height: 295px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -41,13 +42,15 @@ a {
 }
 
 .loginBtn,
-.regBtn {
+.regBtn,
+.findBtn {
     font-size: 16px;
     font-weight: 500;
     border-radius: var(--main-border-radius);
 }
 
-.loginBtn {
+.loginBtn,
+.findBtn {
     background-color: var(--main-color);
     border: none;
     color: white;
@@ -59,9 +62,11 @@ a {
     color: var(--main-color);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"]{
     border-radius: var(--main-border-radius);
     border: 1px solid rgb(221, 221, 221);
+    padding-left: 15px;
 }
 
 input:focus {
@@ -70,7 +75,7 @@ input:focus {
 
 ::placeholder {
     font-size: 14px;
-    padding: 0 11px 1px 15px;
+    padding: 0 11px 1px 0px;
 }
 
 .login-header {
@@ -78,4 +83,11 @@ input:focus {
     font-weight: 800;
     line-height: 20px;
     margin-bottom: 20px;
+}
+
+.register-div__label {
+
+    width: 139px;
+    font-size: 14px;
+    font-weight: 500;
 }

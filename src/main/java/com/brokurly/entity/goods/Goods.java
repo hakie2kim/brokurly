@@ -1,8 +1,12 @@
 package com.brokurly.entity.goods;
-import com.brokurly.dto.goods.GoodsListDto;
+
+import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
 import com.brokurly.dto.goods.GoodsForCartDto;
+import com.brokurly.dto.goods.GoodsListDto;
+import com.brokurly.dto.goods.*;
 import lombok.*;
+
 import java.util.Date;
 
 @ToString
@@ -36,14 +40,7 @@ public class Goods {
   private int revCnt;
   private String stdySellerFl;
 
-  //추가
-  private int salePrice;  //할인이 들어간 가격
 
-  public void initSaleTotal(){
-    salePrice = price - itemDcAmt;
-    if (salePrice < 0)
-      throw new RuntimeException("할인된 가격은 0원 이하일 수 없습니다.");
-  }
   public GoodsListDto makeGoodsList(){
     return GoodsListDto.builder()
             .itemId(itemId)
@@ -79,8 +76,54 @@ public class Goods {
             .itemQty(itemQty)
             .bsnsNo(bsnsNo)
             .itemSpec(itemSpec)
-            .stdySellerFl(stdySellerFl)
-            .salePrice(salePrice)
+            .build();
+  }
+
+  public GoodsUpdateDto updateDto() {
+    return GoodsUpdateDto.builder()
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .build();
+  }
+
+  public GoodsDetailDto detailMakeFullDto() {
+    return GoodsDetailDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .exp(exp)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .origin(origin)
+            .pointFl(pointFl)
+            .cpnElgFl(cpnElgFl)
+            .shipType(shipType)
+            .sellerName(sellerName)
+            .pkgType(pkgType)
+            .capa(capa)
+            .sellUnit(sellUnit)
+            .adultVerifFl(adultVerifFl)
+            .cateCode(cateCode)
+            .itemQty(itemQty)
+            .bsnsNo(bsnsNo)
+            .itemSpec(itemSpec)
+            .salePrice(price - itemDcAmt)
             .build();
   }
 
@@ -91,6 +134,17 @@ public class Goods {
             .itemDcAmt(itemDcAmt)
             .shipType(shipType)
             .pkgType(pkgType)
+            .build();
+  }
+
+  public GoodsByBsnsNoDto toGoodsByBsnsNoDto(String bsnsNo){
+    return GoodsByBsnsNoDto.builder()
+            .itemId(itemId)
+            .name(name)
+            .price(price)
+            .dcRt(dcRt)
+            .itemDcAmt(itemDcAmt)
+            .bsnsNo(this.bsnsNo)
             .build();
   }
 
@@ -114,7 +168,31 @@ public class Goods {
     this.itemQty = goodsDto.getItemQty();
     this.bsnsNo = goodsDto.getBsnsNo();
     this.itemSpec = goodsDto.getItemSpec();
-    this.stdySellerFl = goodsDto.getStdySellerFl();
-    this.salePrice = goodsDto.getSalePrice();
+
   }
+
+  public void UpdateStatus(GoodsUpdateDto goodsUpdateDto) {
+    this.name = goodsUpdateDto.getName();
+    this.exp = goodsUpdateDto.getExp();
+    this.price = goodsUpdateDto.getPrice();
+    this.dcRt = goodsUpdateDto.getDcRt();
+    this.itemDcAmt = goodsUpdateDto.getItemDcAmt();
+    this.origin = goodsUpdateDto.getOrigin();
+    this.pointFl = goodsUpdateDto.getPointFl();
+    this.cpnElgFl = goodsUpdateDto.getCpnElgFl();
+    this.shipType = goodsUpdateDto.getShipType();
+    this.sellerName = goodsUpdateDto.getSellerName();
+    this.pkgType = goodsUpdateDto.getPkgType();
+    this.capa = goodsUpdateDto.getCapa();
+    this.sellUnit = goodsUpdateDto.getSellUnit();
+    this.adultVerifFl = goodsUpdateDto.getAdultVerifFl();
+    this.cateCode = goodsUpdateDto.getCateCode();
+    this.itemQty = goodsUpdateDto.getItemQty();
+    this.bsnsNo = goodsUpdateDto.getBsnsNo();
+    this.itemSpec = goodsUpdateDto.getItemSpec();
+
+  }
+
+
+
 }

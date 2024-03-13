@@ -9,4 +9,8 @@ import java.util.List;
 public interface GoodsListDao {
 
     List<GoodsList> selectGoodsListbyCateCode(String cateCode);
+
+
+
+
 }

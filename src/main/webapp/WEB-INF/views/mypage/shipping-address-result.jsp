@@ -17,31 +17,44 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = () => {
-        $(".form").submit((e) => {
+        $(".submit").click((e) => {
             e.preventDefault();
 
             // console.dir(this);
             // const formData = $(this).serialize();
-            const formData = $(".form").serialize();
+            // const formData = $(".form").serialize();
+            let formData = new FormData();
+            const addr = $("input[name=addr]").val();
+            const specAddr = $("input[name=specAddr]").val();
+            const defAddrFl = $("input[name=defAddrFl]").prop("checked");
+            /*console.log(addr);
+            console.log(specAddr);
+            console.log(defAddrFl);*/
+            /*formData.append("addr", addr);
+            formData.append("specAddr", specAddr);*/
 
             $.ajax({
                 url: "/mypage/address",
-                type: "POST",
-                data: formData,
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "addr": addr,
+                    "specAddr": specAddr,
+                    "defAddrFl": defAddrFl
+                }),
                 success: function (response) {
-                    alert('Your form has been sent successfully.');
                     window.close();
-                    window.opener.addShippingAddrs();
+                    window.opener.location.reload(); // 해당 팝업을 연 페이지를 reload함
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert('Your form was not sent successfully.');
+                    console.error(textStatus, errorThrown);
                 }
             })
         })
     }
 </script>
 <body>
-<form class="form" method="post">
+<div class="form">
     <strong>
         <span type="direct">샛별배송</span>
         지역입니다.
@@ -64,36 +77,15 @@
                 name="specAddr"
                 placeholder="나머지 주소를 입력해 주세요"
                 type="text"
-                value=""
         />
     </div>
     <div class="row3">
         <label>
-            <input type="checkbox"/>
-            <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                        d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                        stroke="#ddd"
-                        fill="#fff"
-                ></path>
-                <path
-                        d="M7 12.6667L10.3846 16L18 8.5"
-                        stroke="#ddd"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                ></path>
-            </svg>
-            <span>기본 배송지로 저장</span>
+            <input type="checkbox" name="defAddrFl" />
+            <span style="margin-left: 5px">기본 배송지로 저장</span>
         </label>
     </div>
-    <button type="submit" height="44" radius="3">
+    <button class="submit" height="44" radius="3">
         <span>저장</span>
     </button>
     <div class="notice">
@@ -103,6 +95,6 @@
             <button>자세히 보기<span></span></button>
         </p>
     </div>
-</form>
+</div>
 </body>
 </html>

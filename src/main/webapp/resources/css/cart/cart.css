@@ -4,6 +4,33 @@
     list-style: none;
     box-sizing: border-box;
 }
+a { /*하이퍼 링크 줄 제거 */
+    text-decoration: none !important; /* 밑줄 제거 */
+    color: black !important; /* 텍스트 색상을 검은색으로 설정 */
+}
+.ul{
+    padding-left: 4px
+}
+[type="checkbox"] {
+    width: 2em;
+    height: 2em;
+    margin-bottom: 0;
+    margin-right: 12px;
+    appearance: none;
+    border-radius: 50%;
+    border: 1px solid rgb(221, 221, 221);
+    background: url(/resources/image/img-check-gray.png) no-repeat center;
+}
+
+[type="checkbox"]:hover,
+.result-buttons button:hover {
+    cursor: pointer;
+}
+
+[type="checkbox"]:checked {
+    background: #11967f url(/resources/image/img-check.png) no-repeat center center;
+    border: 0;
+}
 
 .cart-1 {   /*장바구니 레이아웃*/
     width: 1050px;
@@ -12,7 +39,7 @@
 }
 .cart-2 {   /*장바구니 상단 정렬*/
     padding: 50px 0 48px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 28px;
     line-height: 35px;
     text-align: center;
@@ -36,17 +63,17 @@
     min-height: 942px;
 }
 .cart-6 {   /*장바구니 내용물 상단 레이아웃*/
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
+    /*display: -webkit-box;*/
+    /*display: -webkit-flex;*/
+    /*display: -ms-flexbox;*/
+    /*display: flex;*/
+    /*-webkit-box-pack: justify;*/
+    /*-webkit-justify-content: space-between;*/
+    /*justify-content: space-between;*/
+    /*-webkit-align-items: center;*/
+    /*-webkit-box-align: center;*/
+    /*-ms-flex-align: center;*/
+    /*align-items: center;*/
     padding: 18px 10px 16px 2px;
     font-size: 14px;
     line-height: 26px;
@@ -148,12 +175,16 @@
     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xNiAxMHY0aDR2MmgtNHY0aC0ydi00aC00di0yaDR2LTRoMnoiIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0ibm9uemVybyIvPgo8L3N2Zz4K);
     vertical-align: top;
 }
-
-.css-6mgkir {
+.delete_btn {
     width: 30px;
     height: 30px;
+    margin-left: 9px;
+}
+.css-6mgkir {
+    width: 15px;
+    height: 15px;
     display: inline-block;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMSA5Ljc2MiAyMC4yMzggOSAxNSAxNC4yMzggOS43NjIgOSA5IDkuNzYyIDE0LjIzOCAxNSA5IDIwLjIzOGwuNzYyLjc2MkwxNSAxNS43NjIgMjAuMjM4IDIxbC43NjItLjc2MkwxNS43NjIgMTV6IiBmaWxsPSIjQ0NDIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+Cg==);
+    background-image: url(/resources/image/X.png) ;
     background-size: cover;
     background-position: center center;
 }
@@ -179,18 +210,18 @@
     text-decoration: line-through;
     padding-top: 4px;
 }
-
 .input_size_20{
     width:20px;
     height:20px;
 }
 .all_check_input{
-    margin: 18px 0 18px 18px;
+    margin: 0 0 0 4px;
 }
 .all_chcek_span{
     padding-left: 8px;
     font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
 }
 .css-50ad8x {
     position: absolute;
@@ -199,7 +230,7 @@
 }
 .css-oft680 {
     padding: 23px 19px 20px;
-    border-width: 1px 1px 0px;
+    border-width: 1px 1px 0;
     border-top-style: solid;
     border-right-style: solid;
     border-left-style: solid;
@@ -215,7 +246,7 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
-    background: url(https://res.kurly.com/pc/service/cart/2007/ico_location.svg) 0px 50% / 20px 20px no-repeat;
+    background: url(/resources/image/pointO.png) 0 50% / 25px 25px no-repeat;
 }
 .css-122i3z7 {
     display: block;
@@ -243,7 +274,6 @@
     -webkit-justify-content: space-between;
     justify-content: space-between;
     padding-top: 10px;
-    padding-top: 0;
 }
 .css-vmo0an {
     width: 100px;
@@ -259,7 +289,6 @@
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between;
-    padding-top: 10px;
     padding-top: 12px;
 }
 .css-7ygxxm {
@@ -292,7 +321,7 @@
     border-radius: 3px;
     color: rgb(255, 255, 255);
     background-color: #11967f;
-    border: 0px none;
+    border: 0 none;
     font-weight: 500;
 }
 .css-19kxq7d {
@@ -314,7 +343,7 @@
 .css-454d5e {
     display: inline-block;
     width: 1px;
-    height: 14px;
+    height: 20px;
     background: #ddd;
     margin: 6px 21px 0 22px;
     vertical-align: top;
@@ -328,30 +357,30 @@
     padding: 0;
     color: #333;
 }
-.all_check_input{
-    overflow: hidden;
-    position: absolute;
-    clip: rect(0 0 0 0);
-    -webkit-clip-path: inset(50%);
-    clip-path: inset(50%);
-    width: 1px;
-    height: 1px;
-}
+/*.all_check_input{*/
+/*    !*overflow: hidden;*!*/
+/*    position: absolute;*/
+/*    clip: rect(0 0 0 0);*/
+/*    -webkit-clip-path: inset(50%);*/
+/*    clip-path: inset(50%);*/
+/*    width: 1px;*/
+/*    height: 1px;*/
+/*}*/
 .css-79hxr7 {
     margin-right: 12px;
 }
 .css-79hxr7 svg {
     vertical-align: middle;
 }
-button {
-    overflow: visible;
-    background-color: transparent;
-    border: none;
-}
+/*button {*/
+/*    overflow: visible;*/
+/*    background-color: transparent;*/
+/*    border: none;*/
+/*}*/
 .css-qct1ee {
-    width: 30px;
-    height: 30px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTAgMGgzMHYzMEgweiIvPgogICAgICAgIDxnIHN0cm9rZT0iIzVFQzQ5RSIgc3Ryb2tlLXdpZHRoPSIxLjUiPgogICAgICAgICAgICA8cGF0aCBkPSJNMTQuNjI3IDI1LjI1NWE3LjYyNyA3LjYyNyAwIDAgMCA3LjYyNi03LjYyN2MwLTIuODA4LTIuNTQyLTcuMTg0LTcuNjI2LTEzLjEyOEM5LjU0MiAxMC40NDQgNyAxNC44MiA3IDE3LjYyOGE3LjYyNyA3LjYyNyAwIDAgMCA3LjYyNyA3LjYyN3oiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICAgICAgICAgICAgPHBhdGggZD0iTTE0LjYyNyAyMC42NmEzLjgxMyAzLjgxMyAwIDAgMCAzLjgxMy0zLjgxMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K);
+    width: 26px;
+    height: 26px;
+    background-image: url(/resources/image/water.png);
     display: inline-block;
     background-size: cover;
     background-position: center center;
@@ -365,10 +394,52 @@ button {
     vertical-align: top;
 }
 .css-1791hip {
-    width: 30px;
-    height: 30px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTAgMGgzMHYzMEgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik0xNS4wNDQgNGEuNzUuNzUgMCAwIDEgLjc0NC42NDhsLjAwNi4xMDJ2Mi42ODlsMS43Mi0xLjcyYS43NS43NSAwIDAgMSAuOTc3LS4wNzJsLjA4NC4wNzNhLjc1Ljc1IDAgMCAxIC4wNzIuOTc2bC0uMDcyLjA4NC0yLjc4IDIuNzgtLjAwMSA0LjM5IDMuODAyLTIuMTk0IDEuMDE4LTMuNzk4YS43NS43NSAwIDAgMSAxLjQ3LjI3OWwtLjAyLjEwOS0uNjMgMi4zNSAyLjMyOS0xLjM0NmEuNzUuNzUgMCAwIDEgLjgzNCAxLjI0M2wtLjA4NC4wNTctMi4zMjggMS4zNDQgMi4zNDguNjNhLjc1Ljc1IDAgMCAxIC41NS44MDlsLS4wMi4xMWEuNzUuNzUgMCAwIDEtLjgxLjU1bC0uMTA4LS4wMi0zLjc5OC0xLjAxOC0zLjgwMyAyLjE5NCAzLjgwMiAyLjE5NiAzLjc5OS0xLjAxOGEuNzUuNzUgMCAwIDEgLjQ5MyAxLjQxM2wtLjEwNS4wMzYtMi4zNS42MyAyLjMzIDEuMzQ0YS43NS43NSAwIDAgMS0uNjU5IDEuMzQ0bC0uMDkxLS4wNDQtMi4zMjgtMS4zNDQuNjI4IDIuMzQ4YS43NS43NSAwIDAgMS0uNDI1Ljg4MmwtLjEwNS4wMzdhLjc1Ljc1IDAgMCAxLS44ODItLjQyNmwtLjAzNy0uMTA1LTEuMDE3LTMuNzk3LTMuODAzLTIuMTk3djQuMzkxbDIuNzggMi43OGEuNzUuNzUgMCAwIDEtLjk3NiAxLjEzNGwtLjA4NC0uMDczLTEuNzItMS43MnYyLjY5YS43NS43NSAwIDAgMS0xLjQ5My4xMDJsLS4wMDctLjEwMnYtMi42ODhsLTEuNzIgMS43MThhLjc1Ljc1IDAgMCAxLS45NzYuMDczbC0uMDg0LS4wNzNhLjc1Ljc1IDAgMCAxLS4wNzMtLjk3NmwuMDczLS4wODQgMi43OC0yLjc4di00LjM5MWwtMy44MDEgMi4xOTUtMS4wMTggMy43OThhLjc1Ljc1IDAgMCAxLTEuNDctLjI3OWwuMDItLjEwOS42My0yLjM1LTIuMzI5IDEuMzQ2YS43NS43NSAwIDAgMS0uODM1LTEuMjQzbC4wODUtLjA1NyAyLjMyOC0xLjM0NC0yLjM0OC0uNjNhLjc1Ljc1IDAgMCAxLS41NTEtLjgwOWwuMDItLjExYS43NS43NSAwIDAgMSAuODEtLjU1bC4xMS4wMiAzLjc5NyAxLjAxOCAzLjgwMi0yLjE5NS0zLjgwMS0yLjE5NS0zLjc5OSAxLjAxOGEuNzUuNzUgMCAwIDEtLjQ5My0xLjQxM2wuMTA1LS4wMzYgMi4zNS0uNjMtMi4zMy0xLjM0NGEuNzUuNzUgMCAwIDEgLjY1OS0xLjM0NGwuMDkxLjA0NCAyLjMyOCAxLjM0NC0uNjI4LTIuMzQ4YS43NS43NSAwIDAgMSAuNDI1LS44ODJsLjEwNS0uMDM3YS43NS43NSAwIDAgMSAuODgyLjQyNmwuMDM3LjEwNSAxLjAxNyAzLjc5NyAzLjgwMiAyLjE5NnYtNC4zOWwtMi43OC0yLjc4YS43NS43NSAwIDAgMSAuOTc3LTEuMTM0bC4wODQuMDczIDEuNzIgMS43MTlWNC43NWEuNzUuNzUgMCAwIDEgLjc1LS43NXoiIGZpbGw9IiM2RkFGRjMiIGZpbGwtcnVsZT0ibm9uemVybyIvPgogICAgPC9nPgo8L3N2Zz4K);
+    width: 26px;
+    height: 26px;
+    background-image: url(/resources/image/ice.png);
     display: inline-block;
     background-size: cover;
     background-position: center center;
+}
+.hide {     /* 보이는거 누르면 안보이게 */
+    display: none;
+}
+
+.fold_button {
+    width: 30px; /* 사이즈 */
+    height: 30px; /* 사이즈 */
+}
+.arrow {
+    position: relative;
+    content: '';
+    width: 12px; /* 사이즈 */
+    height: 12px; /* 사이즈 */
+    border-top: 2px solid #121212; /* 선 두께 */
+    border-right: 2px solid #121212; /* 선 두께 */
+    display: inline-block;
+    transform: rotate(315deg);
+
+}
+.turn {
+    transform: rotate(135deg);
+}
+.css-k9umm5 {
+    width: 30px;
+    height: 30px;
+    background-image: url(/resources/image/sun.png);
+    display: inline-block;
+    background-size: cover;
+    background-position: center center;
+}
+/*장바구니 비었을때*/
+.emptyCart {
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+.css-l1lu2l {
+    padding: 115px 0px;
+    border-top: 1px solid rgb(51, 51, 51);
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: rgb(181, 181, 181);
 }

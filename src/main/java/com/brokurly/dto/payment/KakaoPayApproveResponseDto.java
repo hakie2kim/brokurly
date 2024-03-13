@@ -1,7 +1,7 @@
 package com.brokurly.dto.payment;
 
-import com.brokurly.entity.payment.Amount;
-import com.brokurly.entity.payment.CardInfo;
+import com.brokurly.entity.payment.kakaopay.Amount;
+import com.brokurly.entity.payment.kakaopay.CardInfo;
 import lombok.*;
 
 import java.sql.Timestamp;
