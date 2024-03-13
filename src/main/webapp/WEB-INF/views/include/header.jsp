@@ -10,7 +10,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false"%>
-<c:set var="loginSession" value="${pageContext.request.getSession(false)==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+='님'}"/>
+<c:set var="loginSession" value="${pageContext.request.session.getAttribute('loginName')==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+='님'}"/>
 <c:set var="signup" value="${loginSession =='로그인' ? '회원가입' : ''}"/>
 
 <html>

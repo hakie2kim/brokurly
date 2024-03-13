@@ -27,17 +27,8 @@
     <input type="hidden" name="_method" value="POST">
     <section>
         <!-- modal start -->
-        <div class="modal">
-            <div class="modal_content_body">
-                <span id="modal_content"></span>
-                <!-- modalContent -->
-            </div>
-            <div class="modal_alert_body">
-                <button  type="button" class="close-modal-btn btn">확인</button>
-            </div>
-        </div>
+        <jsp:include page="../include/modal.jsp"/>
         <!-- modal end -->
-
         <span class="register-header">회원가입</span>
         <div class="Required-entr-div">
             <span class="Required-entr__label">*&nbsp;</span>필수입력사항
@@ -54,7 +45,7 @@
                         id="email"
                         name="email"
                 />
-                <button type="button" id="email_btn" class="open-modal-btn btn">중복확인</button>
+                <button type="button" id="email_btn" class="open-modal-btn btn css-x0zbdy e4nu7ef3">중복확인</button>
             </div>
             <div class="email-info-div">
           <span
@@ -273,6 +264,7 @@
         <button type="button" class="register-btn btn">가입하기</button>
     </section>
 </form>
+<%--<script type="text/javascript" src="<c:url value='/resources/js/member/modal.js'/>"></script>--%>
 <script type="text/javascript" src="<c:url value='/resources/js/member/member.js'/>"></script>
 </body>
 </html>

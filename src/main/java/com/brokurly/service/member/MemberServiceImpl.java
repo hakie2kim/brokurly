@@ -147,7 +147,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public int chageNewPwd(MemberAndLoginDto memberAndLoginDto){
-        log.info("memberAndLoginDto = {}",memberAndLoginDto);
         memberAndLoginDto.setPwd(bCryptPasswordEncoder.encode(memberAndLoginDto.getPwd()));
         Member member = new Member();
         member.changeStatus(memberAndLoginDto);

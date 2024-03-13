@@ -96,19 +96,11 @@
 
 </style>
 <body>
-<form action="<c:url value='/member/login'/>" method="POST">
+<form id="frm" action="<c:url value='/member/login'/>" method="POST">
     <input type="hidden" name="_method" value="POST">
     <section>
         <!-- modal start -->
-        <div class="modal">
-            <div class="modal_content_body">
-                <span id="modal_content"></span>
-                <!-- modalContent -->
-            </div>
-            <div class="modal_alert_body">
-                <button  type="button" class="close-modal-btn btn">확인</button>
-            </div>
-        </div>
+        <jsp:include page="../include/modal.jsp"/>
         <!-- modal end -->
         <span class="login-header">로그인</span>
         <div class="login-div">
@@ -116,13 +108,16 @@
                     class="login-div__column"
                     type="text"
                     name="custId"
+                    id="email"
                     placeholder="아이디를 입력해주세요"
             />
             <input
                     class="login-div__column"
                     type="password"
                     name="pwd"
+                    id="pwd"
                     placeholder="비밀번호를 입력해주세요"
+                    maxlength="15"
             />
             <input type="hidden" name="reqURI" value="${param.redirectURL}">
             <div class="find-div">
@@ -136,44 +131,60 @@
         </div>
     </section>
 </form>
-<script type="text/javascript" src="<c:url value='/resources/js/member/member.js'/> "></script>
 <script>
    $(document).ready(function ()  {
-       let modal = document.querySelector(".modal");
-       let modalContent = document.querySelector("#modal_content");
-       let closeModalBtn = document.querySelector(".close-modal-btn");
+       // modal start
+       $(".MuiModal-root").hide();
 
-       // 로그인
-       let loginBtn = document.querySelector(".loginBtn");
+       function existModal(msg){
+           let msgDiv = $(".msg-div");
+           msgDiv.text(msg);
 
-       // modal open
-       function openModal(msg) {
-           modal.style.display = "flex";
-           document.body.style.overflow = "hidden"; // 모달 작동 시 스크롤바 비활성화
-           modalContent.innerHTML = `<p>${msg}</p>`; //
-
+           $(".MuiModal-root").show();
        }
 
-       // modal close
-       closeModalBtn.addEventListener("click", () => {
-           modal.style.display = "none";
-           document.body.style.overflow = "unset"; // 모달 작동 시 스크롤바 활성화
-
+       // 모달창 끄기
+       $(".exist-modal").click(function () {
+           $('.modal-item-cnt').text("1");
+           $(".MuiModal-root").fadeOut();
        });
+
 
        let msg = "${msg}";
 
        if(msg != ''){
-           openModal(msg);
+           existModal(msg);
        }
+
+       function regExp(value){
+           const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i; // 이메일 정규식
+           const pwdRegEx = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$/; // 비밀번호 > 영문 특수문자 조합 10자 이상
+
+
+           let inputed = "";
+           let regEx = "";
+           //switch : 수정로 수정 > if else는 전부 검사하는데 switch는 바로 찾아감
+            if(value === 2){
+               inputed = document.querySelector("#email").value.trim();
+               regEx = emailRegEx;
+           }else if(value === 4){
+               inputed = document.querySelector("#pwd").value.trim();
+               regEx = pwdRegEx;
+           }
+           return !regEx.test(inputed) || !inputed;
+       }
+
+       let loginBtn = document.querySelector(".loginBtn");
 
        loginBtn.addEventListener("click", () => {
 
-
-           if(!pwdRegExp()){
-               openModal("아이디 또는 비밀번호를 확인해주세요");
+           if( regExp(2) || regExp(4)){
+               existModal("아이디 또는 비밀번호를 확인해주세요");
                return false;
            }
+
+           let loginFrm = document.querySelector("#frm");
+           loginFrm.submit();
 
        });
 
