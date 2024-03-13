@@ -320,10 +320,10 @@
 
   </div>
 
-</div>
-<%--  주문 form --%>
+<%--</div>--%>
+<%--&lt;%&ndash;  주문 form &ndash;%&gt;--%>
 
-</div>
+<%--</div>--%>
 <script>
     $(document).ready(function () {
         setTotalInfo(); //계산정보 삽입
@@ -580,7 +580,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hakie2kim",
+                custId: "${custId}",
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -613,7 +613,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hakie2kim",
+                custId: "${custId}",
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -634,7 +634,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hakie2kim",
+                custId: "${custId}",
                 itemId: itemId
             },
             success: function () {
@@ -659,7 +659,7 @@
                     method: "POST",
                     dataType: "text",
                     data: {
-                        custId: "hakie2kim",
+                        custId: "${custId}",
                         itemId: itemId
                     },
                     success: function () {
@@ -755,7 +755,7 @@
                     method: "POST",
                     dataType: "text",
                     data: {
-                        custId: "hong",
+                        custId: "${custId}",
                         itemId: itemId,
                         itemCnt: itemCnt,
                         itemCk: 'Y'
