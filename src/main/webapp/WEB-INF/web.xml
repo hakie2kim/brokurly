@@ -70,6 +70,10 @@
             <url-pattern>/WEB-INF/views/categories/*</url-pattern>
             <url-pattern>/WEB-INF/views/search/*</url-pattern>
             <url-pattern>/WEB-INF/views/order/checkout.jsp</url-pattern>
+            <url-pattern>/WEB-INF/views/mypage/address.jsp</url-pattern>
+            <url-pattern>/WEB-INF/views/mypage/order-detail.jsp</url-pattern>
+            <url-pattern>/WEB-INF/views/mypage/order-list.jsp</url-pattern>
+            <url-pattern>/WEB-INF/views/mypage/pick-list.jsp</url-pattern>
             <include-prelude>/WEB-INF/views/include/header.jsp</include-prelude>
             <include-coda>/WEB-INF/views/include/footer.jsp</include-coda>
         </jsp-property-group>

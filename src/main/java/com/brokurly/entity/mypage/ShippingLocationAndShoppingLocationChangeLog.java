@@ -89,6 +89,7 @@ public class ShippingLocationAndShoppingLocationChangeLog {
                 .shipLocaId(shipLocaId)
                 .addr(addr)
                 .specAddr(specAddr)
+                .defAddrFl(defAddrFl)
                 .currAddrFl(currAddrFl)
                 .build();
     }
