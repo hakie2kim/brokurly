@@ -8,6 +8,7 @@ import com.brokurly.dto.mypage.PointLogUsageDto;
 
 import com.brokurly.dto.mypage.*;
 
+import com.brokurly.dto.order.OrderLogListResponseDto;
 import com.brokurly.dto.order.OrderResponseDto;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
@@ -274,9 +275,10 @@ public class MypageController {
     @GetMapping("/order/list")
     String orderList(HttpServletRequest httpServletRequest, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
-//        List<OrderResponseDto> orderList = orderService.findOrdersByCustId(custId);
-//        model.addAttribute("orderList", orderList);
-//        model.addAttribute("orderCnt", orderList.size());
+
+        List<OrderLogListResponseDto> orderList = orderService.findOrdersByCustId(custId);
+        model.addAttribute("orderList", orderList);
+        model.addAttribute("orderCnt", orderList.size());
         return "/mypage/order-list";
     }
 

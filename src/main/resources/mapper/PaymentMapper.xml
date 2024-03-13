@@ -23,7 +23,7 @@
         <include refid="select"/>
     </select>
 
-    <select id="selecByOrderId" resultMap="paymentDetailsResultMap">
+    <select id="selectByOrderId" resultMap="paymentDetailsResultMap">
         SELECT *
         FROM payment
         WHERE order_id = #{orderId}
@@ -37,6 +37,7 @@
         <result property="payReqDt" column="pay_req_dt"/>
         <result property="payConfDt" column="pay_conf_dt"/>
         <result property="orderId" column="order_id"/>
+        <result property="itemName" column="item_name"/>
 
         <!-- PaymentAmount Fields -->
         <association property="paymentAmount" javaType="com.brokurly.entity.payment.PaymentAmount">

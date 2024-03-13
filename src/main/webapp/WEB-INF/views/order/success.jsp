@@ -98,15 +98,15 @@
                     </span>
                 </div>
             </div>
-            <button class="show-order">주문 상세보기</button>
-            <button class="go-shopping">쇼핑 계속하기</button>
+            <button class="show-order buttons">주문 상세보기</button>
+            <button class="go-shopping buttons">쇼핑 계속하기</button>
         </div>
     </div>
     <div class="small-modal">
         <div class="small-modal-border">
             <div class="small-modal-content">주문번호가 복사되었습니다.</div>
             <div class="small-modal-buttons">
-                <button id="small-modal-ok">확인</button>
+                <button id="small-modal-ok" class="buttons">확인</button>
             </div>
         </div>
     </div>

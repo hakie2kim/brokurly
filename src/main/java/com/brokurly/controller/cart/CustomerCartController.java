@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class CustomerCartController {
 //        log.info("customerCartDto.getCustId = {}",customerCartDto.getCustId());
 
         if (custId == null) {
-            return "5";
+            // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
         }
         // 카트 등록
         int result = customerCartService.addCart(customerCartDto);
@@ -79,14 +81,14 @@ public class CustomerCartController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto){
+    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto) {
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
         return "redirect:/cart/{custId}";
     }
 
     @PostMapping("/vacate")
     @ResponseBody
-    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto){
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto) {
         CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
 
     }

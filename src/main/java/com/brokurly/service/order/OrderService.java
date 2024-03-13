@@ -60,9 +60,10 @@ public class OrderService {
             orderLog.setOrder(orderResponseDto);
 
             PaymentDetailsResponseDto payment = paymentService.findPaymentLogByOrderId(orderResponseDto.getOrderId());
-
             orderLog.setItemName(payment.getItemName());
             orderLog.setPayMthd(payment.getPayMthd());
+
+            orderLogList.add(orderLog);
         }
         return orderLogList;
     }
