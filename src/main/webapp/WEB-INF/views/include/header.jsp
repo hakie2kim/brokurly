@@ -153,7 +153,7 @@
 </head>
 <body>
 <div>
-
+  <input type="text" value="${sessionScope.loginMember.custId}">
   <div class="head-1">
     <div class="login-wrap">
       <c:if test="${loginSession eq '로그인'}">
@@ -230,7 +230,7 @@
               type="button"
           ></button>
           <div class="cart-icon">
-            <button class="cart-icon-btn" onclick="location.href='/cart/hakie2kim'">
+            <button class="cart-icon-btn" onclick="location.href='/cart/${custId}'">
                              <div style="top: 7px; position: absolute; right: 3px;">
                                <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
                                 1

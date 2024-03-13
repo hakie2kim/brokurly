@@ -1,11 +1,13 @@
 package com.brokurly.controller.cart;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.mypage.ShippingLocationDto;
 import com.brokurly.repository.mypage.ShippingLocationDao;
 import com.brokurly.service.cart.CustomerCartService;
 import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,12 +33,14 @@ public class CustomerCartController {
     @ResponseBody
     public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
         // 로그인 체크
-        String member = (String) session.getAttribute("member");
+//        String member = (String) session.getAttribute("member");
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
 //        System.out.println(member);
 //        log.info(" member = {}",member);
 //        log.info("cusCart={}",customerCartDto);
 
-        if (member == null) {
+        if (custId == null) {
             return "5";
         }
         // 카트 등록
