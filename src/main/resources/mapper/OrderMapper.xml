@@ -7,17 +7,17 @@
     <insert id="insert">
         INSERT INTO orders
             (order_id, cust_id, total_item_qty, total_price,
-             total_dc_amt, order_amt, ship_fee, order_addr, ship_no)
+             total_dc_amt, order_amt, ship_fee, ship_loca_id, ship_no)
         VALUES
             (#{orderId}, #{custId}, #{totalItemQty}, #{totalPrice},
-             #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{orderAddr}, #{shipNo})
+             #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{shipLocaId}, #{shipNo})
     </insert>
 
     <insert id="insertItemList">
         INSERT INTO order_item_list
-            (order_id, item_id, item_qty, item_price)
+            (order_id, item_id, item_qty, item_price, item_dc_price)
         VALUES
-            (#{orderId}, #{itemId}, #{itemQty}, #{itemPrice})
+            (#{orderId}, #{itemId}, #{itemQty}, #{itemPrice}, #{itemDcPrice})
     </insert>
 
     <!-- READ -->
@@ -39,6 +39,12 @@
 
     <select id="selectByOrderId" resultType="Order">
         <include refid="select"/>
+        WHERE order_id = #{orderId}
+    </select>
+
+    <select id="selectItemList" resultType="OrderItems">
+        SELECT *
+        FROM order_item_list
         WHERE order_id = #{orderId}
     </select>
 
