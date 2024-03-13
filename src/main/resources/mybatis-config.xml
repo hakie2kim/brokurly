@@ -35,11 +35,9 @@
         <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsInquiryLog" alias="GoodsInquiryLog"/>
-<!--        <typeAlias type="com.brokurly.entity.seller.Seller" alias="Seller"/>-->
+        <typeAlias type="com.brokurly.entity.seller.Seller" alias="Seller"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsReviewBoard" alias="GoodsReivewBoard"/>
         <typeAlias type="com.brokurly.entity.mypage.WishList" alias="WishList"/>
         <typeAlias type="com.brokurly.entity.mypage.WishListItem" alias="WishListItem"/>
-
-
     </typeAliases>
 </configuration>

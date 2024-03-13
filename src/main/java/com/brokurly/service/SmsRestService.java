@@ -35,7 +35,7 @@ public class SmsRestService {
         message.setText("["+smsNum+"] 브로컬리 인증번호를 입력해주세요.");
 
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-        System.out.println(response);
+
 
     }
 }

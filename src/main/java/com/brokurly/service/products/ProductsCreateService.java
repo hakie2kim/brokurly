@@ -1,9 +1,6 @@
 package com.brokurly.service.products;
 
-import com.brokurly.dto.goods.GoodsAnnouncementDto;
-import com.brokurly.dto.goods.GoodsByBsnsNoDto;
-import com.brokurly.dto.goods.GoodsDto;
-import com.brokurly.dto.goods.GoodsImageDto;
+import com.brokurly.dto.goods.*;
 import com.brokurly.dto.search.SearchKeywordDto;
 import com.brokurly.entity.goods.Goods;
 import com.brokurly.entity.goods.GoodsAnnouncement;
@@ -138,18 +135,20 @@ public class ProductsCreateService {
 
     // 상품 업데이트
     @Transactional
-    public void updateGoods(String itemId,GoodsDto goodsDto){
+    public void updateGoods(String itemId, GoodsUpdateDto goodsUpdateDto){
         //itemId로 찾기
-        Goods goods = productsCreateDao.selectByItemId(itemId);
-        GoodsDto goodsChangeDto = goods.makeFullDto();
-        log.info("goodsChangeDto={}",goodsChangeDto);
-        log.info("goodsDto={}",goodsDto);
 
-        goods.changeStatus(goodsDto);
+        Goods goods = productsCreateDao.selectByItemId(itemId);
+        log.info("goods={}",goods);
+        log.info("과연..itemId={}",itemId);
+        GoodsUpdateDto goodsChangeDto = goods.updateDto();
+        log.info("goodsChangeDto={}",goodsChangeDto);
+        log.info("goodsUpdateDto={}",goodsUpdateDto);
+
+        goods.UpdateStatus(goodsUpdateDto);
         productsCreateDao.updateItem(goods);
 
     }
-
 
     // 고시정보 업데이트
 

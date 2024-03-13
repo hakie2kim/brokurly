@@ -29,7 +29,7 @@
           <div class="css-1g6fovq">
 
 
-<%--                        <label class="css-1xdhyk6 e1dcessg3" for="kurly-address-22760216">--%>
+<%--                        <label class="css-gi1xdhyk6 e1dcessg3" for="kurly-address-22760216">--%>
 <%--                          <input--%>
 <%--                            data-testid="address-item"--%>
 <%--                            id="kurly-address-22760216"--%>

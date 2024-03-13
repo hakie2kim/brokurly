@@ -9,6 +9,7 @@ body {
 }
 section {
     margin-top: 100px;
+    margin-bottom: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +17,7 @@ section {
 }
 .login-div {
     width: 340px;
-    height: 295px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -61,9 +62,11 @@ a {
     color: var(--main-color);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"]{
     border-radius: var(--main-border-radius);
     border: 1px solid rgb(221, 221, 221);
+    padding-left: 15px;
 }
 
 input:focus {
@@ -72,7 +75,7 @@ input:focus {
 
 ::placeholder {
     font-size: 14px;
-    padding: 0 11px 1px 15px;
+    padding: 0 11px 1px 0px;
 }
 
 .login-header {

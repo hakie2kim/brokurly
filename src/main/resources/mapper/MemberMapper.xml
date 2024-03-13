@@ -28,8 +28,8 @@
         (cust_id, pwd, name, email, tel_no, sex,
          birth_dt, consent,sns_id)
         VALUES
-            (#{email}, #{pwd}, #{name}, #{email}, #{telNo}, 'N',
-             #{birthDt}, '0' ,'0')
+            (#{email}, #{pwd}, #{name}, #{email}, #{telNo}, #{sex},
+             #{birthDt}, #{consent} ,'0')
     </insert>
 
     <!-- READ -->
@@ -103,7 +103,7 @@
 
     <select id="countEmail" resultType="int">
         <include refid="count"/>
-        WHERE email = #{email}
+        WHERE cust_id = #{email}
     </select>
 
     <!--    이메일 인증 : 로그인 시 인증여부를 체크(안했으면 0 반환)-->
@@ -124,6 +124,11 @@
         SET     mail_auth = 1
         WHERE   email     = #{email}
           AND     mail_key  = #{mailKey}
+    </update>
+    <update id="updateMemberByPwd">
+        UPDATE customer
+        SET pwd = #{pwd}
+        WHERE cust_id = #{custId}
     </update>
     <!-- DELETE -->
     <delete id="deleteMemberAll">

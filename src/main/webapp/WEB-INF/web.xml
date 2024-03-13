@@ -74,5 +74,13 @@
             <include-prelude>/WEB-INF/views/include/header.jsp</include-prelude>
             <include-coda>/WEB-INF/views/include/footer.jsp</include-coda>
         </jsp-property-group>
+
+        <jsp-property-group>
+            <url-pattern>/WEB-INF/views/seller/*</url-pattern>
+            <include-prelude>/WEB-INF/views/include/sellerHeader.jsp</include-prelude>
+        </jsp-property-group>
+
     </jsp-config>
+
+
 </web-app>
