@@ -153,7 +153,6 @@
 </head>
 <body>
 <div>
-  <input type="text" value="${sessionScope.loginMember.custId}">
   <div class="head-1">
     <div class="login-wrap">
       <c:if test="${loginSession eq '로그인'}">

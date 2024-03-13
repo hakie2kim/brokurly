@@ -35,10 +35,11 @@ public class CustomerCartController {
         // 로그인 체크
 //        String member = (String) session.getAttribute("member");
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        String custId = custIdDto.getCustId();
-//        System.out.println(member);
-//        log.info(" member = {}",member);
-//        log.info("cusCart={}",customerCartDto);
+        String custId = custIdDto.getCustId();  //id값 가져와서
+        //session.setAttribute("custId",custId);
+        customerCartDto.setCustId(custId);  //id값 넣어주기
+        customerCartDto.setItemCk("N");
+//        log.info("customerCartDto.getCustId = {}",customerCartDto.getCustId());
 
         if (custId == null) {
             return "5";
@@ -51,9 +52,13 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
+
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
+        List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
 
+
+        // 이제는 새로운 CustomerCartDto 객체를 생성하여 값을 설정합니다.
         model.addAttribute("cart", cart);
         model.addAttribute("address", address);
         return "cart/cart";

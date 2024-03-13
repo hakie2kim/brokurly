@@ -274,9 +274,9 @@ public class MypageController {
     @GetMapping("/order/list")
     String orderList(HttpServletRequest httpServletRequest, Model model) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
-        List<OrderResponseDto> orderList = orderService.findOrdersByCustId(custId);
-        model.addAttribute("orderList", orderList);
-        model.addAttribute("orderCnt", orderList.size());
+//        List<OrderResponseDto> orderList = orderService.findOrdersByCustId(custId);
+//        model.addAttribute("orderList", orderList);
+//        model.addAttribute("orderCnt", orderList.size());
         return "/mypage/order-list";
     }
 
