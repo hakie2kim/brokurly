@@ -742,7 +742,7 @@
     //     $(".order_form").html(form_contents);
     //     $(".order_form").submit();
 
-
+//주문하기
     $(".order_btn").on("click", function () {
         $(".cart-8").each(function (index, element) {
 

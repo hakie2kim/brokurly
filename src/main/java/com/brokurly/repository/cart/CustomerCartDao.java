@@ -23,4 +23,5 @@ public interface CustomerCartDao {
     CustomerCart checkCart(CustomerCart customerCart);  //카트 확인
 
     int vacateCart(CustomerCart customerCart);  //주문 후 장바구니 비우기
+    void updateAll(String custId);    //장바구니 itemCk 리셋
 }

@@ -74,6 +74,19 @@ public class CustomerCartService {
     }
 
     @Transactional
+    public List<CustomerCartDto> updateAll(String custId) {     //장바구니 상품 수량 변경
+        List<CustomerCart> cartList = customerCartDao.selectByCustId(custId);
+        List<CustomerCartDto> customerCartDto = new ArrayList<>();
+
+        for (CustomerCart customerCart : cartList) {
+            customerCartDao.updateAll(custId);
+            customerCartDto.add(customerCart.makeFullDto());
+        }
+
+        return customerCartDto;
+    }
+
+    @Transactional
     public CustomerCartDto deleteCart(CustomerCartDto customerCartDto) {   //장바구니 상품 삭제
 
         CustomerCart customerCart = new CustomerCart(); //비어있는 CustomerCart 도메인 만들기
