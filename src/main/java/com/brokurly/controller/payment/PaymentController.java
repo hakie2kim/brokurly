@@ -39,8 +39,8 @@ public class PaymentController {
     public ResponseEntity<String> kakaoPayReady(@RequestBody CheckoutDto checkout, HttpSession session) {
         String orderId = IdGenerator.generateOrderId();
         MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (loginMember == null)
-            loginMember = new MemberAndLoginDto("hakie2kim", "1234", "홍길동");
+
+        log.info("checkout = {}", checkout);
 
         KakaoPayReadyResponseDto response;
         try {
@@ -48,6 +48,8 @@ public class PaymentController {
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
+
+        log.info("response = {}", response);
 
         orderService.placeOrder(checkout, orderId, loginMember.getCustId());
 
@@ -62,9 +64,10 @@ public class PaymentController {
     }
 
     @GetMapping("/kakaopay/success")
-    public String kakaoPaySuccess(@RequestParam String pg_token, HttpSession session, RedirectAttributes redirectAttributes) {
-        log.info("session info = {}", setParamMap(session));
+    public String kakaoPaySuccess(@RequestParam String pg_token, HttpSession session) {
         KakaoPayApproveResponseDto response = kakaoPayService.approve(pg_token, setParamMap(session)).block();
+
+        log.info("success response = {}", response);
 
         if (response == null) {
             log.info("response 없음");
@@ -73,10 +76,6 @@ public class PaymentController {
 
         PaymentAmountCheckoutDto paymentAmount = (PaymentAmountCheckoutDto) session.getAttribute("paymentAmount");
         paymentService.savePaymentLog(response, paymentAmount);
-
-        // 결제 성공 시 보여줄 화면에 데이터 전달
-//        redirectAttributes.addFlashAttribute("orderId", response.getPartner_order_id());
-//        redirectAttributes.addFlashAttribute("amount", response.getAmount());
 
         return "redirect:/order/checkout/success";
     }

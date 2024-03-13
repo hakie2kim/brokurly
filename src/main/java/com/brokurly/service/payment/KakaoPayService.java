@@ -43,7 +43,7 @@ public class KakaoPayService {
                 .cid(clientId)
                 .partner_order_id(orderId)
                 .partner_user_id(custId)
-                .item_name(getItemName(checkoutDto.getCustomerCart()))
+                .item_name(checkoutDto.getItemName())
                 .quantity(getQuantity(checkoutDto.getCustomerCart()))
                 .total_amount(checkoutDto.getPaymentAmount().getOrderAmt())
                 .tax_free_amount(0)
