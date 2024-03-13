@@ -47,16 +47,16 @@ public class ShippingLocationAndShoppingLocationChangeLog {
     }
 
     public void updateShippingLocationDto(ShippingLocationDto shippingLocationDto) {
-       this.shipLocaId = shippingLocationDto.getShipLocaId();
-       this.addr = shippingLocationDto.getAddr();
-       this.specAddr = shippingLocationDto.getSpecAddr();
-       this.defAddrFl = shippingLocationDto.getDefAddrFl();
-       this.shipLocaRegDt = shippingLocationDto.getShipLocaRegDt();
-       this.telNo = shippingLocationDto.getTelNo();
-       this.recAddr = shippingLocationDto.getRecAddr();
-       this.recName = shippingLocationDto.getRecName();
-       this.delFl = shippingLocationDto.getDelFl();
-       this.currAddrFl = shippingLocationDto.getCurrAddrFl();
+        this.shipLocaId = shippingLocationDto.getShipLocaId();
+        this.addr = shippingLocationDto.getAddr();
+        this.specAddr = shippingLocationDto.getSpecAddr();
+        this.defAddrFl = shippingLocationDto.getDefAddrFl();
+        this.shipLocaRegDt = shippingLocationDto.getShipLocaRegDt();
+        this.telNo = shippingLocationDto.getTelNo();
+        this.recAddr = shippingLocationDto.getRecAddr();
+        this.recName = shippingLocationDto.getRecName();
+        this.delFl = shippingLocationDto.getDelFl();
+        this.currAddrFl = shippingLocationDto.getCurrAddrFl();
     }
 
     public ShippingLocationUpdateDto makeShippingLocationUpdateDto() {

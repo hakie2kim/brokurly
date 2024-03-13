@@ -1,11 +1,20 @@
 /* 전체 적용 css */
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    font-family: "Noto Sans KR", sans-serif;*/
+/*}*/
 * {
     margin: 0;
     padding: 0;
     list-style: none;
     box-sizing: border-box;
 }
-
+a { /*하이퍼 링크 줄 제거 */
+    /*text-decoration-line: none;*/
+    text-decoration: none !important; /* 밑줄 제거 */
+    color: black !important; /* 텍스트 색상을 검은색으로 설정 */
+}
 tr {
     display: table-row;
     vertical-align: inherit;
@@ -15,18 +24,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-button {
-    overflow: visible;
-    background-color: transparent;
-    border: none;
-}
-.header0 {
-    position: relative;
-    width: 1050px;
-    height: 100px;
-    margin: 0px auto;
-    letter-spacing: -0.3px;
-}
+/*button {*/
+/*    overflow: visible;*/
+/*    background-color: transparent;*/
+/*    border: none;*/
+/*}*/
+/*.header0 {*/
+/*    position: relative;*/
+/*    width: 1050px;*/
+/*    height: 100px;*/
+/*    margin: 0px auto;*/
+/*    letter-spacing: -0.3px;*/
+/*}*/
 .goods-0 {
     position: relative; /* 앱솔루트의 위치 고정을 위한 기준점(부모 클래스에 줘야됨) */
 }
@@ -41,15 +50,15 @@ button {
     top: 0px;
     left: 0px;
 }
-.header2 {
-    position: relative;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    width: 1050px;
-    height: 56px;
-    margin: 0px auto;
-}
+/*.header2 {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    -webkit-box-pack: justify;*/
+/*    justify-content: space-between;*/
+/*    width: 1050px;*/
+/*    height: 56px;*/
+/*    margin: 0px auto;*/
+/*}*/
 
 .goods-1 {   /* 화면 전체 레이아웃 */
     width: 100%;
@@ -89,6 +98,10 @@ button {
     height: 100%;
     font-size: 16px;
     font-weight: 500;
+    color: #666;
+    text-decoration: none;
+}
+.goods-4:hover {
     color: #666;
 }
 .goods-101 {   /*상품 정보 레이아웃*/
@@ -234,7 +247,7 @@ button {
     -webkit-box-flex: 1;
     flex-grow: 1;
 }
-.goods-113 .cart-button {
+.goods-113 .btn_cart {
     font-weight: 500;
 }
 .goods-114 {   /* 장바구니 버튼 레이아웃 */
@@ -298,7 +311,8 @@ button {
     z-index: 20;
     /* position: -webkit-sticky; */
     position: sticky;
-    top: 56px;
+    /*top: 56px;*/
+    top: 0;
     width: 1010px;
     box-shadow: inset 0 -0.5px 0 0 #ddd;
     background-color: #fff;
@@ -314,6 +328,7 @@ button {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     height: 60px;
+    padding-left: 0;
 }
 .goods-7 {   /* 상품설명/상세정보/후기/문의 카테고리 레이아웃4 */
     display: -webkit-box;
@@ -346,6 +361,7 @@ button {
     flex-wrap: wrap;
     width: 100%;
     padding-top: 36px;
+    padding-left: 0;
     font-size: 13px;
     color: #333;
     line-height: 18px;
@@ -869,7 +885,7 @@ button {
 .goods-67 { /*질문 답변&내용 아이콘 레이아웃*/
     width: 28px;
     height: 28px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ0NSAtODc2KSB0cmFuc2xhdGUoNDIzIDI3NikgdHJhbnNsYXRlKDIgMzE2KSB0cmFuc2xhdGUoMjAgMjg0KSI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIiBmaWxsPSIjQTg2NEQ4Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMS45NDYgNy41YzIuNDU2IDAgNC40NDYgMS45OSA0LjQ0NiA0LjQ0NiAwIC45MDctLjI3MSAxLjc1LS43MzcgMi40NTNsLjg0NS44NDMtMS4yNTggMS4yNTgtLjg0My0uODQ1Yy0uNzAzLjQ2Ni0xLjU0Ni43MzctMi40NTMuNzM3LTIuNDU1IDAtNC40NDYtMS45OS00LjQ0Ni00LjQ0NkM3LjUgOS40OTEgOS40OSA3LjUgMTEuOTQ2IDcuNXptMCAxLjc3OGMtMS40NzMgMC0yLjY2OCAxLjE5NS0yLjY2OCAyLjY2OHMxLjE5NSAyLjY2OCAyLjY2OCAyLjY2OGMuNDEyIDAgLjgwMi0uMDk0IDEuMTUtLjI2bC0uMzY5LS4zNyAxLjI1OC0xLjI1Ny4zNjkuMzY5Yy4xNjYtLjM0OC4yNi0uNzM4LjI2LTEuMTUgMC0xLjQ3My0xLjE5NS0yLjY2OC0yLjY2OC0yLjY2OHoiLz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPgo=);
+    background-image: url(/resources/image/question.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -877,7 +893,7 @@ button {
 .goods-68 {  /*질문 답변 아이콘 레이아웃*/
     width: 28px;
     height: 28px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGc+CiAgICAgICAgICAgIDxnPgogICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQ0NSAtMTkxOCkgdHJhbnNsYXRlKDQyMyAyNzYpIHRyYW5zbGF0ZSgyIDE2MjIpIHRyYW5zbGF0ZSgyMCAyMCkiPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMiIgZmlsbD0iIzVGMDA4MCIvPgogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGQ9Ik05Ljc2IDE1LjcwOGwuNTQtMS40MDRoMy40NTZsLjU1MiAxLjQwNGgyLjE0OEwxMyA3LjVoLTEuOTMyTDcuNiAxNS43MDhoMi4xNnptMy4zMjQtMy4xMzJoLTIuMTEybDEuMDU2LTIuNzEyIDEuMDU2IDIuNzEyeiIvPgogICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==);
+    background-image: url(/resources/image/answer.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -996,12 +1012,16 @@ button {
     display: flex;
     padding: 39px 0 40px;
     border-top: 1px solid #ddd;
+
+    /*display: flex;*/
+    /*padding: 39px 0px 40px;*/
+    /*border-top: 1px solid rgb(221, 221, 221);*/
 }
 .goods-79 { /*고객행복센터 레이아웃*/
     width: 340px;
     padding-left: 31px;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 25px;
 }
 p {
@@ -1127,9 +1147,7 @@ p {
     background-color: rgb(255, 255, 255);
 
 }
-a { /*하이퍼 링크 줄 제거 */
-    text-decoration-line: none;
-}
+
 .img1{  /* 찜,알림 아이콘 */
     width : 32px;
     height: 32px;
@@ -1195,6 +1213,68 @@ a { /*하이퍼 링크 줄 제거 */
     -ms-flex-align: center;
     align-items: center;
     padding-bottom: 16px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.likeX {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    min-width: 88px;
+    height: 32px;
+    padding: 0px 13px 0px 11px;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(153, 153, 153);
+}
+.css-1fkegtf {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 19px;
+    padding-right: 20px;
+}
+.css-1qo6qeh {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: -1px 0px 7px;
+}
+.css-48ujv7 {
+    display: inline-block;
+    height: 18px;
+    border: 1px solid rgb(77, 190, 215);
+    border-radius: 3px;
+    padding: 3px 4px 3px 5px;
+    margin-right: 4px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
+    word-break: keep-all;
+    background-color: rgb(77, 190, 215);
+    color: rgb(255, 255, 255);
+}
+.css-inxa61 {
+    flex: 1 1 0%;
+    overflow: hidden;
+}
+.css-y49dcn {
+    padding-top: 12px;
+    padding-right: 20px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: rgb(51, 51, 51);
 }
 .goods-93 { /*총 리뷰수 레이아웃*/
     font-size: 14px;
@@ -1249,9 +1329,21 @@ a { /*하이퍼 링크 줄 제거 */
     line-height: 18px;
     color: rgb(102, 102, 102);
 }
-
-
-
+.css-13ttlil {
+    display: block;
+    padding-top: 22px;
+}
+.css-e6zvdp:first-of-type {
+    padding-top: 0px;
+}
+.css-e6zvdp {
+    display: block;
+    padding: 30px 0px 6px;
+    font-weight: 500;
+    font-size: 15px;
+    color: rgb(17, 150, 127);
+    line-height: 22px;
+}
 .MuiBackdrop-root {
     top: 0;
     left: 0;
@@ -1612,6 +1704,19 @@ a { /*하이퍼 링크 줄 제거 */
     font-size: 16px;
     font-weight: 500;
 }
+.css-11q4ylb {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgb(153, 153, 153);
+    display: -webkit-box;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 
 /*#modal.modal-overlay {*/
 /*    width: 100%;*/

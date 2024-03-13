@@ -1,4 +1,4 @@
-package com.brokurly.entity.payment;
+package com.brokurly.entity.payment.kakaopay;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardInfo {
+public class CardInfo { // 카카오페이 카드 정보
     private String kakaopay_purchase_corp; // 카카오페이 매입사명
     private String kakaopay_purchase_corp_code; // 카카오페이 매입사 코드
     private String kakaopay_issuer_corp; // 카카오페이 발급사명

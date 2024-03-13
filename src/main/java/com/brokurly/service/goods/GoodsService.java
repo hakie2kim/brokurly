@@ -168,4 +168,14 @@ public int searchWish(String itemId, String custId) {
     }
 
 
+//    @Transactional
+//    public int likeCntUpdate(GoodsReviewBoardDto goodsReivewBoardDto){
+//
+//        GoodsReviewBoard goodsReviewBoard = new GoodsReviewBoard();
+//        goodsReviewBoard.changeStatus(goodsReivewBoardDto);
+//
+//        // 업데이트된 객체를 이용하여 likeCnt 업데이트
+//         return goodsReviewBoardDao.likeCntUpdate(goodsReviewBoard);
+//    }
+
 }

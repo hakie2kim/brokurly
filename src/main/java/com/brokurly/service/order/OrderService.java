@@ -1,20 +1,23 @@
 package com.brokurly.service.order;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.order.CheckoutDto;
+import com.brokurly.dto.order.OrderItemsResponseDto;
+import com.brokurly.dto.order.OrderResponseDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.entity.order.Order;
-import com.brokurly.entity.order.OrderItemList;
+import com.brokurly.entity.order.OrderItems;
 import com.brokurly.entity.payment.PaymentAmount;
 import com.brokurly.repository.order.OrderDao;
 import com.brokurly.service.cart.CustomerCartService;
+import com.brokurly.service.mypage.ShippingLocationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -24,6 +27,7 @@ public class OrderService {
 
     private final CustomerCartService cartService;
     private final ReceiverDetailsService receiverDetailsService;
+    private final ShippingLocationService shippingLocationService;
 
     public CheckoutDto getCheckoutInfo(String shipLocaId, String custId) {
         List<CustomerCartDto> cartList = cartService.getCartList(custId, true);
@@ -39,19 +43,51 @@ public class OrderService {
                 .build();
     }
 
+    public OrderResponseDto findOrderByOrderId(String orderId) {
+        return orderDao.selectByOrderId(orderId).toResponseDto();
+    }
+
+    public List<OrderResponseDto> findOrdersByCustId(String custId) {
+        List<Order> orders = orderDao.selectByCustId(custId);
+        return orders.stream()
+                .map(Order::toResponseDto)
+                .toList();
+    }
+
+    public List<OrderItemsResponseDto> findOrderItemListByOrderId(String orderId) {
+        return orderDao.selectItemList(orderId).stream()
+                .map(OrderItems::toResponseDto)
+                .toList();
+    }
+
     @Transactional
     public void placeOrder(CheckoutDto checkoutDto, String orderId, String custId) {
         if (checkoutDto == null)
             throw new IllegalArgumentException();
 
+        ShippingLocationCurrDto location;
+        try {
+            location = shippingLocationService.getCurrShippingLocationByCustomer(custId);
+        } catch (RuntimeException e) {
+            log.error("shippingLocation -> ", e);
+            location = ShippingLocationCurrDto.builder()
+                    .shipLocaId("123")
+                    .addr("서울 강남구 강남대로 364")
+                    .specAddr("미왕빌딩 10층")
+                    .currAddrFl("Y")
+                    .build();
+//            throw new NoSuchElementException();
+        }
+
         // 주문 내역 저장
         Order order = new Order();
-        order.changeOrder(checkoutDto, orderId, custId);
+
+        order.changeOrder(checkoutDto, orderId, custId, location.getShipLocaId());
         orderDao.insert(order);
 
         // 주문 상품 목록 저장
         for (CustomerCartDto customerCartDto : checkoutDto.getCustomerCart()) {
-            OrderItemList itemList = new OrderItemList();
+            OrderItems itemList = new OrderItems();
             itemList.changeOrderItemList(customerCartDto, orderId);
             orderDao.insertItemList(itemList);
         }

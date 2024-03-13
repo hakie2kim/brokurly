@@ -11,4 +11,9 @@ public interface GoodsReviewBoardDao {
     List<GoodsReviewBoard> selectByItemId(String itemId);
 
     List<GoodsReviewBoard> dateSort(String itemId);
+
+    int likeCntUpdate(GoodsReviewBoard goodsReviewBoard);
+
+    GoodsReviewBoard selectByCustId(String custId);
+
 }

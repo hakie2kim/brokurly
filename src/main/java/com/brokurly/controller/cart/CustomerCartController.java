@@ -33,8 +33,8 @@ public class CustomerCartController {
         // 로그인 체크
         String member = (String) session.getAttribute("member");
 //        System.out.println(member);
-        log.info(" member = {}",member);
-        log.info("cusCart={}",customerCartDto);
+//        log.info(" member = {}",member);
+//        log.info("cusCart={}",customerCartDto);
 
         if (member == null) {
             return "5";
@@ -47,7 +47,6 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/{custId}")
     public String cartPageGET(@PathVariable("custId") String custId, Model model) {
-
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
 

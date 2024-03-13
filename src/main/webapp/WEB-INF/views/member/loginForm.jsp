@@ -136,12 +136,14 @@
         </div>
     </section>
 </form>
-
 <script>
    $(document).ready(function ()  {
        let modal = document.querySelector(".modal");
        let modalContent = document.querySelector("#modal_content");
        let closeModalBtn = document.querySelector(".close-modal-btn");
+
+       // 로그인
+       let loginBtn = document.querySelector(".loginBtn");
 
        // modal open
        function openModal(msg) {
@@ -164,7 +166,6 @@
            openModal(msg);
        }
 
-
    });
 </script>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
@@ -172,7 +173,6 @@
     window.onload = function(){
         Kakao.init('b99b74015501ea2e7067d2dd45d23223'); // sdk 초기화 및 사용할 앱의 키 설정
         Kakao.isInitialized(); // SDK 초기화 여부를 판단
-        console.log(Kakao.isInitialized());
     };
 
 

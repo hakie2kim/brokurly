@@ -1,13 +1,16 @@
 package com.brokurly.controller.products;
 
 
+import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.goods.GoodsUpdateDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +25,14 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/seller")
 public class ProductsCreateController {
 
-    private ProductsCreateService productsCreateService;
+    private final ProductsCreateService productsCreateService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    public ProductsCreateController(ProductsCreateService productsCreateService) {
-        this.productsCreateService = productsCreateService;
-    }
+
 
     @PostMapping("/productsCreate/write")
     public String writeproducts( GoodsDto goodsDto, Model m
@@ -56,17 +58,18 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
-        return "seller/productsOriginList";
+        return "redirect:/seller/productsOriginList";
     }
 
     @PostMapping("/productsCreate/modify")
-    public String modify(GoodsDto goodsDto,String itemId, Model m){
-        log.info("goodsDto={}", goodsDto);
+    public String modify(GoodsUpdateDto goodsUpdateDto, String itemId, Model m){
+        log.info("goodsDto={}", goodsUpdateDto);
+        log.info("itemId={}", itemId);
 
-        m.addAttribute("mode", "new");
-        productsCreateService.updateGoods(itemId,goodsDto);
-        return "redirect:seller/productsCreate";
+        productsCreateService.updateGoods(itemId,goodsUpdateDto);
+        return "redirect:/seller/productsOriginList";
     }
+
 
 
     @GetMapping("/productsOriginList")
@@ -87,6 +90,9 @@ public class ProductsCreateController {
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
         List<String> searchKeyword = productsCreateService.searchKeyword(itemId);
 
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
+
         log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
         log.info("readItemId={}", itemId);
         log.info("searchKeyword={}", searchKeyword);
@@ -97,7 +103,7 @@ public class ProductsCreateController {
 //            log.info("anno={}", anno[i]);
 //        }
 
-        m.addAttribute("mode","readonly");
+//        m.addAttribute("mode","readonly");
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
         m.addAttribute("keyword", searchKeyword);

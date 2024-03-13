@@ -116,7 +116,12 @@ public class MemberController {
 
         memberService.signUp(memberAndSignupDto);
 
-        return  "redirect:/member/login";
+        return  "/member/success";
+    }
+
+    @GetMapping("/success")
+    public String success(){
+        return "/member/success";
     }
 
 
@@ -170,7 +175,8 @@ public class MemberController {
 
         // 3. 일치하면 세션에 저장
         HttpSession session = req.getSession();
-        //  3-1. 세션 있으면 있는 세션 반환, 없으면 신규 생성 후 메인 이동 (기본값 true)
+        //  3-1. 세션 있으면 있는 세션 반환, 없으면
+        //  신규 생성 후 메인 이동 (기본값 true)
         session.setAttribute(SessionConst.LOGIN_MEMBER, resultLoginDto);
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
