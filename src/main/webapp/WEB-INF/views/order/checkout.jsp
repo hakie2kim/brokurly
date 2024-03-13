@@ -30,8 +30,7 @@
         <c:set var="customerCart" value="${checkout.customerCart}"/>
         <c:set var="numOfItemType" value="${fn:length(customerCart)}"/>
         <div id="order-goods">
-            ${customerCart[0].name}
-            <c:if test="${numOfItemType >= 2}">외 ${numOfItemType - 1}개</c:if>
+            <span>${customerCart[0].name}<c:if test="${numOfItemType >= 2}"> 외 ${numOfItemType - 1}개</c:if></span>
             상품을 주문합니다.
         </div>
         <hr class="list-hr"/>
@@ -68,12 +67,12 @@
         </div>
         <div class="info-type2">
             <div>휴대폰</div>
-            <%--            <div id="tel-no">${loginMember.telNo}</div>--%>
+            <div id="tel-no">${loginMember.telNo}</div>
         </div>
         <div class="info-type2">
             <div>이메일</div>
             <div>
-                <%--                ${loginMember.email}--%>
+                ${loginMember.email}
                 <p style="font-size: 12px">이메일을 통해 주문처리과정을 보내드립니다.</p>
                 <p style="font-size: 12px">정보 변경은 마이컬리 > 개인정보 수정 메뉴에서 가능합니다.</p>
             </div>
@@ -102,7 +101,9 @@
         <div class="info-type2">
             <div>배송지</div>
             <div>
-                <span id="default-delivery">기본 배송지</span>
+                <c:if test="${location.defAddrFl == 'Y'}">
+                    <span id="default-delivery">기본 배송지</span>
+                </c:if>
                 <p>${location.addr}</p>
                 <c:if test="${location.specAddr == null}">
                     <p class="caution">상세 주소를 입력해주세요</p>

@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CheckoutDto {
+    private String itemName;
     // 배송 요청사항 정보
     private ReceiverDetailsResponseDto receiverDetails;
     // 주문 상품 목록

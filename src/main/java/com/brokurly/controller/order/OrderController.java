@@ -1,12 +1,13 @@
 package com.brokurly.controller.order;
 
 import com.brokurly.dto.member.MemberAndLoginDto;
+import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
-import com.brokurly.entity.payment.kakaopay.Amount;
+import com.brokurly.service.member.MemberService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
@@ -14,18 +15,14 @@ import com.brokurly.utils.DateUtils;
 import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Slf4j
@@ -34,27 +31,25 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
+    private final MemberService memberService;
     private final ReceiverDetailsService receiverDetailsService;
     private final ShippingLocationService shippingLocationService;
 
     @GetMapping("/checkout")
     public String showCheckout(Model model, HttpSession session) {
-        MemberAndLoginDto loginMember = getLoginMemberFromSession(session);
-        ShippingLocationCurrDto location = null;
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            return "redirect:/member/login";
+
+        ShippingLocationCurrDto location;
         try {
             location = shippingLocationService.getCurrShippingLocationByCustomer(loginMember.getCustId());
         } catch (RuntimeException e) {
-//            log.error("showCheckout -> ", e);
+            log.error("showCheckout -> ", e);
+            return "redirect:/mypage/address";
         }
 
-        if (location == null) {
-            location = ShippingLocationCurrDto.builder()
-                    .shipLocaId("123")
-                    .addr("서울 강남구 강남대로 364")
-                    .specAddr("미왕빌딩 10층")
-                    .currAddrFl("Y")
-                    .build();
-        }
+        MemberAndSignupDto member = memberService.readMemberByOne(loginMember.getCustId());
 
         CheckoutDto checkout = null;
         try {
@@ -67,17 +62,17 @@ public class OrderController {
             session.setAttribute("receiverDetails", checkout.getReceiverDetails());
 
         model.addAttribute("location", location);
-        model.addAttribute("loginMember", loginMember);
+        model.addAttribute("loginMember", member);
         model.addAttribute("checkout", checkout);
 
         return "order/checkout";
     }
 
     @GetMapping("/checkout/success")
-    public String paymentSuccess(//@ModelAttribute("orderId") String orderId, @ModelAttribute("amount") Amount amount,
-                                 Model model, HttpSession session) {
-
-        MemberAndLoginDto loginMember = getLoginMemberFromSession(session);
+    public String paymentSuccess(Model model, HttpSession session) {
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            return "redirect:/member/login"; // 중간 페이지 필요
 
         PaymentAmountCheckoutDto amount = (PaymentAmountCheckoutDto) session.getAttribute("paymentAmount");
         String orderId = (String) session.getAttribute("orderId");
@@ -89,16 +84,8 @@ public class OrderController {
         try {
             location = shippingLocationService.getCurrShippingLocationByCustomer(loginMember.getCustId());
         } catch (RuntimeException e) {
-//            log.error("paymentSuccess -> ", e);
-        }
-
-        if (location == null) {
-            location = ShippingLocationCurrDto.builder()
-                    .shipLocaId("123")
-                    .addr("서울 강남구 강남대로 364")
-                    .specAddr("미왕빌딩 10층")
-                    .currAddrFl("Y")
-                    .build();
+            log.error("paymentSuccess -> ", e);
+            return "redirect:/mypage/address";
         }
 
         model.addAttribute("name", loginMember.getName());
@@ -114,6 +101,16 @@ public class OrderController {
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
         ReceiverDetailsResponseDto receiverDetails = (ReceiverDetailsResponseDto) session.getAttribute("receiverDetails");
+
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            return "redirect:/member/login"; // 중간 페이지 필요
+
+        MemberAndSignupDto member = memberService.readMemberByOne(loginMember.getCustId());
+
+        log.info("member = {}", member);
+
+        model.addAttribute("member", member);
         model.addAttribute("receiverDetails", receiverDetails);
         return "order/receiver-details";
     }
@@ -127,7 +124,7 @@ public class OrderController {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        MemberAndLoginDto loginMember = getLoginMemberFromSession(session);
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         ShippingLocationCurrDto location =
                 shippingLocationService.getCurrShippingLocationByCustomer(loginMember.getCustId());
@@ -148,7 +145,7 @@ public class OrderController {
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        MemberAndLoginDto loginMember = getLoginMemberFromSession(session);
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         ShippingLocationCurrDto location =
                 shippingLocationService.getCurrShippingLocationByCustomer(loginMember.getCustId());
@@ -156,12 +153,5 @@ public class OrderController {
         ReceiverDetailsResponseDto changedReceiverDetails =
                 receiverDetailsService.modifyReceiverDetails(location.getShipLocaId(), requestChangeDto);
         return new ResponseEntity<>(changedReceiverDetails, HttpStatus.OK);
-    }
-
-    private MemberAndLoginDto getLoginMemberFromSession(HttpSession session) {
-        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (loginMember == null)
-            loginMember = new MemberAndLoginDto("hakie2kim", "1234", "홍길동");
-        return loginMember;
     }
 }

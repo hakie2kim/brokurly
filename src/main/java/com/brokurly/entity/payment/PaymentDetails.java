@@ -18,6 +18,7 @@ public class PaymentDetails {
     private Timestamp payReqDt;
     private Timestamp payConfDt;
     private String orderId;
+    private String itemName;
     // 결제 금액
     private PaymentAmount paymentAmount;
 
@@ -29,6 +30,7 @@ public class PaymentDetails {
                 .payReqDt(payReqDt)
                 .payConfDt(payConfDt)
                 .orderId(orderId)
+                .itemName(itemName)
                 .paymentAmount(paymentAmount)
                 .build();
     }
