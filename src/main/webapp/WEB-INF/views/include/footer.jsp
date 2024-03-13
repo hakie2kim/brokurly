@@ -9,6 +9,10 @@ change this template use File | Settings | File Templates. --%> <%@ page
     :root {
         --swiper-theme-color: #007aff;
     }
+    a { /*하이퍼 링크 줄 제거 */
+        text-decoration: none !important; /* 밑줄 제거 */
+        color: black !important; /* 텍스트 색상을 검은색으로 설정 */
+    }
     .css-17cdx60 {
         padding-top: 30px;
         border-top: 1px solid #f7f7f7;
@@ -162,7 +166,7 @@ change this template use File | Settings | File Templates. --%> <%@ page
     }
 
     .css-1tfhwyj {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 18px;
     }
 

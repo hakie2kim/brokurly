@@ -67,6 +67,8 @@
     <jsp-config>
         <jsp-property-group>
             <url-pattern>/WEB-INF/views/member/*</url-pattern>
+            <url-pattern>/WEB-INF/views/goods/goods.jsp</url-pattern>
+            <url-pattern>/WEB-INF/views/cart/cart.jsp</url-pattern>
             <url-pattern>/WEB-INF/views/categories/*</url-pattern>
             <url-pattern>/WEB-INF/views/search/*</url-pattern>
             <url-pattern>/WEB-INF/views/order/checkout.jsp</url-pattern>
