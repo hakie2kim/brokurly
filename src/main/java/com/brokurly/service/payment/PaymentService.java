@@ -28,6 +28,7 @@ public class PaymentService {
                 .payReqDt(kakaoPayResponse.getCreated_at())
                 .payConfDt(kakaoPayResponse.getApproved_at())
                 .orderId(kakaoPayResponse.getPartner_order_id())
+                .itemName(kakaoPayResponse.getItem_name())
                 .paymentAmount(
                         PaymentAmount.builder()
                                 .orderAmt(paymentAmount.getOrderAmt())

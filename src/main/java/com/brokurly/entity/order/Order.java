@@ -6,6 +6,8 @@ import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.OrderResponseDto;
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @ToString
 @EqualsAndHashCode
 @Builder
@@ -15,7 +17,7 @@ public class Order {
     private String orderId;
     private String custId;
     private String orderStat;
-    private String orderDt;
+    private Timestamp orderDt;
     private int totalItemQty;
     private int totalPrice;
     private int totalDcAmt;

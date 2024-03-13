@@ -2,21 +2,21 @@ package com.brokurly.service.order;
 
 import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
-import com.brokurly.dto.order.CheckoutDto;
-import com.brokurly.dto.order.OrderItemsResponseDto;
-import com.brokurly.dto.order.OrderResponseDto;
-import com.brokurly.dto.order.ReceiverDetailsResponseDto;
+import com.brokurly.dto.order.*;
+import com.brokurly.dto.payment.PaymentDetailsResponseDto;
 import com.brokurly.entity.order.Order;
 import com.brokurly.entity.order.OrderItems;
 import com.brokurly.entity.payment.PaymentAmount;
 import com.brokurly.repository.order.OrderDao;
 import com.brokurly.service.cart.CustomerCartService;
 import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +26,7 @@ public class OrderService {
     private final OrderDao orderDao;
 
     private final CustomerCartService cartService;
+    private final PaymentService paymentService;
     private final ReceiverDetailsService receiverDetailsService;
     private final ShippingLocationService shippingLocationService;
 
@@ -47,11 +48,23 @@ public class OrderService {
         return orderDao.selectByOrderId(orderId).toResponseDto();
     }
 
-    public List<OrderResponseDto> findOrdersByCustId(String custId) {
+    public List<OrderLogListResponseDto> findOrdersByCustId(String custId) {
         List<Order> orders = orderDao.selectByCustId(custId);
-        return orders.stream()
+        List<OrderResponseDto> orderList = orders.stream()
                 .map(Order::toResponseDto)
                 .toList();
+
+        List<OrderLogListResponseDto> orderLogList = new ArrayList<>();
+        for (OrderResponseDto orderResponseDto : orderList) {
+            OrderLogListResponseDto orderLog = new OrderLogListResponseDto();
+            orderLog.setOrder(orderResponseDto);
+
+            PaymentDetailsResponseDto payment = paymentService.findPaymentLogByOrderId(orderResponseDto.getOrderId());
+
+            orderLog.setItemName(payment.getItemName());
+            orderLog.setPayMthd(payment.getPayMthd());
+        }
+        return orderLogList;
     }
 
     public List<OrderItemsResponseDto> findOrderItemListByOrderId(String orderId) {

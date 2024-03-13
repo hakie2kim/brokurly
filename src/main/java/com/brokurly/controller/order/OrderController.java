@@ -101,6 +101,16 @@ public class OrderController {
     @GetMapping("/receiver-details")
     public String showReceiverDetails(Model model, HttpSession session) {
         ReceiverDetailsResponseDto receiverDetails = (ReceiverDetailsResponseDto) session.getAttribute("receiverDetails");
+
+        MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (loginMember == null)
+            return "redirect:/member/login"; // 중간 페이지 필요
+
+        MemberAndSignupDto member = memberService.readMemberByOne(loginMember.getCustId());
+
+        log.info("member = {}", member);
+
+        model.addAttribute("member", member);
         model.addAttribute("receiverDetails", receiverDetails);
         return "order/receiver-details";
     }

@@ -193,6 +193,7 @@ function redirectPayment() {
     });
 
     let checkoutInfo = {
+        itemName: $("#order-goods span").text().replace(" 상품을 주문합니다.", "").trim(),
         receiverDetails: {
             rcvName: $("#checkout-name").text(),
             telNo: $("#checkout-tel-no").text(),

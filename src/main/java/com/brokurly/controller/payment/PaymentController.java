@@ -40,12 +40,16 @@ public class PaymentController {
         String orderId = IdGenerator.generateOrderId();
         MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
+        log.info("checkout = {}", checkout);
+
         KakaoPayReadyResponseDto response;
         try {
             response = kakaoPayService.ready(checkout, orderId, loginMember.getCustId()).block();
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
+
+        log.info("response = {}", response);
 
         orderService.placeOrder(checkout, orderId, loginMember.getCustId());
 
@@ -62,6 +66,8 @@ public class PaymentController {
     @GetMapping("/kakaopay/success")
     public String kakaoPaySuccess(@RequestParam String pg_token, HttpSession session) {
         KakaoPayApproveResponseDto response = kakaoPayService.approve(pg_token, setParamMap(session)).block();
+
+        log.info("success response = {}", response);
 
         if (response == null) {
             log.info("response 없음");

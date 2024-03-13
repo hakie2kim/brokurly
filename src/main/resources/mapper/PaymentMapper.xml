@@ -7,10 +7,10 @@
     <insert id="insert">
         INSERT INTO payment
         (pay_no, pay_mthd, pay_req_dt, pay_conf_dt, order_amt, item_amt,
-         ship_fee, cpn_dc_amt, card_dc_amt, point_dc_amt, pay_amt, order_id)
+         ship_fee, cpn_dc_amt, card_dc_amt, point_dc_amt, pay_amt, order_id, item_name)
         VALUES (#{payNo}, #{payMthd}, #{payReqDt}, #{payConfDt}, #{paymentAmount.orderAmt}, #{paymentAmount.itemAmt},
                 #{paymentAmount.shipFee}, #{paymentAmount.cpnDcAmt}, #{paymentAmount.cardDcAmt},
-                #{paymentAmount.pointDcAmt}, #{paymentAmount.payAmt}, #{orderId})
+                #{paymentAmount.pointDcAmt}, #{paymentAmount.payAmt}, #{orderId}, #{itemName})
     </insert>
 
     <!-- READ -->
