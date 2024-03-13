@@ -427,7 +427,7 @@
             <div class="css-1kbzkwh e14yho7m0">
                 <div class="css-sxxs1g eytury60">
 <%--                    disabled=""--%>
-                    <button  type="button" class="css-rzcdhr e1hbwyso0" onclick="location.href='http://localhost:8080/board/notice?page=${pageNo - 1}'">
+                    <button type="button" class="css-rzcdhr e1hbwyso0" onclick="location.href='http://localhost:8080/board/notice?page=${pageNo - 1}'">
                         <div class="css-7qb0sc e1ilyb3p0">이전</div>
                     </button>
                     <button type="button" class="css-1jwilit e1pk9060" onclick="location.href='http://localhost:8080/board/notice?page=${pageNo + 1}'" >
@@ -438,5 +438,19 @@
         </div>
     </div>
 </div>
+<script>
+    window.onload = function() {
+        let prevBtn = document.querySelector(".css-rzcdhr.e1hbwyso0");
+        let nextBtn = document.querySelector(".css-1jwilit.e1pk9060");
+
+        if (${noticePageHandler.firstPage}) {
+            prevBtn.setAttribute('disabled', 'true'); }
+        else { prevBtn.removeAttribute('disabled')}
+
+        if (${noticePageHandler.lastPage}) {
+            nextBtn.setAttribute('disabled', 'true'); }
+        else { nextBtn.removeAttribute('disabled')}
+    };
+</script>
 </body>
 </html>
