@@ -1,8 +1,12 @@
 window.onload = () => {
     // 페이지 로딩 시 전화번호 포맷팅
-    const $checkoutTelNo = $("#checkout-tel-no");
-    const telNo = $checkoutTelNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-    $checkoutTelNo.text(telNo);
+    const $orderTelNo = $("#tel-no");
+    const orderTelNo = $orderTelNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    $orderTelNo.text(orderTelNo);
+
+    const $receiverTelNo = $("#checkout-tel-no");
+    const receivertelNo = $receiverTelNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    $receiverTelNo.text(receivertelNo);
 
     // 주문 상품창 요약 & 리스트 변환 기능
     const $orderGoodsButton = $("#order-goods-change img");
