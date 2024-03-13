@@ -18,23 +18,12 @@ import java.util.List;
 public class FAQService {
     private final FAQBoardDao faqBoardDao;
     private final FAQCateDao faqCateDao;
+    private static final int NUMBER_PER_PAGE = 15;
 
-//    조인된 FAQList 전부를 반환
-    public List<FAQListDto> getFaqList() {
-        List<FAQBoard> faqBoardList = faqBoardDao.selectAllFAQList();
+    public List<FAQListDto> getFaqList(@RequestParam Integer page) {
+        if (page == null) {page = 0;}
+        List<FAQBoard> faqBoardList = faqBoardDao.selectFAQList(page * NUMBER_PER_PAGE, NUMBER_PER_PAGE);
         List<FAQCate> faqCateList = faqCateDao.selectFAQCateList();
-        return new FAQBoard().cateNameJoin(faqBoardList, faqCateList);
-    }
-
-//    PageHandler의 totalCnt를 구하기 위함
-    public FAQListDto getMaxbno() {
-        return faqBoardDao.selectMax().getFAQListDto("");
-    }
-
-    public List<FAQListDto> getFaqSortedList(@RequestParam Integer catecode, int pagesize) {
-        List<FAQBoard> faqBoardList = faqBoardDao.selectSortedList(catecode);
-        FAQCate faqCate = faqCateDao.selectCate(catecode);
-
-        return new FAQBoard().sortedFAQList(faqBoardList, faqCate);
+        return new FAQBoard().pleasejoin(faqBoardList, faqCateList);
     }
 }

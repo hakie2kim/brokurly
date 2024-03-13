@@ -8,10 +8,5 @@
         SELECT *
         FROM FAQ_CATEGORY_CODE
     </select>
-    <select id="selectCate" resultType="FAQCate">
-        SELECT *
-        FROM FAQ_CATEGORY_CODE
-        WHERE code = #{catecode}
-    </select>
 
 </mapper>

@@ -5,7 +5,6 @@ import com.brokurly.dto.board.NoticeListDto;
 import com.brokurly.dto.board.FAQListDto;
 import com.brokurly.service.board.FAQService;
 import com.brokurly.service.board.NoticeService;
-import com.brokurly.utils.BoardPageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,21 +24,9 @@ public class CSCenterController {
 
     @GetMapping("/notice")
     public String notice(Integer page, Model model) throws Exception {
-        BoardPageHandler noticePageHandler = new BoardPageHandler();
-//        페이지를 처음 호출한 시점이므로 page는 0
-        if (page == null) {page = 0;}
-
-//        Service측에 현 페이지 번호와 pagesize을 전달해 필요한 리스트를 가져온다.
-        List<NoticeListDto> noticeListDtoList = noticeService.getList();
-
-//        핸들링으로 15개만 추린다
-        noticeListDtoList = noticePageHandler.getPagedNoticeList(noticeListDtoList, page);
-
-//        페이지에서 보여줄 값을 Model에 넣는다
-        model.addAttribute("noticePageHandler", noticePageHandler);
+        List<NoticeListDto> noticeListDtoList = noticeService.getList(page);
         model.addAttribute("noticeListDtoList", noticeListDtoList);
         model.addAttribute("pageNo", page);
-
         return "board/noticeList";
     }
 
@@ -50,41 +37,11 @@ public class CSCenterController {
         return "board/noticeBoard";
     }
 
-//    @RequestMapping("/faqboard")
-//    public String faq(Integer page, Model model) throws Exception {
-//        BoardPageHandler faqPageHandler = new BoardPageHandler();
-//
-//        if (page == null) {page = 0;}
-//
-//        List<FAQListDto> FAQListDtoList = faqService.getFaqList();
-//
-//        FAQListDtoList = faqPageHandler.getPagedFAQList(FAQListDtoList, page);
-//
-//        model.addAttribute("faqPageHandler", faqPageHandler);
-//        model.addAttribute("FAQListDtoList", FAQListDtoList);
-//        model.addAttribute("pageNo", page);
-//
-//        return "board/faqList";
-//    }
-
     @RequestMapping("/faqboard")
-    public String faq(Integer page, Integer catecode, Model model) {
-        BoardPageHandler faqPageHandler = new BoardPageHandler();
-        if (page == null) {page = 0;}
-
-        if (catecode != null) {
-            List<FAQListDto> FAQListDtoList = faqService.getFaqSortedList(catecode, faqPageHandler.getPagesize());
-            FAQListDtoList = faqPageHandler.getPagedFAQList(FAQListDtoList, page);
-            model.addAttribute("FAQListDtoList", FAQListDtoList);
-        } else {
-            List<FAQListDto> FAQListDtoList = faqService.getFaqList();
-            FAQListDtoList = faqPageHandler.getPagedFAQList(FAQListDtoList, page);
-            model.addAttribute("FAQListDtoList", FAQListDtoList);
-        }
-
-        model.addAttribute("faqPageHandler", faqPageHandler);
+    public String faq(Integer page, Model model) throws Exception {
+        List<FAQListDto> FAQListDtoList = faqService.getFaqList(page);
+        model.addAttribute("FAQListDtoList", FAQListDtoList);
         model.addAttribute("pageNo", page);
-
         return "board/faqList";
     }
 
@@ -96,4 +53,3 @@ public class CSCenterController {
         return "board/inquiryPost";
     }
 }
-
