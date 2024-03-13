@@ -1,13 +1,16 @@
 package com.brokurly.controller.products;
 
 
+import com.brokurly.dto.categories.CategoryDto;
 import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsByBsnsNoDto;
 import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.goods.GoodsUpdateDto;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +25,14 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/seller")
 public class ProductsCreateController {
 
-    private ProductsCreateService productsCreateService;
+    private final ProductsCreateService productsCreateService;
+    private final CategoryService categoryService;
 
-    @Autowired
-    public ProductsCreateController(ProductsCreateService productsCreateService) {
-        this.productsCreateService = productsCreateService;
-    }
+
 
     @PostMapping("/productsCreate/write")
     public String writeproducts( GoodsDto goodsDto, Model m
@@ -56,17 +58,18 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
-        return "seller/productsOriginList";
+        return "redirect:/seller/productsOriginList";
     }
 
     @PostMapping("/productsCreate/modify")
-    public String modify(GoodsDto goodsDto,String itemId, Model m){
-        log.info("goodsDto={}", goodsDto);
+    public String modify(GoodsUpdateDto goodsUpdateDto, String itemId, Model m){
+        log.info("goodsDto={}", goodsUpdateDto);
+        log.info("itemId={}", itemId);
 
-        m.addAttribute("mode", "new");
-        productsCreateService.updateGoods(itemId,goodsDto);
-        return "redirect:seller/productsCreate";
+        productsCreateService.updateGoods(itemId,goodsUpdateDto);
+        return "redirect:/seller/productsOriginList";
     }
+
 
 
     @GetMapping("/productsOriginList")
@@ -87,6 +90,9 @@ public class ProductsCreateController {
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
         List<String> searchKeyword = productsCreateService.searchKeyword(itemId);
 
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
+
         log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
         log.info("readItemId={}", itemId);
         log.info("searchKeyword={}", searchKeyword);
@@ -97,7 +103,7 @@ public class ProductsCreateController {
 //            log.info("anno={}", anno[i]);
 //        }
 
-        m.addAttribute("mode","readonly");
+//        m.addAttribute("mode","readonly");
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
         m.addAttribute("keyword", searchKeyword);
@@ -232,50 +238,5 @@ public class ProductsCreateController {
             return HttpStatus.SERVICE_UNAVAILABLE;
         }
     }
-//
-//    @PostMapping("/img")
-//    public String upload(@RequestParam("file") MultipartFile multipartFile, Model model) {
-//        log.info("file = {}", multipartFile);
-//        try {
-//            // 현재 프로젝트의 절대 경로를 가져옵니다
-//            String projectPath = System.getProperty("user.home") +
-////                    File.separator + "IdeaProjects" +
-//                    File.separator + "brokurly";
-//
-//            log.info("dir = {}", projectPath);
-//            log.info("path = {}", System.getProperty("user.dir"));
-//
-//            // 이미지를 저장할 폴더의 경로를 지정합니다
-//            String uploadDir = projectPath +
-//                    File.separator + "src" +
-//                    File.separator + "main" +
-//                    File.separator + "webapp" +
-//                    File.separator + "resources" +
-//                    File.separator + "image" +
-//                    File.separator + "goodsImage";
-//
-//            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
-//
-//            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
-//            File dir = new File(uploadDir);
-//            if (!dir.exists()) dir.mkdirs();
-//
-//            // 파일 이름을 정의합니다
-//            String originalFilename = multipartFile.getOriginalFilename();
-//            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
-//
-//            Path savePath = Paths.get(filePath);
-//            // 파일을 저장합니다
-//            multipartFile.transferTo(savePath);
-//
-//            model.addAttribute("image", filePath);
-//
-//            // 파일의 저장 경로를 반환합니다
-//            return "order/test";
-//        } catch (IOException e) {
-//            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
-//            return e.getMessage();
-//        }
-//    }
 
 }

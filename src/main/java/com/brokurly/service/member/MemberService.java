@@ -27,5 +27,6 @@ public interface MemberService {
     int emailAuthFail(String custId);
     int updateMailKey(MemberAndMailAuthDto memberAndMailAuthDto);
     int updateMailAuth(MemberAndMailAuthDto memberAndMailAuthDto);
+    int chageNewPwd(MemberAndLoginDto memberAndLoginDto);
     int removeAll();
 }

@@ -63,10 +63,5 @@ public class WishListItem {
     public void changeStatus(WishListItemDto wishListItemDto) {
         this.itemId = wishListItemDto.getItemId();
         this.custId = wishListItemDto.getCustId();
-
-        
-        
-        
     }
-    
 }

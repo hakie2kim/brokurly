@@ -14,5 +14,6 @@ public class ShippingLocationCurrDto {
     private String shipLocaId;
     private String addr;
     private String specAddr;
+    private String defAddrFl;
     private String currAddrFl;
 }

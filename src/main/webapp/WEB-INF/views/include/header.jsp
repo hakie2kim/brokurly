@@ -153,6 +153,7 @@
 </head>
 <body>
 <div>
+
   <div class="head-1">
     <div class="login-wrap">
       <c:if test="${loginSession eq '로그인'}">
@@ -170,8 +171,10 @@
           <div class="menu cs-bar-wrap">
             <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
           </div>
+
         </div>
       </c:if>
+
 
       <div class="lg-bar"></div>
       <div class="lg-text3wrap">
@@ -183,6 +186,7 @@
           <div class="cscenter-bar">자주하는 질문</div>
           <div class="cscenter-bar">1:1 문의</div>
           <div class="cscenter-bar">대량주문 문의</div>
+
         </div>
       </div>
     </div>
@@ -246,21 +250,23 @@
         <div class="category-1">
               <span class="css-1k5gn9s eqn756m1"></span
               ><span class="category-2">카테고리</span>
-          <div class="css-taug43 e7s0tnu0 dropdown-content">
-            <div width="0" class="css-9d3cf6 e1vs1ym87">
-              <ul class="css-13ct7qm e1vs1ym86">
-                <%--                                <li class="css-you2kh e1vs1ym83 menuItem1">--%>
+
+                    <div class="css-taug43 e7s0tnu0 dropdown-content">
+                        <div width="0" class="css-9d3cf6 e1vs1ym87">
+                            <ul class="css-13ct7qm e1vs1ym86" >
+                                <%--                                <li class="css-you2kh e1vs1ym83 menuItem1">--%>
 
 
-                <%--                                    <c:forEach var="item" items="${selectMain}">--%>
+                                <%--                                    <c:forEach var="item" items="${selectMain}">--%>
 
-                <%--                                        <li class="css-you2kh e1vs1ym83 menuItem1">--%>
-                <%--                                            <div class="css-11n7bn4 e1vs1ym81">--%>
-                <%--                                                <img src="/resources/image/icon-.png" alt="채소" class="css-ar6ptu e1vs1ym82" />--%>
-                <%--                                                <span class="css-mhaka4 e1vs1ym84">${item.exp}</span>--%>
-                <%--                                            </div>--%>
-                <%--                                        </li>--%>
-                <%--                                    </c:forEach>--%>
+                                <%--                                        <li class="css-you2kh e1vs1ym83 menuItem1">--%>
+                                <%--                                            <div class="css-11n7bn4 e1vs1ym81">--%>
+                                <%--                                                <img src="/resources/image/icon-.png" alt="채소" class="css-ar6ptu e1vs1ym82" />--%>
+                                <%--                                                <span class="css-mhaka4 e1vs1ym84">${item.exp}</span>--%>
+                                <%--                                            </div>--%>
+                                <%--                                        </li>--%>
+                                <%--                                    </c:forEach>--%>
+
 
                 <c:forEach var="item" items="${selectMain}" varStatus="loop">
                   <li class="css-you2kh e1vs1ym83 menuItem1">
