@@ -24,9 +24,27 @@
         ORDER BY reg_dt DESC
     </select>
 
+    <select id="selectByCustId" resultType="GoodsReivewBoard">
+        <include refid="select"/>
+        WHERE cust_id = #{custId}
+    </select>
+
 
     <!-- UPDATE -->
 
+    <select id="likeCntUpdate">
+        UPDATE item_review_board
+        SET rev_no = #{revNo},
+            item_id = #{itemId},
+            cust_id = #{custId},
+            content = #{content},
+            reg_dt = #{regDt},
+            like_cnt = #{likeCnt},
+            name = #{name},
+            grade = #{grade}
+        WHERE item_id = #{itemId}
+
+    </select>
 
     <!-- DELETE -->
 

@@ -578,7 +578,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hong",
+                custId: "hakie2kim",
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -611,7 +611,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hong",
+                custId: "hakie2kim",
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -632,7 +632,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "hong",
+                custId: "hakie2kim",
                 itemId: itemId
             },
             success: function () {
@@ -657,7 +657,7 @@
                     method: "POST",
                     dataType: "text",
                     data: {
-                        custId: "hong",
+                        custId: "hakie2kim",
                         itemId: itemId
                     },
                     success: function () {
@@ -747,7 +747,7 @@
             if ($(element).find(".individual_cart_checkbox").is(":checked") === true) {	//체크여부
                 let itemId = $(element).find(".individual_itemId_input").val();
                 let itemCnt = $(element).find(".individual_itemCnt_input").val();
-                let shipLocaId = $(".addressId").val();
+                // let shipLocaId = $(".addressId").val();
                 $.ajax({
                     url: '/cart/update',
                     method: "POST",
@@ -759,7 +759,7 @@
                         itemCk: 'Y'
                     },
                     success: function () {
-                        sessionStorage.setItem("shipLocaId", shipLocaId);
+                        // sessionStorage.setItem("shipLocaId", shipLocaId);
                         location.replace("/order/checkout"); // 페이지 이동
                     }
                 });
