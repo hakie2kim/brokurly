@@ -24,7 +24,13 @@ public class CustomerCartService {
         CustomerCart checkCart = customerCartDao.checkCart(customerCart);
 
         if (checkCart != null) {
-            return 2;   //이걸 이제 개수를 추가하는걸로 변경해야됨
+//            int updatedItemCnt = customerCart.getItemCnt() + customerCartDto.getItemCnt();
+//            customerCartDto.setItemCnt(updatedItemCnt);
+            return customerCartDao.duplicationAdd(customerCart);
+
+//            return 2;   //이걸 이제 개수를 추가하는걸로 변경해야됨
+//            int DBItemCnt = customerCartDto.getItemCnt();
+//            int totakItemCnt = makeFullDto.getItemCnt()+DBItemCnt;
         }
         try {   //장바구니 등록 & 에러 시 0 반환
             return customerCartDao.insert(customerCart);

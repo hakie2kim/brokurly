@@ -6,6 +6,7 @@ import com.brokurly.dto.goods.GoodsDetailDto;
 import com.brokurly.dto.goods.GoodsInquiryLogDto;
 import com.brokurly.dto.goods.GoodsReviewBoardDto;
 import com.brokurly.dto.mypage.WishListDto;
+import com.brokurly.entity.goods.GoodsReviewBoard;
 import com.brokurly.service.goods.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +27,16 @@ public class GoodsController {
 
     private final GoodsService goodsService;
 
-  // 상품 상세페이지로 값 전달
-  @GetMapping("/{itemId}")
-  public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
-    session.setAttribute("member", "hakie2kim");
-    GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
-    GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
+    // 상품 상세페이지로 값 전달
+    @GetMapping("/{itemId}")
+    public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
+        session.setAttribute("member", "hakie2kim");
+        GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
+        GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
 //    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
-    List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
-    int wishList = goodsService.searchWish(itemId, "hakie2kim"); //상품 찜
-    List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
+        List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
+        int wishList = goodsService.searchWish(itemId, "hakie2kim"); //상품 찜
+        List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
 
 
         model.addAttribute("goods", goods);
@@ -69,5 +70,13 @@ public class GoodsController {
 //    model.addAttribute("review", review);
 ////    return "goods/goods";
 //  }
+
+
+//    @PostMapping("/updateLikeCount")
+//    @ResponseBody
+//    public void likeCntUpdate(@ModelAttribute GoodsReviewBoardDto goodsReviewBoardDto) {
+//        int review = goodsService.likeCntUpdate(goodsReviewBoardDto);
+//    }
+
 
 }
