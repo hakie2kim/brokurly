@@ -116,7 +116,12 @@ public class MemberController {
 
         memberService.signUp(memberAndSignupDto);
 
-        return  "redirect:/member/login";
+        return  "/member/success";
+    }
+
+    @GetMapping("/success")
+    public String success(){
+        return "/member/success";
     }
 
 

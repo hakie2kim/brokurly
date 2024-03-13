@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/member/loginForm.css'/> ">
 </head>
 <style>
+    .findPwd-div{
+        height: 300px;
+    }
     .loginBtn{
         disabled : true;
         background-color:#dddddd;
@@ -203,7 +206,7 @@
             </div>
         </div>
         <span class="login-header">비밀번호 재설정</span>
-        <div class="login-div">
+        <div class="login-div findPwd-div">
             <div class="email-div">
                 <span class="register-div__label">가입하신 이메일을 입력해주세요</span>
                 <input
