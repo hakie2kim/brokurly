@@ -1,8 +1,5 @@
 
 $(document).ready(function () {
-    let modal = document.querySelector(".modal");
-    let modalContent = document.querySelector("#modal_content");
-    let closeModalBtn = document.querySelector(".close-modal-btn");
 
     let custId = document.querySelector("#custId");
     let name = document.querySelector("#name");
@@ -37,21 +34,21 @@ $(document).ready(function () {
         let consent = document.querySelector("#consent");
 
 
-    // modal open
-    function openModal(msg) {
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden"; // 모달 작동 시 스크롤바 비활성화
-        modalContent.innerHTML = `<p>${msg}</p>`; //
+    // modal start
+    $(".MuiModal-root").hide();
 
+    function existModal(msg){
+        let msgDiv = $(".msg-div");
+        msgDiv.text(msg);
+
+        $(".MuiModal-root").show();
     }
 
-    // modal close
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        document.body.style.overflow = "unset"; // 모달 작동 시 스크롤바 활성화
-
+    // 모달창 끄기
+    $(".exist-modal").click(function () {
+        $('.modal-item-cnt').text("1");
+        $(".MuiModal-root").fadeOut();
     });
-
 
     function regExp(value){
         const idRegEx = /^[a-z]+[a-z0-9]{5,17}$/g; // 아이디 정규식
@@ -282,7 +279,7 @@ $(document).ready(function () {
     //    id 중복체크 btn
     $("#custId_btn").click(function(){
     if(regExp(1)){
-        openModal("6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합");
+        existModal("6자 이상 16자 이하의 영문 혹은 영문과 숫자를 조합");
         return false;
     }else{
         let custIdVal = $("#custId").val();
@@ -302,12 +299,12 @@ $(document).ready(function () {
         }); // end of ajax
         }
         });
-
+    // let a = document.write('<script src="/resources/js/member/modal.js"></script>');
 
     // email 중복체크 btn
         $("#email_btn").click(function(){
             if(regExp(2)){
-            openModal("이메일 형식으로 입력해 주세요");
+          existModal("이메일 형식으로 입력해 주세요");
             return false;
         }else{
             let emailVal = $("#email").val();
@@ -315,7 +312,7 @@ $(document).ready(function () {
             type : 'GET',
             url : '/member/signup/email/'+emailVal+'?cnt=1',
             success : function(result){
-                openModal("사용 할 수 있는 이메일입니다");
+                existModal("사용 할 수 있는 이메일입니다");
             $("#email_btn").attr("disabled",true);
             $("#email_btn").css("color","#dddddd");
             $("#email_btn").css("border-color","#dddddd");
@@ -323,7 +320,7 @@ $(document).ready(function () {
             emailAuthBtn = true;
         },
             error : function(){
-                openModal("사용 불가능한 이메일입니다");
+                existModal("사용 불가능한 이메일입니다");
         }
         }); // end of ajax
         }
@@ -332,7 +329,7 @@ $(document).ready(function () {
     // 휴대폰번호 인증 api
     $("#telNo_btn").click(function(){
     if(regExp(3)){
-        openModal("잘못된 휴대폰 번호입니다.\n확인 후 다시 시도 해주세요.") // 1. 숫자아니면 버튼 활성화 안함
+        existModal("잘못된 휴대폰 번호입니다.\n확인 후 다시 시도 해주세요.") // 1. 숫자아니면 버튼 활성화 안함
         return false;
     }else{
         let telNoVal = $("#telNo").val(); // 휴대폰 번호
@@ -344,9 +341,9 @@ $(document).ready(function () {
             cache : false,
             success : function(data) {
             if (data == "err") { // 실패시
-                openModal("인증번호 발송에 실패하였습니다");
+                existModal("인증번호 발송에 실패하였습니다");
         } else {
-            openModal("인증번호가 발송되었습니다");
+            existModal("인증번호가 발송되었습니다");
                 telNoAuthBtn = true;
 
                 $("#telNo_btn").attr("disabled",true);
@@ -414,7 +411,7 @@ $(document).ready(function () {
         telNoChkBtn.addEventListener("click", telNoChkAuth); // 휴대폰 인증번호 체크
         function telNoChkAuth(){
             if(telNoChk.value === authNum){
-                openModal("인증 성공하였습니다");
+                existModal("인증 성공하였습니다");
                 telNoChkBtn.style.color = "#dddddd";
                 telNoChkBtn.style.borderColor = "#dddddd";
                 telNoChkBtn.disable = true;
@@ -428,7 +425,7 @@ $(document).ready(function () {
 
                 return true;
             }else{
-                openModal("올바른 인증코드가 아닙니다");
+                existModal("올바른 인증코드가 아닙니다");
                 return false;
             }
         }
@@ -494,41 +491,41 @@ $(document).ready(function () {
 
         // 이메일 중복확인
         if(!emailAuthBtn){
-            openModal("이메일 중복확인을 해주세요");
+            existModal("이메일 중복확인을 해주세요");
             return false;
         }
 
         // 비밀번호
         if(!pwdRegExp() || !pwdChkRegExp()){
-            openModal("비밀번호를 확인해주세요");
+            existModal("비밀번호를 확인해주세요");
             return false;
         }
 
         // 이름
         if(!nameRegExp()){
-            openModal("이름을 입력해주세요");
+            existModal("이름을 입력해주세요");
             return false;
         }
 
         // 휴대폰
         if(!telNoChkRegExp()){
-            openModal("휴대폰번호를 확인해주세요");
+            existModal("휴대폰번호를 확인해주세요");
             return false;
         }
 
         if(!telNoAuthBtn){
-            openModal("휴대폰번호를 인증해주세요");
+            existModal("휴대폰번호를 인증해주세요");
             return false;
         }
 
         if(!telNoChkAuthBtn){
-            openModal("인증번호를 인증해주세요");
+            existModal("인증번호를 인증해주세요");
             return false;
         }
 
         //약관동의
         if(!agreeRequired()){
-            openModal("필수동의 항목을 확인해주세요");
+            existModal("필수동의 항목을 확인해주세요");
             return false;
         }
 

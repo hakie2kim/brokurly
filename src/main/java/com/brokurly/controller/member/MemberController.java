@@ -59,7 +59,6 @@ public class MemberController {
     @GetMapping("/signup/{custId}")
     @ResponseBody
     public ResponseEntity<String> checkId(@PathVariable String custId){
-        log.info("custId = {}",custId);
         try{
             if(memberService.getCount(custId) == 1){
                 throw new Exception("Member IdChk failed.");
@@ -81,8 +80,6 @@ public class MemberController {
         //2. chk가 0일 경우 비밀번호 재설정을 위한 이메일 인증으로 카운트 1(가입 확인)
         try{
 
-            log.info("cnt = {}", cnt);
-            log.info("email = {}", email);
                 if (memberService.getCountEmail(email) == cnt) {
                     log.info("memberService.getCountEmail(email) = {}", memberService.getCountEmail(email));
                     throw new Exception("Member EmailChk failed.");
@@ -204,6 +201,7 @@ public class MemberController {
 
         if(session != null){
             session.invalidate();
+
         }
 
         return "redirect:/categories/best-page";
@@ -282,12 +280,25 @@ public class MemberController {
         return "/member/resetPwdForm";
     }
 
-    @PatchMapping("/find/password/reset/{email}")
-    public String changePassword(@PathVariable String email, MemberAndLoginDto memberAndLoginDto){
+    @PatchMapping("/find/password/reset/{email}/{pwd}")
+    @ResponseBody
+    public ResponseEntity<String> changePassword(@PathVariable String email, @PathVariable String pwd){
        // 새 비밀번호 암호화 후 업로드
-        memberAndLoginDto.setCustId(email);
-        memberService.chageNewPwd(memberAndLoginDto);
+        MemberAndLoginDto memberAndLoginDto = new MemberAndLoginDto();
 
-        return "redirect:/member/login";
+        memberAndLoginDto.setCustId(email);
+        memberAndLoginDto.setPwd(pwd);
+
+        try {
+            if(memberService.chageNewPwd(memberAndLoginDto) == 0){
+               new Exception("비밀번호 변경 에러입니다.");
+            }
+            return new ResponseEntity<String>("비밀번호 변경이 완료되었습니다.", HttpStatus.OK);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("비밀번호 변경에 실패하였습니다.", HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/member/loginForm.css'/> ">
 </head>
 <style>
+
     .findPwd-div{
         height: 300px;
     }
@@ -60,7 +61,7 @@
 
     .box{
         top:-300px;
-        z-index:2;
+        z-index:5;
         display: inline-block;
         height: 200px;
         width: 33.3%;
@@ -142,7 +143,7 @@
         left: 0px;
         height: 40px;
         width: 0px;
-        z-index: 0;
+        z-index: 2;
         opacity: 1;
         -webkit-animation: loader72 10s ease-in-out infinite;
         animation: loader72 10s ease-in-out infinite;
@@ -178,33 +179,15 @@
         90%{opacity: 0; width: 40px;}
         100%{opacity: 0;width: 0px;}
     }
-    .modal {
-        position: absolute;
-        display: none;
 
-        justify-content: center;
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-
-        background-color: rgba(0, 0, 0, 0.4);
-
-        padding: 0;
-        z-index: 1;
-    }
 </style>
 <body>
 <form id="frm" action="<c:out value='/member/find/password/reset'/>" method="POST">
     <input type="hidden" name="_method" value="POST">
     <section>
-        <div class="modal">
-            <div class="modal_content_body">
-                <span id="modal_content"></span>
-                <!-- modalContent -->
-            </div>
-        </div>
+        <!-- modal start -->
+        <jsp:include page="../include/modal.jsp"/>
+        <!-- modal end -->
         <span class="login-header">비밀번호 재설정</span>
         <div class="login-div findPwd-div">
             <div class="email-div">
@@ -229,6 +212,30 @@
 </form>
 <script>
     $(document).ready(function (){
+        // modal start
+        $(".MuiModal-root").hide();
+
+        function existModal(msg){
+            let msgDiv = $(".msg-div");
+            msgDiv.text(msg);
+
+            $(".MuiModal-root").show();
+        }
+
+        // 모달창 끄기
+        $(".exist-modal").click(function () {
+            $('.modal-item-cnt').text("1");
+            $(".MuiModal-root").fadeOut();
+        });
+
+        // modal end
+
+        let msg = "${msg}";
+
+        if(msg != ''){
+            existModal(msg);
+        }
+
         let chkCnt = 0; //  이메일 인증 or 인증번호 인증을 위한 cnt
         let authNum = '';
         let emailHidden = '';
@@ -251,10 +258,11 @@
                 chkCnt += 1;
 
             }else{
-                alert("올바른 인증코드가 아닙니다.");
+                existModal("올바른 인증코드가 아닙니다.");
             }
 
         }
+
 
         function submitNewPwd(){
 
@@ -273,6 +281,20 @@
 
             frm.submit();
         }
+
+        function regExp(value){
+            const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i; // 이메일 정규식
+
+            let inputed = "";
+            let regEx = "";
+
+          if(value === 2){
+                inputed = document.querySelector("#email").value.trim();
+                regEx = emailRegEx;
+            }
+            return !regEx.test(inputed) || !inputed;
+        }
+
         // email 중복체크 btn
         // 1. 있는 메일인지 확인한다
         // 1-1. 없으면 알람창
@@ -280,10 +302,10 @@
         $("#email_btn").click(function(){
 
             if(chkCnt === 0){
-            // if(regExp(2)){
-            //     openModal("이메일 형식으로 입력해 주세요");
-            //     return false;
-            // }else{
+            if(regExp(2)){
+                existModal("이메일 형식으로 입력해 주세요");
+                return false;
+            }else{
                 let emailVal = $("#email").val();
                 $.ajax({
                     type : 'GET',
@@ -305,10 +327,10 @@
                     },
 
                     error : function(){
-                         alert("등록된 이메일 주소가 아닙니다.");
+                        existModal("등록된 이메일 주소가 아닙니다.");
                     }
                 }); // end of ajax
-           // }
+            }
             }else if(chkCnt === 1){
                     chkAuthNum();
             }
@@ -322,7 +344,7 @@
                 type:'POST',
                 url : '/member/find/password/'+emailVal,
                 success : function (result){
-                     alert("입력한 이메일로 인증 메일이 발송되었습니다.");
+                    existModal("입력한 이메일로 인증 메일이 \n발송되었습니다.");
 
                     emailHidden = emailVal;
 
@@ -348,13 +370,16 @@
                     $('.box').html(' <div class="loader7"></div>');
                     $('.box').css('display',"block");
                     $('.modal').css('display',"flex");
+
+
                 },
                 complete: function() {
                     $('.box').css('display',"none");
                     $('.modal').css('display',"none");
+
                 },
                 error : function (){
-                    alert("메일 보내기에 실패하였습니다.");
+                    existModal("메일 보내기에 실패하였습니다.");
                 }
 
             });
