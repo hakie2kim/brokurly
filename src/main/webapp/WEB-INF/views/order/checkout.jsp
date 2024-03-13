@@ -1,7 +1,9 @@
+<%@ page import="com.brokurly.dto.member.MemberAndLoginDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
@@ -33,7 +35,6 @@
             <span>${customerCart[0].name}<c:if test="${numOfItemType >= 2}"> 외 ${numOfItemType - 1}개</c:if></span>
             상품을 주문합니다.
         </div>
-        <hr class="list-hr"/>
         <div id="order-goods-list" style="display: none">
             <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
@@ -51,7 +52,7 @@
                         </span>
                     </div>
                 </div>
-                <hr class="list-hr"/>
+<%--                <hr class="list-hr"/>--%>
             </c:forEach>
         </div>
     </div>

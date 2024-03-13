@@ -80,7 +80,7 @@ public class OrderController {
         // 포인트 서비스 필요
         int point = (int) (amount.getOrderAmt() * 0.05);
 
-        ShippingLocationCurrDto location = null;
+        ShippingLocationCurrDto location;
         try {
             location = shippingLocationService.getCurrShippingLocationByCustomer(loginMember.getCustId());
         } catch (RuntimeException e) {
