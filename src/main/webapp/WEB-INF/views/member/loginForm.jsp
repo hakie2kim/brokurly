@@ -128,7 +128,7 @@
             <div class="find-div">
                 <a href="<c:url value='/member/find/password'/>"><span>비밀번호 재설정</span></a>
             </div>
-            <button type="button" class="login-div__column loginBtn">로그인</button>
+            <button class="login-div__column loginBtn">로그인</button>
             <button onclick="location.href='/member/signup'" class="login-div__column regBtn">회원가입</button>
             <div class="col-lg-12 text-center mt-3">
                 <img alt="카카오로그인" src="<c:url value='/resources/image/kakao_login_large_wide.png'/>" onclick="loginWithKakao()">
@@ -136,7 +136,6 @@
         </div>
     </section>
 </form>
-<script type="text/javascript" src="<c:url value='/resources/js/member/member.js'/> "></script>
 <script>
    $(document).ready(function ()  {
        let modal = document.querySelector(".modal");
@@ -166,16 +165,6 @@
        if(msg != ''){
            openModal(msg);
        }
-
-       loginBtn.addEventListener("click", () => {
-
-
-           if(!pwdRegExp()){
-               openModal("아이디 또는 비밀번호를 확인해주세요");
-               return false;
-           }
-
-       });
 
    });
 </script>
