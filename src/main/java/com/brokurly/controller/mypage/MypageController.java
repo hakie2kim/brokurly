@@ -11,6 +11,7 @@ import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.mypage.WishListItemService;
+import com.brokurly.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class MypageController {
     private final PointService pointService;
     private final ShippingLocationService shippingLocationService;
     private final WishListItemService wishListItemService;
+    private final OrderService orderService;
 
     @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
@@ -262,5 +264,17 @@ public class MypageController {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
         wishListItemService.deleteWish(itemId, custId);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/order/list")
+    String orderList(Model model) {
+
+        return "/mypage/order-list";
+    }
+
+    @GetMapping("/order/{orderId}")
+    String orderDetail(@PathVariable String orderId, Model model) {
+
+        return "/mypage/order-detail";
     }
 }
