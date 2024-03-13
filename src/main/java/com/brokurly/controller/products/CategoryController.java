@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/seller")
-public class CategoryController {
+public class  CategoryController {
 
     private final CategoryService categoryService;
 

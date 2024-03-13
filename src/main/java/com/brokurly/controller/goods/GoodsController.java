@@ -1,7 +1,10 @@
 package com.brokurly.controller.goods;
 
 
-import com.brokurly.dto.goods.*;
+import com.brokurly.dto.goods.GoodsAnnouncementDto;
+import com.brokurly.dto.goods.GoodsDetailDto;
+import com.brokurly.dto.goods.GoodsInquiryLogDto;
+import com.brokurly.dto.goods.GoodsReviewBoardDto;
 import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.service.goods.GoodsService;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +62,6 @@ public class GoodsController {
         return new ResponseEntity<>(result + "", HttpStatus.OK);
     }
 
-
 //  @PostMapping("/dateSort")
 //  @ResponseBody
 //  public void sortReview(String itemId, Model model) {
@@ -67,6 +69,5 @@ public class GoodsController {
 //    model.addAttribute("review", review);
 ////    return "goods/goods";
 //  }
-
 
 }
