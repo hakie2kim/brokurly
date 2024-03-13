@@ -30,6 +30,7 @@
     <div>
         <div>
             <label for="receiver-name" class="name title">받으실 분<span class="star">*</span></label>
+            <div id="hidden-name" style="display:none">${member.name}</div>
             <input
                     id="receiver-name"
                     name="rcvName"
@@ -39,6 +40,7 @@
         </div>
         <div>
             <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
+            <div id="hidden-tel-no" style="display:none">${member.telNo}</div>
             <input
                     id="receiver-phone"
                     name="telNo"

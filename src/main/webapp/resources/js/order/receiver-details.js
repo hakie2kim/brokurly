@@ -2,8 +2,8 @@ window.onload = () => {
     // 배송 요청사항 주문자 정보 불러오기 기능
     $(".sameCheck input").on("change", function (e) {
         if (e.target.checked) {
-            $("#receiver-name").val("<c:out value='${member.name}'/>");
-            $("#receiver-phone").val("<c:out value='${member.telNo}'/>");
+            $("#receiver-name").val($("#hidden-name").text());
+            $("#receiver-phone").val($("#hidden-tel-no").text());
         } else {
             $("#receiver-name").val("");
             $("#receiver-phone").val("");

@@ -44,6 +44,7 @@ public class Order {
         return OrderResponseDto.builder()
                 .orderId(orderId)
                 .custId(custId)
+                .orderStat(orderStat)
                 .orderDt(orderDt)
                 .totalItemQty(totalItemQty)
                 .totalPrice(totalPrice)
