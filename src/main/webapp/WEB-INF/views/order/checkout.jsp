@@ -43,10 +43,13 @@
                     <div class="item-name"><span>${item.name}</span></div>
                     <div class="item-cnt">${item.itemCnt}개</div>
                     <div class="item-price-info">
-                        <span class="item-dc-amount">${item.price - item.itemDcAmt}원</span>
-                        <c:if test="${item.itemDcAmt != 0}">
-                            <span class="item-price">${item.price}원</span>
-                        </c:if>
+                        <span class="item-dc-price">
+                            <fmt:formatNumber value="${item.price - item.itemDcAmt}" pattern="#,##0"/>원
+                        </span>
+
+                        <span class="item-price" <c:if test="${item.itemDcAmt != 0}">style="display: none;"</c:if>>
+                            <fmt:formatNumber value="${item.price}" pattern="#,##0"/>원
+                        </span>
                     </div>
                 </div>
                 <hr class="list-hr"/>
@@ -100,8 +103,11 @@
             <div>배송지</div>
             <div>
                 <span id="default-delivery">기본 배송지</span>
-                <p>서울 강남구 강남로 111</p>
-                <p class="caution">상세 주소를 입력해주세요</p>
+                <p>${location.addr}</p>
+                <c:if test="${location.specAddr == null}">
+                    <p class="caution">상세 주소를 입력해주세요</p>
+                </c:if>
+                <p>${location.specAddr}</p>
                 <button id="location-change" class="ship-button">변경</button>
             </div>
         </div>

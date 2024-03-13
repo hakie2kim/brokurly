@@ -9,8 +9,8 @@
     <typeAliases>
         <typeAlias type="com.brokurly.entity.member.Member" alias="Member"/>
         <typeAlias type="com.brokurly.entity.order.Order" alias="Order"/>
-        <typeAlias type="com.brokurly.entity.order.OrderItemList" alias="OrderItemList"/>
-        <typeAlias type="com.brokurly.entity.payment.PaymentDetails" alias="Payment"/>
+        <typeAlias type="com.brokurly.entity.order.OrderItems" alias="OrderItems"/>
+        <typeAlias type="com.brokurly.entity.payment.PaymentDetails" alias="PaymentDetails"/>
         <typeAlias type="com.brokurly.entity.order.OrderAndPayment" alias="OrderAndPayment"/>
         <typeAlias type="com.brokurly.entity.order.ReceiverDetails" alias="ReceiverDetails"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsImage" alias="GoodsImage"/>
@@ -35,6 +35,7 @@
         <typeAlias type="com.brokurly.entity.search.SearchKeyword" alias="SearchKeyword"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsAnnouncement" alias="GoodsAnnouncement"/>
         <typeAlias type="com.brokurly.entity.goods.GoodsInquiryLog" alias="GoodsInquiryLog"/>
+<!--        <typeAlias type="com.brokurly.entity.seller.Seller" alias="Seller"/>-->
         <typeAlias type="com.brokurly.entity.goods.GoodsReviewBoard" alias="GoodsReivewBoard"/>
         <typeAlias type="com.brokurly.entity.mypage.WishList" alias="WishList"/>
         <typeAlias type="com.brokurly.entity.mypage.WishListItem" alias="WishListItem"/>

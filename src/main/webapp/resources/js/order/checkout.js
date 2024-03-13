@@ -175,11 +175,15 @@ function redirectPayment() {
 
     const customerCartList = [];
     $(".item-list").each(function () {
+        let itemPrice = parseInt($(this).find($(".item-price")).text().replace(/[,\s원]/g, ''));
+        let itemDcAmount = itemPrice - parseInt($(this).find($(".item-dc-price")).text().replace(/[,\s원]/g, ''));
+
         let customerCart = {
             itemId: $(this).find($(".item-id")).text(),
             name: $(this).find($(".item-name")).text(),
-            itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
-            price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
+            itemCnt: parseInt($(this).find($(".item-cnt")).text().replace(/[,\s원]/g, '')),
+            price: itemPrice,
+            itemDcAmt: itemDcAmount
         }
         customerCartList.push(customerCart);
     });
