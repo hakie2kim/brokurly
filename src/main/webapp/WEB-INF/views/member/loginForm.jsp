@@ -128,7 +128,7 @@
             <div class="find-div">
                 <a href="<c:url value='/member/find/password'/>"><span>비밀번호 재설정</span></a>
             </div>
-            <button class="login-div__column loginBtn">로그인</button>
+            <button type="button" class="login-div__column loginBtn">로그인</button>
             <button onclick="location.href='/member/signup'" class="login-div__column regBtn">회원가입</button>
             <div class="col-lg-12 text-center mt-3">
                 <img alt="카카오로그인" src="<c:url value='/resources/image/kakao_login_large_wide.png'/>" onclick="loginWithKakao()">
@@ -136,12 +136,15 @@
         </div>
     </section>
 </form>
-
+<script type="text/javascript" src="<c:url value='/resources/js/member/member.js'/> "></script>
 <script>
    $(document).ready(function ()  {
        let modal = document.querySelector(".modal");
        let modalContent = document.querySelector("#modal_content");
        let closeModalBtn = document.querySelector(".close-modal-btn");
+
+       // 로그인
+       let loginBtn = document.querySelector(".loginBtn");
 
        // modal open
        function openModal(msg) {
@@ -164,6 +167,15 @@
            openModal(msg);
        }
 
+       loginBtn.addEventListener("click", () => {
+
+
+           if(!pwdRegExp()){
+               openModal("아이디 또는 비밀번호를 확인해주세요");
+               return false;
+           }
+
+       });
 
    });
 </script>
@@ -172,7 +184,6 @@
     window.onload = function(){
         Kakao.init('b99b74015501ea2e7067d2dd45d23223'); // sdk 초기화 및 사용할 앱의 키 설정
         Kakao.isInitialized(); // SDK 초기화 여부를 판단
-        console.log(Kakao.isInitialized());
     };
 
 
