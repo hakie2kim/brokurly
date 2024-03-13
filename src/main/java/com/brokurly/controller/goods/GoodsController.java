@@ -5,9 +5,11 @@ import com.brokurly.dto.goods.GoodsAnnouncementDto;
 import com.brokurly.dto.goods.GoodsDetailDto;
 import com.brokurly.dto.goods.GoodsInquiryLogDto;
 import com.brokurly.dto.goods.GoodsReviewBoardDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.entity.goods.GoodsReviewBoard;
 import com.brokurly.service.goods.GoodsService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,15 +32,30 @@ public class GoodsController {
     // 상품 상세페이지로 값 전달
     @GetMapping("/{itemId}")
     public String goods(@PathVariable("itemId") String itemId, Model model, HttpSession session) {
-        session.setAttribute("member", "hakie2kim");
+        // 세션에서 로그인 멤버 정보 가져오기
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        // 만약 로그인 멤버 정보가 없으면 로그인 페이지로 리다이렉트
+        if (custIdDto == null) {
+            // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
+        }
+        // 로그인 멤버 정보에서 필요한 값을 추출
+        String custId = custIdDto.getCustId();
+        // 세션에 고객 ID 저장
+//        session.setAttribute("member", custId);
+
+//        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//        String custId = custIdDto.getCustId();
+//        session.setAttribute("member", custId);
+
         GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
         GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
 //    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
         List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
-        int wishList = goodsService.searchWish(itemId, "hakie2kim"); //상품 찜
+        int wishList = goodsService.searchWish(itemId, custId); //상품 찜
         List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
 
-
+        model.addAttribute("custId",custId);
         model.addAttribute("goods", goods);
         model.addAttribute("announcement", announcement);
 //    model.addAttribute("goodsImage", goodsImage);

@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- 가격에 ,찍기 기능용--%>
@@ -18,11 +19,6 @@
 <div>
 <%--  <div class="header0">--%>
 <%--  </div>--%>
-
-
-
-
-
 
   <%--  <div id="container">--%>
   <%--    <h2>Lorem Ipsum</h2>--%>
@@ -1263,7 +1259,7 @@ $(document).ready(function () {
                 type: 'POST',
                 dataType: "text",
                 data: {
-                    custId: "hong",
+                    custId: "${custId}",
                     itemId: "${goods.itemId}"
                 },
                 success: function (data) {
@@ -1281,7 +1277,7 @@ $(document).ready(function () {
                 type: 'POST',
                 dataType: "text",
                 data: {
-                    custId: "hong",
+                    custId: "${custId}",
                     itemId: "${goods.itemId}"
                     },
                 success: function (data) {
@@ -1431,10 +1427,10 @@ $(".minus_btn").on("click", function () {
 
 // 서버로 전송할 데이터
 const form = {
-    <%--custId : '${customer.custId}',--%>
+    custId : '${custId}',
     itemId: '${goods.itemId}',
-    custId: 'hakie2kim',
-    itemCnt: '',
+    // custId: 'hakie2kim',
+    itemCnt: "",
     itemCk: 'N'
 }
 // 장바구니 추가 버튼
@@ -1708,7 +1704,6 @@ $(document).ready(function () {
         }
     });
 });
-
 
 </script>
 

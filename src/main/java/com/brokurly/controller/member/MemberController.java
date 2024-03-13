@@ -181,9 +181,11 @@ public class MemberController {
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         String loginName = custIdDto.getName();
+//        String custId = custIdDto.getCustId();
 
 
         session.setAttribute("loginName",loginName);
+//        session.setAttribute("custId",custId);
 //        Ra.addFlashAttribute("loginName",loginName);
 
 //        return "redirect:/categories/best-page" *** db 연결 후 수정;
