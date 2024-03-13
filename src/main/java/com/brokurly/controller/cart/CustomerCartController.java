@@ -44,7 +44,7 @@ public class CustomerCartController {
 
         if (custId == null) {
             // 로그인 페이지로 리다이렉트
-            return "redirect:/member/login";
+            return "5";
         }
         // 카트 등록
         int result = customerCartService.addCart(customerCartDto);
@@ -58,7 +58,10 @@ public class CustomerCartController {
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
         List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
-
+        if (custId == null) {
+            // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
+        }
 
         // 이제는 새로운 CustomerCartDto 객체를 생성하여 값을 설정합니다.
         model.addAttribute("cart", cart);
