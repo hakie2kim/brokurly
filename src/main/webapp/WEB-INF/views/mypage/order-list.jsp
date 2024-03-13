@@ -185,98 +185,62 @@
             </div>
         </div>
         <div class="order-list">
-            <div class="order">
-                <div class="title">
-                    <span>2023.09.18 (22시 27분)</span>
-                    <a>주문내역 상세보기</a>
-                </div>
-                <div class="desc">
-                    <div class="desc1">
-                        <img
-                                src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1657530497306l0.jpg"
-                                alt="[조선호텔김치] 갓김치 상품 이미지"
-                        />
-                        <div class="details">
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">상품명</dt>
-                                <dd class="css-1o8e829 e1437c643">
-                                    [조선호텔김치] 갓김치 외 1건
-                                </dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">주문번호</dt>
-                                <dd class="css-1i58pf4 e1437c644">2318222270324</dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">결제방법</dt>
-                                <dd class="css-1i58pf4 e1437c644">신용카드</dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">결제금액</dt>
-                                <dd class="css-1i58pf4 e1437c644">13,920원</dd>
-                            </dl>
+            <c:if test="${orderCnt ne 0}">
+                <c:forEach var="order" items="orderList">
+                    <div class="order">
+                        <div class="title">
+                            <span><fmt:formatDate value="${order.orderDt}" pattern="yyyy.MM.dd (HH'시' mm'분')"/></span>
+                            <a>주문내역 상세보기</a>
+                        </div>
+                        <div class="desc">
+                            <div class="desc1">
+                                <img
+                                        src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1657530497306l0.jpg"
+                                        alt="[조선호텔김치] 갓김치 상품 이미지"
+                                />
+                                <div class="details">
+                                    <dl class="css-1ccl3pq e1437c646">
+                                        <dt class="css-dzjp62 e1437c645">상품명</dt>
+                                        <dd class="css-1o8e829 e1437c643">
+                                            [조선호텔김치] 갓김치 외 1건
+                                        </dd>
+                                    </dl>
+                                    <dl class="css-1ccl3pq e1437c646">
+                                        <dt class="css-dzjp62 e1437c645">주문번호</dt>
+                                        <dd class="css-1i58pf4 e1437c644">${order.orderId}</dd>
+                                    </dl>
+                                    <%--<dl class="css-1ccl3pq e1437c646">
+                                        <dt class="css-dzjp62 e1437c645">결제방법</dt>
+                                        <dd class="css-1i58pf4 e1437c644">신용카드</dd>
+                                    </dl>--%>
+                                    <dl class="css-1ccl3pq e1437c646">
+                                        <dt class="css-dzjp62 e1437c645">결제금액</dt>
+                                        <dd class="css-1i58pf4 e1437c644"><fmt:formatNumber value="${order.totalPrice}" pattern="#,### 원"/></dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="desc2">
+                                <span class="deli-stat">${order.orderStat}</span>
+                                <div style="width: 96px">
+                                    <button>
+                                        <span>1:1 문의</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="desc2">
-                        <span class="deli-stat">배송완료</span>
-                        <div style="width: 96px">
-                            <button>
-                                <span>1:1 문의</span>
-                            </button>
-                        </div>
-                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${orderCnt eq 0}">
+                <div class="warning-orders">
+                  <div class="wrapper">
+                    <p>3개월 간의 주문내역이 없습니다.</p>
+                    <button>
+                      <span>베스트 상품 보기</span>
+                    </button>
+                  </div>
                 </div>
-            </div>
-            <div class="order">
-                <div class="title">
-                    <span>2023.08.18 (21시 26분)</span>
-                    <a>주문내역 상세보기</a>
-                </div>
-                <div class="desc">
-                    <div class="desc1">
-                        <img
-                                src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1637154205701l0.jpg"
-                                alt="[연세우유 x 마켓컬리] 전용목장우유 900mL 상품 이미지"
-                        />
-                        <div class="details">
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">상품명</dt>
-                                <dd class="css-1o8e829 e1437c643">
-                                    [연세우유 x 마켓컬리] 전용목장우유 900mL 외 3건
-                                </dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">주문번호</dt>
-                                <dd class="css-1i58pf4 e1437c644">2315121260215</dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">결제방법</dt>
-                                <dd class="css-1i58pf4 e1437c644">신용카드</dd>
-                            </dl>
-                            <dl class="css-1ccl3pq e1437c646">
-                                <dt class="css-dzjp62 e1437c645">결제금액</dt>
-                                <dd class="css-1i58pf4 e1437c644">53,175원</dd>
-                            </dl>
-                        </div>
-                    </div>
-                    <div class="desc2">
-                        <span class="deli-stat">배송완료</span>
-                        <div style="width: 96px">
-                            <button>
-                                <span>1:1 문의</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="warning-orders">
-              <div class="wrapper">
-                <p>3개월 간의 주문내역이 없습니다.</p>
-                <button>
-                  <span>베스트 상품 보기</span>
-                </button>
-              </div>
-            </div> -->
+            </c:if>
         </div>
     </div>
 </div>
