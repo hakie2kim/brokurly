@@ -324,7 +324,7 @@
             </li>
             <li>
                 <span class="column">주소</span>
-                <span class="value">${orderLog.receiverDetails.telNo}</span>
+                <span class="value">${orderLog.order.addr}</span>
             </li>
             <li>
                 <span class="column">받으실 장소</span>
