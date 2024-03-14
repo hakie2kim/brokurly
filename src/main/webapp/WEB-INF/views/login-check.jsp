@@ -10,8 +10,8 @@
         rel="stylesheet"/>
     <link rel="stylesheet" href="<c:url value='/resources/css/payment/cancel.css'/>"/>
     <script>
-        function redirect() {
-            window.location.href = "/member/login";
+        function redirect(uri) {
+            window.location.href = "/member/login?redirectURL=" + uri;
         }
     </script>
 </head>
@@ -20,7 +20,7 @@
     <div class="small-modal-border">
         <div class="small-modal-content">로그인하셔야 본 서비스를 <br>이용하실 수 있습니다.</div>
         <div class="small-modal-buttons">
-            <button id="small-modal-ok" onclick="redirect()">확인</button>
+            <button id="small-modal-ok" onclick="redirect('${redirectURI}')">확인</button>
         </div>
     </div>
 </div>

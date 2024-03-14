@@ -869,7 +869,8 @@
         itemId: '',
         // itemId: "1233",
         itemCnt: '',
-        itemCk: 'N'
+        itemCk: 'N',
+        uri: window.location.pathname
     }
     // 모달창 장바구니 담기 클릭했을 때
     $(".put-in-cart-2").click(function () {
@@ -886,6 +887,10 @@
             //     itemCnt: $(".quantity_input").val()
             // },
             success: function (result) {
+                result += "?page=1";
+                if (result.includes("/categories")) {
+                    window.location.href = "/login-check?redirectURI=" + result;
+                }
 
                 cartAlert(result);
                 $(".MuiModal-root").hide();

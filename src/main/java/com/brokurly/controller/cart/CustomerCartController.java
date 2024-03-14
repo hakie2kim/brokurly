@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,20 +40,26 @@ public class CustomerCartController {
     /* 장바구니 추가 */
     @PostMapping("/add")
     @ResponseBody
-    public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
+    public String addCartPOST(@ModelAttribute CustomerCartDto customerCartDto, @RequestParam String uri, HttpSession session) {
         // 로그인 체크
 //        String member = (String) session.getAttribute("member");
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        log.info("custIdDto = {}", custIdDto);
+        if (custIdDto == null) {
+            log.info("uri = {}", uri);
+            return uri;
+        }
         String custId = custIdDto.getCustId();  //id값 가져와서
+
         //session.setAttribute("custId",custId);
         customerCartDto.setCustId(custId);  //id값 넣어주기
         customerCartDto.setItemCk("N");
 //        log.info("customerCartDto.getCustId = {}",customerCartDto.getCustId());
 
-        if (custId == null) {
-            // 로그인 페이지로 리다이렉트
-            return "5";
-        }
+//        if (custId == null) {
+//            // 로그인 페이지로 리다이렉트
+//            return "5";
+//        }
         // 카트 등록
         int result = customerCartService.addCart(customerCartDto);
         return result + "";
