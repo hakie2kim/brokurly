@@ -1663,19 +1663,19 @@ $(".goods-96").on("click", function () {
     $(this).css('color', 'rgb(51, 51, 51)');
     $(".goods-95").css('color', 'rgb(153, 153, 153)');
 
-    // $.ajax({
-    //     url: '/goods/dateSort',
-    //     method: "POST",
-    //     // dataType: "text",
-    //     // data: {
-    //     //     custId: "hong",
-    //     //     itemId: "1708410569506"
-    //     // },
-    //     success: function () {
-    //         location.reload();
-    //         alert("삭제 완료");
-    //     }
-    // });
+    $.ajax({
+        url: '/goods/dateSort',
+        method: "POST",
+        dataType: "text",
+        data: {
+            // custId: "hong",
+            itemId: "${goods.itemId}"
+        },
+        success: function () {
+            location.reload();
+            alert("정렬 완료");
+        }
+    });
 
     // // review 배열을 생성하고
     // var reviewArray = [];

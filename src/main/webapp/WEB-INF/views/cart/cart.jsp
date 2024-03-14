@@ -580,7 +580,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "${custId}",
+                <%--custId: "${custId}",--%>
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -613,7 +613,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "${custId}",
+                <%--custId: "${custId}",--%>
                 itemId: itemId,
                 itemCnt: quantity,
                 itemCk: check
@@ -634,7 +634,7 @@
             method: "POST",
             dataType: "text",
             data: {
-                custId: "${custId}",
+                <%--custId: "${custId}",--%>
                 itemId: itemId
             },
             success: function () {
@@ -659,7 +659,7 @@
                     method: "POST",
                     dataType: "text",
                     data: {
-                        custId: "${custId}",
+                        <%--custId: "${custId}",--%>
                         itemId: itemId
                     },
                     success: function () {
@@ -755,7 +755,7 @@
                     method: "POST",
                     dataType: "text",
                     data: {
-                        custId: "${custId}",
+                        <%--custId: "${custId}",--%>
                         itemId: itemId,
                         itemCnt: itemCnt,
                         itemCk: 'Y'

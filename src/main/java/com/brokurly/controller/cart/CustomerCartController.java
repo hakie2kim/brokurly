@@ -44,7 +44,7 @@ public class CustomerCartController {
 
         if (custId == null) {
             // 로그인 페이지로 리다이렉트
-            return "redirect:/member/login";
+            return "5";
         }
         // 카트 등록
         int result = customerCartService.addCart(customerCartDto);
@@ -52,13 +52,19 @@ public class CustomerCartController {
     }
 
     /* 장바구니 페이지 이동 */
-    @GetMapping("/{custId}")
-    public String cartPageGET(@PathVariable("custId") String custId, Model model) {
+    @GetMapping("/cartList")
+    public String cartPageGET( Model model, HttpSession session) {
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
+
 
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
         List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
-
+//        if (custId == null) {
+//            // 로그인 페이지로 리다이렉트
+//            return "redirect:/member/login";
+//        }
 
         // 이제는 새로운 CustomerCartDto 객체를 생성하여 값을 설정합니다.
         model.addAttribute("cart", cart);
@@ -69,8 +75,11 @@ public class CustomerCartController {
     //장바구니 수량 수정
     @PostMapping("/update")
     @ResponseBody
-    public ResponseEntity<CustomerCartDto> updateCartPOST(@ModelAttribute CustomerCartDto customerCartDto) {
+    public ResponseEntity<CustomerCartDto> updateCartPOST(@ModelAttribute CustomerCartDto customerCartDto,HttpSession session) {
 //        log.info("cartDto = {}", customerCartDto);
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
+        customerCartDto.setCustId(custId);
         CustomerCartDto cartDto = customerCartService.update(customerCartDto);
 
         if (cartDto == null) {
@@ -81,9 +90,15 @@ public class CustomerCartController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto) {
+    public String deleteCart(@ModelAttribute CustomerCartDto customerCartDto,HttpSession session) {
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
+        customerCartDto.setCustId(custId);
         CustomerCartDto cartDto = customerCartService.deleteCart(customerCartDto);
-        return "redirect:/cart/{custId}";
+//        if (cartDto == null) {
+//
+//        }
+        return "redirect:/cart/cartList";
     }
 
     @PostMapping("/vacate")
