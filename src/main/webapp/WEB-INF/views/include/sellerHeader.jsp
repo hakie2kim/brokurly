@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sookyung
@@ -6,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false"%>
+<%--<c:set var="loginSession" value="${pageContext.request.getSession(false)==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+=''}"/>--%>
+
+
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -126,13 +131,15 @@
                                                            style="width: 50px; height: 20px;"></a></li>
             <li class="header_li"><a class="header_a" href="/categories/best-page">브로컬리</a></li>
             <li class="header_li"><a class="header_a" href="">관리자센터</a></li>
-            <li class="header_li"><a class="header_a" href="/seller/login">LOGIN</a></li>
+
         </ul>
     </div>
 
     <!-- 왼쪽 네비 -->
 
     <div class="submenu">
+
+    <br><br>
 
         <ul role="menu" class="" style="margin: 15px">상품관리<!---->
 

@@ -23,6 +23,10 @@ section {
     justify-content: space-evenly;
 }
 
+.login-div, .login-header {
+    margin-left: 270px;
+}
+
 .login-div__column {
     height: 54px;
     margin-bottom: 10px;

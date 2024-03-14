@@ -1,13 +1,18 @@
 package com.brokurly.controller.products;
 
 import com.brokurly.dto.categories.CategoryDto;
+import com.brokurly.dto.seller.SellerAndLoginDto;
 import com.brokurly.service.categories.CategoryService;
+import com.brokurly.utils.SessionConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -24,14 +29,21 @@ public class  CategoryController {
     }
 
     @GetMapping("/productsCreate")
-    public String readCategory(Model m) throws Exception {
+    public String readCategory(HttpServletResponse res, HttpServletRequest req, Model m) throws Exception {
 
-        List<CategoryDto> selectPrimary = categoryService.readPrimary();
-        m.addAttribute("selectMain", selectPrimary);
-        log.info("model={}",m);
-        log.info("selectPrimary={}", selectPrimary);
+        HttpSession session = req.getSession();
+        SellerAndLoginDto nameDto = (SellerAndLoginDto) session.getAttribute(SessionConst.LOGIN_SELLER);
+        if (nameDto != null) {
+            List<CategoryDto> selectPrimary = categoryService.readPrimary();
+            m.addAttribute("selectMain", selectPrimary);
+            log.info("model={}", m);
+            log.info("selectPrimary={}", selectPrimary);
 
-        return "seller/productsCreate";
+            return "seller/productsCreate";
+
+        } else {
+            return "/seller/loginForm";
+        }
     }
 
     @GetMapping ("/ajax")

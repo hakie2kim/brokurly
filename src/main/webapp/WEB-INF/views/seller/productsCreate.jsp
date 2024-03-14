@@ -271,12 +271,6 @@
                                         <div class="total-price">
                                             <div class="input-content">
                                                 <div id="showResult"></div>
-                                                <%--                                                <input--%>
-                                                <%--                                                        type="hidden"--%>
-                                                <%--                                                        name="salePrice"--%>
-                                                <%--                                                        id="salePrice"--%>
-                                                <%--                                                        value=""--%>
-                                                <%--                                                >--%>
 
                                             </div>
                                         </div>
