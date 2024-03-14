@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false"%>
+<c:set var="loginName" value="${pageContext.request.session.getAttribute('loginName') += '님'}"/>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -17,7 +19,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = () => {
-        // 상품리스트 모달창
+        // 장바구니 담기 모달창
         $(".MuiModal-root").hide();
 
         $('.css-x0zbdy.e4nu7ef3').on("click", function (event) {
@@ -194,7 +196,7 @@
             <div class="member">
                 <div class="grade">일반</div>
                 <div class="info">
-                    <strong class="name">정충교님</strong>
+                    <strong class="name">${loginName}</strong>
                     <div class="grade-check">
                         <button class="next-month">다음 달 등급 확인</button>
                         <span>·</span>
@@ -203,7 +205,7 @@
                 </div>
             </div>
             <div class="membership">
-                <a href="/member/membership">
+                <a href="">
               <span class="kurly-members">
                 <span class="new">NEW</span>
                 <span class="name">컬리멤버스</span>
@@ -215,7 +217,7 @@
         </div>
         <div class="tile2">
             <div class="box1">
-                <button>
+                <button onclick="location.href='<c:out value="/mypage/point/usage"/>'">
                     <div class="title">적립금 · 컬리캐시<span>></span></div>
                     <div class="desc">바로가기<span></span></div>
                 </button>
@@ -249,9 +251,7 @@
         </div>
     </div>
     <div class="event">
-        <a
-                href="https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2024/0111/lucky"
-        >
+        <a>
             <img
                     src="https://product-image.kurly.com/cdn-cgi/image/width=1150,quality=85,format=auto/banner/da-banner/e2b2bea9-934b-4ad2-8629-1c4999e5fac4.jpg"
                     alt="240126 [뷰티][MA] 1월 행운래플"
@@ -264,7 +264,7 @@
         <div class="name">마이컬리</div>
         <ul>
             <li>
-                <a>주문내역 ></a>
+                <a href="<c:out value='/mypage/order/list'/>">주문내역 ></a>
             </li>
             <li>
                 <a>선물내역 ></a>
@@ -273,10 +273,10 @@
                 <a>자주 사는 상품 ></a>
             </li>
             <li>
-                <a>찜한상품 ></a>
+                <a href="<c:out value='/mypage/pick/list'/>">찜한상품 ></a>
             </li>
             <li>
-                <a>배송지 관리 ></a>
+                <a href="<c:out value='/mypage/address'/>">배송지 관리 ></a>
             </li>
             <li>
                 <a>상품후기 ></a>
@@ -288,7 +288,7 @@
                 <a>상품 문의 ></a>
             </li>
             <li>
-                <a>적립금 · 컬리캐시 ></a>
+                <a href="<c:out value='/mypage/point/usage'/>">적립금 · 컬리캐시 ></a>
             </li>
             <li>
                 <a>쿠폰 ></a>
@@ -297,7 +297,7 @@
                 <a>개인 정보 수정 ></a>
             </li>
         </ul>
-        <a href="/mypage/inquiry/list" class="inquiry">
+        <a href="<c:out value='/board/inquiry'/>" class="inquiry">
             <div class="wrapper">
                 <span class="title">도움이 필요하신가요 ?</span>
                 <span class="desc">1:1 문의하기</span>
@@ -426,12 +426,13 @@
                                         radius="4"
                                 >
                                     <input type="hidden" id="itemId" value="${wishListItemId}"/>
-                                    <input type="hidden" id="itemDisPrice" value="${wishListItem.price - wishListItem.itemDcAmt}"/>
-                                        <span class="css-nytqmg e4nu7ef1">
+                                    <input type="hidden" id="itemDisPrice"
+                                           value="${wishListItem.price - wishListItem.itemDcAmt}"/>
+                                    <span class="css-nytqmg e4nu7ef1">
                                             <img
-                                                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg=="
-                                                alt=""
-                                                class="css-1m3kac1 e4nu7ef0"
+                                                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCAzNiAzNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTM2IDM2SDBWMGgzNnoiLz4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1LjE2NCA2LjU0NykiIHN0cm9rZT0iIzVmMDA4MCIgc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjciPgogICAgICAgICAgICA8cGF0aCBkPSJtMjUuNjggMy42Ni0yLjcyIDExLjU3SDcuMzdMNC42NiAzLjY2eiIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMC41MiIgY3k9IjIwLjc4IiByPSIyLjE0Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjkuODEiIGN5PSIyMC43OCIgcj0iMi4xNCIvPgogICAgICAgICAgICA8cGF0aCBkPSJNMCAwaDMuOGwxLjc2IDcuNSIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg=="
+                                                    alt=""
+                                                    class="css-1m3kac1 e4nu7ef0"
                                             />담기
                                         </span>
                                 </button>
