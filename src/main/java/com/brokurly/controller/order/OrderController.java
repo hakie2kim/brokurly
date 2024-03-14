@@ -1,5 +1,6 @@
 package com.brokurly.controller.order;
 
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
@@ -7,7 +8,9 @@ import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
+import com.brokurly.service.cart.CustomerCartService;
 import com.brokurly.service.member.MemberService;
+import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
@@ -23,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Slf4j
@@ -32,6 +36,8 @@ import javax.servlet.http.HttpSession;
 public class OrderController {
     private final OrderService orderService;
     private final MemberService memberService;
+    private final PointService pointService;
+    private final CustomerCartService customerCartService;
     private final ReceiverDetailsService receiverDetailsService;
     private final ShippingLocationService shippingLocationService;
 
@@ -88,6 +94,9 @@ public class OrderController {
             return "redirect:/mypage/address";
         }
 
+        pointService.usePointsWhenOrder(orderId, loginMember.getCustId(), point);
+        truncateCart(session); // 장바구니에서 주문이 끝난 상품 제거
+
         model.addAttribute("name", loginMember.getName());
         model.addAttribute("dayOfWeek", DateUtils.nDaysAfterDayOfWeek(1)); // 도착 요일
         model.addAttribute("addr", location.getAddr()); // 배송 주소
@@ -96,6 +105,19 @@ public class OrderController {
         model.addAttribute("amount", amount.getOrderAmt()); // 결제된 금액
         model.addAttribute("point", point); // 적립된 금액
         return "order/success";
+    }
+
+    private void truncateCart(HttpSession session) {
+        Object customerCart = session.getAttribute("customerCart");
+        if(customerCart instanceof List) {
+            ((List<?>) customerCart)
+                    .stream()
+                    .filter(x -> x instanceof CustomerCartDto)
+                    .map(x-> (CustomerCartDto) x)
+                    .forEach(customerCartService::vacateCart);
+        } else {
+            throw new IllegalArgumentException("'customerCart' 세션 속성의 타입이 예상한 타입과 다릅니다.");
+        }
     }
 
     @GetMapping("/receiver-details")

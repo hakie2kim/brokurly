@@ -9,6 +9,7 @@ import com.brokurly.entity.order.OrderItems;
 import com.brokurly.entity.payment.PaymentAmount;
 import com.brokurly.repository.order.OrderDao;
 import com.brokurly.service.cart.CustomerCartService;
+import com.brokurly.service.goods.GoodsService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderDao orderDao;
-
+    private final GoodsService goodsService;
     private final CustomerCartService cartService;
     private final PaymentService paymentService;
     private final ReceiverDetailsService receiverDetailsService;
@@ -37,9 +39,16 @@ public class OrderService {
         if (cartList == null)
             throw new IllegalStateException("주문을 위해서는 반드시 상품 목록이 필요합니다.");
 
+        List<String> imgList = new ArrayList<>();
+        for (CustomerCartDto customerCartDto : cartList) {
+            String img = goodsService.searchGoodsImage(customerCartDto.getItemId()).getImg();
+            imgList.add(img);
+        }
+
         return CheckoutDto.builder()
                 .receiverDetails(receiverDetails)
                 .customerCart(cartList)
+                .imgList(imgList)
                 .paymentAmount(new PaymentAmount().toCheckoutDto(cartList))
                 .build();
     }
@@ -84,19 +93,19 @@ public class OrderService {
             location = shippingLocationService.getCurrShippingLocationByCustomer(custId);
         } catch (RuntimeException e) {
             log.error("shippingLocation -> ", e);
-            location = ShippingLocationCurrDto.builder()
-                    .shipLocaId("123")
-                    .addr("서울 강남구 강남대로 364")
-                    .specAddr("미왕빌딩 10층")
-                    .currAddrFl("Y")
-                    .build();
-//            throw new NoSuchElementException();
+//            location = ShippingLocationCurrDto.builder()
+//                    .shipLocaId("123")
+//                    .addr("서울 강남구 강남대로 364")
+//                    .specAddr("미왕빌딩 10층")
+//                    .currAddrFl("Y")
+//                    .build();
+            throw new NoSuchElementException();
         }
 
         // 주문 내역 저장
         Order order = new Order();
 
-        order.changeOrder(checkoutDto, orderId, custId, location.getShipLocaId());
+        order.changeOrder(checkoutDto, orderId, custId, location);
         orderDao.insert(order);
 
         // 주문 상품 목록 저장
