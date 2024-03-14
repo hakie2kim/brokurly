@@ -9,11 +9,12 @@ import com.brokurly.dto.mypage.PointLogUsageDto;
 import com.brokurly.dto.mypage.*;
 
 import com.brokurly.dto.order.OrderLogListResponseDto;
-import com.brokurly.dto.order.OrderResponseDto;
+import com.brokurly.dto.order.OrderLogResponseDto;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.mypage.WishListItemService;
+import com.brokurly.service.order.OrderLogService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,7 @@ public class MypageController {
     private final ShippingLocationService shippingLocationService;
     private final WishListItemService wishListItemService;
     private final OrderService orderService;
+    private final OrderLogService orderLogService;
 
     @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
@@ -274,16 +276,19 @@ public class MypageController {
 
     @GetMapping("/order/list")
     String orderList(HttpServletRequest httpServletRequest, Model model) {
-        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
-        List<OrderLogListResponseDto> orderList = orderService.findOrdersByCustId(custId);
-        model.addAttribute("orderList", orderList);
-        model.addAttribute("orderCnt", orderList.size());
+        String custId = "hakjun1234@naver.com"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        List<OrderLogListResponseDto> orderLogList = orderService.findOrdersByCustId(custId);
+        model.addAttribute("orderLogList", orderLogList);
+        model.addAttribute("orderLogCnt", orderLogList.size());
+        log.info("orderLogList = {}", orderLogList);
+        log.info("orderLogCnt = {}", orderLogList.size());
         return "/mypage/order-list";
     }
 
     @GetMapping("/order/{orderId}")
     String orderDetail(@PathVariable String orderId, Model model) {
-
+        OrderLogResponseDto orderLog = orderLogService.showOrderLogDetails(orderId);
+        model.addAttribute("orderLog", orderLog);
         return "/mypage/order-detail";
     }
 

@@ -25,6 +25,9 @@
     <a href="mypage/pick/list">학준 - 찜한 상품</a>
 </div>
 <div>
+    <a href="mypage/order/list">학준 - 주문 목록</a>
+</div>
+<div>
     <a href="member/signup">소라 - 회원가입</a>
 </div>
 <div>
