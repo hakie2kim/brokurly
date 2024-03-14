@@ -9,6 +9,7 @@ import com.brokurly.entity.order.OrderItems;
 import com.brokurly.entity.payment.PaymentAmount;
 import com.brokurly.repository.order.OrderDao;
 import com.brokurly.service.cart.CustomerCartService;
+import com.brokurly.service.goods.GoodsService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderDao orderDao;
-
+    private final GoodsService goodsService;
     private final CustomerCartService cartService;
     private final PaymentService paymentService;
     private final ReceiverDetailsService receiverDetailsService;
@@ -38,9 +39,16 @@ public class OrderService {
         if (cartList == null)
             throw new IllegalStateException("주문을 위해서는 반드시 상품 목록이 필요합니다.");
 
+        List<String> imgList = new ArrayList<>();
+        for (CustomerCartDto customerCartDto : cartList) {
+            String img = goodsService.searchGoodsImage(customerCartDto.getItemId()).getImg();
+            imgList.add(img);
+        }
+
         return CheckoutDto.builder()
                 .receiverDetails(receiverDetails)
                 .customerCart(cartList)
+                .imgList(imgList)
                 .paymentAmount(new PaymentAmount().toCheckoutDto(cartList))
                 .build();
     }
