@@ -19,6 +19,8 @@ public class CheckoutDto {
     private ReceiverDetailsResponseDto receiverDetails;
     // 주문 상품 목록
     private List<CustomerCartDto> customerCart;
+    // 상품 이미지 리스트
+    private List<String> imgList;
     // 결제 금액
     private PaymentAmountCheckoutDto paymentAmount;
 }

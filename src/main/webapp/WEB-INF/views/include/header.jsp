@@ -18,7 +18,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>브로컬리</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/include/header.css'/>"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -177,6 +177,17 @@
             <c:if test="${loginSession ne '로그인'}">
                 <div class="lg-text3wrap">${loginSession}<span class="css-1lrerrk eo4j3y50"></span>
                     <div class="menu cs-bar-wrap">
+                        <div class="cscenter-bar"><a href="<c:out value='/mypage/order/list'/>">주문내역</a></div>
+                        <div class="cscenter-bar">선물내역</div>
+                        <div class="cscenter-bar">자주 사는 상품</div>
+                        <div class="cscenter-bar"><a href="<c:out value='/mypage/pick/list'/>">찜한 상품</a></div>
+                        <div class="cscenter-bar"><a href="<c:out value='/mypage/address'/>">배송지 관리</a></div>
+                        <div class="cscenter-bar">상품 후기</div>
+                        <div class="cscenter-bar">결제수단·컬리페이</div>
+                        <div class="cscenter-bar">상품 문의</div>
+                        <div class="cscenter-bar"><a href="<c:out value='/mypage/point/usage'/>">적립금·컬리캐시</a></div>
+                        <div class="cscenter-bar">쿠폰</div>
+                        <div class="cscenter-bar">개인 정보 수정</div>
                         <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
                     </div>
 
@@ -234,6 +245,7 @@
                             class="wishlist-icon"
                             aria-label="찜하기"
                             type="button"
+                            onclick="location.href='/mypage/pick/list'"
                     ></button>
                     <div class="cart-icon">
                         <button class="cart-icon-btn" onclick="location.href='/cart/cartList'">
@@ -288,7 +300,6 @@
                                     </li>
                                 </c:forEach>
 
-
                                 <li width="535" class="css-1jdpv96 e1vs1ym85"></li>
                                 <li width="0" class="css-1xy9xh5 e1vs1ym85"></li>
                             </ul>
@@ -299,7 +310,7 @@
 
             <ul class="cate-menu-wrap">
                 <li class="cate-menu-1">
-                    <span class="cate-menu-txt">신상품</span>
+                    <span class="cate-menu-txt"><a href="<c:url value='/market-newproduct'/>">신상품</span>
                 </li>
                 <li class="cate-menu-1">
                     <span class="cate-menu-txt"><a href="<c:url value='/categories/best-page'/>">베스트</a></span>

@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class BestPageController {
     }
 
     @GetMapping("/{codeId}")
-    public String categoryPage(Model model, @PathVariable String codeId,
+    public String categoryPage(HttpSession session, Model model, @PathVariable String codeId,
                                @RequestParam(required = false) String sortedType,
                                @RequestParam(required = false) Integer page,
                                @RequestParam(required = false) String filters) throws Exception {
@@ -59,9 +60,10 @@ public class BestPageController {
         log.info("filters = {}", filters);
 
         //대분류 카테고리이름
-        categoryService.readPrimary();
-        List<CategoryDto> selectMain = categoryService.readPrimary();
-        model.addAttribute("selectMain", selectMain);
+
+        List<CategoryDto> selectMain = (List<CategoryDto>) session.getAttribute("selectMain");
+        model.addAttribute("selectMain",selectMain);
+
 
         //페이징
         int totalCnt = goodsListService.countGoodsList(codeId);
@@ -81,9 +83,6 @@ public class BestPageController {
         //가격 필터의 기준값들
         int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
 
-        //필터=배송타입일때
-        //필터=가격일때
-        //필터=배송&가격 둘다 있을떄
 
         model.addAttribute("codeId", codeId);
         model.addAttribute("sortedType", sortedType);
@@ -103,42 +102,41 @@ public class BestPageController {
                                                                 @RequestParam(required = false) String sortedType,
                                                                 @RequestParam(required = false) Integer page,
                                                                 @RequestParam(required = false) String filters,
-                                                                @RequestParam(required = false) String PriceFilterNum) {
+                                                                @RequestParam(required = false) String PriceFilterNum,
+                                                                @RequestParam(required = false) String shipType1,
+                                                                @RequestParam(required = false) String shipType2) {
         log.info("codeId = {}", codeId);
         log.info("sortedType = {}", sortedType);
-        log.info("page={}", page);
-        log.info("PriceFilterNum={}",PriceFilterNum);
+
 
         Map<String, Object> responseMap = new HashMap<>();
 
         PriceFilterDto filter = PriceFilterDto.builder()
+                .shipType1(shipType1)
+                .shipType2(shipType2)
                 .priceFilterNum(PriceFilterNum)
                 .build();
         log.info("filter={}",filter);
 
         List<GoodsListDto> sortedGoodsList = goodsListService.sortGoodsList(codeId, page, sortedType);
-        log.info("sortedGoodsList={}",sortedGoodsList);
         responseMap.put("sortedGoodsList", sortedGoodsList);
-        log.info("responseMap ={}", responseMap);
 
         //페이징
         int totalCnt = goodsListService.countGoodsListByPriceFilter(codeId, sortedType, filter);
         PageHandler pageHandler = new PageHandler(totalCnt, page);
         responseMap.put("pageHandler", pageHandler);
         responseMap.put("totalCnt",totalCnt);
+        log.info("totalCnt={}",totalCnt);
         log.info("pageHandler={}",pageHandler);
 
         //가격 필터 기준 값
         int[] criteria = goodsListService.criteriaForPriceFilter(codeId);
         responseMap.put("criteria", criteria);
-        log.info("criteria={}", criteria);
 
         // 필터적용한 상품리스트
         List<GoodsListDto> readGoodsLisByFilter = goodsListService.readGoodsLisByFilter(codeId, page, sortedType, filter);
         log.info("readGoodsLisByFilter={}",readGoodsLisByFilter);
         responseMap.put("readGoodsLisByFilter",readGoodsLisByFilter);
-
-
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }

@@ -1,10 +1,7 @@
 package com.brokurly.controller.goods;
 
 
-import com.brokurly.dto.goods.GoodsAnnouncementDto;
-import com.brokurly.dto.goods.GoodsDetailDto;
-import com.brokurly.dto.goods.GoodsInquiryLogDto;
-import com.brokurly.dto.goods.GoodsReviewBoardDto;
+import com.brokurly.dto.goods.*;
 import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.entity.goods.GoodsReviewBoard;
@@ -35,10 +32,8 @@ public class GoodsController {
         // 세션에서 로그인 멤버 정보 가져오기
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
         // 만약 로그인 멤버 정보가 없으면 로그인 페이지로 리다이렉트
-        if (custIdDto == null) {
-            // 로그인 페이지로 리다이렉트
-            return "redirect:/member/login";
-        }
+        if (custIdDto == null)
+            return "login-check";
         // 로그인 멤버 정보에서 필요한 값을 추출
         String custId = custIdDto.getCustId();
         // 세션에 고객 ID 저장
@@ -50,7 +45,8 @@ public class GoodsController {
 
         GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
         GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
-//    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
+        GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
+        List<GoodsImageDto> imgList = goodsService.searchGoodsImageList(itemId); //상품 이미지
         List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
         int wishList = goodsService.searchWish(itemId, custId); //상품 찜
         List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
@@ -58,8 +54,8 @@ public class GoodsController {
         model.addAttribute("custId",custId);
         model.addAttribute("goods", goods);
         model.addAttribute("announcement", announcement);
-//    model.addAttribute("goodsImage", goodsImage);
-
+        model.addAttribute("goodsImage", goodsImage);
+        model.addAttribute("imgList", imgList);
         model.addAttribute("inquiry", inquiry);
         model.addAttribute("wishList", wishList);
         model.addAttribute("review", review);

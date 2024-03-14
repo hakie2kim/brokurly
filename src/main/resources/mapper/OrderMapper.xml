@@ -6,10 +6,10 @@
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO orders
-        (order_id, cust_id, total_item_qty, total_price,
-         total_dc_amt, order_amt, ship_fee, ship_loca_id, ship_no)
-        VALUES (#{orderId}, #{custId}, #{totalItemQty}, #{totalPrice},
-                #{totalDcAmt}, #{orderAmt}, #{shipFee}, #{shipLocaId}, #{shipNo})
+        (order_id, cust_id, total_item_qty, total_price, total_dc_amt,
+         order_amt, ship_fee, ship_loca_id, addr, ship_no)
+        VALUES (#{orderId}, #{custId}, #{totalItemQty}, #{totalPrice}, #{totalDcAmt},
+                #{orderAmt}, #{shipFee}, #{shipLocaId}, #{addr}, #{shipNo})
     </insert>
 
     <insert id="insertItemList">

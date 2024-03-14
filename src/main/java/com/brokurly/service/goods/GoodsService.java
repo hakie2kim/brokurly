@@ -1,18 +1,18 @@
 package com.brokurly.service.goods;
 
 
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.goods.*;
 import com.brokurly.dto.mypage.WishListDto;
-import com.brokurly.entity.goods.Goods;
-import com.brokurly.entity.goods.GoodsAnnouncement;
-import com.brokurly.entity.goods.GoodsInquiryLog;
-import com.brokurly.entity.goods.GoodsReviewBoard;
+import com.brokurly.entity.goods.*;
 import com.brokurly.entity.mypage.WishList;
 import com.brokurly.repository.goods.GoodsDao;
+import com.brokurly.repository.goods.GoodsImageDao;
 import com.brokurly.repository.goods.GoodsInquiryLogDao;
 import com.brokurly.repository.goods.GoodsReviewBoardDao;
 import com.brokurly.repository.mypage.WishListDao;
 import com.brokurly.repository.products.ProductsCreateDao;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,45 +23,15 @@ import java.util.List;
 
 @Slf4j
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class GoodsService {
 
     private final GoodsDao goodsDao;
-    private ProductsCreateDao productsCreateDao;
-//    private GoodsImageDao goodsImageDao;
-    private GoodsInquiryLogDao goodsInquiryLogDao;
-    private WishListDao wishListDao;
-    private GoodsReviewBoardDao goodsReviewBoardDao;
-
-    @Autowired
-    public GoodsService(GoodsDao goodsDao){
-        this.goodsDao = goodsDao;
-    }
-
-    @Autowired
-    public void ProductsCreateService(ProductsCreateDao productsCreateDao) {
-        this.productsCreateDao = productsCreateDao;
-    }
-
-//    @Autowired
-//    public void GoodsImageService(GoodsImageDao goodsImageDao){
-//        this.goodsImageDao = goodsImageDao;
-//    }
-
-    @Autowired
-    public void GoodsInquiryLogService(GoodsInquiryLogDao goodsInquiryLogDao){
-        this.goodsInquiryLogDao = goodsInquiryLogDao;
-    }
-
-    @Autowired
-    public void WishListService(WishListDao wishListDao){
-        this.wishListDao = wishListDao;
-    }
-
-    @Autowired
-    public void GoodsReviewBoardService(GoodsReviewBoardDao goodsReviewBoardDao){
-        this.goodsReviewBoardDao = goodsReviewBoardDao;
-    }
+    private final ProductsCreateDao productsCreateDao;
+    private final GoodsImageDao goodsImageDao;
+    private final GoodsInquiryLogDao goodsInquiryLogDao;
+    private final WishListDao wishListDao;
+    private final GoodsReviewBoardDao goodsReviewBoardDao;
 
     //상품 조회
     @Transactional
@@ -83,10 +53,19 @@ public class GoodsService {
         return goodsAnnouncement.makeFullDto();
     }
 
-//    public GoodsImageDto searchGoodsImage(String itemId){     //상품 이미지 불러오기
-//        GoodsImage goodsImage = goodsImageDao.selectByItemId(itemId);
-//        return goodsImage.makeFullDto();
-//    }
+    public GoodsImageDto searchGoodsImage(String itemId){     //상품 대표 이미지 불러오기
+        GoodsImage goodsImage = goodsImageDao.selectByItemId(itemId);
+        return goodsImage.makeFullDto();
+    }
+    public List<GoodsImageDto> searchGoodsImageList(String itemId){     //상품 상세 이미지 불러오기
+        List<GoodsImage> goodsImageList = goodsImageDao.selectListByItemId(itemId);
+        List<GoodsImageDto> goodsImageDto = new ArrayList<>();
+
+        for (GoodsImage goodsImage : goodsImageList){
+            goodsImageDto.add(goodsImage.makeFullDto());
+        }
+        return goodsImageDto;
+    }
 
     @Transactional
     public List<GoodsInquiryLogDto> searchGoodsInquiryLog(String itemId){   //상품문의 불러오기

@@ -39,16 +39,12 @@ public class PaymentController {
         String orderId = IdGenerator.generateOrderId();
         MemberAndLoginDto loginMember = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        log.info("checkout = {}", checkout);
-
         KakaoPayReadyResponseDto response;
         try {
             response = kakaoPayService.ready(checkout, orderId, loginMember.getCustId()).block();
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
-
-        log.info("response = {}", response);
 
         orderService.placeOrder(checkout, orderId, loginMember.getCustId());
 
@@ -95,7 +91,7 @@ public class PaymentController {
     public String kakaoPayCancel(String orderId) {
         PaymentDetailsResponseDto paymentLog = paymentService.findPaymentLogByOrderId(orderId);
         KakaoPayCancelResponseDto response = kakaoPayService.cancel(paymentLog).block();
-        log.info("kakaopay cancel response = {}", response);
+
         return "order/cancel";
     }
 

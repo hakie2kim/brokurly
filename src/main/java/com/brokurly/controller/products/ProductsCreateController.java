@@ -96,7 +96,6 @@ public class ProductsCreateController {
             log.info("bnsnNo={}",bsnsNo);
 
 
-
             List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
             m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
             m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
@@ -153,116 +152,39 @@ public class ProductsCreateController {
 
 
     @PostMapping("/img")
-    public void saveFile(@RequestParam("file") MultipartFile file, GoodsImageDto goodsImageDto) throws IOException {
-        log.info("request={}", file);
-        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
-//        String uploadDir = System.getProperty("user.dir") + "/src/main/webapp/resources/image/goodsImg/"; //파일 저장 경로
-//        String uploadDir =  "resources/image/goodsImg/"; //파일 저장 경로
+    @ResponseBody
+    public HttpStatus upload(@RequestParam("file") MultipartFile multipartFile, GoodsImageDto goodsImageDto,
+                             HttpServletRequest request) {
+        log.info("file = {}", multipartFile);
+        try {
 
-        // "goodsImage" 디렉토리에 파일 저장
-//        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
-//        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
-//        String uploadDir = resource.getFile().getAbsolutePath();
+            String rootDir = request.getServletContext().getRealPath("/").replaceFirst("\\\\target\\\\test", ""); ;
+            String uploadDir = rootDir + "src\\main\\webapp\\resources\\image\\goodsImage"; //파일 저장 경로
+            log.info("uploadDir={}", uploadDir);
 
-        if (!file.isEmpty()) {
+            // 만약 해당 경로에 폴더가 없다면 폴더를 생성
+            File dir = new File(uploadDir);
+            if (!dir.exists()) dir.mkdirs();
 
-//            // 파일 이름
-//            String filename = file.getOriginalFilename();
-//            String filename2 = file.toString();
-//
-//            String fullpath = uploadDir + filename;
-//
-//            log.info("file.getOriginalFilename={}",filename);
-//            log.info("file.getResource={}",filename2);
-//
-////          uuid 적용 파일 이름
-//            String uuid = UUID.randomUUID().toString();
-//            filename = uuid+"_"+filename;  //파일 이름 중복 피하기 위해
-//            log.info("uuid={}",filename);
-//////         파일 위치, 파일 이름을 합친 File객체
-//            File saveFile = new File(fullpath, filename);
-//
-//            //1. 파일 저장하기
-//            file.transferTo(saveFile);
-//
-//            //2. url 서비스로 보내기
-//            log.info("GoodsImageDto={}",goodsImageDto.toString());
-//            productsCreateService.writeGoodsImage(goodsImageDto);
+            // 파일 이름 정의
+            String imageName = "1." + UUID.randomUUID() + ".jpg";  //대표이미지
+            String filePath = uploadDir + File.separator + imageName;
 
-            // 파일 이름
-            String originalFilename = file.getOriginalFilename();
+            // 파일을 저장합니다
+            Path savePath = Paths.get(filePath);
+            multipartFile.transferTo(savePath);
 
-            // UUID 적용 파일 이름
-            String uuid = UUID.randomUUID().toString();
-            String filename = uuid + "_" + originalFilename; // 파일 이름 중복 피하기 위해
+            goodsImageDto.setImg(imageName);
+            log.info("GoodsImageDto={}", goodsImageDto.getImg());
 
-            // 파일 위치, 파일 이름을 합친 File 객체
-            File saveFile = new File(uploadDir + filename);
-
-            // 1. 파일 저장하기
-            file.transferTo(saveFile);
-
-            // 2. url 서비스로 보내기
-            String fileUrl = "/files/" + filename; // 예시: "/files/filename"
-            log.info("File URL: {}", fileUrl);
-
-            // 여기서 fileUrl을 활용하여 필요한 작업을 수행하면 됩니다.
-            // 예를 들면, goodsImageDto에 파일 URL을 저장하거나 다른 서비스로 전송하는 등의 작업이 가능합니다.
-
-            log.info("GoodsImageDto={}", goodsImageDto.toString());
             productsCreateService.writeGoodsImage(goodsImageDto);
 
+            // 파일의 저장 경로를 반환합니다
+            return HttpStatus.OK;
+        } catch (IOException e) {
+            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
+            return HttpStatus.SERVICE_UNAVAILABLE;
         }
-
     }
-
-//
-//    @PostMapping("/img")
-//    @ResponseBody
-//    public HttpStatus upload(@RequestParam("file") MultipartFile multipartFile) {
-//        log.info("file = {}", multipartFile);
-//        try {
-//            // 현재 프로젝트의 절대 경로를 가져옵니다
-//            String projectPath = System.getProperty("user.dir");
-////                    + File.separator + "IdeaProjects" +
-////                    File.separator + "brokurly";
-//
-////            FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
-//
-//            log.info("dir = {}", projectPath);
-//
-//            // 이미지를 저장할 폴더의 경로를 지정합니다
-//            String uploadDir = projectPath +
-//                    File.separator + "src" +
-//                    File.separator + "main" +
-//                    File.separator + "webapp" +
-//                    File.separator + "resources" +
-//                    File.separator + "image" +
-//                    File.separator + "goodsImage";
-//
-//            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
-//
-//            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
-//            File dir = new File(uploadDir);
-//            if (!dir.exists()) dir.mkdirs();
-//
-//            // 파일 이름을 정의합니다
-//            String originalFilename = multipartFile.getOriginalFilename();
-//            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
-//
-//            Path savePath = Paths.get(filePath);
-//
-//            // 파일을 저장합니다
-//            multipartFile.transferTo(savePath);
-//
-//            log.info("filename={}",filePath);
-//
-//            // 파일의 저장 경로를 반환합니다
-//            return HttpStatus.OK;
-//        } catch (IOException e) {
-//            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
-//            return HttpStatus.SERVICE_UNAVAILABLE;
-//        }
-//    }
 
 }

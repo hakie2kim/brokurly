@@ -2,8 +2,10 @@ package com.brokurly.entity.order;
 
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.OrderResponseDto;
+import com.brokurly.utils.RandomGeneratorUtils;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -24,9 +26,10 @@ public class Order {
     private int orderAmt;
     private int shipFee;
     private String shipLocaId;
+    private String addr;
     private String shipNo;
 
-    public void changeOrder(CheckoutDto dto, String orderId, String custId, String shipLocaId) {
+    public void changeOrder(CheckoutDto dto, String orderId, String custId, ShippingLocationCurrDto location) {
         this.orderId = orderId;
         this.custId = custId;
         this.totalItemQty = dto.getCustomerCart().stream()
@@ -36,8 +39,9 @@ public class Order {
         this.totalDcAmt = dto.getPaymentAmount().getItemDcAmt();
         this.orderAmt = dto.getPaymentAmount().getOrderAmt();
         this.shipFee = dto.getPaymentAmount().getShipFee();
-        this.shipLocaId = shipLocaId;
-        this.shipNo = "1111";
+        this.shipLocaId = location.getShipLocaId();
+        this.addr = location.getAddr();
+        this.shipNo = RandomGeneratorUtils.randomGeneratedShipLocaId();
     }
 
     public OrderResponseDto toResponseDto() {
@@ -52,6 +56,7 @@ public class Order {
                 .orderAmt(orderAmt)
                 .shipFee(shipFee)
                 .shipLocaId(shipLocaId)
+                .addr(addr)
                 .shipNo(shipNo)
                 .build();
     }

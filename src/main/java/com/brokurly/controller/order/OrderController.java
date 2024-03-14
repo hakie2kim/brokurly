@@ -1,5 +1,6 @@
 package com.brokurly.controller.order;
 
+import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.member.MemberAndSignupDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
@@ -7,7 +8,9 @@ import com.brokurly.dto.order.CheckoutDto;
 import com.brokurly.dto.order.ReceiverDetailsRequestDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
+import com.brokurly.service.cart.CustomerCartService;
 import com.brokurly.service.member.MemberService;
+import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.order.ReceiverDetailsService;
@@ -23,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Slf4j
@@ -32,6 +36,8 @@ import javax.servlet.http.HttpSession;
 public class OrderController {
     private final OrderService orderService;
     private final MemberService memberService;
+    private final PointService pointService;
+    private final CustomerCartService customerCartService;
     private final ReceiverDetailsService receiverDetailsService;
     private final ShippingLocationService shippingLocationService;
 
@@ -87,6 +93,11 @@ public class OrderController {
             log.error("paymentSuccess -> ", e);
             return "redirect:/mypage/address";
         }
+
+        pointService.usePointsWhenOrder(orderId, loginMember.getCustId(), point);
+        // 장바구니에서 주문이 끝난 상품 제거
+        List<CustomerCartDto> customerCart = customerCartService.getCartList(loginMember.getCustId(), true);
+        customerCart.forEach(customerCartService::vacateCart);
 
         model.addAttribute("name", loginMember.getName());
         model.addAttribute("dayOfWeek", DateUtils.nDaysAfterDayOfWeek(1)); // 도착 요일
