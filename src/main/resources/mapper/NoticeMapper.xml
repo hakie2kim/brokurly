@@ -34,13 +34,15 @@
     <select id="selectMax" resultType="Notice">
         SELECT *
         FROM NOTICE_BOARD
-        WHERE bno = (SELECT MAX(bno) FROM NOTICE_BOARD)
+        ORDER BY bno DESC
+        LIMIT 1
     </select>
 
     <select id="selectMin" resultType="Notice">
         SELECT *
         FROM NOTICE_BOARD
-        WHERE bno = (SELECT MIN(bno) FROM NOTICE_BOARD)
+        ORDER BY bno ASC
+        LIMIT 1
     </select>
 
 </mapper>

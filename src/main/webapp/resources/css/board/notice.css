@@ -56,10 +56,6 @@ html, button, input, select, textarea {
 }
 
 /* 게시글 페이지 이동 버튼 */
-.css-rzcdhr:disabled {
-    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-disabled.svg);
-    cursor: default;
-}
 
 .css-rzcdhr {
     width: 44px;
@@ -72,6 +68,11 @@ html, button, input, select, textarea {
     background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-activated.svg);
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.css-rzcdhr:disabled {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-prev-disabled.svg);
+    cursor: default;
 }
 
 /* 이전, 다음 */
@@ -88,7 +89,6 @@ html, button, input, select, textarea {
     margin-left: 12px;
 }
 
-/* 이전, 다음 버튼 */
 .css-1jwilit {
     width: 44px;
     height: 44px;
@@ -102,3 +102,8 @@ html, button, input, select, textarea {
     background-size: cover;
 }
 
+
+.css-1jwilit:disabled {
+    background-image: url(https://res.kurly.com/kurly/ico/2021/paging-next-disabled.svg);
+    cursor: default;
+}

@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="/resources/css/board/inquiryList.css">
 </head>
 <body class="vsc-initialized" style="padding-right: 0px">
-<div id="__next" data-reactroot="">
     <div class="css-2b29tl eug5r8l2">
         <div class="css-luwwab eug5r8l1">
             <div class="css-833hqy ecbxmj3">
@@ -185,6 +184,86 @@
                     <div width="100" class="css-16tcewl e16adls20">작성일</div>
                     <div width="100" class="css-16tcewl e16adls20">답변상태</div>
                 </div>
+                <ul class="css-1fttcpj e1cfowvj5">
+                    <li class="css-e0dnmk e1cfowvj3">
+                        <div class="css-nfcc9b e1cfowvj4">
+                            <div class="css-wqw6mu e1cfowvj2">
+                                <div class="css-14e35e e1vd1n2i2">안녕하세요 보통 언제 도착하나요?</div>
+                            </div><div class="css-8e1vc1 e1cfowvj2">
+                            <span class="css-14kcwq8 e1vd1n2i1">2024.03.13</span>
+                        </div>
+                            <div class="css-8e1vc1 e1cfowvj2">
+                                <span color="#999" class="css-14kcwq8 e1hz5ei00">답변대기</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;">
+                        <div class="css-br5cai e1vd1n2i0">
+                            <div class="css-193iudv e94cdlt1">
+                                <span class="css-16ts9vc e94cdlt0">서비스/오류/기타</span>
+                                <span class="css-a5dfz6 ecg7plp0"></span>
+                                <span class="css-16ts9vc e94cdlt0">시스템 오류/장애</span>
+                            </div>
+                            <div class="css-zjik7 e82q4qc4">
+                                <span class="css-1ylw081 e1kayg9i0"></span>
+                                <div class="css-145c1ga e82q4qc3">
+                                    <span type="QUESTION" class="css-190bjnp e82q4qc2">기다리다 현기증 날 것 같아요😭</span>
+                                    <br>
+                                    <div class="css-1kl96ir ewad2cu1"></div>
+                                </div>
+                            </div>
+                            <div class="css-1oe9o3r eula2qn2">
+                                <button type="button" class="css-qv4hdm eula2qn1">수정</button>
+                                <div class="css-ord49b eula2qn0"></div>
+                                <button type="button" class="css-qv4hdm eula2qn1">삭제</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="css-e0dnmk e1cfowvj3"><div class="css-nfcc9b e1cfowvj4"><div class="css-wqw6mu e1cfowvj2"><div class="css-4l2co e1vd1n2i2">안녕하세요 결제방법을 모르겠습니다.</div></div><div class="css-8e1vc1 e1cfowvj2"><span class="css-14kcwq8 e1vd1n2i1">2024.03.13</span></div><div class="css-8e1vc1 e1cfowvj2"><span color="#5f0080" class="css-1kxzrwz e1hz5ei00">답변완료</span></div></div></li>
+                    <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;">
+                        <div class="css-br5cai e1vd1n2i0">
+                            <div class="css-193iudv e94cdlt1">
+                                <span class="css-16ts9vc e94cdlt0">주문/결제</span>
+                                <span class="css-a5dfz6 ecg7plp0"></span>
+                                <span class="css-16ts9vc e94cdlt0">주문/결제 방법</span>
+                            </div>
+                            <div class="css-zjik7 e82q4qc4">
+                                <span class="css-1ylw081 e1kayg9i0"></span>
+                                <div class="css-145c1ga e82q4qc3">
+                                    <span type="QUESTION" class="css-190bjnp e82q4qc2">알려주실수 있나요?</span><br>
+                                    <div class="css-1kl96ir ewad2cu1"></div>
+                                </div>
+                            </div>
+                            <div class="css-1tsgnig e1vtrp070">
+                                <div class="css-b41fnw etpoi034">
+                                    <div class="css-1i2xt0r etpoi030">
+                                        <span class="css-1non6l6 ey0f1wv0"></span>
+                                    </div>
+                                    <div class="css-wm215i etpoi033">
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">안녕하세요. 고객님</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">먼저, 바쁜 일상 속 컬리를 이용해 주심에 있어 감사 인사드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">컬리의 결제수단 방법으로는 장바구니에 주문서 담으신 후 결제 진행 시, 주문서 단계에서 결제 수단 확인 후 결제 진행이 가능합니다</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">순서대로 카카오페이, 컬리페이, 신용카드, 간편결제 (네이버페이/토스/페이코), 휴대폰 결제수단으로 이루어져 있습니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">이 중 카카오페이나, 간편결제 수단 중 네이버페이,토스,페이코 중 결제 수단 선택 시 해당 결제수단 PG 결제창으로 이동되며, 결제 완료 진행 후 다시 컬리 주문서로 돌아와주시면 됩니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">컬리페이 또한 하나의 결제 수단으로 컬리 어필 &gt; 하단의 사람모양 버튼 &gt; 마이컬리 &gt; 쇼핑 &gt; 결제수단.컬리페이 &gt; 결제수단 관리 에서 계좌 추가 또는 신용/체크카드 본인인증 후 결제 수단 등록해주시면 추후 주문/결제 시 컬리페이 수단으로 결제 진행이 가능한점 안내드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">하여, 고객님꼐서 평소 이용하시는 결제 수단으로 선택 후 결제 부탁드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">글로 전달드린 답변이 딱딱하게 느껴지셨을까 염려되는 마음입니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">안내 드린 내용 외 추가 확인이 필요하신 경우 문의 남겨주신다면 신속하게 확인하여 안내 하도록 하겠습니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br><span type="ANSWER" class="css-kfh61x etpoi032">컬리 김슬비 드림</span><br>
+                                        <div class="css-iqoq9n e1b9s61w0"></div>
+                                        <div class="css-1kna94k etpoi031">2024.03.13</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
                 <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
                 <div class="css-15jhycr e3tf63e0">
                     <button
@@ -201,7 +280,36 @@
             </div>
         </div>
     </div>
-</div>
+<script>
+    // 내용 보여주기
+    let acc = document.getElementsByClassName("css-e0dnmk e1cfowvj3");
+    let i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            // 현재 클릭된 요소를 제외하고 모든 "notice" 요소에서 "act" 클래스를 제거
+            for (let j = 0; j < acc.length; j++) {
+                if (acc[j] !== this) {
+                    // acc[j].classList.remove("act");
+                    // 다음 형제 요소의 최대 높이를 null로 설정하여 접히도록
+                    let panel = acc[j].nextElementSibling;
+                    panel.style.maxHeight = null;
+                    panel.style.animation = "fadeOut ease-out 0.4s"
+                }
+            }
+            // 현재 클릭된 곳에 "act" 클래스를 추가또는 제거
+            // this.classList.toggle("act");
+            let panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+                panel.style.animation = "fadeOut ease-out 0.4s"
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.animation = "fadeIn ease-out 0.4s"
+            }
+        });
+    }
+</script>
 </body>
 </html>
 
