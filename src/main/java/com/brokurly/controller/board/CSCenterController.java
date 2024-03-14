@@ -1,18 +1,25 @@
 package com.brokurly.controller.board;
 
+import com.brokurly.dto.board.InquiryDto;
 import com.brokurly.dto.board.NoticeBoardDto;
 import com.brokurly.dto.board.NoticeListDto;
 import com.brokurly.dto.board.FAQListDto;
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.service.board.FAQService;
+import com.brokurly.service.board.InquiryService;
 import com.brokurly.service.board.NoticeService;
 import com.brokurly.utils.BoardPageHandler;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import retrofit2.http.HTTP;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -22,6 +29,7 @@ import java.util.List;
 public class CSCenterController {
     private final NoticeService noticeService;
     private final FAQService faqService;
+    private final InquiryService inquiryService;
 
     @GetMapping("/notice")
     public String notice(Integer page, Model model) throws Exception {
@@ -89,8 +97,14 @@ public class CSCenterController {
     }
 
     @RequestMapping("/inquiry")
-    public String inquiry() { return "board/inquiryList"; }
+    public String inquiry(HttpSession session, Model model) {
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
+        List<InquiryDto> inquiryDtoList = inquiryService.getOneCustInquiryList(custId);
+        model.addAttribute("InquiryDtoList", inquiryDtoList);
+            return "board/inquiryList";
 
+    }
     @RequestMapping("/inquiryPost")
     public String inquiryPost() {
         return "board/inquiryPost";
