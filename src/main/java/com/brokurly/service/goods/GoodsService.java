@@ -57,7 +57,7 @@ public class GoodsService {
         GoodsImage goodsImage = goodsImageDao.selectByItemId(itemId);
         return goodsImage.makeFullDto();
     }
-    public List<GoodsImageDto> searchGoodsImageList(String itemId){     //상품 대표 이미지 불러오기
+    public List<GoodsImageDto> searchGoodsImageList(String itemId){     //상품 상세 이미지 불러오기
         List<GoodsImage> goodsImageList = goodsImageDao.selectListByItemId(itemId);
         List<GoodsImageDto> goodsImageDto = new ArrayList<>();
 
