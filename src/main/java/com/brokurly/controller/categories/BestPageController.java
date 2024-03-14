@@ -13,12 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 @Slf4j
 @Controller
@@ -74,7 +74,6 @@ public class BestPageController {
 
         // 카테고리별 & 분류 타입에 따라 상품 나열하기
         List<GoodsListDto> goodsListDto;
-
         if (page == null) page = 1;
         if (sortedType != null) {
             goodsListDto = goodsListService.sortGoodsList(codeId, page, sortedType);

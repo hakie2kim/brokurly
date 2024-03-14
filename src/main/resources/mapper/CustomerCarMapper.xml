@@ -51,6 +51,19 @@
         AND item_id = #{itemId}
     </update>
 
+    <update id="duplicationAdd">
+        UPDATE cart
+        SET item_cnt = item_cnt + #{itemCnt} ,
+            item_ck = #{itemCk}
+        WHERE cust_id = #{custId}
+          AND item_id = #{itemId}
+    </update>
+
+    <update id="updateAll">
+        UPDATE cart
+        SET item_ck = "N"
+        WHERE cust_id = #{custId}
+    </update>
 
     <!-- DELETE -->
     <!--고객 아이디랑 아이탬아이디 같을때만 삭제되게 -->

@@ -1,18 +1,45 @@
 window.onload = () => {
+    // 페이지 로딩 시 전화번호 포맷팅
+    const $orderTelNo = $("#tel-no");
+    const orderTelNo = $orderTelNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    $orderTelNo.text(orderTelNo);
+
+    const $receiverTelNo = $("#checkout-tel-no");
+    const receivertelNo = $receiverTelNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+    $receiverTelNo.text(receivertelNo);
+
     // 주문 상품창 요약 & 리스트 변환 기능
-    const orderGoodsButton = $(".info-type1-title").children().eq(1);
-    orderGoodsButton.click(() => {
-        let buttonText = orderGoodsButton.html();
-        if (buttonText === "⋁") {
-            orderGoodsButton.html("&xwedge;");
+    const $orderGoodsButton = $("#order-goods-change img");
+    $orderGoodsButton.click(() => {
+        let imgSrc = $orderGoodsButton.attr("src");
+        if (imgSrc === "/resources/image/down-arrow.png") {
+            $orderGoodsButton.attr("src", "/resources/image/up-arrow.png");
             $("#order-goods").css("display", "none");
             $("#order-goods-list").css("display", "block");
         } else {
-            orderGoodsButton.html("&xvee;");
+            $orderGoodsButton.attr("src", "/resources/image/down-arrow.png");
             $("#order-goods").show();
             $("#order-goods-list").hide();
         }
     });
+
+    // 배송지 변경 안내
+    let $chatBoxHead = $(".chat-box-head");
+    let $chatBoxBody = $(".chat-box-body");
+    $(".info-type1-title a").on("click", () => {
+        if ($chatBoxHead.css("display") === "none") {
+            $chatBoxHead.show();
+            $chatBoxBody.css("display", "flex");
+        } else {
+            $chatBoxHead.hide();
+            $chatBoxBody.hide();
+        }
+    });
+
+    $(".x-mark").on("click", () => {
+        $chatBoxHead.hide();
+        $chatBoxBody.hide();
+    })
 
     // 배송지 변경 모달 띄우기
     $("#location-change").click(() => {
@@ -73,14 +100,17 @@ window.onload = () => {
 
     const $kakaopay = $("#kakaopay");
     const $creditCard = $("#credit-card");
-    $kakaopay.click(() => {
+    $kakaopay.on("click", () => {
         offPaymentButton();
 
         if ($kakaopay.val() === "false") {
             $kakaopay.val("true")
             $kakaopay.addClass("kakaopay");
         }
-    })
+    });
+
+    // 페이지 로딩 시 카카오페이 선택 (default)
+    $kakaopay.click();
 
     $creditCard.click(() => {
         offPaymentButton();
@@ -125,13 +155,13 @@ function saveReceiverDetails(receiverDetails) {
     const $name = $("<span id='checkout-name'></span>").text(receiverDetails.rcvName + ", ");
     const telNo = receiverDetails.telNo.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
     const $telNo = $("<span id='checkout-tel-no'></span>").text(telNo);
-    const $receiver = $("<div></div>");
+    const $receiver = $("<div class='receiver'></div>");
     $receiver.append($name);
     $receiver.append($telNo);
     $receiverInfo.append($receiver);
 
     // 버튼 추가
-    const $button = $("<button class='receiver-details-btn'>수정</button>");
+    const $button = $("<button class='receiver-details-btn ship-button'>수정</button>");
     $receiverInfo.append($button);
 }
 
@@ -149,16 +179,21 @@ function redirectPayment() {
 
     const customerCartList = [];
     $(".item-list").each(function () {
+        let itemPrice = parseInt($(this).find($(".item-price")).text().replace(/[,\s원]/g, ''));
+        let itemDcAmount = itemPrice - parseInt($(this).find($(".item-dc-price")).text().replace(/[,\s원]/g, ''));
+
         let customerCart = {
             itemId: $(this).find($(".item-id")).text(),
             name: $(this).find($(".item-name")).text(),
-            itemCnt: parseInt($(this).find($(".item-cnt")).text().replace("개", "")),
-            price: parseInt($(this).find($(".item-price")).text().replace("원", ""))
+            itemCnt: parseInt($(this).find($(".item-cnt")).text().replace(/[,\s원]/g, '')),
+            price: itemPrice,
+            itemDcAmt: itemDcAmount
         }
         customerCartList.push(customerCart);
     });
 
-    let checkoutInfo= {
+    let checkoutInfo = {
+        itemName: $("#order-goods span").text().replace(" 상품을 주문합니다.", "").trim(),
         receiverDetails: {
             rcvName: $("#checkout-name").text(),
             telNo: $("#checkout-tel-no").text(),

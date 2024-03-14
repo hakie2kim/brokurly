@@ -1,4 +1,4 @@
-
+<%@ page import="com.brokurly.dto.member.MemberAndLoginDto" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -9,16 +9,27 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.brokurly.dto.member.MemberAndLoginDto" %>
+
 <%@ page session="false"%>
-<c:set var="loginSession" value="${pageContext.request.getSession(false)==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+='님'}"/>
+<c:set var="loginSession" value="${pageContext.request.session.getAttribute('loginName')==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+='님'}"/>
 <c:set var="signup" value="${loginSession =='로그인' ? '회원가입' : ''}"/>
+
 
 <html>
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/include/header.css'/>"/>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
+        a { /*하이퍼 링크 줄 제거 */
+            text-decoration: none !important; /* 밑줄 제거 */
+            color: black !important; /* 텍스트 색상을 검은색으로 설정 */
+        }
+
         .css-taug43 {
             max-height: calc(95vh - 55px);
             min-height: 200px;
@@ -102,7 +113,7 @@
             position: relative;
         }
 
-        #category ul{
+        #category ul {
             display: none;
         }
 
@@ -146,7 +157,14 @@
 
 </head>
 <body>
+<%
+    HttpSession session = request.getSession();
+    String custId = "";
+    if (session.getAttribute("loginMember") != null)
+         custId = ((MemberAndLoginDto) request.getSession().getAttribute("loginMember")).getCustId();
+%>
 <div>
+<input class="cartCnt" type="hidden" value="<%= custId %>">
     <div class="head-1">
         <div class="login-wrap">
             <c:if test="${loginSession eq '로그인'}">
@@ -157,14 +175,14 @@
                 <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
             </c:if>
             <c:if test="${loginSession ne '로그인'}">
-                <div class="lg-text3wrap">
-                    <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span class="css-1lrerrk eo4j3y50"></span
-                    ></a>
+                <div class="lg-text3wrap">${loginSession}<span class="css-1lrerrk eo4j3y50"></span>
                     <div class="menu cs-bar-wrap">
                         <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
                     </div>
+
                 </div>
             </c:if>
+
 
             <div class="lg-bar"></div>
             <div class="lg-text3wrap">
@@ -176,6 +194,7 @@
                     <div class="cscenter-bar">자주하는 질문</div>
                     <div class="cscenter-bar">1:1 문의</div>
                     <div class="cscenter-bar">대량주문 문의</div>
+
                 </div>
             </div>
         </div>
@@ -186,7 +205,8 @@
                         src="/resources/image/brokurly.png"
                         alt="브로컬리 로고"
                         class="mainlogo-img"
-                /><button class="active css-mxd3pm ekdqe1a0">브로컬리</button>
+                />
+                <button class="active css-mxd3pm ekdqe1a0">브로컬리</button>
             </div>
 
             <div class="searchbox-wrap">
@@ -199,11 +219,12 @@
                                 class="searchbox-text"
                                 name="sword"
                                 value=""
-                        /><button
-                            id="submit"
-                            aria-label="submit"
-                            class="searchbox-btn"
-                    ></button>
+                        />
+                        <button
+                                id="submit"
+                                aria-label="submit"
+                                class="searchbox-btn"
+                        ></button>
                     </form>
                 </div>
             </div>
@@ -217,7 +238,14 @@
                             type="button"
                     ></button>
                     <div class="cart-icon">
-                        <button class="cart-icon-btn"></button>
+                        <button class="cart-icon-btn" onclick="location.href='/cart/cartList'">
+<%--                            <div class="cart-cnt" style="top: 7px; position: absolute; right: 3px;">--%>
+<%--                               <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">--%>
+<%--                                1--%>
+<%--&lt;%&ndash;                                <span class="visually-hidden">unread messages</span>&ndash;%&gt;--%>
+<%--                              </span>--%>
+<%--                            </div>--%>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -230,9 +258,10 @@
                 <div class="category-1">
               <span class="css-1k5gn9s eqn756m1"></span
               ><span class="category-2">카테고리</span>
+
                     <div class="css-taug43 e7s0tnu0 dropdown-content">
                         <div width="0" class="css-9d3cf6 e1vs1ym87">
-                            <ul class="css-13ct7qm e1vs1ym86" >
+                            <ul class="css-13ct7qm e1vs1ym86">
                                 <%--                                <li class="css-you2kh e1vs1ym83 menuItem1">--%>
 
 
@@ -246,12 +275,16 @@
                                 <%--                                        </li>--%>
                                 <%--                                    </c:forEach>--%>
 
+
                                 <c:forEach var="item" items="${selectMain}" varStatus="loop">
                                     <li class="css-you2kh e1vs1ym83 menuItem1">
                                         <div class="css-11n7bn4 e1vs1ym81">
                                             <!-- 이미지 파일명 설정 -->
-                                            <img src="/resources/image/icon-<c:out value="${loop.index + 1}" />.png" alt="${item.exp}" class="css-ar6ptu e1vs1ym82" />
-                                            <span class="css-mhaka4 e1vs1ym84"><a href="/categories/${item.codeId}?page=1">${item.exp}</a></span>
+                                            <img src="/resources/image/icon-<c:out value="${loop.index + 1}" />.png"
+                                                 alt="${item.exp}"
+                                                 class="css-ar6ptu e1vs1ym82"/>
+                                            <span class="css-mhaka4 e1vs1ym84"><a
+                                                    href="/categories/${item.codeId}?page=1">${item.exp}</a></span>
 
                                         </div>
                                     </li>
@@ -339,7 +372,8 @@
     const subMenu1 = document.querySelectorAll(".subMenu1");
 
     for (let i = 0; i < subMenu1.length; i++) {
-        subMenu1[i].style.display = "none";}
+        subMenu1[i].style.display = "none";
+    }
 
     mainMenu.addEventListener("mouseenter", () => {
         mainMenu.querySelector("ul").style.display = "block";
@@ -366,14 +400,23 @@
         });
     }
 
+    $(document).ready(function () { //장바구니 개수 로그인 전이면 숨기기
+        let cartCNt = $(".cartCnt").val();
+        if (cartCNt.trim() === "") {
+            $(".position-absolute").hide();
+        } else {
+            $(".position-absolute").show();
+        }
+    });
 
-
-
-
-
-
-
-
+    $(document).ready(function() {  //브로콜리 로고나 브로컬리 글 누르면 베스트 페이지로
+        $('.mainlogo-img, .css-mxd3pm').on('click', function() {
+            window.location.href = 'http://localhost:8080/categories/best-page';
+        });
+    });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>

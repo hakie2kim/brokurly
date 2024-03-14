@@ -71,7 +71,7 @@ public class ShippingLocationService {
                 .stream()
                 .map(ShippingLocationAndShoppingLocationChangeLog::makeShippingLocationCurrDto)
                 .filter(sl -> "Y".equals(sl.getCurrAddrFl())) // 삭제된 배송지는 제외
-                .collect(Collectors.toList())
+                .toList()
                 .get(0);
     }
 

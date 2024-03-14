@@ -1,18 +1,16 @@
 package com.brokurly.entity.payment;
 
-import com.brokurly.dto.cart.CartDto;
 import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
+import com.brokurly.dto.payment.PaymentAmountResponseDto;
+import lombok.*;
 
 import java.util.List;
 
+@Getter
 @ToString
 @EqualsAndHashCode
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentAmount {
@@ -46,6 +44,19 @@ public class PaymentAmount {
                 .itemDcAmt(itemDcAmt)
                 .orderAmt(orderAmt)
                 .shipFee(shipFee)
+                .payAmt(payAmt)
+                .build();
+    }
+
+    public PaymentAmountResponseDto toResponseDto() {
+        return PaymentAmountResponseDto.builder()
+                .orderAmt(orderAmt)
+                .itemAmt(itemAmt)
+                .itemDcAmt(itemDcAmt)
+                .shipFee(shipFee)
+                .cpnDcAmt(cpnDcAmt)
+                .cardDcAmt(cardDcAmt)
+                .pointDcAmt(pointDcAmt)
                 .payAmt(payAmt)
                 .build();
     }

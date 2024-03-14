@@ -2,10 +2,9 @@ package com.brokurly.service.payment;
 
 import com.brokurly.dto.cart.CustomerCartDto;
 import com.brokurly.dto.order.CheckoutDto;
-import com.brokurly.dto.payment.KakaoPayApproveRequestDto;
-import com.brokurly.dto.payment.KakaoPayApproveResponseDto;
-import com.brokurly.dto.payment.KakaoPayReadyRequestDto;
-import com.brokurly.dto.payment.KakaoPayReadyResponseDto;
+import com.brokurly.dto.payment.*;
+import com.brokurly.service.order.OrderService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -13,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,19 +31,24 @@ public class KakaoPayService {
     @Value("${kakaopay.secretKey}")
     private String secretKey;
 
-    public KakaoPayService(ClientHttpConnector clientHttpConnector) {
+    private final PaymentService paymentService;
+    private final OrderService orderService;
+
+    public KakaoPayService(ClientHttpConnector clientHttpConnector, PaymentService paymentService, OrderService orderService) {
         this.webClient = WebClient.builder()
                 .baseUrl("https://open-api.kakaopay.com")
                 .clientConnector(clientHttpConnector)
                 .build();
+        this.paymentService = paymentService;
+        this.orderService = orderService;
     }
 
-    public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto, String orderId) {
+    public Mono<KakaoPayReadyResponseDto> ready(CheckoutDto checkoutDto, String orderId, String custId) {
         KakaoPayReadyRequestDto requestDto = KakaoPayReadyRequestDto.builder()
                 .cid(clientId)
                 .partner_order_id(orderId)
-                .partner_user_id(checkoutDto.getReceiverDetails().getRcvName())
-                .item_name(getItemName(checkoutDto.getCustomerCart()))
+                .partner_user_id(custId)
+                .item_name(checkoutDto.getItemName())
                 .quantity(getQuantity(checkoutDto.getCustomerCart()))
                 .total_amount(checkoutDto.getPaymentAmount().getOrderAmt())
                 .tax_free_amount(0)
@@ -71,6 +76,7 @@ public class KakaoPayService {
                 });
     }
 
+    // JS에서 처리하는 걸로 대체
     private String getItemName(List<CustomerCartDto> list) {
         if (list.isEmpty())
             throw new IllegalArgumentException();
@@ -89,6 +95,7 @@ public class KakaoPayService {
                 .sum();
     }
 
+    @Transactional
     public Mono<KakaoPayApproveResponseDto> approve(String pg_token, Map<String, String> paramMap) {
         KakaoPayApproveRequestDto requestDto = KakaoPayApproveRequestDto.builder()
                 .cid(clientId)
@@ -107,5 +114,30 @@ public class KakaoPayService {
                 .body(BodyInserters.fromValue(requestDto))
                 .retrieve()
                 .bodyToMono(KakaoPayApproveResponseDto.class);
+    }
+
+    @Transactional
+    public Mono<KakaoPayCancelResponseDto> cancel(PaymentDetailsResponseDto payment) {
+        KakaoPayCancelRequestDto requestDto = KakaoPayCancelRequestDto.builder()
+                .cid(clientId)
+                .tid(payment.getPayNo())
+                .cancel_amount(payment.getPaymentAmount().getOrderAmt())
+                .cancel_tax_free_amount(0)
+                .build();
+
+        Mono<KakaoPayCancelResponseDto> responseDto = webClient.post()
+                .uri("/online/v1/payment/cancel")
+                .headers(httpHeaders -> {
+                    httpHeaders.set("Authorization", "SECRET_KEY " + secretKey);
+                    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+                })
+                .body(BodyInserters.fromValue(requestDto))
+                .retrieve()
+                .bodyToMono(KakaoPayCancelResponseDto.class);
+
+        paymentService.changePaymentStatus("결제취소", payment.getPayNo());
+        orderService.changeOrderStatus("주문취소", payment.getOrderId());
+
+        return responseDto;
     }
 }

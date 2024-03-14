@@ -30,22 +30,24 @@
     <div>
         <div>
             <label for="receiver-name" class="name title">받으실 분<span class="star">*</span></label>
+            <div id="hidden-name" style="display:none">${member.name}</div>
             <input
                     id="receiver-name"
                     name="rcvName"
                     placeholder="이름을 입력해 주세요"
                     type="text"
-                    value="<c:if test='${receiverDetails != null}'>${receiverDetails.rcvName}</c:if>"/>
+                    value="${fn:trim(receiverDetails != null ? receiverDetails.rcvName : member.name)}"/>
         </div>
         <div>
             <label for="receiver-phone" class="name title">휴대폰<span class="star">*</span></label>
+            <div id="hidden-tel-no" style="display:none">${member.telNo}</div>
             <input
                     id="receiver-phone"
                     name="telNo"
                     placeholder="숫자만 입력해 주세요"
                     maxlength="11"
                     type="text"
-                    value="<c:if test='${receiverDetails != null}'>${fn:replace(receiverDetails.telNo, '-', '')}</c:if>"/>
+                    value="${fn:trim(receiverDetails != null ? receiverDetails.telNo : member.telNo)}"/>
         </div>
     </div>
 

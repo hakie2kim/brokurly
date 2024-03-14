@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <%-- 가격에 ,찍기 기능용--%>
@@ -9,16 +10,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="<c:url value='/resources/css/goods/goods.css'/>"/>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-          crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
           integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body class="vsc-initialized">
 <div>
-  <div class="header0">
-  </div>
+<%--  <div class="header0">--%>
+<%--  </div>--%>
 
   <%--  <div id="container">--%>
   <%--    <h2>Lorem Ipsum</h2>--%>
@@ -42,10 +42,11 @@
   <%--  </div>--%>
 
   <div class="goods-0">
-    <div class="header1"> <!-- 해더 나중에 수정해야됨 -->
-      <div class="header2">
-      </div>
-    </div>
+<%--    <div class="header1"> <!-- 해더 나중에 수정해야됨 -->--%>
+<%--      <div class="header2">--%>
+<%--      </div>--%>
+<%--    </div>--%>
+
     <div class="goods-1">
       <div class="goods-2">
         <main class="goods-3">
@@ -70,7 +71,7 @@
             </span>
             <p class="goods-120">원산지: ${goods.origin}</p>
             <div class="goods-121">적립 제외 상품입니다.</div>
-            <ul>
+            <ul style="padding: 0">
               <li class="goods-98">
                 <dt class="goods-99">배송</dt>
                 <dd class="goods-102">
@@ -317,30 +318,32 @@
             <div id="content1">
               <div class="goods-78">
                 <strong class="goods-79">01. 상품에 문제가 있는 경우</strong>
-                <p class="goods-80">받으신 상품이 표시·광고 내용 또는 계약 내용과 다른 경우에는 상품을 받은 날부터 3개월 이내,<!-- --><!-- -->그 사실을 알게 된 날부터
-                  30일 이내에 교환 및 환불을 요청하실 수 있습니다.<!-- --><!-- -->상품의 정확한 상태를 확인할 수 있도록 사진을 함께 보내주시면 더 빠른 상담이 가능합니다.
-                  <span>※ 배송 상품에 문제가 있는 것으로 확인되면 배송비는 판매자가 부담합니다.</span>
+                <p class="goods-80">받으신 상품이 표시·광고 내용 또는 계약 내용과 다른 경우에는 상품을 받은 날부터 3개월 이내,
+                  그 사실을 알게 된 날부터 30일 이내에 교환 및 환불을 요청하실 수 있습니다.
+                  상품의 정확한 상태를 확인할 수 있도록 사진을 함께 보내주시면 더 빠른 상담이 가능합니다.
+                  <span class="css-13ttlil">※ 배송 상품에 문제가 있는 것으로 확인되면 배송비는 판매자가 부담합니다.</span>
                 </p>
               </div>
               <div class="goods-78">
                 <strong class="goods-79">02. 단순 변심, 주문 착오의 경우</strong>
                 <p class="goods-80">
-                  <strong>신선 / 냉장 / 냉동 식품</strong>
-                  상품의 특성상 재판매가 불가하여 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품이 어려운 점 양해 부탁드립니다.<!-- --><!-- -->상품에
-                  따라 조금씩 맛이 다를 수 있으며, 개인의 기호에 따라 같은 상품도 다르게 느끼실 수 있습니다.
-                  <strong>유통기한 30일 이상 식품 (신선 / 냉장 / 냉동 제외) &amp; 기타 상품 (뷰티 제품, 생활용품)</strong>
+                  <strong class="css-e6zvdp">신선 / 냉장 / 냉동 식품</strong>
+                  상품의 특성상 재판매가 불가하여 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품이 어려운 점 양해 부탁드립니다.
+                  상품에 따라 조금씩 맛이 다를 수 있으며, 개인의 기호에 따라 같은 상품도 다르게 느끼실 수 있습니다.
+                  <strong class="css-e6zvdp">유통기한 30일 이상 식품 (신선 / 냉장 / 냉동 제외) &amp; 기타 상품 (뷰티 제품, 생활용품)</strong>
                   상품을 받은 날부터 7일 이내 교환, 반품이 가능합니다. 고객행복센터로 문의해주세요.
-                  <span>※ 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품의 경우 고객님께서 왕복배송비 6,000원을 부담하셔야 합니다.</span>
+                  <span class="css-13ttlil">※ 단순 변심, 주문 착오, 주소 오입력 등 고객의 책임 있는 사유로 인한 교환 및 반품의 경우 고객님께서 왕복배송비 6,000원을 부담하셔야 합니다.</span>
                 </p>
               </div>
               <div class="goods-78">
                 <strong class="goods-79">03. 교환·반품이 불가한 경우</strong>
                 <p class="goods-80">다음에 해당하는 교환·환불 신청은 처리가 어려울 수 있으니 양해 부탁드립니다.<!-- -->
-                  <span>고객님의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우<!-- --><!-- -->(단, 상품의 내용을 확인하기 위해 포장 등을 훼손한 경우는 제외)</span>
-                  <span>고객님의 사용 또는 일부 소비로 상품의 가치가 감소한 경우</span>
-                  <span>시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</span>
-                  <span>복제가 가능한 상품의 포장이 훼손된 경우</span>
-                  <span>고객님의 주문에 따라 개별적으로 생산되는 상품의 제작이 이미 진행된 경우</span>
+                  <span>-고객님의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우
+                    (단, 상품의 내용을 확인하기 위해 포장 등을 훼손한 경우는 제외)</span>
+                  <span>-고객님의 사용 또는 일부 소비로 상품의 가치가 감소한 경우</span>
+                  <span>-시간이 지나 다시 판매하기 곤란할 정도로 상품의 가치가 감소한 경우</span>
+                  <span>-복제가 가능한 상품의 포장이 훼손된 경우</span>
+                  <span>-고객님의 주문에 따라 개별적으로 생산되는 상품의 제작이 이미 진행된 경우</span>
                 </p>
               </div>
             </div>
@@ -355,15 +358,19 @@
             <div id="content2">
               <div class="goods-78">
                 <strong class="goods-79">주문 취소 관련</strong>
-                <p class="goods-80">- [배송준비중] 부터는 취소가 불가하니, 반품으로 진행해주세요. (상품에 따라 반품이 불가할 수 있습니다.)<!-- --><!-- -->- 주문마감
-                  시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.<!-- --><!-- -->- 비회원은 App 또는 모바일 웹사이트에서 [마이컬리 <!-- -->&gt;<!-- --> 비회원
-                  주문조회 페이지] 에서 취소가 가능합니다.<!-- --><!-- -->- 일부 예약상품은 배송 3~4일 전에만 취소 가능합니다.<!-- --><!-- -->- 주문상품의 부분취소는
-                  불가능합니다. 전체 주문 취소 후 다시 구매 해주세요.<!-- --><!-- -->- 미성년자 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.<!-- --></p>
+                <p class="goods-80">
+                 - [배송준비중] 부터는 취소가 불가하니, 반품 진행해주세요.
+                  (상품에 따라 반품이 불가할 수 있습니다.)
+                 - 주문마감시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.
+                 - 비회원은 모바일 웹사이트에서 [마이컬리 > 비회원 주문조회 페이지] 에서 취소가 가능합니다.
+                 - 일부 예약상품은 배송 3~4일 전에만 취소 가능합니다.
+                 - 주문상품의 부분취소는 불가능합니다. 전체 주문 취소 후 다시 구매 해주세요.
+                 - 미성년자 결제 시 법정대리인이 그 거래를 취소할 수 있습니다.</p>
               </div>
               <div class="goods-78">
                 <strong class="goods-79">결제 승인 취소 / 환불 관련</strong>
-                <p class="goods-80">- 카드 환불은 카드사 정책에 따르며, 자세한 사항은 카드사에 문의해주세요.<!-- --><!-- -->- 결제 취소 시, 사용하신 적립금과 쿠폰도
-                  모두 복원됩니다.</p>
+                <p class="goods-80">- 카드 환불은 카드사 정책에 따르며, 자세한 사항은 카드사에 문의해주세요.
+                  - 결제 취소 시, 사용하신 적립금과 쿠폰도 모두 복원됩니다.</p>
               </div>
             </div>
             <div class="goods-81">
@@ -374,91 +381,91 @@
           <div class="goods-19" id="section3">
             <section class="goods-16">
               <h2 aria-label="상품 후기">상품 후기</h2>
-              <div class="goods-46">
-                <button class="goods-47">
-                  <span
-                      style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: absolute; inset: 0px;">
-                      <img alt="상품 후기" sizes="100vw"
-                           srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 3840w"
-                           src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg"
-                           decoding="async" data-nimg="fill"
-                           style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                  </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <button class="goods-47">
-                                            <span
-                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                                <img alt="상품 후기" sizes="100vw"
-                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 3840w"
-                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg"
-                                                     decoding="async" data-nimg="fill"
-                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">
-                                            </span>
-                </button>
-                <a class="goods-48">
-                  <span>+더보기</span>
-                </a>
-              </div>
+<%--              <div class="goods-46">--%>
+<%--                <button class="goods-47">--%>
+<%--                  <span--%>
+<%--                      style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: absolute; inset: 0px;">--%>
+<%--                      <img alt="상품 후기" sizes="100vw"--%>
+<%--                           srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg 3840w"--%>
+<%--                           src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/aa86e74c-e5d6-4a4f-b88b-66c5a7e960cf.jpeg"--%>
+<%--                           decoding="async" data-nimg="fill"--%>
+<%--                           style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                  </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/fdc6f4c3-e1bd-4408-882a-da5725805b18.jpeg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/eee90451-744f-4533-8428-b679b6459696.jpg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/16d981b1-a7eb-4cac-b1cb-98093cded3e0.jpeg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/48852a9b-d350-47f4-8fc2-033ad1a8fe72.jpeg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/9b11b72f-9ba9-466b-a130-3a0c96e36b34.jpeg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/c5954d3c-a89a-4857-858c-e51d8e8ccfad.jpg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <button class="goods-47">--%>
+<%--                                            <span--%>
+<%--                                                style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">--%>
+<%--                                                <img alt="상품 후기" sizes="100vw"--%>
+<%--                                                     srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 640w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 750w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 828w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1080w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1200w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 1920w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 2048w, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg 3840w"--%>
+<%--                                                     src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240201/74ddc216-ebb9-4fd9-8dbe-7ba4853971a8.jpg"--%>
+<%--                                                     decoding="async" data-nimg="fill"--%>
+<%--                                                     style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;">--%>
+<%--                                            </span>--%>
+<%--                </button>--%>
+<%--                <a class="goods-48">--%>
+<%--                  <span>+더보기</span>--%>
+<%--                </a>--%>
+<%--              </div>--%>
               <div>
                 <div class="goods-92">
                   <span class="goods-93"></span>
@@ -467,126 +474,126 @@
                     <button class="goods-96">최근등록순</button>
                   </div>
                 </div>
-                <div class="goods-56">
-                  <button class="goods-61">
-                    <p class="goods-97">
-                      <span>회원 등급</span>
-                    </p>
-                  </button>
-                  <div class="goods-49">
-                    <header class="goods-50">
-                      <h3>회원 등급</h3>
-                      <button type="button">
-                        <svg width="12.8" height="12.8" viewBox="0 0 16 16" fill="none"
-                             xmlns="http://www.w3.org/2000/svg">
-                          <path
-                              d="M13.78 3.96303C12.504 2.16973 10.4086 1 8.04 1C4.15192 1 1 4.15192 1 8.04C1 11.9281 4.15192 15.08 8.04 15.08C11.9281 15.08 15.08 11.9281 15.08 8.04"
-                              stroke="#b5b5b5" stroke-width="1.8" stroke-linecap="square"
-                              stroke-linejoin="round"></path>
-                          <path d="M14.4933 1L14.4933 4.52H10.9733" stroke="#b5b5b5" stroke-width="1.8"
-                                stroke-linecap="square" stroke-linejoin="round"></path>
-                        </svg>
-                        <span>초기화</span>
-                      </button>
-                    </header>
-                    <div>
-                      <hr>
-                    </div>
-                    <div>
-                      <ul>
-                        <li>
-                          <button type="button" class="goods-51">
-                                                                <span>
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                                            stroke="#ddd" fill="none"></path>
-                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"
-                                                                              stroke="#ddd" stroke-width="1.5"
-                                                                              stroke-linecap="round"
-                                                                              stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                            <div>
-                                                                    <span>그린
-                                                                        <span class="goods-55">6,350</span>
-                                                                    </span>
-                            </div>
-                          </button>
-                        </li>
-                        <li>
-                          <button type="button" class="goods-51">
-                                                                <span>
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24"
-                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                                            stroke="#ddd" fill="none"></path>
-                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"
-                                                                              stroke="#ddd" stroke-width="1.5"
-                                                                              stroke-linecap="round"
-                                                                              stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                            <div>
-                                                                    <span>프렌즈
-                                                                        <span class="goods-55">9,999+</span>
-                                                                    </span>
-                            </div>
-                          </button>
-                        </li>
-                        <li>
-                          <button type="button" class="goods-51">
-                              <span>
-                                  <svg width="24" height="24" viewBox="0 0 24 24"
-                                       fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path
-                                          d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                          stroke="#ddd" fill="none"></path>
-                                      <path d="M7 12.6667L10.3846 16L18 8.5"
-                                            stroke="#ddd" stroke-width="1.5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"></path>
-                                  </svg>
-                              </span>
-                            <div>
-                              <span>일반
-                                  <span class="goods-55">9,999+</span>
-                              </span>
-                            </div>
-                          </button>
-                        </li>
-                        <li>
-                          <button type="button" class="goods-51">
-                            <span>
-                                <svg width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                        stroke="#ddd" fill="none"></path>
-                                    <path d="M7 12.6667L10.3846 16L18 8.5"
-                                          stroke="#ddd" stroke-width="1.5"
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
-                            <div>
-                              <span>멤버스
-                                  <span class="goods-55">3,621</span>
-                              </span>
-                            </div>
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                    <footer class="goods-53">
-                      <button type="button" class="goods-52">
-                        <p class="goods-54">76,813개 후기 보기</p>
-                      </button>
-                    </footer>
-                  </div>
-                </div>
+<%--                <div class="goods-56">--%>
+<%--                  <button class="goods-61">--%>
+<%--                    <p class="goods-97">--%>
+<%--                      <span>회원 등급</span>--%>
+<%--                    </p>--%>
+<%--                  </button>--%>
+<%--                  <div class="goods-49">--%>
+<%--                    <header class="goods-50">--%>
+<%--                      <h3>회원 등급</h3>--%>
+<%--                      <button type="button">--%>
+<%--                        <svg width="12.8" height="12.8" viewBox="0 0 16 16" fill="none"--%>
+<%--                             xmlns="http://www.w3.org/2000/svg">--%>
+<%--                          <path--%>
+<%--                              d="M13.78 3.96303C12.504 2.16973 10.4086 1 8.04 1C4.15192 1 1 4.15192 1 8.04C1 11.9281 4.15192 15.08 8.04 15.08C11.9281 15.08 15.08 11.9281 15.08 8.04"--%>
+<%--                              stroke="#b5b5b5" stroke-width="1.8" stroke-linecap="square"--%>
+<%--                              stroke-linejoin="round"></path>--%>
+<%--                          <path d="M14.4933 1L14.4933 4.52H10.9733" stroke="#b5b5b5" stroke-width="1.8"--%>
+<%--                                stroke-linecap="square" stroke-linejoin="round"></path>--%>
+<%--                        </svg>--%>
+<%--                        <span>초기화</span>--%>
+<%--                      </button>--%>
+<%--                    </header>--%>
+<%--                    <div>--%>
+<%--                      <hr>--%>
+<%--                    </div>--%>
+<%--                    <div>--%>
+<%--                      <ul>--%>
+<%--                        <li>--%>
+<%--                          <button type="button" class="goods-51">--%>
+<%--                                                                <span>--%>
+<%--                                                                    <svg width="24" height="24" viewBox="0 0 24 24"--%>
+<%--                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                                                        <path--%>
+<%--                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+<%--                                                                            stroke="#ddd" fill="none"></path>--%>
+<%--                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"--%>
+<%--                                                                              stroke="#ddd" stroke-width="1.5"--%>
+<%--                                                                              stroke-linecap="round"--%>
+<%--                                                                              stroke-linejoin="round"></path>--%>
+<%--                                                                    </svg>--%>
+<%--                                                                </span>--%>
+<%--                            <div>--%>
+<%--                                                                    <span>그린--%>
+<%--                                                                        <span class="goods-55">6,350</span>--%>
+<%--                                                                    </span>--%>
+<%--                            </div>--%>
+<%--                          </button>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                          <button type="button" class="goods-51">--%>
+<%--                                                                <span>--%>
+<%--                                                                    <svg width="24" height="24" viewBox="0 0 24 24"--%>
+<%--                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                                                        <path--%>
+<%--                                                                            d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+<%--                                                                            stroke="#ddd" fill="none"></path>--%>
+<%--                                                                        <path d="M7 12.6667L10.3846 16L18 8.5"--%>
+<%--                                                                              stroke="#ddd" stroke-width="1.5"--%>
+<%--                                                                              stroke-linecap="round"--%>
+<%--                                                                              stroke-linejoin="round"></path>--%>
+<%--                                                                    </svg>--%>
+<%--                                                                </span>--%>
+<%--                            <div>--%>
+<%--                                                                    <span>프렌즈--%>
+<%--                                                                        <span class="goods-55">9,999+</span>--%>
+<%--                                                                    </span>--%>
+<%--                            </div>--%>
+<%--                          </button>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                          <button type="button" class="goods-51">--%>
+<%--                              <span>--%>
+<%--                                  <svg width="24" height="24" viewBox="0 0 24 24"--%>
+<%--                                       fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                      <path--%>
+<%--                                          d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+<%--                                          stroke="#ddd" fill="none"></path>--%>
+<%--                                      <path d="M7 12.6667L10.3846 16L18 8.5"--%>
+<%--                                            stroke="#ddd" stroke-width="1.5"--%>
+<%--                                            stroke-linecap="round"--%>
+<%--                                            stroke-linejoin="round"></path>--%>
+<%--                                  </svg>--%>
+<%--                              </span>--%>
+<%--                            <div>--%>
+<%--                              <span>일반--%>
+<%--                                  <span class="goods-55">9,999+</span>--%>
+<%--                              </span>--%>
+<%--                            </div>--%>
+<%--                          </button>--%>
+<%--                        </li>--%>
+<%--                        <li>--%>
+<%--                          <button type="button" class="goods-51">--%>
+<%--                            <span>--%>
+<%--                                <svg width="24" height="24" viewBox="0 0 24 24"--%>
+<%--                                     fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                    <path--%>
+<%--                                        d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
+<%--                                        stroke="#ddd" fill="none"></path>--%>
+<%--                                    <path d="M7 12.6667L10.3846 16L18 8.5"--%>
+<%--                                          stroke="#ddd" stroke-width="1.5"--%>
+<%--                                          stroke-linecap="round"--%>
+<%--                                          stroke-linejoin="round"></path>--%>
+<%--                                </svg>--%>
+<%--                            </span>--%>
+<%--                            <div>--%>
+<%--                              <span>멤버스--%>
+<%--                                  <span class="goods-55">3,621</span>--%>
+<%--                              </span>--%>
+<%--                            </div>--%>
+<%--                          </button>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                    <footer class="goods-53">--%>
+<%--                      <button type="button" class="goods-52">--%>
+<%--                        <p class="goods-54">76,813개 후기 보기</p>--%>
+<%--                      </button>--%>
+<%--                    </footer>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
                 <div class="goods-90">
                   <div class="noticeList">
                     <span class="goods-91">공지</span>
@@ -611,39 +618,39 @@
                 <c:forEach items="${review}" var="re">
                 <div class="goods-17">
                   <div class="goods-18">
-                    <div>
-                      <span>베스트</span>
-                      <span>${re.grade}</span>
-                      <span>${re.name}</span>
+                    <div class="css-1qo6qeh">
+<%--                      <span class="css-16teq6l">베스트</span>--%>
+                      <span class="css-48ujv7">${re.grade}</span>
+                      <span class="maskingName">${re.name}</span>
                     </div>
                   </div>
-                  <article>
+                  <article class="css-inxa61">
                     <div>
                       <div>
-                        <h3>${goods.name}</h3>
+                        <h3 class="css-11q4ylb">${goods.name}</h3>
                       </div>
-                      <p>${fn:replace(re.content, replaceChar, "<br/>")}</p>
-                      <div>
-                        <button>
-                          <span
-                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">
-                            <span
-                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">
-                                <img alt="" aria-hidden="true"
-                                     src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"
-                                     style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">
-                            </span>
-                            <img alt="리뷰 이미지 썸네일"
-                                 src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg"
-                                 decoding="async" data-nimg="intrinsic"
-                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"
-                                 srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 2x">
-                          </span>
-                        </button>
-                      </div>
-                      <footer>
+                      <p class="css-y49dcn">${fn:replace(re.content, replaceChar, "<br/>")}</p>
+<%--                      <div>--%>
+<%--                        <button>--%>
+<%--                          <span--%>
+<%--                            style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;">--%>
+<%--                            <span--%>
+<%--                                style="box-sizing: border-box; display: block; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; max-width: 100%;">--%>
+<%--                                <img alt="" aria-hidden="true"--%>
+<%--                                     src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2793%27%20height=%2793%27/%3e"--%>
+<%--                                     style="display: block; max-width: 100%; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px;">--%>
+<%--                            </span>--%>
+<%--                            <img alt="리뷰 이미지 썸네일"--%>
+<%--                                 src="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg"--%>
+<%--                                 decoding="async" data-nimg="intrinsic"--%>
+<%--                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"--%>
+<%--                                 srcset="https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 1x, https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240129/fa69877c-d25d-4394-9ec1-b0ec002ab97b.jpg 2x">--%>
+<%--                          </span>--%>
+<%--                        </button>--%>
+<%--                      </div>--%>
+                      <footer class="css-1fkegtf">
                         <div>
-                          <span>${re.regDt}</span>
+                          <span><fmt:formatDate value="${re.regDt}" pattern="yyyy-MM-dd" /></span>
                         </div>
                         <button class="likeX">
                           <span>
@@ -651,7 +658,7 @@
                                    id="like1">
                           </span>
                           <span>도움돼요
-                            <span>${re.likeCnt}</span>
+                            <span class="likeCnt">${re.likeCnt}</span>
                           </span>
                         </button>
                       </footer>
@@ -809,19 +816,17 @@
                               <span class="goods-67"></span>
                             </div>
                             <div class="goods-58">
-                              <span>${in.inqContent}<br/></span>
+                              <span>${fn:replace(in.inqContent, replaceChar, "<br/>")}<br/></span>
                             </div>
                           </div>
                         </div>
-                        <div class="css-tnubsz e1ptpt003">
+                        <div class="css-tnubsz">
                           <div class="goods-57">
                             <div class="goods-66">
                               <span class="goods-68"></span>
                             </div>
                             <div class="goods-58">
-                              <div>
-                                  ${in.replyContent}<br/>
-                              </div>
+                              <div>${fn:replace(in.replyContent, replaceChar, "<br/>")} </div>
                             </div>
                           </div>
                           <div class="goods-69">${in.replyDt}
@@ -833,143 +838,6 @@
                     </tr>
                     <!-- ------------------------------------------------------------------------------------------------------------- -->
 
-                      <%--                  <tr class="goods-22">                <!--2번 행-->--%>
-                      <%--                    <td class="goods-65">상품이 터져서왔어요</td>--%>
-                      <%--                    <td class="goods-23">한*수</td>--%>
-                      <%--                    <td class="goods-23">2024.02.01</td>--%>
-                      <%--                    <td class="goods-26">답변완료</td>--%>
-                      <%--                  </tr>--%>
-
-                      <%--                  <tr class="goods-25">                <!--2번 행 답변-->--%>
-                      <%--                    <td colspan="4">--%>
-                      <%--                      <div>--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-67"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <span>위에 비닐이 터져서 고기가노출된상태로왔어요<br/></span>--%>
-                      <%--                            <span>생고기다보니 위생적이지않아 교환접수부탁드립니다.<br/></span>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                      </div>--%>
-                      <%--                      <div class="css-tnubsz e1ptpt003">--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-68"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <div>--%>
-                      <%--                              안녕하세요 고객님<br/><br/>현재 문의량이 많아--%>
-                      <%--                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을--%>
-                      <%--                              드리고자 하였음에도, 시간이 지난 현재 답변을--%>
-                      <%--                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/>--%>
-                      <%--                            </div>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                        <div class="goods-69">2024.02.01</div>--%>
-                      <%--                      </div>--%>
-                      <%--                    </td>--%>
-                      <%--                  </tr>--%>
-                      <%--                  <!-- ------------------------------------------------------------------------------------------------------------- -->--%>
-                      <%--                  <tr class="goods-22">                       <!--3번 행-->--%>
-                      <%--                    <td class="goods-65">포장다찢어져서왔어요</td>--%>
-                      <%--                    <td class="goods-23">김*란</td>--%>
-                      <%--                    <td class="goods-23">2024.01.31</td>--%>
-                      <%--                    <td class="goods-26">답변완료</td>--%>
-                      <%--                  </tr>--%>
-
-                      <%--                  <tr class="goods-25">    <!--3번 행 답변-->--%>
-                      <%--                    <td colspan="4">--%>
-                      <%--                      <div>--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-67"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <span>포장다 찢어져서왔어요<br/></span>--%>
-                      <%--                            <span>환불이나 교환해주세요<br/></span>--%>
-                      <%--                            <span><br/></span>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                      </div>--%>
-                      <%--                      <div>--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-68"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <div>--%>
-                      <%--                              안녕하세요. 고객님<br/>먼저, 바쁘신 일상에서 귀한--%>
-                      <%--                              시간 내어 통화에 응해주셔서 진심으로 감사--%>
-                      <%--                              인사드립니다.<br/><br/>고객님께서 문의하신 내용은--%>
-                      <%--                              유선상으로 안내해 드렸으나 다시 한번 상세한 내용을--%>
-                      <%--                              안내해 드립니다.<br/><br/>기대하고 주문하신 상품의--%>
-                      <%--                              포장이 파손되어 많이 놀라시고 당황하셨을 것 같아 다시--%>
-                      <%--                              한 번 죄송한 마음입니다<br/><br/>바쁜 시간 통화에--%>
-                      <%--                              응해주시어 다시 한번 감사드리며, 다양한 채널로--%>
-                      <%--                              남겨주신 목소리들을 지속해서 모니터링하고 있어--%>
-                      <%--                              앞으로도 고객님께 안전하고 신선한 먹거리와 고객님의--%>
-                      <%--                              일상을 더욱 풍족하게 해드릴 수 있는 상품을 제공하고자--%>
-                      <%--                              최선을 다하는 컬리가 되겠습니다.<br/><br/>감사합니다.<br/>Better--%>
-                      <%--                              Life for All. BroKurly--%>
-                      <%--                            </div>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                        <div class="goods-69">2024.02.02</div>--%>
-                      <%--                      </div>--%>
-                      <%--                    </td>--%>
-                      <%--                  </tr>--%>
-                    <!-- ------------------------------------------------------------------------------------------------------------- -->
-                      <%--                  <tr class="goods-22">                               <!--4번 행-->--%>
-                      <%--                    <td class="goods-65">배송이 엉망으로 왔어요</td>--%>
-                      <%--                    <td class="goods-23">박*하</td>--%>
-                      <%--                    <td class="goods-23">2024.01.31</td>--%>
-                      <%--                    <td class="goods-26">답변완료</td>--%>
-                      <%--                  </tr>--%>
-
-                      <%--                  <tr class="goods-25">        <!--4번 행 답변-->--%>
-                      <%--                    <td colspan="4">--%>
-                      <%--                      <div>--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-67"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <span>고기 포장이 찢겨서 배송됐습니다<br/></span>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                      </div>--%>
-                      <%--                      <div>--%>
-                      <%--                        <div class="goods-57">--%>
-                      <%--                          <div class="goods-66">--%>
-                      <%--                            <span class="goods-68"></span>--%>
-                      <%--                          </div>--%>
-                      <%--                          <div class="goods-58">--%>
-                      <%--                            <div>--%>
-                      <%--                              안녕하세요 고객님<br/><br/>현재 문의량이 많아--%>
-                      <%--                              고객님의 소중한 문의글에 대해 빠르게 확인하고 답변을--%>
-                      <%--                              드리고자<br/>하였음에도 시간이 지난 현재 답변을--%>
-                      <%--                              드리게되어 너무나도 죄송하단 말씀 드립니다.<br/><br/>저--%>
-                      <%--                              또한 상담원이기 전에 소비자로서 고객님에게 공감이 되어--%>
-                      <%--                              많이 불편하셨을 거 같아 너무 죄송합니다.<br/><br/>고객님께서--%>
-                      <%--                              문의주신 내용은 이전 1:1문의 상담을 통해 안내 받으신--%>
-                      <%--                              것으로 확인 되었습니다.<br/>조금 더 신속하게 안내해--%>
-                      <%--                              드리지 못한 점 고객님의 너그러운 양해 부탁--%>
-                      <%--                              드립니다.<br/><br/>안내드린 내용을 통해 문의 주신--%>
-                      <%--                              사항이 해결 되셨길 바랍니다.<br/><br/>이후에--%>
-                      <%--                              추가적인 문의사항이 있으시면 언제든--%>
-                      <%--                              고객행복센터(☎1644-1107) / [1:1] 문의 게시판 / 실시간--%>
-                      <%--                              카카오톡 채팅 상담을 이용해주세요.<br/><br/>감사합니다.<br/>Better--%>
-                      <%--                              Life for All. BroKurly--%>
-                      <%--                            </div>--%>
-                      <%--                          </div>--%>
-                      <%--                        </div>--%>
-                      <%--                        <div class="goods-69">2024.02.01</div>--%>
-                      <%--                      </div>--%>
-                      <%--                    </td>--%>
-                      <%--                  </tr>--%>
-                    <!-- ------------------------------------------------------------------------------------------------------------- -->
                     </tbody>
                   </c:forEach>
                 </table>
@@ -992,8 +860,8 @@
         <div class="goods-33">
           <button class="goods-34"><!-- 버튼 누르면 버튼 클래스 이름 바뀌고 아래 지움-->
             <span class="goods-35">상품 선택
-                            <i class="arrow up"></i>
-                        </span>
+                <i class="arrow up"></i>
+            </span>
           </button>
           <div class="goods-36"><!-- 버튼 누르면 사라지게-->
             <div>
@@ -1055,7 +923,7 @@
                                 </span>
               </button>
               <div class="goods-113">
-                <button class="cart-button goods-115" type="button" radius="3">
+                <button class="btn_cart goods-115" type="button" radius="3">
                   <span class="goods-114">장바구니 담기</span>
                 </button>
               </div>
@@ -1224,12 +1092,24 @@ $('.goods-5> ul > li > a').click(function (e) {
     let href = $(this).attr('href');
     if (!href) return; // href 값이 없는 경우 동작 중지
 
-    let targetTop = $(href).offset().top - 115; // 대상 위치 계산
+    // let targetTop = $(href).offset().top - 115; // 대상 위치 계산
+    let targetTop = $(href).offset().top -62; // 대상 위치 계산
     $('html, body').stop().animate({scrollTop: targetTop}, 300); // 스크롤 애니메이션 적용
 });
+// $('.goods-5 > ul > li > a').click(function (e) {
+//     e.preventDefault(); // 기본 이벤트 동작 중지
+//
+//     let href = $(this).attr('href');
+//     if (!href) return; // href 값이 없는 경우 동작 중지
+//
+//     let targetTop = $(href).offset().top - 60; // 대상 위치 계산
+//     $('html, body').stop().animate({scrollTop: targetTop}, 300, function() {
+//         Page__updateIndicatorActive(); // 스크롤 애니메이션 완료 후 인디케이터 업데이트
+//     });
+// });
 
 function Page__updateIndicatorActive() {
-    let scrollTop = $(window).scrollTop();
+    let scrollTop = $(window).scrollTop() -80; // 상단 메뉴바의 높이를 뺀 값이 아닌 원래 scrollTop 값 사용
     // 역순으로 검색해야 편하다
     $($('.goods-19').get().reverse()).each(function (index, node) {
         let $node = $(this);
@@ -1247,38 +1127,56 @@ function Page__updateIndicatorActive() {
     });
 }
 
+
 // 각 페이지의 offsetTop 속성을 업데이트
 function Page__updateOffsetTop() {
     $('.goods-19').each(function (index, node) {
         let $page = $(node);
-        let offsetTop = $page.offset().top - 115;
+        let offsetTop = $page.offset().top-60 ;
         $page.attr('data-offset-top', offsetTop);
     });
     // 계산이 바뀌었으니까, 다시 상태 업데이트
     Page__updateIndicatorActive();
 }
 
-// 각 페이지의 offsetTop 속성을 업데이트
-function Page__updateOffsetTop() {
-    $('.goods-19').each(function (index, node) {
-        let $page = $(node);
-        let offsetTop = $page.offset().top - 115;
-        $page.attr('data-offset-top', offsetTop);
-    });
-    // 계산이 바뀌었으니까, 다시 상태 업데이트
-    Page__updateIndicatorActive();
-}
+// // 각 페이지의 offsetTop 속성을 업데이트
+// function Page__updateOffsetTop() {
+//     $('.goods-19').each(function (index, node) {
+//         let $page = $(node);
+//         let offsetTop = $page.offset().top-70;
+//         $page.attr('data-offset-top', offsetTop);
+//     });
+//     // 계산이 바뀌었으니까, 다시 상태 업데이트
+//     Page__updateIndicatorActive();
+// }
 
+// function Page__init() {
+//     Page__updateOffsetTop();
+// }
+//
+// // 페이지 초기화로 상단 메뉴바 버튼 업데이트
+// Page__init();
+// // 화면이 리사이즈 할 때 마다, offsetTop을 다시계산
+// $(window).resize(Page__updateOffsetTop);
+// // 스크롤이 될 때 마다, 인디케이터의 상태를 갱신
+// $(window).scroll(Page__updateIndicatorActive);
+// 페이지 초기화 함수
 function Page__init() {
-    Page__updateOffsetTop();
+    Page__updateOffsetTop(); // 초기화 시 offsetTop 업데이트
 }
 
-// 페이지 초기화로 상단 메뉴바 버튼 업데이트
+// 페이지 초기화
 Page__init();
-// 화면이 리사이즈 할 때 마다, offsetTop을 다시계산
-$(window).resize(Page__updateOffsetTop);
-// 스크롤이 될 때 마다, 인디케이터의 상태를 갱신
-$(window).scroll(Page__updateIndicatorActive);
+
+// 창 크기가 조정될 때마다 offsetTop을 다시 계산하여 업데이트하는 이벤트 핸들러 등록
+$(window).resize(function() {
+    Page__updateOffsetTop();
+});
+
+// 스크롤이 될 때마다 인디케이터의 상태를 갱신하는 이벤트 핸들러 등록
+$(window).scroll(function() {
+    Page__updateIndicatorActive();
+});
 
 
 // //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
@@ -1301,46 +1199,45 @@ $(document).ready(function() {
     $('.likeX').click(likeToggle);
 });
 
-// function likeToggle() {
-//     var $imgElement = $(this).find(".img2");
-//
-//     // 이미지 소스를 변경
-//     if ($imgElement.attr("src") === "/resources/image/like1.png") {
-//         $imgElement.attr("src", "/resources/image/likeO.png");
-//     } else {
-//         $imgElement.attr("src", "/resources/image/like1.png");
-//     }
-// }
 function likeToggle() {
-    var $imgElement = $(this).find(".img2");
-    var likeCnt = parseInt($(this).find(".likeCount").text()); // 좋아요 카운트 값 가져오기
-    var reviewId = $(this).data("review-id"); // 리뷰 ID 가져오기
+    let imgChange = $(this).find(".img2");
+    let likeCnt = parseInt($(this).find(".likeCnt").text()); // 좋아요 카운트 값 가져오기
+    // let reviewId = $(this).data("review-id"); // 리뷰 ID 가져오기
 
-    $.ajax({
-        url: '/updateLikeCount', // 서버의 업데이트 좋아요 카운트를 처리하는 엔드포인트로 변경해야 합니다.
-        method: 'POST', // 또는 GET, PUT 등을 사용할 수 있습니다.
-        data: {
-            reviewId: reviewId,
-            likeCnt: likeCnt
-        },
-        success: function(response) {
-            // 서버에서 처리 결과를 받은 후 클라이언트 측에서 좋아요 카운트 업데이트
-            if (response.success) {
-                if ($imgElement.attr("src") === "/resources/image/like1.png") {
-                    $imgElement.attr("src", "/resources/image/likeO.png");
-                    $(this).find(".likeCount").text(likeCnt + 1); // 좋아요 카운트 증가
-                } else {
-                    $imgElement.attr("src", "/resources/image/like1.png");
-                    $(this).find(".likeCount").text(likeCnt - 1); // 좋아요 카운트 감소
-                }
-            } else {
-                alert("좋아요 처리에 실패했습니다.");
-            }
-        },
-        error: function() {
-            alert("서버와의 통신 중 오류가 발생했습니다.");
+    // if (response.success) {
+        if (imgChange.attr("src") === "/resources/image/like1.png") {
+            imgChange.attr("src", "/resources/image/likeO.png");
+            $(this).find(".likeCnt").text(likeCnt + 1); // 좋아요 카운트 증가
+        } else {
+            imgChange.attr("src", "/resources/image/like1.png");
+            $(this).find(".likeCnt").text(likeCnt - 1); // 좋아요 카운트 감소
         }
-    });
+
+    // $.ajax({
+    //     url: '/updateLikeCount', // 서버의 업데이트 좋아요 카운트를 처리하는 엔드포인트로 변경해야 합니다.
+    //     method: 'POST', // 또는 GET, PUT 등을 사용할 수 있습니다.
+    //     data: {
+    //         // reviewId: reviewId,
+    //         likeCnt: likeCnt
+    //     },
+    //     success: function(response) {
+    //         // 서버에서 처리 결과를 받은 후 클라이언트 측에서 좋아요 카운트 업데이트
+    //         if (response.success) {
+    //             if (imgChange.attr("src") === "/resources/image/like1.png") {
+    //                 imgChange.attr("src", "/resources/image/likeO.png");
+    //                 $(this).find(".likeCount").text(likeCnt + 1); // 좋아요 카운트 증가
+    //             } else {
+    //                 imgChange.attr("src", "/resources/image/like1.png");
+    //                 $(this).find(".likeCount").text(likeCnt - 1); // 좋아요 카운트 감소
+    //             }
+    //         } else {
+    //             alert("좋아요 처리에 실패했습니다.");
+    //         }
+    //     },
+    //     error: function() {
+    //         alert("서버와의 통신 중 오류가 발생했습니다.");
+    //     }
+    // });
 }
 
 //찜 버튼 누르면 사진 변경 다시 누르면 원상태로
@@ -1358,12 +1255,11 @@ $(document).ready(function () {
         if (like === "1") {
 
             $.ajax({
-
                 url: '/goods/deleteWish',
                 type: 'POST',
                 dataType: "text",
                 data: {
-                    custId: "hong",
+                    custId: "${custId}",
                     itemId: "${goods.itemId}"
                 },
                 success: function (data) {
@@ -1381,7 +1277,7 @@ $(document).ready(function () {
                 type: 'POST',
                 dataType: "text",
                 data: {
-                    custId: "hong",
+                    custId: "${custId}",
                     itemId: "${goods.itemId}"
                     },
                 success: function (data) {
@@ -1531,11 +1427,12 @@ $(".minus_btn").on("click", function () {
 
 // 서버로 전송할 데이터
 const form = {
-    <%--custId : '${customer.custId}',--%>
+    <%--custId : '${custId}',--%>
     itemId: '${goods.itemId}',
-    custId: 'hong',
-    itemCnt: '',
-    itemCk: 'N'
+    // custId: 'hakie2kim',
+    itemCnt: "",
+    // itemCk: 'N'
+
 }
 // 장바구니 추가 버튼
 $(".btn_cart").on("click", function (e) {
@@ -1610,8 +1507,7 @@ $(document).ready(function () {
     });
 });
 
-
-//문의 작성자 이름 중간 *로 바꾸기
+//문의&후기 작성자 이름 중간 *로 바꾸기
 $(document).ready(function () {
     $('.maskingName').each(function () {
         let maskedName;
@@ -1633,6 +1529,7 @@ $(document).ready(function () {
         $(this).text(maskedName);
     });
 });
+
 
 
 //모달
@@ -1767,19 +1664,19 @@ $(".goods-96").on("click", function () {
     $(this).css('color', 'rgb(51, 51, 51)');
     $(".goods-95").css('color', 'rgb(153, 153, 153)');
 
-    // $.ajax({
-    //     url: '/goods/dateSort',
-    //     method: "POST",
-    //     // dataType: "text",
-    //     // data: {
-    //     //     custId: "hong",
-    //     //     itemId: "1708410569506"
-    //     // },
-    //     success: function () {
-    //         location.reload();
-    //         alert("삭제 완료");
-    //     }
-    // });
+    $.ajax({
+        url: '/goods/dateSort',
+        method: "POST",
+        dataType: "text",
+        data: {
+            // custId: "hong",
+            itemId: "${goods.itemId}"
+        },
+        success: function () {
+            location.reload();
+            alert("정렬 완료");
+        }
+    });
 
     // // review 배열을 생성하고
     // var reviewArray = [];
@@ -1797,6 +1694,16 @@ $(".goods-96").on("click", function () {
     // for (var i = 0; i < reviewArray.length; i++) {
     //     $(".goods-container").append(reviewArray[i].element);
     // }
+});
+
+//상품 문의 답글 없을때 답글 아이콘 숨기기
+$(document).ready(function () {
+    $(".css-tnubsz").each(function () {
+        let replyContent = $(this).find(".goods-58 > div").html().trim();
+        if (replyContent === "") {
+            $(this).hide();
+        }
+    });
 });
 
 </script>

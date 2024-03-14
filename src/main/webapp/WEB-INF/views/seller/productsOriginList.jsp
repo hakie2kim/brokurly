@@ -19,10 +19,13 @@
 
 </head>
 <body>
-<div id="seller-content" class="seller-sub-frame">
+<div class="productsOriginListMain" style="margin-left:20%;padding:1px 16px;height:1000px;">
+
+    <div style="margin-top: 55px">
+
+    <div id="seller-content" class="seller-sub-frame" >
     <!----><!----><!---->
-    <ui-view
-    >
+    <ui-view>
         <div class="seller-sub-title">
             <div class="pull-left">
                 <h2 class="title">
@@ -33,14 +36,13 @@
         </div>
         <div class="seller-sub-content">
             <!---->
-            <ui-view name="search"
-            ><!---->
+            <ui-view name="search"><!---->
                 <div
                         class="form-section seller-status"
                 >
                     <ul class="seller-status-list">
                         <!---->
-                        <li>
+                        <li class="show_li">
                             <a
                                     href=""
                                     class="status-link-area"
@@ -58,7 +60,7 @@
                         </li>
                         <!---->
                         <li
-                                class=""
+                                class="show_li"
                                 style=""
                         >
                             <a
@@ -79,8 +81,7 @@
                         <!---->
                         <li
                                 aria-selected="false"
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -99,8 +100,7 @@
                         <!---->
                         <li
                                 aria-selected="false"
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -120,8 +120,7 @@
                         <!---->
                         <li
                                 aria-selected="false"
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -140,8 +139,7 @@
                         </li>
                         <!---->
                         <li
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -162,8 +160,7 @@
                         <!---->
                         <li
                                 aria-selected="false"
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -182,8 +179,7 @@
                         <!---->
                         <li
                                 aria-selected="false"
-                                class=""
-                        >
+                                class="show_li"                        >
                             <a
                                     href=""
                                     class="status-link-area"
@@ -262,7 +258,7 @@
                                     <div width="100" class="css-16tcewl e16adls20">
                                         <button type="button" id="modifyBtn" onclick="modify(${goodsByB.itemId})">
 <%--                                            <a href="<c:url value='/seller/productsOriginList/read?itemId=${goodsByB.itemId}'/>">수정</a>--%>
-                                            상품보기
+                                            수정하기
                                           </button>
 
 
@@ -275,8 +271,6 @@
                                 </div>
                                 </form>
                             </c:forEach>
-
-
                         </div>
                     </div>
                 </div>
@@ -299,9 +293,8 @@
         </div>
     </ui-view>
 </div>
-</ui-view>
 </div>
-
+</div>
 <script>
 
 <%--  삭제버튼  --%>

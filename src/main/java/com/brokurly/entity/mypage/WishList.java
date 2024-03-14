@@ -25,5 +25,4 @@ public class WishList {
         this.custId = wishListDto.getCustId();
     }
 
-
 }

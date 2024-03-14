@@ -1,15 +1,22 @@
 package com.brokurly.controller.mypage;
 
 
+import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.PointAndPointLogEarningDto;
 import com.brokurly.dto.mypage.PointLogExpDto;
 import com.brokurly.dto.mypage.PointLogUsageDto;
 
 import com.brokurly.dto.mypage.*;
 
+import com.brokurly.dto.order.OrderLogListResponseDto;
+import com.brokurly.dto.order.OrderLogResponseDto;
 import com.brokurly.service.mypage.PointLogService;
 import com.brokurly.service.mypage.PointService;
 import com.brokurly.service.mypage.ShippingLocationService;
+import com.brokurly.service.mypage.WishListItemService;
+import com.brokurly.service.order.OrderLogService;
+import com.brokurly.service.order.OrderService;
+import com.brokurly.utils.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -27,9 +36,12 @@ public class MypageController {
     private final PointLogService pointLogService;
     private final PointService pointService;
     private final ShippingLocationService shippingLocationService;
+    private final WishListItemService wishListItemService;
+    private final OrderService orderService;
+    private final OrderLogService orderLogService;
 
     @GetMapping("/point/usage")
-    String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
+    String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointLogUsageDto> pointLogUsageList = pointLogService.findPointLogUsageByCustomerAndPeriod(custId, period);
@@ -52,7 +64,7 @@ public class MypageController {
     }
 
     @GetMapping("/point/exp")
-    String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
+    String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointLogExpDto> pointLogExpList = pointLogService.findPointLogExpByCustomerAndPeriod(custId, period);
@@ -75,7 +87,7 @@ public class MypageController {
     }
 
     @GetMapping("/point/earning")
-    String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model) {
+    String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
@@ -117,7 +129,7 @@ public class MypageController {
     }
 
     @GetMapping("/address")
-    String manageAddress(Model model) {
+    String manageAddress(Model model, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
         List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
         model.addAttribute("shippingLocationList", shippingLocationList);
@@ -126,7 +138,7 @@ public class MypageController {
 
     @PostMapping("/address")
     @ResponseBody
-    HttpStatus addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto) {
+    HttpStatus addShippingAddress(@RequestBody ShippingLocationAddFormDto shippingLocationAddFormDto, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         String addr = shippingLocationAddFormDto.getAddr();
@@ -146,7 +158,7 @@ public class MypageController {
     }
 
     @GetMapping("/address/shipping-address/update/{shipLocaId}")
-    String modifyShippingLocation(@PathVariable String shipLocaId, Model model) {
+    String modifyShippingLocation(@PathVariable String shipLocaId, HttpServletRequest httpServletRequest, Model model) {
         ShippingLocationModifyPageDto shippingLocationModifyPageDto = shippingLocationService.getShippingLocationToModifyByShipLocaId(shipLocaId);
         model.addAttribute("shippingLocationModifyPageDto", shippingLocationModifyPageDto);
         return "/mypage/address-update";
@@ -155,7 +167,7 @@ public class MypageController {
     @PatchMapping("/address/shipping-address/update/{shipLocaId}")
     @ResponseBody
 //    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
-    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId, @ModelAttribute ShippingLocationModifyDto shippingLocationModifyDto) {
+    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId, @ModelAttribute ShippingLocationModifyDto shippingLocationModifyDto, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         shippingLocationModifyDto.setShipLocaId(shipLocaId);
@@ -191,7 +203,7 @@ public class MypageController {
     @PatchMapping("/address/shipping-address/update-curraddr/{shipLocaId}")
     @ResponseBody
 //    ResponseEntity<String> modifyShippingAddress(@ModelAttribute ShippingLocationUpdateDto shippingLocationUpdateDto) {
-    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId) {
+    HttpStatus modifyShippingLocation(@PathVariable String shipLocaId, HttpServletRequest httpServletRequest) {
         String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
 
         // 현재 배송지 수정
@@ -219,7 +231,7 @@ public class MypageController {
     }*/
 
     @PostMapping("/address/shipping-address/result")
-    String shippingAddressResult(String addr, Model model) {
+    String shippingAddressResult(String addr, HttpServletRequest httpServletRequest, Model model) {
         log.info("@PostMapping(\"/address/shipping-address/result\") shippingAddressResult addr: {}", addr);
         model.addAttribute("addr", addr);
 
@@ -234,13 +246,56 @@ public class MypageController {
         }*/
     }
 
-
     @GetMapping("/address/shipping-address/list")
-    String shippingAddressList(Model model) {
+    String shippingAddressList(HttpServletRequest httpServletRequest, Model model) {
         String custId = "hakie2kim";     //임시
         List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
         model.addAttribute("shippingLocationList", shippingLocationList);
         return "/cart/delivery-address";
     }
 
+    @GetMapping("/pick/list")
+    String pickList(HttpServletRequest httpServletRequest, Model model) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+
+        List<WishListItemDto> wishListItemList = wishListItemService.searchWishList(custId);
+        int wishListItemCounter = wishListItemService.getWishListCounter(custId);
+
+        model.addAttribute("wishListItemList", wishListItemList);
+        model.addAttribute("wishListItemCounter", wishListItemCounter);
+
+        return "/mypage/pick-list";
+    }
+
+    @DeleteMapping("/pick/remove/{itemId}")
+    HttpStatus removePick(@PathVariable String itemId, HttpServletRequest httpServletRequest) {
+        String custId = "hakie2kim"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        wishListItemService.deleteWish(itemId, custId);
+        return HttpStatus.OK;
+    }
+
+    @GetMapping("/order/list")
+    String orderList(HttpServletRequest httpServletRequest, Model model) {
+        String custId = "hakjun1234@naver.com"; // 로그인 기능 구현 후 세션에서 갖고 오는 것으로 대체
+        List<OrderLogListResponseDto> orderLogList = orderService.findOrdersByCustId(custId);
+        model.addAttribute("orderLogList", orderLogList);
+        model.addAttribute("orderLogCnt", orderLogList.size());
+        log.info("orderLogList = {}", orderLogList);
+        log.info("orderLogCnt = {}", orderLogList.size());
+
+        return "/mypage/order-list";
+    }
+
+    @GetMapping("/order/{orderId}")
+    String orderDetail(@PathVariable String orderId, Model model) {
+        OrderLogResponseDto orderLog = orderLogService.showOrderLogDetails(orderId);
+        model.addAttribute("orderLog", orderLog);
+        return "/mypage/order-detail";
+    }
+
+    String getLoggedInCustId(HttpServletRequest httpServletRequest) {
+        HttpSession httpSession = httpServletRequest.getSession(false);
+        MemberAndLoginDto memberAndLoginDto = (MemberAndLoginDto) httpSession.getAttribute(SessionConst.LOGIN_MEMBER);
+        return memberAndLoginDto.getCustId();
+    }
 }

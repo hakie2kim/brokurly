@@ -33,11 +33,11 @@
             cursor: pointer;
         }
 
-
         [type="checkbox"]:checked {
             background: #11967f url(/resources/image/img-check.png) no-repeat center center;
             border: 0;
         }
+
 
         .css-1uk9d3w {
             max-width: 840px;
@@ -60,7 +60,6 @@
             border: 0;
         }
     </style>
-    <%--    <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>--%>
 </head>
 <body>
 
@@ -460,6 +459,7 @@
                             </div>
                         </li>
                         <li class="css-sorted-menu">
+
                             <%-- 클릭할때 클래스 이름 css-126imjl--%>
                             <a class="css-19ce13b eudxpx30">신상품순</a>
                         </li>

@@ -1,19 +1,30 @@
 package com.brokurly.controller.products;
 
 
-import com.brokurly.dto.goods.GoodsAnnouncementDto;
-import com.brokurly.dto.goods.GoodsByBsnsNoDto;
-import com.brokurly.dto.goods.GoodsDto;
+import com.brokurly.dto.categories.CategoryDto;
+import com.brokurly.dto.goods.*;
 import com.brokurly.dto.search.SearchKeywordDto;
+import com.brokurly.dto.seller.SellerAndLoginDto;
+import com.brokurly.service.categories.CategoryService;
 import com.brokurly.service.products.ProductsCreateService;
+import com.brokurly.service.seller.SellerService;
+import com.brokurly.utils.SessionConst;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,23 +33,23 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/seller")
 public class ProductsCreateController {
 
-    private ProductsCreateService productsCreateService;
+    private final ProductsCreateService productsCreateService;
+    private final CategoryService categoryService;
+    private final SellerService sellerService;
 
-    @Autowired
-    public ProductsCreateController(ProductsCreateService productsCreateService) {
-        this.productsCreateService = productsCreateService;
-    }
 
     @PostMapping("/productsCreate/write")
-    public String writeproducts( GoodsDto goodsDto, Model m
-                                ,GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
+    public String writeProducts(@Valid GoodsDto goodsDto, BindingResult bindingResult,
+                                Model m, GoodsAnnouncementDto goodsAnnouncementDto, SearchKeywordDto searchKeywordDto
     ) {
-//        if (bindingResult.hasErrors()){
-//            return "validation-result";
-//        }
+        if (bindingResult.hasErrors()){
+            log.info("상품 등록 실패");
+            return "productsCreate";
+        }
         String a = goodsDto.getName();
         m.addAttribute("mode", "new");
         log.info("a={}", a);
@@ -56,28 +67,45 @@ public class ProductsCreateController {
 //        productsCreateService.writeGoodsImage(goodsImageDto);
 
         //판매자 상품조회페이지로.
-        return "seller/productsOriginList";
+        return "redirect:/seller/productsOriginList";
     }
 
     @PostMapping("/productsCreate/modify")
-    public String modify(GoodsDto goodsDto,String itemId, Model m){
-        log.info("goodsDto={}", goodsDto);
+    public String modify(GoodsUpdateDto goodsUpdateDto, String itemId, Model m){
+        log.info("goodsDto={}", goodsUpdateDto);
+        log.info("itemId={}", itemId);
 
-        m.addAttribute("mode", "new");
-        productsCreateService.updateGoods(itemId,goodsDto);
-        return "redirect:seller/productsCreate";
+        productsCreateService.updateGoods(itemId,goodsUpdateDto);
+        return "redirect:/seller/productsOriginList";
     }
 
 
     @GetMapping("/productsOriginList")
-    public String selectByBsnsId(Model m) {
-        String bsnsNo = "4659877658";  //판매자 로그인 기능 구현 후 세션에서 가져오기
-//    log.info("goodsByBsnsNoDto={}",goodsByBsnsNoDto);
-        List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
-        m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
-        m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
+    public String selectByBsnsId(Model m, HttpServletResponse res, HttpServletRequest req) {
+
+        HttpSession session = req.getSession();
+        SellerAndLoginDto nameDto = (SellerAndLoginDto) session.getAttribute(SessionConst.LOGIN_SELLER);
+        if(nameDto!=null){
+
+            //1. 세션에서 id 불러오기
+            log.info("nameDto={}",nameDto);
+            String nameDtoId = nameDto.getId();
+
+            //2. id로 bsnsNo찾기
+            String bsnsNo =sellerService.selectBsnsNo(nameDtoId).getBsnsNo();
+            log.info("bnsnNo={}",bsnsNo);
+
+
+
+            List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
+            m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
+            m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
 //        log.info("m={}", m);
-        return "seller/productsOriginList";
+            return "seller/productsOriginList";
+
+        } else {
+            return "/seller/loginForm";
+        }
     }
 
 
@@ -86,6 +114,9 @@ public class ProductsCreateController {
         GoodsDto goodsDto = productsCreateService.searchGoods(itemId);
         GoodsAnnouncementDto goodsAnnouncementDto = productsCreateService.searchAnnouncement(itemId);
         List<String> searchKeyword = productsCreateService.searchKeyword(itemId);
+
+        List<CategoryDto> selectPrimary = categoryService.readPrimary();
+        m.addAttribute("selectMain", selectPrimary);
 
         log.info("GoodsAnnouncementDto={}", goodsAnnouncementDto);
         log.info("readItemId={}", itemId);
@@ -97,7 +128,7 @@ public class ProductsCreateController {
 //            log.info("anno={}", anno[i]);
 //        }
 
-        m.addAttribute("mode","readonly");
+//        m.addAttribute("mode","readonly");
         m.addAttribute("goodsDto", goodsDto);
         m.addAttribute("goodsAnnouncement", anno);
         m.addAttribute("keyword", searchKeyword);
@@ -121,116 +152,117 @@ public class ProductsCreateController {
     }
 
 
-//    @PostMapping("/img")
-//    public void saveFile(@RequestParam("file") MultipartFile file, GoodsImageDto goodsImageDto) throws IOException {
-//        log.info("request={}", file);
-//        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
-////        String uploadDir = System.getProperty("user.dir") + "/src/main/webapp/resources/image/goodsImg/"; //파일 저장 경로
-////        String uploadDir =  "resources/image/goodsImg/"; //파일 저장 경로
-//
-//        // "goodsImage" 디렉토리에 파일 저장
-////        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
-////        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
-////        String uploadDir = resource.getFile().getAbsolutePath();
-//
-//        if (!file.isEmpty()) {
-//
-////            // 파일 이름
-////            String filename = file.getOriginalFilename();
-////            String filename2 = file.toString();
-////
-////            String fullpath = uploadDir + filename;
-////
-////            log.info("file.getOriginalFilename={}",filename);
-////            log.info("file.getResource={}",filename2);
-////
-//////          uuid 적용 파일 이름
-////            String uuid = UUID.randomUUID().toString();
-////            filename = uuid+"_"+filename;  //파일 이름 중복 피하기 위해
-////            log.info("uuid={}",filename);
-////////         파일 위치, 파일 이름을 합친 File객체
-////            File saveFile = new File(fullpath, filename);
-////
-////            //1. 파일 저장하기
-////            file.transferTo(saveFile);
-////
-////            //2. url 서비스로 보내기
-////            log.info("GoodsImageDto={}",goodsImageDto.toString());
-////            productsCreateService.writeGoodsImage(goodsImageDto);
-//
+    @PostMapping("/img")
+    public void saveFile(@RequestParam("file") MultipartFile file, GoodsImageDto goodsImageDto) throws IOException {
+        log.info("request={}", file);
+        String uploadDir = "/Users/sookyung/Desktop/kurlyimg/"; //파일 저장 경로
+//        String uploadDir = System.getProperty("user.dir") + "/src/main/webapp/resources/image/goodsImg/"; //파일 저장 경로
+//        String uploadDir =  "resources/image/goodsImg/"; //파일 저장 경로
+
+        // "goodsImage" 디렉토리에 파일 저장
+//        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
+//        Resource resource = resourceLoader.getResource("classpath:/static/goodsImage/");
+//        String uploadDir = resource.getFile().getAbsolutePath();
+
+        if (!file.isEmpty()) {
+
 //            // 파일 이름
-//            String originalFilename = file.getOriginalFilename();
+//            String filename = file.getOriginalFilename();
+//            String filename2 = file.toString();
 //
-//            // UUID 적용 파일 이름
+//            String fullpath = uploadDir + filename;
+//
+//            log.info("file.getOriginalFilename={}",filename);
+//            log.info("file.getResource={}",filename2);
+//
+////          uuid 적용 파일 이름
 //            String uuid = UUID.randomUUID().toString();
-//            String filename = uuid + "_" + originalFilename; // 파일 이름 중복 피하기 위해
+//            filename = uuid+"_"+filename;  //파일 이름 중복 피하기 위해
+//            log.info("uuid={}",filename);
+//////         파일 위치, 파일 이름을 합친 File객체
+//            File saveFile = new File(fullpath, filename);
 //
-//            // 파일 위치, 파일 이름을 합친 File 객체
-//            File saveFile = new File(uploadDir + filename);
-//
-//            // 1. 파일 저장하기
+//            //1. 파일 저장하기
 //            file.transferTo(saveFile);
 //
-//            // 2. url 서비스로 보내기
-//            String fileUrl = "/files/" + filename; // 예시: "/files/filename"
-//            log.info("File URL: {}", fileUrl);
-//
-//            // 여기서 fileUrl을 활용하여 필요한 작업을 수행하면 됩니다.
-//            // 예를 들면, goodsImageDto에 파일 URL을 저장하거나 다른 서비스로 전송하는 등의 작업이 가능합니다.
-//
-//            log.info("GoodsImageDto={}", goodsImageDto.toString());
+//            //2. url 서비스로 보내기
+//            log.info("GoodsImageDto={}",goodsImageDto.toString());
 //            productsCreateService.writeGoodsImage(goodsImageDto);
-//
-//        }
-//
-//    }
 
-    @PostMapping("/img")
-    @ResponseBody
-    public HttpStatus upload(@RequestParam("file") MultipartFile multipartFile) {
-        log.info("file = {}", multipartFile);
-        try {
-            // 현재 프로젝트의 절대 경로를 가져옵니다
-            String projectPath = System.getProperty("user.dir");
-//                    + File.separator + "IdeaProjects" +
-//                    File.separator + "brokurly";
+            // 파일 이름
+            String originalFilename = file.getOriginalFilename();
 
-//            FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
+            // UUID 적용 파일 이름
+            String uuid = UUID.randomUUID().toString();
+            String filename = uuid + "_" + originalFilename; // 파일 이름 중복 피하기 위해
 
-            log.info("dir = {}", projectPath);
+            // 파일 위치, 파일 이름을 합친 File 객체
+            File saveFile = new File(uploadDir + filename);
 
-            // 이미지를 저장할 폴더의 경로를 지정합니다
-            String uploadDir = projectPath +
-                    File.separator + "src" +
-                    File.separator + "main" +
-                    File.separator + "webapp" +
-                    File.separator + "resources" +
-                    File.separator + "image" +
-                    File.separator + "goodsImage";
+            // 1. 파일 저장하기
+            file.transferTo(saveFile);
 
-            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
+            // 2. url 서비스로 보내기
+            String fileUrl = "/files/" + filename; // 예시: "/files/filename"
+            log.info("File URL: {}", fileUrl);
 
-            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
-            File dir = new File(uploadDir);
-            if (!dir.exists()) dir.mkdirs();
+            // 여기서 fileUrl을 활용하여 필요한 작업을 수행하면 됩니다.
+            // 예를 들면, goodsImageDto에 파일 URL을 저장하거나 다른 서비스로 전송하는 등의 작업이 가능합니다.
 
-            // 파일 이름을 정의합니다
-            String originalFilename = multipartFile.getOriginalFilename();
-            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
+            log.info("GoodsImageDto={}", goodsImageDto.toString());
+            productsCreateService.writeGoodsImage(goodsImageDto);
 
-            Path savePath = Paths.get(filePath);
-
-            // 파일을 저장합니다
-            multipartFile.transferTo(savePath);
-
-            log.info("filename={}",filePath);
-
-            // 파일의 저장 경로를 반환합니다
-            return HttpStatus.OK;
-        } catch (IOException e) {
-            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
-            return HttpStatus.SERVICE_UNAVAILABLE;
         }
+
     }
+
+//
+//    @PostMapping("/img")
+//    @ResponseBody
+//    public HttpStatus upload(@RequestParam("file") MultipartFile multipartFile) {
+//        log.info("file = {}", multipartFile);
+//        try {
+//            // 현재 프로젝트의 절대 경로를 가져옵니다
+//            String projectPath = System.getProperty("user.dir");
+////                    + File.separator + "IdeaProjects" +
+////                    File.separator + "brokurly";
+//
+////            FileCopyUtils.copy(mfile.getInputStream(), new FileOutputStream(Paths.get(saveFileName).toFile()));
+//
+//            log.info("dir = {}", projectPath);
+//
+//            // 이미지를 저장할 폴더의 경로를 지정합니다
+//            String uploadDir = projectPath +
+//                    File.separator + "src" +
+//                    File.separator + "main" +
+//                    File.separator + "webapp" +
+//                    File.separator + "resources" +
+//                    File.separator + "image" +
+//                    File.separator + "goodsImage";
+//
+//            log.info("projectPath = {}, uploadDir = {}", projectPath, uploadDir);
+//
+//            // 만약 해당 경로에 폴더가 없다면 폴더를 생성합니다
+//            File dir = new File(uploadDir);
+//            if (!dir.exists()) dir.mkdirs();
+//
+//            // 파일 이름을 정의합니다
+//            String originalFilename = multipartFile.getOriginalFilename();
+//            String filePath = uploadDir + File.separator + UUID.randomUUID()  + "_" + originalFilename;
+//
+//            Path savePath = Paths.get(filePath);
+//
+//            // 파일을 저장합니다
+//            multipartFile.transferTo(savePath);
+//
+//            log.info("filename={}",filePath);
+//
+//            // 파일의 저장 경로를 반환합니다
+//            return HttpStatus.OK;
+//        } catch (IOException e) {
+//            // 파일 저장 중 에러가 발생했을 경우 에러 메시지를 반환합니다
+//            return HttpStatus.SERVICE_UNAVAILABLE;
+//        }
+//    }
 
 }

@@ -24,7 +24,13 @@ public class CustomerCartService {
         CustomerCart checkCart = customerCartDao.checkCart(customerCart);
 
         if (checkCart != null) {
-            return 2;   //이걸 이제 개수를 추가하는걸로 변경해야됨
+//            int updatedItemCnt = customerCart.getItemCnt() + customerCartDto.getItemCnt();
+//            customerCartDto.setItemCnt(updatedItemCnt);
+            return customerCartDao.duplicationAdd(customerCart);
+
+//            return 2;   //이걸 이제 개수를 추가하는걸로 변경해야됨
+//            int DBItemCnt = customerCartDto.getItemCnt();
+//            int totakItemCnt = makeFullDto.getItemCnt()+DBItemCnt;
         }
         try {   //장바구니 등록 & 에러 시 0 반환
             return customerCartDao.insert(customerCart);
@@ -65,6 +71,19 @@ public class CustomerCartService {
             log.info("result=",e);
             throw new RuntimeException(e);
         }
+    }
+
+    @Transactional
+    public List<CustomerCartDto> updateAll(String custId) {     //장바구니 상품 수량 변경
+        List<CustomerCart> cartList = customerCartDao.selectByCustId(custId);
+        List<CustomerCartDto> customerCartDto = new ArrayList<>();
+
+        for (CustomerCart customerCart : cartList) {
+            customerCartDao.updateAll(custId);
+            customerCartDto.add(customerCart.makeFullDto());
+        }
+
+        return customerCartDto;
     }
 
     @Transactional
