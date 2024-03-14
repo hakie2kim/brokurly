@@ -43,6 +43,8 @@ public class MypageController {
     @GetMapping("/point/usage")
     String pointUsageLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = getLoggedInCustId(httpServletRequest);
+        if (custId == null)
+            return "login-check";
 
         List<PointLogUsageDto> pointLogUsageList = pointLogService.findPointLogUsageByCustomerAndPeriod(custId, period);
         int pointLogUsageCount = pointLogService.getPointLogUsageCountByCustomerAndPeriod(custId, period);
@@ -67,6 +69,9 @@ public class MypageController {
     String pointExpLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = getLoggedInCustId(httpServletRequest);
 
+        if (custId == null)
+            return "login-check";
+
         List<PointLogExpDto> pointLogExpList = pointLogService.findPointLogExpByCustomerAndPeriod(custId, period);
         int pointLogExpCount = pointLogService.getPointLogExpCountByCustomerAndPeriod(custId, period);
         int totalAvailPoints = pointService.getTotalAvailPoints(custId);
@@ -89,6 +94,9 @@ public class MypageController {
     @GetMapping("/point/earning")
     String pointEarningLog(@RequestParam(defaultValue = "3") Integer period, Model model, HttpServletRequest httpServletRequest) {
         String custId = getLoggedInCustId(httpServletRequest);
+
+        if (custId == null)
+            return "login-check";
 
         List<PointAndPointLogEarningDto> pointLogEarningList = pointLogService.findPointLogEarningByCustomerAndPeriod(custId, period);
 
@@ -224,7 +232,7 @@ public class MypageController {
     }
 
     @PostMapping("/address/shipping-address/result")
-    String shippingAddressResult(String addr, HttpServletRequest httpServletRequest, Model model) {
+    String shippingAddressResult(String addr, Model model) {
         log.info("@PostMapping(\"/address/shipping-address/result\") shippingAddressResult addr: {}", addr);
         model.addAttribute("addr", addr);
 
@@ -234,6 +242,9 @@ public class MypageController {
     @GetMapping("/address/shipping-address/list")
     String shippingAddressList(HttpServletRequest httpServletRequest, Model model) {
         String custId = getLoggedInCustId(httpServletRequest);
+        if (custId == null)
+            return "login-check";
+
         List<ShippingLocationDto> shippingLocationList = shippingLocationService.getShippingLocationListByCustomer(custId);
         model.addAttribute("shippingLocationList", shippingLocationList);
         return "/cart/delivery-address";
@@ -242,6 +253,8 @@ public class MypageController {
     @GetMapping("/pick/list")
     String pickList(HttpServletRequest httpServletRequest, Model model) {
         String custId = getLoggedInCustId(httpServletRequest);
+        if (custId == null)
+            return "login-check";
 
         List<WishListItemDto> wishListItemList = wishListItemService.searchWishList(custId);
         int wishListItemCounter = wishListItemService.getWishListCounter(custId);
@@ -262,6 +275,9 @@ public class MypageController {
     @GetMapping("/order/list")
     String orderList(HttpServletRequest httpServletRequest, Model model) {
         String custId = getLoggedInCustId(httpServletRequest);
+        if (custId == null)
+            return "login-check";
+
         List<OrderLogListResponseDto> orderLogList = orderService.findOrdersByCustId(custId);
         model.addAttribute("orderLogList", orderLogList);
         model.addAttribute("orderLogCnt", orderLogList.size());
@@ -272,12 +288,17 @@ public class MypageController {
     String orderDetail(@PathVariable String orderId, Model model) {
         OrderLogResponseDto orderLog = orderLogService.showOrderLogDetails(orderId);
         model.addAttribute("orderLog", orderLog);
+        log.info("{}", orderLog);
         return "/mypage/order-detail";
     }
 
     String getLoggedInCustId(HttpServletRequest httpServletRequest) {
         HttpSession httpSession = httpServletRequest.getSession(false);
         MemberAndLoginDto memberAndLoginDto = (MemberAndLoginDto) httpSession.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        if (memberAndLoginDto == null)
+            return null;
+
         return memberAndLoginDto.getCustId();
     }
 }
