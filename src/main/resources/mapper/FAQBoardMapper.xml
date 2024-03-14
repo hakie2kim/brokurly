@@ -12,4 +12,23 @@
              )
         ORDERS LIMIT #{limit} OFFSET #{start}
     </select>
+
+    <select id="selectMax" resultType="FAQBoard">
+        SELECT *
+        FROM FAQ_BOARD
+        ORDER BY bno DESC
+        LIMIT 1
+    </select>
+    <select id="selectSortedList" resultType="FAQBoard">
+        SELECT *
+        FROM FAQ_BOARD
+        WHERE cate_code = #{catecode}
+        ORDER BY bno DESC
+
+    </select>
+    <select id="selectAllFAQList" resultType="FAQBoard">
+        SELECT *
+        FROM FAQ_BOARD
+        ORDER BY bno DESC
+    </select>
 </mapper>
