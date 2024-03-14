@@ -105,7 +105,7 @@ a:hover {
     text-align: center;
 }
 .seller-status-list {
-    display: block;
+    /*display: block;*/
     list-style-type: disc;
     margin-block-start: 1em;
     margin-block-end: 1em;

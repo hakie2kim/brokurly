@@ -21,7 +21,7 @@
     />
     <title>판매자 로그인</title>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" href="<c:url value='/resources/css/member/loginForm.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/css/seller/sellerLoginForm.css'/>"/>
 </head>
 <style>
     section {
@@ -29,6 +29,9 @@
         height: 100vh;
     }
 
+    li{
+        list-style: none;
+    }
     /* modal css start */
     .modal {
         position: absolute;
@@ -96,6 +99,8 @@
         background: transparent;
         cursor: pointer;
     }
+
+
 
     /* modal css end */
 

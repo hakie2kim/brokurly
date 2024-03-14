@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sookyung
@@ -6,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false"%>
+<%--<c:set var="loginSession" value="${pageContext.request.getSession(false)==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+=''}"/>--%>
+
+
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -25,6 +30,7 @@
             padding: 0;
             margin: 0;
         }
+
 
         .whole {
             position: fixed;
@@ -109,7 +115,6 @@
             color: white;
         }
 
-
     </style>
 
 
@@ -122,17 +127,19 @@
     <!-- 상단네비 -->
     <div id="top_navi" class="top_navi">
         <ul class="header_ul">
-            <li class="header_li"><a class="header_a"><img src="/resources/image/brokurlyAdmin.png" class="logo"
+            <li class="header_li"><a class="header_a" href="/categories/best-page"><img src="/resources/image/brokurlyAdmin.png" class="logo"
                                                            style="width: 50px; height: 20px;"></a></li>
-            <li class="header_li"><a class="header_a" href="">브로컬리</a></li>
-            <li class="header_li"><a class="header_a" href="">판매자센터</a></li>
-            <li class="header_li"><a class="header_a" href="">LOGOUT</a></li>
+            <li class="header_li"><a class="header_a" href="/categories/best-page">브로컬리</a></li>
+            <li class="header_li"><a class="header_a" href="">관리자센터</a></li>
+
         </ul>
     </div>
 
     <!-- 왼쪽 네비 -->
 
     <div class="submenu">
+
+    <br><br>
 
         <ul role="menu" class="" style="margin: 15px">상품관리<!---->
 
@@ -149,8 +156,10 @@
                 <a href="#/notice/search" class="submenu_a">공지사항 관리 </a><!----><!---->
             </li><!----><!---->
         </ul>
-
     </div>
+
+
+
 </div>
 
 </body>

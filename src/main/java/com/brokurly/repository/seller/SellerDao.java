@@ -10,4 +10,5 @@ public interface SellerDao {
 
     Seller selectSellerByLogin(Seller seller);
 
+    Seller selectBsnsNoById(String id);
 }

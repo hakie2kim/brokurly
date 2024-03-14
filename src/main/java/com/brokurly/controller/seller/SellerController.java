@@ -99,15 +99,19 @@ public class SellerController {
         session.setAttribute(SessionConst.LOGIN_SELLER, resultLoginDto);
         SellerAndLoginDto nameDto = (SellerAndLoginDto) session.getAttribute(SessionConst.LOGIN_SELLER);
 
+
         String loginName = nameDto.getName();
-
-
+        String loginId = nameDto.getId();
+        log.info("loginId={}",loginId);
         session.setAttribute("loginName",loginName);
+
+
+
+
 //        Ra.addFlashAttribute("loginName",loginName);
 
-//        return "redirect:/categories/best-page" *** db 연결 후 수정;
         // 4. reqURL 여부에 따른 이동
-        reqURI = reqURI == null || reqURI.equals("") ? "/categories/best-page" : reqURI;
+        reqURI = reqURI == null || reqURI.equals("") ? "/seller/productsOriginList" : reqURI;
 
         return "redirect:"+reqURI;
     }
