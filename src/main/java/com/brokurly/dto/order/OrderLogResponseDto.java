@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderLogResponseDto {
+    private String address;
     private OrderResponseDto order;
     private ReceiverDetailsResponseDto receiverDetails;
     private PaymentDetailsResponseDto paymentDetails;

@@ -55,7 +55,7 @@ window.onload = () => {
 
     // 배송지 변경 리다이렉트
     $("#small-modal-ok").click(() => {
-        window.location.href = '/cart/' + $(".cust-id").text();
+        window.location.href = '/cart/cartList';
     });
 
     // 결제 정보 헤더에 붙이기

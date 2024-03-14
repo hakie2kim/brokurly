@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
@@ -84,19 +85,19 @@ public class OrderService {
             location = shippingLocationService.getCurrShippingLocationByCustomer(custId);
         } catch (RuntimeException e) {
             log.error("shippingLocation -> ", e);
-            location = ShippingLocationCurrDto.builder()
-                    .shipLocaId("123")
-                    .addr("서울 강남구 강남대로 364")
-                    .specAddr("미왕빌딩 10층")
-                    .currAddrFl("Y")
-                    .build();
-//            throw new NoSuchElementException();
+//            location = ShippingLocationCurrDto.builder()
+//                    .shipLocaId("123")
+//                    .addr("서울 강남구 강남대로 364")
+//                    .specAddr("미왕빌딩 10층")
+//                    .currAddrFl("Y")
+//                    .build();
+            throw new NoSuchElementException();
         }
 
         // 주문 내역 저장
         Order order = new Order();
 
-        order.changeOrder(checkoutDto, orderId, custId, location.getShipLocaId());
+        order.changeOrder(checkoutDto, orderId, custId, location);
         orderDao.insert(order);
 
         // 주문 상품 목록 저장

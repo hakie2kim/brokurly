@@ -38,7 +38,10 @@
         <div id="order-goods-list" style="display: none">
             <c:forEach items="${customerCart}" var="item">
                 <div class="item-list">
-                    <div class="item-img">상품 사진</div>
+                    <div class="item-img">
+                        상품 사진
+<%--                        <img src="<c:url value='/resources/image/goodsImage/'/>">--%>
+                    </div>
                     <div class="item-id" style="display: none">${item.itemId}</div>
                     <div class="item-name"><span>${item.name}</span></div>
                     <div class="item-cnt">${item.itemCnt}개</div>
