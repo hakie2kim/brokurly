@@ -22,5 +22,6 @@ public class OrderResponseDto {
     private int orderAmt;
     private int shipFee;
     private String shipLocaId;
+    private String addr;
     private String shipNo;
 }

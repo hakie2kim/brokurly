@@ -30,7 +30,7 @@
     <div class="outer">
         <div class="inner">
             <div class="img">
-                <img src="" width="80" height="80" />
+                <img src="<c:url value='/resources/image/cancel.png'/>" width="80" height="80" />
             </div>
             <p class="greeting">주문 취소가 완료되었습니다.</p>
             <div class="info">

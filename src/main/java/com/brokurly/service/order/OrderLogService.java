@@ -5,6 +5,7 @@ import com.brokurly.dto.order.OrderLogResponseDto;
 import com.brokurly.dto.order.OrderResponseDto;
 import com.brokurly.dto.order.ReceiverDetailsResponseDto;
 import com.brokurly.dto.payment.PaymentDetailsResponseDto;
+import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.payment.PaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderLogService {
     private final OrderService orderService;
-    private final ReceiverDetailsService receiverDetailsService;
     private final PaymentService paymentService;
+    private final ReceiverDetailsService receiverDetailsService;
 
     public OrderLogResponseDto showOrderLogDetails(String orderId) {
         OrderLogResponseDto orderLogResponseDto = new OrderLogResponseDto();
