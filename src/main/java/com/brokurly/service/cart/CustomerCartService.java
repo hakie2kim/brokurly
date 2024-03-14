@@ -1,8 +1,11 @@
 package com.brokurly.service.cart;
 
 import com.brokurly.dto.cart.CustomerCartDto;
+import com.brokurly.dto.goods.GoodsImageDto;
 import com.brokurly.entity.cart.CustomerCart;
+import com.brokurly.entity.goods.GoodsImage;
 import com.brokurly.repository.cart.CustomerCartDao;
+import com.brokurly.repository.goods.GoodsImageDao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.List;
 public class CustomerCartService {
 
     private final CustomerCartDao customerCartDao;
+    private final GoodsImageDao goodsImageDao;
+
     @Transactional
     public int addCart(CustomerCartDto customerCartDto) {   //장바구니 상품 추가
 
@@ -72,6 +77,21 @@ public class CustomerCartService {
             throw new RuntimeException(e);
         }
     }
+    public GoodsImageDto searchGoodsImage(String itemId){     //상품 대표 이미지 불러오기
+        GoodsImage goodsImage = goodsImageDao.selectByItemId(itemId);
+        return goodsImage.makeFullDto();
+    }
+
+
+//    public List<GoodsImageDto> searchListByItemId(String itemId){     //상품 대표 이미지 불러오기
+//        List<GoodsImage> goodsImageList = goodsImageDao.selectListByItemId(itemId);
+//        List<GoodsImageDto> goodsImageDto = new ArrayList<>();
+//
+//        for (GoodsImage goodsImage : goodsImageList){
+//            goodsImageDto.add(goodsImage.makeFullDto());
+//        }
+//        return goodsImageDto;
+//    }
 
     @Transactional
     public List<CustomerCartDto> updateAll(String custId) {     //장바구니 상품 수량 변경
