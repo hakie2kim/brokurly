@@ -190,11 +190,9 @@
                 >고객센터 <span class="css-1lrerrk eo4j3y50"></span
                 ></a>
                 <div class="menu cs-bar-wrap">
-                    <div class="cscenter-bar">공지사항</div>
-                    <div class="cscenter-bar">자주하는 질문</div>
-                    <div class="cscenter-bar">1:1 문의</div>
-                    <div class="cscenter-bar">대량주문 문의</div>
-
+                    <a href="/board/notice" class="cscenter-bar">공지사항</a>
+                    <a href="/board/faqboard" class="cscenter-bar">자주하는 질문</a>
+                    <a href="/board/inquiry" class="cscenter-bar">1:1 문의</a>
                 </div>
             </div>
         </div>

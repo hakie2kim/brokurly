@@ -36,9 +36,11 @@
             상품을 주문합니다.
         </div>
         <div id="order-goods-list" style="display: none">
-            <c:forEach items="${customerCart}" var="item">
+            <c:forEach items="${customerCart}" var="item" varStatus="status">
                 <div class="item-list">
-                    <div class="item-img">상품 사진</div>
+                    <div class="item-img">
+                        <img src="<c:url value='/resources/image/goodsImage/${checkout.imgList[status.index]}'/>">
+                    </div>
                     <div class="item-id" style="display: none">${item.itemId}</div>
                     <div class="item-name"><span>${item.name}</span></div>
                     <div class="item-cnt">${item.itemCnt}개</div>

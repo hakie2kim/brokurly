@@ -6,6 +6,7 @@ import com.brokurly.dto.payment.PaymentAmountResponseDto;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @ToString
@@ -24,7 +25,7 @@ public class PaymentAmount {
     private int payAmt;
 
     private static final int SHIPPING_FEE = 3000;
-    private static final int FREE_SHIPPING_AMOUT = 40000;
+    private static final int FREE_SHIPPING_AMOUNT = 40000;
 
     public PaymentAmountCheckoutDto toCheckoutDto(List<CustomerCartDto> itemList) {
         for (CustomerCartDto item : itemList) {
@@ -36,7 +37,7 @@ public class PaymentAmount {
         // 주문 금액 = 상품 금액 - 상품 할인 금액
         orderAmt += itemAmt - itemDcAmt;
         // 배송비
-        shipFee = itemAmt >= FREE_SHIPPING_AMOUT ? 0 : SHIPPING_FEE;
+        shipFee = itemAmt >= FREE_SHIPPING_AMOUNT ? 0 : SHIPPING_FEE;
         payAmt += orderAmt + shipFee;
 
         return PaymentAmountCheckoutDto.builder()
