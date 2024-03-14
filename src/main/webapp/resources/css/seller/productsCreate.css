@@ -220,6 +220,7 @@ ui-view {
     margin-bottom: 10px;
 }
 .input-group {
+
     position: relative;
     display: table;
     border-collapse: separate;

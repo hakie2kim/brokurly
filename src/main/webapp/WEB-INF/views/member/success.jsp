@@ -12,27 +12,9 @@
     />
     <title>회원가입 완료</title>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<%--    <script>--%>
-<%--        window.onload = () => {--%>
-<%--            $(".show-order").on("click", () => {--%>
-<%--                window.location.href = "/mypage/order";--%>
-<%--            });--%>
-
-<%--            $(".go-shopping").on("click", () => {--%>
-<%--                window.location.href = "/categories/best-page"--%>
-<%--            });--%>
-<%--        }--%>
-<%--    </script>--%>
 </head>
 <style>
-    /*body*/
-    /* {*/
-    /*    margin: 0;*/
-    /*    padding: 0;*/
-    /*    background-color: #eeeeee;*/
-    /*    font-family: "Noto Sans";*/
-    /*    font-weight: 500;*/
-    /*}*/
+
     .background {
         /*width: 100%;*/
         height: 60%;
@@ -101,5 +83,13 @@
 </div>
 </section>
 </body>
+<script>
+    window.onload = () => {
+        $(".loginBtn").on("click", () => {
+            window.location.href = "/member/login";
+        });
+
+    }
+</script>
 </html>
 

@@ -282,6 +282,7 @@ public class MypageController {
         model.addAttribute("orderLogCnt", orderLogList.size());
         log.info("orderLogList = {}", orderLogList);
         log.info("orderLogCnt = {}", orderLogList.size());
+
         return "/mypage/order-list";
     }
 

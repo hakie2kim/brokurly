@@ -1427,11 +1427,11 @@ $(".minus_btn").on("click", function () {
 
 // 서버로 전송할 데이터
 const form = {
-    custId : '${custId}',
+    <%--custId : '${custId}',--%>
     itemId: '${goods.itemId}',
     // custId: 'hakie2kim',
     itemCnt: "",
-    itemCk: 'N'
+    // itemCk: 'N'
 }
 // 장바구니 추가 버튼
 $(".btn_cart").on("click", function (e) {

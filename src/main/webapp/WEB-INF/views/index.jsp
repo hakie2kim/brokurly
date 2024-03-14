@@ -40,8 +40,6 @@
     <a href="board/notice">윤호 - 공지사항</a>
 </div>
 <div>
-    <a href="seller/productsCreate">수경 - 상품 등록</a>
-    <br>
     <a href="seller/productsOriginList">수경 - 상품 조회/수정</a>
 </div>
 <div>
