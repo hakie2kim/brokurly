@@ -30,6 +30,7 @@ body {
 }
 .seller-sub-frame {
     position: relative;
+    left:-40px;
 }
 ng-include,
 ui-view {

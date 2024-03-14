@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: munnahye
@@ -53,20 +54,12 @@
             font-weight: 400;
         }
 
-        .current-page {
-            /* 원하는 스타일을 여기에 추가하세요 */
-            font-weight: bold; /* 예시: 텍스트를 굵게 표시 */
-            color: #11967f; /* 예시: 텍스트 색상을 빨간색으로 지정 */
-        }
-
-
 
         [type="checkbox"]:checked {
             background: #11967f url(/resources/image/img-check.png) no-repeat center center;
             border: 0;
         }
     </style>
-<%--    <script type="text/javascript" src="<c:url value='/resources/js/categories/categories.js'/>"></script>--%>
 </head>
 <body>
 
@@ -132,36 +125,37 @@
                         </button>
                         <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2">
-                                    <%--                                    <button class="css-cate-btn">--%>
-                                    <input type="checkbox" onclick="addQueryString('dawn')" value="dawn"/>
+                                <a class="ship-list css-cate-list-2 ship-filter-1">
+                                    <button class="css-cate-btn ">
+                                        <%--<input type="checkbox" onclick="addQueryString('dawn')" value="dawn"/>--%>
 
-                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-                                    <%--                                            <path class="myPath" d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
-                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-                                    <%--                                        </svg>--%>
-                                    <%--                                    </button>--%>
-                                    <span class="css-cate-txt">샛별배송</span><span class="css-cate-cnt">647</span>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path class="myPath"
+                                                  d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                                  stroke="#ddd" fill="none"></path>
+                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                                  stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">샛별배송</span><span class="css-cate-cnt"></span>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2">
-                                    <input type="checkbox" onclick="addQueryString('normal_parcel')"
-                                           value="normal_parcel"/>
-                                    <%--                                    <button class="css-cate-btn">--%>
-                                    <%--                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"--%>
-                                    <%--                                             xmlns="http://www.w3.org/2000/svg">--%>
-                                    <%--                                            <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"--%>
-                                    <%--                                                  stroke="#ddd" fill="none"></path>--%>
-                                    <%--                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"--%>
-                                    <%--                                                  stroke-linecap="round" stroke-linejoin="round"></path>--%>
-                                    <%--                                        </svg>--%>
-                                    <%--                                    </button>--%>
-                                    <span class="css-cate-txt">판매자배송</span><span
-                                        class="css-cate-cnt">5</span>
+                                <a class="ship-list css-cate-list-2 ship-filter-2">
+                                    <%--                                    <input type="checkbox" onclick="addQueryString('normal_parcel')"--%>
+                                    <%--                                           value="normal_parcel"/>--%>
+                                    <button class="css-cate-btn">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                                  stroke="#ddd" fill="none"></path>
+                                            <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                                  stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                    <span class="css-cate-txt">일반배송</span><span
+                                        class="css-cate-cnt"></span>
                                 </a>
                             </li>
                         </nav>
@@ -177,7 +171,7 @@
                         </button>
                         <nav class="side-cate-menu" style="max-height: 100vh; opacity: 1;">
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2 price-filter-1">
+                                <a class="price-list css-cate-list-2 price-filter-1">
                                     <button class="css-cate-btn price-btn1">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -185,12 +179,12 @@
                                                   fill="#fff" stroke="#ddd"></path>
                                         </svg>
                                     </button>
-                                    <span class="css-cate-txt price-criteria-1">원 미만</span><span
-                                        class="css-cate-cnt">111</span>
+                                    <span class="css-cate-txt price-criteria-1">원 미만</span>
+<%--                                    <span class="css-cate-cnt">111</span>--%>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2 price-filter-2">
+                                <a class="price-list css-cate-list-2 price-filter-2">
                                     <button class="css-cate-btn price-btn2">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -199,12 +193,11 @@
                                         </svg>
                                     </button>
                                     <span class="css-cate-txt price-criteria-2">2,990원 ~ 4,290원</span>
-                                    <span
-                                            class="css-cate-cnt">141</span>
+<%--                                    <span class="css-cate-cnt">141</span>&ndash;%&gt;--%>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2 price-filter-3 price-btn2">
+                                <a class="price-list css-cate-list-2 price-filter-3 price-btn2">
                                     <button class="css-cate-btn">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -212,12 +205,12 @@
                                                   fill="#fff" stroke="#ddd"></path>
                                         </svg>
                                     </button>
-                                    <span class="css-cate-txt price-criteria-3 price-btn3">4,290원 ~ 5,990원</span><span
-                                        class="css-cate-cnt">116</span>
+                                    <span class="css-cate-txt price-criteria-3 price-btn3">4,290원 ~ 5,990원</span>
+<%--                                    <span class="css-cate-cnt">116</span>--%>
                                 </a>
                             </li>
                             <li class="css-cate-list-1">
-                                <a class="css-cate-list-2 price-filter-4">
+                                <a class="price-list css-cate-list-2 price-filter-4">
                                     <button class="css-cate-btn">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -225,373 +218,207 @@
                                                   fill="#fff" stroke="#ddd"></path>
                                         </svg>
                                     </button>
-                                    <span class="css-cate-txt price-criteria-4">5,990원 이상</span><span
-                                        class="css-cate-cnt">142</span>
+                                    <span class="css-cate-txt price-criteria-4">5,990원 이상</span>
+<%--                                    <span class="css-cate-cnt">142</span>--%>
                                 </a>
                             </li>
                         </nav>
                     </div>
-                    <div class="side-category1">
-                        <button class="side-cate-btn">
-                            <div class="side-cate-txt">카테고리</div>
-                            <svg
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 18 18"
-                                    fill="none"
-                                    stroke="#999"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="css-innaj4"
-                                    style="transform: rotate(0deg)"
-                            >
-                                <path
-                                        d="M5 11L9 7L13 11"
-                                        stroke="#999"
-                                        stroke-width="1.2"
-                                ></path>
+
+                    <div class="css-146937 e1frj59j10">
+                        <button class="css-16ixplb e1frj59j9">
+                            <div class="css-1iwixyn e1frj59j8">브랜드</div>
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999"
+                                 xmlns="http://www.w3.org/2000/svg" class="css-innaj4 e1frj59j6"
+                                 style="transform: rotate(0deg);">
+                                <path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
                             </svg>
                         </button>
-                        <nav class="side-cate-menu"
-                             style="max-height: 100vh; opacity: 1">
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="http://localhost:8080/categories/${codeId}?page=1&sortedtype=4"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button>
-                                    <span class="css-cate-txt">간편식·밀키트·샐러드</span
-                                    ><span class="css-cate-cnt">75</span></a
-                                >
+                        <nav class="css-1kscq9s e1frj59j5" style="max-height: 100vh; opacity: 1;">
+                            <menu class="css-1gtroub e1frj59j4">
+                                <li class="css-14cvnbg e1frj59j3">
+                                    <button class="css-8fr2f6 e1frj59j2">가나다순</button>
+                                </li>
+                                <li class="css-14cvnbg e1frj59j3">
+                                    <button class="css-1vbs14e e1frj59j2">상품 많은순</button>
+                                </li>
+                            </menu>
+                            <menu class="css-3770rk e5tjvqm2">
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="47" class="css-15z0st1 e5tjvqm0">전체</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㄱ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㄴ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㄷ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅁ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅅ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅇ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅈ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅍ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="22" class="css-1e7ssny e5tjvqm0">ㅎ</button>
+                                </li>
+                                <li class="css-ffhm6p e5tjvqm1">
+                                    <button type="button" width="47" class="css-d9k3gf e5tjvqm0">A-Z</button>
+                                </li>
+                            </menu>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Aumbstj"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">간편 샐러드</span><span
+                                    class="css-ryw54y ee933651">2</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Af8ohqx"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">권영원 소담정찬</span><span
+                                    class="css-ryw54y ee933651">1</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Aorq3fj"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">그린자이언트</span><span
+                                    class="css-ryw54y ee933651">1</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Aot4ds7"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">김구원선생</span><span
+                                    class="css-ryw54y ee933651">2</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Atbg2p5"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">네떼</span><span
+                                    class="css-ryw54y ee933651">3</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Argpmac"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">담그루</span><span class="css-ryw54y ee933651">1</span></a>
                             </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A910"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">정육·가공육·계란</span
-                                    ><span class="css-cate-cnt">50</span></a
-                                >
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3A2kvma8"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">마주</span><span
+                                    class="css-ryw54y ee933651">1</span></a></li>
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Aswawgz"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">맛꾼푸드</span><span class="css-ryw54y ee933651">1</span></a>
                             </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A911"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">국·반찬·메인요리</span
-                                    ><span class="css-cate-cnt">50</span></a
-                                >
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3An4ekt9"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">산양산삼</span><span class="css-ryw54y ee933651">1</span></a>
                             </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A908"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">과일·견과·쌀</span
-                                    ><span class="css-cate-cnt">35</span></a
-                                >
+                            <li class="css-x67gaa e1isxf3i1"><a href="/categories/907?page=1&amp;filters=brand%3Auzzflk"
+                                                                class="css-s5xdrg e1isxf3i0">
+                                <button class="css-17kh8wb ee933650">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
+                                              stroke="#ddd" fill="none"></path>
+                                        <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5"
+                                              stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <span class="css-1buhy1h ee933652">생채움</span><span class="css-ryw54y ee933651">1</span></a>
                             </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A914"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">생수·음료·커피</span
-                                    ><span class="css-cate-cnt">19</span></a
-                                >
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A909"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">수산·해산·건어물</span
-                                    ><span class="css-cate-cnt">18</span></a
-                                >
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A915"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">베이커리</span
-                                    ><span class="css-cate-cnt">17</span></a
-                                >
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A597"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">2024 설 선물세트</span
-                                    ><span class="css-cate-cnt">16</span></a
-                                >
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A913"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">면·양념·오일</span
-                                    ><span class="css-cate-cnt">16</span></a
-                                >
-                            </li>
-                            <li class="css-cate-list-1">
-                                <a
-                                        href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=category%3A249"
-                                        class="css-cate-list-2"
-                                >
-                                    <button class="css-cate-btn">
-                                        <svg
-                                                width="18"
-                                                height="18"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                    d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
-                                                    stroke="#ddd"
-                                                    fill="none"
-                                            ></path>
-                                            <path
-                                                    d="M7 12.6667L10.3846 16L18 8.5"
-                                                    stroke="#ddd"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                            ></path>
-                                        </svg>
-                                    </button
-                                    >
-                                    <span class="css-cate-txt">간식·과자·떡</span
-                                    ><span class="css-cate-cnt">12</span></a
-                                >
-                            </li>
-                            <button class="css-more-btn">
-                                카테고리 더보기
-                                <svg
-                                        width="18"
-                                        height="18"
-                                        viewBox="0 0 18 18"
-                                        fill="none"
-                                        stroke="#999"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="css-jbgpyq e1frj59j0"
-                                >
-                                    <path
-                                            d="M5 11L9 7L13 11"
-                                            stroke="#999"
-                                            stroke-width="1.2"
-                                    ></path>
+                            <button class="css-ypdml9 e1frj59j1">브랜드 더보기
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#999"
+                                     xmlns="http://www.w3.org/2000/svg" class="css-jbgpyq e1frj59j0">
+                                    <path d="M5 11L9 7L13 11" stroke="#999" stroke-width="1.2"></path>
                                 </svg>
                             </button>
                         </nav>
                     </div>
+
+
+
                 </div>
             </div>
 
@@ -600,9 +427,8 @@
                     <div class="goodstotalCnt">총 ${totalCnt}건</div>
                     <ul class="sorted-menu-wrap">
                         <li class="css-sorted-menu">
-                            <a
-                                    href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=&amp;per_page=96&amp;sorted_type=4"
-                                    class="css-126imjl eudxpx30"
+                            <a href="/collection-groups/market-best?page=1&amp;collection=market-best&amp;filters=&amp;per_page=96&amp;sorted_type=4"
+                               class="css-126imjl eudxpx30"
                             >추천순</a
                             >
                             <div class="css-f49ql3 e1kpyq4d1">
@@ -651,9 +477,32 @@
                         </li>
                     </ul>
                 </div>
+
+                <%--                필터클릭시 나타나는--%>
+                <div class="css-8j0b2j ev5e5853 filter-box" style="display: none;">
+<%--                    <div class="css-s5xdrg ev5e5852"><span class="css-35ue1n ev5e5851">2,990원 미만</span><a--%>
+<%--                            href="/categories/907?page=1&amp;filters=delivery_type%3Adawn" class="css-1uoamx5 ev5e5850">--%>
+<%--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                            <path d="M5.55566 5.55566L14.4446 14.4446" stroke="#ccc"></path>--%>
+<%--                            <path d="M14.4443 5.55566L5.55545 14.4446" stroke="#ccc"></path>--%>
+<%--                        </svg>--%>
+<%--                    </a>--%>
+<%--                    </div>--%>
+<%--                    <div class="css-s5xdrg ev5e5852"><span class="css-35ue1n ev5e5851">샛별배송</span><a--%>
+<%--                            href="/categories/907?page=1&amp;filters=price%3A-2990" class="css-1uoamx5 ev5e5850">--%>
+<%--                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                            <path d="M5.55566 5.55566L14.4446 14.4446" stroke="#ccc"></path>--%>
+<%--                            <path d="M14.4443 5.55566L5.55545 14.4446" stroke="#ccc"></path>--%>
+<%--                        </svg>--%>
+<%--                    </a></div>--%>
+                </div>
+                <%--                필터클릭시 나타나는--%>
+
+
                 <div class="best-itemlist">
                     <%--상품 정보 시작--%>
                     <c:forEach var="goodsListDto" items="${goodsListDto}" varStatus="loop">
+
                         <a href="/goods/${goodsListDto.itemId}" class="css-9o2zup e1c07x4813">
                             <div class="css-0 e1c07x4811">
                                 <div class="e1c07x4812 css-tou8lf e3um3060">
@@ -700,7 +549,7 @@
                                 </div>
                             </div>
                             <div class="button-wrapper">
-                                <button type="button" class="css-13xu5fn e17x72af0">
+                                <button type="button" class="put-in-cart css-13xu5fn e17x72af0">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1.53516 2.70001H3.93316L5.76816 10.609H13.6482L15.2992 4.35901H4.86916M12.8582 14.933C13.0098 14.9375 13.1609 14.9115 13.3024 14.8566C13.4438 14.8017 13.5728 14.7189 13.6817 14.6132C13.7906 14.5075 13.8771 14.381 13.9363 14.2412C13.9954 14.1015 14.0258 13.9513 14.0258 13.7995C14.0258 13.6478 13.9954 13.4975 13.9363 13.3578C13.8771 13.218 13.7906 13.0915 13.6817 12.9858C13.5728 12.8801 13.4438 12.7974 13.3024 12.7424C13.1609 12.6875 13.0098 12.6615 12.8582 12.666C12.5634 12.6748 12.2836 12.798 12.0782 13.0096C11.8727 13.2213 11.7578 13.5046 11.7578 13.7995C11.7578 14.0944 11.8727 14.3778 12.0782 14.5894C12.2836 14.801 12.5634 14.9243 12.8582 14.933ZM6.49316 14.933C6.64484 14.9375 6.79589 14.9115 6.93735 14.8566C7.07881 14.8017 7.20781 14.7189 7.31669 14.6132C7.42558 14.5075 7.51214 14.381 7.57126 14.2412C7.63037 14.1015 7.66083 13.9513 7.66083 13.7995C7.66083 13.6478 7.63037 13.4975 7.57126 13.3578C7.51214 13.218 7.42558 13.0915 7.31669 12.9858C7.20781 12.8801 7.07881 12.7974 6.93735 12.7424C6.79589 12.6875 6.64484 12.6615 6.49316 12.666C6.19836 12.6748 5.91858 12.798 5.71315 13.0096C5.50773 13.2213 5.39283 13.5046 5.39283 13.7995C5.39283 14.0944 5.50773 14.3778 5.71315 14.5894C5.91858 14.801 6.19836 14.9243 6.49316 14.933Z"
@@ -712,22 +561,27 @@
                             <div class="css-1kpzrna e1c07x489">
                                 <span class="css-1qd61ut e1ms5t9c1">
                                     <span class="css-1vdqr5b e1ms5t9c0">${goodsListDto.shipType}</span></span>
-                                <span class="css-1dry2r1 e1c07x488">${goodsListDto.name}</span>
-                                <p class="css-1wejlc3 e1c07x486">${goodsListDto.exp}</p>
+                                <span class="css-1dry2r1 e1c07x488 goodslistdto-name">${goodsListDto.name}</span>
+                                <p class="css-1wejlc3 e1c07x486 goodslistdto-exp">${goodsListDto.exp}</p>
                                 <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
                                     <div>
-                                        <c:if test="${goodsListDto.dcRt} != 0">
-                                        <span class="dimmed-price css-18tpqqq ei5rudb1 price-rate">${goodsListDto.price}
+                                        <c:if test="${goodsListDto.dcRt ne '0'}">
+                                        <span class="dimmed-price css-18tpqqq ei5rudb1 price-rate goodslistdto-price">
+                                                <fmt:formatNumber value="${goodsListDto.price}"
+                                                                  pattern="#,###"/>
+<%--                                                ${goodsListDto.price}--%>
                                             <span class="won price-rate">원</span></span>
                                         </c:if>
                                     </div>
                                     <div class="discount">
-                                        <c:if test="${goodsListDto.dcRt} != 0">
+                                        <c:if test="${goodsListDto.dcRt ne '0'}">
                                         <span class="discount-rate css-19lkxd2 ei5rudb0 price-rate">
                                                 ${goodsListDto.dcRt}%
                                         </span>
                                         </c:if>
-                                        <span class="sales-price css-18tpqqq ei5rudb1">${goodsListDto.disPrice}
+                                        <span class="sales-price css-18tpqqq ei5rudb1 goodslistdto-disprice">
+                                                <fmt:formatNumber value="${goodsListDto.disPrice}"
+                                                                  pattern="#,###"/>
                                             <span class="won">원</span></span>
                                     </div>
                                 </div>
@@ -753,18 +607,70 @@
                     <%--상품 정보 끝--%>
                 </div>
 
-                <div class="small-modal">
-                    <div class="small-modal-border">
-                        <div class="small-modal-content">
-                            <p>장바구니로 이동하여</p>
-                            <p>다른 배송지로 변경하시겠습니까?</p>
-                        </div>
-                        <div class="small-modal-buttons">
-                            <button id="small-modal-cancel">취소</button>
-                            <button id="small-modal-ok">확인</button>
+
+                <%--모달창시작--%>
+                <div role="presentation" class="MuiModal-root MuiDialog-root css-98q5jm">
+                    <div aria-hidden="true" class="MuiBackdrop-root css-919eu4"
+                         style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"></div>
+                    <div tabindex="0" data-test="sentinelStart"></div>
+                    <div class="MuiDialog-container MuiDialog-scrollPaper css-ekeie0" role="presentation" tabindex="-1"
+                         style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;">
+                        <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-uhb5lp"
+                             role="dialog" aria-labelledby="customized-dialog-title">
+                            <div class="css-qfuix0 e1xnucib5">
+                                <div class="css-96wx9m e1xnucib4"><span
+                                        style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
+                                        alt="상품 이미지" sizes="100vw"
+                                        srcset="https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 640w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 750w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 828w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1080w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1200w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1920w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 2048w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 3840w"
+                                        src="https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg"
+                                        decoding="async" data-nimg="fill" class="css-0"
+                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
+                                </div>
+                                <div class="css-1p7augg e1xnucib3"><span
+                                        class="css-1n9elca e1xnucib2 modal-item-name">[KF365] 햇감자 1kg</span></div>
+                            </div>
+                            <div class="css-hjdyv5 e1xnucib1">
+                                <div class="css-kiebmq e1b27mtb8">
+                                    <div class="css-1066lcq e1b27mtb7"><span
+                                            class="css-rsi182 e1b27mtb6 modal-item-name">[KF365] 감자 1kg</span></div>
+                                    <div class="css-e7dd1m e1b27mtb5 modal-item-exp">적립제외상품</div>
+                                    <div class="css-2fwlel e1b27mtb4">
+                                        <div class="css-23v5d0 e1b27mtb3"><span
+                                                class="css-1kl4at5 e1b27mtb2 modal-item-disprice">6,120원</span><span
+                                                class="css-pblsth e1b27mtb1 modal-item-price">6,590원</span></div>
+                                        <div class="e1b27mtb0 css-2q9wxp e1cqr3m40">
+                                            <button type="button" aria-label="수량내리기"
+                                                    class="css-8azp8 e1hx75jb0 subtract-item-cnt"></button>
+                                            <div class="count css-6m57y0 e1cqr3m41 modal-item-cnt">1</div>
+                                            <button type="button" aria-label="수량올리기"
+                                                    class="css-18y6jr4 e1hx75jb0 add-item-cnt"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="css-1ovj4tx e1xnucib0">
+                                <div class="css-1fttcpj e9qarb89">
+                                    <div class="css-1066lcq e9qarb88"><p class="css-1sl7ome e9qarb87">합계</p>
+                                        <div><span class="css-1qdap1a e9qarb86 modal-item-disprice-final">6,120</span>
+                                            <span class="css-xq0an6 e9qarb85">원</span>
+                                        </div>
+                                    </div>
+                                    <%--                                    <div class="css-1gtuyqu e9qarb84"><span class="css-111b0mc e9qarb83">적립</span><span--%>
+                                    <%--                                            class="css-10qpvf7 e9qarb80">로그인 후, 적립 혜택 제공</span></div>--%>
+                                </div>
+                            </div>
+                            <div class="css-1toes8l e1vslu8h0">
+                                <button class="exist-modal css-1w3nh5f e4nu7ef3" type="button" height="56"><span
+                                        class="css-nytqmg e4nu7ef1">취소</span></button>
+                                <button class="put-in-cart-2 css-ahkst0 e4nu7ef3" type="button" height="56"><span
+                                        class="css-nytqmg e4nu7ef1">장바구니 담기</span></button>
+                                <div class="item-id" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
+                    <div tabindex="0" data-test="sentinelEnd"></div>
                 </div>
+                <%--            모달창 끝 --%>
 
 
             </div>
@@ -838,12 +744,168 @@
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII="
                     alt="마지막 페이지로 이동하기 아이콘"/></a>
 
-
     </div>
 </div>
 
 
 <script>
+
+    let codeId = "";
+    let uri = "";
+    let sortedType;
+    let filters = "";
+    let PriceFilterNum="";
+    let shipType1 = '';
+    let shipType2 = '';
+
+    let page = 1;
+    let endPage = 9999;
+
+    let queryString = window.location.search;
+    var searchParams = new URLSearchParams(queryString);
+    var sword = searchParams.get('sword');
+
+    function shipfilterChecked(filter){
+        let newDiv = $('<div>').addClass('css-s5xdrg ev5e5852 price-filter-text');
+        let newSpan = $('<span>').addClass('css-35ue1n ev5e5851').text(filter);
+        let newLink = $('<a>').addClass('css-1uoamx5 ev5e5850').attr('href', '#');
+        newDiv.append(newSpan, newLink);
+        newDiv.append(newSpan);
+
+        // 태그를 추가하고, 클릭된 요소 뒤에 삽입
+        $('.filter-box').append(newDiv);
+    }
+
+
+    function filterChecked(filter) {
+        let newDiv = $('<div>').addClass('css-s5xdrg ev5e5852 price-filter-text');
+        let newSpan = $('<span>').addClass('css-35ue1n ev5e5851').text(filter);
+        let newLink = $('<a>').addClass('css-1uoamx5 ev5e5850').attr('href', '#');
+        // let newSvg = $('<svg>').attr({
+        //     'width': '20',
+        //     'height': '20',
+        //     'viewBox': '0 0 20 20',
+        //     'fill': 'none',
+        //     'xmlns': "http://www.w3.org/2000/svg"
+        // });
+        //
+        // let newPath1 = $('<path>').attr({
+        //     'd': 'M5.55566 5.55566L14.4446 14.4446',
+        //     'stroke': '#ccc'
+        // });
+        // let newPath2 = $('<path>').attr({
+        //     'd': 'M14.4443 5.55566L5.55545 14.4446',
+        //     'stroke': '#ccc'
+        // });
+        //
+        // newSvg.append(newPath1, newPath2);
+        //  newLink.append(newSvg);
+          newDiv.append(newSpan, newLink);
+         newDiv.append(newSpan);
+
+        // 태그를 추가하고, 클릭된 요소 뒤에 삽입
+        $('.filter-box').append(newDiv);
+    }
+
+
+
+    // 상품리스트 모달창
+    $(".MuiModal-root").hide();
+
+    $(document).on("click", ".button-wrapper", function (event) {
+
+        event.preventDefault();
+        let aTag = $(this).closest('a');
+
+        //상품 태그에서 정보 가지고오기
+        let itemName = aTag.find('.goodslistdto-name').text();
+        let itemExp = aTag.find('.goodslistdto-exp').text();
+        let itemDisPrice = aTag.find('.goodslistdto-disprice').text();
+        let itemPrice = aTag.find('.goodslistdto-price').text();
+        let itemId = aTag.attr('href').replace("/goods/", "");
+
+        //모달창 태그로 상품 정보 넣기
+        $(".modal-item-name").text(itemName);
+        $(".modal-item-exp").text(itemExp);
+        $(".modal-item-disprice").text(itemDisPrice);
+        $(".modal-item-price").text(itemPrice);
+        $(".modal-item-disprice-final").text((itemDisPrice).replace('원', ''));
+        $(".item-id").text(itemId);
+
+        $(".MuiModal-root").show();
+    });
+
+    // 모달창 끄기
+    $(".exist-modal").click(function () {
+        $(".MuiModal-root").fadeOut();
+        $('.modal-item-cnt').text("1");
+    });
+
+    // 상품 수량 올림 버튼
+    $(".add-item-cnt").click(function () {
+
+        let itemCntNumber = parseInt($('.modal-item-cnt').text());
+        itemCntNumber++;
+        let disprice = $(".modal-item-disprice").text().replace(",", "");
+        $('.modal-item-cnt').text(itemCntNumber);
+        $(".modal-item-disprice-final").text((parseInt(disprice) * itemCntNumber).toLocaleString());
+    });
+
+    //상품 수량 내림 버튼
+    $(".subtract-item-cnt").click(function () {
+
+        let itemCntNumber = parseInt($('.modal-item-cnt').text());
+        if (itemCntNumber !== 1) {
+            itemCntNumber--;
+            let disprice = $(".modal-item-disprice").text().replace(",", "");
+            $('.modal-item-cnt').text(itemCntNumber);
+            $(".modal-item-disprice-final").text((parseInt(disprice) * itemCntNumber).toLocaleString());
+        }
+    });
+
+    //모달창 장바구니 담기 눌렀을때 보낼 데이터
+    const form = {
+        <%--custId : '${customer.custId}',--%>
+        itemId: '',
+        // itemId: "1233",
+        itemCnt: '',
+        itemCk: 'N'
+    }
+    // 모달창 장바구니 담기 클릭했을 때
+    $(".put-in-cart-2").click(function () {
+        form.itemCnt = parseInt($('.modal-item-cnt').text());
+        form.itemId = $(".item-id").text();
+        $.ajax({
+            url: '/cart/add',
+            type: 'POST',
+            data: form,
+            dataType: "text",
+            // data: {
+            //     custId: "hong",
+            //     itemId: "1234",
+            //     itemCnt: $(".quantity_input").val()
+            // },
+            success: function (result) {
+
+                cartAlert(result);
+                $(".MuiModal-root").hide();
+                $('.modal-item-cnt').text("1")
+            }
+        })
+    });
+
+    function cartAlert(result) {
+        if (result == '0') {
+            alert("장바구니에 추가를 하지 못하였습니다.");
+        } else if (result == '1') {
+            alert("장바구니에 추가되었습니다.");
+        } else if (result == '2') {
+            alert("장바구니에 이미 추가되어져 있습니다.");
+        } else if (result == '5') {
+            alert("로그인이 필요합니다.");
+        }
+    }
+
 
     //가격필터 기준 계산하기
     let numbers = ['${criteria[0]}', '${criteria[1]}', '${criteria[2]}'];
@@ -853,19 +915,6 @@
         numbers[i] = Math.floor(numbers[i] / 100) * 100;
         numbers[i] = numbers[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-
-    let codeId = "";
-    let uri = "";
-    let sortedType;
-    let filters = "";
-    let PriceFilterNum;
-
-    let page = 1;
-    let endPage = 9999;
-
-    let queryString = window.location.search;
-    var searchParams = new URLSearchParams(queryString);
-    var sword = searchParams.get('sword');
 
 
     $(document).ready(function () {
@@ -898,8 +947,58 @@
         });
 
 
+       // 배송 버튼 누르기
+        $(".ship-list").each(function () {
+            $(this).on("click", function () {
+
+                let className = $(this).attr('class');
+
+                let button = $(this).find('button');
+                let svg = button.find('svg');
+                let paths = svg.find('path');
+
+                //선택된 버튼 다시누를때 버튼 되돌리기
+                if(className.includes('checked-type')){
+                    if(className.includes('ship-filter-1')){
+                        shipType1 =null;
+                    }
+                    if(className.includes('ship-filter-2')){
+                        shipType2=null;
+                    }
+                    paths.attr('fill', '#fff');
+                    $(this).removeClass('checked-type');
+                    page = 1;
+                    loadNewGoodsList();
+                    return;
+                }
+
+                if (className.includes('ship-filter-1')) {
+                    paths.attr('fill', '#11967f');
+                    shipType1 = 1;
+                    $(this).addClass('checked-type');
+                    //shipfilterChecked($(this).text());
+                    //filterChecked($(this).text());
+                }
+
+                if (className.includes('ship-filter-2')) {
+                    paths.attr('fill', '#11967f');
+                    shipType2 = 2;
+                    $(this).addClass('checked-type');
+                    //shipfilterChecked($(this).text());
+                    //filterChecked($(this).text());
+                }
+
+                page = 1;
+                loadNewGoodsList();
+
+            });
+
+        });
+
+
+        //가격 필터 버튼 누르기
         let previousButton = null;
-        $('.css-cate-list-2').each(function () {
+        $('.price-list').each(function () {
             $(this).on("click", function () {
 
                 let className = $(this).attr('class');
@@ -910,7 +1009,7 @@
 
                 // 클릭된 버튼 다시 누를때
                 if (previousButton && button.is(previousButton)) {
-                    // 현재 버튼의 클래스에 PriceFilterNum 값이 있는지 확인
+                    // 현재  클래스에 PriceFilterNum 값이 있는지 확인
                     if (className.includes('price-filter-' + PriceFilterNum)) {
                         // PriceFilterNum 값 초기화
                         PriceFilterNum = null;
@@ -919,9 +1018,10 @@
                         // 이전 버튼 초기화
                         previousButton = null;
                         // 페이지 다시 로드
+
                         page = 1;
                         loadNewGoodsList();
-                        return; // 함수 종료
+                        return;// 함수 종료
                     }
                 }
 
@@ -936,24 +1036,33 @@
                 if (className.includes('price-filter-1')) {
                     paths.attr('fill', '#11967f');
                     PriceFilterNum = 1;
+                    $(".price-filter-text").remove();
+                    //filterChecked($(this).text());
                 }
                 if (className.includes('price-filter-2')) {
                     paths.attr('fill', '#11967f');
                     PriceFilterNum = 2;
+                    $(".price-filter-text").remove();
+                    //filterChecked($(this).text());
                 }
                 if (className.includes('price-filter-3')) {
                     paths.attr('fill', '#11967f');
                     PriceFilterNum = 3;
+                    $(".price-filter-text").remove();
+                    //filterChecked($(this).text());
                 }
                 if (className.includes('price-filter-4')) {
                     paths.attr('fill', '#11967f');
                     PriceFilterNum = 4;
+                    $(".price-filter-text").remove();
+                    //filterChecked($(this).text());
                 }
 
                 page = 1;
                 loadNewGoodsList();
             });
         });
+
 
 
         // 특정 페이지로 이동
@@ -990,6 +1099,7 @@
         $(".price-criteria-3").text(numbers[1] + '원 ~ ' + numbers[2] + '원');
         $(".price-criteria-4").text(numbers[2] + '원 이상');
 
+
     });
 
     // 검색했을 경우
@@ -1016,14 +1126,13 @@
         }
     }
 
-
+    //중분류를 클릭했을 때, 폰트 변경
     $('.best-menu-name').each(function () {
         const codeURI = window.location.pathname.replace("/categories/", "");
 
         if (codeURI === $(this).attr('class').replace("best-menu-name ", "")) {
             $(this).css('color', '#11967f');
             $(this).css('font-weight', '600');
-
         }
     });
 
@@ -1117,17 +1226,17 @@
             + '<span class="css-1vdqr5b e1ms5t9c0">'
             + goods.shipType
             + '</span></span>'
-            + '<span class="css-1dry2r1 e1c07x488">'
+            + '<span class="css-1dry2r1 e1c07x488 goodslistdto-name">'
             + goods.name
             + '</span>'
-            + '<p class="css-1wejlc3 e1c07x486">'
+            + '<p class="css-1wejlc3 e1c07x486 goodslistdto-exp">'
             + goods.exp
             + '</p>'
             + '<div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">'
             + '<div>';
         if (goods.dcRt !== 0) {
-            itemHTML += '<span class="dimmed-price css-18tpqqq ei5rudb1">'
-                + goods.price
+            itemHTML += '<span class="dimmed-price css-18tpqqq ei5rudb1 goodslistdto-price">'
+                + goods.price.toLocaleString()
                 + '<span class="won">'
                 + '원'
                 + '</span>'
@@ -1140,8 +1249,8 @@
                 + goods.dcRt + '%'
                 + '</span>';
         }
-        itemHTML += '<span class="sales-price css-18tpqqq ei5rudb1">'
-            + goods.disPrice
+        itemHTML += '<span class="sales-price css-18tpqqq ei5rudb1 goodslistdto-disprice">'
+            + goods.disPrice.toLocaleString()
             + '<span class="won">' + '원'
             + '</span></span>'
             + '</div>'
@@ -1207,6 +1316,8 @@
                 "sortedType": sortedType,
                 "page": page,
                 "PriceFilterNum": PriceFilterNum,
+                "shipType1": shipType1,
+                "shipType2": shipType2,
                 "sword": sword
             },
             success: function (response) {
@@ -1263,6 +1374,14 @@
 
                 $(".goodstotalCnt").text('총 ' + response.totalCnt + '건');
 
+
+                //if (PriceFilterNum === 1 || PriceFilterNum === 2 || PriceFilterNum === 3 || PriceFilterNum === 4
+                // || shipType1 === 1 || shipType2 ===2) {
+                //     $(".filter-box").css("display", "block");
+                // } else {
+                //     $(".filter-box").html("");
+                //     $(".filter-box").css("display", "none");
+                // }
 
             },
             error: function (xhr, status, error) {
@@ -1370,7 +1489,6 @@
 
 
 </script>
-
 
 
 </body>

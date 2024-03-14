@@ -4,9 +4,9 @@ import com.brokurly.entity.board.Notice;
 import com.brokurly.dto.board.NoticeBoardDto;
 import com.brokurly.dto.board.NoticeListDto;
 import com.brokurly.repository.board.NoticeBoardDao;
+import com.brokurly.utils.BoardPageHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Response;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,16 +19,23 @@ import java.util.List;
 public class NoticeService {
     private final NoticeBoardDao noticeBoardDao;
 
-    private static final int NUMBER_PER_PAGE = 15;
-
-    public List<NoticeListDto> getList(@RequestParam Integer page) {
-        if (page == null) {page = 0;}
-        List<Notice> noticeList = noticeBoardDao.selectPage(page * NUMBER_PER_PAGE, NUMBER_PER_PAGE);
+    public List<NoticeListDto> getList() {
+//        일단 전부 Notice 전부 가져오고
+        List<Notice> noticeList = noticeBoardDao.selectAllPages();
+//        필요한 것만 Dto리스트에 담는다.
         List<NoticeListDto> noticeListDtoList = new ArrayList<>();
         for (Notice notice : noticeList) {
             noticeListDtoList.add(notice.getNoticeListDto());
         }
         return noticeListDtoList;
+    }
+
+    public NoticeListDto getMaxBno() {
+        return noticeBoardDao.selectMax().getNoticeListDto();
+    }
+
+    public NoticeListDto getMinBno() {
+        return noticeBoardDao.selectMin().getNoticeListDto();
     }
 //    public List<NoticeListDto> getList(Integer bno) {
 ////        만약 첫페이지, 최초의 bno가 없는 상황이라면 전체테이블의 가장 최신 글의 번호를 받아와 bno에 넣어준다.

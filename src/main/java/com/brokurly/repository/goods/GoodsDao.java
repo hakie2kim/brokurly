@@ -88,6 +88,12 @@ public interface GoodsDao {
                                     @Param("itemId") List<String> itemId);
 
 
+    List<Goods> GoodsListByRegDate(@Param("limit") int limit,
+                                   @Param("start") int start);
+    int countGoodsListByRegDate ();
+
+    Goods getLowestPriceGoodsByRegDate();
+    Goods getHighestPriceGoodsByRegDate();
 
 }
 

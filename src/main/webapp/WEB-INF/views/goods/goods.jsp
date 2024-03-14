@@ -1432,6 +1432,7 @@ const form = {
     // custId: 'hakie2kim',
     itemCnt: "",
     // itemCk: 'N'
+
 }
 // 장바구니 추가 버튼
 $(".btn_cart").on("click", function (e) {

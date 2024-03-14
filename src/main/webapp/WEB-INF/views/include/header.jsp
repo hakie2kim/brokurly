@@ -175,10 +175,7 @@
                 <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
             </c:if>
             <c:if test="${loginSession ne '로그인'}">
-                <div class="lg-text3wrap">
-                    <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span
-                            class="css-1lrerrk eo4j3y50"></span
-                    ></a>
+                <div class="lg-text3wrap">${loginSession}<span class="css-1lrerrk eo4j3y50"></span>
                     <div class="menu cs-bar-wrap">
                         <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
                     </div>
@@ -193,11 +190,9 @@
                 >고객센터 <span class="css-1lrerrk eo4j3y50"></span
                 ></a>
                 <div class="menu cs-bar-wrap">
-                    <div class="cscenter-bar">공지사항</div>
-                    <div class="cscenter-bar">자주하는 질문</div>
-                    <div class="cscenter-bar">1:1 문의</div>
-                    <div class="cscenter-bar">대량주문 문의</div>
-
+                    <a href="/board/notice" class="cscenter-bar">공지사항</a>
+                    <a href="/board/faqboard" class="cscenter-bar">자주하는 질문</a>
+                    <a href="/board/inquiry" class="cscenter-bar">1:1 문의</a>
                 </div>
             </div>
         </div>
@@ -293,7 +288,6 @@
                                     </li>
                                 </c:forEach>
 
-
                                 <li width="535" class="css-1jdpv96 e1vs1ym85"></li>
                                 <li width="0" class="css-1xy9xh5 e1vs1ym85"></li>
                             </ul>
@@ -304,7 +298,7 @@
 
             <ul class="cate-menu-wrap">
                 <li class="cate-menu-1">
-                    <span class="cate-menu-txt">신상품</span>
+                    <span class="cate-menu-txt"><a href="<c:url value='/market-newproduct'/>">신상품</span>
                 </li>
                 <li class="cate-menu-1">
                     <span class="cate-menu-txt"><a href="<c:url value='/categories/best-page'/>">베스트</a></span>
