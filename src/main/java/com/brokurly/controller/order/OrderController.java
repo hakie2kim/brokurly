@@ -95,7 +95,9 @@ public class OrderController {
         }
 
         pointService.usePointsWhenOrder(orderId, loginMember.getCustId(), point);
-        truncateCart(session); // 장바구니에서 주문이 끝난 상품 제거
+        // 장바구니에서 주문이 끝난 상품 제거
+        List<CustomerCartDto> customerCart = customerCartService.getCartList(loginMember.getCustId(), true);
+        customerCart.forEach(customerCartService::vacateCart);
 
         model.addAttribute("name", loginMember.getName());
         model.addAttribute("dayOfWeek", DateUtils.nDaysAfterDayOfWeek(1)); // 도착 요일
@@ -105,19 +107,6 @@ public class OrderController {
         model.addAttribute("amount", amount.getOrderAmt()); // 결제된 금액
         model.addAttribute("point", point); // 적립된 금액
         return "order/success";
-    }
-
-    private void truncateCart(HttpSession session) {
-        Object customerCart = session.getAttribute("customerCart");
-        if(customerCart instanceof List) {
-            ((List<?>) customerCart)
-                    .stream()
-                    .filter(x -> x instanceof CustomerCartDto)
-                    .map(x-> (CustomerCartDto) x)
-                    .forEach(customerCartService::vacateCart);
-        } else {
-            throw new IllegalArgumentException("'customerCart' 세션 속성의 타입이 예상한 타입과 다릅니다.");
-        }
     }
 
     @GetMapping("/receiver-details")
