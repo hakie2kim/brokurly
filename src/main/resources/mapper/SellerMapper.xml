@@ -10,4 +10,10 @@
         AND   pwd = #{pwd}
     </select>
 
+    <select id="selectBsnsNoById" resultType="Seller">
+        SELECT bsns_no, name
+        FROM seller_account
+        WHERE id = #{id}
+    </select>
+
 </mapper>

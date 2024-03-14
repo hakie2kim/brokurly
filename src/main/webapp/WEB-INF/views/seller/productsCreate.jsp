@@ -93,7 +93,7 @@
                         <div class="input-content">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <div class="seller-input-wrap">
+                                    <div class="seller-input-wrap" style="width: 1000px">
                                         <input name="name"
                                                type="text"
                                                class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-valid-maxlength"
@@ -271,12 +271,6 @@
                                         <div class="total-price">
                                             <div class="input-content">
                                                 <div id="showResult"></div>
-                                                <%--                                                <input--%>
-                                                <%--                                                        type="hidden"--%>
-                                                <%--                                                        name="salePrice"--%>
-                                                <%--                                                        id="salePrice"--%>
-                                                <%--                                                        value=""--%>
-                                                <%--                                                >--%>
 
                                             </div>
                                         </div>

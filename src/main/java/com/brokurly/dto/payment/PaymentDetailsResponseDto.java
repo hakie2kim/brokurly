@@ -22,5 +22,5 @@ public class PaymentDetailsResponseDto {
     private String orderId;
     private String itemName;
     // 결제 금액
-    private PaymentAmount paymentAmount;
+    private PaymentAmountResponseDto paymentAmount;
 }

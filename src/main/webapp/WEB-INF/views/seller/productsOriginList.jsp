@@ -21,7 +21,9 @@
 <body>
 <div class="productsOriginListMain" style="margin-left:20%;padding:1px 16px;height:1000px;">
 
-<div id="seller-content" class="seller-sub-frame"style=" margin-top: 55px">
+    <div style="margin-top: 55px">
+
+    <div id="seller-content" class="seller-sub-frame" >
     <!----><!----><!---->
     <ui-view>
         <div class="seller-sub-title">
@@ -269,8 +271,6 @@
                                 </div>
                                 </form>
                             </c:forEach>
-
-
                         </div>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
     </ui-view>
 </div>
 </div>
-
+</div>
 <script>
 
 <%--  삭제버튼  --%>

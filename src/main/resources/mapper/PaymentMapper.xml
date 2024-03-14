@@ -53,6 +53,11 @@
     </resultMap>
 
     <!-- UPDATE -->
+    <update id="updatePayStat">
+        UPDATE payment
+        SET pay_stat = #{payStat}
+        WHERE pay_no = #{payNo}
+    </update>
 
     <!-- DELETE -->
 
