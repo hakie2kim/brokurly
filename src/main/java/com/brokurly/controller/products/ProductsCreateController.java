@@ -96,7 +96,6 @@ public class ProductsCreateController {
             log.info("bnsnNo={}",bsnsNo);
 
 
-
             List<GoodsByBsnsNoDto> goodsByBsnsNoDtosList = productsCreateService.readByBsnsNo(bsnsNo);
             m.addAttribute("goodsByBsnsNo", goodsByBsnsNoDtosList);
             m.addAttribute("goodssize", goodsByBsnsNoDtosList.size());
