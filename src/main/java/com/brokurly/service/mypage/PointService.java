@@ -55,7 +55,7 @@ public class PointService {
         List<PointDto> pointDtos = pointDao.selectByExpirDt(custId)
                 .stream()
                 .map(Point::getPointDto)
-                .collect(Collectors.toList()); // 만료일자가 제일 앞선 것 먼저
+                .toList(); // 만료일자가 제일 앞선 것 먼저
 
         // PointLogRecordWithPointNoDto -> PointLog
         PointLogRecordWithoutPointNoDto pointLogRecordDto = new PointLogRecordWithoutPointNoDto(orderId, custId, pointAmt, "주문 결제 시 사용", "사용");
