@@ -9,8 +9,10 @@ import java.util.List;
 public interface GoodsImageDao {
     int insert(GoodsImage goodsImage);
 
-    GoodsImage selectByItemId(String itemId);
-    List<GoodsImage> selectListByItemId(String itemId);
+    GoodsImage selectByItemId(String itemId);   //대표이미지
+    List<GoodsImage> selectListByItemId(String itemId); //상품 이미지(대표이미지 아닌거)
+//    List<GoodsImage> searchListByItemId(String itemId); //대표이미지 리스트
+
 
     void deleteByImg(String string);
 

@@ -55,7 +55,6 @@ public class PaymentController {
         session.setAttribute("userId", response.getPartner_user_id());
         session.setAttribute("orderId", response.getPartner_order_id());
         session.setAttribute("paymentAmount", checkout.getPaymentAmount());
-        session.setAttribute("customerCart", checkout.getCustomerCart());
         return new ResponseEntity<>(response.getNext_redirect_pc_url(), HttpStatus.OK);
     }
 
