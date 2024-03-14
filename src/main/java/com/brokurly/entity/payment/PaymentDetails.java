@@ -31,7 +31,7 @@ public class PaymentDetails {
                 .payConfDt(payConfDt)
                 .orderId(orderId)
                 .itemName(itemName)
-                .paymentAmount(paymentAmount)
+                .paymentAmount(paymentAmount.toResponseDto())
                 .build();
     }
 }
