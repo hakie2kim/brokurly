@@ -3,9 +3,7 @@ package com.brokurly.controller.payment;
 import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.ShippingLocationCurrDto;
 import com.brokurly.dto.order.CheckoutDto;
-import com.brokurly.dto.payment.KakaoPayApproveResponseDto;
-import com.brokurly.dto.payment.KakaoPayReadyResponseDto;
-import com.brokurly.dto.payment.PaymentAmountCheckoutDto;
+import com.brokurly.dto.payment.*;
 import com.brokurly.service.mypage.ShippingLocationService;
 import com.brokurly.service.order.OrderService;
 import com.brokurly.service.payment.KakaoPayService;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -67,8 +66,6 @@ public class PaymentController {
     public String kakaoPaySuccess(@RequestParam String pg_token, HttpSession session) {
         KakaoPayApproveResponseDto response = kakaoPayService.approve(pg_token, setParamMap(session)).block();
 
-        log.info("success response = {}", response);
-
         if (response == null) {
             log.info("response 없음");
             return "/order/checkout";
@@ -94,7 +91,15 @@ public class PaymentController {
         return paramMap;
     }
 
-    @GetMapping("/cancel")
+    @GetMapping("/kakaopay/cancel") // 카카오페이 결제 취소
+    public String kakaoPayCancel(String orderId) {
+        PaymentDetailsResponseDto paymentLog = paymentService.findPaymentLogByOrderId(orderId);
+        KakaoPayCancelResponseDto response = kakaoPayService.cancel(paymentLog).block();
+        log.info("kakaopay cancel response = {}", response);
+        return "order/cancel";
+    }
+
+    @GetMapping("/cancel") // 결제 도중 취소
     public String cancel(HttpSession session) {
         // 결제 실패 시 DB에서 해당 주문 건을 삭제
         orderService.cancelOrder((String) session.getAttribute("orderId"));
