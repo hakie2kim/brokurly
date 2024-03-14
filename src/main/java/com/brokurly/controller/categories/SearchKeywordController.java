@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,14 +36,13 @@ public class SearchKeywordController {
 
 
     @GetMapping("/search")
-    public String searchPage(Model model,
+    public String searchPage(Model model, HttpSession session,
                              @RequestParam(required = false) String codeId,
                              @RequestParam(required = false) Integer page,
                              @RequestParam(required = false) String sword) {
 
-        categoryService.readPrimary();
-        List<CategoryDto> selectMain = categoryService.readPrimary();
-        model.addAttribute("selectMain", selectMain);
+        List<CategoryDto> selectMain = (List<CategoryDto>) session.getAttribute("selectMain");
+        model.addAttribute("selectMain",selectMain);
 
         List<GoodsListDto> goodsListDto;
         model.addAttribute("sword",sword);
@@ -124,12 +124,4 @@ public class SearchKeywordController {
 
         return new ResponseEntity<>(responseMap, HttpStatus.OK);
     }
-
-
-
-
-
-
-
-
 }

@@ -43,10 +43,12 @@
             display: inline-block;
             vertical-align: top;
         }
+
         .css-1qfsi3d {
             font-weight: 500;
             color: #11967f;
         }
+
         .css-mmvz9h {
             font-weight: 400;
         }
@@ -59,9 +61,11 @@
             margin-top: 50px;
             margin-bottom: 75px;
         }
+
         .css-1d3w5wq {
             width: 100%;
         }
+
         .css-hayd9f {
             display: flex;
             flex-direction: column;
@@ -74,6 +78,7 @@
             margin: auto;
             padding: 100px 0px;
         }
+
         .css-h97wyk {
             text-align: center;
             font-size: 16px;
@@ -82,6 +87,16 @@
             line-height: normal;
         }
 
+        /*이미지*/
+        .css-1azakc {
+            text-align: center;
+        }
+        .css-1217fb7 {
+            width: 100%;
+            vertical-align: top;
+        }
+
+
     </style>
 
 </head>
@@ -89,24 +104,27 @@
 
 
 <div class="best-page">
-    <div class="best-menu-wrap1">
-        <h3 class="best-name">${categorydto[0].exp}</h3>
-        <ul class="best-menu-wrap2">
-            <li class="best-list">
-                <a class="best-menu-name"
-                   href="http://localhost:8080/categories/${categorydto[0].codeId}?page=1">전체보기</a>
-            </li>
+    <%--    <div class="best-menu-wrap1">--%>
+    <%--        <h3 class="best-name">${categorydto[0].exp}</h3>--%>
+    <%--        <ul class="best-menu-wrap2">--%>
+    <%--            <li class="best-list">--%>
+    <%--                <a class="best-menu-name"--%>
+    <%--                   href="http://localhost:8080/categories/${categorydto[0].codeId}?page=1">전체보기</a>--%>
+    <%--            </li>--%>
 
-            <c:forEach var="catelist" items="${categorydto}" begin="1" end="${fn:length(categorydto)}" varStatus="loop">
-                <li class="best-list">
-                    <a class="best-menu-name"
-                       href="http://localhost:8080/categories/${catelist.codeId}?page=1">${catelist.exp}</a>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+    <%--            <c:forEach var="catelist" items="${categorydto}" begin="1" end="${fn:length(categorydto)}" varStatus="loop">--%>
+    <%--                <li class="best-list">--%>
+    <%--                    <a class="best-menu-name"--%>
+    <%--                       href="http://localhost:8080/categories/${catelist.codeId}?page=1">${catelist.exp}</a>--%>
+    <%--                </li>--%>
+    <%--            </c:forEach>--%>
+    <%--        </ul>--%>
+    <%--    </div>--%>
 
     <div class="container">
+        <div class="css-1azakc e13967gz1"><a href="https://www.kurly.com/categories/490"><img
+                src="https://collection-image.kurly.com/cdn-cgi/image/width=1050,quality=85/product-collections/2451/F2uGXatyNQnwEthnqFshJlSXDtd34B98hsuQDpAX.jpg"
+                alt="배너 이미지" class="css-1217fb7 e13967gz0"></a></div>
         <div class="best-content-wrap">
             <div class="side-menu">
                 <div class="side-menu-filter">
@@ -742,7 +760,7 @@
                                     </div>
                                     <div class="discount">
                                         <c:if test="${goodsListDto.dcRt ne '0'}">
-                                        <span class="discount-rate css-19lkxd2 ei5rudb0">${goodsListDto.dcRt}%</span>
+                                            <span class="discount-rate css-19lkxd2 ei5rudb0">${goodsListDto.dcRt}%</span>
                                         </c:if>
                                         <span class="sales-price css-18tpqqq ei5rudb1 goodslistdto-disprice">
                                                 <fmt:formatNumber value="${goodsListDto.disPrice}"
@@ -752,11 +770,14 @@
                                 </div>
                                 <div class="review-count css-xezqwk e1c07x482">
                                     <span class="css-mz5g71 e1c07x481">
-                                        <svg width="100%" height="100%" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="100%" height="100%" viewBox="0 0 14 14" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
                                         <mask id="path-1-inside-1_1513_17755" fill="white">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path>
+                                          <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M3 2C1.89543 2 1 2.89543 1 4V8.67201C1 9.77658 1.89543 10.672 3 10.672H5.11212L6.33682 12.7653C6.5299 13.0954 7.00688 13.0954 7.19995 12.7653L8.42465 10.672H10.5C11.6046 10.672 12.5 9.77658 12.5 8.67201V4C12.5 2.89543 11.6046 2 10.5 2H3Z"></path>
                                          </mask>
-                                          <path fill="#999" d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
+                                          <path fill="#999"
+                                                d="M5.11212 10.672L5.97526 10.167L5.68564 9.67201H5.11212V10.672ZM6.33682 12.7653L5.47369 13.2703L5.47369 13.2703L6.33682 12.7653ZM7.19995 12.7653L6.33682 12.2604L6.33682 12.2604L7.19995 12.7653ZM8.42465 10.672V9.67201H7.85113L7.56152 10.167L8.42465 10.672ZM2 4C2 3.44772 2.44772 3 3 3V1C1.34315 1 0 2.34315 0 4H2ZM2 8.67201V4H0V8.67201H2ZM3 9.67201C2.44772 9.67201 2 9.22429 2 8.67201H0C0 10.3289 1.34315 11.672 3 11.672V9.67201ZM5.11212 9.67201H3V11.672H5.11212V9.67201ZM7.19995 12.2604L5.97526 10.167L4.24899 11.177L5.47369 13.2703L7.19995 12.2604ZM6.33682 12.2604C6.5299 11.9304 7.00688 11.9304 7.19995 12.2604L5.47369 13.2703C6.05291 14.2604 7.48386 14.2604 8.06309 13.2703L6.33682 12.2604ZM7.56152 10.167L6.33682 12.2604L8.06309 13.2703L9.28779 11.177L7.56152 10.167ZM10.5 9.67201H8.42465V11.672H10.5V9.67201ZM11.5 8.67201C11.5 9.22429 11.0523 9.67201 10.5 9.67201V11.672C12.1569 11.672 13.5 10.3289 13.5 8.67201H11.5ZM11.5 4V8.67201H13.5V4H11.5ZM10.5 3C11.0523 3 11.5 3.44772 11.5 4H13.5C13.5 2.34315 12.1569 1 10.5 1V3ZM3 3H10.5V1H3V3Z"
                                                 mask="url(#path-1-inside-1_1513_17755)"></path>
                                         <circle fill="#999" cx="4.34998" cy="6.17871" r="0.75"></circle>
                                          <circle fill="#999" cx="6.75" cy="6.17871" r="0.75"></circle>
@@ -770,8 +791,7 @@
                 </div>
 
 
-
-                <%-- 모달창시작--%>
+                <%--             모달창시작--%>
                 <div role="presentation" class="MuiModal-root MuiDialog-root css-98q5jm">
                     <div aria-hidden="true" class="MuiBackdrop-root css-919eu4"
                          style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"></div>
@@ -834,8 +854,6 @@
                     <div tabindex="0" data-test="sentinelEnd"></div>
                 </div>
                 <%--            모달창 끝 --%>
-
-
 
 
             </div>
@@ -972,7 +990,7 @@
         <%--custId : '${customer.custId}',--%>
         itemId: '',
         // itemId: "1233",
-        //custId: 'hakie2kim',
+        custId: 'hakie2kim',
         itemCnt: '',
         itemCk: 'N'
     }
@@ -1015,9 +1033,9 @@
     //가격필터 기준 계산하기
     let numbers = ['${criteria[0]}', '${criteria[1]}', '${criteria[2]}'];
 
-    for(let i = 0; i < numbers.length; i++){
+    for (let i = 0; i < numbers.length; i++) {
         numbers[i] = parseInt(numbers[i], 10);
-        numbers[i] = Math.floor(numbers[i]/100)*100;
+        numbers[i] = Math.floor(numbers[i] / 100) * 100;
         numbers[i] = numbers[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
@@ -1030,7 +1048,7 @@
     let page = 1;
     let endPage = 9999;
 
-    let queryString=window.location.search;
+    let queryString = window.location.search;
     var searchParams = new URLSearchParams(queryString);
     var sword = searchParams.get('sword');
 
@@ -1067,7 +1085,7 @@
 
         // 가격 필터 버튼 누를 때 동작
         let previousButton = null;
-        $('.css-cate-list-2').each(function (){
+        $('.css-cate-list-2').each(function () {
             $(this).on("click", function () {
 
                 let className = $(this).attr('class');
@@ -1084,23 +1102,23 @@
 
                 previousButton = button; //현재버튼을 이전버튼으로
 
-                if(className.includes('price-filter-1')){
+                if (className.includes('price-filter-1')) {
                     paths.attr('fill', '#11967f');
-                    PriceFilterNum=1;
+                    PriceFilterNum = 1;
                 }
-                if(className.includes('price-filter-2')){
+                if (className.includes('price-filter-2')) {
                     paths.attr('fill', '#11967f');
-                    PriceFilterNum=2;
+                    PriceFilterNum = 2;
                 }
-                if(className.includes('price-filter-3')){
+                if (className.includes('price-filter-3')) {
                     paths.attr('fill', '#11967f');
-                    PriceFilterNum=3;
+                    PriceFilterNum = 3;
                 }
-                if(className.includes('price-filter-4')){
+                if (className.includes('price-filter-4')) {
                     paths.attr('fill', '#11967f');
-                    PriceFilterNum=4;
+                    PriceFilterNum = 4;
                 }
-                page=1;
+                page = 1;
                 loadNewGoodsList();
             });
         });
@@ -1136,17 +1154,16 @@
         })
 
         // 가격필터 값 바꾸기
-        $(".price-criteria-1").text(numbers[0]+'원 미만');
-        $(".price-criteria-2").text(numbers[0]+'원 ~ '+numbers[1]+'원');
-        $(".price-criteria-3").text(numbers[1]+'원 ~ '+numbers[2]+'원');
-        $(".price-criteria-4").text(numbers[2]+'원 이상');
+        $(".price-criteria-1").text(numbers[0] + '원 미만');
+        $(".price-criteria-2").text(numbers[0] + '원 ~ ' + numbers[1] + '원');
+        $(".price-criteria-3").text(numbers[1] + '원 ~ ' + numbers[2] + '원');
+        $(".price-criteria-4").text(numbers[2] + '원 이상');
 
     });
 
 
-
     // 검색했을 경우 화면
-    if(sword!=null) {
+    if (sword != null) {
 
         $(".best-menu-wrap2").hide();
 
@@ -1162,19 +1179,19 @@
         $(".best-name").html(showSearchKeyword);
 
         // 검색 후 상품 리스트가 없을 경우
-        if($(".css-9o2zup").html()==null) { //상품<a>태그의 클래스
+        if ($(".css-9o2zup").html() == null) { //상품<a>태그의 클래스
 
             $(".best-content-wrap").hide();
             $(".css-rdz8z7").hide(); //페이징 숨기기
 
             const noSearchListHTML = '<div class="css-pzlq5x etf617g0">'
-                                    +'<div class="css-1d3w5wq e1oh2pka6">'
-                                    +'<div height="480" class="css-hayd9f e1oh2pka3">'
-                                    +'<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">'
-                                    +'<g clip-path="url(#clip0_368_6766)">'
-                                    +'<path d="M22.0732 43.1463C33.7116 43.1463 43.1463 33.7116 43.1463 22.0732C43.1463 10.4348 33.7116 1 22.0732 1C10.4348 1 1 10.4348 1 22.0732C1 33.7116 10.4348 43.1463 22.0732 43.1463Z" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path>'
-                                    +'<path d="M47.8293 47.8291L37.2927 37.2925" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path></g><defs><clipPath id="clip0_368_6766"><rect width="48" height="48" fill="#fff"></rect></clipPath></defs></svg>'
-                                    +'<span class="css-h97wyk e1oh2pka2">검색된 상품이 없습니다.<br>다른 검색어를 입력해 주세요.</span></div></div></div>'
+                + '<div class="css-1d3w5wq e1oh2pka6">'
+                + '<div height="480" class="css-hayd9f e1oh2pka3">'
+                + '<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">'
+                + '<g clip-path="url(#clip0_368_6766)">'
+                + '<path d="M22.0732 43.1463C33.7116 43.1463 43.1463 33.7116 43.1463 22.0732C43.1463 10.4348 33.7116 1 22.0732 1C10.4348 1 1 10.4348 1 22.0732C1 33.7116 10.4348 43.1463 22.0732 43.1463Z" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path>'
+                + '<path d="M47.8293 47.8291L37.2927 37.2925" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path></g><defs><clipPath id="clip0_368_6766"><rect width="48" height="48" fill="#fff"></rect></clipPath></defs></svg>'
+                + '<span class="css-h97wyk e1oh2pka2">검색된 상품이 없습니다.<br>다른 검색어를 입력해 주세요.</span></div></div></div>'
             $(".container").append(noSearchListHTML);
         }
     }
@@ -1360,8 +1377,8 @@
                 "codeId": codeId,
                 "sortedType": sortedType,
                 "page": page,
-                "PriceFilterNum":PriceFilterNum,
-                "sword":sword
+                "PriceFilterNum": PriceFilterNum,
+                "sword": sword
             },
             success: function (response) {
                 let sortedGoodsList = response.sortedGoodsList;
@@ -1381,7 +1398,7 @@
                 // itemHTML=sortedGoodsList.map(readGoodsListHTML);
 
                 // if(PriceFilterNum!=null){
-                itemHTML=readGoodsLisByFilter.map(readGoodsListHTML);
+                itemHTML = readGoodsLisByFilter.map(readGoodsListHTML);
                 // }
 
                 containerForSort.append(itemHTML);
@@ -1415,7 +1432,7 @@
                 containerForPaging.append(pagingHTML);
 
 
-                $(".goodstotalCnt").text('총 '+response.totalCnt+'건');
+                $(".goodstotalCnt").text('총 ' + response.totalCnt + '건');
 
 
             },
@@ -1431,3 +1448,4 @@
 
 </body>
 </html>
+

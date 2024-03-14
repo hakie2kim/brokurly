@@ -290,7 +290,6 @@
                                     </li>
                                 </c:forEach>
 
-
                                 <li width="535" class="css-1jdpv96 e1vs1ym85"></li>
                                 <li width="0" class="css-1xy9xh5 e1vs1ym85"></li>
                             </ul>
@@ -301,7 +300,7 @@
 
             <ul class="cate-menu-wrap">
                 <li class="cate-menu-1">
-                    <span class="cate-menu-txt">신상품</span>
+                    <span class="cate-menu-txt"><a href="<c:url value='/market-newproduct'/>">신상품</span>
                 </li>
                 <li class="cate-menu-1">
                     <span class="cate-menu-txt"><a href="<c:url value='/categories/best-page'/>">베스트</a></span>

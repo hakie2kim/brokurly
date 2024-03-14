@@ -6,33 +6,32 @@
     <!-- CREATE -->
     <insert id="insert">
         INSERT INTO item
-            (item_id,  name ,exp, price, dc_rt, item_dc_amt, origin,
-             point_fl, cpn_elg_fl, ship_type, seller_name, pkg_type, capa,
-             sell_unit, adult_verif_fl, cate_code, item_qty, wish_cnt,
-             bsns_no, item_spec, sell_cnt, rev_cnt)
-        VALUES
-            (#{itemId}, #{name}, #{exp}, #{price}, #{dcRt}, #{itemDcAmt}, #{origin},
-             #{pointFl}, #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType} , #{capa},
-             #{sellUnit}, #{adultVerifFl}, #{cateCode}, #{itemQty} , #{wishCnt},
-             #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt} )
+        (item_id, name, exp, price, dc_rt, item_dc_amt, origin,
+         point_fl, cpn_elg_fl, ship_type, seller_name, pkg_type, capa,
+         sell_unit, adult_verif_fl, cate_code, item_qty, wish_cnt,
+         bsns_no, item_spec, sell_cnt, rev_cnt)
+        VALUES (#{itemId}, #{name}, #{exp}, #{price}, #{dcRt}, #{itemDcAmt}, #{origin},
+                #{pointFl}, #{cpnElgFl}, #{shipType}, #{sellerName}, #{pkgType}, #{capa},
+                #{sellUnit}, #{adultVerifFl}, #{cateCode}, #{itemQty}, #{wishCnt},
+                #{bsnsNo}, #{itemSpec}, #{sellCnt}, #{revCnt})
     </insert>
 
     <insert id="addCart">
         INSERT INTO cart
-        (item_id, cust_id, item_cnt)
-        VALUES
-        (#{itemId}, #{custId}, #{itemCnt})
+            (item_id, cust_id, item_cnt)
+        VALUES (#{itemId}, #{custId}, #{itemCnt})
     </insert>
 
     <insert id="insertAnnouncement">
         INSERT INTO item_announcement
             (item_id, item_ann, item_ann_cate)
-        VALUES (#{itemId},#{itemAnn},#{itemAnnCate})
+        VALUES (#{itemId}, #{itemAnn}, #{itemAnnCate})
     </insert>
 
     <!-- READ -->
     <sql id="select">
-        SELECT * FROM item
+        SELECT *
+        FROM item
     </sql>
 
     <select id="selectByItemId" resultType="Goods">
@@ -47,12 +46,19 @@
 
 
     <select id="selectGoodsListByCateCode" resultType="Goods">
-        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        select item_id,
+               name,
+               exp,
+               price,
+               dc_rt,
+               item_dc_amt,
+               rev_cnt,
+               ship_type
         from ITEM
-        where cate_code LIKE CONCAT(#{cateCode},'%')
-        limit #{limit} offset #{start}
+        where cate_code LIKE CONCAT(#{cateCode}, '%')
+            limit #{limit}
+        offset #{start}
     </select>
-
 
 
     <select id="sortGoodsList" resultType="Goods">
@@ -62,48 +68,71 @@
         ITEM
         WHERE
         cate_code LIKE CONCAT(#{cateCode},'%')
-            <if test="sortedType == 4">
-                ORDER BY price - item_dc_amt ASC
-            </if>
-            <if test="sortedType == 5">
-                ORDER BY price - item_dc_amt DESC
-            </if>
-            <if test="sortedType == 2">
-                ORDER BY sell_cnt DESC
-            </if>
-            <if test="sortedType == 3">
-                ORDER BY dc_rt DESC
-            </if>
-            <if test="sortedType == 1">
-                ORDER BY reg_dt DESC
-            </if>
+        <if test="sortedType == 4">
+            ORDER BY price - item_dc_amt ASC
+        </if>
+        <if test="sortedType == 5">
+            ORDER BY price - item_dc_amt DESC
+        </if>
+        <if test="sortedType == 2">
+            ORDER BY sell_cnt DESC
+        </if>
+        <if test="sortedType == 3">
+            ORDER BY dc_rt DESC
+        </if>
+        <if test="sortedType == 1">
+            ORDER BY reg_dt DESC
+        </if>
         LIMIT #{limit} OFFSET #{start}
     </select>
 
-<!--리스트 중에 가장 낮은 가격의 상품-->
+    <!--리스트 중에 가장 낮은 가격의 상품-->
     <select id="getLowestPriceGoods" resultType="Goods">
-        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        select item_id,
+               name,
+               exp,
+               price,
+               dc_rt,
+               item_dc_amt,
+               rev_cnt,
+               ship_type
         from ITEM
-        where cate_code LIKE CONCAT(#{cateCode},'%')
-        ORDER BY price ASC
-        LIMIT 1;
+        where cate_code LIKE CONCAT(#{cateCode}, '%')
+        ORDER BY price ASC LIMIT 1;
     </select>
 
-<!--리스트 중에 가장 높은 가격의 상품-->
+    <!--리스트 중에 가장 높은 가격의 상품-->
     <select id="getHighestPriceGoods" resultType="Goods">
-        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        select item_id,
+               name,
+               exp,
+               price,
+               dc_rt,
+               item_dc_amt,
+               rev_cnt,
+               ship_type
         from ITEM
-        where cate_code LIKE CONCAT(#{cateCode},'%')
-        ORDER BY price DESC
-        LIMIT 1;
+        where cate_code LIKE CONCAT(#{cateCode}, '%')
+        ORDER BY price DESC LIMIT 1;
     </select>
-
 
 
     <select id="goodsListByPriceFilter" resultType="Goods">
-        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode},'%')
+        <if test="filter.shipType1 == 1 ">
+            AND (
+            ship_type = '샛별배송'
+            <if test="filter.shipType2 == 2">
+                OR ship_type = '일반배송'
+            </if>
+            )
+        </if>
+        <if test="filter.shipType1 != 1 and filter.shipType2 == 2">
+            AND ship_type = '일반배송'
+        </if>
+
         <if test="filter.priceFilterNum == 1">
             AND price-item_dc_amt &lt; #{filter.price1}
         </if>
@@ -135,13 +164,21 @@
     </select>
 
 
-
-
     <select id="countGoodsListByPriceFilter" resultType="int">
-        select  count(*)
+        select count(*)
         from ITEM
         where cate_code LIKE CONCAT(#{cateCode},'%')
-
+        <if test="filter.shipType1 == 1 ">
+            AND (
+            ship_type = '샛별배송'
+            <if test="filter.shipType2 == 2">
+                OR ship_type = '일반배송'
+            </if>
+            )
+        </if>
+        <if test="filter.shipType1 != 1 and filter.shipType2 == 2">
+            AND ship_type = '일반배송'
+        </if>
         <if test="filter.priceFilterNum == 1">
             AND price-item_dc_amt &lt; #{filter.price1}
         </if>
@@ -173,15 +210,14 @@
     </select>
 
 
-
-<!--    검색할때 상품 리스트 출력 -->
+    <!--    검색할때 상품 리스트 출력 -->
     <select id="selectGoodsListByitemIdList" resultType="Goods" parameterType="java.util.List">
         select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
         WHERE item_id IN
-            <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
-                #{item}
-            </foreach>
+        <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
         limit #{limit} offset #{start}
     </select>
 
@@ -217,7 +253,7 @@
     </select>
 
     <select id="goodsListByIdListAndFilter" resultType="Goods" parameterType="java.util.List">
-        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        select item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
         from ITEM
         WHERE item_id IN
         <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
@@ -254,7 +290,7 @@
     </select>
 
     <select id="countGoodsListByIdListAndFilter" resultType="int">
-        select  count(*)
+        select count(*)
         from ITEM
         WHERE item_id IN
         <foreach item="item" index="index" collection="itemId" open="(" separator="," close=")">
@@ -292,99 +328,142 @@
     </select>
 
 
+    <!--    <select id="sortGoodsListByRegDate" resultType="Goods">-->
+    <!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--        order by reg_dt desc-->
+    <!--        limit #{limit} offset #{start}-->
+    <!--    </select>-->
 
+    <!--    <select id="sortGoodsListByLowPrice" resultType="Goods">-->
+    <!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--        order by price-item_dc_amt asc-->
+    <!--         limit #{limit} offset #{start}-->
+    <!--    </select>-->
 
+    <!--    <select id="sortGoodsListByHighPrice" resultType="Goods">-->
+    <!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--        order by price-item_dc_amt desc-->
+    <!--        limit #{limit} offset #{start}-->
+    <!--    </select>-->
 
+    <!--    <select id="sortGoodsListBySellCnt" resultType="Goods">-->
+    <!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--        order by sell_cnt desc-->
+    <!--        limit #{limit} offset #{start}-->
+    <!--    </select>-->
 
+    <!--    <select id="sortGoodsListByDcRt" resultType="Goods">-->
+    <!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--        order by dc_rt desc-->
+    <!--        limit #{limit} offset #{start}-->
+    <!--    </select>-->
 
-
-
-
-<!--    <select id="sortGoodsListByRegDate" resultType="Goods">-->
-<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--        order by reg_dt desc-->
-<!--        limit #{limit} offset #{start}-->
-<!--    </select>-->
-
-<!--    <select id="sortGoodsListByLowPrice" resultType="Goods">-->
-<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--        order by price-item_dc_amt asc-->
-<!--         limit #{limit} offset #{start}-->
-<!--    </select>-->
-
-<!--    <select id="sortGoodsListByHighPrice" resultType="Goods">-->
-<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--        order by price-item_dc_amt desc-->
-<!--        limit #{limit} offset #{start}-->
-<!--    </select>-->
-
-<!--    <select id="sortGoodsListBySellCnt" resultType="Goods">-->
-<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--        order by sell_cnt desc-->
-<!--        limit #{limit} offset #{start}-->
-<!--    </select>-->
-
-<!--    <select id="sortGoodsListByDcRt" resultType="Goods">-->
-<!--        select  item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--        order by dc_rt desc-->
-<!--        limit #{limit} offset #{start}-->
-<!--    </select>-->
-
-<!--    <select id="countGoodsListByCateCode" resultType="int">-->
-<!--        select count(*)-->
-<!--        from ITEM-->
-<!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
-<!--    </select>-->
+    <!--    <select id="countGoodsListByCateCode" resultType="int">-->
+    <!--        select count(*)-->
+    <!--        from ITEM-->
+    <!--        where cate_code LIKE CONCAT(#{cateCode},'%')-->
+    <!--    </select>-->
 
     <select id="countGoodsListByCateCode" resultType="int">
-            select count(*)
-            from ITEM
-            where cate_code LIKE CONCAT(#{cateCode},'%')
+        select count(*)
+        from ITEM
+        where cate_code LIKE CONCAT(#{cateCode}, '%')
     </select>
+
+
+    <select id="GoodsListByRegDate" resultType="Goods">
+        SELECT
+        item_id, name, exp, price, dc_rt, item_dc_amt, rev_cnt, ship_type
+        FROM
+        ITEM
+        ORDER BY reg_dt DESC
+        LIMIT #{limit} OFFSET #{start}
+    </select>
+
+    <select id="countGoodsListByRegDate" resultType="int">
+        select count(*)
+        from ITEM
+        ORDER BY reg_dt DESC
+    </select>
+
+    <!--리스트 중에 가장 낮은 가격의 상품-->
+    <select id="getLowestPriceGoodsByRegDate" resultType="Goods">
+        select item_id,
+               name,
+               exp,
+               price,
+               dc_rt,
+               item_dc_amt,
+               rev_cnt,
+               ship_type
+        from ITEM
+        ORDER BY price ASC LIMIT 1;
+    </select>
+
+    <!--리스트 중에 가장 높은 가격의 상품-->
+    <select id="getHighestPriceGoodsByRegDate" resultType="Goods">
+        select item_id,
+               name,
+               exp,
+               price,
+               dc_rt,
+               item_dc_amt,
+               rev_cnt,
+               ship_type
+        from ITEM
+        ORDER BY price DESC LIMIT 1;
+    </select>
+
+
+
+
+
+
 
 
     <!-- UPDATE -->
     <update id="update">
         UPDATE item
-        SET name = #{name},
-            exp = #{exp},
-            price = #{price},
-            dc_rt = #{dcRt},
-            item_dc_amt = #{itemDcAmt},
-            origin = #{origin},
-            point_fl = #{pointFl},
-            cpn_elg_fl = #{cpnElgFl},
-            ship_type = #{shipType},
-            seller_name = #{sellerName},
-            pkg_type = #{pkgType},
-            capa = #{capa},
-            sell_unit = #{sellUnit},
-            reg_dt = #{regDt},
+        SET name           = #{name},
+            exp            = #{exp},
+            price          = #{price},
+            dc_rt          = #{dcRt},
+            item_dc_amt    = #{itemDcAmt},
+            origin         = #{origin},
+            point_fl       = #{pointFl},
+            cpn_elg_fl     = #{cpnElgFl},
+            ship_type      = #{shipType},
+            seller_name    = #{sellerName},
+            pkg_type       = #{pkgType},
+            capa           = #{capa},
+            sell_unit      = #{sellUnit},
+            reg_dt         = #{regDt},
             adult_verif_fl = #{adultVerifFl},
-            cate_code = #{cateCode},
-            item_qty = #{itemQty},
-            wish_cnt = #{wishCnt},
-            bsns_no = #{bsnsNo},
-            item_spec = #{itemSpec},
-            sell_cnt = #{sellCnt},
-            rev_cnt = #{revCnt},
+            cate_code      = #{cateCode},
+            item_qty       = #{itemQty},
+            wish_cnt       = #{wishCnt},
+            bsns_no        = #{bsnsNo},
+            item_spec      = #{itemSpec},
+            sell_cnt       = #{sellCnt},
+            rev_cnt        = #{revCnt},
             stdy_seller_fl = #{stdySellerFl}
         WHERE item_id = #{itemId}
     </update>
 
     <!-- DELETE -->
     <delete id="deleteByItemId">
-        DELETE FROM item
+        DELETE
+        FROM item
         WHERE item_id = #{itemId}
     </delete>
 
