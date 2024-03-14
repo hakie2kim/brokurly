@@ -18,6 +18,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     window.onload = () => {
+        const telNo = $('#telNo');
+        const formattedTelNo = telNo.text().replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-****");
+        telNo.text(formattedTelNo);
     }
 </script>
 <body>
@@ -199,10 +202,12 @@
                         class="item-img"
                 />
                 <div class="item-info">
-                    <a data-testid="deal-name" href="/goods/${orderItem.itemId}">[조선호텔김치] 갓김치</a>
+                    <a data-testid="deal-name" href="/goods/${orderItem.itemId}">${orderItem.itemName}</a>
                     <div>
-                        <span class="item-disprice"><fmt:formatNumber value="${orderItem.itemPrice}" pattern="#,###원"/></span>
-                        <span class="item-price"><fmt:formatNumber value="${orderItem.itemPrice}" pattern="#,###원"/></span>
+                        <span class="item-disprice"><fmt:formatNumber value="${orderItem.itemPrice - orderItem.itemDcPrice}" pattern="#,###원"/></span>
+                        <c:if test="${orderItem.itemDcPrice ne 0}">
+                            <span class="item-price"><fmt:formatNumber value="${orderItem.itemPrice}" pattern="#,###원"/></span>
+                        </c:if>
                         <span class="item-amt">${orderItem.itemQty}개</span>
                     </div>
                 </div>
@@ -230,36 +235,59 @@
         </div>
         <ul>
             <li>
-            <span class="column-payment">상품금액</span
-            ><span class="value">51,800<span class="won">원</span></span>
+                <span class="column-payment">상품금액</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.order.orderAmt}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
             <li>
-            <span class="column-payment">배송비</span
-            ><span class="value">0<span class="won">원</span></span>
+                <span class="column-payment">배송비</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.order.shipFee}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
             <li>
-            <span class="column-payment">쿠폰할인</span
-            ><span class="value">-6,734<span class="won">원</span></span>
+                <span class="column-payment">쿠폰할인</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.paymentDetails.paymentAmount.cpnDcAmt}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
             <li>
-            <span class="column-payment">카드즉시할인</span
-            ><span class="value">0<span class="won">원</span></span>
+                <span class="column-payment">카드즉시할인</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.paymentDetails.paymentAmount.cardDcAmt}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
             <li>
-            <span class="column-payment">적립금</span
-            ><span class="value">0<span class="won">원</span></span>
+                <span class="column-payment">적립금</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.paymentDetails.paymentAmount.pointDcAmt}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
             <li>
-            <span class="column-payment">결제금액</span
-            ><span class="value">13,920<span class="won">원</span></span>
+                <span class="column-payment">결제금액</span>
+                <span class="value">
+                    <fmt:formatNumber value="${orderLog.order.orderAmt}" pattern="#,###"/>
+                    <span class="won">원</span>
+                </span>
             </li>
-            <li>
-            <span class="column-payment">환불완료금액</span
-            ><span class="value">31,146<span class="won">원</span></span>
-            </li>
+            <c:if test="${fn:contains(orderLog.paymentDetails.payStat, '취소')}">
+                <li>
+                    <span class="column-payment">환불완료금액</span>
+                    <span class="value">
+                         <fmt:formatNumber value="${orderLog.order.orderAmt}" pattern="#,###"/>
+                        <span class="won">원</span>
+                    </span>
+                </li>
+            </c:if>
             <li>
                 <span class="column-payment">결제방법</span>
-                <div class="value">신용카드</div>
+                <div class="value">${orderLog.paymentDetails.payMthd}</div>
             </li>
             <div class="end-line"></div>
         </ul>
@@ -269,15 +297,16 @@
         <ul>
             <li>
                 <span class="column">주문번호</span>
-                <span class="value">2318222270324</span>
+                <span class="value">${orderLog.order.orderId}</span>
             </li>
             <li>
                 <span class="column">보내는 분</span>
-                <span class="value">갱얼쥐</span>
+                <span class="value">${orderLog.receiverDetails.rcvName}</span>
             </li>
             <li>
                 <span class="column">결제일시</span>
-                <span class="value">2023-09-18 22:28:42</span>
+                <span class="value"><fmt:formatDate value="${orderLog.paymentDetails.payConfDt}"
+                                                    pattern="yyyy-MM-dd HH:mm:SS"/></span>
             </li>
             <div class="end-line"></div>
         </ul>
@@ -287,30 +316,27 @@
         <ul>
             <li>
                 <span class="column">받는 분</span>
-                <span class="value">갱얼쥐</span>
+                <span class="value">${orderLog.receiverDetails.rcvName}</span>
             </li>
             <li>
                 <span class="column">핸드폰</span>
-                <span class="value">010-2288-****</span>
+                <span class="value" id="telNo">${orderLog.receiverDetails.telNo}</span>
             </li>
             <li>
                 <span class="column">주소</span>
-                <span class="value"
-                >(08564) 서울특별시 양천구 강남대로 124 (미왕빌딩) 엘리베이터 옆
-              구덩이</span
-                >
+                <span class="value">${orderLog.receiverDetails.telNo}</span>
             </li>
             <li>
                 <span class="column">받으실 장소</span>
-                <span class="value">문 앞</span>
+                <span class="value">${orderLog.receiverDetails.rcvPlace}</span>
             </li>
             <li>
                 <span class="column">공동현관 출입방법</span>
-                <span class="value">자유 출입 가능</span>
+                <span class="value">${orderLog.receiverDetails.enterMthd}</span>
             </li>
             <li>
                 <span class="column">메시지 전송시점</span>
-                <span class="value">배송 직후</span>
+                <span class="value">${orderLog.receiverDetails.msgTime}</span>
             </li>
             <div class="end-line"></div>
         </ul>

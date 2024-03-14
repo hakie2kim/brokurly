@@ -290,6 +290,7 @@ public class MypageController {
     String orderDetail(@PathVariable String orderId, Model model) {
         OrderLogResponseDto orderLog = orderLogService.showOrderLogDetails(orderId);
         model.addAttribute("orderLog", orderLog);
+        log.info("orderLog = {}", orderLog);
         return "/mypage/order-detail";
     }
 
