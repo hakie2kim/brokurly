@@ -101,9 +101,7 @@ public class SellerController {
 
 
         String loginName = nameDto.getName();
-        String loginId = nameDto.getId();
-        log.info("loginId={}",loginId);
-        session.setAttribute("loginName",loginName);
+        session.setAttribute("sellerName",loginName);
 
 
 

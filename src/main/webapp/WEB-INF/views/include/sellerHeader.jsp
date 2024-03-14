@@ -4,7 +4,7 @@ IntelliJ IDEA. User: sookyung Date: 2024/03/11 Time: 5:43 PM To change this
 template use File | Settings | File Templates. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page session="false"%>
-<c:set var="loginSession" value="${pageContext.request.session.getAttribute('loginName')==null ? '로그인' : pageContext.request.session.getAttribute('loginName')+='님'}"/>
+<c:set var="loginSession" value="${pageContext.request.session.getAttribute('sellerName')==null ? '로그인' : pageContext.request.session.getAttribute('sellerName')+='님'}"/>
 <c:set var="signup" value="${loginSession =='로그인' ? '' : '로그아웃'}"/>
 <html>
 <head>
