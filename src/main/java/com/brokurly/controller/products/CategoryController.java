@@ -36,6 +36,8 @@ public class  CategoryController {
         if (nameDto != null) {
             List<CategoryDto> selectPrimary = categoryService.readPrimary();
             m.addAttribute("selectMain", selectPrimary);
+            m.addAttribute("mode", "new");
+
             log.info("model={}", m);
             log.info("selectPrimary={}", selectPrimary);
 
