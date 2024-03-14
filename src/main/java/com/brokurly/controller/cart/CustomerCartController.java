@@ -109,5 +109,6 @@ public class CustomerCartController {
         customerCartDto.setCustId(custId);
         CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
 
+
     }
 }
