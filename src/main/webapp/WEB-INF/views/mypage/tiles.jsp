@@ -21,7 +21,6 @@
     }
 </script>
 <body>
-<div class="top">
     <div class="tiles">
         <div class="tile1">
             <div class="member">
@@ -89,6 +88,5 @@
             />
         </a>
     </div>
-</div>
 </body>
 </html>

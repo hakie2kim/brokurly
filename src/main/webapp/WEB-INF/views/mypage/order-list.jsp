@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false"%>
+<c:set var="loginName" value="${pageContext.request.session.getAttribute('loginName') += '님'}"/>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -20,9 +22,153 @@
     }
 </script>
 <body>
-<jsp:include page="/WEB-INF/views/mypage/tiles.jsp"/>
+<div class="top">
+    <div class="tiles">
+        <div class="tile1">
+            <div class="member">
+                <div class="grade">일반</div>
+                <div class="info">
+                    <strong class="name">${loginName}</strong>
+                    <div class="grade-check">
+                        <button class="next-month">다음 달 등급 확인</button>
+                        <span>·</span>
+                        <button class="all">전체 등급 확인</button>
+                    </div>
+                </div>
+            </div>
+            <div class="membership">
+                <a href="">
+              <span class="kurly-members">
+                <span class="new">NEW</span>
+                <span class="name">컬리멤버스</span>
+                <span class="benefit">월 1,900원으로 10배 쿠폰 받기</span>
+                <span>></span>
+              </span>
+                </a>
+            </div>
+        </div>
+        <div class="tile2">
+            <div class="box1">
+                <button onclick="location.href='<c:out value="/mypage/point/usage"/>'">
+                    <div class="title">적립금 · 컬리캐시<span>></span></div>
+                    <div class="desc">바로가기<span></span></div>
+                </button>
+            </div>
+            <div class="box2">
+                <button>
+                    <div class="title">쿠폰<span>></span></div>
+                    <div class="desc">1<span>개</span></div>
+                </button>
+            </div>
+            <div class="box3">
+                <button>
+                    <div class="title">나의 컬리 스타일<span>></span></div>
+                    <div class="desc">등록하기</div>
+                </button>
+            </div>
+        </div>
+        <div class="tile3">
+            <div>
+                <button>
+                    <div class="title">컬리퍼플박스<span>></span></div>
+                    <div class="desc">알아보기</div>
+                </button>
+            </div>
+            <div>
+                <button>
+                    <div class="title">컬리멤버스<span>></span></div>
+                    <div class="desc">혜택받기</div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="event">
+        <a>
+            <img
+                    src="https://product-image.kurly.com/cdn-cgi/image/width=1150,quality=85,format=auto/banner/da-banner/e2b2bea9-934b-4ad2-8629-1c4999e5fac4.jpg"
+                    alt="240126 [뷰티][MA] 1월 행운래플"
+            />
+        </a>
+    </div>
+</div>
 <div class="bottom">
-    <jsp:include page="/WEB-INF/views/mypage/sidebar.jsp"/>
+    <div class="sidebar">
+        <div class="name">마이컬리</div>
+        <ul>
+            <li>
+                <a href="<c:out value='/mypage/order/list'/>">주문내역 ></a>
+            </li>
+            <li>
+                <a>선물내역 ></a>
+            </li>
+            <li>
+                <a>자주 사는 상품 ></a>
+            </li>
+            <li>
+                <a href="<c:out value='/mypage/pick/list'/>">찜한상품 ></a>
+            </li>
+            <li>
+                <a href="<c:out value='/mypage/address'/>">배송지 관리 ></a>
+            </li>
+            <li>
+                <a>상품후기 ></a>
+            </li>
+            <li>
+                <a>결제수단 · 컬리페이 ></a>
+            </li>
+            <li>
+                <a>상품 문의 ></a>
+            </li>
+            <li>
+                <a href="<c:out value='/mypage/point/usage'/>">적립금 · 컬리캐시 ></a>
+            </li>
+            <li>
+                <a>쿠폰 ></a>
+            </li>
+            <li>
+                <a>개인 정보 수정 ></a>
+            </li>
+        </ul>
+        <a href="<c:out value='/board/inquiry'/>" class="inquiry">
+            <div class="wrapper">
+                <span class="title">도움이 필요하신가요 ?</span>
+                <span class="desc">1:1 문의하기</span>
+            </div>
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="19"
+                    height="19"
+                    viewBox="0 0 24 24"
+            >
+                <defs>
+                    <path
+                            id="gfk9q0rhta"
+                            d="M1.657 1.657L9.657 1.657 9.657 9.657"
+                    ></path>
+                </defs>
+                <g fill="none" fill-rule="evenodd">
+                    <g>
+                        <g>
+                            <g>
+                                <g
+                                        transform="translate(-339 -398) translate(0 386) translate(339 12) translate(4.69 6.343)"
+                                >
+                                    <use
+                                            stroke="#333"
+                                            stroke-linecap="round"
+                                            stroke-width="1.8"
+                                            stroke-linejoin="round"
+                                            transform="rotate(45 5.657 5.657)"
+                                            xlink:href="#gfk9q0rhta"
+                                    ></use>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </a>
+    </div>
     <div class="content">
         <div class="header">
             <div class="title">
