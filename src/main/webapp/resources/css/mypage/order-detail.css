@@ -385,12 +385,18 @@ span,
     white-space: normal;
 }
 
-.bottom .content .item .item-price {
+.bottom .content .item .item-disprice {
     margin-right: 6px;
     font-weight: bold;
     line-height: 1.5;
     letter-spacing: -0.22px;
     color: rgb(51, 51, 51);
+}
+
+.bottom .content .item .item-price {
+    margin-right: 8px;
+    color: rgb(153, 153, 153);
+    text-decoration: line-through;
 }
 
 .bottom .content .item .item-amt {

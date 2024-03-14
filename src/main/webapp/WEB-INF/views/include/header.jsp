@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/include/header.css'/>"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
         a { /*하이퍼 링크 줄 제거 */
             text-decoration: none !important; /* 밑줄 제거 */
@@ -162,7 +164,7 @@
          custId = ((MemberAndLoginDto) request.getSession().getAttribute("loginMember")).getCustId();
 %>
 <div>
-
+<input class="cartCnt" type="hidden" value="<%= custId %>">
     <div class="head-1">
         <div class="login-wrap">
             <c:if test="${loginSession eq '로그인'}">
@@ -173,10 +175,7 @@
                 <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
             </c:if>
             <c:if test="${loginSession ne '로그인'}">
-                <div class="lg-text3wrap">
-                    <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span
-                            class="css-1lrerrk eo4j3y50"></span
-                    ></a>
+                <div class="lg-text3wrap">${loginSession}<span class="css-1lrerrk eo4j3y50"></span>
                     <div class="menu cs-bar-wrap">
                         <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
                     </div>
@@ -239,13 +238,13 @@
                             type="button"
                     ></button>
                     <div class="cart-icon">
-                        <button class="cart-icon-btn" onclick="location.href='/cart/<%= custId %>'">
-                            <div style="top: 7px; position: absolute; right: 3px;">
-                               <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                                1
-<%--                                <span class="visually-hidden">unread messages</span>--%>
-                              </span>
-                            </div>
+                        <button class="cart-icon-btn" onclick="location.href='/cart/cartList'">
+<%--                            <div class="cart-cnt" style="top: 7px; position: absolute; right: 3px;">--%>
+<%--                               <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">--%>
+<%--                                1--%>
+<%--&lt;%&ndash;                                <span class="visually-hidden">unread messages</span>&ndash;%&gt;--%>
+<%--                              </span>--%>
+<%--                            </div>--%>
                         </button>
                     </div>
                 </div>
@@ -402,7 +401,20 @@
         });
     }
 
+    $(document).ready(function () { //장바구니 개수 로그인 전이면 숨기기
+        let cartCNt = $(".cartCnt").val();
+        if (cartCNt.trim() === "") {
+            $(".position-absolute").hide();
+        } else {
+            $(".position-absolute").show();
+        }
+    });
 
+    $(document).ready(function() {  //브로콜리 로고나 브로컬리 글 누르면 베스트 페이지로
+        $('.mainlogo-img, .css-mxd3pm').on('click', function() {
+            window.location.href = 'http://localhost:8080/categories/best-page';
+        });
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

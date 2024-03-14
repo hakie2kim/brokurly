@@ -11,6 +11,7 @@ import lombok.*;
 public class OrderItems {
     private String orderId;
     private String itemId;
+    private String itemName;
     private int itemQty;
     private int itemPrice;
     private int itemDcPrice;
@@ -27,8 +28,10 @@ public class OrderItems {
         return OrderItemsResponseDto.builder()
                 .orderId(orderId)
                 .itemId(itemId)
+                .itemName(itemName)
                 .itemQty(itemQty)
                 .itemPrice(itemPrice)
+                .itemDcPrice(itemDcPrice)
                 .build();
     }
 }

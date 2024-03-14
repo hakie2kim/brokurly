@@ -4,6 +4,7 @@ import com.brokurly.entity.order.Order;
 import com.brokurly.entity.order.OrderAndPayment;
 import com.brokurly.entity.order.OrderItems;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public interface OrderDao {
     List<OrderItems> selectItemList(String orderId);
 
     // UPDATE
+    int updateOrderStatus(@Param("orderStat") String status, @Param("orderId") String orderId);
 
     // DELTE
     int deleteById(String orderId);
