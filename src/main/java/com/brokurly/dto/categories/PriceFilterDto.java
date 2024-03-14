@@ -11,7 +11,10 @@ import lombok.*;
 public class PriceFilterDto {
 
     String priceFilterNum;
+    String shipType1;
+    String shipType2;
     int price1;
     int price2;
     int price3;
+
 }

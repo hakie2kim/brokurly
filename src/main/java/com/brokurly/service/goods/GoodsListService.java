@@ -110,6 +110,8 @@ public class GoodsListService {
 
         filter = PriceFilterDto.builder()
                 .priceFilterNum(filter.getPriceFilterNum())
+                .shipType1(filter.getShipType1())
+                .shipType2(filter.getShipType2())
                 .price1(criteria[0])
                 .price2(criteria[1])
                 .price3(criteria[2])
@@ -141,6 +143,8 @@ public class GoodsListService {
         int[] criteria = criteriaForPriceFilter(cateCode);
         filter = PriceFilterDto.builder()
                 .priceFilterNum(filter.getPriceFilterNum())
+                .shipType1(filter.getShipType1())
+                .shipType2(filter.getShipType2())
                 .price1(criteria[0])
                 .price2(criteria[1])
                 .price3(criteria[2])
@@ -172,14 +176,44 @@ public class GoodsListService {
 
 
 
+    public List<GoodsListDto> ReadGoodsListByRegDate (int page){
 
+        int start = GOODS_PER_PAGE*(page-1);
+        List<Goods> goodsList = goodsDao.GoodsListByRegDate(GOODS_PER_PAGE, start);
+        List<GoodsListDto> goodsListDto = new ArrayList<>();
 
+        for(Goods goods : goodsList){
+            GoodsListDto dto = goods.makeGoodsList();
+            String img = goodsImageDao.getThumbnailByItemId(dto.getItemId());
+            dto.setImg(img);
+            goodsListDto.add(dto);
+        }
 
+        return goodsListDto;
+    }
 
+    public int countGoodsListByRegDate(){
+        return goodsDao.countGoodsListByRegDate();
+    }
 
+    public int[] criteriaForPriceFilterByRegDate(){
 
+        Goods lowestPriceGoods = goodsDao.getLowestPriceGoodsByRegDate();
+        Goods highestPriceGoods = goodsDao.getHighestPriceGoodsByRegDate();
 
+        GoodsListDto lowestPriceDto = lowestPriceGoods.makeGoodsList();
+        GoodsListDto highestPriceDto = highestPriceGoods.makeGoodsList();
 
+        int lowestPrice = lowestPriceDto.getDisPrice();
+        int highestPrice = highestPriceDto.getDisPrice();
 
+        int interval = (highestPrice - lowestPrice)/4;
+
+        int[] criteria = new int[3];
+        for (int i = 0; i < 3; i++) {
+            criteria[i] = (lowestPrice + interval * (i + 1))/100*100;
+        }
+        return criteria;
+    }
 
 }

@@ -103,7 +103,10 @@ public class CustomerCartController {
 
     @PostMapping("/vacate")
     @ResponseBody
-    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto) {
+    public void vacateCart(@ModelAttribute CustomerCartDto customerCartDto, HttpSession session) {
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        String custId = custIdDto.getCustId();
+        customerCartDto.setCustId(custId);
         CustomerCartDto cartDto = customerCartService.vacateCart(customerCartDto);
 
     }

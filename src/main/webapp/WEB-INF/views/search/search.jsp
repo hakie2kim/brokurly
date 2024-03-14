@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: munnahye
@@ -44,7 +45,7 @@
         }
         .css-1qfsi3d {
             font-weight: 500;
-            color: rgb(95, 0, 128);
+            color: #11967f;
         }
         .css-mmvz9h {
             font-weight: 400;
@@ -728,20 +729,24 @@
                             <div class="css-1kpzrna e1c07x489">
                                 <span class="css-1qd61ut e1ms5t9c1">
                                     <span class="css-1vdqr5b e1ms5t9c0">${goodsListDto.shipType}</span></span>
-                                <span class="css-1dry2r1 e1c07x488">${goodsListDto.name}</span>
-                                <p class="css-1wejlc3 e1c07x486">${goodsListDto.exp}</p>
+                                <span class="css-1dry2r1 e1c07x488 goodslistdto-name">${goodsListDto.name}</span>
+                                <p class="css-1wejlc3 e1c07x486 goodslistdto-exp">${goodsListDto.exp}</p>
                                 <div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">
                                     <div>
-                                        <c:if test="${goodsListDto.dcRt} != 0">
-                                        <span class="dimmed-price css-18tpqqq ei5rudb1">${goodsListDto.price}
+                                        <c:if test="${goodsListDto.dcRt ne '0'}">
+                                        <span class="dimmed-price css-18tpqqq ei5rudb1 goodslistdto-price">
+                                                <fmt:formatNumber value="${goodsListDto.price}"
+                                                                  pattern="#,###"/>
                                             <span class="won">원</span></span>
                                         </c:if>
                                     </div>
                                     <div class="discount">
-                                        <c:if test="${goodsListDto.dcRt} != 0">
+                                        <c:if test="${goodsListDto.dcRt ne '0'}">
                                         <span class="discount-rate css-19lkxd2 ei5rudb0">${goodsListDto.dcRt}%</span>
                                         </c:if>
-                                        <span class="sales-price css-18tpqqq ei5rudb1">${goodsListDto.disPrice}
+                                        <span class="sales-price css-18tpqqq ei5rudb1 goodslistdto-disprice">
+                                                <fmt:formatNumber value="${goodsListDto.disPrice}"
+                                                                  pattern="#,###"/>
                                             <span class="won">원</span></span>
                                     </div>
                                 </div>
@@ -763,6 +768,74 @@
                     </c:forEach>
                     <%--상품 정보 끝--%>
                 </div>
+
+
+
+                <%-- 모달창시작--%>
+                <div role="presentation" class="MuiModal-root MuiDialog-root css-98q5jm">
+                    <div aria-hidden="true" class="MuiBackdrop-root css-919eu4"
+                         style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"></div>
+                    <div tabindex="0" data-test="sentinelStart"></div>
+                    <div class="MuiDialog-container MuiDialog-scrollPaper css-ekeie0" role="presentation" tabindex="-1"
+                         style="opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;">
+                        <div class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-uhb5lp"
+                             role="dialog" aria-labelledby="customized-dialog-title">
+                            <div class="css-qfuix0 e1xnucib5">
+                                <div class="css-96wx9m e1xnucib4"><span
+                                        style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;"><img
+                                        alt="상품 이미지" sizes="100vw"
+                                        srcset="https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 640w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 750w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 828w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1080w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1200w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 1920w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 2048w, https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg 3840w"
+                                        src="https://img-cf.kurly.com/shop/data/goods/1637154387515l0.jpg"
+                                        decoding="async" data-nimg="fill" class="css-0"
+                                        style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: cover;"></span>
+                                </div>
+                                <div class="css-1p7augg e1xnucib3"><span
+                                        class="css-1n9elca e1xnucib2 modal-item-name">[KF365] 햇감자 1kg</span></div>
+                            </div>
+                            <div class="css-hjdyv5 e1xnucib1">
+                                <div class="css-kiebmq e1b27mtb8">
+                                    <div class="css-1066lcq e1b27mtb7"><span
+                                            class="css-rsi182 e1b27mtb6 modal-item-name">[KF365] 감자 1kg</span></div>
+                                    <div class="css-e7dd1m e1b27mtb5 modal-item-exp">적립제외상품</div>
+                                    <div class="css-2fwlel e1b27mtb4">
+                                        <div class="css-23v5d0 e1b27mtb3"><span
+                                                class="css-1kl4at5 e1b27mtb2 modal-item-disprice">6,120원</span><span
+                                                class="css-pblsth e1b27mtb1 modal-item-price">6,590원</span></div>
+                                        <div class="e1b27mtb0 css-2q9wxp e1cqr3m40">
+                                            <button type="button" aria-label="수량내리기"
+                                                    class="css-8azp8 e1hx75jb0 subtract-item-cnt"></button>
+                                            <div class="count css-6m57y0 e1cqr3m41 modal-item-cnt">1</div>
+                                            <button type="button" aria-label="수량올리기"
+                                                    class="css-18y6jr4 e1hx75jb0 add-item-cnt"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="css-1ovj4tx e1xnucib0">
+                                <div class="css-1fttcpj e9qarb89">
+                                    <div class="css-1066lcq e9qarb88"><p class="css-1sl7ome e9qarb87">합계</p>
+                                        <div><span class="css-1qdap1a e9qarb86 modal-item-disprice-final">6,120</span>
+                                            <span class="css-xq0an6 e9qarb85">원</span>
+                                        </div>
+                                    </div>
+                                    <%--                                    <div class="css-1gtuyqu e9qarb84"><span class="css-111b0mc e9qarb83">적립</span><span--%>
+                                    <%--                                            class="css-10qpvf7 e9qarb80">로그인 후, 적립 혜택 제공</span></div>--%>
+                                </div>
+                            </div>
+                            <div class="css-1toes8l e1vslu8h0">
+                                <button class="exist-modal css-1w3nh5f e4nu7ef3" type="button" height="56"><span
+                                        class="css-nytqmg e4nu7ef1">취소</span></button>
+                                <button class="put-in-cart-2 css-ahkst0 e4nu7ef3" type="button" height="56"><span
+                                        class="css-nytqmg e4nu7ef1">장바구니 담기</span></button>
+                                <div class="item-id" style="display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div tabindex="0" data-test="sentinelEnd"></div>
+                </div>
+                <%--            모달창 끝 --%>
+
+
 
 
             </div>
@@ -840,6 +913,105 @@
 
 <script>
 
+    // 상품리스트 모달창
+    $(".MuiModal-root").hide();
+
+    $(document).on("click", ".button-wrapper", function (event) {
+
+        event.preventDefault();
+        let aTag = $(this).closest('a');
+
+        //상품 태그에서 정보 가지고오기
+        let itemName = aTag.find('.goodslistdto-name').text();
+        let itemExp = aTag.find('.goodslistdto-exp').text();
+        let itemDisPrice = aTag.find('.goodslistdto-disprice').text();
+        let itemPrice = aTag.find('.goodslistdto-price').text();
+        let itemId = aTag.attr('href').replace("/goods/", "");
+
+        //모달창 태그로 상품 정보 넣기
+        $(".modal-item-name").text(itemName);
+        $(".modal-item-exp").text(itemExp);
+        $(".modal-item-disprice").text(itemDisPrice);
+        $(".modal-item-price").text(itemPrice);
+        $(".modal-item-disprice-final").text((itemDisPrice).replace('원', ''));
+        $(".item-id").text(itemId);
+
+        $(".MuiModal-root").show();
+    });
+
+    // 모달창 끄기
+    $(".exist-modal").click(function () {
+        $(".MuiModal-root").fadeOut();
+        $('.modal-item-cnt').text("1");
+    });
+
+    // 상품 수량 올림 버튼
+    $(".add-item-cnt").click(function () {
+
+        let itemCntNumber = parseInt($('.modal-item-cnt').text());
+        itemCntNumber++;
+        let disprice = $(".modal-item-disprice").text().replace(",", "");
+        $('.modal-item-cnt').text(itemCntNumber);
+        $(".modal-item-disprice-final").text((parseInt(disprice) * itemCntNumber).toLocaleString());
+    });
+
+    //상품 수량 내림 버튼
+    $(".subtract-item-cnt").click(function () {
+
+        let itemCntNumber = parseInt($('.modal-item-cnt').text());
+        if (itemCntNumber !== 1) {
+            itemCntNumber--;
+            let disprice = $(".modal-item-disprice").text().replace(",", "");
+            $('.modal-item-cnt').text(itemCntNumber);
+            $(".modal-item-disprice-final").text((parseInt(disprice) * itemCntNumber).toLocaleString());
+        }
+    });
+
+    //모달창 장바구니 담기 눌렀을때 보낼 데이터
+    const form = {
+        <%--custId : '${customer.custId}',--%>
+        itemId: '',
+        // itemId: "1233",
+        //custId: 'hakie2kim',
+        itemCnt: '',
+        itemCk: 'N'
+    }
+    // 모달창 장바구니 담기 클릭했을 때
+    $(".put-in-cart-2").click(function () {
+        form.itemCnt = parseInt($('.modal-item-cnt').text());
+        form.itemId = $(".item-id").text();
+        $.ajax({
+            url: '/cart/add',
+            type: 'POST',
+            data: form,
+            dataType: "text",
+            // data: {
+            //     custId: "hong",
+            //     itemId: "1234",
+            //     itemCnt: $(".quantity_input").val()
+            // },
+            success: function (result) {
+
+                cartAlert(result);
+                $(".MuiModal-root").hide();
+                $('.modal-item-cnt').text("1")
+            }
+        })
+    });
+
+    function cartAlert(result) {
+        if (result == '0') {
+            alert("장바구니에 추가를 하지 못하였습니다.");
+        } else if (result == '1') {
+            alert("장바구니에 추가되었습니다.");
+        } else if (result == '2') {
+            alert("장바구니에 이미 추가되어져 있습니다.");
+        } else if (result == '5') {
+            alert("로그인이 필요합니다.");
+        }
+    }
+
+
     //가격필터 기준 계산하기
     let numbers = ['${criteria[0]}', '${criteria[1]}', '${criteria[2]}'];
 
@@ -913,19 +1085,19 @@
                 previousButton = button; //현재버튼을 이전버튼으로
 
                 if(className.includes('price-filter-1')){
-                    paths.attr('fill', '#5f0080');
+                    paths.attr('fill', '#11967f');
                     PriceFilterNum=1;
                 }
                 if(className.includes('price-filter-2')){
-                    paths.attr('fill', '#5f0080');
+                    paths.attr('fill', '#11967f');
                     PriceFilterNum=2;
                 }
                 if(className.includes('price-filter-3')){
-                    paths.attr('fill', '#5f0080');
+                    paths.attr('fill', '#11967f');
                     PriceFilterNum=3;
                 }
                 if(className.includes('price-filter-4')){
-                    paths.attr('fill', '#5f0080');
+                    paths.attr('fill', '#11967f');
                     PriceFilterNum=4;
                 }
                 page=1;
@@ -1015,7 +1187,7 @@
 
 
     function readGoodsListHTML(goods) {
-        const itemHTML = '<a href="/goods/' + goods.itemId + '" class="css-9o2zup e1c07x4813">'
+        let itemHTML = '<a href="/goods/' + goods.itemId + '" class="css-9o2zup e1c07x4813">'
             + '<div class="css-0 e1c07x4811">' + '<div class="e1c07x4812 css-tou8lf e3um3060">'
             + '<span style="'
             + 'box-sizing: border-box;'
@@ -1099,27 +1271,31 @@
             + '<span class="css-1vdqr5b e1ms5t9c0">'
             + goods.shipType
             + '</span></span>'
-            + '<span class="css-1dry2r1 e1c07x488">'
+            + '<span class="css-1dry2r1 e1c07x488 goodslistdto-name">'
             + goods.name
             + '</span>'
-            + '<p class="css-1wejlc3 e1c07x486">'
+            + '<p class="css-1wejlc3 e1c07x486 goodslistdto-exp">'
             + goods.exp
             + '</p>'
             + '<div class="e1c07x487 discount-price css-1tl7659 ei5rudb2">'
-            + '<div>'
-            + '<span class="dimmed-price css-18tpqqq ei5rudb1">'
-            + goods.price
-            + '<span class="won">'
-            + '원'
-            + '</span>'
-            + '</span>'
-            + '</div>'
-            + '<div class="discount">'
-            + '<span class="discount-rate css-19lkxd2 ei5rudb0">'
-            + goods.dcRt + '%'
-            + '</span>'
-            + '<span class="sales-price css-18tpqqq ei5rudb1">'
-            + goods.disPrice
+            + '<div>';
+        if (goods.dcRt !== 0) {
+            itemHTML += '<span class="dimmed-price css-18tpqqq ei5rudb1 goodslistdto-price">'
+                + goods.price.toLocaleString()
+                + '<span class="won">'
+                + '원'
+                + '</span>'
+                + '</span>';
+        }
+        itemHTML += '</div>'
+            + '<div class="discount">';
+        if (goods.dcRt !== 0) {
+            itemHTML += '<span class="discount-rate css-19lkxd2 ei5rudb0">'
+                + goods.dcRt + '%'
+                + '</span>';
+        }
+        itemHTML += '<span class="sales-price css-18tpqqq ei5rudb1 goodslistdto-disprice">'
+            + goods.disPrice.toLocaleString()
             + '<span class="won">' + '원'
             + '</span></span>'
             + '</div>'
@@ -1248,128 +1424,6 @@
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // function addQueryString(text) {
-
-    //
-    //     var storageKey = 'filter_' + text;
-    //     if (localStorage.getItem(storageKey) == null) {
-    //         localStorage.setItem(storageKey, '0');
-    //     }
-    //     var clickCnt = localStorage.getItem(storageKey);
-    //     var url = window.location.href;
-    //
-    //     var result;
-    //     var encodedText = encodeURIComponent(text); // 미리 encode 해두기
-    //     console.log(clickCnt);
-    //
-    //     if (clickCnt === '0') {
-    //         if (!url.includes('filters')) {
-    //             if (!url.includes(encodedText)) {
-    //                 result = url + '&filters=delivery_type' + encodeURIComponent(':') + encodedText;
-    //             } else {
-    //                 result = url;
-    //             }
-    //         } else {
-    //             if (!url.includes(encodedText)) {
-    //                 result = url + encodeURIComponent(',') + encodedText;
-    //             } else {
-    //                 result = url;
-    //             }
-    //         }
-    //         clickCnt = '1';
-    //
-    //     } else if (clickCnt === '1') {
-    //         if (url.includes(encodedText + encodeURIComponent(','))) {
-    //             result = url.replace(encodedText + encodeURIComponent(','), "");
-    //         } else if (url.includes(encodeURIComponent(',') + encodedText)) {
-    //             result = url.replace(encodeURIComponent(',') + encodedText, "");
-    //         } else {
-    //             result = url.replace('&filters=delivery_type%3A' + encodedText, "");
-    //         }
-    //         clickCnt = '0';
-    //
-    //     }
-    //     localStorage.setItem(storageKey, clickCnt);
-    //     window.location.href = result;
-    //
-    // }
-
-
-    // let clickCnt =0
-    //
-    // function addQueryString(text){
-    //
-    //     var url = window.location.href;
-    //     var result;
-    //
-    //
-    //
-    //
-    //     if(clickCnt===0) {
-    //         if (!url.includes('filters')) {
-    //             if (!url.includes(text)) {
-    //
-    //                 result = url + '&filters=delivery_type' + encodeURIComponent(':' + text);
-    //                 console.log(clickCnt);
-    //             } else {
-    //                 result = url;
-    //             }
-    //         } else {
-    //             if (!url.includes(text)) {
-    //
-    //                 result = url + encodeURIComponent(',' + text);
-    //             } else {
-    //                 result = url;
-    //             }
-    //         }
-    //         clickCnt=1;
-    //
-    //
-    //     }
-    //      else if(clickCnt===1){
-    //          if(!url.includes(encodeURIComponent(','))){
-    //
-    //              result = url.replace('delivery_type%3A' + encodeURIComponent(text), "");
-    //          }
-    //          else{
-    //
-    //              result = url.replace( encodeURIComponent(','+text), "");
-    //          }
-    //
-    //
-    //          clickCnt =0;
-    //      }
-    //
-    //     window.location.href = result;
-    //
-    // }
 
 
 </script>
