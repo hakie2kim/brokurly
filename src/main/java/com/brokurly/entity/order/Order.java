@@ -56,6 +56,7 @@ public class Order {
                 .orderAmt(orderAmt)
                 .shipFee(shipFee)
                 .shipLocaId(shipLocaId)
+                .addr(addr)
                 .shipNo(shipNo)
                 .build();
     }
