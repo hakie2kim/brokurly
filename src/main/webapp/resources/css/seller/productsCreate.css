@@ -5,6 +5,7 @@
 
 .seller-sub-frame {
     position: relative;
+    left:-50px;
 }
 ui-view {
     display: block;
@@ -329,6 +330,7 @@ textarea {
 
 .form-inline {
     margin-bottom: -10px;
+    width:300px;
 }
 .form-inline .form-group .form-group:last-child,
 .form-inline .form-group .form-inline {

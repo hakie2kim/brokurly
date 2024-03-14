@@ -175,10 +175,7 @@
                 <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}</a>
             </c:if>
             <c:if test="${loginSession ne '로그인'}">
-                <div class="lg-text3wrap">
-                    <a class="lg-text" href="<c:url value='/member/login'/>">${loginSession}<span
-                            class="css-1lrerrk eo4j3y50"></span
-                    ></a>
+                <div class="lg-text3wrap">${loginSession}<span class="css-1lrerrk eo4j3y50"></span>
                     <div class="menu cs-bar-wrap">
                         <div class="cscenter-bar"><a href="<c:out value='/member/logout'/>">로그아웃</a></div>
                     </div>
