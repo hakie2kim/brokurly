@@ -79,14 +79,18 @@ public class GoodsController {
         int result = goodsService.deleteWish(wishListDto); //String 이기에 int값 먼저 넣어줌
         return new ResponseEntity<>(result + "", HttpStatus.OK);
     }
+//
+//    @PostMapping("/dateSort")
+//    @ResponseBody
+//    public ResponseEntity<List<GoodsReviewBoardDto>> sortReview(@ModelAttribute GoodsReviewBoardDto goodsReviewBoardDto, String itemId, Model model, HttpSession session) {
+//        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//        String custId = custIdDto.getCustId();
+//        goodsReviewBoardDto.setCustId(custId);
+//        List<GoodsReviewBoardDto> review = goodsService.sortReview(itemId);
+//        model.addAttribute("review", review);
+//        return new ResponseEntity<>(review, HttpStatus.OK);
+//    }
 
-//  @PostMapping("/dateSort")
-//  @ResponseBody
-//  public void sortReview(String itemId, Model model) {
-//    List<GoodsReviewBoardDto> review = goodsService.sortReview(itemId);
-//    model.addAttribute("review", review);
-////    return "goods/goods";
-//  }
 
 
 //    @PostMapping("/updateLikeCount")
