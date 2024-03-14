@@ -1,10 +1,7 @@
 package com.brokurly.controller.goods;
 
 
-import com.brokurly.dto.goods.GoodsAnnouncementDto;
-import com.brokurly.dto.goods.GoodsDetailDto;
-import com.brokurly.dto.goods.GoodsInquiryLogDto;
-import com.brokurly.dto.goods.GoodsReviewBoardDto;
+import com.brokurly.dto.goods.*;
 import com.brokurly.dto.member.MemberAndLoginDto;
 import com.brokurly.dto.mypage.WishListDto;
 import com.brokurly.entity.goods.GoodsReviewBoard;
@@ -50,7 +47,8 @@ public class GoodsController {
 
         GoodsDetailDto goods = goodsService.searchGoods(itemId);  // 상품정보
         GoodsAnnouncementDto announcement = goodsService.searchGoodsAnnouncement(itemId); //상품고시정보
-//    GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
+        GoodsImageDto goodsImage = goodsService.searchGoodsImage(itemId); //상품 이미지
+        List<GoodsImageDto> imgList = goodsService.searchGoodsImageList(itemId); //상품 이미지
         List<GoodsInquiryLogDto> inquiry = goodsService.searchGoodsInquiryLog(itemId);  //상품 문의사항
         int wishList = goodsService.searchWish(itemId, custId); //상품 찜
         List<GoodsReviewBoardDto> review = goodsService.searchReview(itemId);
@@ -58,8 +56,8 @@ public class GoodsController {
         model.addAttribute("custId",custId);
         model.addAttribute("goods", goods);
         model.addAttribute("announcement", announcement);
-//    model.addAttribute("goodsImage", goodsImage);
-
+        model.addAttribute("goodsImage", goodsImage);
+        model.addAttribute("imgList", imgList);
         model.addAttribute("inquiry", inquiry);
         model.addAttribute("wishList", wishList);
         model.addAttribute("review", review);
