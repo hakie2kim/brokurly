@@ -7,9 +7,9 @@
     <!-- CREATE -->
     <insert id="insert">   <!--3. SQL 이름이랑 넣을값 이름 맞춤? -->
         INSERT INTO cart
-            (item_id, cust_id, item_cnt, item_ck)
+            (item_id, cust_id, item_cnt)
         VALUES
-            (#{itemId}, #{custId}, #{itemCnt}, #{itemCk})
+            (#{itemId}, #{custId}, #{itemCnt})
     </insert>
 
     <!-- READ -->

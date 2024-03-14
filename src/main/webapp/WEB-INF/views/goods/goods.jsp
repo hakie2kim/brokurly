@@ -1534,7 +1534,8 @@ const form = {
     <%--custId : '${customer.custId}',--%>
     itemId: '${goods.itemId}',
     custId: 'hong',
-    itemCnt: ''
+    itemCnt: '',
+    itemCk: 'N'
 }
 // 장바구니 추가 버튼
 $(".btn_cart").on("click", function (e) {
