@@ -15,7 +15,7 @@
     <script>
         window.onload = () => {
             $(".show-order").on("click", () => {
-                window.location.href = "/mypage/order";
+                window.location.href = "/mypage/order/list";
             });
 
             $(".go-shopping").on("click", () => {

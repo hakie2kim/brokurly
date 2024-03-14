@@ -47,4 +47,8 @@ public class PaymentService {
     public PaymentDetailsResponseDto findPaymentLogByOrderId(String orderId) {
         return paymentDao.selectByOrderId(orderId).toResponseDto();
     }
+
+    public void changePaymentStatus(String status, String tid) {
+        paymentDao.updatePayStat(status, tid);
+    }
 }
