@@ -111,7 +111,6 @@ public class OrderService {
         orderDao.updateOrderStatus(status, orderId);
     }
 
-    @Deprecated
     @Transactional
     public void cancelOrder(String orderId) {
         orderDao.deleteById(orderId);
