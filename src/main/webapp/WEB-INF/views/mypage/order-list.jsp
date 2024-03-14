@@ -185,12 +185,13 @@
             </div>
         </div>
         <div class="order-list">
-            <c:if test="${orderCnt ne 0}">
-                <c:forEach var="order" items="orderList">
+            <c:if test="${orderLogCnt ne 0}">
+                <c:forEach var="orderLog" items="${orderLogList}">
                     <div class="order">
                         <div class="title">
-                            <span><fmt:formatDate value="${order.orderDt}" pattern="yyyy.MM.dd (HH'시' mm'분')"/></span>
-                            <a>주문내역 상세보기</a>
+                            <span><fmt:formatDate value="${orderLog.order.orderDt}"
+                                                  pattern="yyyy.MM.dd (HH'시' mm'분')"/></span>
+                            <a href="/mypage/order/${orderLog.order.orderId}">주문내역 상세보기</a>
                         </div>
                         <div class="desc">
                             <div class="desc1">
@@ -202,25 +203,26 @@
                                     <dl class="css-1ccl3pq e1437c646">
                                         <dt class="css-dzjp62 e1437c645">상품명</dt>
                                         <dd class="css-1o8e829 e1437c643">
-                                            [조선호텔김치] 갓김치 외 1건
+                                            ${orderLog.itemName}
                                         </dd>
                                     </dl>
                                     <dl class="css-1ccl3pq e1437c646">
                                         <dt class="css-dzjp62 e1437c645">주문번호</dt>
-                                        <dd class="css-1i58pf4 e1437c644">${order.orderId}</dd>
+                                        <dd class="css-1i58pf4 e1437c644">${orderLog.order.orderId}</dd>
                                     </dl>
-                                    <%--<dl class="css-1ccl3pq e1437c646">
+                                    <dl class="css-1ccl3pq e1437c646">
                                         <dt class="css-dzjp62 e1437c645">결제방법</dt>
-                                        <dd class="css-1i58pf4 e1437c644">신용카드</dd>
-                                    </dl>--%>
+                                        <dd class="css-1i58pf4 e1437c644">${orderLog.payMthd}</dd>
+                                    </dl>
                                     <dl class="css-1ccl3pq e1437c646">
                                         <dt class="css-dzjp62 e1437c645">결제금액</dt>
-                                        <dd class="css-1i58pf4 e1437c644"><fmt:formatNumber value="${order.totalPrice}" pattern="#,### 원"/></dd>
+                                        <dd class="css-1i58pf4 e1437c644"><fmt:formatNumber
+                                                value="${orderLog.order.totalPrice}" pattern="#,###원"/></dd>
                                     </dl>
                                 </div>
                             </div>
                             <div class="desc2">
-                                <span class="deli-stat">${order.orderStat}</span>
+                                <span class="deli-stat">${orderLog.order.orderStat}</span>
                                 <div style="width: 96px">
                                     <button>
                                         <span>1:1 문의</span>
@@ -231,14 +233,14 @@
                     </div>
                 </c:forEach>
             </c:if>
-            <c:if test="${orderCnt eq 0}">
+            <c:if test="${orderLogCnt eq 0}">
                 <div class="warning-orders">
-                  <div class="wrapper">
-                    <p>3개월 간의 주문내역이 없습니다.</p>
-                    <button>
-                      <span>베스트 상품 보기</span>
-                    </button>
-                  </div>
+                    <div class="wrapper">
+                        <p>3개월 간의 주문내역이 없습니다.</p>
+                        <button>
+                            <span>베스트 상품 보기</span>
+                        </button>
+                    </div>
                 </div>
             </c:if>
         </div>

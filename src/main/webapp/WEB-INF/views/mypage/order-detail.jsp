@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -173,43 +174,46 @@
         <div class="title">
             <h2>주문 내역 상세</h2>
         </div>
-        <div class="box">
-            <div class="deli-stat">
-            <span class="date">
-              <span>09/19(화)</span> 배송 완료되었습니다.
-            </span>
-                <p class="time">배송완료 시간 04:44</p>
+        <c:if test="${fn:contains(orderLog.order.orderStat, '배송')}">
+            <div class="box">
+                <div class="deli-stat">
+                    <span class="date">
+                      <span>09/19(화)</span> 배송 완료되었습니다.
+                    </span>
+                    <p class="time">배송완료 시간 04:44</p>
+                </div>
             </div>
-        </div>
+        </c:if>
         <div class="header">
-            <h3>주문번호 <span>2318222270324</span></h3>
+            <h3>주문번호 <span>${orderLog.order.orderId}</span></h3>
             <span class="inquiry">
             배송 또는 상품에 문제가 있나요?
             <a href="/mypage/inquiry/list"> 1:1 문의 ></a>
           </span>
         </div>
-        <div class="item">
-            <img
-                    src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1657530497306l0.jpg"
-                    alt="[조선호텔김치] 갓김치"
-                    class="item-img"
-            />
-            <div class="item-info">
-                <a data-testid="deal-name" href="/goods/5156430"
-                >[조선호텔김치] 갓김치</a
-                >
-                <div>
-                    <span class="item-price">16,000원</span>
-                    <span class="item-amt">1개</span>
+        <c:forEach var="orderItem" items="${orderLog.orderItemList}">
+            <div class="item">
+                <img
+                        src="https://img-cf.kurly.com/cdn-cgi/image/width=120,height=156,fit=crop,quality=85/shop/data/goods/1657530497306l0.jpg"
+                        alt="[조선호텔김치] 갓김치"
+                        class="item-img"
+                />
+                <div class="item-info">
+                    <a data-testid="deal-name" href="/goods/${orderItem.itemId}">[조선호텔김치] 갓김치</a>
+                    <div>
+                        <span class="item-disprice"><fmt:formatNumber value="${orderItem.itemPrice}" pattern="#,###원"/></span>
+                        <span class="item-price"><fmt:formatNumber value="${orderItem.itemPrice}" pattern="#,###원"/></span>
+                        <span class="item-amt">${orderItem.itemQty}개</span>
+                    </div>
+                </div>
+                <span class="deli-stat">${orderLog.order.orderStat}</span>
+                <div class="button-wrapper">
+                    <button width="96" height="36" radius="3">
+                        <span>장바구니 담기</span>
+                    </button>
                 </div>
             </div>
-            <span class="deli-stat">배송완료</span>
-            <div class="button-wrapper">
-                <button width="96" height="36" radius="3">
-                    <span>장바구니 담기</span>
-                </button>
-            </div>
-        </div>
+        </c:forEach>
         <div class="entire-items">
             <button>
                 <span>전체 상품 다시 담기</span>
