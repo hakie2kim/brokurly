@@ -20,13 +20,13 @@
     }
 </script>
 <body>
-<div class="top">
+<%--<div class="top">
     <div class="tiles">
         <div class="tile1">
             <div class="member">
                 <div class="grade">일반</div>
                 <div class="info">
-                    <strong class="name">정충교님</strong>
+                    <strong class="name">${loginSession}</strong>
                     <div class="grade-check">
                         <button class="next-month">다음 달 등급 확인</button>
                         <span>·</span>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="membership">
-                <a href="/member/membership">
+                <a href="">
               <span class="kurly-members">
                 <span class="new">NEW</span>
                 <span class="name">컬리멤버스</span>
@@ -47,7 +47,7 @@
         </div>
         <div class="tile2">
             <div class="box1">
-                <button>
+                <button onclick="location.href='/mypage/point/usage'">
                     <div class="title">적립금 · 컬리캐시<span>></span></div>
                     <div class="desc">바로가기<span></span></div>
                 </button>
@@ -81,22 +81,21 @@
         </div>
     </div>
     <div class="event">
-        <a
-                href="https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2024/0111/lucky"
-        >
+        <a>
             <img
-                    src="https://product-image.kurly.com/cdn-cgi/image/width=1150,quality=85,format=auto/banner/da-banner/e2b2bea9-934b-4ad2-8629-1c4999e5fac4.jpg"
-                    alt="240126 [뷰티][MA] 1월 행운래플"
+                src="https://product-image.kurly.com/cdn-cgi/image/width=1150,quality=85,format=auto/banner/da-banner/e2b2bea9-934b-4ad2-8629-1c4999e5fac4.jpg"
+                alt="240126 [뷰티][MA] 1월 행운래플"
             />
         </a>
     </div>
-</div>
+</div>--%>
+<jsp:include page="/WEB-INF/views/mypage/tiles.jsp"/>
 <div class="bottom">
     <div class="sidebar">
         <div class="name">마이컬리</div>
         <ul>
             <li>
-                <a>주문내역 ></a>
+                <a href="/mypage/order/list">주문내역 ></a>
             </li>
             <li>
                 <a>선물내역 ></a>
@@ -105,10 +104,10 @@
                 <a>자주 사는 상품 ></a>
             </li>
             <li>
-                <a>찜한상품 ></a>
+                <a href="/mypage/pick/list">찜한상품 ></a>
             </li>
             <li>
-                <a>배송지 관리 ></a>
+                <a href="/mypage/address">배송지 관리 ></a>
             </li>
             <li>
                 <a>상품후기 ></a>
@@ -120,7 +119,7 @@
                 <a>상품 문의 ></a>
             </li>
             <li>
-                <a>적립금 · 컬리캐시 ></a>
+                <a href="/mypage/point/usage">적립금 · 컬리캐시 ></a>
             </li>
             <li>
                 <a>쿠폰 ></a>
@@ -203,7 +202,7 @@
                                     <dl class="css-1ccl3pq e1437c646">
                                         <dt class="css-dzjp62 e1437c645">상품명</dt>
                                         <dd class="css-1o8e829 e1437c643">
-                                            ${orderLog.itemName}
+                                                ${orderLog.itemName}
                                         </dd>
                                     </dl>
                                     <dl class="css-1ccl3pq e1437c646">
