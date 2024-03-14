@@ -54,17 +54,16 @@ public class CustomerCartController {
     /* 장바구니 페이지 이동 */
     @GetMapping("/cartList")
     public String cartPageGET( Model model, HttpSession session) {
-        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        String custId = custIdDto.getCustId();
 
+        MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (custIdDto == null)
+            return "login-check";
+        String custId = custIdDto.getCustId();
 
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
         List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
-//        if (custId == null) {
-//            // 로그인 페이지로 리다이렉트
-//            return "redirect:/member/login";
-//        }
+
 
         // 이제는 새로운 CustomerCartDto 객체를 생성하여 값을 설정합니다.
         model.addAttribute("cart", cart);
