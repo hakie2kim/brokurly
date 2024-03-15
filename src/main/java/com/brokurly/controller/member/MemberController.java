@@ -140,7 +140,7 @@ public class MemberController {
      * @return String
      */
     @PostMapping("/login")
-    public String login(@Valid MemberAndLoginDto memberAndLoginDto, String reqURI, Errors errors, HttpServletResponse res, HttpServletRequest req, Model model, RedirectAttributes Ra){
+    public String login(@Valid MemberAndLoginDto memberAndLoginDto, String reqURI, Errors errors, HttpSession session, Model model, RedirectAttributes Ra){
         // 비밀번호는 암호화 처리 되어있음.
 
         // 1. 로그인 정보 넘어오면 유효성 확인
@@ -171,7 +171,7 @@ public class MemberController {
         }
 
         // 3. 일치하면 세션에 저장
-        HttpSession session = req.getSession();
+//        HttpSession session = req.getSession();
         //  3-1. 세션 있으면 있는 세션 반환, 없으면
         //  신규 생성 후 메인 이동 (기본값 true)
         session.setAttribute(SessionConst.LOGIN_MEMBER, resultLoginDto);
@@ -186,7 +186,7 @@ public class MemberController {
 //        Ra.addFlashAttribute("loginName",loginName);
 //        return "redirect:/categories/best-page" *** db 연결 후 수정;
         // 4. reqURL 여부에 따른 이동
-        reqURI = reqURI == null || reqURI.equals("") ? "/categories/best-page" : reqURI;
+        reqURI = reqURI == null || reqURI.equals("") ? "/market-newproduct" : reqURI;
 
         if (!"/categories/best-page".equals(reqURI)) {
             Pattern pattern = Pattern.compile("[ㄱ-ㅎㅏ-ㅣ가-힣]+");
@@ -210,17 +210,17 @@ public class MemberController {
 
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest req){
+    public String logout(HttpSession session){
         // create : false > 세션이 있으면 기존 세션을 반환하고,
         // 없으면 새로운 세션을 생성하지 않고 null을 반환한다
-        HttpSession session = req.getSession(false);
+//        HttpSession session = req.getSession(false);
 
         if(session != null){
             session.invalidate();
 
         }
 
-        return "redirect:/categories/best-page";
+        return "redirect:/market-newproduct";
 
 //        return "redirect:/";
     }

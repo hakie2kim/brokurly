@@ -128,7 +128,7 @@
               </button>
             </h4>
             <div id="content2">
-              <c:forEach items="${cart}" var="ci">
+              <c:forEach items="${cart}" var="ci" varStatus="status">
                 <c:if test="${ci.pkgType =='냉동'}">
                   <ul class="ul">
                     <li class="cart-8">
@@ -152,7 +152,7 @@
                         <%--                    </div>--%>
                       <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
                         <span class="css-1f44rj5">
-                            <%--                          <img src="/resources/image/goodsImage/${imgMap[ci.itemid]}" alt="">--%>
+                          <img src="/resources/image/goodsImage/${imgList[status.index].img}" alt="">
                         </span>
                       </a>
                       <div class="css-14sb0pe">
@@ -202,7 +202,7 @@
               </button>
             </h4>
             <div id="content3">
-              <c:forEach items="${cart}" var="ci">
+              <c:forEach items="${cart}" var="ci" varStatus="status">
                 <c:if test="${ci.pkgType =='상온'}">
                   <ul class="ul">
                     <li class="cart-8">
@@ -223,7 +223,9 @@
                       <input type="hidden" class="individual_checkbox_input" value="${ci.itemCk}">
 
                       <a href="http://localhost:8080/goods/${ci.itemId}" class="css-1u5t3pw">
-                        <span class="css-1f44rj5"></span>
+                        <span class="css-1f44rj5">
+                          <img src="/resources/image/goodsImage/${imgList[status.index].img}" alt="">
+                        </span>
                       </a>
                       <div class="css-14sb0pe">
                         <a href="http://localhost:8080/goods/${ci.itemId}"

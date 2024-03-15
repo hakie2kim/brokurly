@@ -48,8 +48,13 @@ public class SellerController {
     //local login start
 
     @GetMapping("/login")
-    public String login(){
-        return "/seller/loginForm";
+    public String login(HttpSession session){
+
+        if(session.getAttribute("sellerName") == null){
+            return "/seller/loginForm";
+        }
+
+        return "redirect:/seller/productsOriginList";
     }
 
     /**
@@ -57,13 +62,11 @@ public class SellerController {
      * @param sellerAndLoginDto
      * @param reqURI
      * @param errors
-     * @param res
-     * @param req
      * @param model
      * @return String
      */
     @PostMapping("/login")
-    public String login(@Valid SellerAndLoginDto sellerAndLoginDto, String reqURI, Errors errors, HttpServletResponse res, HttpServletRequest req, Model model, RedirectAttributes Ra){
+    public String login(@Valid SellerAndLoginDto sellerAndLoginDto, String reqURI, Errors errors,HttpSession session, Model model){
 
             log.info("sellerAndLoginDto = {}", sellerAndLoginDto);
         // 1. 로그인 정보 넘어오면 유효성 확인
@@ -94,7 +97,7 @@ public class SellerController {
         }
 
         // 3. 일치하면 세션에 저장
-        HttpSession session = req.getSession();
+//        HttpSession session = req.getSession();
         //  3-1. 세션 있으면 있는 세션 반환, 없으면 신규 생성 후 메인 이동 (기본값 true)
         session.setAttribute(SessionConst.LOGIN_SELLER, resultLoginDto);
         SellerAndLoginDto nameDto = (SellerAndLoginDto) session.getAttribute(SessionConst.LOGIN_SELLER);
@@ -103,10 +106,6 @@ public class SellerController {
         String loginName = nameDto.getName();
         session.setAttribute("sellerName",loginName);
 
-
-
-
-//        Ra.addFlashAttribute("loginName",loginName);
 
         // 4. reqURL 여부에 따른 이동
         reqURI = reqURI == null || reqURI.equals("") ? "/seller/productsOriginList" : reqURI;

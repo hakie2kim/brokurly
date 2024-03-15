@@ -19,6 +19,7 @@
         ORDER BY bno DESC
         LIMIT 1
     </select>
+
     <select id="selectSortedList" resultType="FAQBoard">
         SELECT *
         FROM FAQ_BOARD
@@ -26,6 +27,7 @@
         ORDER BY bno DESC
 
     </select>
+
     <select id="selectAllFAQList" resultType="FAQBoard">
         SELECT *
         FROM FAQ_BOARD

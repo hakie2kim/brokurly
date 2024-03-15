@@ -143,7 +143,7 @@
                     </a>
                 </li>
             </ul>
-            <a href="/mypage/inquiry/list" class="css-196gwz9 e19l01ug3"
+            <a href="/board/inquiry" class="css-196gwz9 e19l01ug3"
             >
                 <div class="css-rmee6s e19l01ug2">
                 <span class="css-1sdidca e19l01ug1">도움이 필요하신가요 ?</span

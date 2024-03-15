@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: atomosphere
@@ -134,7 +135,7 @@
                             </g></svg                        ></a>
                     </li>
                 </ul>
-                <a href="/mypage/inquiry/list" class="css-196gwz9 e19l01ug3"
+                <a href="/board/inquiry" class="css-196gwz9 e19l01ug3"
                 ><div class="css-rmee6s e19l01ug2">
                             <span class="css-1sdidca e19l01ug1"
                             >도움이 필요하신가요 ?</span
@@ -185,6 +186,57 @@
                     <div width="100" class="css-16tcewl e16adls20">답변상태</div>
                 </div>
                 <ul class="css-1fttcpj e1cfowvj5">
+                    <c:forEach var="inquiry" items="${InquiryDtoList}">
+                    <li class="css-e0dnmk e1cfowvj3">
+                        <div class="css-nfcc9b e1cfowvj4">
+                            <div class="css-wqw6mu e1cfowvj2">
+                                <div class="css-4l2co e1vd1n2i2">${inquiry.title}</div>
+                            </div>
+                            <div class="css-8e1vc1 e1cfowvj2">
+                                <span class="css-14kcwq8 e1vd1n2i1">${inquiry.regDt}</span>
+                            </div>
+                            <div class="css-8e1vc1 e1cfowvj2">
+                                <span color="#999" class="css-14kcwq8 e1hz5ei00">${inquiry.ansStat}</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="css-d3v9zr e1cfowvj0" style="opacity: 1; height: auto;">
+                        <div class="css-br5cai e1vd1n2i0">
+                            <div class="css-193iudv e94cdlt1">
+                                <span class="css-16ts9vc e94cdlt0">${inquiry.majorCate}</span>
+                                <span class="css-a5dfz6 ecg7plp0"></span>
+                                <span class="css-16ts9vc e94cdlt0">${inquiry.subCate}</span>
+                            </div>
+                            <div class="css-zjik7 e82q4qc4">
+                                <span class="css-1ylw081 e1kayg9i0"></span>
+                                <div class="css-145c1ga e82q4qc3">
+                                    <span type="QUESTION" class="css-190bjnp e82q4qc2">${inquiry.content}</span><br>
+                                    <div class="css-1kl96ir ewad2cu1"></div>
+                                </div>
+                            </div>
+                            <div class="css-1oe9o3r eula2qn2">
+                                <button type="button" class="css-qv4hdm eula2qn1">수정</button>
+                                <div class="css-ord49b eula2qn0"></div>
+                                <button type="button" class="css-qv4hdm eula2qn1">삭제</button>
+                            </div>
+<%--                            답변 답변 있으면 보여주고, 아니면 생략--%>
+<%--                            <div class="css-1tsgnig e1vtrp070">--%>
+<%--                                <div class="css-b41fnw etpoi034">--%>
+<%--                                    <div class="css-1i2xt0r etpoi030">--%>
+<%--                                        <span class="css-1non6l6 ey0f1wv0"></span>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="css-wm215i etpoi033">--%>
+<%--                                        <span type="ANSWER" class="css-kfh61x etpoi032">${답변내용}</span><br>--%>
+<%--                                        <div class="css-iqoq9n e1b9s61w0"></div>--%>
+<%--                                        <div class="css-1kna94k etpoi031">${답변날짜}</div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            답변 끝--%>
+                        </div>
+                    </li>
+                    </c:forEach>
+
                     <li class="css-e0dnmk e1cfowvj3">
                         <div class="css-nfcc9b e1cfowvj4">
                             <div class="css-wqw6mu e1cfowvj2">
@@ -264,7 +316,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
+<%--                <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>--%>
                 <div class="css-15jhycr e3tf63e0">
                     <button
                             class="css-1ibxj4m e4nu7ef3"

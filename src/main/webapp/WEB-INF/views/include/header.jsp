@@ -421,7 +421,7 @@
 
     $(document).ready(function() {  //브로콜리 로고나 브로컬리 글 누르면 베스트 페이지로
         $('.mainlogo-img, .css-mxd3pm').on('click', function() {
-            window.location.href = 'http://localhost:8080/categories/best-page';
+            window.location.href = 'http://localhost:8080/market-newproduct';
         });
     });
 </script>

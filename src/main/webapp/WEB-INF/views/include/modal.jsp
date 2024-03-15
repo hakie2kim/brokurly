@@ -26,7 +26,7 @@
                 <div class="msg-div"></div>
             </div>
             <div class="css-1toes8l e1vslu8h0">
-                <button class="exist-modal css-1w3nh5f e4nu7ef3" type="button" height="56"><span
+                <button class="exist-modal modal-btn e4nu7ef3" type="button" height="56"><span
                         class="css-nytqmg e4nu7ef1">닫기</span></button>
             </div>
         </div>
