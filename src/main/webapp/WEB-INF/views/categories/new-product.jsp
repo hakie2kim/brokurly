@@ -707,15 +707,15 @@
                         inset: 0px;
                       ">
                                     <img alt="상품 이미지" sizes="100vw" srcset="
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  640w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  750w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  828w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1080w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1200w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1920w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 2048w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 3840w"
-                                         src="https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg"
+                                        /resources/image/goodsImage/${goodsListDto.img}  640w,
+                                        /resources/image/goodsImage/${goodsListDto.img}  750w,
+                                        /resources/image/goodsImage/${goodsListDto.img}  828w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1080w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1200w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1920w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 2048w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 3840w"
+                                         src="/resources/image/goodsImage/${goodsListDto.img}"
                                          decoding="async" data-nimg="fill" class="css-0" style="
                           position: absolute;
                           inset: 0px;
@@ -945,6 +945,7 @@
         let itemDisPrice = aTag.find('.goodslistdto-disprice').text();
         let itemPrice = aTag.find('.goodslistdto-price').text();
         let itemId = aTag.attr('href').replace("/goods/", "");
+        let itemImg = aTag.find('img').attr('srcset');
 
         //모달창 태그로 상품 정보 넣기
         $(".modal-item-name").text(itemName);
@@ -953,6 +954,7 @@
         $(".modal-item-price").text(itemPrice);
         $(".modal-item-disprice-final").text((itemDisPrice).replace('원', ''));
         $(".item-id").text(itemId);
+        $('.css-96wx9m.e1xnucib4 img').attr('srcset', itemImg);
 
         $(".MuiModal-root").show();
     });
@@ -992,7 +994,8 @@
         // itemId: "1233",
         custId: 'hakie2kim',
         itemCnt: '',
-        itemCk: 'N'
+        itemCk: 'N',
+        uri: window.location.pathname
     }
     // 모달창 장바구니 담기 클릭했을 때
     $(".put-in-cart-2").click(function () {
@@ -1219,15 +1222,15 @@
             + 'padding: 0px;'
             + 'position: absolute;'
             + 'inset: 0px;">'
-            + '<img alt="상품 이미지" sizes="100vw" srcset='
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  640w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  750w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  828w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1080w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1200w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1920w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 2048w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 3840w"'
+            + '<img alt="상품 이미지" sizes="100vw" srcset="'
+            + '/resources/image/goodsImage/'+goods.img +' 640w,'
+            + '/resources/image/goodsImage/'+goods.img +' 750w,'
+            + '/resources/image/goodsImage/'+goods.img +' 828w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1080w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1200w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1920w,'
+            + '/resources/image/goodsImage/'+goods.img +' 2048w,'
+            + '/resources/image/goodsImage/'+goods.img +' 3840w,'
             + 'src="https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg"'
             + 'decoding="async" data-nimg="fill" class="css-0"'
             + 'style="'
@@ -1382,6 +1385,7 @@
             },
             success: function (response) {
                 let sortedGoodsList = response.sortedGoodsList;
+                let goodsListDto = response.goodsListDto;
                 let readGoodsLisByFilter = response.readGoodsLisByFilter;
                 let containerForSort = $('.best-itemlist');
                 containerForSort.html(" ");
@@ -1398,7 +1402,7 @@
                 // itemHTML=sortedGoodsList.map(readGoodsListHTML);
 
                 // if(PriceFilterNum!=null){
-                itemHTML = readGoodsLisByFilter.map(readGoodsListHTML);
+                itemHTML = goodsListDto.map(readGoodsListHTML);
                 // }
 
                 containerForSort.append(itemHTML);

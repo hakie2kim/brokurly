@@ -689,15 +689,15 @@
                         inset: 0px;
                       ">
                                     <img alt="상품 이미지" sizes="100vw" srcset="
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  640w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  750w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  828w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1080w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1200w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1920w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 2048w,
-                                        https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 3840w"
-                                         src="https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg"
+                                        /resources/image/goodsImage/${goodsListDto.img}  640w,
+                                        /resources/image/goodsImage/${goodsListDto.img}  750w,
+                                        /resources/image/goodsImage/${goodsListDto.img}  828w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1080w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1200w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 1920w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 2048w,
+                                        /resources/image/goodsImage/${goodsListDto.img} 3840w"
+                                         src="/resources/image/goodsImage/${goodsListDto.img}"
                                          decoding="async" data-nimg="fill" class="css-0" style="
                           position: absolute;
                           inset: 0px;
@@ -927,6 +927,7 @@
         let itemDisPrice = aTag.find('.goodslistdto-disprice').text();
         let itemPrice = aTag.find('.goodslistdto-price').text();
         let itemId = aTag.attr('href').replace("/goods/", "");
+        let itemImg = aTag.find('img').attr('srcset');
 
         //모달창 태그로 상품 정보 넣기
         $(".modal-item-name").text(itemName);
@@ -935,6 +936,7 @@
         $(".modal-item-price").text(itemPrice);
         $(".modal-item-disprice-final").text((itemDisPrice).replace('원', ''));
         $(".item-id").text(itemId);
+        $('.css-96wx9m.e1xnucib4 img').attr('srcset', itemImg);
 
         $(".MuiModal-root").show();
     });
@@ -974,12 +976,15 @@
         // itemId: "1233",
         //custId: 'hakie2kim',
         itemCnt: '',
-        itemCk: 'N'
+        itemCk: 'N',
+        uri: window.location.pathname
     }
     // 모달창 장바구니 담기 클릭했을 때
     $(".put-in-cart-2").click(function () {
         form.itemCnt = parseInt($('.modal-item-cnt').text());
         form.itemId = $(".item-id").text();
+        alert(sword);
+        form.uri += "?sword=" + encodeURIComponent(sword);
         $.ajax({
             url: '/cart/add',
             type: 'POST',
@@ -991,6 +996,11 @@
             //     itemCnt: $(".quantity_input").val()
             // },
             success: function (result) {
+                // result += "?sword="+sword;
+                alert(result);
+                if (result.includes("/search")) {
+                    window.location.href = "/login-check?redirectURI=" + result;
+                }
 
                 cartAlert(result);
                 $(".MuiModal-root").hide();
@@ -1000,13 +1010,13 @@
     });
 
     function cartAlert(result) {
-        if (result == '0') {
+        if (result === '0') {
             alert("장바구니에 추가를 하지 못하였습니다.");
-        } else if (result == '1') {
+        } else if (result === '1') {
             alert("장바구니에 추가되었습니다.");
-        } else if (result == '2') {
+        } else if (result === '2') {
             alert("장바구니에 이미 추가되어져 있습니다.");
-        } else if (result == '5') {
+        } else if (result === '5') {
             alert("로그인이 필요합니다.");
         }
     }
@@ -1202,15 +1212,15 @@
             + 'padding: 0px;'
             + 'position: absolute;'
             + 'inset: 0px;">'
-            + '<img alt="상품 이미지" sizes="100vw" srcset='
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  640w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  750w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg  828w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1080w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1200w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 1920w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 2048w,'
-            + 'https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg 3840w"'
+            +'<img alt="상품 이미지" sizes="100vw" srcset="'
+            + '/resources/image/goodsImage/'+goods.img +' 640w,'
+            + '/resources/image/goodsImage/'+goods.img +' 750w,'
+            + '/resources/image/goodsImage/'+goods.img +' 828w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1080w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1200w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1920w,'
+            + '/resources/image/goodsImage/'+goods.img +' 2048w,'
+            + '/resources/image/goodsImage/'+goods.img +' 3840w,'
             + 'src="https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg"'
             + 'decoding="async" data-nimg="fill" class="css-0"'
             + 'style="'
