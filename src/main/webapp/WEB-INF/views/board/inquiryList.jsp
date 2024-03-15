@@ -293,23 +293,23 @@
                                     </div>
                                     <div class="css-wm215i etpoi033">
                                         <span type="ANSWER" class="css-kfh61x etpoi032">안녕하세요. 고객님</span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">먼저, 바쁜 일상 속 컬리를 이용해 주심에 있어 감사 인사드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">먼저, 바쁜 일상 속 컬리를 이용해 주심에 있어 감사 인사드립니다. 🙇🏻&zwj;♂️</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">컬리의 결제수단 방법으로는 장바구니에 주문서 담으신 후 결제 진행 시, 주문서 단계에서 결제 수단 확인 후 결제 진행이 가능합니다</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">저희 <strong><span style="color: rgb(65, 168, 95);">브로컬리</span></strong>의 결제수단 방법으로는 장바구니에 원하는 상품들을 담으신 후 결제 진행시, 주문서 단계에서 결제 수단 확인 후 결제 진행이 가능합니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">순서대로 카카오페이, 컬리페이, 신용카드, 간편결제 (네이버페이/토스/페이코), 휴대폰 결제수단으로 이루어져 있습니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">순서대로 <strong><span style="color: rgb(250, 197, 28);">카카오페이</span></strong>, <span style="color: rgb(65, 168, 95);"><strong>브로콜리</strong></span> 교환으로 이루어져 있습니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">이 중 카카오페이나, 간편결제 수단 중 네이버페이,토스,페이코 중 결제 수단 선택 시 해당 결제수단 PG 결제창으로 이동되며, 결제 완료 진행 후 다시 컬리 주문서로 돌아와주시면 됩니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">이 중 카카오페이 같은 간편결제 수단 선택시 해당 결제수단 PG 결제창으로 이동되며, 결제완료 진행 후 다시 주문서로 돌아와주시면 됩니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">컬리페이 또한 하나의 결제 수단으로 컬리 어필 &gt; 하단의 사람모양 버튼 &gt; 마이컬리 &gt; 쇼핑 &gt; 결제수단.컬리페이 &gt; 결제수단 관리 에서 계좌 추가 또는 신용/체크카드 본인인증 후 결제 수단 등록해주시면 추후 주문/결제 시 컬리페이 수단으로 결제 진행이 가능한점 안내드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">또한, 저희는 <u>브로콜리를 하나의 화폐로 인정</u>하여, 결제수단에서 브로콜리 교환으로 선택이 가능합니다.<br>주문 완료 6시간 이내에 담당 브로콜리 회수팀이 자택을 방문해 수거 예정이니, <strong><span style="color: rgb(184, 49, 47);">정확한 자택 주소를 입력하셨는지 다시 한번 확인</span></strong>부탁드립니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032">하여, 고객님꼐서 평소 이용하시는 결제 수단으로 선택 후 결제 부탁드립니다.</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032">하여, 편하신 결제 수단으로 선택 후 결제 부탁드립니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032"></span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032">글로 전달드린 답변이 딱딱하게 느껴지셨을까 염려되는 마음입니다.</span><br>
                                         <span type="ANSWER" class="css-kfh61x etpoi032">안내 드린 내용 외 추가 확인이 필요하신 경우 문의 남겨주신다면 신속하게 확인하여 안내 하도록 하겠습니다.</span><br>
-                                        <span type="ANSWER" class="css-kfh61x etpoi032"></span><br><span type="ANSWER" class="css-kfh61x etpoi032">컬리 김슬비 드림</span><br>
+                                        <span type="ANSWER" class="css-kfh61x etpoi032"><p style="text-align: right;"><strong><span style="color: rgb(65, 168, 95);">브로컬리</span></strong> 프로 상담사 정윤호 올림</p></span><br>
                                         <div class="css-iqoq9n e1b9s61w0"></div>
-                                        <div class="css-1kna94k etpoi031">2024.03.13</div>
+                                        <div class="css-1kna94k etpoi031"><p style="text-align: right;">2024.03.13</p>  </div>
                                     </div>
                                 </div>
                             </div>

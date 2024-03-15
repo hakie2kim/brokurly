@@ -484,27 +484,27 @@
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
-                                            <a href="/board/faqboard?catecode=101" class="css-u6h51f e1tpwzmg0">취소/교환/환불</a>
+                                            <a href="/board/faqboard?page=0&catecode=101" class="css-u6h51f e1tpwzmg0">취소/교환/환불</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
-                                            <a href="/board/faqboard?catecode=102" class="css-u6h51f e1tpwzmg0">선물하기</a>
+                                            <a href="/board/faqboard?page=0&catecode=102" class="css-u6h51f e1tpwzmg0">선물하기</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
-                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="MEMBER">
-                                            <a href="/board/faqboard?catecode=103" class="css-u6h51f e1tpwzmg0">포장</a>
+                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
+                                            <a href="/board/faqboard?page=0&catecode=103" class="css-u6h51f e1tpwzmg0">포장</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
-                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
-                                            <a href="/board/faqboard?catecode=104" class="css-u6h51f e1tpwzmg0">회원</a>
+                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
+                                            <a href="/board/faqboard?page=0&catecode=104" class="css-u6h51f e1tpwzmg0">회원</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
-                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
-                                            <a href="/board/faqboard?catecode=105" class="css-u6h51f e1tpwzmg0">이벤트/쿠폰/적립금</a>
+                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
+                                            <a href="/board/faqboard?page=0&catecode=105" class="css-u6h51f e1tpwzmg0">이벤트/쿠폰/적립금</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
-                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
-                                            <a href="/board/faqboard?catecode=106" class="css-u6h51f e1tpwzmg0">시스템 오류</a>
+                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
+                                            <a href="/board/faqboard?page=0&catecode=106" class="css-u6h51f e1tpwzmg0">시스템 오류</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                     </ul>
