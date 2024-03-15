@@ -484,23 +484,27 @@
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
-                                            <p class="css-u6h51f e1tpwzmg0">취소/교환/환불</p>
+                                            <a href="/board/faqboard?catecode=101" class="css-u6h51f e1tpwzmg0">취소/교환/환불</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="TOP">
-                                            <p class="css-u6h51f e1tpwzmg0">선물하기</p>
+                                            <a href="/board/faqboard?catecode=102" class="css-u6h51f e1tpwzmg0">선물하기</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="MEMBER">
-                                            <p class="css-u6h51f e1tpwzmg0">포장</p>
+                                            <a href="/board/faqboard?catecode=103" class="css-u6h51f e1tpwzmg0">포장</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
-                                            <p class="css-u6h51f e1tpwzmg0">회원</p>
+                                            <a href="/board/faqboard?catecode=104" class="css-u6h51f e1tpwzmg0">회원</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                         <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
-                                            <p class="css-u6h51f e1tpwzmg0">이벤트/쿠폰/적립금</p>
+                                            <a href="/board/faqboard?catecode=105" class="css-u6h51f e1tpwzmg0">이벤트/쿠폰/적립금</a>
+                                            <span class="MuiTouchRipple-root css-w0pj6f"></span>
+                                        </li>
+                                        <li class="MuiMenuItem-root MuiMenuItem-gutters MuiButtonBase-root css-1n71h99" tabindex="-1" role="option" aria-selected="false" data-value="ORDER">
+                                            <a href="/board/faqboard?catecode=106" class="css-u6h51f e1tpwzmg0">시스템 오류</a>
                                             <span class="MuiTouchRipple-root css-w0pj6f"></span>
                                         </li>
                                     </ul>

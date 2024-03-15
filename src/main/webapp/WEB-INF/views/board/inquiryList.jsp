@@ -196,7 +196,7 @@
                                 <span class="css-14kcwq8 e1vd1n2i1">${inquiry.regDt}</span>
                             </div>
                             <div class="css-8e1vc1 e1cfowvj2">
-                                <span color="#5f0080" class="css-1kxzrwz e1hz5ei00">${inquiry.ansStat}</span>
+                                <span color="#999" class="css-14kcwq8 e1hz5ei00">${inquiry.ansStat}</span>
                             </div>
                         </div>
                     </li>
@@ -213,6 +213,11 @@
                                     <span type="QUESTION" class="css-190bjnp e82q4qc2">${inquiry.content}</span><br>
                                     <div class="css-1kl96ir ewad2cu1"></div>
                                 </div>
+                            </div>
+                            <div class="css-1oe9o3r eula2qn2">
+                                <button type="button" class="css-qv4hdm eula2qn1">수정</button>
+                                <div class="css-ord49b eula2qn0"></div>
+                                <button type="button" class="css-qv4hdm eula2qn1">삭제</button>
                             </div>
 <%--                            답변 답변 있으면 보여주고, 아니면 생략--%>
 <%--                            <div class="css-1tsgnig e1vtrp070">--%>
@@ -311,7 +316,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>
+<%--                <div class="css-l0r8ps e1cfowvj1">게시글이 없습니다.</div>--%>
                 <div class="css-15jhycr e3tf63e0">
                     <button
                             class="css-1ibxj4m e4nu7ef3"

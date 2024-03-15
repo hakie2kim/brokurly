@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import retrofit2.http.HTTP;
 
 import javax.mail.Session;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -97,8 +98,11 @@ public class CSCenterController {
     }
 
     @RequestMapping("/inquiry")
-    public String inquiry(HttpSession session, Model model) {
+    public String inquiry(HttpSession session, HttpServletRequest request, Model model) {
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if (custIdDto == null) {
+            return "redirect:/login-check?redirectURI=" + request.getRequestURI();
+        }
         String custId = custIdDto.getCustId();
         List<InquiryDto> inquiryDtoList = inquiryService.getOneCustInquiryList(custId);
         model.addAttribute("InquiryDtoList", inquiryDtoList);
