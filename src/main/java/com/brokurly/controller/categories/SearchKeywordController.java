@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,12 +40,15 @@ public class SearchKeywordController {
     public String searchPage(Model model, HttpSession session,
                              @RequestParam(required = false) String codeId,
                              @RequestParam(required = false) Integer page,
-                             @RequestParam(required = false) String sword) {
+                             @RequestParam(required = false) String sword) throws UnsupportedEncodingException {
 
         List<CategoryDto> selectMain = (List<CategoryDto>) session.getAttribute("selectMain");
         model.addAttribute("selectMain",selectMain);
 
         List<GoodsListDto> goodsListDto;
+        log.info("sword = {}", sword);
+//        sword = URLEncoder.encode(sword, StandardCharsets.UTF_8);
+//        log.info("sword = {}", sword);
         model.addAttribute("sword",sword);
 
         List<String> itemIdList = searchKeywordService.readItemIdList(sword);

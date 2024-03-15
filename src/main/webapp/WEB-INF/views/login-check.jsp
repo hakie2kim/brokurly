@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/payment/cancel.css'/>"/>
     <script>
         function redirect(uri) {
+            uri = encodeURIComponent(uri);
+            alert("login-check = " + uri);
             window.location.href = "/member/login?redirectURL=" + uri;
         }
     </script>

@@ -976,12 +976,15 @@
         // itemId: "1233",
         //custId: 'hakie2kim',
         itemCnt: '',
-        itemCk: 'N'
+        itemCk: 'N',
+        uri: window.location.pathname
     }
     // 모달창 장바구니 담기 클릭했을 때
     $(".put-in-cart-2").click(function () {
         form.itemCnt = parseInt($('.modal-item-cnt').text());
         form.itemId = $(".item-id").text();
+        alert(sword);
+        form.uri += "?sword=" + encodeURIComponent(sword);
         $.ajax({
             url: '/cart/add',
             type: 'POST',
@@ -993,6 +996,11 @@
             //     itemCnt: $(".quantity_input").val()
             // },
             success: function (result) {
+                // result += "?sword="+sword;
+                alert(result);
+                if (result.includes("/search")) {
+                    window.location.href = "/login-check?redirectURI=" + result;
+                }
 
                 cartAlert(result);
                 $(".MuiModal-root").hide();
@@ -1002,13 +1010,13 @@
     });
 
     function cartAlert(result) {
-        if (result == '0') {
+        if (result === '0') {
             alert("장바구니에 추가를 하지 못하였습니다.");
-        } else if (result == '1') {
+        } else if (result === '1') {
             alert("장바구니에 추가되었습니다.");
-        } else if (result == '2') {
+        } else if (result === '2') {
             alert("장바구니에 이미 추가되어져 있습니다.");
-        } else if (result == '5') {
+        } else if (result === '5') {
             alert("로그인이 필요합니다.");
         }
     }

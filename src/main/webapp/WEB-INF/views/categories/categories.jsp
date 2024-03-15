@@ -821,8 +821,6 @@
 
     $(document).on("click", ".button-wrapper", function (event) {
 
-
-
         event.preventDefault();
         let aTag = $(this).closest('a');
 

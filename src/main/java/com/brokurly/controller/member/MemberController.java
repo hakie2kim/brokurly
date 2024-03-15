@@ -16,11 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import retrofit2.http.Path;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +28,8 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -184,11 +184,27 @@ public class MemberController {
         session.setAttribute("loginName",loginName);
 //        session.setAttribute("custId",custId);
 //        Ra.addFlashAttribute("loginName",loginName);
-
 //        return "redirect:/categories/best-page" *** db 연결 후 수정;
         // 4. reqURL 여부에 따른 이동
         reqURI = reqURI == null || reqURI.equals("") ? "/categories/best-page" : reqURI;
 
+        if (!"/categories/best-page".equals(reqURI)) {
+            Pattern pattern = Pattern.compile("[ㄱ-ㅎㅏ-ㅣ가-힣]+");
+            Matcher matcher = pattern.matcher(reqURI);
+
+            StringBuilder result = new StringBuilder();
+            while (matcher.find()) {
+                String koreanText = matcher.group();
+                try {
+                    String encodedText = URLEncoder.encode(koreanText, "UTF-8");
+                    matcher.appendReplacement(result, encodedText);
+                } catch (UnsupportedEncodingException e) {
+                    System.err.println("Unsupported encoding: " + e.getMessage());
+                }
+            }
+            matcher.appendTail(result);
+            reqURI = result.toString();
+        }
         return "redirect:"+reqURI;
     }
 

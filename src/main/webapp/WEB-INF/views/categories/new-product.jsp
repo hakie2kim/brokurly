@@ -994,7 +994,8 @@
         // itemId: "1233",
         custId: 'hakie2kim',
         itemCnt: '',
-        itemCk: 'N'
+        itemCk: 'N',
+        uri: window.location.pathname
     }
     // 모달창 장바구니 담기 클릭했을 때
     $(".put-in-cart-2").click(function () {
@@ -1221,16 +1222,16 @@
             + 'padding: 0px;'
             + 'position: absolute;'
             + 'inset: 0px;">'
-            + '<img alt="상품 이미지" sizes="100vw" srcset='
-            + '/resources/image/goodsImage/'+goods.img +'640w,'
-            + '/resources/image/goodsImage/'+goods.img +'750w,'
-            + '/resources/image/goodsImage/'+goods.img +'828w,'
-            + '/resources/image/goodsImage/'+goods.img +'1080w,'
-            + '/resources/image/goodsImage/'+goods.img +'1200w,'
-            + '/resources/image/goodsImage/'+goods.img +'1920w,'
-            + '/resources/image/goodsImage/'+goods.img +'2048w,'
-            + '/resources/image/goodsImage/'+goods.img +'3840w,'
-            + 'src="/resources/image/goodsImage/'+goods.img+'"'
+            + '<img alt="상품 이미지" sizes="100vw" srcset="'
+            + '/resources/image/goodsImage/'+goods.img +' 640w,'
+            + '/resources/image/goodsImage/'+goods.img +' 750w,'
+            + '/resources/image/goodsImage/'+goods.img +' 828w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1080w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1200w,'
+            + '/resources/image/goodsImage/'+goods.img +' 1920w,'
+            + '/resources/image/goodsImage/'+goods.img +' 2048w,'
+            + '/resources/image/goodsImage/'+goods.img +' 3840w,'
+            + 'src="https://img-cf.kurly.com/cdn-cgi/image/fit=crop,width=360,height=468,quality=85/shop/data/goods/1646377916155l0.jpg"'
             + 'decoding="async" data-nimg="fill" class="css-0"'
             + 'style="'
             + 'position: absolute;'
@@ -1384,6 +1385,7 @@
             },
             success: function (response) {
                 let sortedGoodsList = response.sortedGoodsList;
+                let goodsListDto = response.goodsListDto;
                 let readGoodsLisByFilter = response.readGoodsLisByFilter;
                 let containerForSort = $('.best-itemlist');
                 containerForSort.html(" ");
@@ -1400,7 +1402,7 @@
                 // itemHTML=sortedGoodsList.map(readGoodsListHTML);
 
                 // if(PriceFilterNum!=null){
-                itemHTML = readGoodsLisByFilter.map(readGoodsListHTML);
+                itemHTML = goodsListDto.map(readGoodsListHTML);
                 // }
 
                 containerForSort.append(itemHTML);
