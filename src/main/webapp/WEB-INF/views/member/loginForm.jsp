@@ -123,7 +123,7 @@
             <div class="find-div">
                 <a href="<c:url value='/member/find/password'/>"><span>비밀번호 재설정</span></a>
             </div>
-            <button class="login-div__column loginBtn">로그인</button>
+            <button type="button" class="login-div__column loginBtn">로그인</button>
             <button onclick="location.href='/member/signup'" class="login-div__column regBtn">회원가입</button>
             <div class="col-lg-12 text-center mt-3">
                 <img alt="카카오로그인" src="<c:url value='/resources/image/kakao_login_large_wide.png'/>" onclick="loginWithKakao()">
@@ -178,6 +178,15 @@
        let loginBtn = document.querySelector(".loginBtn");
 
        loginBtn.addEventListener("click", () => {
+
+           let emailVal = document.querySelector("#email").value;
+           let pwdVal = document.querySelector("#pwd").value;
+
+
+           if(emailVal.length === 0 || pwdVal.length === 0){
+               existModal("아이디 또는 비빌번호를 확인해주세요.");
+               return false;
+           }
 
            if( regExp(2) || regExp(4)){
                existModal("아이디 또는 비밀번호를 확인해주세요");
