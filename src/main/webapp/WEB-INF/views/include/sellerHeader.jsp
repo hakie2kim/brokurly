@@ -102,12 +102,12 @@ template use File | Settings | File Templates. --%>
     <div class="main-header">
         <div class="header-div__column">
             <div class="header-detail__column">
-                <a href="/categories/best-page"
+                <a href="/market-newproduct"
                 ><img src="/resources/image/brokurlyAdmin.png"
                 /></a>
             </div>
             <div class="header-detail__column">
-                <a href="/categories/best-page">브로컬리</a>
+                <a href="/market-newproduct">브로컬리</a>
             </div>
             |
             <div class="header-detail__column"><a href="#">관리자센터</a></div>
