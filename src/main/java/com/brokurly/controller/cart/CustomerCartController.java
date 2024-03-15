@@ -73,19 +73,23 @@ public class CustomerCartController {
         MemberAndLoginDto custIdDto = (MemberAndLoginDto) session.getAttribute(SessionConst.LOGIN_MEMBER);
         if (custIdDto == null)
             return "login-check";
+
         String custId = custIdDto.getCustId();
 
         List<CustomerCartDto> cart = customerCartService.getCartList(custId, false);
         List<GoodsImageDto> imgList = new ArrayList<>();
         for (CustomerCartDto customerCartDto: cart) {
+
             String itemId = customerCartDto.getItemId();
             GoodsImageDto goodsImageDto = customerCartService.searchGoodsImage(itemId);
+
 //            String img = goodsImageDto.getImg();
 //            imgList.add(img);
             imgList.add(goodsImageDto);
         }
 //        log.info(imgList);
         List<CustomerCartDto> updateAll = customerCartService.updateAll(custId);
+
         ShippingLocationCurrDto address = shippingLocationService.getCurrShippingLocationByCustomer(custId);
 
 
@@ -141,4 +145,6 @@ public class CustomerCartController {
 
 
     }
+
+
 }
