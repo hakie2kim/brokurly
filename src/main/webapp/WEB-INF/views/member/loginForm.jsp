@@ -124,7 +124,7 @@
                 <a href="<c:url value='/member/find/password'/>"><span>비밀번호 재설정</span></a>
             </div>
             <button type="button" class="login-div__column loginBtn">로그인</button>
-            <button onclick="location.href='/member/signup'" class="login-div__column regBtn">회원가입</button>
+            <button type="button" onclick="location.href='/member/signup'" class="login-div__column regBtn">회원가입</button>
             <div class="col-lg-12 text-center mt-3">
                 <img alt="카카오로그인" src="<c:url value='/resources/image/kakao_login_large_wide.png'/>" onclick="loginWithKakao()">
             </div>
