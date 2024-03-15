@@ -6,9 +6,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 <!--    인터셉터 추가 시 주석 풀고 맵핑 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/cart/cartList"/>
+            <bean class="com.brokurly.interceptor.LoginCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 <!--    <mvc:interceptors>-->
 <!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/cart/cartList"/>-->
+<!--            <mvc:mapping path="/board/inquiry"/>-->
+<!--            <bean class="com.brokurly.interceptor.LoginCheckInterceptor"/>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/board/inquiryPost"/>-->
 <!--            <bean class="com.brokurly.interceptor.LoginCheckInterceptor"/>-->
 <!--        </mvc:interceptor>-->
 <!--    </mvc:interceptors>-->
