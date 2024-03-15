@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @RequestMapping("/")
     public String index() {
-        return "categories/best-page";
+        return "redirect:/market-newproduct";
     }
 }
